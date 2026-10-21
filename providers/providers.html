@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Model providers</title>
+  <link rel="stylesheet" href="providers.css">
+</head>
+<body>
+  <main class="page">
+    <header>
+      <h1 id="title">Your models</h1>
+      <p id="intro">Use your own API key, or a model running on this computer. Signed-in membership models stay in the same menu.</p>
+    </header>
+    <div class="toolbar" id="saved-bar">
+      <h2 id="saved-heading">Saved providers</h2>
+      <button type="button" id="add" class="primary">Add a provider</button>
+    </div>
+    <section class="card" id="saved" aria-labelledby="saved-heading">
+      <div id="list" class="list"></div>
+    </section>
+    <section id="editor" hidden>
+      <form id="form" class="card" novalidate>
+        <div class="form-head">
+          <h2 id="form-title">Add a provider</h2>
+          <button type="button" id="test">Test connection</button>
+        </div>
+        <div id="test-panel" class="test-panel" hidden>
+          <div id="status" class="status" role="status" hidden></div>
+          <ul id="results" class="results" hidden></ul>
+        </div>
+        <div class="field">
+          <label id="label-preset" for="preset-button">Provider</label>
+          <div class="picker" id="preset-picker">
+            <button type="button" id="preset-button" class="picker-button" aria-haspopup="listbox" aria-expanded="false" aria-controls="preset-menu" aria-labelledby="label-preset">
+              <span id="preset-value"></span>
+              <svg class="picker-chevron" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            </button>
+            <ul id="preset-menu" class="picker-menu" role="listbox" hidden></ul>
+          </div>
+          <select id="preset" name="preset" class="picker-native" tabindex="-1" aria-hidden="true"></select>
+        </div>
+        <label>
+          <span id="label-host">Base URL</span>
+          <input id="host" name="host" type="url" inputmode="url" autocomplete="off" spellcheck="false" aria-describedby="host-hint">
+          <span class="hint" id="host-hint"></span>
+          <span class="error" id="host-error" hidden></span>
+        </label>
+        <label>
+          <span id="label-key">API key</span>
+          <span class="key-row">
+            <input id="key" name="key" type="password" autocomplete="off" spellcheck="false" aria-describedby="key-hint">
+            <button type="button" id="toggle-key">Show</button>
+          </span>
+          <span class="hint" id="key-hint"></span>
+          <span class="error" id="key-error" hidden></span>
+        </label>
+        <button type="button" id="more" class="more-toggle" aria-expanded="false" aria-controls="more-fields">More</button>
+        <div id="more-fields" hidden>
+          <label>
+            <span id="label-name">Name</span>
+            <input id="name" name="name" type="text" autocomplete="off" spellcheck="false">
+          </label>
+          <label>
+            <span id="label-models">Model ids</span>
+            <textarea id="models" name="models" spellcheck="false" aria-describedby="models-hint"></textarea>
+            <span class="hint" id="models-hint">Optional. One id per line. Leave this empty to show up to 40 models from the provider. Fill it in to show only those.</span>
+          </label>
+        </div>
+        <div class="form-actions">
+          <button type="button" id="cancel">Cancel</button>
+          <button type="submit" id="save" class="primary">Save</button>
+        </div>
+      </form>
+    </section>
+    <section id="mcp">
+      <div class="toolbar">
+        <h2 id="mcp-heading">MCP servers</h2>
+        <button type="button" id="mcp-add" class="primary">Add a server</button>
+      </div>
+      <p class="note" id="mcp-note"></p>
+      <p id="mcp-status" class="note" role="status"></p>
+      <div class="toolbar">
+        <h2 id="mcp-known-heading">Known servers</h2>
+      </div>
+      <section class="card">
+        <div id="mcp-known" class="list"></div>
+      </section>
+      <section class="card">
+        <div id="mcp-list" class="list"></div>
+      </section>
+      <form id="mcp-form" class="card" hidden>
+        <div class="form-head">
+          <h2 id="mcp-form-title">Add an MCP server</h2>
+          <button type="button" id="mcp-test">Test connection</button>
+        </div>
+        <label>
+          <span id="mcp-label-name">Name</span>
+          <input id="mcp-name" type="text" autocomplete="off" spellcheck="false">
+        </label>
+        <label>
+          <span id="mcp-label-url">Server URL</span>
+          <input id="mcp-url" type="url" inputmode="url" autocomplete="off" spellcheck="false" placeholder="https://example.com/mcp">
+        </label>
+        <label>
+          <span id="mcp-label-token">Token</span>
+          <input id="mcp-token" type="password" autocomplete="off" spellcheck="false">
+          <span class="hint" id="mcp-token-hint"></span>
+        </label>
+        <div class="form-actions">
+          <button type="button" id="mcp-signin">Sign in</button>
+          <button type="button" id="mcp-cancel">Cancel</button>
+          <button type="submit" id="mcp-save" class="primary">Save</button>
+        </div>
+      </form>
+    </section>
+  </main>
+  <script type="module" src="providers.js"></script>
+  <script type="module" src="mcp.js"></script>
+</body>
+</html>

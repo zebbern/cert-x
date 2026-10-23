@@ -31,7 +31,15 @@ try{
  const target=await browser.newPage();
  const login=async()=>{await target.goto(origin+'/login.php');await target.fill('input[name=username]','admin');await target.fill('input[name=password]','password');await Promise.all([target.waitForNavigation(),target.click('input[name=Login]')]);return new URL(target.url()).pathname;};
  let landed=await login();
- if(landed!=='/index.php'){assert.equal(landed,'/setup.php');await Promise.all([target.waitForNavigation(),target.click('input[name=create_db]')]);landed=await login();assert.equal(landed,'/index.php');}
+ if(landed!=='/index.php'){
+  // Fresh instance (DB missing) or an agent session changed the admin
+  // password (brute force / SQLi testing): both are fixed by DVWA's
+  // create/reset database step, which restores default credentials.
+  await target.goto(origin+'/setup.php');
+  await Promise.all([target.waitForNavigation(),target.click('input[name=create_db]')]);
+  landed=await login();
+  assert.equal(landed,'/index.php','DVWA login must reach the index after database reset');
+ }
  await target.goto(origin+'/security.php');
  if(!/<option value="low" selected=/i.test(await target.content())){await target.selectOption('select[name=security]','low');await Promise.all([target.waitForNavigation(),target.click('input[name=seclev_submit]')]);}
  mark('dvwa ready');
@@ -51,9 +59,12 @@ try{
  await panel.keyboard.type('Test the DVWA application in the attached tab. Map the surface first, orchestrate the recon, work findings to proof, and report each one with the invariant.');
  await panel.keyboard.press('Enter');
  mark('instruction sent; running free','timebox '+timeboxMinutes+'m');
- let done=false;
+ let done=false,steered=false;
  for(let elapsed=0;elapsed<timeboxMinutes*60;elapsed+=5){
    await sleep(5000);
+   // At 75% of the timebox, steer the model to stop expanding and deliver:
+   // without this, thorough models work past the clock and never report.
+   if(!steered&&elapsed>=timeboxMinutes*45){try{await panel.locator('.wb-editor').first().click();await panel.keyboard.type('Wrap up now: stop starting new tests and produce your final report. State every proven finding with the invariant (given [prerequisites], I demonstrated [unauthorized action] across [security boundary], producing [observable effect]); list hypotheses you did not prove as such.');await panel.keyboard.press('Enter');steered=true;mark('wrap-up steering sent',Math.round(elapsed)+'s');}catch{}}
    done=await panel.evaluate(()=>document.querySelector('[aria-label="Profile"]')?.disabled===false).catch(()=>false);
    // A failed turn re-enables the profile AND shows Retry — the affordance
    // must win over the idle signal, or a dead turn reads as "finished".

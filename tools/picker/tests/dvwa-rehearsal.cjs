@@ -49,13 +49,28 @@ try{
  await worker.evaluate(async()=>{await certXSecurity.ready;});
  base='chrome-extension://'+new URL(worker.url()).host;
  for(let i=0;i<8;i++){await worker.evaluate(host=>chrome.storage.local.set({sidepanel_language:'en',sidepanel_theme:'dark',sidepanel_approval_mode:'full_access',sidepanel_connections:[{id:'mock',label:'Mock',presetId:'openrouter',apiKey:'fixture',host:host+'/api/v1'}]}),'http://127.0.0.1:'+provider.address().port);await sleep(300);if((await worker.evaluate(()=>chrome.storage.local.get('sidepanel_connections'))).sidepanel_connections?.length)break;}
- // Phase A: real DVWA. Login, force Low security, verify.
+ // Phase A: real target (local container or hosted pentest-ground instance).
+ // Login; a fresh hosted instance (redeployed every 30 min) needs one-time
+ // database creation before login succeeds.
  const target=await browser.newPage();target.on('pageerror',error=>pageErrors.push(error.message));
- await target.goto(origin+'/login.php');
- await target.fill('input[name=username]','admin');await target.fill('input[name=password]','password');
- await Promise.all([target.waitForNavigation(),target.click('input[name=Login]')]);
- assert.equal(new URL(target.url()).pathname,'/index.php','DVWA login must reach the index (run setup first)');
+ const login=async()=>{
+  await target.goto(origin+'/login.php');
+  await target.fill('input[name=username]','admin');await target.fill('input[name=password]','password');
+  await Promise.all([target.waitForNavigation(),target.click('input[name=Login]')]);
+  return new URL(target.url()).pathname;
+ };
+ let landed=await login();
+ if(landed!=='/index.php'){
+  assert.equal(landed,'/setup.php','login must reach the index or the setup page');
+  await Promise.all([target.waitForNavigation(),target.click('input[name=create_db]')]);
+  landed=await login();
+  assert.equal(landed,'/index.php','DVWA login must reach the index after setup (create the database first)');
+ }
  await target.goto(origin+'/security.php');
+ if(!/<option value="low" selected=/i.test(await target.content())){
+  await target.selectOption('select[name=security]','low');
+  await Promise.all([target.waitForNavigation(),target.click('input[name=seclev_submit]')]);
+ }
  assert.match(await target.content(),/<option value="low" selected=/i,'DVWA security must be on Low for the rehearsal');
  mark('dvwa ready','logged in, security low');
  const tabId=await worker.evaluate(async url=>(await chrome.tabs.query({})).find(tab=>tab.url.startsWith(url)).id,origin);

@@ -5,7 +5,8 @@
 const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),assert=require('node:assert/strict');
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'C:/Users/zeb/AppData/Roaming/npm/node_modules/@playwright/cli/node_modules/playwright-core');
 const root=path.resolve(__dirname,'../../..'),temp=fs.mkdtempSync(path.join(os.tmpdir(),'cert-x-m4-live-'));
-const origin=process.env.DVWA_ORIGIN||'http://127.0.0.1:4280',modelId=process.env.M4_MODEL||'xiaomi/mimo-v2.6-pro';
+const origin=process.env.DVWA_ORIGIN||'http://127.0.0.1:4280',origin2=process.env.M4_ORIGIN2||'',modelId=process.env.M4_MODEL||'xiaomi/mimo-v2.6-pro';
+const origins=origin2?[origin,origin2]:[origin];
 const apiKey=process.env.OPENROUTER_API_KEY,timeboxMinutes=Number(process.env.M4_MINUTES||12);
 const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 if(!apiKey){console.error('OPENROUTER_API_KEY is required');process.exit(2);}
@@ -46,6 +47,9 @@ try{
  if(!/<option value="low" selected=/i.test(await target.content())){await target.selectOption('select[name=security]','low');await Promise.all([target.waitForNavigation(),target.click('input[name=seclev_submit]')]);}
  mark('dvwa ready');
  } else {await target.goto(origin+'/');mark('target ready (no login)');}
+ // Optional second origin (M4_ORIGIN2): a second target tab in the same
+ // workspace — the cross-target map scenario.
+ if(origin2){const second=await browser.newPage();await second.goto(origin2+'/');await second.waitForLoadState('domcontentloaded').catch(()=>{});mark('second target open',origin2);}
  const tabId=await worker.evaluate(async url=>(await chrome.tabs.query({})).find(tab=>tab.url.startsWith(url)).id,origin);
  panel=await browser.newPage();
  await panel.goto(base+'/pages/sidepanel.html?tabId='+tabId);
@@ -54,7 +58,7 @@ try{
  for(let i=0;i<20;i++){const chats=await worker.evaluate(()=>chrome.storage.local.get('ki_contexts').then(value=>value.ki_contexts?.chats||{}));const hit=Object.entries(chats).find(([,chat])=>chat.profileId==='bugbounty');if(hit){session=hit[0];break;}await sleep(500);}
  assert.ok(session,'bugbounty chat found');
  const ctx=async value=>{const reply=await panel.evaluate(message=>chrome.runtime.sendMessage(message),{type:'KI_CONTEXT',...value});assert.equal(reply.ok,true,JSON.stringify(reply));return reply.result;};
- await ctx({op:'save_workspace',workspace:{id:'m4-live',name:'M4 live',profileId:'bugbounty',model:{connectionId:'or',modelId},dastScope:{origins:[origin],excludePaths:[]}}});
+ await ctx({op:'save_workspace',workspace:{id:'m4-live',name:'M4 live',profileId:'bugbounty',model:{connectionId:'or',modelId},dastScope:{origins,excludePaths:[]}}});
  await ctx({op:'assign_chat',session,workspaceId:'m4-live',profileId:'bugbounty',modelExplicit:null});
  mark('session ready',modelId+' on '+session);
  // The single instruction. Everything after this is the model's own choice.

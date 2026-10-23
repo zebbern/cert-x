@@ -315,6 +315,10 @@ async function kiSecurityOperate(op, args, session, signal, recheck, userAction 
   if (op === 'clear_cookie_policy') { op = 'execute'; args = { capability: 'utility', arguments: { tool: 'cookies', action: 'unset', policyId: args.policyId } }; }
   if (op === 'tabs') return kiSecurityTabs(session);
   if (op === 'capabilities') {
+    // kiSecurityToolDefs reads the turn-cached context; a settings-page or
+    // pre-first-turn caller would otherwise be reported under the Default
+    // profile. Resolve the stored assignment into the cache first.
+    if (session && typeof kiContextPrepare === 'function') { try { await kiContextPrepare(session); } catch {} }
     const value = await service.describe(context);
     const publicTools = kiSecurityToolDefs(session, { fullSchemas:true }).filter(tool => KI_SECURITY_REGISTRY.some(spec => spec.name === tool.name));
     if (args.detail != null && !['summary', 'full'].includes(args.detail)) throw kiSecurityInputError('Choose capabilities detail "summary" or "full".', 'invalid_capabilities_detail', 'Use detail:"summary", or tool:"security_tool_name" for an exact operation schema.');

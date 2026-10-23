@@ -35,7 +35,7 @@ async function main() {
   const tabId = (await worker.evaluate(() => chrome.tabs.query({}))).find(tab => tab.url === origin + '/app').id;
   const execute = (capability, args, options) => call('execute', { capability, tabId, arguments: args, ...(options ? { options } : {}) });
   const deny = async (capability, args, pattern, options) => { const result = await raw('execute', { capability, tabId, arguments: args, ...(options ? { options } : {}) }); assert.equal(result.ok, false, brief(result)); if (pattern) assert.match(result.error, pattern); return result; };
-  const capabilities = await call('capabilities'); assert.ok(capabilities.operations.includes('utility')); assert.ok(capabilities.operations.includes('macro')); assert.ok(capabilities.operations.includes('replay'));
+  const capabilities = await call('capabilities'); assert.ok(capabilities.operations.includes('security_utility')); assert.ok(capabilities.operations.includes('security_macro')); assert.ok(capabilities.operations.includes('security_replay_request'));
 
   await check('codecs', async () => {
     const encoded = await execute('utility', { tool: 'encode', method: 'base64', text: 'cert-x – café' }); assert.equal(encoded.result, Buffer.from('cert-x – café').toString('base64'));

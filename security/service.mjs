@@ -56,7 +56,14 @@ export function createSecurityService(runtime, { storage = globalThis.chrome?.st
     const dast = result.engines?.DAST || result.engineStatus?.DAST;
     const finish = error => {
       const resolved = actionableCoverage(coverage, { ...run, state });
-      if (state === 'completed' && resolved.actionableGaps.length) state = 'incomplete';
+      // Coverage gaps invalidate a clean "completed" verdict only when they
+      // represent unfinished assessment (limits, drains, errors, nothing
+      // analyzed). Basis caveats that accompany any successful scan stay in
+      // actionableGaps without flipping the run state; no_client_source_analyzed
+      // is also advisory here because stop-time snapshots can predate the
+      // analysis counters settling.
+      const advisory = new Set(['original_html_unavailable', 'no_client_source_analyzed']);
+      if (state === 'completed' && resolved.actionableGaps.some(gap => !advisory.has(gap.code))) state = 'incomplete';
       return { state, coverage: resolved, error: error || null };
     };
     if (!run.engines.includes('DAST') || !dast) return finish(null);

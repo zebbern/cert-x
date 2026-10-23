@@ -161,7 +161,13 @@ node tools/picker/apply-picker.js
 node --test tools/host/tests/*.test.js tools/picker/tests/*.test.js providers/*.test.js tools/ptk/*.test.cjs tools/ptk/*.test.mjs tools/security/tests/*.test.mjs
 ```
 
-Real Chromium checks use temporary profiles and local fixtures:
+Real Chromium checks use temporary profiles and local fixtures. Run all of them with real exit codes (nothing silently skips) via:
+
+```text
+node tools/run-browser-tests.cjs
+```
+
+Individual checks:
 
 ```text
 node tools/picker/tests/native-test.js

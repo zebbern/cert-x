@@ -55,11 +55,15 @@ try{
  for(let elapsed=0;elapsed<timeboxMinutes*60;elapsed+=5){
    await sleep(5000);
    done=await panel.evaluate(()=>document.querySelector('[aria-label="Profile"]')?.disabled===false).catch(()=>false);
-   if(done&&elapsed>30)break;
-   // Stream drops can kill a turn mid-session; the panel surfaces a Retry
-   // button — click it so the model resumes instead of stalling to the timebox.
-   try{const retry=panel.getByText('Retry',{exact:true});if(await retry.count()>0&&await retry.first().isVisible()){await retry.first().click();mark('retry clicked',Math.round(elapsed/1000)+'s');await sleep(3000);}}catch{}
-   if(elapsed%60000<5000)mark('running',Math.round(elapsed/1000)+'s');
+   // A failed turn re-enables the profile AND shows Retry — the affordance
+   // must win over the idle signal, or a dead turn reads as "finished".
+   let clicked=false;
+   try{const retry=panel.getByText('Retry',{exact:true});if(await retry.count()>0&&await retry.first().isVisible()){await retry.first().click();clicked=true;mark('retry clicked',Math.round(elapsed)+'s');await sleep(3000);}}catch{}
+   if(done&&!clicked&&elapsed>30){try{const retry=panel.getByText('Retry',{exact:true});if(await retry.count()>0&&(await retry.first().isVisible())){await retry.first().click();mark('retry clicked (done path)',Math.round(elapsed)+'s');await sleep(3000);continue;}}catch{}break;}
+   // Long subagent turns can outlive a discarded panel in headless runs;
+   // touching the panel keeps it resident so the turn's stream survives.
+   if(elapsed%60000<5000)try{await panel.bringToFront();}catch{}
+   if(elapsed%60000<5000)mark('running',Math.round(elapsed)+'s');
  }
  // Capture transcript and telemetry before closing.
  const transcript=await panel.evaluate(()=>{const picks=[...document.querySelectorAll('.wb-thread,[class*=thread],main,body')].map(node=>node.innerText||'');return picks.sort((a,b)=>b.length-a.length)[0]||'';}).catch(()=> '(transcript unavailable)');

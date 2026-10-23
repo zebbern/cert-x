@@ -21,16 +21,22 @@ try{
   if(url.pathname.endsWith('/chat/completions')){let body='';req.on('data',chunk=>body+=chunk);req.on('end',()=>{try{
    const request=JSON.parse(body),names=(request.tools||[]).map(tool=>tool.function?.name);modelCalls.push(names);
    for(const item of request.messages||[])if(item.role==='tool')toolResults.push(String(item.content));
-   const script=[
-    {name:'graph_write',arguments:JSON.stringify({nodes:[
+   // Two-level script: the orchestrator delegates recon to a subagent whose
+   // task brief carries the marker; the subagent writes the graph and returns
+   // a summary, then the orchestrator reads the digest.
+   const isSub=(request.messages||[]).some(item=>item.role==='user'&&String(item.content).includes('RECON-BRIEF'));
+   const hadToolResult=(request.messages||[]).some(item=>item.role==='tool');
+   const graphWrite={name:'graph_write',arguments:JSON.stringify({nodes:[
       {id:'dvwa',kind:'origin',label:origin},
       {id:'r-sqli',kind:'route',label:'/vulnerabilities/sqli/'},
       {id:'p-id',kind:'param',label:'id'}],
-     edges:[{from:'dvwa',to:'r-sqli',kind:'hosts'},{from:'r-sqli',to:'p-id',kind:'has_param'}]})},
-    {name:'graph_digest',arguments:'{}'}];
-   const action=script[modelStep++];
+     edges:[{from:'dvwa',to:'r-sqli',kind:'hosts'},{from:'r-sqli',to:'p-id',kind:'has_param'}]})};
+   let action;
+   if(isSub)action=hadToolResult?null:graphWrite;
+   else{const main=[{name:'agent',arguments:JSON.stringify({description:'Recon the DVWA sqli area',prompt:'RECON-BRIEF: enumerate the DVWA sqli area and record it with graph_write, then summarize.'})},{name:'graph_digest',arguments:'{}'}];action=main[modelStep++]||null;}
+   const finalText=isSub?'SUBAGENT-DONE':'REHEARSAL-DONE';
    res.writeHead(200,{'Content-Type':'text/event-stream'});const send=x=>res.write('data: '+JSON.stringify(x)+'\n\n');
-   send({id:'rehearsal',object:'chat.completion.chunk',choices:[{index:0,delta:action?{role:'assistant',tool_calls:[{index:0,id:'reh-'+modelStep,type:'function',function:{name:action.name,arguments:action.arguments}}]}:{role:'assistant',content:'REHEARSAL-DONE'}}]});
+   send({id:'rehearsal',object:'chat.completion.chunk',choices:[{index:0,delta:action?{role:'assistant',tool_calls:[{index:0,id:'reh-'+Math.floor(Math.random()*1e9),type:'function',function:{name:action.name,arguments:action.arguments}}]}:{role:'assistant',content:finalText}}]});
    send({id:'rehearsal',object:'chat.completion.chunk',choices:[{index:0,delta:{},finish_reason:action?'tool_calls':'stop'}]});res.end('data: [DONE]\n\n');
   }catch(error){res.statusCode=500;res.end();}});return;}
   res.writeHead(404);res.end();
@@ -86,22 +92,25 @@ try{
  const report=JSON.parse(fs.readFileSync(download.filename,'utf8'));
  assert.equal(report.run.runId,started.runId);
  mark('scan complete',JSON.stringify({requestsSent:status.requestsSent,findings:findings.total,families:families.slice(0,8),reportBytes:fs.statSync(download.filename).size}));
- // Phase B: knowledge graph through a scripted model turn (the adoption path).
+ // Phase B: orchestration through scripted model turns. The orchestrator
+ // delegates recon to a subagent (agent tool), the subagent writes the graph,
+ // its summary returns, and the orchestrator reads the digest.
  await panel.locator('.wb-editor').first().click();
- await panel.keyboard.type('Record the recon map and summarize the frontier.');
+ await panel.keyboard.type('Delegate recon for the DVWA sqli area, then summarize the frontier.');
  await panel.keyboard.press('Enter');
- await panel.getByText('REHEARSAL-DONE',{exact:true}).waitFor({timeout:45000});
+ await panel.getByText('REHEARSAL-DONE',{exact:true}).waitFor({timeout:60000});
  await panel.waitForFunction(()=>document.querySelector('[aria-label="Profile"]')?.disabled===false);
  const advertised=modelCalls[modelCalls.length-1]||[];
- for(const tool of ['graph_write','graph_digest','security_start_scan','attach_tab'])assert.ok(advertised.includes(tool),'Model schema must advertise '+tool);
+ for(const tool of ['agent','graph_digest','security_start_scan','attach_tab'])assert.ok(advertised.includes(tool),'Model schema must advertise '+tool);
  const writeResult=JSON.parse(toolResults.find(text=>text.includes('"written"')));
  assert.equal(writeResult.written.nodes,3);
+ assert.ok(toolResults.some(text=>text.includes('SUBAGENT-DONE')),'The subagent summary must return to the orchestrator');
  const digest=JSON.parse(toolResults.find(text=>text.includes('"unvisitedRoutes"')));
  assert.equal(digest.counts.nodes>=3,true);
  assert.ok(digest.unvisitedRoutes.includes('/vulnerabilities/sqli/'),'frontier must list the unvisited sqli route');
  assert.deepEqual(pageErrors,[],'no page errors');
- console.log('REHEARSAL-PASS',JSON.stringify({requestsSent:status.requestsSent,findings:findings.total,families,graphCounts:digest.counts,unvisitedRoutes:digest.unvisitedRoutes,advertisedTools:advertised.filter(name=>name.startsWith('graph_')||name.startsWith('security_')).length}));
-}catch(error){console.error('REHEARSAL-FAIL at',error.message);process.exitCode=1;}
+ console.log('REHEARSAL-PASS',JSON.stringify({requestsSent:status.requestsSent,findings:findings.total,families,graphCounts:digest.counts,unvisitedRoutes:digest.unvisitedRoutes,orchestrated:true,advertisedTools:advertised.filter(name=>name.startsWith('graph_')||name.startsWith('security_')||name==='agent').length}));
+}catch(error){console.error('REHEARSAL-FAIL at',error.message);console.error('DEBUG',JSON.stringify({conversations:modelCalls.map(names=>({tools:names.length,hasAgent:names.includes('agent'),hasGraphWrite:names.includes('graph_write')})),lastResults:toolResults.slice(-5).map(text=>text.slice(0,160))}));process.exitCode=1;}
 finally{try{await Promise.race([browser?.close(),sleep(5000)]);}catch{}try{provider?.close();}catch{}process.exit(process.exitCode||0);}
 }
 main();

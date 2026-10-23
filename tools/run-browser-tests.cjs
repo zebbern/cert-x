@@ -41,7 +41,7 @@ async function main() {
     if (result.status === 0) console.log("PASS  " + label.padEnd(28) + (tail ? " " + tail : ""));
     else { failed++; console.log("FAIL  " + label.padEnd(28) + " exit=" + result.status + (tail ? " " + tail : "")); }
   }
-  console.log("\n" + (selected.length - skipped) + " run, " + failed + " failed" + (skipped ? ", " + skipped + " skipped" : "") + (failed ? " — see HANDOFF.md for known engine failures" : ""));
+  console.log("\n" + (selected.length - skipped) + " run, " + failed + " failed" + (skipped ? ", " + skipped + " skipped" : "") + (failed ? " — rerun a failing check alone before treating it as a regression; security lifecycle is known timing-flaky under load" : ""));
   process.exit(failed ? 1 : 0);
 }
 main();

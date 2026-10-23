@@ -12,6 +12,8 @@ async function kiWorkspaceOutput(session, item) {
     const next = stored.filter(old => !(old.owner === owner && ((item.path && old.path === item.path) || (item.downloadId && old.downloadId === item.downloadId))));
     next.push(record);
     // Bound retained previews separately from lightweight file references.
+    // Justified: chrome.storage.local has the unlimitedStorage permission, so
+    // the 100-reference / 12 MiB bounds are UX sizing, not a storage quota.
     let bytes = 0; const keep = [];
     for (const entry of next.reverse()) {
       const size = entry.data?.length || 0;
@@ -108,7 +110,7 @@ async function kiWorkspaceHealth(query = "", profile = "main", session) {
   const securityAvailable = securitySelected && securityRule !== "disabled" && (selectedSecurityTool?.available ?? true);
   const security = { available: securityAvailable, selected: securitySelected,
     ...(securityAvailable ? { discoveryTool: "security_capabilities" } : { reason: !securitySelected ? "Security tools are not selected by this profile or workspace." : selectedSecurityTool?.reasons.join(" ") || "Security tools are disabled in Tools & permissions." }) };
-  return { ...(ptk ? { ptk } : {}), ...(security ? { security } : {}), ...(taskContext ? { task: { profile: { id: taskContext.profile.id, name: taskContext.profile.name }, workspace: taskContext.workspace ? { id: taskContext.workspace.id, name: taskContext.workspace.name } : null, folder: taskContext.folder, selectedMcp: taskContext.mcp, connections: configuredMcp, missingMcp: (taskContext.mcp || []).filter(id => !configuredMcp.some(server => server.id === id)), modelSource: taskContext.modelSource } } : {}), checkedAt: Date.now(), extensionVersion: chrome.runtime.getManifest().version,
+  return { ...(ptk ? { ptk } : {}), ...(security ? { security } : {}), ...(typeof kiTelemetrySummary === "function" ? { telemetry: kiTelemetrySummary() } : {}), ...(taskContext ? { task: { profile: { id: taskContext.profile.id, name: taskContext.profile.name }, workspace: taskContext.workspace ? { id: taskContext.workspace.id, name: taskContext.workspace.name } : null, folder: taskContext.folder, selectedMcp: taskContext.mcp, connections: configuredMcp, missingMcp: (taskContext.mcp || []).filter(id => !configuredMcp.some(server => server.id === id)), modelSource: taskContext.modelSource } } : {}), checkedAt: Date.now(), extensionVersion: chrome.runtime.getManifest().version,
     modelProviders: { configured: (data.sidepanel_connections || []).length, scope: "Custom providers only; built-in account models are not counted." },
     local: { enabled: data.ki_native_settings?.enabled === true, host },
     browserControl: await XB.snapshot(),
@@ -126,7 +128,7 @@ function kiWorkspaceAgentHealth(value, query, detail) {
     details:'Use get_capabilities({tool:"tool_name"}) for a tool’s availability and reasons, or detail:"full" for the full inventory.' } };
 }
 function kiProductTools(profile = "main", session) {
-  return [{ name: "get_capabilities", description: "Read extension setup, host compatibility, MCP discovery and tool rules. Optional tool filter matches an original or generated tool name. Use to diagnose missing tools instead of guessing. Does not connect Browser control or run MCP tools. Model providers are reported as configured, not credential-tested.", parameters: { type: "object", properties: { tool: { type: "string" }, detail: { type:"string", enum:["summary","full"], description:"Default summary lists available tool names; full includes all tool rules." } } },
+  return [{ name: "get_capabilities", description: "Read extension setup, MCP discovery, tool rules and recent tool-failure telemetry. Pass tool:\"name\" for one tool's availability and reasons. Use to diagnose missing tools instead of guessing; does not run MCP tools or connect Browser control.", parameters: { type: "object", properties: { tool: { type: "string" }, detail: { type:"string", enum:["summary","full"], description:"Default summary lists available tool names; full includes all tool rules." } } },
     kiPolicyMeta: { ...kiPolicyBrowserMeta("get_capabilities"), label: "Check capabilities", defaultAsk: false }, resolveExecution(args) { return { approvalRule: "allow", async execute() { const query=typeof args?.tool === "string" ? args.tool : ""; return { output: JSON.stringify(kiWorkspaceAgentHealth(await kiWorkspaceHealth(query, profile, session),query,args?.detail)) }; } }; } }];
 }
 async function kiWorkspaceJobs() {

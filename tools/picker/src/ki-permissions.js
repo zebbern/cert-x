@@ -118,18 +118,25 @@ function kiPolicyWrap(tool, session) {
     const preview = tool.kiApprovalPreview ? JSON.parse(JSON.stringify(tool.kiApprovalPreview(snapshot, session))) : snapshot;
     const resolved = tool.resolveExecution(snapshot);
     return { ...resolved, async execute(context) {
+      let executionMeta = meta;
       try {
-        const executionMeta = tool.kiPolicyMetaFor ? tool.kiPolicyMetaFor(snapshot) : meta;
+        executionMeta = tool.kiPolicyMetaFor ? tool.kiPolicyMetaFor(snapshot) : meta;
         const lease = await kiPolicyGuard(executionMeta, preview, { ...context, session });
         const activityStartedAt = Date.now();
         const result = await resolved.execute({ ...context, [KI_POLICY_CONTEXT]: lease });
         const activityEndedAt = Date.now();
+        try { kiTelemetryRecord(executionMeta, session, result?.isError === true); } catch {}
         try { await kiWorkspaceCapture(meta, snapshot, result, session); } catch {}
         if (meta.family === "browser" && typeof kiPtkActivity === "function") {
           try { await kiPtkActivity(session, meta, snapshot, result, { startedAt: activityStartedAt, endedAt: activityEndedAt }); } catch {}
         }
         return result;
-      } catch (error) { return { output: error.message, isError: true }; }
+      } catch (error) {
+        try { kiTelemetryRecord(executionMeta, session, true); } catch {}
+        let output = error instanceof Error ? error.message : String(error);
+        try { output = await kiErrorEnvelope(executionMeta, error, session); } catch {}
+        return { output, isError: true };
+      }
     } };
   } };
 }

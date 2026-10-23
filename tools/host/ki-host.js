@@ -8,7 +8,12 @@ const os = require("node:os");
 const { spawn, spawnSync } = require("node:child_process");
 const { StringDecoder } = require("node:string_decoder");
 
+// Chrome native messaging caps one message at 1 MiB; 900 KiB leaves room for
+// the JSON envelope around the payload.
 const MAX_FRAME = 900 * 1024;
+// FIXME(justified-limits): unverified default. Reads paginate, but the real
+// per-message ceiling (~900 KiB) would allow much larger chunks per call;
+// confirm against real usage and raise, or document why small is right.
 const MAX_FILE = 128 * 1024;
 const processes = new Set();
 const requests = new Map();
@@ -77,6 +82,9 @@ const security = require('./security/client.cjs').createClient({onAdmission:send
 async function runCommand(p, signal) {
   const command = text(p.command, "command");
   const cwd = localPath(p.cwd);
+  // FIXME(justified-limits): the 30 s default / 120 s max foreground timeout and
+  // 64 KiB default output cap are unverified defaults; longer work is meant to
+  // use background jobs, but confirm these numbers against real usage.
   const timeout = integer(p.timeout_ms, 30000, 100, 120000);
   const cap = integer(p.max_output_bytes, 65536, 1, 131072);
   const [executable, args] = commandLine(command);

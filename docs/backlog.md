@@ -3,8 +3,11 @@
 Ordered by expected value, not by age.
 
 1. **Surface provider refusals.** A `content_filter` refusal currently reads
-   as "turn interrupted". Name it in the error so the user knows to switch
-   models (see `docs/provider-notes.md`).
+   as "turn interrupted". Investigated 2026-10-23: refusals arrive in the
+   response stream inside the minified provider layer — a picker-source shim
+   cannot reach them without fetch-body interception, which is invasive for
+   all model traffic. Deferred because the primary setup (MiMo) is unaffected;
+   revisit if Anthropic models become the default. See `docs/provider-notes.md`.
 2. **Subagent stream resume.** The graph-checkpoint recovery envelope works
    live (runs 4–5 of the M4 baseline); the deeper fix resumes the subagent
    thread itself instead of re-delegating with a digest brief.

@@ -38,3 +38,24 @@ OPENROUTER_API_KEY=... M4_MINUTES=40 M4_MODEL=xiaomi/mimo-v2.6-pro \
   recovery-loop cost (via `get_capabilities` or the captured storage dump).
 - The fullest captured request body contains the whole conversation; the DOM
   transcript contains the final report.
+
+## First real session (your browser)
+
+Five minutes of setup, then the same shape as every evidence run:
+
+1. Reload the extension (`chrome://extensions`).
+2. **Settings → Models**: your OpenRouter connection needs the models in its
+   `modelIds` list (e.g. `xiaomi/mimo-v2.6-pro`); pick it as the model.
+3. **Settings → Workspaces**: create one for the program. Put the program's
+   **scope and exclusions in the workspace notes** (origins in scope,
+   out-of-scope paths, rate expectations) and the testing scope origins —
+   scans and replays are refused outside those origins, and the agent treats
+   written limits as binding.
+4. Open the target logged in as the intended account, select the Bug bounty
+   profile and the workspace, and give one instruction: what to test, "work
+   findings to proof, report each one with the invariant."
+5. Watch the transcript; steer mid-run like any chat. Afterwards,
+   `get_capabilities` → `telemetry` is the session scoreboard.
+
+Note: the runner's timebox and wrap-up steering are test-harness only — a
+real session has no clock; the model works until it reports.

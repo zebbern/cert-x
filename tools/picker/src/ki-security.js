@@ -402,7 +402,7 @@ async function kiSecurityOperate(op, args, session, signal, recheck, userAction 
   await kiWorkspaceOutput(session, { name, path: download.filename, downloadId, size: bytes.length, kind: 'file', runId: args.runId, mime });
   return { reports: [{ name, downloadId, size: bytes.length }], summary: result.run?.summary, selectedEngines: result.run?.engines, coverageState: result.run?.state,
     requestBudget:{ used:result.run?.requestsSent ?? null, limit:result.run?.config?.maxRequests ?? null, exhausted:result.run?.config?.maxRequests != null && result.run.requestsSent >= result.run.config.maxRequests },
-    warnings: result.warnings || [], reportingNote: 'Use summary.byModule for raw alert counts. Selected engines are the tested engines; an unselected engine is not necessarily unconfigured. Raw alerts are not distinct vulnerabilities. Tasks entered are not HTTP requests; only requestBudget.exhausted supports a request-budget exhaustion claim.' };
+    warnings: result.warnings || [], findingInvariant: 'Given [attacker prerequisites], I demonstrated [unauthorized action] across [security boundary], producing [observable effect].', reportingNote: 'Use summary.byModule for raw alert counts. Selected engines are the tested engines; an unselected engine is not necessarily unconfigured. Raw alerts are not distinct vulnerabilities. Tasks entered are not HTTP requests; only requestBudget.exhausted supports a request-budget exhaustion claim.' };
 }
 function kiSecurityAgentResult(op, args, result) {
   if (args?.detail === 'full' || !result || typeof result !== 'object') return result;

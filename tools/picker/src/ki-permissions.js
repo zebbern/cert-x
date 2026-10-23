@@ -158,6 +158,7 @@ async function kiPolicyInventory() {
   for (const name of names) kiPolicyRegister(kiPolicyBrowserMeta(name));
   for (const spec of kiNativeSpecs) kiPolicyRegister({ ...kiPolicyLocalMeta(spec.name), description: spec.description });
   for (const tool of kiProductTools()) kiPolicyRegister(tool.kiPolicyMeta);
+  if (typeof kiGraphToolDefs === "function") for (const tool of kiGraphToolDefs()) kiPolicyRegister(tool.kiPolicyMeta);
   if (typeof kiPtkMeta === "function") for (const name of ["ptk_check", "ptk_start_scan", "ptk_scan_status", "ptk_stop_scan", "ptk_get_findings", "ptk_export_report", "ptk_extend_scan"]) kiPolicyRegister(kiPtkMeta(name));
   if (typeof kiDastMeta === "function") for (const name of ["ptk_capture_requests", "ptk_list_requests", "ptk_prepare_dast", "ptk_run_dast", "ptk_dast_status", "ptk_stop_dast", "ptk_dast_findings", "ptk_dast_export"]) kiPolicyRegister(kiDastMeta(name));
   if (typeof kiAuthzMeta === "function") for (const name of ["ptk_list_accounts", "ptk_save_account", "ptk_verify_account", "ptk_prepare_access_test", "ptk_run_access_test", "ptk_access_status", "ptk_stop_access_test", "ptk_access_findings", "ptk_access_export"]) kiPolicyRegister(kiAuthzMeta(name));

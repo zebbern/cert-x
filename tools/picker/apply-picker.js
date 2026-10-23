@@ -138,6 +138,11 @@ let bg = fs.readFileSync(path.join(original, "background.js"), "utf8");
 bg = swap(bg, 'let e=Array.isArray(a.attachments),t=Array.isArray(a.files);if(e===t)', 'let e=Array.isArray(a.attachments),t=Array.isArray(a.files),g=a.generated!==void 0;if(Number(e)+Number(t)+Number(g)!==1)');
 bg = swap(bg, 'if(Number(e)+Number(t)+Number(g)!==1)return{output:t?"upload: give either `attachments` or `files`, not both — the two sources cannot be combined in one call.":"upload: give `attachments` (attachment_ids from the <context> block) or `files` (absolute local paths).",isError:!0}', 'if(Number(e)+Number(t)+Number(g)!==1)return{output:"upload: choose exactly one source: attachments, files, or generated.",isError:!0}');
 bg = swap(bg, 'var mP={navigate:new Kt,', fs.readFileSync(path.join(__dirname, 'src/ki-upload.js'), 'utf8').trim() + '\nvar mP={navigate:new Kt,');
+// Subagent stream deaths lose the final summary but not the work: graph_write
+// calls persist in the workspace graph. Teach that recovery at the failure
+// point so the orchestrator resumes via digest instead of re-delegating recon.
+bg = swap(bg, 'catch(e){if(r.signal.aborted)throw e;return{output:`Subagent failed: ${e instanceof Error?e.message:String(e)}`,isError:!0}',
+  'catch(e){if(r.signal.aborted)throw e;return{output:`Subagent interrupted: ${e instanceof Error?e.message:String(e)}. Recovery: its graph_write calls persist in the workspace graph. Do not repeat the same enumeration from scratch: delegate a resume brief ("a previous subagent already mapped the surface with graph_write; read graph_digest and graph_find, fill only visible gaps, then produce the final summary"). If the subagent wrote no graph, re-delegate the original task.`,isError:!0}');
 // The favicon/cursor marker is cosmetic. On a second file selection after a
 // download it can leave a Runtime.evaluate pending and block upload CDP work.
 bg = swap(bg, 'await Da(n,u)}try{let o={', 'if(e!==`upload`)await Da(n,u)}try{let o={');

@@ -66,9 +66,10 @@ try{
  let done=false,steered=false;
  for(let elapsed=0;elapsed<timeboxMinutes*60;elapsed+=5){
    await sleep(5000);
-   // At 75% of the timebox, steer the model to stop expanding and deliver:
-   // without this, thorough models work past the clock and never report.
-   if(!steered&&elapsed>=timeboxMinutes*45){try{await panel.locator('.wb-editor').first().click();await panel.keyboard.type('Wrap up now: stop starting new tests and produce your final report. State every proven finding with the invariant (given [prerequisites], I demonstrated [unauthorized action] across [security boundary], producing [observable effect]); list hypotheses you did not prove as such.');await panel.keyboard.press('Enter');steered=true;mark('wrap-up steering sent',Math.round(elapsed)+'s');}catch{}}
+   // At 60% of the timebox, steer the model to stop expanding and deliver:
+   // thorough models accept this but need the remaining box to generate the
+   // report — 75% proved too late twice (report lost mid-generation).
+   if(!steered&&elapsed>=timeboxMinutes*36){try{await panel.locator('.wb-editor').first().click();await panel.keyboard.type('Wrap up now: stop starting new tests and produce your final report. State every proven finding with the invariant (given [prerequisites], I demonstrated [unauthorized action] across [security boundary], producing [observable effect]); list hypotheses you did not prove as such.');await panel.keyboard.press('Enter');steered=true;mark('wrap-up steering sent',Math.round(elapsed)+'s');}catch{}}
    done=await panel.evaluate(()=>document.querySelector('[aria-label="Profile"]')?.disabled===false).catch(()=>false);
    // A failed turn re-enables the profile AND shows Retry — the affordance
    // must win over the idle signal, or a dead turn reads as "finished".

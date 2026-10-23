@@ -65,6 +65,10 @@ Recon and findings build a persistent map of the target, stored per workspace an
 
 Tool-failure telemetry — per-tool error counts and which tool ran next after each error — is collected automatically and surfaced through `get_capabilities` under `telemetry`.
 
+## Live sessions
+
+The extension can be exercised end-to-end against a practice target with a real model, unattended; the M4 evidence baseline was produced this way. See [docs/live-sessions.md](docs/live-sessions.md) for the runner, targets and how to read results; [docs/backlog.md](docs/backlog.md) tracks open items.
+
 ## MCP connections
 
 In the side panel, open **Settings → MCP servers**. Choose **Add a server**, paste its URL, then **Connect** to test and save in one step. API keys and names are optional fields; servers that request OAuth open sign-in. Postman (US) uses sign-in. Postman (EU) uses a key from the EU account. Local stdio MCP servers run through the optional native host below.

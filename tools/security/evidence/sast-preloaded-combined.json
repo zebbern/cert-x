@@ -6,10 +6,10 @@
         "SAST"
       ],
       "status": {
-        "runId": "cedd1219-39e9-423d-98ca-a38d596fd6e5",
+        "runId": "d3232df6-4e59-453c-b1d4-733137ce7123",
         "owner": "sast-combined",
         "workspaceId": null,
-        "tabId": 2061889086,
+        "tabId": 362542172,
         "engines": [
           "SAST"
         ],
@@ -20,6 +20,9 @@
           "dastScanStrategy": "COMPREHENSIVE",
           "scanControlProfile": "wide",
           "allowCaptureWithoutInteraction": true,
+          "enableHtmlLinkDiscovery": true,
+          "htmlLinkDiscoveryBudget": "safe",
+          "schedulerBreadthFirst": true,
           "maxRequestsPerSecond": 5,
           "concurrency": 3,
           "planningConcurrency": 2,
@@ -44,14 +47,14 @@
         },
         "scope": {
           "origins": [
-            "http://127.0.0.1:49360"
+            "http://127.0.0.1:61176"
           ],
           "excludePaths": []
         },
         "accountId": null,
         "accountRevision": null,
-        "createdAt": 1792694491628,
-        "updatedAt": 1792694491933,
+        "createdAt": 1792736662553,
+        "updatedAt": 1792736662642,
         "requestsSent": 0,
         "coverage": {
           "backendGaps": [],
@@ -89,7 +92,13 @@
               "resources": 1,
               "denied": 0
             },
-            "preloaded": null,
+            "preloaded": {
+              "documents": 1,
+              "scripts": 1,
+              "analyzedScripts": 0,
+              "originalHtmlUnavailable": true,
+              "provenance": "debugger_script_source"
+            },
             "preloadedAcquisition": {
               "captured": 1,
               "gaps": 0,
@@ -105,15 +114,40 @@
             "sourceWarnings": []
           },
           "engineFailures": [],
-          "actionableGaps": [],
+          "actionableGaps": [
+            {
+              "code": "original_html_unavailable",
+              "engine": "SAST",
+              "summary": "Preloaded scripts were inspected without the original HTML response.",
+              "sampledOccurrences": 1,
+              "retryUnchanged": false,
+              "recovery": {
+                "action": "exercise_workflow",
+                "instruction": "Keep the client-script findings. If original-HTML checks matter, revisit that route while the same scan is active. Browser SAST cannot inspect server-side source."
+              },
+              "examples": []
+            },
+            {
+              "code": "no_client_source_analyzed",
+              "engine": "SAST",
+              "summary": "No client-source analysis was established.",
+              "sampledOccurrences": 1,
+              "retryUnchanged": false,
+              "recovery": {
+                "action": "exercise_workflow",
+                "instruction": "Inspect source-acquisition diagnostics and visit the relevant application route while scanning. Do not infer a clean client-code assessment from no findings."
+              },
+              "examples": []
+            }
+          ],
           "recovery": {
-            "runId": "cedd1219-39e9-423d-98ca-a38d596fd6e5",
+            "runId": "d3232df6-4e59-453c-b1d4-733137ce7123",
             "state": "in_progress",
-            "instruction": "Assess only the checks and evidence actually recorded; absence of reported gaps is not proof of full application coverage."
+            "instruction": "Address applicable recovery steps or include unresolved gaps in the final report. Do not repeat unchanged failed calls."
           }
         },
         "summary": {
-          "findingsCount": 0,
+          "findingsCount": 3,
           "bySeverity": {
             "critical": 0,
             "high": 0,
@@ -121,19 +155,24 @@
             "low": 0,
             "info": 0
           },
-          "findings": 3
+          "findings": 3,
+          "byModule": {
+            "dom-xss": 2,
+            "client-template-injection": 1
+          },
+          "countsBasis": "retained_findings"
         },
-        "runtimeId": "ptk-session_ffac9e24-83a8-439b-bbb8-e3d585f6383a",
+        "runtimeId": "ptk-session_1384e38d-184f-4925-9520-116ce4b5451e",
         "engineStatus": {
           "SAST": {
             "status": "running",
             "isRunning": true,
             "progress": {
-              "done": 0,
+              "done": 1,
               "total": 1,
-              "remaining": 1
+              "remaining": 0
             },
-            "findingsCount": 0,
+            "findingsCount": 3,
             "bySeverity": {
               "critical": 0,
               "high": 0,
@@ -143,75 +182,75 @@
             },
             "lastActivityAt": null,
             "warnings": [],
-            "phase": "module_complete",
+            "phase": "waiting",
             "totalFiles": 1,
-            "completedFiles": 0,
+            "completedFiles": 1,
             "totalModules": 11,
-            "completedModules": 1,
-            "currentFile": "http://127.0.0.1:49360/exec",
-            "currentModule": "DOM-based XSS",
-            "lastStatus": "Completed module",
-            "findings": 0,
-            "hints": 0,
+            "completedModules": 11,
+            "currentFile": null,
+            "currentModule": null,
+            "lastStatus": "Waiting for next page activity",
+            "findings": 2,
+            "hints": 1,
             "isSessionRunning": true,
-            "isAnalysisRunning": true,
-            "collectionState": "analysis_running",
+            "isAnalysisRunning": false,
+            "collectionState": "waiting_for_page_activity",
             "sessionState": "running",
-            "analysisState": "analyzing",
+            "analysisState": "complete",
             "firstCollectionStarted": true,
             "firstCollectionSettled": true,
             "firstCollectionError": null,
             "initialCollectionDeferred": null,
-            "activeCollectionCount": 1,
-            "pendingCollectionCount": 3,
-            "currentGeneration": 2,
-            "lastCompletedGeneration": 1,
-            "currentCollectionId": "sast_collection_2",
-            "currentCollectionFile": "http://127.0.0.1:49360/exec",
+            "activeCollectionCount": 0,
+            "pendingCollectionCount": 2,
+            "currentGeneration": 3,
+            "lastCompletedGeneration": 3,
+            "currentCollectionId": "sast_collection_3",
+            "currentCollectionFile": "http://127.0.0.1:61176/exec",
             "currentCollectionScriptsCount": 1,
             "currentCollectionHtmlChars": 0,
             "currentCollectionFindingsCount": 0,
-            "currentCollectionStartedAt": "2026-10-22T18:41:31.883Z",
-            "currentCollectionPayloadAt": "2026-10-22T18:41:31.887Z",
-            "lastCompletedCollectionId": "sast_collection_1",
-            "lastCompletedFile": "http://127.0.0.1:49360/exec",
-            "lastCompletedModule": "DOM-based XSS",
-            "lastCompletedScriptsCount": 0,
+            "currentCollectionStartedAt": "2026-10-23T06:24:22.641Z",
+            "currentCollectionPayloadAt": "2026-10-23T06:24:22.641Z",
+            "lastCompletedCollectionId": "sast_collection_2",
+            "lastCompletedFile": "http://127.0.0.1:61176/exec",
+            "lastCompletedModule": "DOM Data Manipulation",
+            "lastCompletedScriptsCount": 1,
             "lastCompletedHtmlChars": 0,
-            "lastCompletedFindingsCount": 0,
+            "lastCompletedFindingsCount": 3,
             "lastCompletedArtifactsCount": 0,
-            "lastCompletedAt": "2026-10-22T18:41:31.839Z",
+            "lastCompletedAt": "2026-10-23T06:24:22.640Z",
             "hasObservedCollection": true,
-            "idle": false
+            "idle": true
           }
         },
         "lastStatus": {
-          "sessionId": "ptk-session_ffac9e24-83a8-439b-bbb8-e3d585f6383a",
-          "scanId": "ptk-session_ffac9e24-83a8-439b-bbb8-e3d585f6383a",
+          "sessionId": "ptk-session_1384e38d-184f-4925-9520-116ce4b5451e",
+          "scanId": "ptk-session_1384e38d-184f-4925-9520-116ce4b5451e",
           "ok": true,
           "status": "running",
           "completionStatus": "running",
           "releaseStatus": null,
           "error": null,
-          "startedAt": "2026-10-22T18:41:31.640Z",
+          "startedAt": "2026-10-23T06:24:22.558Z",
           "finishedAt": null,
           "stopRequestedAt": null,
           "closeRequestId": null,
           "closeRequestAck": false,
           "closeRequestMode": null,
           "idleVerified": false,
-          "elapsedMs": 292,
+          "elapsedMs": 84,
           "lastUpdatedAt": null,
           "engines": {
             "SAST": {
               "status": "running",
               "isRunning": true,
               "progress": {
-                "done": 0,
+                "done": 1,
                 "total": 1,
-                "remaining": 1
+                "remaining": 0
               },
-              "findingsCount": 0,
+              "findingsCount": 3,
               "bySeverity": {
                 "critical": 0,
                 "high": 0,
@@ -221,50 +260,50 @@
               },
               "lastActivityAt": null,
               "warnings": [],
-              "phase": "module_complete",
+              "phase": "waiting",
               "totalFiles": 1,
-              "completedFiles": 0,
+              "completedFiles": 1,
               "totalModules": 11,
-              "completedModules": 1,
-              "currentFile": "http://127.0.0.1:49360/exec",
-              "currentModule": "DOM-based XSS",
-              "lastStatus": "Completed module",
-              "findings": 0,
-              "hints": 0,
+              "completedModules": 11,
+              "currentFile": null,
+              "currentModule": null,
+              "lastStatus": "Waiting for next page activity",
+              "findings": 2,
+              "hints": 1,
               "isSessionRunning": true,
-              "isAnalysisRunning": true,
-              "collectionState": "analysis_running",
+              "isAnalysisRunning": false,
+              "collectionState": "waiting_for_page_activity",
               "sessionState": "running",
-              "analysisState": "analyzing",
+              "analysisState": "complete",
               "firstCollectionStarted": true,
               "firstCollectionSettled": true,
               "firstCollectionError": null,
               "initialCollectionDeferred": null,
-              "activeCollectionCount": 1,
-              "pendingCollectionCount": 3,
-              "currentGeneration": 2,
-              "lastCompletedGeneration": 1,
-              "currentCollectionId": "sast_collection_2",
-              "currentCollectionFile": "http://127.0.0.1:49360/exec",
+              "activeCollectionCount": 0,
+              "pendingCollectionCount": 2,
+              "currentGeneration": 3,
+              "lastCompletedGeneration": 3,
+              "currentCollectionId": "sast_collection_3",
+              "currentCollectionFile": "http://127.0.0.1:61176/exec",
               "currentCollectionScriptsCount": 1,
               "currentCollectionHtmlChars": 0,
               "currentCollectionFindingsCount": 0,
-              "currentCollectionStartedAt": "2026-10-22T18:41:31.883Z",
-              "currentCollectionPayloadAt": "2026-10-22T18:41:31.887Z",
-              "lastCompletedCollectionId": "sast_collection_1",
-              "lastCompletedFile": "http://127.0.0.1:49360/exec",
-              "lastCompletedModule": "DOM-based XSS",
-              "lastCompletedScriptsCount": 0,
+              "currentCollectionStartedAt": "2026-10-23T06:24:22.641Z",
+              "currentCollectionPayloadAt": "2026-10-23T06:24:22.641Z",
+              "lastCompletedCollectionId": "sast_collection_2",
+              "lastCompletedFile": "http://127.0.0.1:61176/exec",
+              "lastCompletedModule": "DOM Data Manipulation",
+              "lastCompletedScriptsCount": 1,
               "lastCompletedHtmlChars": 0,
-              "lastCompletedFindingsCount": 0,
+              "lastCompletedFindingsCount": 3,
               "lastCompletedArtifactsCount": 0,
-              "lastCompletedAt": "2026-10-22T18:41:31.839Z",
+              "lastCompletedAt": "2026-10-23T06:24:22.640Z",
               "hasObservedCollection": true,
-              "idle": false
+              "idle": true
             }
           },
           "summary": {
-            "findingsCount": 0,
+            "findingsCount": 3,
             "bySeverity": {
               "critical": 0,
               "high": 0,
@@ -275,14 +314,14 @@
           },
           "warnings": [],
           "sessionLookup": {
-            "requestedSessionId": "ptk-session_ffac9e24-83a8-439b-bbb8-e3d585f6383a",
-            "tabId": 2061889086,
+            "requestedSessionId": "ptk-session_1384e38d-184f-4925-9520-116ce4b5451e",
+            "tabId": 362542172,
             "strictCurrentTab": true,
             "allowActive": true,
             "allowCompleted": true,
             "allowGlobalCompleted": true,
             "lookupSource": "explicit-session",
-            "activeSessionIdForTab": "ptk-session_ffac9e24-83a8-439b-bbb8-e3d585f6383a",
+            "activeSessionIdForTab": "ptk-session_1384e38d-184f-4925-9520-116ce4b5451e",
             "completedSessionIdForTab": null,
             "globalCompletedSessionId": null,
             "sessionExists": true,
@@ -335,7 +374,13 @@
                 "resources": 1,
                 "denied": 0
               },
-              "preloaded": null,
+              "preloaded": {
+                "documents": 1,
+                "scripts": 1,
+                "analyzedScripts": 0,
+                "originalHtmlUnavailable": true,
+                "provenance": "debugger_script_source"
+              },
               "preloadedAcquisition": {
                 "captured": 1,
                 "gaps": 0,
@@ -354,20 +399,23 @@
         }
       },
       "stopped": {
-        "runId": "cedd1219-39e9-423d-98ca-a38d596fd6e5",
+        "runId": "d3232df6-4e59-453c-b1d4-733137ce7123",
         "owner": "sast-combined",
         "workspaceId": null,
-        "tabId": 2061889086,
+        "tabId": 362542172,
         "engines": [
           "SAST"
         ],
-        "state": "incomplete",
+        "state": "completed",
         "config": {
           "preset": "thorough",
           "scanStrategy": "COMPREHENSIVE",
           "dastScanStrategy": "COMPREHENSIVE",
           "scanControlProfile": "wide",
           "allowCaptureWithoutInteraction": true,
+          "enableHtmlLinkDiscovery": true,
+          "htmlLinkDiscoveryBudget": "safe",
+          "schedulerBreadthFirst": true,
           "maxRequestsPerSecond": 5,
           "concurrency": 3,
           "planningConcurrency": 2,
@@ -392,14 +440,14 @@
         },
         "scope": {
           "origins": [
-            "http://127.0.0.1:49360"
+            "http://127.0.0.1:61176"
           ],
           "excludePaths": []
         },
         "accountId": null,
         "accountRevision": null,
-        "createdAt": 1792694491628,
-        "updatedAt": 1792694492056,
+        "createdAt": 1792736662553,
+        "updatedAt": 1792736662673,
         "requestsSent": 0,
         "coverage": {
           "backendGaps": [],
@@ -461,19 +509,6 @@
           "engineFailures": [],
           "actionableGaps": [
             {
-              "code": "execution_incomplete",
-              "engine": "Run",
-              "summary": "This run did not establish complete execution.",
-              "sampledOccurrences": 1,
-              "retryUnchanged": false,
-              "recovery": {
-                "action": "inspect_run",
-                "tool": "security_scan_status",
-                "instruction": "Inspect this run and its retained evidence before retrying. Resolve the failure or report the untested work; never infer a clean result from missing findings."
-              },
-              "examples": []
-            },
-            {
               "code": "original_html_unavailable",
               "engine": "SAST",
               "summary": "Preloaded scripts were inspected without the original HTML response.",
@@ -487,7 +522,7 @@
             }
           ],
           "recovery": {
-            "runId": "cedd1219-39e9-423d-98ca-a38d596fd6e5",
+            "runId": "d3232df6-4e59-453c-b1d4-733137ce7123",
             "state": "incomplete",
             "instruction": "Address applicable recovery steps or include unresolved gaps in the final report. Do not repeat unchanged failed calls."
           }
@@ -505,9 +540,14 @@
               "info": 0
             }
           },
-          "findings": 3
+          "findings": 3,
+          "byModule": {
+            "dom-xss": 2,
+            "client-template-injection": 1
+          },
+          "countsBasis": "retained_findings"
         },
-        "runtimeId": "ptk-session_ffac9e24-83a8-439b-bbb8-e3d585f6383a",
+        "runtimeId": "ptk-session_1384e38d-184f-4925-9520-116ce4b5451e",
         "engineStatus": {
           "SAST": {
             "status": "stopped",
@@ -558,7 +598,7 @@
             "currentCollectionStartedAt": null,
             "currentCollectionPayloadAt": null,
             "lastCompletedCollectionId": null,
-            "lastCompletedFile": "http://127.0.0.1:49360/asset.js",
+            "lastCompletedFile": "http://127.0.0.1:61176/asset.js",
             "lastCompletedModule": "DOM Data Manipulation",
             "lastCompletedScriptsCount": 0,
             "lastCompletedHtmlChars": 0,
@@ -570,21 +610,21 @@
           }
         },
         "lastStatus": {
-          "sessionId": "ptk-session_ffac9e24-83a8-439b-bbb8-e3d585f6383a",
-          "scanId": "ptk-session_ffac9e24-83a8-439b-bbb8-e3d585f6383a",
+          "sessionId": "ptk-session_1384e38d-184f-4925-9520-116ce4b5451e",
+          "scanId": "ptk-session_1384e38d-184f-4925-9520-116ce4b5451e",
           "ok": true,
           "status": "completed",
           "completionStatus": "completed",
           "releaseStatus": "clean",
           "error": null,
-          "startedAt": "2026-10-22T18:41:31.640Z",
-          "finishedAt": "2026-10-22T18:41:32.046Z",
+          "startedAt": "2026-10-23T06:24:22.558Z",
+          "finishedAt": "2026-10-23T06:24:22.669Z",
           "stopRequestedAt": null,
           "closeRequestId": null,
           "closeRequestAck": false,
           "closeRequestMode": null,
           "idleVerified": false,
-          "elapsedMs": 415,
+          "elapsedMs": 114,
           "lastUpdatedAt": null,
           "engines": {
             "SAST": {
@@ -636,7 +676,7 @@
               "currentCollectionStartedAt": null,
               "currentCollectionPayloadAt": null,
               "lastCompletedCollectionId": null,
-              "lastCompletedFile": "http://127.0.0.1:49360/asset.js",
+              "lastCompletedFile": "http://127.0.0.1:61176/asset.js",
               "lastCompletedModule": "DOM Data Manipulation",
               "lastCompletedScriptsCount": 0,
               "lastCompletedHtmlChars": 0,
@@ -673,19 +713,19 @@
           },
           "warnings": [],
           "sessionLookup": {
-            "requestedSessionId": "ptk-session_ffac9e24-83a8-439b-bbb8-e3d585f6383a",
-            "tabId": 2061889086,
+            "requestedSessionId": "ptk-session_1384e38d-184f-4925-9520-116ce4b5451e",
+            "tabId": 362542172,
             "strictCurrentTab": true,
             "allowActive": true,
             "allowCompleted": true,
             "allowGlobalCompleted": true,
             "lookupSource": "explicit-session",
             "activeSessionIdForTab": null,
-            "completedSessionIdForTab": "ptk-session_ffac9e24-83a8-439b-bbb8-e3d585f6383a",
-            "globalCompletedSessionId": "ptk-session_ffac9e24-83a8-439b-bbb8-e3d585f6383a",
+            "completedSessionIdForTab": "ptk-session_1384e38d-184f-4925-9520-116ce4b5451e",
+            "globalCompletedSessionId": "ptk-session_1384e38d-184f-4925-9520-116ce4b5451e",
             "sessionExists": true,
             "sessionStatus": "completed",
-            "sessionFinishedAt": "2026-10-22T18:41:32.046Z",
+            "sessionFinishedAt": "2026-10-23T06:24:22.669Z",
             "stopRequestedAt": null,
             "retention": {
               "ttlMs": 86400000,
@@ -762,10 +802,10 @@
         "scan": {
           "version": "1.0",
           "engine": "SAST",
-          "scanId": "131d0d0e-a4b9-4a95-9784-ccf3ace0803c",
-          "host": "127.0.0.1:49360",
-          "startedAt": "2026-10-22T18:41:31.688Z",
-          "finishedAt": "2026-10-22T18:41:32.038Z",
+          "scanId": "ee7fedda-a804-4a42-8dd6-08eb767cc8ec",
+          "host": "127.0.0.1:61176",
+          "startedAt": "2026-10-23T06:24:22.573Z",
+          "finishedAt": "2026-10-23T06:24:22.667Z",
           "settings": {
             "policyCode": "COMPREHENSIVE",
             "scanStrategyCode": 0,
@@ -789,9 +829,9 @@
           },
           "findings": [
             {
-              "id": "131d0d0e-a4b9-4a95-9784-ccf3ace0803c::SAST::dom-xss::no-inner-outer-html::e8f0cfef2b8c746e",
+              "id": "ee7fedda-a804-4a42-8dd6-08eb767cc8ec::SAST::dom-xss::no-inner-outer-html::c3dd4e1e57badfd4",
               "engine": "SAST",
-              "scanId": "131d0d0e-a4b9-4a95-9784-ccf3ace0803c",
+              "scanId": "ee7fedda-a804-4a42-8dd6-08eb767cc8ec",
               "moduleId": "dom-xss",
               "moduleName": "DOM-based XSS",
               "ruleId": "no-inner-outer-html",
@@ -818,23 +858,23 @@
                 "CWE": "https://cwe.mitre.org/data/definitions/79.html"
               },
               "location": {
-                "file": "http://127.0.0.1:49360/asset.js",
+                "file": "http://127.0.0.1:61176/asset.js",
                 "line": 1,
                 "column": 22,
-                "runtimeUrl": "http://127.0.0.1:49360/exec",
+                "runtimeUrl": "http://127.0.0.1:61176/exec",
                 "runtimeUrls": [
-                  "http://127.0.0.1:49360/exec"
+                  "http://127.0.0.1:61176/exec"
                 ],
-                "pageUrl": "http://127.0.0.1:49360/exec",
+                "pageUrl": "http://127.0.0.1:61176/exec",
                 "pageUrls": [
-                  "http://127.0.0.1:49360/exec"
+                  "http://127.0.0.1:61176/exec"
                 ],
-                "url": "http://127.0.0.1:49360/exec",
+                "url": "http://127.0.0.1:61176/exec",
                 "param": null,
                 "kind": "code"
               },
-              "createdAt": "2026-10-22T18:41:31.998Z",
-              "fingerprint": "no-inner-outer-html@@low@@http://127.0.0.1:49360/asset.js@@http://127.0.0.1:49360/asset.js@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":79}}@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":63}}@@",
+              "createdAt": "2026-10-23T06:24:22.652Z",
+              "fingerprint": "no-inner-outer-html@@low@@http://127.0.0.1:61176/asset.js@@http://127.0.0.1:61176/asset.js@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":79}}@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":63}}@@",
               "findingKind": "hint",
               "confidence": 38,
               "evidence": {
@@ -843,8 +883,8 @@
                   "source": {
                     "label": "innerHTML",
                     "path": null,
-                    "sourceFile": "http://127.0.0.1:49360/asset.js",
-                    "sourceFileFull": "http://127.0.0.1:49360/asset.js",
+                    "sourceFile": "http://127.0.0.1:61176/asset.js",
+                    "sourceFileFull": "http://127.0.0.1:61176/asset.js",
                     "sourceLoc": {
                       "start": {
                         "line": 1,
@@ -862,8 +902,8 @@
                     "kind": "assign",
                     "label": "innerHTML",
                     "path": [],
-                    "sinkFile": "http://127.0.0.1:49360/asset.js",
-                    "sinkFileFull": "http://127.0.0.1:49360/asset.js",
+                    "sinkFile": "http://127.0.0.1:61176/asset.js",
+                    "sinkFileFull": "http://127.0.0.1:61176/asset.js",
                     "sinkLoc": {
                       "start": {
                         "line": 1,
@@ -887,13 +927,13 @@
                   ]
                 }
               },
-              "updatedAt": "2026-10-22T18:41:31.998Z",
-              "pageUrl": "http://127.0.0.1:49360/exec"
+              "updatedAt": "2026-10-23T06:24:22.652Z",
+              "pageUrl": "http://127.0.0.1:61176/exec"
             },
             {
-              "id": "131d0d0e-a4b9-4a95-9784-ccf3ace0803c::SAST::dom-xss::dom-xss-taint::c37682169e3633ac",
+              "id": "ee7fedda-a804-4a42-8dd6-08eb767cc8ec::SAST::dom-xss::dom-xss-taint::a478db3e6394e7d5",
               "engine": "SAST",
-              "scanId": "131d0d0e-a4b9-4a95-9784-ccf3ace0803c",
+              "scanId": "ee7fedda-a804-4a42-8dd6-08eb767cc8ec",
               "moduleId": "dom-xss",
               "moduleName": "DOM-based XSS",
               "ruleId": "dom-xss-taint",
@@ -920,23 +960,23 @@
                 "CWE": "https://cwe.mitre.org/data/definitions/79.html"
               },
               "location": {
-                "file": "http://127.0.0.1:49360/asset.js",
+                "file": "http://127.0.0.1:61176/asset.js",
                 "line": 1,
                 "column": 22,
-                "runtimeUrl": "http://127.0.0.1:49360/exec",
+                "runtimeUrl": "http://127.0.0.1:61176/exec",
                 "runtimeUrls": [
-                  "http://127.0.0.1:49360/exec"
+                  "http://127.0.0.1:61176/exec"
                 ],
-                "pageUrl": "http://127.0.0.1:49360/exec",
+                "pageUrl": "http://127.0.0.1:61176/exec",
                 "pageUrls": [
-                  "http://127.0.0.1:49360/exec"
+                  "http://127.0.0.1:61176/exec"
                 ],
-                "url": "http://127.0.0.1:49360/exec",
+                "url": "http://127.0.0.1:61176/exec",
                 "param": null,
                 "kind": "code"
               },
-              "createdAt": "2026-10-22T18:41:31.998Z",
-              "fingerprint": "dom-xss-taint@@high@@http://127.0.0.1:49360/asset.js@@http://127.0.0.1:49360/asset.js@@{\"start\":{\"line\":1,\"column\":66},\"end\":{\"line\":1,\"column\":79}}@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":63}}@@",
+              "createdAt": "2026-10-23T06:24:22.652Z",
+              "fingerprint": "dom-xss-taint@@high@@http://127.0.0.1:61176/asset.js@@http://127.0.0.1:61176/asset.js@@{\"start\":{\"line\":1,\"column\":66},\"end\":{\"line\":1,\"column\":79}}@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":63}}@@",
               "findingKind": "finding",
               "confidence": 100,
               "evidence": {
@@ -945,8 +985,8 @@
                   "source": {
                     "label": "location.hash",
                     "path": "location.hash",
-                    "sourceFile": "http://127.0.0.1:49360/asset.js",
-                    "sourceFileFull": "http://127.0.0.1:49360/asset.js",
+                    "sourceFile": "http://127.0.0.1:61176/asset.js",
+                    "sourceFileFull": "http://127.0.0.1:61176/asset.js",
                     "sourceLoc": {
                       "start": {
                         "line": 1,
@@ -969,8 +1009,8 @@
                     "framework": null,
                     "api": null,
                     "argIndex": null,
-                    "sinkFile": "http://127.0.0.1:49360/asset.js",
-                    "sinkFileFull": "http://127.0.0.1:49360/asset.js",
+                    "sinkFile": "http://127.0.0.1:61176/asset.js",
+                    "sinkFileFull": "http://127.0.0.1:61176/asset.js",
                     "sinkLoc": {
                       "start": {
                         "line": 1,
@@ -989,7 +1029,7 @@
                     {
                       "kind": "source",
                       "label": "location.hash",
-                      "file": "http://127.0.0.1:49360/asset.js",
+                      "file": "http://127.0.0.1:61176/asset.js",
                       "loc": {
                         "start": {
                           "line": 1,
@@ -1004,7 +1044,7 @@
                     {
                       "kind": "sink",
                       "label": "innerHTML",
-                      "file": "http://127.0.0.1:49360/asset.js",
+                      "file": "http://127.0.0.1:61176/asset.js",
                       "loc": {
                         "start": {
                           "line": 1,
@@ -1029,13 +1069,13 @@
                   ]
                 }
               },
-              "updatedAt": "2026-10-22T18:41:31.998Z",
-              "pageUrl": "http://127.0.0.1:49360/exec"
+              "updatedAt": "2026-10-23T06:24:22.652Z",
+              "pageUrl": "http://127.0.0.1:61176/exec"
             },
             {
-              "id": "131d0d0e-a4b9-4a95-9784-ccf3ace0803c::SAST::client-template-injection::client-template-injection-taint::645ce60d84d28791",
+              "id": "ee7fedda-a804-4a42-8dd6-08eb767cc8ec::SAST::client-template-injection::client-template-injection-taint::2b19cf606e51b797",
               "engine": "SAST",
-              "scanId": "131d0d0e-a4b9-4a95-9784-ccf3ace0803c",
+              "scanId": "ee7fedda-a804-4a42-8dd6-08eb767cc8ec",
               "moduleId": "client-template-injection",
               "moduleName": "Client-side Template Injection",
               "ruleId": "client-template-injection-taint",
@@ -1062,23 +1102,23 @@
                 "CWE": "https://cwe.mitre.org/data/definitions/94.html"
               },
               "location": {
-                "file": "http://127.0.0.1:49360/asset.js",
+                "file": "http://127.0.0.1:61176/asset.js",
                 "line": 1,
                 "column": 22,
-                "runtimeUrl": "http://127.0.0.1:49360/exec",
+                "runtimeUrl": "http://127.0.0.1:61176/exec",
                 "runtimeUrls": [
-                  "http://127.0.0.1:49360/exec"
+                  "http://127.0.0.1:61176/exec"
                 ],
-                "pageUrl": "http://127.0.0.1:49360/exec",
+                "pageUrl": "http://127.0.0.1:61176/exec",
                 "pageUrls": [
-                  "http://127.0.0.1:49360/exec"
+                  "http://127.0.0.1:61176/exec"
                 ],
-                "url": "http://127.0.0.1:49360/exec",
+                "url": "http://127.0.0.1:61176/exec",
                 "param": null,
                 "kind": "code"
               },
-              "createdAt": "2026-10-22T18:41:31.998Z",
-              "fingerprint": "client-template-injection-taint@@high@@http://127.0.0.1:49360/asset.js@@http://127.0.0.1:49360/asset.js@@{\"start\":{\"line\":1,\"column\":66},\"end\":{\"line\":1,\"column\":79}}@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":63}}@@",
+              "createdAt": "2026-10-23T06:24:22.652Z",
+              "fingerprint": "client-template-injection-taint@@high@@http://127.0.0.1:61176/asset.js@@http://127.0.0.1:61176/asset.js@@{\"start\":{\"line\":1,\"column\":66},\"end\":{\"line\":1,\"column\":79}}@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":63}}@@",
               "findingKind": "finding",
               "confidence": 88,
               "evidence": {
@@ -1087,8 +1127,8 @@
                   "source": {
                     "label": "location.hash",
                     "path": "location.hash",
-                    "sourceFile": "http://127.0.0.1:49360/asset.js",
-                    "sourceFileFull": "http://127.0.0.1:49360/asset.js",
+                    "sourceFile": "http://127.0.0.1:61176/asset.js",
+                    "sourceFileFull": "http://127.0.0.1:61176/asset.js",
                     "sourceLoc": {
                       "start": {
                         "line": 1,
@@ -1111,8 +1151,8 @@
                     "framework": null,
                     "api": null,
                     "argIndex": null,
-                    "sinkFile": "http://127.0.0.1:49360/asset.js",
-                    "sinkFileFull": "http://127.0.0.1:49360/asset.js",
+                    "sinkFile": "http://127.0.0.1:61176/asset.js",
+                    "sinkFileFull": "http://127.0.0.1:61176/asset.js",
                     "sinkLoc": {
                       "start": {
                         "line": 1,
@@ -1131,7 +1171,7 @@
                     {
                       "kind": "source",
                       "label": "location.hash",
-                      "file": "http://127.0.0.1:49360/asset.js",
+                      "file": "http://127.0.0.1:61176/asset.js",
                       "loc": {
                         "start": {
                           "line": 1,
@@ -1146,7 +1186,7 @@
                     {
                       "kind": "sink",
                       "label": "innerHTML",
-                      "file": "http://127.0.0.1:49360/asset.js",
+                      "file": "http://127.0.0.1:61176/asset.js",
                       "loc": {
                         "start": {
                           "line": 1,
@@ -1171,68 +1211,68 @@
                   ]
                 }
               },
-              "updatedAt": "2026-10-22T18:41:31.998Z",
-              "pageUrl": "http://127.0.0.1:49360/exec"
+              "updatedAt": "2026-10-23T06:24:22.652Z",
+              "pageUrl": "http://127.0.0.1:61176/exec"
             }
           ],
           "groups": [
             {
-              "id": "SAST@@dom_xss@@dom-xss@@no-inner-outer-html@@http://127.0.0.1:49360/asset.js@@1",
+              "id": "SAST@@dom_xss@@dom-xss@@no-inner-outer-html@@http://127.0.0.1:61176/asset.js@@1",
               "engine": "SAST",
-              "scanId": "131d0d0e-a4b9-4a95-9784-ccf3ace0803c",
+              "scanId": "ee7fedda-a804-4a42-8dd6-08eb767cc8ec",
               "vulnId": "dom_xss",
               "category": "xss",
               "severity": "low",
               "correlationKey": null,
               "location": {
-                "url": "http://127.0.0.1:49360/exec",
-                "runtimeUrl": "http://127.0.0.1:49360/exec",
-                "file": "http://127.0.0.1:49360/asset.js",
+                "url": "http://127.0.0.1:61176/exec",
+                "runtimeUrl": "http://127.0.0.1:61176/exec",
+                "file": "http://127.0.0.1:61176/asset.js",
                 "param": null,
                 "sink": "innerHTML"
               },
               "occurrenceIds": [
-                "131d0d0e-a4b9-4a95-9784-ccf3ace0803c::SAST::dom-xss::no-inner-outer-html::e8f0cfef2b8c746e"
+                "ee7fedda-a804-4a42-8dd6-08eb767cc8ec::SAST::dom-xss::no-inner-outer-html::c3dd4e1e57badfd4"
               ],
               "count": 1
             },
             {
-              "id": "SAST@@dom_xss@@dom-xss@@dom-xss-taint@@http://127.0.0.1:49360/asset.js@@1",
+              "id": "SAST@@dom_xss@@dom-xss@@dom-xss-taint@@http://127.0.0.1:61176/asset.js@@1",
               "engine": "SAST",
-              "scanId": "131d0d0e-a4b9-4a95-9784-ccf3ace0803c",
+              "scanId": "ee7fedda-a804-4a42-8dd6-08eb767cc8ec",
               "vulnId": "dom_xss",
               "category": "xss",
               "severity": "high",
               "correlationKey": null,
               "location": {
-                "url": "http://127.0.0.1:49360/exec",
-                "runtimeUrl": "http://127.0.0.1:49360/exec",
-                "file": "http://127.0.0.1:49360/asset.js",
+                "url": "http://127.0.0.1:61176/exec",
+                "runtimeUrl": "http://127.0.0.1:61176/exec",
+                "file": "http://127.0.0.1:61176/asset.js",
                 "param": null,
                 "sink": "innerHTML"
               },
               "occurrenceIds": [
-                "131d0d0e-a4b9-4a95-9784-ccf3ace0803c::SAST::dom-xss::dom-xss-taint::c37682169e3633ac"
+                "ee7fedda-a804-4a42-8dd6-08eb767cc8ec::SAST::dom-xss::dom-xss-taint::a478db3e6394e7d5"
               ],
               "count": 1
             },
             {
-              "id": "SAST@@code_injection@@client-template-injection@@client-template-injection-taint@@http://127.0.0.1:49360/asset.js@@1",
+              "id": "SAST@@code_injection@@client-template-injection@@client-template-injection-taint@@http://127.0.0.1:61176/asset.js@@1",
               "engine": "SAST",
-              "scanId": "131d0d0e-a4b9-4a95-9784-ccf3ace0803c",
+              "scanId": "ee7fedda-a804-4a42-8dd6-08eb767cc8ec",
               "vulnId": "code_injection",
               "category": "injection",
               "severity": "high",
               "correlationKey": null,
               "location": {
-                "url": "http://127.0.0.1:49360/exec",
-                "runtimeUrl": "http://127.0.0.1:49360/exec",
-                "file": "http://127.0.0.1:49360/asset.js",
+                "url": "http://127.0.0.1:61176/exec",
+                "runtimeUrl": "http://127.0.0.1:61176/exec",
+                "file": "http://127.0.0.1:61176/asset.js",
                 "param": null,
                 "sink": "innerHTML"
               },
               "occurrenceIds": [
-                "131d0d0e-a4b9-4a95-9784-ccf3ace0803c::SAST::client-template-injection::client-template-injection-taint::645ce60d84d28791"
+                "ee7fedda-a804-4a42-8dd6-08eb767cc8ec::SAST::client-template-injection::client-template-injection-taint::2b19cf606e51b797"
               ],
               "count": 1
             }
@@ -1247,35 +1287,35 @@
               "hiddenParams": [],
               "gadgets": [
                 {
-                  "id": "sast-gadget::127.0.0.1:49360|*|/exec::dom-html-sink::innerHTML",
-                  "bucketId": "sast-gadget::127.0.0.1:49360|*|/exec::dom-html-sink::innerHTML",
+                  "id": "sast-gadget::127.0.0.1:61176|*|/exec::dom-html-sink::innerHTML",
+                  "bucketId": "sast-gadget::127.0.0.1:61176|*|/exec::dom-html-sink::innerHTML",
                   "artifactType": "gadget",
                   "moduleId": "sast-gadget-path-hints",
                   "ruleId": "gadget-artifact",
                   "gadgetType": "dom-html-sink",
                   "label": "innerHTML",
-                  "routeKey": "127.0.0.1:49360|*|/exec",
+                  "routeKey": "127.0.0.1:61176|*|/exec",
                   "occurrenceCount": 2,
                   "sourceFiles": [
-                    "http://127.0.0.1:49360/asset.js"
+                    "http://127.0.0.1:61176/asset.js"
                   ],
-                  "sourceFile": "http://127.0.0.1:49360/asset.js",
+                  "sourceFile": "http://127.0.0.1:61176/asset.js",
                   "sourceLoc": {
                     "line": 1,
                     "column": 22
                   },
-                  "pageUrl": "http://127.0.0.1:49360/exec",
-                  "pageCanon": "http://127.0.0.1:49360/exec",
+                  "pageUrl": "http://127.0.0.1:61176/exec",
+                  "pageCanon": "http://127.0.0.1:61176/exec",
                   "pageUrls": [
-                    "http://127.0.0.1:49360/exec"
+                    "http://127.0.0.1:61176/exec"
                   ],
                   "runtimeUrls": [
-                    "http://127.0.0.1:49360/exec"
+                    "http://127.0.0.1:61176/exec"
                   ],
                   "observedUrls": [
-                    "http://127.0.0.1:49360/exec"
+                    "http://127.0.0.1:61176/exec"
                   ],
-                  "runtimeUrl": "http://127.0.0.1:49360/exec",
+                  "runtimeUrl": "http://127.0.0.1:61176/exec",
                   "authHints": [],
                   "protocolHints": [],
                   "discoveryTags": [],
@@ -1298,7 +1338,7 @@
             }
           },
           "files": [
-            "http://127.0.0.1:49360/asset.js"
+            "http://127.0.0.1:61176/asset.js"
           ],
           "scanStrategy": {
             "policyCode": "COMPREHENSIVE",
@@ -1402,10 +1442,10 @@
         "SCA"
       ],
       "status": {
-        "runId": "264623dc-936e-452b-9055-89f4b5c46224",
+        "runId": "2c45d8be-092e-4d68-8c11-7dbbf3a4c640",
         "owner": "sast-combined",
         "workspaceId": null,
-        "tabId": 2061889086,
+        "tabId": 362542172,
         "engines": [
           "SAST",
           "SCA"
@@ -1417,6 +1457,9 @@
           "dastScanStrategy": "COMPREHENSIVE",
           "scanControlProfile": "wide",
           "allowCaptureWithoutInteraction": true,
+          "enableHtmlLinkDiscovery": true,
+          "htmlLinkDiscoveryBudget": "safe",
+          "schedulerBreadthFirst": true,
           "maxRequestsPerSecond": 5,
           "concurrency": 3,
           "planningConcurrency": 2,
@@ -1441,14 +1484,14 @@
         },
         "scope": {
           "origins": [
-            "http://127.0.0.1:49360"
+            "http://127.0.0.1:61176"
           ],
           "excludePaths": []
         },
         "accountId": null,
         "accountRevision": null,
-        "createdAt": 1792694492307,
-        "updatedAt": 1792694492602,
+        "createdAt": 1792736662756,
+        "updatedAt": 1792736662836,
         "requestsSent": 0,
         "coverage": {
           "backendGaps": [],
@@ -1553,7 +1596,7 @@
             }
           ],
           "recovery": {
-            "runId": "264623dc-936e-452b-9055-89f4b5c46224",
+            "runId": "2c45d8be-092e-4d68-8c11-7dbbf3a4c640",
             "state": "in_progress",
             "instruction": "Address applicable recovery steps or include unresolved gaps in the final report. Do not repeat unchanged failed calls."
           }
@@ -1567,9 +1610,11 @@
             "low": 0,
             "info": 0
           },
-          "findings": 0
+          "findings": 0,
+          "byModule": {},
+          "countsBasis": "retained_findings"
         },
-        "runtimeId": "ptk-session_2dbd6013-f889-46a5-95c9-fa35f8875683",
+        "runtimeId": "ptk-session_aeb6f115-b9d6-49b1-9c1f-0519744b0c65",
         "engineStatus": {
           "SAST": {
             "status": "running",
@@ -1613,20 +1658,20 @@
             "currentGeneration": 5,
             "lastCompletedGeneration": 5,
             "currentCollectionId": "sast_collection_5",
-            "currentCollectionFile": "http://127.0.0.1:49360/exec?safe",
+            "currentCollectionFile": "http://127.0.0.1:61176/exec?safe",
             "currentCollectionScriptsCount": 1,
             "currentCollectionHtmlChars": 0,
             "currentCollectionFindingsCount": 0,
-            "currentCollectionStartedAt": "2026-10-22T18:41:32.506Z",
-            "currentCollectionPayloadAt": "2026-10-22T18:41:32.507Z",
+            "currentCollectionStartedAt": "2026-10-23T06:24:22.813Z",
+            "currentCollectionPayloadAt": "2026-10-23T06:24:22.814Z",
             "lastCompletedCollectionId": "sast_collection_5",
-            "lastCompletedFile": "http://127.0.0.1:49360/exec?safe",
+            "lastCompletedFile": "http://127.0.0.1:61176/exec?safe",
             "lastCompletedModule": "DOM Data Manipulation",
             "lastCompletedScriptsCount": 1,
             "lastCompletedHtmlChars": 0,
             "lastCompletedFindingsCount": 0,
             "lastCompletedArtifactsCount": 0,
-            "lastCompletedAt": "2026-10-22T18:41:32.508Z",
+            "lastCompletedAt": "2026-10-23T06:24:22.814Z",
             "hasObservedCollection": true,
             "idle": true
           },
@@ -1651,21 +1696,21 @@
           }
         },
         "lastStatus": {
-          "sessionId": "ptk-session_2dbd6013-f889-46a5-95c9-fa35f8875683",
-          "scanId": "ptk-session_2dbd6013-f889-46a5-95c9-fa35f8875683",
+          "sessionId": "ptk-session_aeb6f115-b9d6-49b1-9c1f-0519744b0c65",
+          "scanId": "ptk-session_aeb6f115-b9d6-49b1-9c1f-0519744b0c65",
           "ok": true,
           "status": "running",
           "completionStatus": "running",
           "releaseStatus": null,
           "error": null,
-          "startedAt": "2026-10-22T18:41:32.316Z",
+          "startedAt": "2026-10-23T06:24:22.759Z",
           "finishedAt": null,
           "stopRequestedAt": null,
           "closeRequestId": null,
           "closeRequestAck": false,
           "closeRequestMode": null,
           "idleVerified": false,
-          "elapsedMs": 285,
+          "elapsedMs": 77,
           "lastUpdatedAt": null,
           "engines": {
             "SAST": {
@@ -1710,20 +1755,20 @@
               "currentGeneration": 5,
               "lastCompletedGeneration": 5,
               "currentCollectionId": "sast_collection_5",
-              "currentCollectionFile": "http://127.0.0.1:49360/exec?safe",
+              "currentCollectionFile": "http://127.0.0.1:61176/exec?safe",
               "currentCollectionScriptsCount": 1,
               "currentCollectionHtmlChars": 0,
               "currentCollectionFindingsCount": 0,
-              "currentCollectionStartedAt": "2026-10-22T18:41:32.506Z",
-              "currentCollectionPayloadAt": "2026-10-22T18:41:32.507Z",
+              "currentCollectionStartedAt": "2026-10-23T06:24:22.813Z",
+              "currentCollectionPayloadAt": "2026-10-23T06:24:22.814Z",
               "lastCompletedCollectionId": "sast_collection_5",
-              "lastCompletedFile": "http://127.0.0.1:49360/exec?safe",
+              "lastCompletedFile": "http://127.0.0.1:61176/exec?safe",
               "lastCompletedModule": "DOM Data Manipulation",
               "lastCompletedScriptsCount": 1,
               "lastCompletedHtmlChars": 0,
               "lastCompletedFindingsCount": 0,
               "lastCompletedArtifactsCount": 0,
-              "lastCompletedAt": "2026-10-22T18:41:32.508Z",
+              "lastCompletedAt": "2026-10-23T06:24:22.814Z",
               "hasObservedCollection": true,
               "idle": true
             },
@@ -1759,16 +1804,16 @@
           },
           "warnings": [],
           "sessionLookup": {
-            "requestedSessionId": "ptk-session_2dbd6013-f889-46a5-95c9-fa35f8875683",
-            "tabId": 2061889086,
+            "requestedSessionId": "ptk-session_aeb6f115-b9d6-49b1-9c1f-0519744b0c65",
+            "tabId": 362542172,
             "strictCurrentTab": true,
             "allowActive": true,
             "allowCompleted": true,
             "allowGlobalCompleted": true,
             "lookupSource": "explicit-session",
-            "activeSessionIdForTab": "ptk-session_2dbd6013-f889-46a5-95c9-fa35f8875683",
-            "completedSessionIdForTab": "ptk-session_ffac9e24-83a8-439b-bbb8-e3d585f6383a",
-            "globalCompletedSessionId": "ptk-session_ffac9e24-83a8-439b-bbb8-e3d585f6383a",
+            "activeSessionIdForTab": "ptk-session_aeb6f115-b9d6-49b1-9c1f-0519744b0c65",
+            "completedSessionIdForTab": "ptk-session_1384e38d-184f-4925-9520-116ce4b5451e",
+            "globalCompletedSessionId": "ptk-session_1384e38d-184f-4925-9520-116ce4b5451e",
             "sessionExists": true,
             "sessionStatus": "running",
             "sessionFinishedAt": null,
@@ -1874,21 +1919,24 @@
         }
       },
       "stopped": {
-        "runId": "264623dc-936e-452b-9055-89f4b5c46224",
+        "runId": "2c45d8be-092e-4d68-8c11-7dbbf3a4c640",
         "owner": "sast-combined",
         "workspaceId": null,
-        "tabId": 2061889086,
+        "tabId": 362542172,
         "engines": [
           "SAST",
           "SCA"
         ],
-        "state": "incomplete",
+        "state": "completed",
         "config": {
           "preset": "thorough",
           "scanStrategy": "COMPREHENSIVE",
           "dastScanStrategy": "COMPREHENSIVE",
           "scanControlProfile": "wide",
           "allowCaptureWithoutInteraction": true,
+          "enableHtmlLinkDiscovery": true,
+          "htmlLinkDiscoveryBudget": "safe",
+          "schedulerBreadthFirst": true,
           "maxRequestsPerSecond": 5,
           "concurrency": 3,
           "planningConcurrency": 2,
@@ -1913,14 +1961,14 @@
         },
         "scope": {
           "origins": [
-            "http://127.0.0.1:49360"
+            "http://127.0.0.1:61176"
           ],
           "excludePaths": []
         },
         "accountId": null,
         "accountRevision": null,
-        "createdAt": 1792694492307,
-        "updatedAt": 1792694492690,
+        "createdAt": 1792736662756,
+        "updatedAt": 1792736662862,
         "requestsSent": 0,
         "coverage": {
           "backendGaps": [],
@@ -2011,7 +2059,7 @@
               "gaps": 0,
               "cleanupPending": false,
               "tabs": {
-                "2061889086": {
+                "362542172": {
                   "complete": true,
                   "gaps": 0
                 }
@@ -2021,19 +2069,6 @@
           "scaBodyWarnings": [],
           "engineFailures": [],
           "actionableGaps": [
-            {
-              "code": "execution_incomplete",
-              "engine": "Run",
-              "summary": "This run did not establish complete execution.",
-              "sampledOccurrences": 1,
-              "retryUnchanged": false,
-              "recovery": {
-                "action": "inspect_run",
-                "tool": "security_scan_status",
-                "instruction": "Inspect this run and its retained evidence before retrying. Resolve the failure or report the untested work; never infer a clean result from missing findings."
-              },
-              "examples": []
-            },
             {
               "code": "original_html_unavailable",
               "engine": "SAST",
@@ -2048,7 +2083,7 @@
             }
           ],
           "recovery": {
-            "runId": "264623dc-936e-452b-9055-89f4b5c46224",
+            "runId": "2c45d8be-092e-4d68-8c11-7dbbf3a4c640",
             "state": "incomplete",
             "instruction": "Address applicable recovery steps or include unresolved gaps in the final report. Do not repeat unchanged failed calls."
           }
@@ -2066,9 +2101,11 @@
               "info": 0
             }
           },
-          "findings": 0
+          "findings": 0,
+          "byModule": {},
+          "countsBasis": "retained_findings"
         },
-        "runtimeId": "ptk-session_2dbd6013-f889-46a5-95c9-fa35f8875683",
+        "runtimeId": "ptk-session_aeb6f115-b9d6-49b1-9c1f-0519744b0c65",
         "engineStatus": {
           "SAST": {
             "status": "stopped",
@@ -2119,7 +2156,7 @@
             "currentCollectionStartedAt": null,
             "currentCollectionPayloadAt": null,
             "lastCompletedCollectionId": null,
-            "lastCompletedFile": "http://127.0.0.1:49360/asset.js?safe",
+            "lastCompletedFile": "http://127.0.0.1:61176/asset.js?safe",
             "lastCompletedModule": "DOM Data Manipulation",
             "lastCompletedScriptsCount": 0,
             "lastCompletedHtmlChars": 0,
@@ -2150,21 +2187,21 @@
           }
         },
         "lastStatus": {
-          "sessionId": "ptk-session_2dbd6013-f889-46a5-95c9-fa35f8875683",
-          "scanId": "ptk-session_2dbd6013-f889-46a5-95c9-fa35f8875683",
+          "sessionId": "ptk-session_aeb6f115-b9d6-49b1-9c1f-0519744b0c65",
+          "scanId": "ptk-session_aeb6f115-b9d6-49b1-9c1f-0519744b0c65",
           "ok": true,
           "status": "completed",
           "completionStatus": "completed",
           "releaseStatus": "clean",
           "error": null,
-          "startedAt": "2026-10-22T18:41:32.316Z",
-          "finishedAt": "2026-10-22T18:41:32.677Z",
+          "startedAt": "2026-10-23T06:24:22.759Z",
+          "finishedAt": "2026-10-23T06:24:22.858Z",
           "stopRequestedAt": null,
           "closeRequestId": null,
           "closeRequestAck": false,
           "closeRequestMode": null,
           "idleVerified": false,
-          "elapsedMs": 373,
+          "elapsedMs": 103,
           "lastUpdatedAt": null,
           "engines": {
             "SAST": {
@@ -2216,7 +2253,7 @@
               "currentCollectionStartedAt": null,
               "currentCollectionPayloadAt": null,
               "lastCompletedCollectionId": null,
-              "lastCompletedFile": "http://127.0.0.1:49360/asset.js?safe",
+              "lastCompletedFile": "http://127.0.0.1:61176/asset.js?safe",
               "lastCompletedModule": "DOM Data Manipulation",
               "lastCompletedScriptsCount": 0,
               "lastCompletedHtmlChars": 0,
@@ -2272,19 +2309,19 @@
           },
           "warnings": [],
           "sessionLookup": {
-            "requestedSessionId": "ptk-session_2dbd6013-f889-46a5-95c9-fa35f8875683",
-            "tabId": 2061889086,
+            "requestedSessionId": "ptk-session_aeb6f115-b9d6-49b1-9c1f-0519744b0c65",
+            "tabId": 362542172,
             "strictCurrentTab": true,
             "allowActive": true,
             "allowCompleted": true,
             "allowGlobalCompleted": true,
             "lookupSource": "explicit-session",
             "activeSessionIdForTab": null,
-            "completedSessionIdForTab": "ptk-session_2dbd6013-f889-46a5-95c9-fa35f8875683",
-            "globalCompletedSessionId": "ptk-session_2dbd6013-f889-46a5-95c9-fa35f8875683",
+            "completedSessionIdForTab": "ptk-session_aeb6f115-b9d6-49b1-9c1f-0519744b0c65",
+            "globalCompletedSessionId": "ptk-session_aeb6f115-b9d6-49b1-9c1f-0519744b0c65",
             "sessionExists": true,
             "sessionStatus": "completed",
-            "sessionFinishedAt": "2026-10-22T18:41:32.677Z",
+            "sessionFinishedAt": "2026-10-23T06:24:22.858Z",
             "stopRequestedAt": null,
             "retention": {
               "ttlMs": 86400000,
@@ -2385,7 +2422,7 @@
                 "gaps": 0,
                 "cleanupPending": false,
                 "tabs": {
-                  "2061889086": {
+                  "362542172": {
                     "complete": true,
                     "gaps": 0
                   }
@@ -2401,10 +2438,10 @@
         "scan": {
           "version": "1.0",
           "engine": "SAST",
-          "scanId": "a17e3e63-9ee3-45c0-aa35-4926fccdddf2",
-          "host": "127.0.0.1:49360",
-          "startedAt": "2026-10-22T18:41:32.342Z",
-          "finishedAt": "2026-10-22T18:41:32.666Z",
+          "scanId": "e49e5082-651e-4298-93f3-a56d51ae13ed",
+          "host": "127.0.0.1:61176",
+          "startedAt": "2026-10-23T06:24:22.766Z",
+          "finishedAt": "2026-10-23T06:24:22.855Z",
           "settings": {
             "policyCode": "COMPREHENSIVE",
             "scanStrategyCode": 0,
@@ -2440,7 +2477,7 @@
             }
           },
           "files": [
-            "http://127.0.0.1:49360/asset.js?safe"
+            "http://127.0.0.1:61176/asset.js?safe"
           ],
           "scanStrategy": {
             "policyCode": "COMPREHENSIVE",
@@ -2544,10 +2581,10 @@
         "SCA"
       ],
       "status": {
-        "runId": "0bd7bd3d-ee0d-42f8-a140-3fe2c79098d8",
+        "runId": "8c31ad4c-b937-4d80-80c5-06839fb6213b",
         "owner": "sast-combined",
         "workspaceId": null,
-        "tabId": 2061889086,
+        "tabId": 362542172,
         "engines": [
           "SAST",
           "SCA"
@@ -2559,6 +2596,9 @@
           "dastScanStrategy": "COMPREHENSIVE",
           "scanControlProfile": "wide",
           "allowCaptureWithoutInteraction": true,
+          "enableHtmlLinkDiscovery": true,
+          "htmlLinkDiscoveryBudget": "safe",
+          "schedulerBreadthFirst": true,
           "maxRequestsPerSecond": 5,
           "concurrency": 3,
           "planningConcurrency": 2,
@@ -2583,14 +2623,14 @@
         },
         "scope": {
           "origins": [
-            "http://127.0.0.1:49360"
+            "http://127.0.0.1:61176"
           ],
           "excludePaths": []
         },
         "accountId": null,
         "accountRevision": null,
-        "createdAt": 1792694492867,
-        "updatedAt": 1792694493363,
+        "createdAt": 1792736662942,
+        "updatedAt": 1792736663099,
         "requestsSent": 0,
         "coverage": {
           "backendGaps": [],
@@ -2616,7 +2656,7 @@
               "capturedDocuments": 1,
               "missingResources": [
                 {
-                  "url": "http://127.0.0.1:49360/missing.js",
+                  "url": "http://127.0.0.1:61176/missing.js",
                   "reason": "external_script_unavailable"
                 }
               ],
@@ -2687,9 +2727,9 @@
           },
           "scaBodyWarnings": [
             {
-              "url": "http://127.0.0.1:49360/missing.js",
+              "url": "http://127.0.0.1:61176/missing.js",
               "reason": "preexisting_script_source_not_observed",
-              "tabId": 2061889086,
+              "tabId": 362542172,
               "requestId": null,
               "documentId": null,
               "acquisition": "debugger_script_source"
@@ -2697,7 +2737,7 @@
             {
               "url": null,
               "reason": "request_failed",
-              "tabId": 2061889086,
+              "tabId": 362542172,
               "requestId": null,
               "documentId": null
             }
@@ -2728,7 +2768,7 @@
               },
               "examples": [
                 {
-                  "url": "http://127.0.0.1:49360/missing.js",
+                  "url": "http://127.0.0.1:61176/missing.js",
                   "reason": "external_script_unavailable"
                 }
               ]
@@ -2746,7 +2786,7 @@
               "examples": [
                 {
                   "reason": "preexisting_script_source_not_observed",
-                  "url": "http://127.0.0.1:49360/missing.js",
+                  "url": "http://127.0.0.1:61176/missing.js",
                   "documentId": null
                 },
                 {
@@ -2758,7 +2798,7 @@
             }
           ],
           "recovery": {
-            "runId": "0bd7bd3d-ee0d-42f8-a140-3fe2c79098d8",
+            "runId": "8c31ad4c-b937-4d80-80c5-06839fb6213b",
             "state": "in_progress",
             "instruction": "Address applicable recovery steps or include unresolved gaps in the final report. Do not repeat unchanged failed calls."
           }
@@ -2772,9 +2812,14 @@
             "low": 0,
             "info": 0
           },
-          "findings": 3
+          "findings": 3,
+          "byModule": {
+            "dom-xss": 2,
+            "client-template-injection": 1
+          },
+          "countsBasis": "retained_findings"
         },
-        "runtimeId": "ptk-session_aca24e83-fca5-470a-99d1-c1a949bea5b6",
+        "runtimeId": "ptk-session_b21b8bef-2f08-44fc-8a54-4f271b1a260a",
         "engineStatus": {
           "SAST": {
             "status": "running",
@@ -2818,20 +2863,20 @@
             "currentGeneration": 12,
             "lastCompletedGeneration": 11,
             "currentCollectionId": "sast_collection_12",
-            "currentCollectionFile": "http://127.0.0.1:49360/exec?missing",
+            "currentCollectionFile": "http://127.0.0.1:61176/exec?missing",
             "currentCollectionScriptsCount": 1,
             "currentCollectionHtmlChars": 0,
             "currentCollectionFindingsCount": 0,
-            "currentCollectionStartedAt": "2026-10-22T18:41:33.356Z",
-            "currentCollectionPayloadAt": "2026-10-22T18:41:33.357Z",
+            "currentCollectionStartedAt": "2026-10-23T06:24:23.095Z",
+            "currentCollectionPayloadAt": "2026-10-23T06:24:23.096Z",
             "lastCompletedCollectionId": "sast_collection_11",
-            "lastCompletedFile": "http://127.0.0.1:49360/exec?missing",
+            "lastCompletedFile": "http://127.0.0.1:61176/exec?missing",
             "lastCompletedModule": "DOM Data Manipulation",
             "lastCompletedScriptsCount": 0,
             "lastCompletedHtmlChars": 0,
             "lastCompletedFindingsCount": 0,
             "lastCompletedArtifactsCount": 0,
-            "lastCompletedAt": "2026-10-22T18:41:33.335Z",
+            "lastCompletedAt": "2026-10-23T06:24:23.077Z",
             "hasObservedCollection": true,
             "idle": true
           },
@@ -2856,21 +2901,21 @@
           }
         },
         "lastStatus": {
-          "sessionId": "ptk-session_aca24e83-fca5-470a-99d1-c1a949bea5b6",
-          "scanId": "ptk-session_aca24e83-fca5-470a-99d1-c1a949bea5b6",
+          "sessionId": "ptk-session_b21b8bef-2f08-44fc-8a54-4f271b1a260a",
+          "scanId": "ptk-session_b21b8bef-2f08-44fc-8a54-4f271b1a260a",
           "ok": true,
           "status": "running",
           "completionStatus": "running",
           "releaseStatus": null,
           "error": null,
-          "startedAt": "2026-10-22T18:41:32.880Z",
+          "startedAt": "2026-10-23T06:24:22.946Z",
           "finishedAt": null,
           "stopRequestedAt": null,
           "closeRequestId": null,
           "closeRequestAck": false,
           "closeRequestMode": null,
           "idleVerified": false,
-          "elapsedMs": 482,
+          "elapsedMs": 153,
           "lastUpdatedAt": null,
           "engines": {
             "SAST": {
@@ -2915,20 +2960,20 @@
               "currentGeneration": 12,
               "lastCompletedGeneration": 11,
               "currentCollectionId": "sast_collection_12",
-              "currentCollectionFile": "http://127.0.0.1:49360/exec?missing",
+              "currentCollectionFile": "http://127.0.0.1:61176/exec?missing",
               "currentCollectionScriptsCount": 1,
               "currentCollectionHtmlChars": 0,
               "currentCollectionFindingsCount": 0,
-              "currentCollectionStartedAt": "2026-10-22T18:41:33.356Z",
-              "currentCollectionPayloadAt": "2026-10-22T18:41:33.357Z",
+              "currentCollectionStartedAt": "2026-10-23T06:24:23.095Z",
+              "currentCollectionPayloadAt": "2026-10-23T06:24:23.096Z",
               "lastCompletedCollectionId": "sast_collection_11",
-              "lastCompletedFile": "http://127.0.0.1:49360/exec?missing",
+              "lastCompletedFile": "http://127.0.0.1:61176/exec?missing",
               "lastCompletedModule": "DOM Data Manipulation",
               "lastCompletedScriptsCount": 0,
               "lastCompletedHtmlChars": 0,
               "lastCompletedFindingsCount": 0,
               "lastCompletedArtifactsCount": 0,
-              "lastCompletedAt": "2026-10-22T18:41:33.335Z",
+              "lastCompletedAt": "2026-10-23T06:24:23.077Z",
               "hasObservedCollection": true,
               "idle": true
             },
@@ -2964,16 +3009,16 @@
           },
           "warnings": [],
           "sessionLookup": {
-            "requestedSessionId": "ptk-session_aca24e83-fca5-470a-99d1-c1a949bea5b6",
-            "tabId": 2061889086,
+            "requestedSessionId": "ptk-session_b21b8bef-2f08-44fc-8a54-4f271b1a260a",
+            "tabId": 362542172,
             "strictCurrentTab": true,
             "allowActive": true,
             "allowCompleted": true,
             "allowGlobalCompleted": true,
             "lookupSource": "explicit-session",
-            "activeSessionIdForTab": "ptk-session_aca24e83-fca5-470a-99d1-c1a949bea5b6",
-            "completedSessionIdForTab": "ptk-session_2dbd6013-f889-46a5-95c9-fa35f8875683",
-            "globalCompletedSessionId": "ptk-session_2dbd6013-f889-46a5-95c9-fa35f8875683",
+            "activeSessionIdForTab": "ptk-session_b21b8bef-2f08-44fc-8a54-4f271b1a260a",
+            "completedSessionIdForTab": "ptk-session_aeb6f115-b9d6-49b1-9c1f-0519744b0c65",
+            "globalCompletedSessionId": "ptk-session_aeb6f115-b9d6-49b1-9c1f-0519744b0c65",
             "sessionExists": true,
             "sessionStatus": "running",
             "sessionFinishedAt": null,
@@ -3012,7 +3057,7 @@
                 "capturedDocuments": 1,
                 "missingResources": [
                   {
-                    "url": "http://127.0.0.1:49360/missing.js",
+                    "url": "http://127.0.0.1:61176/missing.js",
                     "reason": "external_script_unavailable"
                   }
                 ],
@@ -3083,9 +3128,9 @@
             },
             "scaBodyWarnings": [
               {
-                "url": "http://127.0.0.1:49360/missing.js",
+                "url": "http://127.0.0.1:61176/missing.js",
                 "reason": "preexisting_script_source_not_observed",
-                "tabId": 2061889086,
+                "tabId": 362542172,
                 "requestId": null,
                 "documentId": null,
                 "acquisition": "debugger_script_source"
@@ -3093,7 +3138,7 @@
               {
                 "url": null,
                 "reason": "request_failed",
-                "tabId": 2061889086,
+                "tabId": 362542172,
                 "requestId": null,
                 "documentId": null
               }
@@ -3102,10 +3147,10 @@
         }
       },
       "stopped": {
-        "runId": "0bd7bd3d-ee0d-42f8-a140-3fe2c79098d8",
+        "runId": "8c31ad4c-b937-4d80-80c5-06839fb6213b",
         "owner": "sast-combined",
         "workspaceId": null,
-        "tabId": 2061889086,
+        "tabId": 362542172,
         "engines": [
           "SAST",
           "SCA"
@@ -3117,6 +3162,9 @@
           "dastScanStrategy": "COMPREHENSIVE",
           "scanControlProfile": "wide",
           "allowCaptureWithoutInteraction": true,
+          "enableHtmlLinkDiscovery": true,
+          "htmlLinkDiscoveryBudget": "safe",
+          "schedulerBreadthFirst": true,
           "maxRequestsPerSecond": 5,
           "concurrency": 3,
           "planningConcurrency": 2,
@@ -3141,14 +3189,14 @@
         },
         "scope": {
           "origins": [
-            "http://127.0.0.1:49360"
+            "http://127.0.0.1:61176"
           ],
           "excludePaths": []
         },
         "accountId": null,
         "accountRevision": null,
-        "createdAt": 1792694492867,
-        "updatedAt": 1792694493505,
+        "createdAt": 1792736662942,
+        "updatedAt": 1792736663146,
         "requestsSent": 0,
         "coverage": {
           "backendGaps": [],
@@ -3174,7 +3222,7 @@
               "capturedDocuments": 1,
               "missingResources": [
                 {
-                  "url": "http://127.0.0.1:49360/missing.js",
+                  "url": "http://127.0.0.1:61176/missing.js",
                   "reason": "external_script_unavailable"
                 }
               ],
@@ -3214,15 +3262,15 @@
             },
             "sourceWarnings": [
               {
-                "documentUrl": "http://127.0.0.1:49360/exec?missing",
-                "documentId": "03952696B9D22CE66A5A56ADED3A9CF3",
+                "documentUrl": "http://127.0.0.1:61176/exec?missing",
+                "documentId": "7C97AD80B64933C9A43A40E1690DD6C4",
                 "reason": "source_batch_partial",
                 "phase": "final",
                 "sourceGaps": 1,
                 "incompleteBodies": 0,
                 "originalDocumentMissing": false,
                 "missingScripts": [
-                  "http://127.0.0.1:49360/missing.js"
+                  "http://127.0.0.1:61176/missing.js"
                 ]
               }
             ]
@@ -3259,7 +3307,7 @@
               "gaps": 1,
               "cleanupPending": false,
               "tabs": {
-                "2061889086": {
+                "362542172": {
                   "complete": true,
                   "gaps": 1
                 }
@@ -3268,9 +3316,9 @@
           },
           "scaBodyWarnings": [
             {
-              "url": "http://127.0.0.1:49360/missing.js",
+              "url": "http://127.0.0.1:61176/missing.js",
               "reason": "preexisting_script_source_not_observed",
-              "tabId": 2061889086,
+              "tabId": 362542172,
               "requestId": null,
               "documentId": null,
               "acquisition": "debugger_script_source"
@@ -3278,16 +3326,16 @@
             {
               "url": null,
               "reason": "request_failed",
-              "tabId": 2061889086,
+              "tabId": 362542172,
               "requestId": null,
               "documentId": null
             },
             {
-              "url": "http://127.0.0.1:49360/missing.js",
+              "url": "http://127.0.0.1:61176/missing.js",
               "reason": "response_body_unavailable",
-              "tabId": 2061889086,
-              "requestId": "19332.17",
-              "documentId": "03952696B9D22CE66A5A56ADED3A9CF3"
+              "tabId": 362542172,
+              "requestId": "49968.17",
+              "documentId": "7C97AD80B64933C9A43A40E1690DD6C4"
             }
           ],
           "engineFailures": [],
@@ -3329,15 +3377,15 @@
               },
               "examples": [
                 {
-                  "url": "http://127.0.0.1:49360/missing.js",
+                  "url": "http://127.0.0.1:61176/missing.js",
                   "reason": "external_script_unavailable"
                 },
                 {
-                  "url": "http://127.0.0.1:49360/exec?missing",
+                  "url": "http://127.0.0.1:61176/exec?missing",
                   "reason": "source_batch_partial",
-                  "documentId": "03952696B9D22CE66A5A56ADED3A9CF3",
+                  "documentId": "7C97AD80B64933C9A43A40E1690DD6C4",
                   "missingScripts": [
-                    "http://127.0.0.1:49360/missing.js"
+                    "http://127.0.0.1:61176/missing.js"
                   ]
                 }
               ]
@@ -3355,7 +3403,7 @@
               "examples": [
                 {
                   "reason": "preexisting_script_source_not_observed",
-                  "url": "http://127.0.0.1:49360/missing.js",
+                  "url": "http://127.0.0.1:61176/missing.js",
                   "documentId": null
                 },
                 {
@@ -3365,14 +3413,14 @@
                 },
                 {
                   "reason": "response_body_unavailable",
-                  "url": "http://127.0.0.1:49360/missing.js",
-                  "documentId": "03952696B9D22CE66A5A56ADED3A9CF3"
+                  "url": "http://127.0.0.1:61176/missing.js",
+                  "documentId": "7C97AD80B64933C9A43A40E1690DD6C4"
                 }
               ]
             }
           ],
           "recovery": {
-            "runId": "0bd7bd3d-ee0d-42f8-a140-3fe2c79098d8",
+            "runId": "8c31ad4c-b937-4d80-80c5-06839fb6213b",
             "state": "incomplete",
             "instruction": "Address applicable recovery steps or include unresolved gaps in the final report. Do not repeat unchanged failed calls."
           }
@@ -3390,9 +3438,14 @@
               "info": 0
             }
           },
-          "findings": 3
+          "findings": 3,
+          "byModule": {
+            "dom-xss": 2,
+            "client-template-injection": 1
+          },
+          "countsBasis": "retained_findings"
         },
-        "runtimeId": "ptk-session_aca24e83-fca5-470a-99d1-c1a949bea5b6",
+        "runtimeId": "ptk-session_b21b8bef-2f08-44fc-8a54-4f271b1a260a",
         "engineStatus": {
           "SAST": {
             "status": "stopped",
@@ -3443,7 +3496,7 @@
             "currentCollectionStartedAt": null,
             "currentCollectionPayloadAt": null,
             "lastCompletedCollectionId": null,
-            "lastCompletedFile": "http://127.0.0.1:49360/asset.js",
+            "lastCompletedFile": "http://127.0.0.1:61176/asset.js",
             "lastCompletedModule": "DOM Data Manipulation",
             "lastCompletedScriptsCount": 0,
             "lastCompletedHtmlChars": 0,
@@ -3474,21 +3527,21 @@
           }
         },
         "lastStatus": {
-          "sessionId": "ptk-session_aca24e83-fca5-470a-99d1-c1a949bea5b6",
-          "scanId": "ptk-session_aca24e83-fca5-470a-99d1-c1a949bea5b6",
+          "sessionId": "ptk-session_b21b8bef-2f08-44fc-8a54-4f271b1a260a",
+          "scanId": "ptk-session_b21b8bef-2f08-44fc-8a54-4f271b1a260a",
           "ok": true,
           "status": "completed",
           "completionStatus": "completed",
           "releaseStatus": "clean",
           "error": null,
-          "startedAt": "2026-10-22T18:41:32.880Z",
-          "finishedAt": "2026-10-22T18:41:33.486Z",
+          "startedAt": "2026-10-23T06:24:22.946Z",
+          "finishedAt": "2026-10-23T06:24:23.140Z",
           "stopRequestedAt": null,
           "closeRequestId": null,
           "closeRequestAck": false,
           "closeRequestMode": null,
           "idleVerified": false,
-          "elapsedMs": 624,
+          "elapsedMs": 199,
           "lastUpdatedAt": null,
           "engines": {
             "SAST": {
@@ -3540,7 +3593,7 @@
               "currentCollectionStartedAt": null,
               "currentCollectionPayloadAt": null,
               "lastCompletedCollectionId": null,
-              "lastCompletedFile": "http://127.0.0.1:49360/asset.js",
+              "lastCompletedFile": "http://127.0.0.1:61176/asset.js",
               "lastCompletedModule": "DOM Data Manipulation",
               "lastCompletedScriptsCount": 0,
               "lastCompletedHtmlChars": 0,
@@ -3596,19 +3649,19 @@
           },
           "warnings": [],
           "sessionLookup": {
-            "requestedSessionId": "ptk-session_aca24e83-fca5-470a-99d1-c1a949bea5b6",
-            "tabId": 2061889086,
+            "requestedSessionId": "ptk-session_b21b8bef-2f08-44fc-8a54-4f271b1a260a",
+            "tabId": 362542172,
             "strictCurrentTab": true,
             "allowActive": true,
             "allowCompleted": true,
             "allowGlobalCompleted": true,
             "lookupSource": "explicit-session",
             "activeSessionIdForTab": null,
-            "completedSessionIdForTab": "ptk-session_aca24e83-fca5-470a-99d1-c1a949bea5b6",
-            "globalCompletedSessionId": "ptk-session_aca24e83-fca5-470a-99d1-c1a949bea5b6",
+            "completedSessionIdForTab": "ptk-session_b21b8bef-2f08-44fc-8a54-4f271b1a260a",
+            "globalCompletedSessionId": "ptk-session_b21b8bef-2f08-44fc-8a54-4f271b1a260a",
             "sessionExists": true,
             "sessionStatus": "completed",
-            "sessionFinishedAt": "2026-10-22T18:41:33.486Z",
+            "sessionFinishedAt": "2026-10-23T06:24:23.140Z",
             "stopRequestedAt": null,
             "retention": {
               "ttlMs": 86400000,
@@ -3644,7 +3697,7 @@
                 "capturedDocuments": 1,
                 "missingResources": [
                   {
-                    "url": "http://127.0.0.1:49360/missing.js",
+                    "url": "http://127.0.0.1:61176/missing.js",
                     "reason": "external_script_unavailable"
                   }
                 ],
@@ -3684,15 +3737,15 @@
               },
               "sourceWarnings": [
                 {
-                  "documentUrl": "http://127.0.0.1:49360/exec?missing",
-                  "documentId": "03952696B9D22CE66A5A56ADED3A9CF3",
+                  "documentUrl": "http://127.0.0.1:61176/exec?missing",
+                  "documentId": "7C97AD80B64933C9A43A40E1690DD6C4",
                   "reason": "source_batch_partial",
                   "phase": "final",
                   "sourceGaps": 1,
                   "incompleteBodies": 0,
                   "originalDocumentMissing": false,
                   "missingScripts": [
-                    "http://127.0.0.1:49360/missing.js"
+                    "http://127.0.0.1:61176/missing.js"
                   ]
                 }
               ]
@@ -3729,7 +3782,7 @@
                 "gaps": 1,
                 "cleanupPending": false,
                 "tabs": {
-                  "2061889086": {
+                  "362542172": {
                     "complete": true,
                     "gaps": 1
                   }
@@ -3738,9 +3791,9 @@
             },
             "scaBodyWarnings": [
               {
-                "url": "http://127.0.0.1:49360/missing.js",
+                "url": "http://127.0.0.1:61176/missing.js",
                 "reason": "preexisting_script_source_not_observed",
-                "tabId": 2061889086,
+                "tabId": 362542172,
                 "requestId": null,
                 "documentId": null,
                 "acquisition": "debugger_script_source"
@@ -3748,16 +3801,16 @@
               {
                 "url": null,
                 "reason": "request_failed",
-                "tabId": 2061889086,
+                "tabId": 362542172,
                 "requestId": null,
                 "documentId": null
               },
               {
-                "url": "http://127.0.0.1:49360/missing.js",
+                "url": "http://127.0.0.1:61176/missing.js",
                 "reason": "response_body_unavailable",
-                "tabId": 2061889086,
-                "requestId": "19332.17",
-                "documentId": "03952696B9D22CE66A5A56ADED3A9CF3"
+                "tabId": 362542172,
+                "requestId": "49968.17",
+                "documentId": "7C97AD80B64933C9A43A40E1690DD6C4"
               }
             ]
           }
@@ -3768,10 +3821,10 @@
         "scan": {
           "version": "1.0",
           "engine": "SAST",
-          "scanId": "8f9a9b81-21d8-44b8-a1dc-46827fd1a0ad",
-          "host": "127.0.0.1:49360",
-          "startedAt": "2026-10-22T18:41:32.904Z",
-          "finishedAt": "2026-10-22T18:41:33.475Z",
+          "scanId": "8a3d47bf-9b51-4530-91e3-e4966c5f5b5c",
+          "host": "127.0.0.1:61176",
+          "startedAt": "2026-10-23T06:24:22.953Z",
+          "finishedAt": "2026-10-23T06:24:23.137Z",
           "settings": {
             "policyCode": "COMPREHENSIVE",
             "scanStrategyCode": 0,
@@ -3795,9 +3848,9 @@
           },
           "findings": [
             {
-              "id": "8f9a9b81-21d8-44b8-a1dc-46827fd1a0ad::SAST::dom-xss::no-inner-outer-html::e8f0cfef2b8c746e",
+              "id": "8a3d47bf-9b51-4530-91e3-e4966c5f5b5c::SAST::dom-xss::no-inner-outer-html::c3dd4e1e57badfd4",
               "engine": "SAST",
-              "scanId": "8f9a9b81-21d8-44b8-a1dc-46827fd1a0ad",
+              "scanId": "8a3d47bf-9b51-4530-91e3-e4966c5f5b5c",
               "moduleId": "dom-xss",
               "moduleName": "DOM-based XSS",
               "ruleId": "no-inner-outer-html",
@@ -3824,23 +3877,23 @@
                 "CWE": "https://cwe.mitre.org/data/definitions/79.html"
               },
               "location": {
-                "file": "http://127.0.0.1:49360/asset.js",
+                "file": "http://127.0.0.1:61176/asset.js",
                 "line": 1,
                 "column": 22,
-                "runtimeUrl": "http://127.0.0.1:49360/exec?missing",
+                "runtimeUrl": "http://127.0.0.1:61176/exec?missing",
                 "runtimeUrls": [
-                  "http://127.0.0.1:49360/exec?missing"
+                  "http://127.0.0.1:61176/exec?missing"
                 ],
-                "pageUrl": "http://127.0.0.1:49360/exec?missing",
+                "pageUrl": "http://127.0.0.1:61176/exec?missing",
                 "pageUrls": [
-                  "http://127.0.0.1:49360/exec?missing"
+                  "http://127.0.0.1:61176/exec?missing"
                 ],
-                "url": "http://127.0.0.1:49360/exec?missing",
+                "url": "http://127.0.0.1:61176/exec?missing",
                 "param": null,
                 "kind": "code"
               },
-              "createdAt": "2026-10-22T18:41:33.408Z",
-              "fingerprint": "no-inner-outer-html@@low@@http://127.0.0.1:49360/asset.js@@http://127.0.0.1:49360/asset.js@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":79}}@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":63}}@@",
+              "createdAt": "2026-10-23T06:24:23.113Z",
+              "fingerprint": "no-inner-outer-html@@low@@http://127.0.0.1:61176/asset.js@@http://127.0.0.1:61176/asset.js@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":79}}@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":63}}@@",
               "findingKind": "hint",
               "confidence": 38,
               "evidence": {
@@ -3849,8 +3902,8 @@
                   "source": {
                     "label": "innerHTML",
                     "path": null,
-                    "sourceFile": "http://127.0.0.1:49360/asset.js",
-                    "sourceFileFull": "http://127.0.0.1:49360/asset.js",
+                    "sourceFile": "http://127.0.0.1:61176/asset.js",
+                    "sourceFileFull": "http://127.0.0.1:61176/asset.js",
                     "sourceLoc": {
                       "start": {
                         "line": 1,
@@ -3868,8 +3921,8 @@
                     "kind": "assign",
                     "label": "innerHTML",
                     "path": [],
-                    "sinkFile": "http://127.0.0.1:49360/asset.js",
-                    "sinkFileFull": "http://127.0.0.1:49360/asset.js",
+                    "sinkFile": "http://127.0.0.1:61176/asset.js",
+                    "sinkFileFull": "http://127.0.0.1:61176/asset.js",
                     "sinkLoc": {
                       "start": {
                         "line": 1,
@@ -3893,13 +3946,13 @@
                   ]
                 }
               },
-              "updatedAt": "2026-10-22T18:41:33.408Z",
-              "pageUrl": "http://127.0.0.1:49360/exec?missing"
+              "updatedAt": "2026-10-23T06:24:23.113Z",
+              "pageUrl": "http://127.0.0.1:61176/exec?missing"
             },
             {
-              "id": "8f9a9b81-21d8-44b8-a1dc-46827fd1a0ad::SAST::dom-xss::dom-xss-taint::c37682169e3633ac",
+              "id": "8a3d47bf-9b51-4530-91e3-e4966c5f5b5c::SAST::dom-xss::dom-xss-taint::a478db3e6394e7d5",
               "engine": "SAST",
-              "scanId": "8f9a9b81-21d8-44b8-a1dc-46827fd1a0ad",
+              "scanId": "8a3d47bf-9b51-4530-91e3-e4966c5f5b5c",
               "moduleId": "dom-xss",
               "moduleName": "DOM-based XSS",
               "ruleId": "dom-xss-taint",
@@ -3926,23 +3979,23 @@
                 "CWE": "https://cwe.mitre.org/data/definitions/79.html"
               },
               "location": {
-                "file": "http://127.0.0.1:49360/asset.js",
+                "file": "http://127.0.0.1:61176/asset.js",
                 "line": 1,
                 "column": 22,
-                "runtimeUrl": "http://127.0.0.1:49360/exec?missing",
+                "runtimeUrl": "http://127.0.0.1:61176/exec?missing",
                 "runtimeUrls": [
-                  "http://127.0.0.1:49360/exec?missing"
+                  "http://127.0.0.1:61176/exec?missing"
                 ],
-                "pageUrl": "http://127.0.0.1:49360/exec?missing",
+                "pageUrl": "http://127.0.0.1:61176/exec?missing",
                 "pageUrls": [
-                  "http://127.0.0.1:49360/exec?missing"
+                  "http://127.0.0.1:61176/exec?missing"
                 ],
-                "url": "http://127.0.0.1:49360/exec?missing",
+                "url": "http://127.0.0.1:61176/exec?missing",
                 "param": null,
                 "kind": "code"
               },
-              "createdAt": "2026-10-22T18:41:33.409Z",
-              "fingerprint": "dom-xss-taint@@high@@http://127.0.0.1:49360/asset.js@@http://127.0.0.1:49360/asset.js@@{\"start\":{\"line\":1,\"column\":66},\"end\":{\"line\":1,\"column\":79}}@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":63}}@@",
+              "createdAt": "2026-10-23T06:24:23.113Z",
+              "fingerprint": "dom-xss-taint@@high@@http://127.0.0.1:61176/asset.js@@http://127.0.0.1:61176/asset.js@@{\"start\":{\"line\":1,\"column\":66},\"end\":{\"line\":1,\"column\":79}}@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":63}}@@",
               "findingKind": "finding",
               "confidence": 100,
               "evidence": {
@@ -3951,8 +4004,8 @@
                   "source": {
                     "label": "location.hash",
                     "path": "location.hash",
-                    "sourceFile": "http://127.0.0.1:49360/asset.js",
-                    "sourceFileFull": "http://127.0.0.1:49360/asset.js",
+                    "sourceFile": "http://127.0.0.1:61176/asset.js",
+                    "sourceFileFull": "http://127.0.0.1:61176/asset.js",
                     "sourceLoc": {
                       "start": {
                         "line": 1,
@@ -3975,8 +4028,8 @@
                     "framework": null,
                     "api": null,
                     "argIndex": null,
-                    "sinkFile": "http://127.0.0.1:49360/asset.js",
-                    "sinkFileFull": "http://127.0.0.1:49360/asset.js",
+                    "sinkFile": "http://127.0.0.1:61176/asset.js",
+                    "sinkFileFull": "http://127.0.0.1:61176/asset.js",
                     "sinkLoc": {
                       "start": {
                         "line": 1,
@@ -3995,7 +4048,7 @@
                     {
                       "kind": "source",
                       "label": "location.hash",
-                      "file": "http://127.0.0.1:49360/asset.js",
+                      "file": "http://127.0.0.1:61176/asset.js",
                       "loc": {
                         "start": {
                           "line": 1,
@@ -4010,7 +4063,7 @@
                     {
                       "kind": "sink",
                       "label": "innerHTML",
-                      "file": "http://127.0.0.1:49360/asset.js",
+                      "file": "http://127.0.0.1:61176/asset.js",
                       "loc": {
                         "start": {
                           "line": 1,
@@ -4035,13 +4088,13 @@
                   ]
                 }
               },
-              "updatedAt": "2026-10-22T18:41:33.409Z",
-              "pageUrl": "http://127.0.0.1:49360/exec?missing"
+              "updatedAt": "2026-10-23T06:24:23.113Z",
+              "pageUrl": "http://127.0.0.1:61176/exec?missing"
             },
             {
-              "id": "8f9a9b81-21d8-44b8-a1dc-46827fd1a0ad::SAST::client-template-injection::client-template-injection-taint::645ce60d84d28791",
+              "id": "8a3d47bf-9b51-4530-91e3-e4966c5f5b5c::SAST::client-template-injection::client-template-injection-taint::2b19cf606e51b797",
               "engine": "SAST",
-              "scanId": "8f9a9b81-21d8-44b8-a1dc-46827fd1a0ad",
+              "scanId": "8a3d47bf-9b51-4530-91e3-e4966c5f5b5c",
               "moduleId": "client-template-injection",
               "moduleName": "Client-side Template Injection",
               "ruleId": "client-template-injection-taint",
@@ -4068,23 +4121,23 @@
                 "CWE": "https://cwe.mitre.org/data/definitions/94.html"
               },
               "location": {
-                "file": "http://127.0.0.1:49360/asset.js",
+                "file": "http://127.0.0.1:61176/asset.js",
                 "line": 1,
                 "column": 22,
-                "runtimeUrl": "http://127.0.0.1:49360/exec?missing",
+                "runtimeUrl": "http://127.0.0.1:61176/exec?missing",
                 "runtimeUrls": [
-                  "http://127.0.0.1:49360/exec?missing"
+                  "http://127.0.0.1:61176/exec?missing"
                 ],
-                "pageUrl": "http://127.0.0.1:49360/exec?missing",
+                "pageUrl": "http://127.0.0.1:61176/exec?missing",
                 "pageUrls": [
-                  "http://127.0.0.1:49360/exec?missing"
+                  "http://127.0.0.1:61176/exec?missing"
                 ],
-                "url": "http://127.0.0.1:49360/exec?missing",
+                "url": "http://127.0.0.1:61176/exec?missing",
                 "param": null,
                 "kind": "code"
               },
-              "createdAt": "2026-10-22T18:41:33.409Z",
-              "fingerprint": "client-template-injection-taint@@high@@http://127.0.0.1:49360/asset.js@@http://127.0.0.1:49360/asset.js@@{\"start\":{\"line\":1,\"column\":66},\"end\":{\"line\":1,\"column\":79}}@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":63}}@@",
+              "createdAt": "2026-10-23T06:24:23.113Z",
+              "fingerprint": "client-template-injection-taint@@high@@http://127.0.0.1:61176/asset.js@@http://127.0.0.1:61176/asset.js@@{\"start\":{\"line\":1,\"column\":66},\"end\":{\"line\":1,\"column\":79}}@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":63}}@@",
               "findingKind": "finding",
               "confidence": 88,
               "evidence": {
@@ -4093,8 +4146,8 @@
                   "source": {
                     "label": "location.hash",
                     "path": "location.hash",
-                    "sourceFile": "http://127.0.0.1:49360/asset.js",
-                    "sourceFileFull": "http://127.0.0.1:49360/asset.js",
+                    "sourceFile": "http://127.0.0.1:61176/asset.js",
+                    "sourceFileFull": "http://127.0.0.1:61176/asset.js",
                     "sourceLoc": {
                       "start": {
                         "line": 1,
@@ -4117,8 +4170,8 @@
                     "framework": null,
                     "api": null,
                     "argIndex": null,
-                    "sinkFile": "http://127.0.0.1:49360/asset.js",
-                    "sinkFileFull": "http://127.0.0.1:49360/asset.js",
+                    "sinkFile": "http://127.0.0.1:61176/asset.js",
+                    "sinkFileFull": "http://127.0.0.1:61176/asset.js",
                     "sinkLoc": {
                       "start": {
                         "line": 1,
@@ -4137,7 +4190,7 @@
                     {
                       "kind": "source",
                       "label": "location.hash",
-                      "file": "http://127.0.0.1:49360/asset.js",
+                      "file": "http://127.0.0.1:61176/asset.js",
                       "loc": {
                         "start": {
                           "line": 1,
@@ -4152,7 +4205,7 @@
                     {
                       "kind": "sink",
                       "label": "innerHTML",
-                      "file": "http://127.0.0.1:49360/asset.js",
+                      "file": "http://127.0.0.1:61176/asset.js",
                       "loc": {
                         "start": {
                           "line": 1,
@@ -4177,68 +4230,68 @@
                   ]
                 }
               },
-              "updatedAt": "2026-10-22T18:41:33.409Z",
-              "pageUrl": "http://127.0.0.1:49360/exec?missing"
+              "updatedAt": "2026-10-23T06:24:23.113Z",
+              "pageUrl": "http://127.0.0.1:61176/exec?missing"
             }
           ],
           "groups": [
             {
-              "id": "SAST@@dom_xss@@dom-xss@@no-inner-outer-html@@http://127.0.0.1:49360/asset.js@@1",
+              "id": "SAST@@dom_xss@@dom-xss@@no-inner-outer-html@@http://127.0.0.1:61176/asset.js@@1",
               "engine": "SAST",
-              "scanId": "8f9a9b81-21d8-44b8-a1dc-46827fd1a0ad",
+              "scanId": "8a3d47bf-9b51-4530-91e3-e4966c5f5b5c",
               "vulnId": "dom_xss",
               "category": "xss",
               "severity": "low",
               "correlationKey": null,
               "location": {
-                "url": "http://127.0.0.1:49360/exec?missing",
-                "runtimeUrl": "http://127.0.0.1:49360/exec?missing",
-                "file": "http://127.0.0.1:49360/asset.js",
+                "url": "http://127.0.0.1:61176/exec?missing",
+                "runtimeUrl": "http://127.0.0.1:61176/exec?missing",
+                "file": "http://127.0.0.1:61176/asset.js",
                 "param": null,
                 "sink": "innerHTML"
               },
               "occurrenceIds": [
-                "8f9a9b81-21d8-44b8-a1dc-46827fd1a0ad::SAST::dom-xss::no-inner-outer-html::e8f0cfef2b8c746e"
+                "8a3d47bf-9b51-4530-91e3-e4966c5f5b5c::SAST::dom-xss::no-inner-outer-html::c3dd4e1e57badfd4"
               ],
               "count": 1
             },
             {
-              "id": "SAST@@dom_xss@@dom-xss@@dom-xss-taint@@http://127.0.0.1:49360/asset.js@@1",
+              "id": "SAST@@dom_xss@@dom-xss@@dom-xss-taint@@http://127.0.0.1:61176/asset.js@@1",
               "engine": "SAST",
-              "scanId": "8f9a9b81-21d8-44b8-a1dc-46827fd1a0ad",
+              "scanId": "8a3d47bf-9b51-4530-91e3-e4966c5f5b5c",
               "vulnId": "dom_xss",
               "category": "xss",
               "severity": "high",
               "correlationKey": null,
               "location": {
-                "url": "http://127.0.0.1:49360/exec?missing",
-                "runtimeUrl": "http://127.0.0.1:49360/exec?missing",
-                "file": "http://127.0.0.1:49360/asset.js",
+                "url": "http://127.0.0.1:61176/exec?missing",
+                "runtimeUrl": "http://127.0.0.1:61176/exec?missing",
+                "file": "http://127.0.0.1:61176/asset.js",
                 "param": null,
                 "sink": "innerHTML"
               },
               "occurrenceIds": [
-                "8f9a9b81-21d8-44b8-a1dc-46827fd1a0ad::SAST::dom-xss::dom-xss-taint::c37682169e3633ac"
+                "8a3d47bf-9b51-4530-91e3-e4966c5f5b5c::SAST::dom-xss::dom-xss-taint::a478db3e6394e7d5"
               ],
               "count": 1
             },
             {
-              "id": "SAST@@code_injection@@client-template-injection@@client-template-injection-taint@@http://127.0.0.1:49360/asset.js@@1",
+              "id": "SAST@@code_injection@@client-template-injection@@client-template-injection-taint@@http://127.0.0.1:61176/asset.js@@1",
               "engine": "SAST",
-              "scanId": "8f9a9b81-21d8-44b8-a1dc-46827fd1a0ad",
+              "scanId": "8a3d47bf-9b51-4530-91e3-e4966c5f5b5c",
               "vulnId": "code_injection",
               "category": "injection",
               "severity": "high",
               "correlationKey": null,
               "location": {
-                "url": "http://127.0.0.1:49360/exec?missing",
-                "runtimeUrl": "http://127.0.0.1:49360/exec?missing",
-                "file": "http://127.0.0.1:49360/asset.js",
+                "url": "http://127.0.0.1:61176/exec?missing",
+                "runtimeUrl": "http://127.0.0.1:61176/exec?missing",
+                "file": "http://127.0.0.1:61176/asset.js",
                 "param": null,
                 "sink": "innerHTML"
               },
               "occurrenceIds": [
-                "8f9a9b81-21d8-44b8-a1dc-46827fd1a0ad::SAST::client-template-injection::client-template-injection-taint::645ce60d84d28791"
+                "8a3d47bf-9b51-4530-91e3-e4966c5f5b5c::SAST::client-template-injection::client-template-injection-taint::2b19cf606e51b797"
               ],
               "count": 1
             }
@@ -4253,35 +4306,35 @@
               "hiddenParams": [],
               "gadgets": [
                 {
-                  "id": "sast-gadget::127.0.0.1:49360|*|/exec::dom-html-sink::innerHTML",
-                  "bucketId": "sast-gadget::127.0.0.1:49360|*|/exec::dom-html-sink::innerHTML",
+                  "id": "sast-gadget::127.0.0.1:61176|*|/exec::dom-html-sink::innerHTML",
+                  "bucketId": "sast-gadget::127.0.0.1:61176|*|/exec::dom-html-sink::innerHTML",
                   "artifactType": "gadget",
                   "moduleId": "sast-gadget-path-hints",
                   "ruleId": "gadget-artifact",
                   "gadgetType": "dom-html-sink",
                   "label": "innerHTML",
-                  "routeKey": "127.0.0.1:49360|*|/exec",
+                  "routeKey": "127.0.0.1:61176|*|/exec",
                   "occurrenceCount": 4,
                   "sourceFiles": [
-                    "http://127.0.0.1:49360/asset.js"
+                    "http://127.0.0.1:61176/asset.js"
                   ],
-                  "sourceFile": "http://127.0.0.1:49360/asset.js",
+                  "sourceFile": "http://127.0.0.1:61176/asset.js",
                   "sourceLoc": {
                     "line": 1,
                     "column": 22
                   },
-                  "pageUrl": "http://127.0.0.1:49360/exec?missing",
-                  "pageCanon": "http://127.0.0.1:49360/exec",
+                  "pageUrl": "http://127.0.0.1:61176/exec?missing",
+                  "pageCanon": "http://127.0.0.1:61176/exec",
                   "pageUrls": [
-                    "http://127.0.0.1:49360/exec?missing"
+                    "http://127.0.0.1:61176/exec?missing"
                   ],
                   "runtimeUrls": [
-                    "http://127.0.0.1:49360/exec?missing"
+                    "http://127.0.0.1:61176/exec?missing"
                   ],
                   "observedUrls": [
-                    "http://127.0.0.1:49360/exec?missing"
+                    "http://127.0.0.1:61176/exec?missing"
                   ],
-                  "runtimeUrl": "http://127.0.0.1:49360/exec?missing",
+                  "runtimeUrl": "http://127.0.0.1:61176/exec?missing",
                   "authHints": [],
                   "protocolHints": [],
                   "discoveryTags": [],
@@ -4304,7 +4357,7 @@
             }
           },
           "files": [
-            "http://127.0.0.1:49360/asset.js"
+            "http://127.0.0.1:61176/asset.js"
           ],
           "scanStrategy": {
             "policyCode": "COMPREHENSIVE",
@@ -4347,7 +4400,7 @@
             "capturedDocuments": 1,
             "missingResources": [
               {
-                "url": "http://127.0.0.1:49360/missing.js",
+                "url": "http://127.0.0.1:61176/missing.js",
                 "reason": "external_script_unavailable"
               }
             ],
@@ -4376,15 +4429,15 @@
           },
           "sastSourceWarnings": [
             {
-              "documentUrl": "http://127.0.0.1:49360/exec?missing",
-              "documentId": "03952696B9D22CE66A5A56ADED3A9CF3",
+              "documentUrl": "http://127.0.0.1:61176/exec?missing",
+              "documentId": "7C97AD80B64933C9A43A40E1690DD6C4",
               "reason": "source_batch_partial",
               "phase": "final",
               "sourceGaps": 1,
               "incompleteBodies": 0,
               "originalDocumentMissing": false,
               "missingScripts": [
-                "http://127.0.0.1:49360/missing.js"
+                "http://127.0.0.1:61176/missing.js"
               ]
             }
           ]
@@ -4428,10 +4481,10 @@
         "SAST"
       ],
       "status": {
-        "runId": "f6d5307f-1c77-4de9-ab61-dffe52d3b163",
+        "runId": "38aaf0ae-af2c-4a01-89bd-fcd53092dfce",
         "owner": "sast-combined",
         "workspaceId": null,
-        "tabId": 2061889086,
+        "tabId": 362542172,
         "engines": [
           "SAST"
         ],
@@ -4442,6 +4495,9 @@
           "dastScanStrategy": "COMPREHENSIVE",
           "scanControlProfile": "wide",
           "allowCaptureWithoutInteraction": true,
+          "enableHtmlLinkDiscovery": true,
+          "htmlLinkDiscoveryBudget": "safe",
+          "schedulerBreadthFirst": true,
           "maxRequestsPerSecond": 5,
           "concurrency": 3,
           "planningConcurrency": 2,
@@ -4466,21 +4522,21 @@
         },
         "scope": {
           "origins": [
-            "http://127.0.0.1:49360"
+            "http://127.0.0.1:61176"
           ],
           "excludePaths": []
         },
         "accountId": null,
         "accountRevision": null,
-        "createdAt": 1792694493626,
-        "updatedAt": 1792694493919,
+        "createdAt": 1792736663191,
+        "updatedAt": 1792736663327,
         "requestsSent": 0,
         "coverage": {
           "backendGaps": [],
           "sast": {
             "basis": "Acquired client-side JavaScript and HTML/DOM only; server-side application source is not available through browser SAST.",
             "acquisition": {
-              "generation": 5,
+              "generation": 7,
               "documents": 1,
               "preloadedIdentityMatches": 0,
               "collectorGaps": 0,
@@ -4511,7 +4567,7 @@
               },
               "bytes": 0,
               "resources": 0,
-              "denied": 2
+              "denied": 3
             },
             "preloaded": null,
             "preloadedAcquisition": {
@@ -4529,8 +4585,8 @@
             "sourceWarnings": [
               {
                 "reason": "sast_acquisition_resource_limit",
-                "documentId": "D7FAC56B53C76AD93E88BCD87735CC44",
-                "url": "http://127.0.0.1:49360/exec",
+                "documentId": "545426ED9C90425A7D19F76EEEFDCCDE",
+                "url": "http://127.0.0.1:61176/exec",
                 "limit": 32
               }
             ]
@@ -4566,16 +4622,16 @@
               },
               "examples": [
                 {
-                  "url": "http://127.0.0.1:49360/exec",
+                  "url": "http://127.0.0.1:61176/exec",
                   "reason": "sast_acquisition_resource_limit",
-                  "documentId": "D7FAC56B53C76AD93E88BCD87735CC44",
+                  "documentId": "545426ED9C90425A7D19F76EEEFDCCDE",
                   "limit": 32
                 }
               ]
             }
           ],
           "recovery": {
-            "runId": "f6d5307f-1c77-4de9-ab61-dffe52d3b163",
+            "runId": "38aaf0ae-af2c-4a01-89bd-fcd53092dfce",
             "state": "in_progress",
             "instruction": "Address applicable recovery steps or include unresolved gaps in the final report. Do not repeat unchanged failed calls."
           }
@@ -4589,9 +4645,11 @@
             "low": 0,
             "info": 0
           },
-          "findings": 0
+          "findings": 0,
+          "byModule": {},
+          "countsBasis": "retained_findings"
         },
-        "runtimeId": "ptk-session_c34cb038-cf61-4a83-99b2-07255226553f",
+        "runtimeId": "ptk-session_c32b7090-90d0-43a7-8177-60c581ede36e",
         "engineStatus": {
           "SAST": {
             "status": "running",
@@ -4621,53 +4679,53 @@
             "findings": 0,
             "hints": 0,
             "isSessionRunning": true,
-            "isAnalysisRunning": true,
-            "collectionState": "analysis_running",
+            "isAnalysisRunning": false,
+            "collectionState": "collection_failed",
             "sessionState": "running",
-            "analysisState": "analyzing",
+            "analysisState": "error",
             "firstCollectionStarted": true,
             "firstCollectionSettled": true,
             "firstCollectionError": "sast_acquisition_resource_limit",
             "initialCollectionDeferred": null,
-            "activeCollectionCount": 1,
-            "pendingCollectionCount": 2,
-            "currentGeneration": 6,
-            "lastCompletedGeneration": 3,
-            "currentCollectionId": "sast_collection_6",
-            "currentCollectionFile": "http://127.0.0.1:49360/exec",
-            "currentCollectionScriptsCount": 0,
+            "activeCollectionCount": 0,
+            "pendingCollectionCount": 0,
+            "currentGeneration": 7,
+            "lastCompletedGeneration": 6,
+            "currentCollectionId": "sast_collection_7",
+            "currentCollectionFile": "http://127.0.0.1:61176/exec",
+            "currentCollectionScriptsCount": 1,
             "currentCollectionHtmlChars": 0,
             "currentCollectionFindingsCount": 0,
-            "currentCollectionStartedAt": "2026-10-22T18:41:33.917Z",
-            "currentCollectionPayloadAt": "2026-10-22T18:41:33.917Z",
-            "lastCompletedCollectionId": "sast_collection_3",
-            "lastCompletedFile": "http://127.0.0.1:49360/exec",
+            "currentCollectionStartedAt": "2026-10-23T06:24:23.326Z",
+            "currentCollectionPayloadAt": "2026-10-23T06:24:23.326Z",
+            "lastCompletedCollectionId": "sast_collection_6",
+            "lastCompletedFile": "http://127.0.0.1:61176/exec",
             "lastCompletedModule": null,
             "lastCompletedScriptsCount": 0,
             "lastCompletedHtmlChars": 0,
             "lastCompletedFindingsCount": 0,
             "lastCompletedArtifactsCount": 0,
-            "lastCompletedAt": "2026-10-22T18:41:33.826Z",
+            "lastCompletedAt": "2026-10-23T06:24:23.285Z",
             "hasObservedCollection": true,
-            "idle": false
+            "idle": true
           }
         },
         "lastStatus": {
-          "sessionId": "ptk-session_c34cb038-cf61-4a83-99b2-07255226553f",
-          "scanId": "ptk-session_c34cb038-cf61-4a83-99b2-07255226553f",
+          "sessionId": "ptk-session_c32b7090-90d0-43a7-8177-60c581ede36e",
+          "scanId": "ptk-session_c32b7090-90d0-43a7-8177-60c581ede36e",
           "ok": true,
           "status": "running",
           "completionStatus": "running",
           "releaseStatus": null,
           "error": null,
-          "startedAt": "2026-10-22T18:41:33.645Z",
+          "startedAt": "2026-10-23T06:24:23.198Z",
           "finishedAt": null,
           "stopRequestedAt": null,
           "closeRequestId": null,
           "closeRequestAck": false,
           "closeRequestMode": null,
           "idleVerified": false,
-          "elapsedMs": 274,
+          "elapsedMs": 129,
           "lastUpdatedAt": null,
           "engines": {
             "SAST": {
@@ -4698,35 +4756,35 @@
               "findings": 0,
               "hints": 0,
               "isSessionRunning": true,
-              "isAnalysisRunning": true,
-              "collectionState": "analysis_running",
+              "isAnalysisRunning": false,
+              "collectionState": "collection_failed",
               "sessionState": "running",
-              "analysisState": "analyzing",
+              "analysisState": "error",
               "firstCollectionStarted": true,
               "firstCollectionSettled": true,
               "firstCollectionError": "sast_acquisition_resource_limit",
               "initialCollectionDeferred": null,
-              "activeCollectionCount": 1,
-              "pendingCollectionCount": 2,
-              "currentGeneration": 6,
-              "lastCompletedGeneration": 3,
-              "currentCollectionId": "sast_collection_6",
-              "currentCollectionFile": "http://127.0.0.1:49360/exec",
-              "currentCollectionScriptsCount": 0,
+              "activeCollectionCount": 0,
+              "pendingCollectionCount": 0,
+              "currentGeneration": 7,
+              "lastCompletedGeneration": 6,
+              "currentCollectionId": "sast_collection_7",
+              "currentCollectionFile": "http://127.0.0.1:61176/exec",
+              "currentCollectionScriptsCount": 1,
               "currentCollectionHtmlChars": 0,
               "currentCollectionFindingsCount": 0,
-              "currentCollectionStartedAt": "2026-10-22T18:41:33.917Z",
-              "currentCollectionPayloadAt": "2026-10-22T18:41:33.917Z",
-              "lastCompletedCollectionId": "sast_collection_3",
-              "lastCompletedFile": "http://127.0.0.1:49360/exec",
+              "currentCollectionStartedAt": "2026-10-23T06:24:23.326Z",
+              "currentCollectionPayloadAt": "2026-10-23T06:24:23.326Z",
+              "lastCompletedCollectionId": "sast_collection_6",
+              "lastCompletedFile": "http://127.0.0.1:61176/exec",
               "lastCompletedModule": null,
               "lastCompletedScriptsCount": 0,
               "lastCompletedHtmlChars": 0,
               "lastCompletedFindingsCount": 0,
               "lastCompletedArtifactsCount": 0,
-              "lastCompletedAt": "2026-10-22T18:41:33.826Z",
+              "lastCompletedAt": "2026-10-23T06:24:23.285Z",
               "hasObservedCollection": true,
-              "idle": false
+              "idle": true
             }
           },
           "summary": {
@@ -4741,16 +4799,16 @@
           },
           "warnings": [],
           "sessionLookup": {
-            "requestedSessionId": "ptk-session_c34cb038-cf61-4a83-99b2-07255226553f",
-            "tabId": 2061889086,
+            "requestedSessionId": "ptk-session_c32b7090-90d0-43a7-8177-60c581ede36e",
+            "tabId": 362542172,
             "strictCurrentTab": true,
             "allowActive": true,
             "allowCompleted": true,
             "allowGlobalCompleted": true,
             "lookupSource": "explicit-session",
-            "activeSessionIdForTab": "ptk-session_c34cb038-cf61-4a83-99b2-07255226553f",
-            "completedSessionIdForTab": "ptk-session_aca24e83-fca5-470a-99d1-c1a949bea5b6",
-            "globalCompletedSessionId": "ptk-session_aca24e83-fca5-470a-99d1-c1a949bea5b6",
+            "activeSessionIdForTab": "ptk-session_c32b7090-90d0-43a7-8177-60c581ede36e",
+            "completedSessionIdForTab": "ptk-session_b21b8bef-2f08-44fc-8a54-4f271b1a260a",
+            "globalCompletedSessionId": "ptk-session_b21b8bef-2f08-44fc-8a54-4f271b1a260a",
             "sessionExists": true,
             "sessionStatus": "running",
             "sessionFinishedAt": null,
@@ -4770,7 +4828,7 @@
             "sast": {
               "basis": "Acquired client-side JavaScript and HTML/DOM only; server-side application source is not available through browser SAST.",
               "acquisition": {
-                "generation": 5,
+                "generation": 7,
                 "documents": 1,
                 "preloadedIdentityMatches": 0,
                 "collectorGaps": 0,
@@ -4801,7 +4859,7 @@
                 },
                 "bytes": 0,
                 "resources": 0,
-                "denied": 2
+                "denied": 3
               },
               "preloaded": null,
               "preloadedAcquisition": {
@@ -4819,8 +4877,8 @@
               "sourceWarnings": [
                 {
                   "reason": "sast_acquisition_resource_limit",
-                  "documentId": "D7FAC56B53C76AD93E88BCD87735CC44",
-                  "url": "http://127.0.0.1:49360/exec",
+                  "documentId": "545426ED9C90425A7D19F76EEEFDCCDE",
+                  "url": "http://127.0.0.1:61176/exec",
                   "limit": 32
                 }
               ]
@@ -4829,10 +4887,10 @@
         }
       },
       "stopped": {
-        "runId": "f6d5307f-1c77-4de9-ab61-dffe52d3b163",
+        "runId": "38aaf0ae-af2c-4a01-89bd-fcd53092dfce",
         "owner": "sast-combined",
         "workspaceId": null,
-        "tabId": 2061889086,
+        "tabId": 362542172,
         "engines": [
           "SAST"
         ],
@@ -4843,6 +4901,9 @@
           "dastScanStrategy": "COMPREHENSIVE",
           "scanControlProfile": "wide",
           "allowCaptureWithoutInteraction": true,
+          "enableHtmlLinkDiscovery": true,
+          "htmlLinkDiscoveryBudget": "safe",
+          "schedulerBreadthFirst": true,
           "maxRequestsPerSecond": 5,
           "concurrency": 3,
           "planningConcurrency": 2,
@@ -4867,14 +4928,14 @@
         },
         "scope": {
           "origins": [
-            "http://127.0.0.1:49360"
+            "http://127.0.0.1:61176"
           ],
           "excludePaths": []
         },
         "accountId": null,
         "accountRevision": null,
-        "createdAt": 1792694493626,
-        "updatedAt": 1792694494045,
+        "createdAt": 1792736663191,
+        "updatedAt": 1792736663362,
         "requestsSent": 0,
         "coverage": {
           "backendGaps": [],
@@ -4930,8 +4991,8 @@
             "sourceWarnings": [
               {
                 "reason": "sast_acquisition_resource_limit",
-                "documentId": "D7FAC56B53C76AD93E88BCD87735CC44",
-                "url": "http://127.0.0.1:49360/exec",
+                "documentId": "545426ED9C90425A7D19F76EEEFDCCDE",
+                "url": "http://127.0.0.1:61176/exec",
                 "limit": 32
               }
             ]
@@ -4980,16 +5041,16 @@
               },
               "examples": [
                 {
-                  "url": "http://127.0.0.1:49360/exec",
+                  "url": "http://127.0.0.1:61176/exec",
                   "reason": "sast_acquisition_resource_limit",
-                  "documentId": "D7FAC56B53C76AD93E88BCD87735CC44",
+                  "documentId": "545426ED9C90425A7D19F76EEEFDCCDE",
                   "limit": 32
                 }
               ]
             }
           ],
           "recovery": {
-            "runId": "f6d5307f-1c77-4de9-ab61-dffe52d3b163",
+            "runId": "38aaf0ae-af2c-4a01-89bd-fcd53092dfce",
             "state": "incomplete",
             "instruction": "Address applicable recovery steps or include unresolved gaps in the final report. Do not repeat unchanged failed calls."
           }
@@ -5007,9 +5068,11 @@
               "info": 0
             }
           },
-          "findings": 0
+          "findings": 0,
+          "byModule": {},
+          "countsBasis": "retained_findings"
         },
-        "runtimeId": "ptk-session_c34cb038-cf61-4a83-99b2-07255226553f",
+        "runtimeId": "ptk-session_c32b7090-90d0-43a7-8177-60c581ede36e",
         "engineStatus": {
           "SAST": {
             "status": "stopped",
@@ -5071,21 +5134,21 @@
           }
         },
         "lastStatus": {
-          "sessionId": "ptk-session_c34cb038-cf61-4a83-99b2-07255226553f",
-          "scanId": "ptk-session_c34cb038-cf61-4a83-99b2-07255226553f",
+          "sessionId": "ptk-session_c32b7090-90d0-43a7-8177-60c581ede36e",
+          "scanId": "ptk-session_c32b7090-90d0-43a7-8177-60c581ede36e",
           "ok": true,
           "status": "completed",
           "completionStatus": "completed",
           "releaseStatus": "clean",
           "error": null,
-          "startedAt": "2026-10-22T18:41:33.645Z",
-          "finishedAt": "2026-10-22T18:41:34.025Z",
+          "startedAt": "2026-10-23T06:24:23.198Z",
+          "finishedAt": "2026-10-23T06:24:23.356Z",
           "stopRequestedAt": null,
           "closeRequestId": null,
           "closeRequestAck": false,
           "closeRequestMode": null,
           "idleVerified": false,
-          "elapsedMs": 399,
+          "elapsedMs": 164,
           "lastUpdatedAt": null,
           "engines": {
             "SAST": {
@@ -5173,19 +5236,19 @@
           },
           "warnings": [],
           "sessionLookup": {
-            "requestedSessionId": "ptk-session_c34cb038-cf61-4a83-99b2-07255226553f",
-            "tabId": 2061889086,
+            "requestedSessionId": "ptk-session_c32b7090-90d0-43a7-8177-60c581ede36e",
+            "tabId": 362542172,
             "strictCurrentTab": true,
             "allowActive": true,
             "allowCompleted": true,
             "allowGlobalCompleted": true,
             "lookupSource": "explicit-session",
             "activeSessionIdForTab": null,
-            "completedSessionIdForTab": "ptk-session_c34cb038-cf61-4a83-99b2-07255226553f",
-            "globalCompletedSessionId": "ptk-session_c34cb038-cf61-4a83-99b2-07255226553f",
+            "completedSessionIdForTab": "ptk-session_c32b7090-90d0-43a7-8177-60c581ede36e",
+            "globalCompletedSessionId": "ptk-session_c32b7090-90d0-43a7-8177-60c581ede36e",
             "sessionExists": true,
             "sessionStatus": "completed",
-            "sessionFinishedAt": "2026-10-22T18:41:34.025Z",
+            "sessionFinishedAt": "2026-10-23T06:24:23.356Z",
             "stopRequestedAt": null,
             "retention": {
               "ttlMs": 86400000,
@@ -5251,8 +5314,8 @@
               "sourceWarnings": [
                 {
                   "reason": "sast_acquisition_resource_limit",
-                  "documentId": "D7FAC56B53C76AD93E88BCD87735CC44",
-                  "url": "http://127.0.0.1:49360/exec",
+                  "documentId": "545426ED9C90425A7D19F76EEEFDCCDE",
+                  "url": "http://127.0.0.1:61176/exec",
                   "limit": 32
                 }
               ]
@@ -5265,10 +5328,10 @@
         "scan": {
           "version": "1.0",
           "engine": "SAST",
-          "scanId": "4fd95f17-2cc4-4e83-994b-29108fcd9647",
-          "host": "127.0.0.1:49360",
-          "startedAt": "2026-10-22T18:41:33.668Z",
-          "finishedAt": "2026-10-22T18:41:34.023Z",
+          "scanId": "373d482f-f904-43be-bc71-f3eb5d84ca22",
+          "host": "127.0.0.1:61176",
+          "startedAt": "2026-10-23T06:24:23.206Z",
+          "finishedAt": "2026-10-23T06:24:23.355Z",
           "settings": {
             "policyCode": "COMPREHENSIVE",
             "scanStrategyCode": 0,
@@ -5363,8 +5426,8 @@
           "sastSourceWarnings": [
             {
               "reason": "sast_acquisition_resource_limit",
-              "documentId": "D7FAC56B53C76AD93E88BCD87735CC44",
-              "url": "http://127.0.0.1:49360/exec",
+              "documentId": "545426ED9C90425A7D19F76EEEFDCCDE",
+              "url": "http://127.0.0.1:61176/exec",
               "limit": 32
             }
           ]
@@ -5410,10 +5473,10 @@
         "SCA"
       ],
       "status": {
-        "runId": "a85f1cba-d4a5-4636-b752-f6d7204437bf",
+        "runId": "b026a922-625e-4b7e-a66d-60b807669841",
         "owner": "sast-combined",
         "workspaceId": null,
-        "tabId": 2061889086,
+        "tabId": 362542172,
         "engines": [
           "DAST",
           "SAST",
@@ -5426,6 +5489,9 @@
           "dastScanStrategy": "COMPREHENSIVE",
           "scanControlProfile": "wide",
           "allowCaptureWithoutInteraction": true,
+          "enableHtmlLinkDiscovery": true,
+          "htmlLinkDiscoveryBudget": "safe",
+          "schedulerBreadthFirst": true,
           "maxRequestsPerSecond": 5,
           "concurrency": 3,
           "planningConcurrency": 2,
@@ -5450,15 +5516,15 @@
         },
         "scope": {
           "origins": [
-            "http://127.0.0.1:49360"
+            "http://127.0.0.1:61176"
           ],
           "excludePaths": []
         },
         "accountId": null,
         "accountRevision": null,
-        "createdAt": 1792694494157,
-        "updatedAt": 1792694495039,
-        "requestsSent": 1,
+        "createdAt": 1792736663400,
+        "updatedAt": 1792736663712,
+        "requestsSent": 0,
         "coverage": {
           "backendGaps": [],
           "sast": {
@@ -5548,20 +5614,22 @@
           "scaBodyWarnings": [],
           "engineFailures": [],
           "dast": {
-            "phase": "passive_execution",
+            "phase": "dispatch_attribution_unknown",
             "applicationRequestsObserved": 0,
             "applicationRequestsQueued": 0,
-            "proxySeededRequests": 6,
+            "proxySeededRequests": 5,
             "selectedTargetSeededRequests": 0,
-            "seedCandidates": 8,
+            "seedCandidates": 7,
             "unsafeSeedSkipped": 0,
             "tasksPlanned": 0,
             "tasksExecuted": 0,
             "taskCounterMeaning": "Tasks entered execution before any transport attempt",
-            "probeDispatches": 0,
-            "baselineDispatches": 1,
-            "dastRequestsDispatched": 1,
-            "runRequestsDispatched": 1,
+            "plannedMinusEntered": 0,
+            "plannedMinusEnteredMeaning": "Accounting difference only; this is not an exact count of skipped HTTP requests. Inspect stop state, strategy skips and retained task errors.",
+            "probeDispatches": null,
+            "baselineDispatches": null,
+            "dastRequestsDispatched": null,
+            "runRequestsDispatched": 0,
             "skippedDueToStrategy": 0,
             "taskErrors": 0,
             "lastTaskError": null,
@@ -5572,14 +5640,14 @@
           },
           "actionableGaps": [
             {
-              "code": "no_active_probe_coverage",
+              "code": "dispatch_attribution_unknown",
               "engine": "DAST",
-              "summary": "A page or baseline was captured, but active probe coverage is absent.",
+              "summary": "Request counts cannot be attributed to DAST.",
               "sampledOccurrences": 1,
               "retryUnchanged": false,
               "recovery": {
-                "action": "exercise_workflow",
-                "instruction": "Exercise forms or API workflows with attackable inputs. Inspect selected modules and task skips; do not repeatedly restart an unchanged scan."
+                "action": "inspect_evidence",
+                "instruction": "Use retained request/response evidence; do not count other engines’ traffic as DAST probes."
               },
               "examples": []
             },
@@ -5597,7 +5665,7 @@
             }
           ],
           "recovery": {
-            "runId": "a85f1cba-d4a5-4636-b752-f6d7204437bf",
+            "runId": "b026a922-625e-4b7e-a66d-60b807669841",
             "state": "in_progress",
             "instruction": "Address applicable recovery steps or include unresolved gaps in the final report. Do not repeat unchanged failed calls."
           }
@@ -5611,9 +5679,14 @@
             "low": 0,
             "info": 0
           },
-          "findings": 3
+          "findings": 3,
+          "byModule": {
+            "dom-xss": 2,
+            "client-template-injection": 1
+          },
+          "countsBasis": "retained_findings"
         },
-        "runtimeId": "ptk-session_4528921d-d663-4df1-99a1-8545a2f1654b",
+        "runtimeId": "ptk-session_96108ac2-fd20-434b-b43e-86c8aa43f6e2",
         "engineStatus": {
           "DAST": {
             "status": "running",
@@ -5621,7 +5694,7 @@
             "progress": {
               "done": 0,
               "total": 0,
-              "remaining": 4
+              "remaining": 5
             },
             "findingsCount": 0,
             "bySeverity": {
@@ -5631,16 +5704,16 @@
               "low": 0,
               "info": 0
             },
-            "lastActivityAt": "2026-10-22T18:41:34.721Z",
+            "lastActivityAt": "2026-10-23T06:24:23.601Z",
             "warnings": [],
             "phase": "scanning",
             "idle": false,
-            "remaining": 4,
+            "remaining": 5,
             "activeTasks": 0,
             "taskQueue": 0,
-            "requestQueue": 3,
+            "requestQueue": 5,
             "pendingPlans": 0,
-            "planning": 1,
+            "planning": 0,
             "pendingCaptures": 0,
             "captureStats": {
               "pendingObservedRequests": 0,
@@ -5664,10 +5737,10 @@
             "skippedDueToStrategy": 0,
             "scanStrategy": "COMPREHENSIVE",
             "pendingAutomationSeeds": 0,
-            "seededRequests": 6,
-            "proxySeededRequests": 6,
+            "seededRequests": 5,
+            "proxySeededRequests": 5,
             "selectedTargetSeededRequests": 0,
-            "seedCandidates": 8,
+            "seedCandidates": 7,
             "unsafeSeedSkipped": 0,
             "seedError": null,
             "waitingForInteraction": false,
@@ -5721,20 +5794,20 @@
             "currentGeneration": 5,
             "lastCompletedGeneration": 5,
             "currentCollectionId": "sast_collection_5",
-            "currentCollectionFile": "http://127.0.0.1:49360/exec",
+            "currentCollectionFile": "http://127.0.0.1:61176/exec",
             "currentCollectionScriptsCount": 1,
             "currentCollectionHtmlChars": 0,
             "currentCollectionFindingsCount": 3,
-            "currentCollectionStartedAt": "2026-10-22T18:41:34.925Z",
-            "currentCollectionPayloadAt": "2026-10-22T18:41:34.925Z",
+            "currentCollectionStartedAt": "2026-10-23T06:24:23.672Z",
+            "currentCollectionPayloadAt": "2026-10-23T06:24:23.672Z",
             "lastCompletedCollectionId": "sast_collection_5",
-            "lastCompletedFile": "http://127.0.0.1:49360/exec",
+            "lastCompletedFile": "http://127.0.0.1:61176/exec",
             "lastCompletedModule": "DOM Data Manipulation",
             "lastCompletedScriptsCount": 1,
             "lastCompletedHtmlChars": 0,
             "lastCompletedFindingsCount": 3,
             "lastCompletedArtifactsCount": 0,
-            "lastCompletedAt": "2026-10-22T18:41:34.926Z",
+            "lastCompletedAt": "2026-10-23T06:24:23.673Z",
             "hasObservedCollection": true,
             "idle": true
           },
@@ -5759,22 +5832,22 @@
           }
         },
         "lastStatus": {
-          "sessionId": "ptk-session_4528921d-d663-4df1-99a1-8545a2f1654b",
-          "scanId": "ptk-session_4528921d-d663-4df1-99a1-8545a2f1654b",
+          "sessionId": "ptk-session_96108ac2-fd20-434b-b43e-86c8aa43f6e2",
+          "scanId": "ptk-session_96108ac2-fd20-434b-b43e-86c8aa43f6e2",
           "ok": true,
           "status": "running",
           "completionStatus": "running",
           "releaseStatus": null,
           "error": null,
-          "startedAt": "2026-10-22T18:41:34.195Z",
+          "startedAt": "2026-10-23T06:24:23.415Z",
           "finishedAt": null,
           "stopRequestedAt": null,
           "closeRequestId": null,
           "closeRequestAck": false,
           "closeRequestMode": null,
           "idleVerified": false,
-          "elapsedMs": 844,
-          "lastUpdatedAt": "2026-10-22T18:41:34.721Z",
+          "elapsedMs": 297,
+          "lastUpdatedAt": "2026-10-23T06:24:23.601Z",
           "engines": {
             "DAST": {
               "status": "running",
@@ -5782,7 +5855,7 @@
               "progress": {
                 "done": 0,
                 "total": 0,
-                "remaining": 4
+                "remaining": 5
               },
               "findingsCount": 0,
               "bySeverity": {
@@ -5792,16 +5865,16 @@
                 "low": 0,
                 "info": 0
               },
-              "lastActivityAt": "2026-10-22T18:41:34.721Z",
+              "lastActivityAt": "2026-10-23T06:24:23.601Z",
               "warnings": [],
               "phase": "scanning",
               "idle": false,
-              "remaining": 4,
+              "remaining": 5,
               "activeTasks": 0,
               "taskQueue": 0,
-              "requestQueue": 3,
+              "requestQueue": 5,
               "pendingPlans": 0,
-              "planning": 1,
+              "planning": 0,
               "pendingCaptures": 0,
               "captureStats": {
                 "pendingObservedRequests": 0,
@@ -5825,10 +5898,10 @@
               "skippedDueToStrategy": 0,
               "scanStrategy": "COMPREHENSIVE",
               "pendingAutomationSeeds": 0,
-              "seededRequests": 6,
-              "proxySeededRequests": 6,
+              "seededRequests": 5,
+              "proxySeededRequests": 5,
               "selectedTargetSeededRequests": 0,
-              "seedCandidates": 8,
+              "seedCandidates": 7,
               "unsafeSeedSkipped": 0,
               "seedError": null,
               "waitingForInteraction": false,
@@ -5882,20 +5955,20 @@
               "currentGeneration": 5,
               "lastCompletedGeneration": 5,
               "currentCollectionId": "sast_collection_5",
-              "currentCollectionFile": "http://127.0.0.1:49360/exec",
+              "currentCollectionFile": "http://127.0.0.1:61176/exec",
               "currentCollectionScriptsCount": 1,
               "currentCollectionHtmlChars": 0,
               "currentCollectionFindingsCount": 3,
-              "currentCollectionStartedAt": "2026-10-22T18:41:34.925Z",
-              "currentCollectionPayloadAt": "2026-10-22T18:41:34.925Z",
+              "currentCollectionStartedAt": "2026-10-23T06:24:23.672Z",
+              "currentCollectionPayloadAt": "2026-10-23T06:24:23.672Z",
               "lastCompletedCollectionId": "sast_collection_5",
-              "lastCompletedFile": "http://127.0.0.1:49360/exec",
+              "lastCompletedFile": "http://127.0.0.1:61176/exec",
               "lastCompletedModule": "DOM Data Manipulation",
               "lastCompletedScriptsCount": 1,
               "lastCompletedHtmlChars": 0,
               "lastCompletedFindingsCount": 3,
               "lastCompletedArtifactsCount": 0,
-              "lastCompletedAt": "2026-10-22T18:41:34.926Z",
+              "lastCompletedAt": "2026-10-23T06:24:23.673Z",
               "hasObservedCollection": true,
               "idle": true
             },
@@ -5931,16 +6004,16 @@
           },
           "warnings": [],
           "sessionLookup": {
-            "requestedSessionId": "ptk-session_4528921d-d663-4df1-99a1-8545a2f1654b",
-            "tabId": 2061889086,
+            "requestedSessionId": "ptk-session_96108ac2-fd20-434b-b43e-86c8aa43f6e2",
+            "tabId": 362542172,
             "strictCurrentTab": true,
             "allowActive": true,
             "allowCompleted": true,
             "allowGlobalCompleted": true,
             "lookupSource": "explicit-session",
-            "activeSessionIdForTab": "ptk-session_4528921d-d663-4df1-99a1-8545a2f1654b",
-            "completedSessionIdForTab": "ptk-session_c34cb038-cf61-4a83-99b2-07255226553f",
-            "globalCompletedSessionId": "ptk-session_c34cb038-cf61-4a83-99b2-07255226553f",
+            "activeSessionIdForTab": "ptk-session_96108ac2-fd20-434b-b43e-86c8aa43f6e2",
+            "completedSessionIdForTab": "ptk-session_c32b7090-90d0-43a7-8177-60c581ede36e",
+            "globalCompletedSessionId": "ptk-session_c32b7090-90d0-43a7-8177-60c581ede36e",
             "sessionExists": true,
             "sessionStatus": "running",
             "sessionFinishedAt": null,
@@ -6043,18 +6116,13 @@
             },
             "scaBodyWarnings": []
           }
-        },
-        "inFlight": 1,
-        "requestsReserved": 0,
-        "dastProbeDispatches": 0,
-        "dastBaselineDispatches": 1,
-        "httpRequestsSent": 1
+        }
       },
       "stopped": {
-        "runId": "a85f1cba-d4a5-4636-b752-f6d7204437bf",
+        "runId": "b026a922-625e-4b7e-a66d-60b807669841",
         "owner": "sast-combined",
         "workspaceId": null,
-        "tabId": 2061889086,
+        "tabId": 362542172,
         "engines": [
           "DAST",
           "SAST",
@@ -6067,6 +6135,9 @@
           "dastScanStrategy": "COMPREHENSIVE",
           "scanControlProfile": "wide",
           "allowCaptureWithoutInteraction": true,
+          "enableHtmlLinkDiscovery": true,
+          "htmlLinkDiscoveryBudget": "safe",
+          "schedulerBreadthFirst": true,
           "maxRequestsPerSecond": 5,
           "concurrency": 3,
           "planningConcurrency": 2,
@@ -6091,15 +6162,15 @@
         },
         "scope": {
           "origins": [
-            "http://127.0.0.1:49360"
+            "http://127.0.0.1:61176"
           ],
           "excludePaths": []
         },
         "accountId": null,
         "accountRevision": null,
-        "createdAt": 1792694494157,
-        "updatedAt": 1792694495307,
-        "requestsSent": 1,
+        "createdAt": 1792736663400,
+        "updatedAt": 1792736663876,
+        "requestsSent": 0,
         "coverage": {
           "backendGaps": [],
           "sast": {
@@ -6189,7 +6260,7 @@
               "gaps": 0,
               "cleanupPending": false,
               "tabs": {
-                "2061889086": {
+                "362542172": {
                   "complete": true,
                   "gaps": 0
                 }
@@ -6207,17 +6278,19 @@
             "phase": "engine_error",
             "applicationRequestsObserved": 0,
             "applicationRequestsQueued": 0,
-            "proxySeededRequests": 6,
+            "proxySeededRequests": 5,
             "selectedTargetSeededRequests": 0,
-            "seedCandidates": 8,
+            "seedCandidates": 7,
             "unsafeSeedSkipped": 0,
-            "tasksPlanned": 46,
-            "tasksExecuted": 46,
+            "tasksPlanned": 0,
+            "tasksExecuted": 0,
             "taskCounterMeaning": "Tasks entered execution before any transport attempt",
-            "probeDispatches": 0,
-            "baselineDispatches": 1,
-            "dastRequestsDispatched": 1,
-            "runRequestsDispatched": 1,
+            "plannedMinusEntered": 0,
+            "plannedMinusEnteredMeaning": "Accounting difference only; this is not an exact count of skipped HTTP requests. Inspect stop state, strategy skips and retained task errors.",
+            "probeDispatches": null,
+            "baselineDispatches": null,
+            "dastRequestsDispatched": null,
+            "runRequestsDispatched": 0,
             "skippedDueToStrategy": 0,
             "taskErrors": 0,
             "lastTaskError": null,
@@ -6261,7 +6334,7 @@
             }
           ],
           "recovery": {
-            "runId": "a85f1cba-d4a5-4636-b752-f6d7204437bf",
+            "runId": "b026a922-625e-4b7e-a66d-60b807669841",
             "state": "incomplete",
             "instruction": "Address applicable recovery steps or include unresolved gaps in the final report. Do not repeat unchanged failed calls."
           }
@@ -6282,19 +6355,24 @@
           "incompleteEngines": [
             "DAST"
           ],
-          "findings": 6
+          "findings": 3,
+          "byModule": {
+            "dom-xss": 2,
+            "client-template-injection": 1
+          },
+          "countsBasis": "retained_findings"
         },
-        "runtimeId": "ptk-session_4528921d-d663-4df1-99a1-8545a2f1654b",
+        "runtimeId": "ptk-session_96108ac2-fd20-434b-b43e-86c8aa43f6e2",
         "engineStatus": {
           "DAST": {
             "status": "error",
             "isRunning": false,
             "progress": {
-              "done": 46,
-              "total": 46,
+              "done": 0,
+              "total": 0,
               "remaining": 0
             },
-            "findingsCount": 3,
+            "findingsCount": 0,
             "bySeverity": {
               "critical": 0,
               "high": 0,
@@ -6302,7 +6380,7 @@
               "low": 0,
               "info": 0
             },
-            "lastActivityAt": "2026-10-22T18:41:35.127Z",
+            "lastActivityAt": "2026-10-23T06:24:23.601Z",
             "warnings": [],
             "error": "executor_stop_failed: Stopped by user.",
             "phase": "stopped",
@@ -6336,10 +6414,10 @@
             "skippedDueToStrategy": 0,
             "scanStrategy": "COMPREHENSIVE",
             "pendingAutomationSeeds": 0,
-            "seededRequests": 6,
-            "proxySeededRequests": 6,
+            "seededRequests": 5,
+            "proxySeededRequests": 5,
             "selectedTargetSeededRequests": 0,
-            "seedCandidates": 8,
+            "seedCandidates": 7,
             "unsafeSeedSkipped": 0,
             "seedError": null,
             "waitingForInteraction": false,
@@ -6400,7 +6478,7 @@
             "currentCollectionStartedAt": null,
             "currentCollectionPayloadAt": null,
             "lastCompletedCollectionId": null,
-            "lastCompletedFile": "http://127.0.0.1:49360/asset.js",
+            "lastCompletedFile": "http://127.0.0.1:61176/asset.js",
             "lastCompletedModule": "DOM Data Manipulation",
             "lastCompletedScriptsCount": 0,
             "lastCompletedHtmlChars": 0,
@@ -6431,32 +6509,32 @@
           }
         },
         "lastStatus": {
-          "sessionId": "ptk-session_4528921d-d663-4df1-99a1-8545a2f1654b",
-          "scanId": "ptk-session_4528921d-d663-4df1-99a1-8545a2f1654b",
+          "sessionId": "ptk-session_96108ac2-fd20-434b-b43e-86c8aa43f6e2",
+          "scanId": "ptk-session_96108ac2-fd20-434b-b43e-86c8aa43f6e2",
           "ok": true,
           "status": "error",
           "completionStatus": "engine_incomplete",
           "releaseStatus": "incomplete",
           "error": "DAST:executor_stop_failed: Stopped by user.",
-          "startedAt": "2026-10-22T18:41:34.195Z",
-          "finishedAt": "2026-10-22T18:41:35.280Z",
+          "startedAt": "2026-10-23T06:24:23.415Z",
+          "finishedAt": "2026-10-23T06:24:23.867Z",
           "stopRequestedAt": null,
           "closeRequestId": null,
           "closeRequestAck": false,
           "closeRequestMode": null,
           "idleVerified": false,
-          "elapsedMs": 1111,
-          "lastUpdatedAt": "2026-10-22T18:41:35.127Z",
+          "elapsedMs": 461,
+          "lastUpdatedAt": "2026-10-23T06:24:23.601Z",
           "engines": {
             "DAST": {
               "status": "error",
               "isRunning": false,
               "progress": {
-                "done": 46,
-                "total": 46,
+                "done": 0,
+                "total": 0,
                 "remaining": 0
               },
-              "findingsCount": 3,
+              "findingsCount": 0,
               "bySeverity": {
                 "critical": 0,
                 "high": 0,
@@ -6464,7 +6542,7 @@
                 "low": 0,
                 "info": 0
               },
-              "lastActivityAt": "2026-10-22T18:41:35.127Z",
+              "lastActivityAt": "2026-10-23T06:24:23.601Z",
               "warnings": [],
               "error": "executor_stop_failed: Stopped by user.",
               "phase": "stopped",
@@ -6498,10 +6576,10 @@
               "skippedDueToStrategy": 0,
               "scanStrategy": "COMPREHENSIVE",
               "pendingAutomationSeeds": 0,
-              "seededRequests": 6,
-              "proxySeededRequests": 6,
+              "seededRequests": 5,
+              "proxySeededRequests": 5,
               "selectedTargetSeededRequests": 0,
-              "seedCandidates": 8,
+              "seedCandidates": 7,
               "unsafeSeedSkipped": 0,
               "seedError": null,
               "waitingForInteraction": false,
@@ -6562,7 +6640,7 @@
               "currentCollectionStartedAt": null,
               "currentCollectionPayloadAt": null,
               "lastCompletedCollectionId": null,
-              "lastCompletedFile": "http://127.0.0.1:49360/asset.js",
+              "lastCompletedFile": "http://127.0.0.1:61176/asset.js",
               "lastCompletedModule": "DOM Data Manipulation",
               "lastCompletedScriptsCount": 0,
               "lastCompletedHtmlChars": 0,
@@ -6593,7 +6671,7 @@
             }
           },
           "summary": {
-            "findingsCount": 6,
+            "findingsCount": 3,
             "bySeverity": {
               "critical": 0,
               "high": 0,
@@ -6604,19 +6682,19 @@
           },
           "warnings": [],
           "sessionLookup": {
-            "requestedSessionId": "ptk-session_4528921d-d663-4df1-99a1-8545a2f1654b",
-            "tabId": 2061889086,
+            "requestedSessionId": "ptk-session_96108ac2-fd20-434b-b43e-86c8aa43f6e2",
+            "tabId": 362542172,
             "strictCurrentTab": true,
             "allowActive": true,
             "allowCompleted": true,
             "allowGlobalCompleted": true,
             "lookupSource": "explicit-session",
             "activeSessionIdForTab": null,
-            "completedSessionIdForTab": "ptk-session_4528921d-d663-4df1-99a1-8545a2f1654b",
-            "globalCompletedSessionId": "ptk-session_4528921d-d663-4df1-99a1-8545a2f1654b",
+            "completedSessionIdForTab": "ptk-session_96108ac2-fd20-434b-b43e-86c8aa43f6e2",
+            "globalCompletedSessionId": "ptk-session_96108ac2-fd20-434b-b43e-86c8aa43f6e2",
             "sessionExists": true,
             "sessionStatus": "cancelled",
-            "sessionFinishedAt": "2026-10-22T18:41:35.280Z",
+            "sessionFinishedAt": "2026-10-23T06:24:23.867Z",
             "stopRequestedAt": null,
             "retention": {
               "ttlMs": 86400000,
@@ -6717,7 +6795,7 @@
                 "gaps": 0,
                 "cleanupPending": false,
                 "tabs": {
-                  "2061889086": {
+                  "362542172": {
                     "complete": true,
                     "gaps": 0
                   }
@@ -6727,11 +6805,6 @@
             "scaBodyWarnings": []
           }
         },
-        "inFlight": 0,
-        "requestsReserved": 0,
-        "dastProbeDispatches": 0,
-        "dastBaselineDispatches": 1,
-        "httpRequestsSent": 1,
         "stopReason": "Stopped by user.",
         "error": "Stopped by user."
       },
@@ -6739,10 +6812,10 @@
         "scan": {
           "version": "1.0",
           "engine": "SAST",
-          "scanId": "24105102-731f-45b3-ada4-6763198347f6",
-          "host": "127.0.0.1:49360",
-          "startedAt": "2026-10-22T18:41:34.782Z",
-          "finishedAt": "2026-10-22T18:41:35.276Z",
+          "scanId": "72f995d5-9519-49a7-bbe2-68c3d3cd3dd6",
+          "host": "127.0.0.1:61176",
+          "startedAt": "2026-10-23T06:24:23.621Z",
+          "finishedAt": "2026-10-23T06:24:23.864Z",
           "settings": {
             "policyCode": "COMPREHENSIVE",
             "scanStrategyCode": 0,
@@ -6766,9 +6839,9 @@
           },
           "findings": [
             {
-              "id": "24105102-731f-45b3-ada4-6763198347f6::SAST::dom-xss::no-inner-outer-html::e8f0cfef2b8c746e",
+              "id": "72f995d5-9519-49a7-bbe2-68c3d3cd3dd6::SAST::dom-xss::no-inner-outer-html::c3dd4e1e57badfd4",
               "engine": "SAST",
-              "scanId": "24105102-731f-45b3-ada4-6763198347f6",
+              "scanId": "72f995d5-9519-49a7-bbe2-68c3d3cd3dd6",
               "moduleId": "dom-xss",
               "moduleName": "DOM-based XSS",
               "ruleId": "no-inner-outer-html",
@@ -6795,23 +6868,23 @@
                 "CWE": "https://cwe.mitre.org/data/definitions/79.html"
               },
               "location": {
-                "file": "http://127.0.0.1:49360/asset.js",
+                "file": "http://127.0.0.1:61176/asset.js",
                 "line": 1,
                 "column": 22,
-                "runtimeUrl": "http://127.0.0.1:49360/exec",
+                "runtimeUrl": "http://127.0.0.1:61176/exec",
                 "runtimeUrls": [
-                  "http://127.0.0.1:49360/exec"
+                  "http://127.0.0.1:61176/exec"
                 ],
-                "pageUrl": "http://127.0.0.1:49360/exec",
+                "pageUrl": "http://127.0.0.1:61176/exec",
                 "pageUrls": [
-                  "http://127.0.0.1:49360/exec"
+                  "http://127.0.0.1:61176/exec"
                 ],
-                "url": "http://127.0.0.1:49360/exec",
+                "url": "http://127.0.0.1:61176/exec",
                 "param": null,
                 "kind": "code"
               },
-              "createdAt": "2026-10-22T18:41:34.910Z",
-              "fingerprint": "no-inner-outer-html@@low@@http://127.0.0.1:49360/asset.js@@http://127.0.0.1:49360/asset.js@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":79}}@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":63}}@@",
+              "createdAt": "2026-10-23T06:24:23.667Z",
+              "fingerprint": "no-inner-outer-html@@low@@http://127.0.0.1:61176/asset.js@@http://127.0.0.1:61176/asset.js@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":79}}@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":63}}@@",
               "findingKind": "hint",
               "confidence": 38,
               "evidence": {
@@ -6820,8 +6893,8 @@
                   "source": {
                     "label": "innerHTML",
                     "path": null,
-                    "sourceFile": "http://127.0.0.1:49360/asset.js",
-                    "sourceFileFull": "http://127.0.0.1:49360/asset.js",
+                    "sourceFile": "http://127.0.0.1:61176/asset.js",
+                    "sourceFileFull": "http://127.0.0.1:61176/asset.js",
                     "sourceLoc": {
                       "start": {
                         "line": 1,
@@ -6839,8 +6912,8 @@
                     "kind": "assign",
                     "label": "innerHTML",
                     "path": [],
-                    "sinkFile": "http://127.0.0.1:49360/asset.js",
-                    "sinkFileFull": "http://127.0.0.1:49360/asset.js",
+                    "sinkFile": "http://127.0.0.1:61176/asset.js",
+                    "sinkFileFull": "http://127.0.0.1:61176/asset.js",
                     "sinkLoc": {
                       "start": {
                         "line": 1,
@@ -6864,13 +6937,13 @@
                   ]
                 }
               },
-              "updatedAt": "2026-10-22T18:41:34.910Z",
-              "pageUrl": "http://127.0.0.1:49360/exec"
+              "updatedAt": "2026-10-23T06:24:23.667Z",
+              "pageUrl": "http://127.0.0.1:61176/exec"
             },
             {
-              "id": "24105102-731f-45b3-ada4-6763198347f6::SAST::dom-xss::dom-xss-taint::c37682169e3633ac",
+              "id": "72f995d5-9519-49a7-bbe2-68c3d3cd3dd6::SAST::dom-xss::dom-xss-taint::a478db3e6394e7d5",
               "engine": "SAST",
-              "scanId": "24105102-731f-45b3-ada4-6763198347f6",
+              "scanId": "72f995d5-9519-49a7-bbe2-68c3d3cd3dd6",
               "moduleId": "dom-xss",
               "moduleName": "DOM-based XSS",
               "ruleId": "dom-xss-taint",
@@ -6897,23 +6970,23 @@
                 "CWE": "https://cwe.mitre.org/data/definitions/79.html"
               },
               "location": {
-                "file": "http://127.0.0.1:49360/asset.js",
+                "file": "http://127.0.0.1:61176/asset.js",
                 "line": 1,
                 "column": 22,
-                "runtimeUrl": "http://127.0.0.1:49360/exec",
+                "runtimeUrl": "http://127.0.0.1:61176/exec",
                 "runtimeUrls": [
-                  "http://127.0.0.1:49360/exec"
+                  "http://127.0.0.1:61176/exec"
                 ],
-                "pageUrl": "http://127.0.0.1:49360/exec",
+                "pageUrl": "http://127.0.0.1:61176/exec",
                 "pageUrls": [
-                  "http://127.0.0.1:49360/exec"
+                  "http://127.0.0.1:61176/exec"
                 ],
-                "url": "http://127.0.0.1:49360/exec",
+                "url": "http://127.0.0.1:61176/exec",
                 "param": null,
                 "kind": "code"
               },
-              "createdAt": "2026-10-22T18:41:34.910Z",
-              "fingerprint": "dom-xss-taint@@high@@http://127.0.0.1:49360/asset.js@@http://127.0.0.1:49360/asset.js@@{\"start\":{\"line\":1,\"column\":66},\"end\":{\"line\":1,\"column\":79}}@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":63}}@@",
+              "createdAt": "2026-10-23T06:24:23.667Z",
+              "fingerprint": "dom-xss-taint@@high@@http://127.0.0.1:61176/asset.js@@http://127.0.0.1:61176/asset.js@@{\"start\":{\"line\":1,\"column\":66},\"end\":{\"line\":1,\"column\":79}}@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":63}}@@",
               "findingKind": "finding",
               "confidence": 100,
               "evidence": {
@@ -6922,8 +6995,8 @@
                   "source": {
                     "label": "location.hash",
                     "path": "location.hash",
-                    "sourceFile": "http://127.0.0.1:49360/asset.js",
-                    "sourceFileFull": "http://127.0.0.1:49360/asset.js",
+                    "sourceFile": "http://127.0.0.1:61176/asset.js",
+                    "sourceFileFull": "http://127.0.0.1:61176/asset.js",
                     "sourceLoc": {
                       "start": {
                         "line": 1,
@@ -6946,8 +7019,8 @@
                     "framework": null,
                     "api": null,
                     "argIndex": null,
-                    "sinkFile": "http://127.0.0.1:49360/asset.js",
-                    "sinkFileFull": "http://127.0.0.1:49360/asset.js",
+                    "sinkFile": "http://127.0.0.1:61176/asset.js",
+                    "sinkFileFull": "http://127.0.0.1:61176/asset.js",
                     "sinkLoc": {
                       "start": {
                         "line": 1,
@@ -6966,7 +7039,7 @@
                     {
                       "kind": "source",
                       "label": "location.hash",
-                      "file": "http://127.0.0.1:49360/asset.js",
+                      "file": "http://127.0.0.1:61176/asset.js",
                       "loc": {
                         "start": {
                           "line": 1,
@@ -6981,7 +7054,7 @@
                     {
                       "kind": "sink",
                       "label": "innerHTML",
-                      "file": "http://127.0.0.1:49360/asset.js",
+                      "file": "http://127.0.0.1:61176/asset.js",
                       "loc": {
                         "start": {
                           "line": 1,
@@ -7006,13 +7079,13 @@
                   ]
                 }
               },
-              "updatedAt": "2026-10-22T18:41:34.910Z",
-              "pageUrl": "http://127.0.0.1:49360/exec"
+              "updatedAt": "2026-10-23T06:24:23.667Z",
+              "pageUrl": "http://127.0.0.1:61176/exec"
             },
             {
-              "id": "24105102-731f-45b3-ada4-6763198347f6::SAST::client-template-injection::client-template-injection-taint::645ce60d84d28791",
+              "id": "72f995d5-9519-49a7-bbe2-68c3d3cd3dd6::SAST::client-template-injection::client-template-injection-taint::2b19cf606e51b797",
               "engine": "SAST",
-              "scanId": "24105102-731f-45b3-ada4-6763198347f6",
+              "scanId": "72f995d5-9519-49a7-bbe2-68c3d3cd3dd6",
               "moduleId": "client-template-injection",
               "moduleName": "Client-side Template Injection",
               "ruleId": "client-template-injection-taint",
@@ -7039,23 +7112,23 @@
                 "CWE": "https://cwe.mitre.org/data/definitions/94.html"
               },
               "location": {
-                "file": "http://127.0.0.1:49360/asset.js",
+                "file": "http://127.0.0.1:61176/asset.js",
                 "line": 1,
                 "column": 22,
-                "runtimeUrl": "http://127.0.0.1:49360/exec",
+                "runtimeUrl": "http://127.0.0.1:61176/exec",
                 "runtimeUrls": [
-                  "http://127.0.0.1:49360/exec"
+                  "http://127.0.0.1:61176/exec"
                 ],
-                "pageUrl": "http://127.0.0.1:49360/exec",
+                "pageUrl": "http://127.0.0.1:61176/exec",
                 "pageUrls": [
-                  "http://127.0.0.1:49360/exec"
+                  "http://127.0.0.1:61176/exec"
                 ],
-                "url": "http://127.0.0.1:49360/exec",
+                "url": "http://127.0.0.1:61176/exec",
                 "param": null,
                 "kind": "code"
               },
-              "createdAt": "2026-10-22T18:41:34.910Z",
-              "fingerprint": "client-template-injection-taint@@high@@http://127.0.0.1:49360/asset.js@@http://127.0.0.1:49360/asset.js@@{\"start\":{\"line\":1,\"column\":66},\"end\":{\"line\":1,\"column\":79}}@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":63}}@@",
+              "createdAt": "2026-10-23T06:24:23.667Z",
+              "fingerprint": "client-template-injection-taint@@high@@http://127.0.0.1:61176/asset.js@@http://127.0.0.1:61176/asset.js@@{\"start\":{\"line\":1,\"column\":66},\"end\":{\"line\":1,\"column\":79}}@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":63}}@@",
               "findingKind": "finding",
               "confidence": 88,
               "evidence": {
@@ -7064,8 +7137,8 @@
                   "source": {
                     "label": "location.hash",
                     "path": "location.hash",
-                    "sourceFile": "http://127.0.0.1:49360/asset.js",
-                    "sourceFileFull": "http://127.0.0.1:49360/asset.js",
+                    "sourceFile": "http://127.0.0.1:61176/asset.js",
+                    "sourceFileFull": "http://127.0.0.1:61176/asset.js",
                     "sourceLoc": {
                       "start": {
                         "line": 1,
@@ -7088,8 +7161,8 @@
                     "framework": null,
                     "api": null,
                     "argIndex": null,
-                    "sinkFile": "http://127.0.0.1:49360/asset.js",
-                    "sinkFileFull": "http://127.0.0.1:49360/asset.js",
+                    "sinkFile": "http://127.0.0.1:61176/asset.js",
+                    "sinkFileFull": "http://127.0.0.1:61176/asset.js",
                     "sinkLoc": {
                       "start": {
                         "line": 1,
@@ -7108,7 +7181,7 @@
                     {
                       "kind": "source",
                       "label": "location.hash",
-                      "file": "http://127.0.0.1:49360/asset.js",
+                      "file": "http://127.0.0.1:61176/asset.js",
                       "loc": {
                         "start": {
                           "line": 1,
@@ -7123,7 +7196,7 @@
                     {
                       "kind": "sink",
                       "label": "innerHTML",
-                      "file": "http://127.0.0.1:49360/asset.js",
+                      "file": "http://127.0.0.1:61176/asset.js",
                       "loc": {
                         "start": {
                           "line": 1,
@@ -7148,68 +7221,68 @@
                   ]
                 }
               },
-              "updatedAt": "2026-10-22T18:41:34.910Z",
-              "pageUrl": "http://127.0.0.1:49360/exec"
+              "updatedAt": "2026-10-23T06:24:23.667Z",
+              "pageUrl": "http://127.0.0.1:61176/exec"
             }
           ],
           "groups": [
             {
-              "id": "SAST@@dom_xss@@dom-xss@@no-inner-outer-html@@http://127.0.0.1:49360/asset.js@@1",
+              "id": "SAST@@dom_xss@@dom-xss@@no-inner-outer-html@@http://127.0.0.1:61176/asset.js@@1",
               "engine": "SAST",
-              "scanId": "24105102-731f-45b3-ada4-6763198347f6",
+              "scanId": "72f995d5-9519-49a7-bbe2-68c3d3cd3dd6",
               "vulnId": "dom_xss",
               "category": "xss",
               "severity": "low",
               "correlationKey": null,
               "location": {
-                "url": "http://127.0.0.1:49360/exec",
-                "runtimeUrl": "http://127.0.0.1:49360/exec",
-                "file": "http://127.0.0.1:49360/asset.js",
+                "url": "http://127.0.0.1:61176/exec",
+                "runtimeUrl": "http://127.0.0.1:61176/exec",
+                "file": "http://127.0.0.1:61176/asset.js",
                 "param": null,
                 "sink": "innerHTML"
               },
               "occurrenceIds": [
-                "24105102-731f-45b3-ada4-6763198347f6::SAST::dom-xss::no-inner-outer-html::e8f0cfef2b8c746e"
+                "72f995d5-9519-49a7-bbe2-68c3d3cd3dd6::SAST::dom-xss::no-inner-outer-html::c3dd4e1e57badfd4"
               ],
               "count": 1
             },
             {
-              "id": "SAST@@dom_xss@@dom-xss@@dom-xss-taint@@http://127.0.0.1:49360/asset.js@@1",
+              "id": "SAST@@dom_xss@@dom-xss@@dom-xss-taint@@http://127.0.0.1:61176/asset.js@@1",
               "engine": "SAST",
-              "scanId": "24105102-731f-45b3-ada4-6763198347f6",
+              "scanId": "72f995d5-9519-49a7-bbe2-68c3d3cd3dd6",
               "vulnId": "dom_xss",
               "category": "xss",
               "severity": "high",
               "correlationKey": null,
               "location": {
-                "url": "http://127.0.0.1:49360/exec",
-                "runtimeUrl": "http://127.0.0.1:49360/exec",
-                "file": "http://127.0.0.1:49360/asset.js",
+                "url": "http://127.0.0.1:61176/exec",
+                "runtimeUrl": "http://127.0.0.1:61176/exec",
+                "file": "http://127.0.0.1:61176/asset.js",
                 "param": null,
                 "sink": "innerHTML"
               },
               "occurrenceIds": [
-                "24105102-731f-45b3-ada4-6763198347f6::SAST::dom-xss::dom-xss-taint::c37682169e3633ac"
+                "72f995d5-9519-49a7-bbe2-68c3d3cd3dd6::SAST::dom-xss::dom-xss-taint::a478db3e6394e7d5"
               ],
               "count": 1
             },
             {
-              "id": "SAST@@code_injection@@client-template-injection@@client-template-injection-taint@@http://127.0.0.1:49360/asset.js@@1",
+              "id": "SAST@@code_injection@@client-template-injection@@client-template-injection-taint@@http://127.0.0.1:61176/asset.js@@1",
               "engine": "SAST",
-              "scanId": "24105102-731f-45b3-ada4-6763198347f6",
+              "scanId": "72f995d5-9519-49a7-bbe2-68c3d3cd3dd6",
               "vulnId": "code_injection",
               "category": "injection",
               "severity": "high",
               "correlationKey": null,
               "location": {
-                "url": "http://127.0.0.1:49360/exec",
-                "runtimeUrl": "http://127.0.0.1:49360/exec",
-                "file": "http://127.0.0.1:49360/asset.js",
+                "url": "http://127.0.0.1:61176/exec",
+                "runtimeUrl": "http://127.0.0.1:61176/exec",
+                "file": "http://127.0.0.1:61176/asset.js",
                 "param": null,
                 "sink": "innerHTML"
               },
               "occurrenceIds": [
-                "24105102-731f-45b3-ada4-6763198347f6::SAST::client-template-injection::client-template-injection-taint::645ce60d84d28791"
+                "72f995d5-9519-49a7-bbe2-68c3d3cd3dd6::SAST::client-template-injection::client-template-injection-taint::2b19cf606e51b797"
               ],
               "count": 1
             }
@@ -7224,35 +7297,35 @@
               "hiddenParams": [],
               "gadgets": [
                 {
-                  "id": "sast-gadget::127.0.0.1:49360|*|/exec::dom-html-sink::innerHTML",
-                  "bucketId": "sast-gadget::127.0.0.1:49360|*|/exec::dom-html-sink::innerHTML",
+                  "id": "sast-gadget::127.0.0.1:61176|*|/exec::dom-html-sink::innerHTML",
+                  "bucketId": "sast-gadget::127.0.0.1:61176|*|/exec::dom-html-sink::innerHTML",
                   "artifactType": "gadget",
                   "moduleId": "sast-gadget-path-hints",
                   "ruleId": "gadget-artifact",
                   "gadgetType": "dom-html-sink",
                   "label": "innerHTML",
-                  "routeKey": "127.0.0.1:49360|*|/exec",
+                  "routeKey": "127.0.0.1:61176|*|/exec",
                   "occurrenceCount": 2,
                   "sourceFiles": [
-                    "http://127.0.0.1:49360/asset.js"
+                    "http://127.0.0.1:61176/asset.js"
                   ],
-                  "sourceFile": "http://127.0.0.1:49360/asset.js",
+                  "sourceFile": "http://127.0.0.1:61176/asset.js",
                   "sourceLoc": {
                     "line": 1,
                     "column": 22
                   },
-                  "pageUrl": "http://127.0.0.1:49360/exec",
-                  "pageCanon": "http://127.0.0.1:49360/exec",
+                  "pageUrl": "http://127.0.0.1:61176/exec",
+                  "pageCanon": "http://127.0.0.1:61176/exec",
                   "pageUrls": [
-                    "http://127.0.0.1:49360/exec"
+                    "http://127.0.0.1:61176/exec"
                   ],
                   "runtimeUrls": [
-                    "http://127.0.0.1:49360/exec"
+                    "http://127.0.0.1:61176/exec"
                   ],
                   "observedUrls": [
-                    "http://127.0.0.1:49360/exec"
+                    "http://127.0.0.1:61176/exec"
                   ],
-                  "runtimeUrl": "http://127.0.0.1:49360/exec",
+                  "runtimeUrl": "http://127.0.0.1:61176/exec",
                   "authHints": [],
                   "protocolHints": [],
                   "discoveryTags": [],
@@ -7275,7 +7348,7 @@
             }
           },
           "files": [
-            "http://127.0.0.1:49360/asset.js"
+            "http://127.0.0.1:61176/asset.js"
           ],
           "scanStrategy": {
             "policyCode": "COMPREHENSIVE",
@@ -7388,14 +7461,11 @@
     "/missing.js",
     "/missing.js",
     "/missing.js",
-    "/missing.js",
     "/favicon.ico",
     "/exec?missing",
     "/asset.js",
     "/missing.js",
     "/missing.js",
-    "/missing.js",
-    "/missing.js",
     "/favicon.ico",
     "/login",
     "/exec",
@@ -7407,7 +7477,6 @@
     "/login",
     "/exec",
     "/asset.js",
-    "/favicon.ico",
-    "/exec?missing"
+    "/favicon.ico"
   ]
 }

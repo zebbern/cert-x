@@ -5,7 +5,7 @@
     "maxTotalBytes": 33554432,
     "drainTimeoutMs": 9000
   },
-  "runId": "d6ecd613-ee9d-4530-bf9f-2d782ca7ba24",
+  "runId": "e6b551e9-cf62-4256-ae9f-d0e6cdc56baa",
   "state": "incomplete",
   "coverage": {
     "backendGaps": [],
@@ -41,7 +41,7 @@
         "gaps": 1,
         "cleanupPending": false,
         "tabs": {
-          "446051834": {
+          "1938440730": {
             "complete": true,
             "gaps": 1
           }
@@ -52,15 +52,15 @@
       {
         "url": null,
         "reason": "script_source_limit",
-        "tabId": 446051834,
+        "tabId": 1938440730,
         "requestId": null,
         "documentId": null,
         "acquisition": "debugger_script_source"
       },
       {
-        "url": "http://127.0.0.1:52434/asset.js",
+        "url": "http://127.0.0.1:64825/asset.js",
         "reason": "preexisting_script_source_not_observed",
-        "tabId": 446051834,
+        "tabId": 1938440730,
         "requestId": null,
         "documentId": null,
         "acquisition": "debugger_script_source"
@@ -113,7 +113,7 @@
         "examples": [
           {
             "reason": "preexisting_script_source_not_observed",
-            "url": "http://127.0.0.1:52434/asset.js",
+            "url": "http://127.0.0.1:64825/asset.js",
             "documentId": null
           }
         ]
@@ -132,12 +132,12 @@
       }
     ],
     "recovery": {
-      "runId": "d6ecd613-ee9d-4530-bf9f-2d782ca7ba24",
+      "runId": "e6b551e9-cf62-4256-ae9f-d0e6cdc56baa",
       "state": "incomplete",
       "instruction": "Address applicable recovery steps or include unresolved gaps in the final report. Do not repeat unchanged failed calls."
     }
   },
-  "report": "# cert-x Security Report\n\n- Host: 127\\.0\\.0\\.1:52434\n- Report type: cert\\-x security report\n- Generated: 2026\\-10\\-22 19:48\n\n## Coverage and remaining gaps\n\n- Run: d6ecd613\\-ee9d\\-4530\\-bf9f\\-2d782ca7ba24 \\| State: incomplete\n- SCA: 0 captured responses and 0 loaded script sources analyzed\\. These counts may overlap\\.\n- Address applicable recovery steps or include unresolved gaps in the final report\\. Do not repeat unchanged failed calls\\.\n- Run \\- This run did not establish complete execution\\.\n- Next step: Inspect this run and its retained evidence before retrying\\. Resolve the failure or report the untested work; never infer a clean result from missing findings\\.\n- SCA \\- An acquisition limit excluded content\\.\n- Next step: Inspect effective acquisition limits and shared capture capacity\\. Raise the relevant preference within user ceilings, or narrow the workflow; do not bypass explicit limits\\.\n- Evidence: script\\_source\\_limit\n- SCA \\- Some resource content was not analyzed\\.\n- Next step: Inspect the resource URL, status, MIME type and acquisition reason\\. Revisit the affected route under capture if appropriate; report unsupported or unavailable content as a gap\\.\n- Evidence: preexisting\\_script\\_source\\_not\\_observed \\| http://127\\.0\\.0\\.1:52434/asset\\.js\n- SCA \\- No JavaScript content has been analyzed\\.\n- Next step: Verify login and browse routes that load application scripts\\. Inspect acquisition warnings; URI matches alone cannot establish a negative content assessment\\.\n- Effective acquisition limits: resource bytes 1024; total acquired bytes 33554432; loaded scripts 256; drain milliseconds 9000\n\n\nReport generated using cert-x scanning engines. Executive preset includes top findings only and excludes sensitive evidence by default. Results depend on scan coverage and target responsiveness.\n**Scope:** http://127\\.0\\.0\\.1:52434\n**Limitations:** Results depend on available routes and auth context; some flows may not be covered.\n",
+  "report": "# cert-x Security Report\n\n- Host: 127\\.0\\.0\\.1:64825\n- Report type: cert\\-x security report\n- Generated: 2026\\-10\\-23 08:24\n\n## Coverage and remaining gaps\n\n- Run: e6b551e9\\-cf62\\-4256\\-ae9f\\-d0e6cdc56baa \\| State: incomplete\n- SCA: 0 captured responses and 0 loaded script sources analyzed\\. These counts may overlap\\.\n- Address applicable recovery steps or include unresolved gaps in the final report\\. Do not repeat unchanged failed calls\\.\n- Run \\- This run did not establish complete execution\\.\n- Next step: Inspect this run and its retained evidence before retrying\\. Resolve the failure or report the untested work; never infer a clean result from missing findings\\.\n- SCA \\- An acquisition limit excluded content\\.\n- Next step: Inspect effective acquisition limits and shared capture capacity\\. Raise the relevant preference within user ceilings, or narrow the workflow; do not bypass explicit limits\\.\n- Evidence: script\\_source\\_limit\n- SCA \\- Some resource content was not analyzed\\.\n- Next step: Inspect the resource URL, status, MIME type and acquisition reason\\. Revisit the affected route under capture if appropriate; report unsupported or unavailable content as a gap\\.\n- Evidence: preexisting\\_script\\_source\\_not\\_observed \\| http://127\\.0\\.0\\.1:64825/asset\\.js\n- SCA \\- No JavaScript content has been analyzed\\.\n- Next step: Verify login and browse routes that load application scripts\\. Inspect acquisition warnings; URI matches alone cannot establish a negative content assessment\\.\n- Effective acquisition limits: resource bytes 1024; total acquired bytes 33554432; loaded scripts 256; drain milliseconds 9000\n\n\nReport generated using cert-x scanning engines. Executive preset includes top findings only and excludes sensitive evidence by default. Results depend on scan coverage and target responsiveness.\n**Scope:** http://127\\.0\\.0\\.1:64825\n**Limitations:** Results depend on available routes and auth context; some flows may not be covered.\n",
   "wire": [
     "/app",
     "/asset.js",

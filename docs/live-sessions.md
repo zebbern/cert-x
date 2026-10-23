@@ -16,8 +16,14 @@ OPENROUTER_API_KEY=... M4_MINUTES=40 M4_MODEL=xiaomi/mimo-v2.6-pro \
   the Bug bounty profile, sends one instruction, then only watches — no
   model behavior is scripted.
 - `M4_MINUTES` is a **test-only** timebox. The product has no time window;
-  at 75% of the box the runner may steer a wrap-up through the same mid-run
-  message channel any human user has.
+  at 60% of the box the runner steers a wrap-up through the same mid-run
+  message channel any human user has. **Scale the box with scope** — a
+  single target finishes naturally in ~25 min under 60% steering; a
+  dual-target session exceeded 35 min and lost its final report to the
+  clock (work was complete; the report was mid-generation at expiry).
+- `M4_ORIGIN2` adds a second target tab in the same workspace — the
+  cross-target map scenario (validated 2026-10-24: parallel recon
+  subagents, one shared graph, orchestrator holds the hypothesis ledger).
 - Captures per run: model request bodies (full conversation history), the
   panel transcript, and tool telemetry (`C:/tmp/m4-*`).
 

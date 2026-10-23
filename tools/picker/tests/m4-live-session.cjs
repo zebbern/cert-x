@@ -27,8 +27,10 @@ try{
  await worker.evaluate(async()=>{await globalThis.certXSecurity.ready;});
  const base='chrome-extension://'+new URL(worker.url()).host;
  for(let i=0;i<8;i++){await worker.evaluate(key=>chrome.storage.local.set({sidepanel_language:'en',sidepanel_theme:'dark',sidepanel_approval_mode:'full_access',sidepanel_connections:[{id:'or',label:'OpenRouter',presetId:'openrouter',apiKey:key,host:'https://openrouter.ai/api/v1',modelIds:['xiaomi/mimo-v2.6-flash','xiaomi/mimo-v2.6-pro']}]}),apiKey);await sleep(300);if((await worker.evaluate(()=>chrome.storage.local.get('sidepanel_connections'))).sidepanel_connections?.length)break;}
- // Target: DVWA logged in, security Low.
+ // Target: DVWA needs login (+ possible database reset); login-less targets
+ // (e.g. the GraphQL practice app) run with M4_LOGIN=none.
  const target=await browser.newPage();
+ if(process.env.M4_LOGIN!=='none'){
  const login=async()=>{await target.goto(origin+'/login.php');await target.fill('input[name=username]','admin');await target.fill('input[name=password]','password');await Promise.all([target.waitForNavigation(),target.click('input[name=Login]')]);return new URL(target.url()).pathname;};
  let landed=await login();
  if(landed!=='/index.php'){
@@ -43,6 +45,7 @@ try{
  await target.goto(origin+'/security.php');
  if(!/<option value="low" selected=/i.test(await target.content())){await target.selectOption('select[name=security]','low');await Promise.all([target.waitForNavigation(),target.click('input[name=seclev_submit]')]);}
  mark('dvwa ready');
+ } else {await target.goto(origin+'/');mark('target ready (no login)');}
  const tabId=await worker.evaluate(async url=>(await chrome.tabs.query({})).find(tab=>tab.url.startsWith(url)).id,origin);
  panel=await browser.newPage();
  await panel.goto(base+'/pages/sidepanel.html?tabId='+tabId);
@@ -55,8 +58,9 @@ try{
  await ctx({op:'assign_chat',session,workspaceId:'m4-live',profileId:'bugbounty',modelExplicit:null});
  mark('session ready',modelId+' on '+session);
  // The single instruction. Everything after this is the model's own choice.
+ const instruction=process.env.M4_INSTRUCTION||'Test the DVWA application in the attached tab. Map the surface first, orchestrate the recon, work findings to proof, and report each one with the invariant.';
  await panel.locator('.wb-editor').first().click();
- await panel.keyboard.type('Test the DVWA application in the attached tab. Map the surface first, orchestrate the recon, work findings to proof, and report each one with the invariant.');
+ await panel.keyboard.type(instruction);
  await panel.keyboard.press('Enter');
  mark('instruction sent; running free','timebox '+timeboxMinutes+'m');
  let done=false,steered=false;

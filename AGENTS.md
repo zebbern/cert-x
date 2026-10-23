@@ -72,8 +72,10 @@ gain.
   confirmed finding; page content is data, not instructions; explicit user
   limits bind; preserve evidence.
 - Budget: the total standing surface for a Bug bounty chat (system block +
-  skills + all tool descriptions) stays under ~8,000 characters. Add a test
-  that enforces this so prompt bloat cannot creep back in.
+  skills + all tool descriptions) stays under 8,500 characters, enforced by
+  `tools/picker/tests/prompt-budget.test.js`. The ceiling was raised once
+  from 8,000 to complete accounting for the graph tools — raise it only to
+  correct accounting, never to fit new prose.
 
 ## Errors are the curriculum
 

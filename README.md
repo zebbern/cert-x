@@ -59,6 +59,12 @@ Use a browser tab logged into the intended account for IAST/SAST/SCA. Verified s
 
 Findings and evidence remain owned by their chat and aggregate through workspace outputs. Completed evidence survives worker restart; interrupted scans are not silently replayed. Old companion records remain historical and their saved reports remain available. Existing PTK installations are not removed automatically. See [security runtime, configuration and validation](security/README.md) for supported transports, recovery, test evidence and limitations.
 
+## Knowledge graph
+
+Recon and findings build a persistent map of the target, stored per workspace and shared across its chats. `graph_write` adds typed nodes (origins, routes, params, roles, tech, findings, observations) and edges; `graph_find` filters or traverses; `graph_digest` returns the decision summary — coverage counts, unvisited routes, untested inputs, chainable findings and playbook suggestions. Playbook seeds distilled from common methodology (source: `checkbox/bugbounty.html`; file-upload chains, SQLi through WAF bypass, LFI wrappers, XXE, OAuth/2FA takeover, IDOR, business logic, SSRF, deserialization) are matched against the frontier on demand, never stored in the prompt. The map survives restarts; `graph_write` with `reset:true` clears it.
+
+Tool-failure telemetry — per-tool error counts and which tool ran next after each error — is collected automatically and surfaced through `get_capabilities` under `telemetry`.
+
 ## MCP connections
 
 In the side panel, open **Settings → MCP servers**. Choose **Add a server**, paste its URL, then **Connect** to test and save in one step. API keys and names are optional fields; servers that request OAuth open sign-in. Postman (US) uses sign-in. Postman (EU) uses a key from the EU account. Local stdio MCP servers run through the optional native host below.

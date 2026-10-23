@@ -110,16 +110,16 @@ function kiGraphToolDefs(session) {
   const wrapError = error => ({ output: JSON.stringify({ error: error.message, ...(error.retryable === false ? { retryable: false, recovery: error.recovery } : {}) }), isError: true });
   const run = async work => { try { return { output: JSON.stringify(await work()) }; } catch (error) { return wrapError(error); } };
   return [
-    { name: "graph_write", description: "Add or update nodes and edges in this workspace’s attack-surface graph (origins, routes, params, roles, tech, findings, observations). Upsert by id; edges may reference nodes from the same call; reset:true clears it.", kiPolicyMeta: meta("graph_write"),
+    { name: "graph_write", description: "Add or update nodes and edges in this workspace’s attack-surface graph (origins, routes, params, roles, tech, findings). Upsert by id; edges may use nodes from the same call; reset:true clears.", kiPolicyMeta: meta("graph_write"),
       parameters: { type: "object", properties: {
         nodes: { type: "array", description: "Nodes to upsert: {id?, kind, label, data?}. Kinds: " + KI_GRAPH_KINDS.join(", ") + "." },
         edges: { type: "array", description: "Edges to add: {from, to, kind, note?}. Kinds: " + KI_GRAPH_EDGE_KINDS.join(", ") + "." },
         reset: { type: "boolean", description: "Clear this workspace’s graph first." } }, additionalProperties: false },
       resolveExecution(args) { return { approvalRule: "allow", async execute() { return run(() => kiGraphApply(session, args)); } }; } },
-    { name: "graph_find", description: "Find nodes in the workspace graph by kind or label substring, or traverse from a node id by edge kind. Playbook seeds are included when they match.", kiPolicyMeta: meta("graph_find"),
+    { name: "graph_find", description: "Find graph nodes by kind or label substring, or traverse an id by edge kind; matching playbook seeds are included.", kiPolicyMeta: meta("graph_find"),
       parameters: { type: "object", properties: { kinds: { type: "array", items: { type: "string" } }, label_contains: { type: "string" }, id: { type: "string" }, from: { type: "string" }, to: { type: "string" }, edge: { type: "string" }, limit: { type: "integer", minimum: 1, maximum: 100 } }, additionalProperties: false },
       resolveExecution(args) { return { approvalRule: "allow", async execute() { return run(() => kiGraphFindRaw(session, args)); } }; } },
-    { name: "graph_digest", description: "Read the graph’s decision summary: coverage counts, unvisited routes, untested inputs, chainable findings and suggested playbooks — the input for choosing the next move.", kiPolicyMeta: meta("graph_digest"),
+    { name: "graph_digest", description: "The graph’s decision summary: coverage counts, unvisited routes, untested inputs, chainable findings, suggested playbooks.", kiPolicyMeta: meta("graph_digest"),
       parameters: { type: "object", properties: {}, additionalProperties: false },
       resolveExecution() { return { approvalRule: "allow", async execute() { return run(() => kiGraphDigest(session)); } }; } },
   ];

@@ -165,6 +165,7 @@ Real Chromium checks use temporary profiles and local fixtures:
 
 ```text
 node tools/picker/tests/native-test.js
+node tools/picker/tests/dvwa-rehearsal.cjs
 node tools/picker/tests/browser-control-ui-test.js
 node tools/picker/tests/contexts-ui-test.js
 node tools/picker/tests/csp-ui-test.js

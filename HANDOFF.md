@@ -39,5 +39,8 @@ runner script so red stays red (after fixing).
 - Likely area: scan stop/drain logic in `security/service.mjs` and the
   capabilities operation list assembly (`kiSecurityToolDefs` gating or
   `service.describe`), not the picker patches.
+- Second reproduction: `tools/picker/tests/dvwa-rehearsal.cjs` (live DVWA,
+  DAST stop with work in flight) also lands on `cancelled` instead of
+  `completed` — same terminal-state bug on a different engine path.
 
 Delete this file once all three pass.

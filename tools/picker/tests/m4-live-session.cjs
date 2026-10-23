@@ -56,10 +56,13 @@ try{
    await sleep(5000);
    done=await panel.evaluate(()=>document.querySelector('[aria-label="Profile"]')?.disabled===false).catch(()=>false);
    if(done&&elapsed>30)break;
+   // Stream drops can kill a turn mid-session; the panel surfaces a Retry
+   // button — click it so the model resumes instead of stalling to the timebox.
+   try{const retry=panel.getByText('Retry',{exact:true});if(await retry.count()>0&&await retry.first().isVisible()){await retry.first().click();mark('retry clicked',Math.round(elapsed/1000)+'s');await sleep(3000);}}catch{}
    if(elapsed%60000<5000)mark('running',Math.round(elapsed/1000)+'s');
  }
  // Capture transcript and telemetry before closing.
- const transcript=await panel.evaluate(()=>{const node=document.querySelector('.wb-thread')||document.querySelector('[class*=thread]')||document.querySelector('main')||document.body;return node.innerText;}).catch(()=> '(transcript unavailable)');
+ const transcript=await panel.evaluate(()=>{const picks=[...document.querySelectorAll('.wb-thread,[class*=thread],main,body')].map(node=>node.innerText||'');return picks.sort((a,b)=>b.length-a.length)[0]||'';}).catch(()=> '(transcript unavailable)');
  const telemetry=await worker.evaluate(()=>chrome.storage.local.get('ki_tool_telemetry').then(value=>value.ki_tool_telemetry||{})).catch(()=>({}));
  const minutes=((Date.now()-started)/60000).toFixed(1);
  fs.writeFileSync('/tmp/m4-live-transcript.txt',transcript);

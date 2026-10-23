@@ -1,0 +1,516 @@
+{
+  "fixture": "Nested same-site/OOPIF preloaded Angular; immediate stop after Fetch/XHR loadend; account isolation",
+  "cases": [
+    {
+      "account": "a",
+      "acquisition": {
+        "captured": 4,
+        "gaps": 0,
+        "provenance": "debugger_script_source",
+        "sessionsInspected": 2,
+        "effectiveLimits": {
+          "maxScripts": 128,
+          "maxResourceBytes": 8388608,
+          "maxTotalBytes": 33554432
+        },
+        "childDocumentsUninspected": 0
+      },
+      "drain": {
+        "complete": true,
+        "gaps": 0,
+        "cleanupPending": false,
+        "tabs": {
+          "667999794": {
+            "complete": true,
+            "gaps": 0
+          }
+        }
+      },
+      "findings": 18,
+      "bodyCoverage": {
+        "captured": 2,
+        "analyzed": 2,
+        "gaps": 0
+      },
+      "sourceCoverage": {
+        "captured": 4,
+        "analyzed": 4,
+        "gaps": 0
+      },
+      "acquisitions": [
+        "captured_http_body"
+      ],
+      "extraReads": [],
+      "liveReads": [
+        {
+          "url": "/opaque/fetch",
+          "account": "a"
+        },
+        {
+          "url": "/opaque/xhr",
+          "account": "a"
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "account": "b",
+      "acquisition": {
+        "captured": 4,
+        "gaps": 0,
+        "provenance": "debugger_script_source",
+        "sessionsInspected": 2,
+        "effectiveLimits": {
+          "maxScripts": 128,
+          "maxResourceBytes": 8388608,
+          "maxTotalBytes": 33554432
+        },
+        "childDocumentsUninspected": 0
+      },
+      "drain": {
+        "complete": true,
+        "gaps": 0,
+        "cleanupPending": false,
+        "tabs": {
+          "667999794": {
+            "complete": true,
+            "gaps": 0
+          }
+        }
+      },
+      "findings": 0,
+      "bodyCoverage": {
+        "captured": 2,
+        "analyzed": 2,
+        "gaps": 0
+      },
+      "sourceCoverage": {
+        "captured": 4,
+        "analyzed": 4,
+        "gaps": 0
+      },
+      "acquisitions": [],
+      "extraReads": [],
+      "liveReads": [
+        {
+          "url": "/opaque/fetch",
+          "account": "b"
+        },
+        {
+          "url": "/opaque/xhr",
+          "account": "b"
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "account": "anonymous",
+      "acquisition": {
+        "captured": 0,
+        "gaps": 0,
+        "provenance": "debugger_script_source",
+        "sessionsInspected": 2,
+        "effectiveLimits": {
+          "maxScripts": 128,
+          "maxResourceBytes": 8388608,
+          "maxTotalBytes": 33554432
+        },
+        "childDocumentsUninspected": 0
+      },
+      "drain": {
+        "complete": true,
+        "gaps": 0,
+        "cleanupPending": false,
+        "tabs": {
+          "667999794": {
+            "complete": true,
+            "gaps": 0
+          }
+        }
+      },
+      "findings": 0,
+      "bodyCoverage": {
+        "captured": 0,
+        "analyzed": 0,
+        "gaps": 2
+      },
+      "sourceCoverage": {
+        "captured": 0,
+        "analyzed": 0,
+        "gaps": 1
+      },
+      "acquisitions": [],
+      "extraReads": [],
+      "liveReads": [
+        {
+          "url": "/opaque/fetch",
+          "account": "anonymous"
+        },
+        {
+          "url": "/opaque/xhr",
+          "account": "anonymous"
+        }
+      ],
+      "warnings": [
+        {
+          "url": "https://127.0.0.1:50617/opaque/frame.js",
+          "reason": "preexisting_script_source_not_observed",
+          "tabId": 667999794,
+          "requestId": null,
+          "documentId": null,
+          "acquisition": "debugger_script_source"
+        },
+        {
+          "url": "https://127.0.0.1:50617/opaque/fetch",
+          "reason": "response_status_unavailable",
+          "tabId": 667999794,
+          "requestId": "7744.26",
+          "status": 401,
+          "documentId": "8CD7F2E4EAB1A12F590BE63B777B6B0A"
+        },
+        {
+          "url": "https://127.0.0.1:50617/opaque/xhr",
+          "reason": "response_status_unavailable",
+          "tabId": 667999794,
+          "requestId": "7744.27",
+          "status": 401,
+          "documentId": "8CD7F2E4EAB1A12F590BE63B777B6B0A"
+        }
+      ]
+    },
+    {
+      "case": "limited-diagnostic",
+      "drain": {
+        "complete": false,
+        "reason": "capture_drain_timeout",
+        "gaps": 0,
+        "cleanupPending": false,
+        "tabs": {
+          "667999794": {
+            "complete": false,
+            "reason": "capture_drain_timeout",
+            "cleanupPending": false,
+            "cleanupReason": "capture_cleanup_pending"
+          }
+        }
+      },
+      "limits": {
+        "requested": {
+          "maxScripts": 1,
+          "drainTimeoutMs": 75
+        },
+        "effective": {
+          "maxScripts": 1,
+          "maxResourceBytes": 8388608,
+          "maxTotalBytes": 33554432
+        }
+      },
+      "sourceCoverage": {
+        "captured": 1,
+        "analyzed": 1,
+        "gaps": 2
+      },
+      "warnings": [
+        {
+          "url": null,
+          "reason": "script_source_limit",
+          "tabId": 667999794,
+          "requestId": null,
+          "documentId": null,
+          "acquisition": "debugger_script_source"
+        },
+        {
+          "url": "https://127.0.0.1:50617/opaque/frame.js",
+          "reason": "preexisting_script_source_not_observed",
+          "tabId": 667999794,
+          "requestId": null,
+          "documentId": null,
+          "acquisition": "debugger_script_source"
+        },
+        {
+          "url": null,
+          "reason": "capture_drain_timeout",
+          "tabId": 667999794,
+          "requestId": null,
+          "documentId": null
+        },
+        {
+          "url": null,
+          "reason": "capture_drain_timeout",
+          "tabId": 667999794,
+          "requestId": null,
+          "documentId": null
+        },
+        {
+          "url": "https://127.0.0.1:50617/slow.js",
+          "reason": "response_body_unavailable",
+          "tabId": 667999794,
+          "requestId": "7744.35",
+          "documentId": "3FE858ABE8CE141581802F44F50D73A7"
+        },
+        {
+          "url": null,
+          "reason": "capture_cleanup_pending",
+          "tabId": 667999794,
+          "requestId": null,
+          "documentId": null
+        }
+      ]
+    },
+    {
+      "case": "limited-sources-and-stop-timeout",
+      "drain": {
+        "complete": false,
+        "reason": "capture_drain_timeout",
+        "gaps": 0,
+        "cleanupPending": false,
+        "tabs": {
+          "667999794": {
+            "complete": false,
+            "reason": "capture_drain_timeout",
+            "cleanupPending": false,
+            "cleanupReason": "capture_cleanup_pending"
+          }
+        }
+      },
+      "sourceCoverage": {
+        "captured": 1,
+        "analyzed": 1,
+        "gaps": 2
+      },
+      "warnings": [
+        {
+          "url": null,
+          "reason": "script_source_limit",
+          "tabId": 667999794,
+          "requestId": null,
+          "documentId": null,
+          "acquisition": "debugger_script_source"
+        },
+        {
+          "url": "https://127.0.0.1:50617/opaque/frame.js",
+          "reason": "preexisting_script_source_not_observed",
+          "tabId": 667999794,
+          "requestId": null,
+          "documentId": null,
+          "acquisition": "debugger_script_source"
+        },
+        {
+          "url": null,
+          "reason": "capture_drain_timeout",
+          "tabId": 667999794,
+          "requestId": null,
+          "documentId": null
+        },
+        {
+          "url": null,
+          "reason": "capture_drain_timeout",
+          "tabId": 667999794,
+          "requestId": null,
+          "documentId": null
+        },
+        {
+          "url": "https://127.0.0.1:50617/slow.js",
+          "reason": "response_body_unavailable",
+          "tabId": 667999794,
+          "requestId": "7744.35",
+          "documentId": "3FE858ABE8CE141581802F44F50D73A7"
+        },
+        {
+          "url": null,
+          "reason": "capture_cleanup_pending",
+          "tabId": 667999794,
+          "requestId": null,
+          "documentId": null
+        }
+      ],
+      "findings": 18
+    }
+  ],
+  "wire": [
+    {
+      "url": "/login/a",
+      "account": "anonymous"
+    },
+    {
+      "url": "/app",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/asset.js",
+      "account": "a"
+    },
+    {
+      "url": "/frame",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/frame.js",
+      "account": "a"
+    },
+    {
+      "url": "/cross",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/cross.js",
+      "account": "a"
+    },
+    {
+      "url": "/nested",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/nested.js",
+      "account": "a"
+    },
+    {
+      "url": "/favicon.ico",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/fetch",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/xhr",
+      "account": "a"
+    },
+    {
+      "url": "/login/b",
+      "account": "anonymous"
+    },
+    {
+      "url": "/app",
+      "account": "b"
+    },
+    {
+      "url": "/opaque/asset.js",
+      "account": "b"
+    },
+    {
+      "url": "/frame",
+      "account": "b"
+    },
+    {
+      "url": "/opaque/frame.js",
+      "account": "b"
+    },
+    {
+      "url": "/cross",
+      "account": "b"
+    },
+    {
+      "url": "/opaque/cross.js",
+      "account": "b"
+    },
+    {
+      "url": "/nested",
+      "account": "b"
+    },
+    {
+      "url": "/opaque/nested.js",
+      "account": "b"
+    },
+    {
+      "url": "/favicon.ico",
+      "account": "b"
+    },
+    {
+      "url": "/opaque/fetch",
+      "account": "b"
+    },
+    {
+      "url": "/opaque/xhr",
+      "account": "b"
+    },
+    {
+      "url": "/app",
+      "account": "anonymous"
+    },
+    {
+      "url": "/opaque/asset.js",
+      "account": "anonymous"
+    },
+    {
+      "url": "/frame",
+      "account": "anonymous"
+    },
+    {
+      "url": "/opaque/frame.js",
+      "account": "anonymous"
+    },
+    {
+      "url": "/cross",
+      "account": "anonymous"
+    },
+    {
+      "url": "/opaque/cross.js",
+      "account": "anonymous"
+    },
+    {
+      "url": "/nested",
+      "account": "anonymous"
+    },
+    {
+      "url": "/opaque/nested.js",
+      "account": "anonymous"
+    },
+    {
+      "url": "/favicon.ico",
+      "account": "anonymous"
+    },
+    {
+      "url": "/opaque/fetch",
+      "account": "anonymous"
+    },
+    {
+      "url": "/opaque/xhr",
+      "account": "anonymous"
+    },
+    {
+      "url": "/login/a",
+      "account": "anonymous"
+    },
+    {
+      "url": "/app",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/asset.js",
+      "account": "a"
+    },
+    {
+      "url": "/frame",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/frame.js",
+      "account": "a"
+    },
+    {
+      "url": "/cross",
+      "account": "anonymous"
+    },
+    {
+      "url": "/opaque/cross.js",
+      "account": "anonymous"
+    },
+    {
+      "url": "/nested",
+      "account": "anonymous"
+    },
+    {
+      "url": "/opaque/nested.js",
+      "account": "anonymous"
+    },
+    {
+      "url": "/favicon.ico",
+      "account": "a"
+    },
+    {
+      "url": "/slow.js",
+      "account": "a"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<MacroEventList>
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>Navigate</EventType>
+    <EventTypeName>Navigate</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[http://localhost:3001/#/login]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[]]></ElementPath>
+    <Duration>100</Duration>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>1</Step>
+  </MacroEvent>
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>OnClick</EventType>
+    <EventTypeName>Click</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[css=button[type=submit]]]></ElementPath>
+    <Duration>100</Duration>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>2</Step>
+  </MacroEvent>
+</MacroEventList>

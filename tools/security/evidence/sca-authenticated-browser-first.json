@@ -1,0 +1,1464 @@
+{
+  "wire": [
+    {
+      "side": "owned",
+      "url": "/login/a",
+      "account": "anonymous"
+    },
+    {
+      "side": "owned",
+      "url": "/app",
+      "account": "a"
+    },
+    {
+      "side": "owned",
+      "url": "/favicon.ico",
+      "account": "a"
+    },
+    {
+      "side": "owned",
+      "url": "/bundle.js",
+      "account": "a"
+    },
+    {
+      "side": "owned",
+      "url": "/fragment.js",
+      "account": "a"
+    }
+  ],
+  "fixture": "Real AngularJS 1.1.5 served behind HttpOnly session cookie at opaque bundle.js/fragment.js paths; B receives clean JavaScript.",
+  "owned": [
+    {
+      "account": "a",
+      "scan": {
+        "version": "1.0",
+        "type": "scan_result",
+        "engine": "SCA",
+        "scanId": "7ca3cc80-cd5f-49a7-a1ad-37f184123473",
+        "host": "127.0.0.1:52529",
+        "tabId": 911486449,
+        "startedAt": "2026-10-22T14:56:15.045Z",
+        "finishedAt": "2026-10-22T14:56:17.636Z",
+        "settings": {},
+        "toolVersion": "1.0.0",
+        "stats": {
+          "findingsCount": 18,
+          "packagesCount": 1,
+          "critical": 0,
+          "high": 1,
+          "medium": 13,
+          "low": 4,
+          "info": 0
+        },
+        "findings": [
+          {
+            "id": "7ca3cc80-cd5f-49a7-a1ad-37f184123473::SCA::sca::50::angular@1.1.5",
+            "engine": "SCA",
+            "scanId": "7ca3cc80-cd5f-49a7-a1ad-37f184123473",
+            "moduleId": "sca",
+            "moduleName": "Software Composition Analysis",
+            "ruleId": "50",
+            "ruleName": "The attribute usemap can be used as a security exploit",
+            "severity": "medium",
+            "category": "supply_chain",
+            "vulnId": "vulnerable_component",
+            "cwe": [
+              "CWE-79"
+            ],
+            "owasp": [
+              "A03:2025 - Software Supply Chain Failures",
+              "A06:2021 - Vulnerable and Outdated Components"
+            ],
+            "tags": [
+              "sca",
+              "dependency",
+              "filecontent"
+            ],
+            "links": {
+              "ref_1": "https://github.com/angular/angular.js/blob/master/CHANGELOG.md#1230-patronal-resurrection-2016-07-21"
+            },
+            "location": {
+              "kind": "package",
+              "file": "http://127.0.0.1:52529/bundle.js"
+            },
+            "description": "The attribute usemap can be used as a security exploit",
+            "recommendation": "Upgrade angularjs (currently 1.1.5) to a secure release that is not affected by 50.",
+            "createdAt": "2026-10-22T14:56:15.124Z",
+            "evidence": {
+              "sca": {
+                "component": {
+                  "name": "angularjs",
+                  "version": "1.1.5",
+                  "npmname": "angular",
+                  "purl": "pkg:npm/angular@1.1.5",
+                  "basePurl": null,
+                  "detection": "filecontent",
+                  "source": null,
+                  "ecosystem": "npm",
+                  "locations": [
+                    "http://127.0.0.1:52529/bundle.js",
+                    "http://127.0.0.1:52529/fragment.js"
+                  ]
+                },
+                "identifiers": {
+                  "summary": "The attribute usemap can be used as a security exploit",
+                  "retid": "50",
+                  "cwe": [
+                    "CWE-79"
+                  ]
+                },
+                "versionRange": {
+                  "atOrAbove": "1.0.0",
+                  "above": null,
+                  "atOrBelow": null,
+                  "below": "1.2.30"
+                },
+                "info": [
+                  "https://github.com/angular/angular.js/blob/master/CHANGELOG.md#1230-patronal-resurrection-2016-07-21"
+                ],
+                "summary": "The attribute usemap can be used as a security exploit",
+                "sourceFile": "http://127.0.0.1:52529/bundle.js"
+              }
+            },
+            "updatedAt": "2026-10-22T14:56:15.130Z"
+          },
+          {
+            "id": "7ca3cc80-cd5f-49a7-a1ad-37f184123473::SCA::sca::GHSA-r5fx-8r73-v86c::angular@1.1.5",
+            "engine": "SCA",
+            "scanId": "7ca3cc80-cd5f-49a7-a1ad-37f184123473",
+            "moduleId": "sca",
+            "moduleName": "Software Composition Analysis",
+            "ruleId": "GHSA-r5fx-8r73-v86c",
+            "ruleName": "XSS through xlink:href attributes",
+            "severity": "medium",
+            "category": "supply_chain",
+            "vulnId": "vulnerable_component",
+            "cwe": [
+              "CWE-79"
+            ],
+            "owasp": [
+              "A03:2025 - Software Supply Chain Failures",
+              "A06:2021 - Vulnerable and Outdated Components"
+            ],
+            "tags": [
+              "sca",
+              "dependency",
+              "filecontent"
+            ],
+            "links": {
+              "ref_1": "https://github.com/advisories/GHSA-r5fx-8r73-v86c",
+              "ref_2": "https://github.com/angular/angular.js/blob/master/CHANGELOG.md#150-beta1-dense-dispersion-2015-09-29"
+            },
+            "location": {
+              "kind": "package",
+              "file": "http://127.0.0.1:52529/bundle.js"
+            },
+            "description": "XSS through xlink:href attributes",
+            "recommendation": "Upgrade angularjs (currently 1.1.5) to a secure release that is not affected by GHSA-r5fx-8r73-v86c.",
+            "createdAt": "2026-10-22T14:56:15.124Z",
+            "evidence": {
+              "sca": {
+                "component": {
+                  "name": "angularjs",
+                  "version": "1.1.5",
+                  "npmname": "angular",
+                  "purl": "pkg:npm/angular@1.1.5",
+                  "basePurl": null,
+                  "detection": "filecontent",
+                  "source": null,
+                  "ecosystem": "npm",
+                  "locations": [
+                    "http://127.0.0.1:52529/bundle.js",
+                    "http://127.0.0.1:52529/fragment.js"
+                  ]
+                },
+                "identifiers": {
+                  "summary": "XSS through xlink:href attributes",
+                  "CVE": [
+                    "CVE-2019-14863"
+                  ],
+                  "githubID": "GHSA-r5fx-8r73-v86c",
+                  "cwe": [
+                    "CWE-79"
+                  ]
+                },
+                "versionRange": {
+                  "atOrAbove": null,
+                  "above": null,
+                  "atOrBelow": null,
+                  "below": "1.5.0-beta.1"
+                },
+                "info": [
+                  "https://github.com/advisories/GHSA-r5fx-8r73-v86c",
+                  "https://github.com/angular/angular.js/blob/master/CHANGELOG.md#150-beta1-dense-dispersion-2015-09-29"
+                ],
+                "summary": "XSS through xlink:href attributes",
+                "sourceFile": "http://127.0.0.1:52529/bundle.js"
+              }
+            },
+            "updatedAt": "2026-10-22T14:56:15.130Z"
+          },
+          {
+            "id": "7ca3cc80-cd5f-49a7-a1ad-37f184123473::SCA::sca::GHSA-28hp-fgcr-2r4h::angular@1.1.5",
+            "engine": "SCA",
+            "scanId": "7ca3cc80-cd5f-49a7-a1ad-37f184123473",
+            "moduleId": "sca",
+            "moduleName": "Software Composition Analysis",
+            "ruleId": "GHSA-28hp-fgcr-2r4h",
+            "ruleName": "Cross-Site Scripting via JSONP",
+            "severity": "medium",
+            "category": "supply_chain",
+            "vulnId": "vulnerable_component",
+            "cwe": [
+              "CWE-79"
+            ],
+            "owasp": [
+              "A03:2025 - Software Supply Chain Failures",
+              "A06:2021 - Vulnerable and Outdated Components"
+            ],
+            "tags": [
+              "sca",
+              "dependency",
+              "filecontent"
+            ],
+            "links": {
+              "ref_1": "https://github.com/advisories/GHSA-28hp-fgcr-2r4h"
+            },
+            "location": {
+              "kind": "package",
+              "file": "http://127.0.0.1:52529/bundle.js"
+            },
+            "description": "Cross-Site Scripting via JSONP",
+            "recommendation": "Upgrade angularjs (currently 1.1.5) to a secure release that is not affected by GHSA-28hp-fgcr-2r4h.",
+            "createdAt": "2026-10-22T14:56:15.124Z",
+            "evidence": {
+              "sca": {
+                "component": {
+                  "name": "angularjs",
+                  "version": "1.1.5",
+                  "npmname": "angular",
+                  "purl": "pkg:npm/angular@1.1.5",
+                  "basePurl": null,
+                  "detection": "filecontent",
+                  "source": null,
+                  "ecosystem": "npm",
+                  "locations": [
+                    "http://127.0.0.1:52529/bundle.js",
+                    "http://127.0.0.1:52529/fragment.js"
+                  ]
+                },
+                "identifiers": {
+                  "summary": "Cross-Site Scripting via JSONP",
+                  "githubID": "GHSA-28hp-fgcr-2r4h",
+                  "cwe": [
+                    "CWE-79"
+                  ]
+                },
+                "versionRange": {
+                  "atOrAbove": null,
+                  "above": null,
+                  "atOrBelow": null,
+                  "below": "1.6.0"
+                },
+                "info": [
+                  "https://github.com/advisories/GHSA-28hp-fgcr-2r4h"
+                ],
+                "summary": "Cross-Site Scripting via JSONP",
+                "sourceFile": "http://127.0.0.1:52529/bundle.js"
+              }
+            },
+            "updatedAt": "2026-10-22T14:56:15.130Z"
+          },
+          {
+            "id": "7ca3cc80-cd5f-49a7-a1ad-37f184123473::SCA::sca::52::angular@1.1.5",
+            "engine": "SCA",
+            "scanId": "7ca3cc80-cd5f-49a7-a1ad-37f184123473",
+            "moduleId": "sca",
+            "moduleName": "Software Composition Analysis",
+            "ruleId": "52",
+            "ruleName": "DOS in $sanitize",
+            "severity": "medium",
+            "category": "supply_chain",
+            "vulnId": "vulnerable_component",
+            "cwe": [
+              "CWE-400"
+            ],
+            "owasp": [
+              "A03:2025 - Software Supply Chain Failures",
+              "A06:2021 - Vulnerable and Outdated Components"
+            ],
+            "tags": [
+              "sca",
+              "dependency",
+              "filecontent"
+            ],
+            "links": {
+              "ref_1": "https://github.com/angular/angular.js/blob/master/CHANGELOG.md",
+              "ref_2": "https://github.com/angular/angular.js/pull/15699"
+            },
+            "location": {
+              "kind": "package",
+              "file": "http://127.0.0.1:52529/bundle.js"
+            },
+            "description": "DOS in $sanitize",
+            "recommendation": "Upgrade angularjs (currently 1.1.5) to a secure release that is not affected by 52.",
+            "createdAt": "2026-10-22T14:56:15.124Z",
+            "evidence": {
+              "sca": {
+                "component": {
+                  "name": "angularjs",
+                  "version": "1.1.5",
+                  "npmname": "angular",
+                  "purl": "pkg:npm/angular@1.1.5",
+                  "basePurl": null,
+                  "detection": "filecontent",
+                  "source": null,
+                  "ecosystem": "npm",
+                  "locations": [
+                    "http://127.0.0.1:52529/bundle.js",
+                    "http://127.0.0.1:52529/fragment.js"
+                  ]
+                },
+                "identifiers": {
+                  "summary": "DOS in $sanitize",
+                  "retid": "52",
+                  "cwe": [
+                    "CWE-400"
+                  ]
+                },
+                "versionRange": {
+                  "atOrAbove": null,
+                  "above": null,
+                  "atOrBelow": null,
+                  "below": "1.6.3"
+                },
+                "info": [
+                  "https://github.com/angular/angular.js/blob/master/CHANGELOG.md",
+                  "https://github.com/angular/angular.js/pull/15699"
+                ],
+                "summary": "DOS in $sanitize",
+                "sourceFile": "http://127.0.0.1:52529/bundle.js"
+              }
+            },
+            "updatedAt": "2026-10-22T14:56:15.130Z"
+          },
+          {
+            "id": "7ca3cc80-cd5f-49a7-a1ad-37f184123473::SCA::sca::51::angular@1.1.5",
+            "engine": "SCA",
+            "scanId": "7ca3cc80-cd5f-49a7-a1ad-37f184123473",
+            "moduleId": "sca",
+            "moduleName": "Software Composition Analysis",
+            "ruleId": "51",
+            "ruleName": "Universal CSP bypass via add-on in Firefox",
+            "severity": "medium",
+            "category": "supply_chain",
+            "vulnId": "vulnerable_component",
+            "cwe": [
+              "CWE-942"
+            ],
+            "owasp": [
+              "A03:2025 - Software Supply Chain Failures",
+              "A06:2021 - Vulnerable and Outdated Components"
+            ],
+            "tags": [
+              "sca",
+              "dependency",
+              "filecontent"
+            ],
+            "links": {
+              "ref_1": "http://pastebin.com/raw/kGrdaypP",
+              "ref_2": "https://github.com/mozilla/addons-linter/issues/1000#issuecomment-282083435"
+            },
+            "location": {
+              "kind": "package",
+              "file": "http://127.0.0.1:52529/bundle.js"
+            },
+            "description": "Universal CSP bypass via add-on in Firefox",
+            "recommendation": "Upgrade angularjs (currently 1.1.5) to a secure release that is not affected by 51.",
+            "createdAt": "2026-10-22T14:56:15.124Z",
+            "evidence": {
+              "sca": {
+                "component": {
+                  "name": "angularjs",
+                  "version": "1.1.5",
+                  "npmname": "angular",
+                  "purl": "pkg:npm/angular@1.1.5",
+                  "basePurl": null,
+                  "detection": "filecontent",
+                  "source": null,
+                  "ecosystem": "npm",
+                  "locations": [
+                    "http://127.0.0.1:52529/bundle.js",
+                    "http://127.0.0.1:52529/fragment.js"
+                  ]
+                },
+                "identifiers": {
+                  "summary": "Universal CSP bypass via add-on in Firefox",
+                  "retid": "51",
+                  "cwe": [
+                    "CWE-942"
+                  ]
+                },
+                "versionRange": {
+                  "atOrAbove": null,
+                  "above": null,
+                  "atOrBelow": null,
+                  "below": "1.6.3"
+                },
+                "info": [
+                  "http://pastebin.com/raw/kGrdaypP",
+                  "https://github.com/mozilla/addons-linter/issues/1000#issuecomment-282083435"
+                ],
+                "summary": "Universal CSP bypass via add-on in Firefox",
+                "sourceFile": "http://127.0.0.1:52529/bundle.js"
+              }
+            },
+            "updatedAt": "2026-10-22T14:56:15.130Z"
+          },
+          {
+            "id": "7ca3cc80-cd5f-49a7-a1ad-37f184123473::SCA::sca::53::angular@1.1.5",
+            "engine": "SCA",
+            "scanId": "7ca3cc80-cd5f-49a7-a1ad-37f184123473",
+            "moduleId": "sca",
+            "moduleName": "Software Composition Analysis",
+            "ruleId": "53",
+            "ruleName": "XSS in $sanitize in Safari/Firefox",
+            "severity": "low",
+            "category": "supply_chain",
+            "vulnId": "vulnerable_component",
+            "cwe": [
+              "CWE-79"
+            ],
+            "owasp": [
+              "A03:2025 - Software Supply Chain Failures",
+              "A06:2021 - Vulnerable and Outdated Components"
+            ],
+            "tags": [
+              "sca",
+              "dependency",
+              "filecontent"
+            ],
+            "links": {
+              "ref_1": "https://github.com/angular/angular.js/commit/8f31f1ff43b673a24f84422d5c13d6312b2c4d94"
+            },
+            "location": {
+              "kind": "package",
+              "file": "http://127.0.0.1:52529/bundle.js"
+            },
+            "description": "XSS in $sanitize in Safari/Firefox",
+            "recommendation": "Upgrade angularjs (currently 1.1.5) to a secure release that is not affected by 53.",
+            "createdAt": "2026-10-22T14:56:15.124Z",
+            "evidence": {
+              "sca": {
+                "component": {
+                  "name": "angularjs",
+                  "version": "1.1.5",
+                  "npmname": "angular",
+                  "purl": "pkg:npm/angular@1.1.5",
+                  "basePurl": null,
+                  "detection": "filecontent",
+                  "source": null,
+                  "ecosystem": "npm",
+                  "locations": [
+                    "http://127.0.0.1:52529/bundle.js",
+                    "http://127.0.0.1:52529/fragment.js"
+                  ]
+                },
+                "identifiers": {
+                  "summary": "XSS in $sanitize in Safari/Firefox",
+                  "retid": "53",
+                  "cwe": [
+                    "CWE-79"
+                  ]
+                },
+                "versionRange": {
+                  "atOrAbove": null,
+                  "above": null,
+                  "atOrBelow": null,
+                  "below": "1.6.5"
+                },
+                "info": [
+                  "https://github.com/angular/angular.js/commit/8f31f1ff43b673a24f84422d5c13d6312b2c4d94"
+                ],
+                "summary": "XSS in $sanitize in Safari/Firefox",
+                "sourceFile": "http://127.0.0.1:52529/bundle.js"
+              }
+            },
+            "updatedAt": "2026-10-22T14:56:15.130Z"
+          },
+          {
+            "id": "7ca3cc80-cd5f-49a7-a1ad-37f184123473::SCA::sca::GHSA-89mq-4x47-5v83::angular@1.1.5",
+            "engine": "SCA",
+            "scanId": "7ca3cc80-cd5f-49a7-a1ad-37f184123473",
+            "moduleId": "sca",
+            "moduleName": "Software Composition Analysis",
+            "ruleId": "GHSA-89mq-4x47-5v83",
+            "ruleName": "Prototype pollution",
+            "severity": "high",
+            "category": "supply_chain",
+            "vulnId": "vulnerable_component",
+            "cwe": [
+              "CWE-1321",
+              "CWE-20",
+              "CWE-915"
+            ],
+            "owasp": [
+              "A03:2025 - Software Supply Chain Failures",
+              "A06:2021 - Vulnerable and Outdated Components"
+            ],
+            "tags": [
+              "sca",
+              "dependency",
+              "filecontent"
+            ],
+            "links": {
+              "ref_1": "https://github.com/angular/angular.js/blob/master/CHANGELOG.md#179-pollution-eradication-2019-11-19",
+              "ref_2": "https://github.com/angular/angular.js/commit/726f49dcf6c23106ddaf5cfd5e2e592841db743a"
+            },
+            "location": {
+              "kind": "package",
+              "file": "http://127.0.0.1:52529/bundle.js"
+            },
+            "description": "Prototype pollution",
+            "recommendation": "Upgrade angularjs (currently 1.1.5) to a secure release that is not affected by GHSA-89mq-4x47-5v83.",
+            "createdAt": "2026-10-22T14:56:15.124Z",
+            "evidence": {
+              "sca": {
+                "component": {
+                  "name": "angularjs",
+                  "version": "1.1.5",
+                  "npmname": "angular",
+                  "purl": "pkg:npm/angular@1.1.5",
+                  "basePurl": null,
+                  "detection": "filecontent",
+                  "source": null,
+                  "ecosystem": "npm",
+                  "locations": [
+                    "http://127.0.0.1:52529/bundle.js",
+                    "http://127.0.0.1:52529/fragment.js"
+                  ]
+                },
+                "identifiers": {
+                  "summary": "Prototype pollution",
+                  "retid": "47",
+                  "githubID": "GHSA-89mq-4x47-5v83",
+                  "CVE": [
+                    "CVE-2019-10768"
+                  ],
+                  "cwe": [
+                    "CWE-1321",
+                    "CWE-20",
+                    "CWE-915"
+                  ]
+                },
+                "versionRange": {
+                  "atOrAbove": null,
+                  "above": null,
+                  "atOrBelow": null,
+                  "below": "1.7.9"
+                },
+                "info": [
+                  "https://github.com/angular/angular.js/blob/master/CHANGELOG.md#179-pollution-eradication-2019-11-19",
+                  "https://github.com/angular/angular.js/commit/726f49dcf6c23106ddaf5cfd5e2e592841db743a"
+                ],
+                "summary": "Prototype pollution",
+                "sourceFile": "http://127.0.0.1:52529/bundle.js"
+              }
+            },
+            "updatedAt": "2026-10-22T14:56:15.130Z"
+          },
+          {
+            "id": "7ca3cc80-cd5f-49a7-a1ad-37f184123473::SCA::sca::GHSA-5cp4-xmrw-59wf::angular@1.1.5",
+            "engine": "SCA",
+            "scanId": "7ca3cc80-cd5f-49a7-a1ad-37f184123473",
+            "moduleId": "sca",
+            "moduleName": "Software Composition Analysis",
+            "ruleId": "GHSA-5cp4-xmrw-59wf",
+            "ruleName": "XSS via JQLite DOM manipulation functions in AngularJS",
+            "severity": "medium",
+            "category": "supply_chain",
+            "vulnId": "vulnerable_component",
+            "cwe": [
+              "CWE-79"
+            ],
+            "owasp": [
+              "A03:2025 - Software Supply Chain Failures",
+              "A06:2021 - Vulnerable and Outdated Components"
+            ],
+            "tags": [
+              "sca",
+              "dependency",
+              "filecontent"
+            ],
+            "links": {
+              "ref_1": "https://github.com/advisories/GHSA-5cp4-xmrw-59wf"
+            },
+            "location": {
+              "kind": "package",
+              "file": "http://127.0.0.1:52529/bundle.js"
+            },
+            "description": "XSS via JQLite DOM manipulation functions in AngularJS",
+            "recommendation": "Upgrade angularjs (currently 1.1.5) to a secure release that is not affected by GHSA-5cp4-xmrw-59wf.",
+            "createdAt": "2026-10-22T14:56:15.124Z",
+            "evidence": {
+              "sca": {
+                "component": {
+                  "name": "angularjs",
+                  "version": "1.1.5",
+                  "npmname": "angular",
+                  "purl": "pkg:npm/angular@1.1.5",
+                  "basePurl": null,
+                  "detection": "filecontent",
+                  "source": null,
+                  "ecosystem": "npm",
+                  "locations": [
+                    "http://127.0.0.1:52529/bundle.js",
+                    "http://127.0.0.1:52529/fragment.js"
+                  ]
+                },
+                "identifiers": {
+                  "summary": "XSS via JQLite DOM manipulation functions in AngularJS",
+                  "githubID": "GHSA-5cp4-xmrw-59wf",
+                  "cwe": [
+                    "CWE-79"
+                  ]
+                },
+                "versionRange": {
+                  "atOrAbove": null,
+                  "above": null,
+                  "atOrBelow": null,
+                  "below": "1.8.0"
+                },
+                "info": [
+                  "https://github.com/advisories/GHSA-5cp4-xmrw-59wf"
+                ],
+                "summary": "XSS via JQLite DOM manipulation functions in AngularJS",
+                "sourceFile": "http://127.0.0.1:52529/bundle.js"
+              }
+            },
+            "updatedAt": "2026-10-22T14:56:15.130Z"
+          },
+          {
+            "id": "7ca3cc80-cd5f-49a7-a1ad-37f184123473::SCA::sca::GHSA-mhp6-pxh8-r675::angular@1.1.5",
+            "engine": "SCA",
+            "scanId": "7ca3cc80-cd5f-49a7-a1ad-37f184123473",
+            "moduleId": "sca",
+            "moduleName": "Software Composition Analysis",
+            "ruleId": "GHSA-mhp6-pxh8-r675",
+            "ruleName": "XSS may be triggered in AngularJS applications that sanitize user-controlled HTML snippets before passing them to JQLite methods like JQLite.prepend, JQLite.after, JQLite.append, JQLite.replaceWith, JQLite.append, new JQLite and angular.element.",
+            "severity": "medium",
+            "category": "supply_chain",
+            "vulnId": "vulnerable_component",
+            "cwe": [
+              "CWE-79"
+            ],
+            "owasp": [
+              "A03:2025 - Software Supply Chain Failures",
+              "A06:2021 - Vulnerable and Outdated Components"
+            ],
+            "tags": [
+              "sca",
+              "dependency",
+              "filecontent"
+            ],
+            "links": {
+              "ref_1": "https://github.com/advisories/GHSA-5cp4-xmrw-59wf",
+              "ref_2": "https://nvd.nist.gov/vuln/detail/CVE-2020-7676"
+            },
+            "location": {
+              "kind": "package",
+              "file": "http://127.0.0.1:52529/bundle.js"
+            },
+            "description": "XSS may be triggered in AngularJS applications that sanitize user-controlled HTML snippets before passing them to JQLite methods like JQLite.prepend, JQLite.after, JQLite.append, JQLite.replaceWith, JQLite.append, new JQLite and angular.element.",
+            "recommendation": "Upgrade angularjs (currently 1.1.5) to a secure release that is not affected by GHSA-mhp6-pxh8-r675.",
+            "createdAt": "2026-10-22T14:56:15.124Z",
+            "evidence": {
+              "sca": {
+                "component": {
+                  "name": "angularjs",
+                  "version": "1.1.5",
+                  "npmname": "angular",
+                  "purl": "pkg:npm/angular@1.1.5",
+                  "basePurl": null,
+                  "detection": "filecontent",
+                  "source": null,
+                  "ecosystem": "npm",
+                  "locations": [
+                    "http://127.0.0.1:52529/bundle.js",
+                    "http://127.0.0.1:52529/fragment.js"
+                  ]
+                },
+                "identifiers": {
+                  "summary": "XSS may be triggered in AngularJS applications that sanitize user-controlled HTML snippets before passing them to JQLite methods like JQLite.prepend, JQLite.after, JQLite.append, JQLite.replaceWith, JQLite.append, new JQLite and angular.element.",
+                  "CVE": [
+                    "CVE-2020-7676"
+                  ],
+                  "githubID": "GHSA-mhp6-pxh8-r675",
+                  "cwe": [
+                    "CWE-79"
+                  ]
+                },
+                "versionRange": {
+                  "atOrAbove": null,
+                  "above": null,
+                  "atOrBelow": null,
+                  "below": "1.8.0"
+                },
+                "info": [
+                  "https://github.com/advisories/GHSA-5cp4-xmrw-59wf",
+                  "https://nvd.nist.gov/vuln/detail/CVE-2020-7676"
+                ],
+                "summary": "XSS may be triggered in AngularJS applications that sanitize user-controlled HTML snippets before passing them to JQLite methods like JQLite.prepend, JQLite.after, JQLite.append, JQLite.replaceWith, JQLite.append, new JQLite and angular.element.",
+                "sourceFile": "http://127.0.0.1:52529/bundle.js"
+              }
+            },
+            "updatedAt": "2026-10-22T14:56:15.130Z"
+          },
+          {
+            "id": "7ca3cc80-cd5f-49a7-a1ad-37f184123473::SCA::sca::GHSA-2qqx-w9hr-q5gx::angular@1.1.5",
+            "engine": "SCA",
+            "scanId": "7ca3cc80-cd5f-49a7-a1ad-37f184123473",
+            "moduleId": "sca",
+            "moduleName": "Software Composition Analysis",
+            "ruleId": "GHSA-2qqx-w9hr-q5gx",
+            "ruleName": "angular vulnerable to regular expression denial of service via the $resource service",
+            "severity": "medium",
+            "category": "supply_chain",
+            "vulnId": "vulnerable_component",
+            "cwe": [
+              "CWE-1333"
+            ],
+            "owasp": [
+              "A03:2025 - Software Supply Chain Failures",
+              "A06:2021 - Vulnerable and Outdated Components"
+            ],
+            "tags": [
+              "sca",
+              "dependency",
+              "filecontent"
+            ],
+            "links": {
+              "ref_1": "https://github.com/advisories/GHSA-2qqx-w9hr-q5gx"
+            },
+            "location": {
+              "kind": "package",
+              "file": "http://127.0.0.1:52529/bundle.js"
+            },
+            "description": "angular vulnerable to regular expression denial of service via the $resource service",
+            "recommendation": "Upgrade angularjs (currently 1.1.5) to a secure release that is not affected by GHSA-2qqx-w9hr-q5gx.",
+            "createdAt": "2026-10-22T14:56:15.124Z",
+            "evidence": {
+              "sca": {
+                "component": {
+                  "name": "angularjs",
+                  "version": "1.1.5",
+                  "npmname": "angular",
+                  "purl": "pkg:npm/angular@1.1.5",
+                  "basePurl": null,
+                  "detection": "filecontent",
+                  "source": null,
+                  "ecosystem": "npm",
+                  "locations": [
+                    "http://127.0.0.1:52529/bundle.js",
+                    "http://127.0.0.1:52529/fragment.js"
+                  ]
+                },
+                "identifiers": {
+                  "summary": "angular vulnerable to regular expression denial of service via the $resource service",
+                  "CVE": [
+                    "CVE-2023-26117"
+                  ],
+                  "githubID": "GHSA-2qqx-w9hr-q5gx",
+                  "cwe": [
+                    "CWE-1333"
+                  ]
+                },
+                "versionRange": {
+                  "atOrAbove": null,
+                  "above": null,
+                  "atOrBelow": null,
+                  "below": "1.8.4"
+                },
+                "info": [
+                  "https://github.com/advisories/GHSA-2qqx-w9hr-q5gx"
+                ],
+                "summary": "angular vulnerable to regular expression denial of service via the $resource service",
+                "sourceFile": "http://127.0.0.1:52529/bundle.js"
+              }
+            },
+            "updatedAt": "2026-10-22T14:56:15.130Z"
+          },
+          {
+            "id": "7ca3cc80-cd5f-49a7-a1ad-37f184123473::SCA::sca::GHSA-2vrf-hf26-jrp5::angular@1.1.5",
+            "engine": "SCA",
+            "scanId": "7ca3cc80-cd5f-49a7-a1ad-37f184123473",
+            "moduleId": "sca",
+            "moduleName": "Software Composition Analysis",
+            "ruleId": "GHSA-2vrf-hf26-jrp5",
+            "ruleName": "angular vulnerable to regular expression denial of service via the angular.copy() utility",
+            "severity": "medium",
+            "category": "supply_chain",
+            "vulnId": "vulnerable_component",
+            "cwe": [
+              "CWE-1333"
+            ],
+            "owasp": [
+              "A03:2025 - Software Supply Chain Failures",
+              "A06:2021 - Vulnerable and Outdated Components"
+            ],
+            "tags": [
+              "sca",
+              "dependency",
+              "filecontent"
+            ],
+            "links": {
+              "ref_1": "https://github.com/advisories/GHSA-2vrf-hf26-jrp5"
+            },
+            "location": {
+              "kind": "package",
+              "file": "http://127.0.0.1:52529/bundle.js"
+            },
+            "description": "angular vulnerable to regular expression denial of service via the angular.copy() utility",
+            "recommendation": "Upgrade angularjs (currently 1.1.5) to a secure release that is not affected by GHSA-2vrf-hf26-jrp5.",
+            "createdAt": "2026-10-22T14:56:15.124Z",
+            "evidence": {
+              "sca": {
+                "component": {
+                  "name": "angularjs",
+                  "version": "1.1.5",
+                  "npmname": "angular",
+                  "purl": "pkg:npm/angular@1.1.5",
+                  "basePurl": null,
+                  "detection": "filecontent",
+                  "source": null,
+                  "ecosystem": "npm",
+                  "locations": [
+                    "http://127.0.0.1:52529/bundle.js",
+                    "http://127.0.0.1:52529/fragment.js"
+                  ]
+                },
+                "identifiers": {
+                  "summary": "angular vulnerable to regular expression denial of service via the angular.copy() utility",
+                  "CVE": [
+                    "CVE-2023-26116"
+                  ],
+                  "githubID": "GHSA-2vrf-hf26-jrp5",
+                  "cwe": [
+                    "CWE-1333"
+                  ]
+                },
+                "versionRange": {
+                  "atOrAbove": null,
+                  "above": null,
+                  "atOrBelow": null,
+                  "below": "1.8.4"
+                },
+                "info": [
+                  "https://github.com/advisories/GHSA-2vrf-hf26-jrp5"
+                ],
+                "summary": "angular vulnerable to regular expression denial of service via the angular.copy() utility",
+                "sourceFile": "http://127.0.0.1:52529/bundle.js"
+              }
+            },
+            "updatedAt": "2026-10-22T14:56:15.130Z"
+          },
+          {
+            "id": "7ca3cc80-cd5f-49a7-a1ad-37f184123473::SCA::sca::GHSA-prc3-vjfx-vhm9::angular@1.1.5",
+            "engine": "SCA",
+            "scanId": "7ca3cc80-cd5f-49a7-a1ad-37f184123473",
+            "moduleId": "sca",
+            "moduleName": "Software Composition Analysis",
+            "ruleId": "GHSA-prc3-vjfx-vhm9",
+            "ruleName": "Angular (deprecated package) Cross-site Scripting",
+            "severity": "medium",
+            "category": "supply_chain",
+            "vulnId": "vulnerable_component",
+            "cwe": [
+              "CWE-79"
+            ],
+            "owasp": [
+              "A03:2025 - Software Supply Chain Failures",
+              "A06:2021 - Vulnerable and Outdated Components"
+            ],
+            "tags": [
+              "sca",
+              "dependency",
+              "filecontent"
+            ],
+            "links": {
+              "ref_1": "https://github.com/advisories/GHSA-prc3-vjfx-vhm9"
+            },
+            "location": {
+              "kind": "package",
+              "file": "http://127.0.0.1:52529/bundle.js"
+            },
+            "description": "Angular (deprecated package) Cross-site Scripting",
+            "recommendation": "Upgrade angularjs (currently 1.1.5) to a secure release that is not affected by GHSA-prc3-vjfx-vhm9.",
+            "createdAt": "2026-10-22T14:56:15.124Z",
+            "evidence": {
+              "sca": {
+                "component": {
+                  "name": "angularjs",
+                  "version": "1.1.5",
+                  "npmname": "angular",
+                  "purl": "pkg:npm/angular@1.1.5",
+                  "basePurl": null,
+                  "detection": "filecontent",
+                  "source": null,
+                  "ecosystem": "npm",
+                  "locations": [
+                    "http://127.0.0.1:52529/bundle.js",
+                    "http://127.0.0.1:52529/fragment.js"
+                  ]
+                },
+                "identifiers": {
+                  "summary": "Angular (deprecated package) Cross-site Scripting",
+                  "CVE": [
+                    "CVE-2022-25869"
+                  ],
+                  "githubID": "GHSA-prc3-vjfx-vhm9",
+                  "cwe": [
+                    "CWE-79"
+                  ]
+                },
+                "versionRange": {
+                  "atOrAbove": null,
+                  "above": null,
+                  "atOrBelow": null,
+                  "below": "1.8.4"
+                },
+                "info": [
+                  "https://github.com/advisories/GHSA-prc3-vjfx-vhm9"
+                ],
+                "summary": "Angular (deprecated package) Cross-site Scripting",
+                "sourceFile": "http://127.0.0.1:52529/bundle.js"
+              }
+            },
+            "updatedAt": "2026-10-22T14:56:15.130Z"
+          },
+          {
+            "id": "7ca3cc80-cd5f-49a7-a1ad-37f184123473::SCA::sca::GHSA-qwqh-hm9m-p5hr::angular@1.1.5",
+            "engine": "SCA",
+            "scanId": "7ca3cc80-cd5f-49a7-a1ad-37f184123473",
+            "moduleId": "sca",
+            "moduleName": "Software Composition Analysis",
+            "ruleId": "GHSA-qwqh-hm9m-p5hr",
+            "ruleName": "angular vulnerable to regular expression denial of service via the <input type=\"url\"> element",
+            "severity": "medium",
+            "category": "supply_chain",
+            "vulnId": "vulnerable_component",
+            "cwe": [
+              "CWE-1333"
+            ],
+            "owasp": [
+              "A03:2025 - Software Supply Chain Failures",
+              "A06:2021 - Vulnerable and Outdated Components"
+            ],
+            "tags": [
+              "sca",
+              "dependency",
+              "filecontent"
+            ],
+            "links": {
+              "ref_1": "https://github.com/advisories/GHSA-qwqh-hm9m-p5hr"
+            },
+            "location": {
+              "kind": "package",
+              "file": "http://127.0.0.1:52529/bundle.js"
+            },
+            "description": "angular vulnerable to regular expression denial of service via the <input type=\"url\"> element",
+            "recommendation": "Upgrade angularjs (currently 1.1.5) to a secure release that is not affected by GHSA-qwqh-hm9m-p5hr.",
+            "createdAt": "2026-10-22T14:56:15.124Z",
+            "evidence": {
+              "sca": {
+                "component": {
+                  "name": "angularjs",
+                  "version": "1.1.5",
+                  "npmname": "angular",
+                  "purl": "pkg:npm/angular@1.1.5",
+                  "basePurl": null,
+                  "detection": "filecontent",
+                  "source": null,
+                  "ecosystem": "npm",
+                  "locations": [
+                    "http://127.0.0.1:52529/bundle.js",
+                    "http://127.0.0.1:52529/fragment.js"
+                  ]
+                },
+                "identifiers": {
+                  "summary": "angular vulnerable to regular expression denial of service via the <input type=\"url\"> element",
+                  "githubID": "GHSA-qwqh-hm9m-p5hr",
+                  "CVE": [
+                    "CVE-2023-26118"
+                  ],
+                  "cwe": [
+                    "CWE-1333"
+                  ]
+                },
+                "versionRange": {
+                  "atOrAbove": null,
+                  "above": null,
+                  "atOrBelow": null,
+                  "below": "1.8.4"
+                },
+                "info": [
+                  "https://github.com/advisories/GHSA-qwqh-hm9m-p5hr"
+                ],
+                "summary": "angular vulnerable to regular expression denial of service via the <input type=\"url\"> element",
+                "sourceFile": "http://127.0.0.1:52529/bundle.js"
+              }
+            },
+            "updatedAt": "2026-10-22T14:56:15.130Z"
+          },
+          {
+            "id": "7ca3cc80-cd5f-49a7-a1ad-37f184123473::SCA::sca::GHSA-j58c-ww9w-pwp5::angular@1.1.5",
+            "engine": "SCA",
+            "scanId": "7ca3cc80-cd5f-49a7-a1ad-37f184123473",
+            "moduleId": "sca",
+            "moduleName": "Software Composition Analysis",
+            "ruleId": "GHSA-j58c-ww9w-pwp5",
+            "ruleName": "AngularJS improperly sanitizes SVG elements",
+            "severity": "low",
+            "category": "supply_chain",
+            "vulnId": "vulnerable_component",
+            "cwe": [
+              "CWE-791"
+            ],
+            "owasp": [
+              "A03:2025 - Software Supply Chain Failures",
+              "A06:2021 - Vulnerable and Outdated Components"
+            ],
+            "tags": [
+              "sca",
+              "dependency",
+              "filecontent"
+            ],
+            "links": {
+              "ref_1": "https://github.com/advisories/GHSA-j58c-ww9w-pwp5",
+              "ref_2": "https://nvd.nist.gov/vuln/detail/CVE-2025-0716",
+              "ref_3": "https://codepen.io/herodevs/pen/qEWQmpd/a86a0d29310e12c7a3756768e6c7b915",
+              "ref_4": "https://github.com/angular/angular.js",
+              "ref_5": "https://www.herodevs.com/vulnerability-directory/cve-2025-0716"
+            },
+            "location": {
+              "kind": "package",
+              "file": "http://127.0.0.1:52529/bundle.js"
+            },
+            "description": "AngularJS improperly sanitizes SVG elements",
+            "recommendation": "Upgrade angularjs (currently 1.1.5) to a secure release that is not affected by GHSA-j58c-ww9w-pwp5.",
+            "createdAt": "2026-10-22T14:56:15.124Z",
+            "evidence": {
+              "sca": {
+                "component": {
+                  "name": "angularjs",
+                  "version": "1.1.5",
+                  "npmname": "angular",
+                  "purl": "pkg:npm/angular@1.1.5",
+                  "basePurl": null,
+                  "detection": "filecontent",
+                  "source": null,
+                  "ecosystem": "npm",
+                  "locations": [
+                    "http://127.0.0.1:52529/bundle.js",
+                    "http://127.0.0.1:52529/fragment.js"
+                  ]
+                },
+                "identifiers": {
+                  "summary": "AngularJS improperly sanitizes SVG elements",
+                  "CVE": [
+                    "CVE-2025-0716"
+                  ],
+                  "githubID": "GHSA-j58c-ww9w-pwp5",
+                  "cwe": [
+                    "CWE-791"
+                  ]
+                },
+                "versionRange": {
+                  "atOrAbove": "0",
+                  "above": null,
+                  "atOrBelow": null,
+                  "below": "1.8.4"
+                },
+                "info": [
+                  "https://github.com/advisories/GHSA-j58c-ww9w-pwp5",
+                  "https://nvd.nist.gov/vuln/detail/CVE-2025-0716",
+                  "https://codepen.io/herodevs/pen/qEWQmpd/a86a0d29310e12c7a3756768e6c7b915",
+                  "https://github.com/angular/angular.js",
+                  "https://www.herodevs.com/vulnerability-directory/cve-2025-0716"
+                ],
+                "summary": "AngularJS improperly sanitizes SVG elements",
+                "sourceFile": "http://127.0.0.1:52529/bundle.js"
+              }
+            },
+            "updatedAt": "2026-10-22T14:56:15.130Z"
+          },
+          {
+            "id": "7ca3cc80-cd5f-49a7-a1ad-37f184123473::SCA::sca::GHSA-mqm9-c95h-x2p6::angular@1.1.5",
+            "engine": "SCA",
+            "scanId": "7ca3cc80-cd5f-49a7-a1ad-37f184123473",
+            "moduleId": "sca",
+            "moduleName": "Software Composition Analysis",
+            "ruleId": "GHSA-mqm9-c95h-x2p6",
+            "ruleName": "AngularJS allows attackers to bypass common image source restrictions",
+            "severity": "low",
+            "category": "supply_chain",
+            "vulnId": "vulnerable_component",
+            "cwe": [
+              "CWE-791"
+            ],
+            "owasp": [
+              "A03:2025 - Software Supply Chain Failures",
+              "A06:2021 - Vulnerable and Outdated Components"
+            ],
+            "tags": [
+              "sca",
+              "dependency",
+              "filecontent"
+            ],
+            "links": {
+              "ref_1": "https://github.com/advisories/GHSA-mqm9-c95h-x2p6",
+              "ref_2": "https://nvd.nist.gov/vuln/detail/CVE-2024-8373",
+              "ref_3": "https://codepen.io/herodevs/full/bGPQgMp/8da9ce87e99403ee13a295c305ebfa0b",
+              "ref_4": "https://github.com/angular/angular.js",
+              "ref_5": "https://www.herodevs.com/vulnerability-directory/cve-2024-8373"
+            },
+            "location": {
+              "kind": "package",
+              "file": "http://127.0.0.1:52529/bundle.js"
+            },
+            "description": "AngularJS allows attackers to bypass common image source restrictions",
+            "recommendation": "Upgrade angularjs (currently 1.1.5) to a secure release that is not affected by GHSA-mqm9-c95h-x2p6.",
+            "createdAt": "2026-10-22T14:56:15.124Z",
+            "evidence": {
+              "sca": {
+                "component": {
+                  "name": "angularjs",
+                  "version": "1.1.5",
+                  "npmname": "angular",
+                  "purl": "pkg:npm/angular@1.1.5",
+                  "basePurl": null,
+                  "detection": "filecontent",
+                  "source": null,
+                  "ecosystem": "npm",
+                  "locations": [
+                    "http://127.0.0.1:52529/bundle.js",
+                    "http://127.0.0.1:52529/fragment.js"
+                  ]
+                },
+                "identifiers": {
+                  "summary": "AngularJS allows attackers to bypass common image source restrictions",
+                  "CVE": [
+                    "CVE-2024-8373"
+                  ],
+                  "githubID": "GHSA-mqm9-c95h-x2p6",
+                  "cwe": [
+                    "CWE-791"
+                  ]
+                },
+                "versionRange": {
+                  "atOrAbove": "0",
+                  "above": null,
+                  "atOrBelow": null,
+                  "below": "1.8.4"
+                },
+                "info": [
+                  "https://github.com/advisories/GHSA-mqm9-c95h-x2p6",
+                  "https://nvd.nist.gov/vuln/detail/CVE-2024-8373",
+                  "https://codepen.io/herodevs/full/bGPQgMp/8da9ce87e99403ee13a295c305ebfa0b",
+                  "https://github.com/angular/angular.js",
+                  "https://www.herodevs.com/vulnerability-directory/cve-2024-8373"
+                ],
+                "summary": "AngularJS allows attackers to bypass common image source restrictions",
+                "sourceFile": "http://127.0.0.1:52529/bundle.js"
+              }
+            },
+            "updatedAt": "2026-10-22T14:56:15.130Z"
+          },
+          {
+            "id": "7ca3cc80-cd5f-49a7-a1ad-37f184123473::SCA::sca::GHSA-4p4w-6hg8-63wx::angular@1.1.5",
+            "engine": "SCA",
+            "scanId": "7ca3cc80-cd5f-49a7-a1ad-37f184123473",
+            "moduleId": "sca",
+            "moduleName": "Software Composition Analysis",
+            "ruleId": "GHSA-4p4w-6hg8-63wx",
+            "ruleName": "AngularJS Incomplete Filtering of Special Elements vulnerability",
+            "severity": "medium",
+            "category": "supply_chain",
+            "vulnId": "vulnerable_component",
+            "cwe": [
+              "CWE-791"
+            ],
+            "owasp": [
+              "A03:2025 - Software Supply Chain Failures",
+              "A06:2021 - Vulnerable and Outdated Components"
+            ],
+            "tags": [
+              "sca",
+              "dependency",
+              "filecontent"
+            ],
+            "links": {
+              "ref_1": "https://github.com/advisories/GHSA-4p4w-6hg8-63wx",
+              "ref_2": "https://nvd.nist.gov/vuln/detail/CVE-2025-2336",
+              "ref_3": "https://codepen.io/herodevs/pen/bNGYaXx/412a3a4218387479898912f60c269c6c",
+              "ref_4": "https://github.com/angular/angular.js",
+              "ref_5": "https://www.herodevs.com/vulnerability-directory/cve-2025-2336"
+            },
+            "location": {
+              "kind": "package",
+              "file": "http://127.0.0.1:52529/bundle.js"
+            },
+            "description": "AngularJS Incomplete Filtering of Special Elements vulnerability",
+            "recommendation": "Upgrade angularjs (currently 1.1.5) to a secure release that is not affected by GHSA-4p4w-6hg8-63wx.",
+            "createdAt": "2026-10-22T14:56:15.124Z",
+            "evidence": {
+              "sca": {
+                "component": {
+                  "name": "angularjs",
+                  "version": "1.1.5",
+                  "npmname": "angular",
+                  "purl": "pkg:npm/angular@1.1.5",
+                  "basePurl": null,
+                  "detection": "filecontent",
+                  "source": null,
+                  "ecosystem": "npm",
+                  "locations": [
+                    "http://127.0.0.1:52529/bundle.js",
+                    "http://127.0.0.1:52529/fragment.js"
+                  ]
+                },
+                "identifiers": {
+                  "summary": "AngularJS Incomplete Filtering of Special Elements vulnerability",
+                  "CVE": [
+                    "CVE-2025-2336"
+                  ],
+                  "githubID": "GHSA-4p4w-6hg8-63wx",
+                  "cwe": [
+                    "CWE-791"
+                  ]
+                },
+                "versionRange": {
+                  "atOrAbove": "0",
+                  "above": null,
+                  "atOrBelow": null,
+                  "below": "1.9.8"
+                },
+                "info": [
+                  "https://github.com/advisories/GHSA-4p4w-6hg8-63wx",
+                  "https://nvd.nist.gov/vuln/detail/CVE-2025-2336",
+                  "https://codepen.io/herodevs/pen/bNGYaXx/412a3a4218387479898912f60c269c6c",
+                  "https://github.com/angular/angular.js",
+                  "https://www.herodevs.com/vulnerability-directory/cve-2025-2336"
+                ],
+                "summary": "AngularJS Incomplete Filtering of Special Elements vulnerability",
+                "sourceFile": "http://127.0.0.1:52529/bundle.js"
+              }
+            },
+            "updatedAt": "2026-10-22T14:56:15.130Z"
+          },
+          {
+            "id": "7ca3cc80-cd5f-49a7-a1ad-37f184123473::SCA::sca::GHSA-hfff-63hg-f47j::angular@1.1.5",
+            "engine": "SCA",
+            "scanId": "7ca3cc80-cd5f-49a7-a1ad-37f184123473",
+            "moduleId": "sca",
+            "moduleName": "Software Composition Analysis",
+            "ruleId": "GHSA-hfff-63hg-f47j",
+            "ruleName": "AngularJS Regular expression Denial of Service (ReDoS)",
+            "severity": "medium",
+            "category": "supply_chain",
+            "vulnId": "vulnerable_component",
+            "cwe": [
+              "CWE-1333"
+            ],
+            "owasp": [
+              "A03:2025 - Software Supply Chain Failures",
+              "A06:2021 - Vulnerable and Outdated Components"
+            ],
+            "tags": [
+              "sca",
+              "dependency",
+              "filecontent"
+            ],
+            "links": {
+              "ref_1": "https://github.com/advisories/GHSA-hfff-63hg-f47j",
+              "ref_2": "https://nvd.nist.gov/vuln/detail/CVE-2025-4690",
+              "ref_3": "https://codepen.io/herodevs/pen/RNNEPzP/751b91eab7730dff277523f3d50e4b77",
+              "ref_4": "https://github.com/angular/angular.js",
+              "ref_5": "https://www.herodevs.com/vulnerability-directory/cve-2025-4690"
+            },
+            "location": {
+              "kind": "package",
+              "file": "http://127.0.0.1:52529/bundle.js"
+            },
+            "description": "AngularJS Regular expression Denial of Service (ReDoS)",
+            "recommendation": "Upgrade angularjs (currently 1.1.5) to a secure release that is not affected by GHSA-hfff-63hg-f47j.",
+            "createdAt": "2026-10-22T14:56:15.124Z",
+            "evidence": {
+              "sca": {
+                "component": {
+                  "name": "angularjs",
+                  "version": "1.1.5",
+                  "npmname": "angular",
+                  "purl": "pkg:npm/angular@1.1.5",
+                  "basePurl": null,
+                  "detection": "filecontent",
+                  "source": null,
+                  "ecosystem": "npm",
+                  "locations": [
+                    "http://127.0.0.1:52529/bundle.js",
+                    "http://127.0.0.1:52529/fragment.js"
+                  ]
+                },
+                "identifiers": {
+                  "summary": "AngularJS Regular expression Denial of Service (ReDoS)",
+                  "CVE": [
+                    "CVE-2025-4690"
+                  ],
+                  "githubID": "GHSA-hfff-63hg-f47j",
+                  "cwe": [
+                    "CWE-1333"
+                  ]
+                },
+                "versionRange": {
+                  "atOrAbove": "0",
+                  "above": null,
+                  "atOrBelow": null,
+                  "below": "1.9.9"
+                },
+                "info": [
+                  "https://github.com/advisories/GHSA-hfff-63hg-f47j",
+                  "https://nvd.nist.gov/vuln/detail/CVE-2025-4690",
+                  "https://codepen.io/herodevs/pen/RNNEPzP/751b91eab7730dff277523f3d50e4b77",
+                  "https://github.com/angular/angular.js",
+                  "https://www.herodevs.com/vulnerability-directory/cve-2025-4690"
+                ],
+                "summary": "AngularJS Regular expression Denial of Service (ReDoS)",
+                "sourceFile": "http://127.0.0.1:52529/bundle.js"
+              }
+            },
+            "updatedAt": "2026-10-22T14:56:15.130Z"
+          },
+          {
+            "id": "7ca3cc80-cd5f-49a7-a1ad-37f184123473::SCA::sca::54::angular@1.1.5",
+            "engine": "SCA",
+            "scanId": "7ca3cc80-cd5f-49a7-a1ad-37f184123473",
+            "moduleId": "sca",
+            "moduleName": "Software Composition Analysis",
+            "ruleId": "54",
+            "ruleName": "End-of-Life: Long term support for AngularJS has been discontinued as of December 31, 2021",
+            "severity": "low",
+            "category": "supply_chain",
+            "vulnId": "vulnerable_component",
+            "cwe": [
+              "CWE-1104"
+            ],
+            "owasp": [
+              "A03:2025 - Software Supply Chain Failures",
+              "A06:2021 - Vulnerable and Outdated Components"
+            ],
+            "tags": [
+              "sca",
+              "dependency",
+              "filecontent"
+            ],
+            "links": {
+              "ref_1": "https://docs.angularjs.org/misc/version-support-status"
+            },
+            "location": {
+              "kind": "package",
+              "file": "http://127.0.0.1:52529/bundle.js"
+            },
+            "description": "End-of-Life: Long term support for AngularJS has been discontinued as of December 31, 2021",
+            "recommendation": "Upgrade angularjs (currently 1.1.5) to a secure release that is not affected by 54.",
+            "createdAt": "2026-10-22T14:56:15.124Z",
+            "evidence": {
+              "sca": {
+                "component": {
+                  "name": "angularjs",
+                  "version": "1.1.5",
+                  "npmname": "angular",
+                  "purl": "pkg:npm/angular@1.1.5",
+                  "basePurl": null,
+                  "detection": "filecontent",
+                  "source": null,
+                  "ecosystem": "npm",
+                  "locations": [
+                    "http://127.0.0.1:52529/bundle.js",
+                    "http://127.0.0.1:52529/fragment.js"
+                  ]
+                },
+                "identifiers": {
+                  "summary": "End-of-Life: Long term support for AngularJS has been discontinued as of December 31, 2021",
+                  "retid": "54",
+                  "cwe": [
+                    "CWE-1104"
+                  ]
+                },
+                "versionRange": {
+                  "atOrAbove": null,
+                  "above": null,
+                  "atOrBelow": null,
+                  "below": "1.999"
+                },
+                "info": [
+                  "https://docs.angularjs.org/misc/version-support-status"
+                ],
+                "summary": "End-of-Life: Long term support for AngularJS has been discontinued as of December 31, 2021",
+                "sourceFile": "http://127.0.0.1:52529/bundle.js"
+              }
+            },
+            "updatedAt": "2026-10-22T14:56:15.130Z"
+          }
+        ],
+        "groups": [],
+        "codeArtifacts": {
+          "sast": {
+            "version": 2,
+            "routes": [],
+            "endpoints": [],
+            "graphql": [],
+            "surfaces": [],
+            "hiddenParams": [],
+            "gadgets": []
+          }
+        },
+        "items": [],
+        "packages": [
+          {
+            "name": "angularjs",
+            "version": "1.1.5",
+            "file": "http://127.0.0.1:52529/bundle.js",
+            "npmname": "angular",
+            "purl": "pkg:npm/angular@1.1.5",
+            "basePurl": null,
+            "detection": "filecontent",
+            "source": null,
+            "ecosystem": "npm",
+            "locations": [
+              "http://127.0.0.1:52529/bundle.js",
+              "http://127.0.0.1:52529/fragment.js"
+            ]
+          }
+        ],
+        "scaBodyCoverage": {
+          "captured": 2,
+          "analyzed": 2,
+          "gaps": 0
+        }
+      },
+      "bodyRequests": [
+        {
+          "side": "owned",
+          "url": "/bundle.js",
+          "account": "a"
+        },
+        {
+          "side": "owned",
+          "url": "/fragment.js",
+          "account": "a"
+        }
+      ]
+    }
+  ],
+  "error": "AssertionError [ERR_ASSERTION]: Authenticated body must produce real content-signature detection\n    at run (C:\\Users\\zeb\\Downloads\\ki\\tools\\security\\tests\\sca-authenticated.browser.cjs:24:178)\n    at async main (C:\\Users\\zeb\\Downloads\\ki\\tools\\security\\tests\\sca-authenticated.browser.cjs:36:2)"
+}

@@ -1,0 +1,399 @@
+{
+  "fixture": "Controlled real POSIX shell (Kali WSL on Windows)",
+  "legacySyntax": {
+    "originalCommand": "printf '%s\\n' 127.0.0.1|/bin/cat /etc/passwd|",
+    "originalSyntax": {
+      "code": 2,
+      "stdout": "",
+      "stderr": "sh: 1: Syntax error: end of file unexpected\n"
+    },
+    "fixedCommand": "printf '%s\\n' 127.0.0.1|/bin/cat /etc/passwd",
+    "fixedSyntax": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "execution": "syntax-only; no file read"
+  },
+  "cases": [
+    {
+      "mode": "positive",
+      "runId": "31634ad0-12a8-46f3-b165-5954ad716e90",
+      "state": "completed",
+      "coverage": {
+        "backendGaps": [],
+        "engineFailures": [],
+        "dast": {
+          "phase": "scan_requests_dispatched",
+          "applicationRequestsObserved": 1,
+          "applicationRequestsQueued": 1,
+          "proxySeededRequests": 0,
+          "selectedTargetSeededRequests": 1,
+          "seedCandidates": 0,
+          "unsafeSeedSkipped": 0,
+          "tasksPlanned": 2,
+          "tasksExecuted": 2,
+          "taskCounterMeaning": "Tasks entered execution before any transport attempt",
+          "probeDispatches": 2,
+          "baselineDispatches": 2,
+          "dastRequestsDispatched": 4,
+          "runRequestsDispatched": 4,
+          "skippedDueToStrategy": 0,
+          "taskErrors": 0,
+          "lastTaskError": null,
+          "taskSkips": 0,
+          "lastTaskSkip": null,
+          "captureErrors": 0,
+          "waitingForInteraction": false
+        },
+        "actionableGaps": [],
+        "recovery": {
+          "runId": "31634ad0-12a8-46f3-b165-5954ad716e90",
+          "state": "reported_checks_finished",
+          "instruction": "Assess only the checks and evidence actually recorded; absence of reported gaps is not proof of full application coverage."
+        }
+      },
+      "findings": [
+        {
+          "id": "10119247-40c6-4d3b-a85b-ad7c0a6abd8f::DAST::os_command_injection::oscommand_inband_printf_pipe::req-2::atk-1",
+          "engine": "DAST",
+          "scanId": "10119247-40c6-4d3b-a85b-ad7c0a6abd8f",
+          "moduleId": "os_command_injection",
+          "moduleName": "OS command injection",
+          "ruleId": "oscommand_inband_printf_pipe",
+          "ruleName": "OS Command Injection - POSIX output marker (pipe)",
+          "vulnId": "command_injection",
+          "category": "injection",
+          "severity": "high",
+          "confidence": 78,
+          "owasp": [
+            "A05:2025 - Injection",
+            "A03:2021 - Injection"
+          ],
+          "cwe": [
+            "CWE-78"
+          ],
+          "tags": [
+            "dast",
+            "command",
+            "injection"
+          ],
+          "description": "The server response contains a per-probe marker assembled by printf. The complete marker is absent from the submitted payload and the original response, so simple reflection is not positive evidence.",
+          "recommendation": "<p>Never concatenate untrusted input into shell commands.</p><ul><li>Use fixed command allow-lists and parameterized process execution APIs (e.g. execve with argument arrays, never sh -c with user input).</li><li>Reject or strictly allow-list dangerous metacharacters and separators including |, ;, &amp;, $, `, \\n, (, ), {, }.</li><li>Run command-executing services with least privilege and strong sandboxing.</li></ul>",
+          "links": {
+            "OWASP": "https://owasp.org/Top10/2025/A05_2025-Injection/",
+            "CWE": "https://cwe.mitre.org/data/definitions/78.html"
+          },
+          "presentationAggregate": null,
+          "location": {
+            "url": "http://127.0.0.1:58592/positive",
+            "method": "POST",
+            "param": "ip",
+            "kind": "http"
+          },
+          "createdAt": "2026-10-22T19:46:24.475Z",
+          "evidence": {
+            "dast": {
+              "attackId": "atk-1",
+              "requestId": "req-2",
+              "resolverKey": "req-2::atk-1",
+              "proof": "certx_sfpfpk3wrzc4_exec",
+              "param": "ip",
+              "payload": "127.0.0.1|printf 'certx_%s_%s' 'sfpfpk3wrzc4' 'exec' #",
+              "confidenceSignals": [
+                "validation:paired:original"
+              ],
+              "meta": {
+                "attacked": {
+                  "location": "form",
+                  "name": "ip",
+                  "before": "127.0.0.1",
+                  "after": "127.0.0.1|printf 'certx_%s_%s' 'sfpfpk3wrzc4' 'exec' #"
+                },
+                "match": "certx_sfpfpk3wrzc4_exec",
+                "confidence": 78
+              }
+            }
+          },
+          "updatedAt": "2026-10-22T19:46:24.475Z",
+          "title": "OS Command Injection - POSIX output marker (pipe)"
+        },
+        {
+          "id": "10119247-40c6-4d3b-a85b-ad7c0a6abd8f::DAST::os_command_injection::oscommand_inband_printf_separator::req-2::atk-2",
+          "engine": "DAST",
+          "scanId": "10119247-40c6-4d3b-a85b-ad7c0a6abd8f",
+          "moduleId": "os_command_injection",
+          "moduleName": "OS command injection",
+          "ruleId": "oscommand_inband_printf_separator",
+          "ruleName": "OS Command Injection - POSIX output marker (separator)",
+          "vulnId": "command_injection",
+          "category": "injection",
+          "severity": "high",
+          "confidence": 78,
+          "owasp": [
+            "A05:2025 - Injection",
+            "A03:2021 - Injection"
+          ],
+          "cwe": [
+            "CWE-78"
+          ],
+          "tags": [
+            "dast",
+            "command",
+            "injection"
+          ],
+          "description": "The server response contains a per-probe marker assembled by printf. The complete marker is absent from the submitted payload and the original response, so simple reflection is not positive evidence.",
+          "recommendation": "<p>Never concatenate untrusted input into shell commands.</p><ul><li>Use fixed command allow-lists and parameterized process execution APIs (e.g. execve with argument arrays, never sh -c with user input).</li><li>Reject or strictly allow-list dangerous metacharacters and separators including |, ;, &amp;, $, `, \\n, (, ), {, }.</li><li>Run command-executing services with least privilege and strong sandboxing.</li></ul>",
+          "links": {
+            "OWASP": "https://owasp.org/Top10/2025/A05_2025-Injection/",
+            "CWE": "https://cwe.mitre.org/data/definitions/78.html"
+          },
+          "presentationAggregate": null,
+          "location": {
+            "url": "http://127.0.0.1:58592/positive",
+            "method": "POST",
+            "param": "ip",
+            "kind": "http"
+          },
+          "createdAt": "2026-10-22T19:46:24.773Z",
+          "evidence": {
+            "dast": {
+              "attackId": "atk-2",
+              "requestId": "req-2",
+              "resolverKey": "req-2::atk-2",
+              "proof": "certx_imdc6ug5chie_exec",
+              "param": "ip",
+              "payload": "127.0.0.1;printf 'certx_%s_%s' 'imdc6ug5chie' 'exec';#",
+              "confidenceSignals": [
+                "validation:paired:original"
+              ],
+              "meta": {
+                "attacked": {
+                  "location": "form",
+                  "name": "ip",
+                  "before": "127.0.0.1",
+                  "after": "127.0.0.1;printf 'certx_%s_%s' 'imdc6ug5chie' 'exec';#"
+                },
+                "match": "certx_imdc6ug5chie_exec",
+                "confidence": 78
+              }
+            }
+          },
+          "updatedAt": "2026-10-22T19:46:24.773Z",
+          "title": "OS Command Injection - POSIX output marker (separator)"
+        }
+      ],
+      "wire": [
+        {
+          "url": "/positive",
+          "method": "POST",
+          "body": "ip=127.0.0.1",
+          "shell": {
+            "code": 0,
+            "stdout": "127.0.0.1\n",
+            "stderr": ""
+          },
+          "output": "127.0.0.1\n"
+        },
+        {
+          "url": "/positive",
+          "method": "GET",
+          "body": ""
+        },
+        {
+          "url": "/positive",
+          "method": "POST",
+          "body": "ip=127.0.0.1",
+          "shell": {
+            "code": 0,
+            "stdout": "127.0.0.1\n",
+            "stderr": ""
+          },
+          "output": "127.0.0.1\n"
+        },
+        {
+          "url": "/positive",
+          "method": "POST",
+          "body": "ip=127.0.0.1%7Cprintf+%27certx_%25s_%25s%27+%27sfpfpk3wrzc4%27+%27exec%27+%23&ptk_rnd=jbcu7jjxh9lm",
+          "shell": {
+            "code": 0,
+            "stdout": "certx_sfpfpk3wrzc4_exec",
+            "stderr": ""
+          },
+          "output": "certx_sfpfpk3wrzc4_exec"
+        },
+        {
+          "url": "/positive",
+          "method": "POST",
+          "body": "ip=127.0.0.1%3Bprintf+%27certx_%25s_%25s%27+%27imdc6ug5chie%27+%27exec%27%3B%23&ptk_rnd=yc55hy5cwk1v",
+          "shell": {
+            "code": 0,
+            "stdout": "127.0.0.1\ncertx_imdc6ug5chie_exec",
+            "stderr": ""
+          },
+          "output": "127.0.0.1\ncertx_imdc6ug5chie_exec"
+        }
+      ]
+    },
+    {
+      "mode": "quoted",
+      "runId": "a93872cc-f8de-4fbc-b095-33d9114a4ea9",
+      "state": "completed",
+      "coverage": {
+        "backendGaps": [],
+        "engineFailures": [],
+        "dast": {
+          "phase": "scan_requests_dispatched",
+          "applicationRequestsObserved": 1,
+          "applicationRequestsQueued": 1,
+          "proxySeededRequests": 0,
+          "selectedTargetSeededRequests": 1,
+          "seedCandidates": 2,
+          "unsafeSeedSkipped": 1,
+          "tasksPlanned": 2,
+          "tasksExecuted": 2,
+          "taskCounterMeaning": "Tasks entered execution before any transport attempt",
+          "probeDispatches": 2,
+          "baselineDispatches": 2,
+          "dastRequestsDispatched": 4,
+          "runRequestsDispatched": 4,
+          "skippedDueToStrategy": 0,
+          "taskErrors": 0,
+          "lastTaskError": null,
+          "taskSkips": 0,
+          "lastTaskSkip": null,
+          "captureErrors": 0,
+          "waitingForInteraction": false
+        },
+        "actionableGaps": [],
+        "recovery": {
+          "runId": "a93872cc-f8de-4fbc-b095-33d9114a4ea9",
+          "state": "reported_checks_finished",
+          "instruction": "Assess only the checks and evidence actually recorded; absence of reported gaps is not proof of full application coverage."
+        }
+      },
+      "findings": [],
+      "wire": [
+        {
+          "url": "/quoted",
+          "method": "POST",
+          "body": "ip=127.0.0.1",
+          "shell": {
+            "code": 0,
+            "stdout": "127.0.0.1\n",
+            "stderr": ""
+          },
+          "output": "127.0.0.1\n"
+        },
+        {
+          "url": "/quoted",
+          "method": "GET",
+          "body": ""
+        },
+        {
+          "url": "/quoted",
+          "method": "POST",
+          "body": "ip=127.0.0.1",
+          "shell": {
+            "code": 0,
+            "stdout": "127.0.0.1\n",
+            "stderr": ""
+          },
+          "output": "127.0.0.1\n"
+        },
+        {
+          "url": "/quoted",
+          "method": "POST",
+          "body": "ip=127.0.0.1%7Cprintf+%27certx_%25s_%25s%27+%27n15zwuv30f7o%27+%27exec%27+%23&ptk_rnd=ac30xwnm3ubo",
+          "shell": {
+            "code": 0,
+            "stdout": "127.0.0.1|printf 'certx_%s_%s' 'n15zwuv30f7o' 'exec' #\n",
+            "stderr": ""
+          },
+          "output": "127.0.0.1|printf 'certx_%s_%s' 'n15zwuv30f7o' 'exec' #\n"
+        },
+        {
+          "url": "/quoted",
+          "method": "POST",
+          "body": "ip=127.0.0.1%3Bprintf+%27certx_%25s_%25s%27+%27yn58sa14u2cl%27+%27exec%27%3B%23&ptk_rnd=uxvvakxhuziq",
+          "shell": {
+            "code": 0,
+            "stdout": "127.0.0.1;printf 'certx_%s_%s' 'yn58sa14u2cl' 'exec';#\n",
+            "stderr": ""
+          },
+          "output": "127.0.0.1;printf 'certx_%s_%s' 'yn58sa14u2cl' 'exec';#\n"
+        }
+      ]
+    },
+    {
+      "mode": "reflect",
+      "runId": "62ac1e11-6133-44ed-acd1-94157c9afe6c",
+      "state": "completed",
+      "coverage": {
+        "backendGaps": [],
+        "engineFailures": [],
+        "dast": {
+          "phase": "scan_requests_dispatched",
+          "applicationRequestsObserved": 1,
+          "applicationRequestsQueued": 1,
+          "proxySeededRequests": 0,
+          "selectedTargetSeededRequests": 1,
+          "seedCandidates": 4,
+          "unsafeSeedSkipped": 2,
+          "tasksPlanned": 2,
+          "tasksExecuted": 2,
+          "taskCounterMeaning": "Tasks entered execution before any transport attempt",
+          "probeDispatches": 2,
+          "baselineDispatches": 2,
+          "dastRequestsDispatched": 4,
+          "runRequestsDispatched": 4,
+          "skippedDueToStrategy": 0,
+          "taskErrors": 0,
+          "lastTaskError": null,
+          "taskSkips": 0,
+          "lastTaskSkip": null,
+          "captureErrors": 0,
+          "waitingForInteraction": false
+        },
+        "actionableGaps": [],
+        "recovery": {
+          "runId": "62ac1e11-6133-44ed-acd1-94157c9afe6c",
+          "state": "reported_checks_finished",
+          "instruction": "Assess only the checks and evidence actually recorded; absence of reported gaps is not proof of full application coverage."
+        }
+      },
+      "findings": [],
+      "wire": [
+        {
+          "url": "/reflect",
+          "method": "POST",
+          "body": "ip=127.0.0.1",
+          "output": "127.0.0.1"
+        },
+        {
+          "url": "/reflect",
+          "method": "GET",
+          "body": ""
+        },
+        {
+          "url": "/reflect",
+          "method": "POST",
+          "body": "ip=127.0.0.1",
+          "output": "127.0.0.1"
+        },
+        {
+          "url": "/reflect",
+          "method": "POST",
+          "body": "ip=127.0.0.1%7Cprintf+%27certx_%25s_%25s%27+%27162c9e6ktk6u%27+%27exec%27+%23&ptk_rnd=6nubs4m7u068",
+          "output": "127.0.0.1|printf 'certx_%s_%s' '162c9e6ktk6u' 'exec' #"
+        },
+        {
+          "url": "/reflect",
+          "method": "POST",
+          "body": "ip=127.0.0.1%3Bprintf+%27certx_%25s_%25s%27+%27nniwnbxegxzy%27+%27exec%27%3B%23&ptk_rnd=j34qqazts180",
+          "output": "127.0.0.1;printf 'certx_%s_%s' 'nniwnbxegxzy' 'exec';#"
+        }
+      ]
+    }
+  ]
+}

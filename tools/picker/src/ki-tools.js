@@ -77,7 +77,7 @@ const specs = {
   },
   cdp: {
     description:
-      "Raw Chrome DevTools Protocol escape hatch on the working tab: send any CDP method with params and get the result back. Use for capabilities the other tools do not cover, e.g. Runtime.enable then Runtime.evaluate, DOM/CSS inspection, Network domain, or Emulation.setFocusEmulationEnabled. Target.activateTarget is refused; call Page.bringToFront instead.",
+      "Raw Chrome DevTools Protocol escape hatch on the working tab. Prefer screenshot for ordinary page or element screenshots; Page.captureScreenshot is also returned as a rendered image, with its CDP parameters preserved. Prefer save_as_pdf for PDFs; Page.printToPDF returns an Outputs artifact, while explicitly requested stream handles stay raw. Use CDP for capabilities the other tools do not cover, such as DOM/CSS inspection, Network domain, or Emulation.setFocusEmulationEnabled. Target.activateTarget is refused; call Page.bringToFront instead.",
     parameters: {
       type: "object",
       properties: {

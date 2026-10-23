@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "referenceSha256": "901619844a281628f9dc9eb17ff978cc3498cf05b9548cea15808c706c42c581",
+  "outcomes": [
+    {
+      "variant": "ablation-no-boxing",
+      "revertedFunction": "getTaintEntry",
+      "status": 1,
+      "productionSha256": "5bb98779c5d7dc34970ec0f2b5996375480907836a6cd87002d5139a5dd7f480",
+      "variantSha256": "3a09b0807b72aac742cb2b3f5078e97ddc0df3443bc5db3cc8e4bbcdf569d5d2",
+      "originalSourceSha256": "8a76e89339389f21ab5befbc2df4723d0f0edae29f1c7ff8757ffc1cdfe40a49",
+      "referenceObservations": [],
+      "ownedObservations": [
+        {
+          "ruleId": "dom_innerhtml_xss",
+          "moduleId": "iast_dom_xss",
+          "sourceKinds": [
+            "postMessage"
+          ],
+          "sink": "dom.innerHTML",
+          "sourceLocations": [
+            "http://127.0.0.1:53548/app?c=QZ710&q=unrelated-query-value"
+          ]
+        }
+      ],
+      "output": "COLLECTION reference launch\nCOLLECTION reference message 0\nCOLLECTION owned launch\nCOLLECTION owned message 1\n\nAssertionError [ERR_ASSERTION]: Source/sink observation parity for message\n+ actual - expected\n\n+ [\n+   {\n+     moduleId: 'iast_dom_xss',\n+     ruleId: 'dom_innerhtml_xss',\n+     sink: 'dom.innerHTML',\n+     sourceKinds: [\n+       'postMessage'\n+     ],\n+     sourceLocations: [\n+       'http://127.0.0.1:53548/app?c=QZ710&q=unrelated-query-value'\n+     ]\n+   }\n+ ]\n- []\n\n    at main (C:\\Users\\zeb\\Downloads\\ki\\tools\\security\\tests\\collection-parity.browser.cjs:57:141) {\n  generatedMessage: false,\n  code: 'ERR_ASSERTION',\n  actual: [Array],\n  expected: [],\n  operator: 'deepStrictEqual',\n  diff: 'simple'\n}\n"
+    },
+    {
+      "variant": "ablation-no-reentrancy",
+      "revertedFunction": "propagateTaint",
+      "status": 1,
+      "productionSha256": "5bb98779c5d7dc34970ec0f2b5996375480907836a6cd87002d5139a5dd7f480",
+      "variantSha256": "61523ab1b421cd02de0a0326b0fa2a976aa96810f692d07c925c6e667775e1b9",
+      "originalSourceSha256": "8a76e89339389f21ab5befbc2df4723d0f0edae29f1c7ff8757ffc1cdfe40a49",
+      "referenceObservations": [],
+      "ownedObservations": [
+        {
+          "ruleId": "dom_innerhtml_xss",
+          "moduleId": "iast_dom_xss",
+          "sourceKinds": [
+            "postMessage"
+          ],
+          "sink": "dom.innerHTML",
+          "sourceLocations": [
+            "http://127.0.0.1:62311/app?c=QZ710&q=unrelated-query-value"
+          ]
+        }
+      ],
+      "output": "COLLECTION reference launch\nCOLLECTION reference message 0\nCOLLECTION owned launch\nCOLLECTION owned message 1\n\nAssertionError [ERR_ASSERTION]: Source/sink observation parity for message\n+ actual - expected\n\n+ [\n+   {\n+     moduleId: 'iast_dom_xss',\n+     ruleId: 'dom_innerhtml_xss',\n+     sink: 'dom.innerHTML',\n+     sourceKinds: [\n+       'postMessage'\n+     ],\n+     sourceLocations: [\n+       'http://127.0.0.1:62311/app?c=QZ710&q=unrelated-query-value'\n+     ]\n+   }\n+ ]\n- []\n\n    at main (C:\\Users\\zeb\\Downloads\\ki\\tools\\security\\tests\\collection-parity.browser.cjs:57:141) {\n  generatedMessage: false,\n  code: 'ERR_ASSERTION',\n  actual: [Array],\n  expected: [],\n  operator: 'deepStrictEqual',\n  diff: 'simple'\n}\n"
+    }
+  ],
+  "productionUnchanged": true
+}

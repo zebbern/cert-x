@@ -189,3 +189,63 @@
 .ki-topnav-record[aria-disabled]{cursor:not-allowed}
 .ki-topnav-record[aria-disabled]>svg{opacity:.4}
 .ki-topnav-record .wb-sk-tip{max-width:240px;white-space:normal}
+/* Task outputs use the existing composer colors and compact controls. */
+.ki-output-tray { width: 100%; border-bottom: 1px solid var(--wb-border); padding: 8px 0; font-size: 12px; }
+.ki-output-tray summary { cursor: pointer; color: var(--wb-text-2); }
+.ki-output-list { max-height: 220px; overflow: auto; margin-top: 8px; }
+.ki-output-row { display: flex; align-items: center; gap: 6px; padding: 5px 0; }
+.ki-output-row > span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ki-output-tray button { padding: 4px 6px; border-radius: 6px; background: var(--wb-fill-2); color: var(--wb-text); border: 0; cursor: pointer; font-size: 11px; white-space: nowrap; }
+.ki-output-tray button:disabled { opacity: .5; cursor: wait; }
+.ki-output-preview pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 220px; overflow: auto; }
+.ki-output-preview img { max-width: 100%; max-height: 260px; object-fit: contain; }
+/* Task selectors share the existing neutral composer/settings palette. */
+.ki-profile-control { display: inline-flex; min-width: 0; flex: 0 1 auto; position: relative; }
+.ki-profile-control select, .ki-workspace-control select, .ki-history-filter { color: var(--wb-text); background: var(--wb-fill-1); border: 1px solid var(--wb-line); border-radius: 8px; padding: 5px 8px; font: inherit; font-size: 12px; min-width: 0; max-width: 100%; cursor: pointer; }
+.ki-profile-control select { max-width: 140px; }
+.ki-profile-control option, .ki-workspace-control option, .ki-history-filter option { color: var(--wb-text); background: var(--wb-bg); }
+.ki-profile-control select:disabled, .ki-workspace-control select:disabled { opacity: .55; cursor: default; }
+.ki-workspace-control { padding: 8px 0 4px; font-size: 12px; width: 100%; }
+.ki-workspace-line { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; min-width: 0; }
+.ki-workspace-control select { max-width: min(240px, 100%); }
+.ki-workspace-folder { color: var(--wb-dim); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 160px; }
+.ki-context-default { font: inherit; color: var(--wb-dim); cursor: pointer; border: 0; background: transparent; padding: 4px; margin-left: auto; }
+.ki-context-default:hover { color: var(--wb-text); }
+.ki-context-error { color: var(--wb-error); font-size: 12px; overflow-wrap: anywhere; }
+.ki-profile-control > .ki-context-error { position: absolute; bottom: 100%; left: 0; background: var(--wb-bg); padding: 8px; width: 220px; border: 1px solid var(--wb-line); border-radius: 8px; }
+.ki-history-filter { margin-bottom: 12px; }
+.ki-output-scope { display: flex; gap: 8px; margin-top: 8px; }
+.ki-output-source { display: block; color: var(--wb-dim); font-size: 10px; }
+@media (max-width: 480px) { .ki-profile-control select { max-width: 100px; padding: 4px; } .wb-composer-model { min-width: 0; } .ki-workspace-folder { max-width: 100px; } }
+
+.security-root, .ki-security-panel { --security-text: var(--wb-text, #252525); --security-muted: var(--wb-text-secondary, #707070); --security-line: var(--wb-border, #dfdfdf); --security-fill: var(--wb-hover, #f4f4f4); color: var(--security-text); }
+:root[data-theme="dark"] .security-root, :root[data-theme="dark"] .ki-security-panel { --security-text: var(--wb-text, #e8e8e8); --security-muted: var(--wb-text-secondary, #a1a1a1); --security-line: var(--wb-border, #414141); --security-fill: var(--wb-hover, #303030); }
+.security-root .security-card { padding: 18px; margin: 14px 0; }
+.security-field { display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 16px; padding: 10px 0; min-width: 0; }
+.security-field > span { flex: 0 1 45%; }
+.security-field input, .security-field select { width: 52%; min-width: 0; margin: 0; }
+.security-field .wb-toggle { flex: 0 0 32px; }
+.security-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 10px 0; }
+.security-actions select { width: auto; max-width: 100%; padding: 6px 10px; font-size: 13px; }
+.security-meta, .security-notice { color: var(--security-muted); font-size: 13px; line-height: 1.5; overflow-wrap: anywhere; }
+.security-notice:empty { display: none; }
+.security-error { color: #c24636; overflow-wrap: anywhere; }
+:root[data-theme="dark"] .security-error { color: #f9a399; }
+.security-advanced { padding: 12px 0; border-top: 1px solid var(--security-line); }
+.security-advanced > summary { cursor: pointer; font-weight: 500; }
+.security-root pre, .ki-security-panel pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 280px; overflow: auto; font-size: 12px; line-height: 1.5; }
+.security-run, .security-finding { padding: 14px 0; border-bottom: 1px solid var(--security-line); }
+.security-run:last-child, .security-finding:last-child { border-bottom: 0; }
+.security-run h3, .security-finding h3 { font-size: 14px; margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+.security-run details, .security-finding details { margin: 8px 0; }
+.security-results { scroll-margin-top: 12px; }
+.security-attribution { margin: 16px 0; }
+.security-attribution a { color: inherit; }
+.security-root [hidden], .ki-security-panel [hidden] { display: none !important; }
+.ki-security-panel { padding: 8px 0; border-bottom: 1px solid var(--security-line); }
+.ki-security-panel > summary { cursor: pointer; font-weight: 500; }
+.ki-security-panel button { background: var(--security-fill); color: var(--security-text); border: 0; border-radius: 6px; font: inherit; padding: 6px 9px; cursor: pointer; }
+.ki-security-panel button:disabled { opacity: .5; cursor: default; }
+.ki-security-panel .security-run { padding: 8px 0; }
+.ki-security-panel select { background: var(--wb-bg, var(--security-fill)); color: var(--security-text); border: 1px solid var(--security-line); border-radius: 6px; font: inherit; padding: 6px; }
+@media (max-width: 460px) { .security-root .security-card { padding: 12px; } .security-field { gap: 10px; } .security-actions button { min-width: 0; } }

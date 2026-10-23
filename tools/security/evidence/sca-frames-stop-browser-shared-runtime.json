@@ -1,0 +1,125 @@
+{
+  "error": "AssertionError [ERR_ASSERTION]: Root, nested same-site, OOPIF and nested OOPIF document sources\n\n2 !== 4\n\n    at main (C:\\Users\\zeb\\Downloads\\ki\\tools\\security\\tests\\sca-frames-stop.browser.cjs:88:14)",
+  "cases": [
+    {
+      "account": "a",
+      "acquisition": {
+        "captured": 2,
+        "gaps": 2,
+        "provenance": "debugger_script_source",
+        "sessionsInspected": 2,
+        "effectiveLimits": {
+          "maxScripts": 128,
+          "maxResourceBytes": 8388608,
+          "maxTotalBytes": 33554432
+        },
+        "childDocumentsUninspected": 0
+      },
+      "drain": {
+        "complete": true,
+        "gaps": 2
+      },
+      "findings": 18,
+      "bodyCoverage": {
+        "captured": 2,
+        "analyzed": 2,
+        "gaps": 0
+      },
+      "sourceCoverage": {
+        "captured": 2,
+        "analyzed": 2,
+        "gaps": 3
+      },
+      "acquisitions": [
+        "captured_http_body"
+      ],
+      "extraReads": [],
+      "liveReads": [
+        {
+          "url": "/opaque/fetch",
+          "account": "a"
+        },
+        {
+          "url": "/opaque/xhr",
+          "account": "a"
+        }
+      ],
+      "warnings": [
+        {
+          "url": null,
+          "reason": "script_source_document_unavailable",
+          "tabId": 913509689,
+          "requestId": null,
+          "documentId": null,
+          "acquisition": "debugger_script_source"
+        },
+        {
+          "url": null,
+          "reason": "script_source_document_unavailable",
+          "tabId": 913509689,
+          "requestId": null,
+          "documentId": null,
+          "acquisition": "debugger_script_source"
+        },
+        {
+          "url": "https://127.0.0.1:51488/opaque/asset.js",
+          "reason": "preexisting_script_source_not_observed",
+          "tabId": 913509689,
+          "requestId": null,
+          "documentId": null,
+          "acquisition": "debugger_script_source"
+        }
+      ]
+    }
+  ],
+  "wire": [
+    {
+      "url": "/login/a",
+      "account": "anonymous"
+    },
+    {
+      "url": "/app",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/asset.js",
+      "account": "a"
+    },
+    {
+      "url": "/frame",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/frame.js",
+      "account": "a"
+    },
+    {
+      "url": "/cross",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/cross.js",
+      "account": "a"
+    },
+    {
+      "url": "/nested",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/nested.js",
+      "account": "a"
+    },
+    {
+      "url": "/favicon.ico",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/fetch",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/xhr",
+      "account": "a"
+    }
+  ]
+}

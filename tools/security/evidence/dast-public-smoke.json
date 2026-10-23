@@ -1,0 +1,487 @@
+{
+  "target": "https://pentest-ground.com:81/search",
+  "bounds": {
+    "maxRequests": 12,
+    "requestsPerSecond": 1,
+    "seconds": 25
+  },
+  "startedAt": "2026-10-22T15:27:53.676Z",
+  "status": {
+    "runId": "fce3bbca-c2d6-4a1b-a792-bed05815ed80",
+    "owner": "public-dast-smoke",
+    "workspaceId": null,
+    "tabId": 722846620,
+    "engines": [
+      "DAST"
+    ],
+    "state": "completed",
+    "config": {
+      "preset": "thorough",
+      "scanStrategy": "COMPREHENSIVE",
+      "dastScanStrategy": "COMPREHENSIVE",
+      "scanControlProfile": "wide",
+      "allowCaptureWithoutInteraction": true,
+      "maxRequestsPerSecond": 1,
+      "concurrency": 1,
+      "planningConcurrency": 1,
+      "runCve": false,
+      "follow_redirect": true,
+      "maxRequests": 12,
+      "durationSeconds": 25,
+      "rulepack": {
+        "schema": "ptk-dast-rulepack/v1",
+        "engine": "DAST",
+        "version": 1,
+        "modules": [
+          {
+            "id": "xss",
+            "name": "Reflected Cross-Site Scripting (XSS)",
+            "type": "active",
+            "async": true,
+            "runtime": {
+              "mode": "standard",
+              "hooks": [],
+              "confirmation": {},
+              "config": {}
+            },
+            "metadata": {
+              "taxonomy": {
+                "severity": "high",
+                "category": "xss",
+                "vulnId": "reflected_xss",
+                "owasp": [
+                  "A05:2025 - Injection",
+                  "A03:2021 - Injection"
+                ],
+                "cwe": [
+                  "CWE-79"
+                ],
+                "tags": [
+                  "dast",
+                  "xss",
+                  "dom"
+                ]
+              },
+              "docs": {
+                "description": "Reflected Cross-site Scripting (XSS) is another name for non-persistent XSS, where the attack doesn't load with the vulnerable web application but is originated by the victim loading the offending URI. In this article we will see some ways to test a web application for this kind of vulnerability.",
+                "recommendation": "<p>Reflected XSS attacks are the most frequent type of XSS attacks found nowadays.</p><p>When a web application is vulnerable to this type of attack, it will pass unvalidated input sent through requests to the client. Reflected attacks are delivered to the victim in various ways, such as in an e-mail message, or through some specially crafted URI. When a user is tricked into clicking on the malicious link, the injected code travels to the vulnerable web site, which reflects the attack back to the user\\u2019s browser. The browser then executes the offending code because it came from a \"trusted\" server.</p> <p>Commonly the attacker's code is written in the Javascript language, but other scripting languages are also used, e.g., ActionScript and VBScript.</p> <p>Attackers typically leverage these vulnerabilities to install key loggers, steal victim cookies, perform clipboard theft, and change the content of the page (e.g. download links).</p> <p>To remediate against reflected XSS vulnerabilities, strict filtering of HTML character encodings must be adhered to. In some cases, the web application may not be filtering some character encodings. For example, it may filter out \"&lt;script&gt;\", but might not filter \"%3Cscript%3E\" which simply includes another encoding of tags. A nice tool for testing character encodings is OWASP's CAL9000.</p> <p>Filtering of all information sent to the server via form POST/GET and URL query parameters with a particular emphasis on filtering out HTML-specific characters is advised.</p>",
+                "links": {
+                  "OWASP": "https://owasp.org/Top10/2025/A05_2025-Injection/",
+                  "CWE": "https://cwe.mitre.org/data/definitions/79.html"
+                }
+              },
+              "execution": {
+                "findingSemantics": "unique",
+                "capabilities": [],
+                "requiredEngineCapabilities": [],
+                "allowStrategyBulk": true,
+                "allowAuthLikeTargets": false,
+                "allowHardDeniedTargets": {}
+              },
+              "constants": {},
+              "extensions": {}
+            },
+            "attacks": [
+              {
+                "id": "xss_1",
+                "name": "XSS - Unfiltered <script> tag",
+                "runtime": {
+                  "hooks": [],
+                  "confirmation": {
+                    "tracking": {
+                      "enabled": true,
+                      "mode": "followup_get",
+                      "marker": "<script>alert(987101)</script>",
+                      "confidence": 90
+                    }
+                  },
+                  "config": {}
+                },
+                "action": {
+                  "params": [
+                    {
+                      "value": "<script>alert(987101)</script>",
+                      "position": "after",
+                      "operation": "add"
+                    }
+                  ]
+                },
+                "validation": {
+                  "rule": {
+                    "and": [
+                      {
+                        "regex": [
+                          {
+                            "var": "attack.response.body"
+                          },
+                          {
+                            "var": "attack.metadata.regex"
+                          }
+                        ]
+                      },
+                      {
+                        "!": {
+                          "regex": [
+                            {
+                              "var": "original.response.body"
+                            },
+                            {
+                              "var": "attack.metadata.regex"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "proof": {
+                    "proof": [
+                      {
+                        "var": "attack.response.body"
+                      },
+                      {
+                        "var": "attack.metadata.regex"
+                      }
+                    ]
+                  }
+                },
+                "condition": {},
+                "target": {},
+                "requestGrouping": "inherit",
+                "metadata": {
+                  "taxonomy": {},
+                  "docs": {},
+                  "constants": {
+                    "regex": "<script>alert\\(987101\\)\\s*<\\/script>"
+                  },
+                  "extensions": {}
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "limits": {}
+    },
+    "scope": {
+      "origins": [
+        "https://pentest-ground.com:81"
+      ],
+      "excludePaths": [
+        "/login",
+        "/create"
+      ]
+    },
+    "accountId": null,
+    "accountRevision": null,
+    "createdAt": 1792682876058,
+    "updatedAt": 1792682878997,
+    "requestsSent": 3,
+    "coverage": {
+      "backendGaps": [],
+      "dast": {
+        "phase": "scan_requests_dispatched",
+        "applicationRequestsObserved": 1,
+        "applicationRequestsQueued": 1,
+        "proxySeededRequests": 0,
+        "selectedTargetSeededRequests": 1,
+        "seedCandidates": 1,
+        "unsafeSeedSkipped": 0,
+        "tasksPlanned": 1,
+        "tasksExecuted": 1,
+        "taskCounterMeaning": "Tasks entered execution before any transport attempt",
+        "probeDispatches": 1,
+        "baselineDispatches": 2,
+        "dastRequestsDispatched": 3,
+        "runRequestsDispatched": 3,
+        "skippedDueToStrategy": 0,
+        "taskErrors": 0,
+        "lastTaskError": null,
+        "taskSkips": 0,
+        "lastTaskSkip": null,
+        "captureErrors": 0,
+        "waitingForInteraction": false
+      }
+    },
+    "summary": {
+      "status": "completed",
+      "releaseStatus": "clean",
+      "stats": {
+        "findingsCount": 0,
+        "bySeverity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "info": 0
+        }
+      },
+      "findings": 0
+    },
+    "runtimeId": "ptk-session_82bc76de-8cd0-4712-8367-d1e41e263c88",
+    "engineStatus": {
+      "DAST": {
+        "status": "stopped",
+        "isRunning": false,
+        "progress": {
+          "done": 1,
+          "total": 1,
+          "remaining": 0
+        },
+        "findingsCount": 0,
+        "bySeverity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "info": 0
+        },
+        "lastActivityAt": "2026-10-22T15:27:58.807Z",
+        "warnings": [],
+        "phase": "stopped",
+        "idle": true,
+        "remaining": 0,
+        "activeTasks": 0,
+        "taskQueue": 0,
+        "requestQueue": 0,
+        "pendingPlans": 0,
+        "planning": 0,
+        "pendingCaptures": 0,
+        "captureStats": {
+          "pendingObservedRequests": 0,
+          "pendingObservedRequestsMax": 1,
+          "observedRequestsStarted": 1,
+          "observedRequestsQueued": 1,
+          "observedRequestsDropped": 0,
+          "observedRequestsErrored": 0,
+          "observedRequestsDeduplicated": 2,
+          "lastObservedRequestStartedAt": "2026-10-22T15:27:56.345Z",
+          "lastObservedRequestFinishedAt": "2026-10-22T15:27:56.351Z",
+          "lastObservedRequestQueuedAt": "2026-10-22T15:27:56.351Z",
+          "lastObservedRequestDroppedAt": null,
+          "lastObservedRequestErrorAt": null
+        },
+        "engineError": null,
+        "taskErrorsCount": 0,
+        "lastTaskError": null,
+        "taskSkipsCount": 0,
+        "lastTaskSkip": null,
+        "skippedDueToStrategy": 0,
+        "scanStrategy": "COMPREHENSIVE",
+        "pendingAutomationSeeds": 0,
+        "seededRequests": 1,
+        "proxySeededRequests": 0,
+        "selectedTargetSeededRequests": 1,
+        "seedCandidates": 1,
+        "unsafeSeedSkipped": 0,
+        "seedError": null,
+        "waitingForInteraction": false,
+        "historySeededRequests": 0,
+        "historySeedInputCount": 0,
+        "historySeedTotalAvailable": 0,
+        "historySeedDroppedByCap": 0,
+        "historySeedDuplicatesSkipped": 0,
+        "targetWindowRequired": true,
+        "zapAttackWindow": null
+      }
+    },
+    "lastStatus": {
+      "sessionId": "ptk-session_82bc76de-8cd0-4712-8367-d1e41e263c88",
+      "scanId": "ptk-session_82bc76de-8cd0-4712-8367-d1e41e263c88",
+      "ok": true,
+      "status": "completed",
+      "completionStatus": "completed",
+      "releaseStatus": "clean",
+      "error": null,
+      "startedAt": "2026-10-22T15:27:56.079Z",
+      "finishedAt": "2026-10-22T15:27:58.995Z",
+      "stopRequestedAt": null,
+      "closeRequestId": null,
+      "closeRequestAck": false,
+      "closeRequestMode": null,
+      "idleVerified": false,
+      "elapsedMs": 2918,
+      "lastUpdatedAt": "2026-10-22T15:27:58.807Z",
+      "engines": {
+        "DAST": {
+          "status": "stopped",
+          "isRunning": false,
+          "progress": {
+            "done": 1,
+            "total": 1,
+            "remaining": 0
+          },
+          "findingsCount": 0,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          },
+          "lastActivityAt": "2026-10-22T15:27:58.807Z",
+          "warnings": [],
+          "phase": "stopped",
+          "idle": true,
+          "remaining": 0,
+          "activeTasks": 0,
+          "taskQueue": 0,
+          "requestQueue": 0,
+          "pendingPlans": 0,
+          "planning": 0,
+          "pendingCaptures": 0,
+          "captureStats": {
+            "pendingObservedRequests": 0,
+            "pendingObservedRequestsMax": 1,
+            "observedRequestsStarted": 1,
+            "observedRequestsQueued": 1,
+            "observedRequestsDropped": 0,
+            "observedRequestsErrored": 0,
+            "observedRequestsDeduplicated": 2,
+            "lastObservedRequestStartedAt": "2026-10-22T15:27:56.345Z",
+            "lastObservedRequestFinishedAt": "2026-10-22T15:27:56.351Z",
+            "lastObservedRequestQueuedAt": "2026-10-22T15:27:56.351Z",
+            "lastObservedRequestDroppedAt": null,
+            "lastObservedRequestErrorAt": null
+          },
+          "engineError": null,
+          "taskErrorsCount": 0,
+          "lastTaskError": null,
+          "taskSkipsCount": 0,
+          "lastTaskSkip": null,
+          "skippedDueToStrategy": 0,
+          "scanStrategy": "COMPREHENSIVE",
+          "pendingAutomationSeeds": 0,
+          "seededRequests": 1,
+          "proxySeededRequests": 0,
+          "selectedTargetSeededRequests": 1,
+          "seedCandidates": 1,
+          "unsafeSeedSkipped": 0,
+          "seedError": null,
+          "waitingForInteraction": false,
+          "historySeededRequests": 0,
+          "historySeedInputCount": 0,
+          "historySeedTotalAvailable": 0,
+          "historySeedDroppedByCap": 0,
+          "historySeedDuplicatesSkipped": 0,
+          "targetWindowRequired": true,
+          "zapAttackWindow": null
+        }
+      },
+      "summary": {
+        "findingsCount": 0,
+        "bySeverity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "info": 0
+        }
+      },
+      "finalSummary": {
+        "status": "completed",
+        "releaseStatus": "clean",
+        "stats": {
+          "findingsCount": 0,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          }
+        }
+      },
+      "warnings": [],
+      "sessionLookup": {
+        "requestedSessionId": "ptk-session_82bc76de-8cd0-4712-8367-d1e41e263c88",
+        "tabId": 722846620,
+        "strictCurrentTab": true,
+        "allowActive": true,
+        "allowCompleted": true,
+        "allowGlobalCompleted": true,
+        "lookupSource": "explicit-session",
+        "activeSessionIdForTab": null,
+        "completedSessionIdForTab": "ptk-session_82bc76de-8cd0-4712-8367-d1e41e263c88",
+        "globalCompletedSessionId": "ptk-session_82bc76de-8cd0-4712-8367-d1e41e263c88",
+        "sessionExists": true,
+        "sessionStatus": "completed",
+        "sessionFinishedAt": "2026-10-22T15:27:58.995Z",
+        "stopRequestedAt": null,
+        "retention": {
+          "ttlMs": 86400000,
+          "maxCompletedSessions": 20,
+          "evicted": false
+        }
+      },
+      "supplemental": {
+        "backends": {},
+        "gaps": []
+      },
+      "coverage": {
+        "backendGaps": []
+      }
+    },
+    "inFlight": 0,
+    "requestsReserved": 0,
+    "dastProbeDispatches": 1,
+    "dastBaselineDispatches": 2,
+    "httpRequestsSent": 3,
+    "stopReason": "Stopped by user."
+  },
+  "wire": [
+    {
+      "url": "https://pentest-ground.com:81/search",
+      "method": "GET",
+      "bodyBytes": 0,
+      "status": 200
+    },
+    {
+      "url": "https://pentest-ground.com:81/search",
+      "method": "POST",
+      "bodyBytes": 27,
+      "status": 200
+    },
+    {
+      "url": "https://pentest-ground.com:81/search",
+      "method": "POST",
+      "bodyBytes": 92,
+      "status": 200
+    }
+  ],
+  "findings": {
+    "runId": "fce3bbca-c2d6-4a1b-a792-bed05815ed80",
+    "findings": [],
+    "total": 0,
+    "nextOffset": null,
+    "truncated": false,
+    "coverage": {
+      "backendGaps": [],
+      "dast": {
+        "phase": "scan_requests_dispatched",
+        "applicationRequestsObserved": 1,
+        "applicationRequestsQueued": 1,
+        "proxySeededRequests": 0,
+        "selectedTargetSeededRequests": 1,
+        "seedCandidates": 1,
+        "unsafeSeedSkipped": 0,
+        "tasksPlanned": 1,
+        "tasksExecuted": 1,
+        "taskCounterMeaning": "Tasks entered execution before any transport attempt",
+        "probeDispatches": 1,
+        "baselineDispatches": 2,
+        "dastRequestsDispatched": 3,
+        "runRequestsDispatched": 3,
+        "skippedDueToStrategy": 0,
+        "taskErrors": 0,
+        "lastTaskError": null,
+        "taskSkips": 0,
+        "lastTaskSkip": null,
+        "captureErrors": 0,
+        "waitingForInteraction": false
+      }
+    },
+    "error": null
+  },
+  "passed": true,
+  "finishedAt": "2026-10-22T15:27:59.024Z"
+}

@@ -1,0 +1,1820 @@
+{
+  "schema": 1,
+  "scope": "Inert existing-frame/OOPIF acquisition and permission cleanup; no exploit execution.",
+  "checks": [
+    {
+      "name": "Allowed cross-origin frame is an actual OOPIF",
+      "passed": true,
+      "details": [
+        {
+          "type": "iframe",
+          "url": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E"
+        },
+        {
+          "type": "iframe",
+          "url": "http://localhost:65508/frameB?q=%3Cb%3ECERTX_EXISTING_SAFE%3C%2Fb%3E"
+        },
+        {
+          "type": "iframe",
+          "url": "http://localhost:65508/excluded/frameA?q=%3Cb%3ECERTX_EXISTING_EXCLUDEDPATH%3C%2Fb%3E"
+        },
+        {
+          "type": "iframe",
+          "url": "http://localhost:65509/frameA?q=%3Cb%3ECERTX_EXISTING_FOREIGN%3C%2Fb%3E"
+        }
+      ]
+    },
+    {
+      "name": "Existing same document was not reloaded",
+      "passed": true
+    },
+    {
+      "name": "Existing cross document was not reloaded",
+      "passed": true
+    },
+    {
+      "name": "Existing safe document was not reloaded",
+      "passed": true
+    },
+    {
+      "name": "Existing excludedPath document was not reloaded",
+      "passed": true
+    },
+    {
+      "name": "Existing foreign document was not reloaded",
+      "passed": true
+    },
+    {
+      "name": "existing same agent loaded",
+      "passed": true
+    },
+    {
+      "name": "existing same source-to-sink evidence",
+      "passed": true
+    },
+    {
+      "name": "existing cross agent loaded",
+      "passed": true
+    },
+    {
+      "name": "existing cross source-to-sink evidence",
+      "passed": true
+    },
+    {
+      "name": "existing safe frame is instrumented",
+      "passed": true
+    },
+    {
+      "name": "existing safe textContent has no finding",
+      "passed": true
+    },
+    {
+      "name": "existing excludedPath not instrumented",
+      "passed": true
+    },
+    {
+      "name": "existing excludedPath no findings",
+      "passed": true
+    },
+    {
+      "name": "existing foreign not instrumented",
+      "passed": true
+    },
+    {
+      "name": "existing foreign no findings",
+      "passed": true
+    },
+    {
+      "name": "navigated same agent loaded",
+      "passed": true
+    },
+    {
+      "name": "navigated same source-to-sink evidence",
+      "passed": true
+    },
+    {
+      "name": "navigated cross agent loaded",
+      "passed": true
+    },
+    {
+      "name": "navigated cross source-to-sink evidence",
+      "passed": true
+    },
+    {
+      "name": "navigated safe frame is instrumented",
+      "passed": true
+    },
+    {
+      "name": "navigated safe textContent has no finding",
+      "passed": true
+    },
+    {
+      "name": "navigated excludedPath not instrumented",
+      "passed": true
+    },
+    {
+      "name": "navigated excludedPath no findings",
+      "passed": true
+    },
+    {
+      "name": "navigated foreign not instrumented",
+      "passed": true
+    },
+    {
+      "name": "navigated foreign no findings",
+      "passed": true
+    },
+    {
+      "name": "Disabling security permissions terminates observation",
+      "passed": true,
+      "details": "completed"
+    },
+    {
+      "name": "Revoked same frame not reinjected",
+      "passed": true
+    },
+    {
+      "name": "Revoked cross frame not reinjected",
+      "passed": true
+    },
+    {
+      "name": "Revoked frames add no evidence",
+      "passed": true
+    },
+    {
+      "name": "Browser-agent debugger survives IAST revocation",
+      "passed": true
+    }
+  ],
+  "phases": [
+    {
+      "name": "existing",
+      "frames": {
+        "same": {
+          "url": "http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E",
+          "documentId": "2c33d716-d477-4963-9b1b-70c3628fb817",
+          "agentLoaded": true,
+          "rendered": "<b>CERTX_EXISTING_SAME</b>"
+        },
+        "cross": {
+          "url": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E",
+          "documentId": "1ec49d19-e0b2-4539-984a-c98d7d44becc",
+          "agentLoaded": true,
+          "rendered": "<b>CERTX_EXISTING_CROSS</b>"
+        },
+        "safe": {
+          "url": "http://localhost:65508/frameB?q=%3Cb%3ECERTX_EXISTING_SAFE%3C%2Fb%3E",
+          "documentId": "4c765af9-3350-4a60-87ed-1306ffb2e311",
+          "agentLoaded": true,
+          "rendered": "&lt;b&gt;CERTX_EXISTING_SAFE&lt;/b&gt;"
+        },
+        "excludedPath": {
+          "url": "http://localhost:65508/excluded/frameA?q=%3Cb%3ECERTX_EXISTING_EXCLUDEDPATH%3C%2Fb%3E",
+          "documentId": "f9ace5fd-5a6f-4f14-a210-5fed29f20c51",
+          "agentLoaded": false,
+          "rendered": "<b>CERTX_EXISTING_EXCLUDEDPATH</b>"
+        },
+        "foreign": {
+          "url": "http://localhost:65509/frameA?q=%3Cb%3ECERTX_EXISTING_FOREIGN%3C%2Fb%3E",
+          "documentId": "2ede250f-9c57-4262-9ac7-7d3a4bf4746a",
+          "agentLoaded": false,
+          "rendered": "<b>CERTX_EXISTING_FOREIGN</b>"
+        }
+      },
+      "observations": {
+        "same": [
+          {
+            "ruleId": "dom_innerhtml_xss",
+            "url": "http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E",
+            "sinkId": "dom.innerHTML",
+            "sourceKind": "query"
+          }
+        ],
+        "cross": [
+          {
+            "ruleId": "dom_innerhtml_xss",
+            "url": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E",
+            "sinkId": "dom.innerHTML",
+            "sourceKind": "query"
+          }
+        ],
+        "safe": [],
+        "excludedPath": [],
+        "foreign": []
+      },
+      "findings": [
+        {
+          "id": "d8b2a037-dfc9-44d6-860e-3fe3d901681a::IAST::8e9441bdb9cb3616892bc8d59a215e223d76a322",
+          "fingerprint": "8e9441bdb9cb3616892bc8d59a215e223d76a322",
+          "category": "xss",
+          "severity": "high",
+          "confidence": 77,
+          "cwe": [
+            "CWE-79"
+          ],
+          "owasp": [
+            "A05:2025 - Injection",
+            "A03:2021 - Injection"
+          ],
+          "location": {
+            "url": "http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E",
+            "scriptUrl": null,
+            "line": null,
+            "column": null,
+            "domPath": "div#sink",
+            "kind": "runtime",
+            "method": null
+          },
+          "ruleId": "dom_innerhtml_xss",
+          "ruleName": "DOM XSS via Element.innerHTML",
+          "moduleId": "iast_dom_xss",
+          "moduleName": "DOM XSS sinks",
+          "description": "Tainted data assigned to innerHTML (possible DOM XSS).",
+          "recommendation": "<ul><li>Avoid inserting untrusted strings into HTML or inline handlers.</li><li>Prefer textContent or safe templating; sanitize with DOMPurify when HTML is required.</li><li>Use CSP without unsafe-inline where possible.</li></ul>",
+          "links": {
+            "OWASP": "https://owasp.org/www-community/attacks/xss/",
+            "CWE": "https://cwe.mitre.org/data/definitions/79.html"
+          },
+          "evidence": {
+            "iast": {
+              "sinkId": "dom.innerHTML",
+              "sourceId": "query:q",
+              "sourceKey": "query:q",
+              "sourceKind": "query",
+              "sourceValuePreview": "<b>CERTX_EXISTING_SAME</b>",
+              "taintSource": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_SAME</b>\")",
+              "source": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_SAME</b>\")",
+              "primarySource": {
+                "source": "query:q",
+                "raw": "<b>CERTX_EXISTING_SAME</b>",
+                "kind": "query",
+                "matchType": "substring",
+                "score": 10001000000,
+                "lastUpdated": 1792690990122,
+                "taintKind": "user_input",
+                "key": "query:q",
+                "value": "<b>CERTX_EXISTING_SAME</b>",
+                "label": "Query parameter \"q\"",
+                "detail": "q",
+                "location": "http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E",
+                "sourceKind": "query",
+                "sourceId": "s_1",
+                "origin": null,
+                "isCrossOriginMessage": null,
+                "responseUrl": null,
+                "responseStatus": null,
+                "__normalizedSource": true
+              },
+              "secondarySources": [
+                {
+                  "display": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_SAME</b>\")",
+                  "key": "query:q",
+                  "sourceKind": "query",
+                  "score": 10001000000,
+                  "sourceValuePreview": "<b>CERTX_EXISTING_SAME</b>"
+                }
+              ],
+              "sources": [
+                {
+                  "source": "query:q",
+                  "raw": "<b>CERTX_EXISTING_SAME</b>",
+                  "kind": "query",
+                  "matchType": "substring",
+                  "score": 10001000000,
+                  "lastUpdated": 1792690990122,
+                  "taintKind": "user_input",
+                  "key": "query:q",
+                  "value": "<b>CERTX_EXISTING_SAME</b>",
+                  "label": "Query parameter \"q\"",
+                  "detail": "q",
+                  "location": "http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E",
+                  "sourceKind": "query",
+                  "sourceId": "s_1",
+                  "origin": null,
+                  "isCrossOriginMessage": null,
+                  "responseUrl": null,
+                  "responseStatus": null,
+                  "__normalizedSource": true,
+                  "display": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_SAME</b>\")",
+                  "sourceValuePreview": "<b>CERTX_EXISTING_SAME</b>"
+                }
+              ],
+              "sink": "innerHTML",
+              "sinkContext": {
+                "requestUrl": null,
+                "method": null,
+                "headerName": null,
+                "destUrl": null,
+                "destHost": null,
+                "destOrigin": null,
+                "isCrossOrigin": null,
+                "tagName": "DIV",
+                "domPath": "div#sink",
+                "attribute": null,
+                "elementId": null,
+                "cookieName": null,
+                "cookieAttributes": null,
+                "storageKey": null,
+                "storageArea": null
+              },
+              "matched": "<b>CERTX_EXISTING_SAME</b>",
+              "trace": "Error: Sink: xss-via-innerHTML\nat document.querySelector.onclick (http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E:1:379)",
+              "traceSummary": "at document.querySelector.onclick (http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E:1:379)",
+              "context": {
+                "location": "http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E",
+                "domPath": "div#sink",
+                "elementId": "sink",
+                "tagName": "div",
+                "valuePreview": "<b>CERTX_EXISTING_SAME</b>"
+              },
+              "sinkSummary": {
+                "sinks": [
+                  "dom.innerHTML"
+                ],
+                "primarySink": "dom.innerHTML"
+              },
+              "taintSummary": {
+                "sources": [
+                  "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_SAME</b>\")",
+                  "query:q"
+                ],
+                "primarySource": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_SAME</b>\")"
+              },
+              "schemaVersion": "iast-evidence@1",
+              "primaryClass": "taint_flow",
+              "sourceRole": "origin",
+              "operation": {
+                "sinkId": "dom.innerHTML",
+                "sinkArgs": null
+              },
+              "routing": {
+                "runtimeUrl": "http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E",
+                "pathname": "/frameA",
+                "clientRoute": "/frameA",
+                "route": "/frameA",
+                "urlPattern": "http://127.0.0.1:65507/frameA"
+              },
+              "aggregate": {
+                "mode": "route-source-sink-callsite",
+                "key": "IAST|route-source-sink-callsite|d8b2a037-dfc9-44d6-860e-3fe3d901681a|127.0.0.1:65507|iast_dom_xss|dom_innerhtml_xss|http://127.0.0.1:65507/frameA|query:q|dom.innerhtml|div#sink"
+              },
+              "occurrenceCount": 1,
+              "sampleLimit": 10,
+              "truncated": false,
+              "samples": [
+                {
+                  "url": "http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E",
+                  "route": "http://127.0.0.1:65507/frameA",
+                  "sourceKey": "query:q",
+                  "sourceKind": "query",
+                  "source": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_SAME</b>\")",
+                  "sinkId": "dom.innerHTML",
+                  "callsite": "div#sink",
+                  "matched": "<b>CERTX_EXISTING_SAME</b>",
+                  "seenAt": "2026-10-22T17:43:11.690Z"
+                }
+              ],
+              "affectedUrls": [
+                "http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E"
+              ]
+            }
+          },
+          "scanId": "d8b2a037-dfc9-44d6-860e-3fe3d901681a",
+          "createdAt": "2026-10-22T17:43:11.688Z",
+          "updatedAt": "2026-10-22T17:43:11.688Z",
+          "vulnId": "dom_xss",
+          "requestKey": null,
+          "presentationAggregate": "route-source-sink-callsite",
+          "engine": "IAST",
+          "tags": [
+            "iast",
+            "dom",
+            "xss"
+          ],
+          "title": "DOM XSS via Element.innerHTML"
+        },
+        {
+          "id": "d8b2a037-dfc9-44d6-860e-3fe3d901681a::IAST::deb87f0f36794beff865c984c81215361029041d",
+          "fingerprint": "deb87f0f36794beff865c984c81215361029041d",
+          "category": "xss",
+          "severity": "high",
+          "confidence": 77,
+          "cwe": [
+            "CWE-79"
+          ],
+          "owasp": [
+            "A05:2025 - Injection",
+            "A03:2021 - Injection"
+          ],
+          "location": {
+            "url": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E",
+            "scriptUrl": null,
+            "line": null,
+            "column": null,
+            "domPath": "div#sink",
+            "kind": "runtime",
+            "method": null
+          },
+          "ruleId": "dom_innerhtml_xss",
+          "ruleName": "DOM XSS via Element.innerHTML",
+          "moduleId": "iast_dom_xss",
+          "moduleName": "DOM XSS sinks",
+          "description": "Tainted data assigned to innerHTML (possible DOM XSS).",
+          "recommendation": "<ul><li>Avoid inserting untrusted strings into HTML or inline handlers.</li><li>Prefer textContent or safe templating; sanitize with DOMPurify when HTML is required.</li><li>Use CSP without unsafe-inline where possible.</li></ul>",
+          "links": {
+            "OWASP": "https://owasp.org/www-community/attacks/xss/",
+            "CWE": "https://cwe.mitre.org/data/definitions/79.html"
+          },
+          "evidence": {
+            "iast": {
+              "sinkId": "dom.innerHTML",
+              "sourceId": "query:q",
+              "sourceKey": "query:q",
+              "sourceKind": "query",
+              "sourceValuePreview": "<b>CERTX_EXISTING_CROSS</b>",
+              "taintSource": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_CROSS</b>\")",
+              "source": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_CROSS</b>\")",
+              "primarySource": {
+                "source": "query:q",
+                "raw": "<b>CERTX_EXISTING_CROSS</b>",
+                "kind": "query",
+                "matchType": "substring",
+                "score": 10001000000,
+                "lastUpdated": 1792690990132,
+                "taintKind": "user_input",
+                "key": "query:q",
+                "value": "<b>CERTX_EXISTING_CROSS</b>",
+                "label": "Query parameter \"q\"",
+                "detail": "q",
+                "location": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E",
+                "sourceKind": "query",
+                "sourceId": "s_1",
+                "origin": null,
+                "isCrossOriginMessage": null,
+                "responseUrl": null,
+                "responseStatus": null,
+                "__normalizedSource": true
+              },
+              "secondarySources": [
+                {
+                  "display": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_CROSS</b>\")",
+                  "key": "query:q",
+                  "sourceKind": "query",
+                  "score": 10001000000,
+                  "sourceValuePreview": "<b>CERTX_EXISTING_CROSS</b>"
+                }
+              ],
+              "sources": [
+                {
+                  "source": "query:q",
+                  "raw": "<b>CERTX_EXISTING_CROSS</b>",
+                  "kind": "query",
+                  "matchType": "substring",
+                  "score": 10001000000,
+                  "lastUpdated": 1792690990132,
+                  "taintKind": "user_input",
+                  "key": "query:q",
+                  "value": "<b>CERTX_EXISTING_CROSS</b>",
+                  "label": "Query parameter \"q\"",
+                  "detail": "q",
+                  "location": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E",
+                  "sourceKind": "query",
+                  "sourceId": "s_1",
+                  "origin": null,
+                  "isCrossOriginMessage": null,
+                  "responseUrl": null,
+                  "responseStatus": null,
+                  "__normalizedSource": true,
+                  "display": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_CROSS</b>\")",
+                  "sourceValuePreview": "<b>CERTX_EXISTING_CROSS</b>"
+                }
+              ],
+              "sink": "innerHTML",
+              "sinkContext": {
+                "requestUrl": null,
+                "method": null,
+                "headerName": null,
+                "destUrl": null,
+                "destHost": null,
+                "destOrigin": null,
+                "isCrossOrigin": null,
+                "tagName": "DIV",
+                "domPath": "div#sink",
+                "attribute": null,
+                "elementId": null,
+                "cookieName": null,
+                "cookieAttributes": null,
+                "storageKey": null,
+                "storageArea": null
+              },
+              "matched": "<b>CERTX_EXISTING_CROSS</b>",
+              "trace": "Error: Sink: xss-via-innerHTML\nat document.querySelector.onclick (http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E:1:379)",
+              "traceSummary": "at document.querySelector.onclick (http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E:1:379)",
+              "context": {
+                "location": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E",
+                "domPath": "div#sink",
+                "elementId": "sink",
+                "tagName": "div",
+                "valuePreview": "<b>CERTX_EXISTING_CROSS</b>"
+              },
+              "sinkSummary": {
+                "sinks": [
+                  "dom.innerHTML"
+                ],
+                "primarySink": "dom.innerHTML"
+              },
+              "taintSummary": {
+                "sources": [
+                  "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_CROSS</b>\")",
+                  "query:q"
+                ],
+                "primarySource": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_CROSS</b>\")"
+              },
+              "schemaVersion": "iast-evidence@1",
+              "primaryClass": "taint_flow",
+              "sourceRole": "origin",
+              "operation": {
+                "sinkId": "dom.innerHTML",
+                "sinkArgs": null
+              },
+              "routing": {
+                "runtimeUrl": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E",
+                "pathname": "/frameA",
+                "clientRoute": "/frameA",
+                "route": "/frameA",
+                "urlPattern": "http://localhost:65508/frameA"
+              },
+              "aggregate": {
+                "mode": "route-source-sink-callsite",
+                "key": "IAST|route-source-sink-callsite|d8b2a037-dfc9-44d6-860e-3fe3d901681a|127.0.0.1:65507|iast_dom_xss|dom_innerhtml_xss|http://localhost:65508/frameA|query:q|dom.innerhtml|div#sink"
+              },
+              "occurrenceCount": 1,
+              "sampleLimit": 10,
+              "truncated": false,
+              "samples": [
+                {
+                  "url": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E",
+                  "route": "http://localhost:65508/frameA",
+                  "sourceKey": "query:q",
+                  "sourceKind": "query",
+                  "source": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_CROSS</b>\")",
+                  "sinkId": "dom.innerHTML",
+                  "callsite": "div#sink",
+                  "matched": "<b>CERTX_EXISTING_CROSS</b>",
+                  "seenAt": "2026-10-22T17:43:11.711Z"
+                }
+              ],
+              "affectedUrls": [
+                "http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E"
+              ]
+            }
+          },
+          "scanId": "d8b2a037-dfc9-44d6-860e-3fe3d901681a",
+          "createdAt": "2026-10-22T17:43:11.711Z",
+          "updatedAt": "2026-10-22T17:43:11.711Z",
+          "vulnId": "dom_xss",
+          "requestKey": null,
+          "presentationAggregate": "route-source-sink-callsite",
+          "engine": "IAST",
+          "tags": [
+            "iast",
+            "dom",
+            "xss"
+          ],
+          "title": "DOM XSS via Element.innerHTML"
+        }
+      ]
+    },
+    {
+      "name": "navigated",
+      "frames": {
+        "same": {
+          "url": "http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_NAVIGATED_SAME%3C%2Fb%3E",
+          "documentId": "df351812-4e26-4a8b-bb12-af27af589e6f",
+          "agentLoaded": true,
+          "rendered": "<b>CERTX_NAVIGATED_SAME</b>"
+        },
+        "cross": {
+          "url": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_NAVIGATED_CROSS%3C%2Fb%3E",
+          "documentId": "02111b50-fce1-4a32-af02-00d380d7dd98",
+          "agentLoaded": true,
+          "rendered": "<b>CERTX_NAVIGATED_CROSS</b>"
+        },
+        "safe": {
+          "url": "http://localhost:65508/frameB?q=%3Cb%3ECERTX_NAVIGATED_SAFE%3C%2Fb%3E",
+          "documentId": "6ca422ef-cf43-45f5-933e-736d04b1c03a",
+          "agentLoaded": true,
+          "rendered": "&lt;b&gt;CERTX_NAVIGATED_SAFE&lt;/b&gt;"
+        },
+        "excludedPath": {
+          "url": "http://localhost:65508/excluded/frameA?q=%3Cb%3ECERTX_NAVIGATED_EXCLUDEDPATH%3C%2Fb%3E",
+          "documentId": "17563e42-13a1-41a5-92df-56c8c525a138",
+          "agentLoaded": false,
+          "rendered": "<b>CERTX_NAVIGATED_EXCLUDEDPATH</b>"
+        },
+        "foreign": {
+          "url": "http://localhost:65509/frameA?q=%3Cb%3ECERTX_NAVIGATED_FOREIGN%3C%2Fb%3E",
+          "documentId": "836d9317-30af-4c04-8b36-e3b7b092b95d",
+          "agentLoaded": false,
+          "rendered": "<b>CERTX_NAVIGATED_FOREIGN</b>"
+        }
+      },
+      "observations": {
+        "same": [
+          {
+            "ruleId": "dom_innerhtml_xss",
+            "url": "http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E",
+            "sinkId": "dom.innerHTML",
+            "sourceKind": "query"
+          }
+        ],
+        "cross": [
+          {
+            "ruleId": "dom_innerhtml_xss",
+            "url": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E",
+            "sinkId": "dom.innerHTML",
+            "sourceKind": "query"
+          }
+        ],
+        "safe": [],
+        "excludedPath": [],
+        "foreign": []
+      },
+      "findings": [
+        {
+          "id": "d8b2a037-dfc9-44d6-860e-3fe3d901681a::IAST::8e9441bdb9cb3616892bc8d59a215e223d76a322",
+          "fingerprint": "8e9441bdb9cb3616892bc8d59a215e223d76a322",
+          "category": "xss",
+          "severity": "high",
+          "confidence": 77,
+          "cwe": [
+            "CWE-79"
+          ],
+          "owasp": [
+            "A05:2025 - Injection",
+            "A03:2021 - Injection"
+          ],
+          "location": {
+            "url": "http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E",
+            "scriptUrl": null,
+            "line": null,
+            "column": null,
+            "domPath": "div#sink",
+            "kind": "runtime",
+            "method": null
+          },
+          "ruleId": "dom_innerhtml_xss",
+          "ruleName": "DOM XSS via Element.innerHTML",
+          "moduleId": "iast_dom_xss",
+          "moduleName": "DOM XSS sinks",
+          "description": "Tainted data assigned to innerHTML (possible DOM XSS).",
+          "recommendation": "<ul><li>Avoid inserting untrusted strings into HTML or inline handlers.</li><li>Prefer textContent or safe templating; sanitize with DOMPurify when HTML is required.</li><li>Use CSP without unsafe-inline where possible.</li></ul>",
+          "links": {
+            "OWASP": "https://owasp.org/www-community/attacks/xss/",
+            "CWE": "https://cwe.mitre.org/data/definitions/79.html"
+          },
+          "evidence": {
+            "iast": {
+              "sinkId": "dom.innerHTML",
+              "sourceId": "query:q",
+              "sourceKey": "query:q",
+              "sourceKind": "query",
+              "sourceValuePreview": "<b>CERTX_EXISTING_SAME</b>",
+              "taintSource": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_SAME</b>\")",
+              "source": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_SAME</b>\")",
+              "primarySource": {
+                "source": "query:q",
+                "raw": "<b>CERTX_EXISTING_SAME</b>",
+                "kind": "query",
+                "matchType": "substring",
+                "score": 10001000000,
+                "lastUpdated": 1792690990122,
+                "taintKind": "user_input",
+                "key": "query:q",
+                "value": "<b>CERTX_EXISTING_SAME</b>",
+                "label": "Query parameter \"q\"",
+                "detail": "q",
+                "location": "http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E",
+                "sourceKind": "query",
+                "sourceId": "s_1",
+                "origin": null,
+                "isCrossOriginMessage": null,
+                "responseUrl": null,
+                "responseStatus": null,
+                "__normalizedSource": true
+              },
+              "secondarySources": [
+                {
+                  "display": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_SAME</b>\")",
+                  "key": "query:q",
+                  "sourceKind": "query",
+                  "score": 10001000000,
+                  "sourceValuePreview": "<b>CERTX_EXISTING_SAME</b>"
+                }
+              ],
+              "sources": [
+                {
+                  "source": "query:q",
+                  "raw": "<b>CERTX_EXISTING_SAME</b>",
+                  "kind": "query",
+                  "matchType": "substring",
+                  "score": 10001000000,
+                  "lastUpdated": 1792690990122,
+                  "taintKind": "user_input",
+                  "key": "query:q",
+                  "value": "<b>CERTX_EXISTING_SAME</b>",
+                  "label": "Query parameter \"q\"",
+                  "detail": "q",
+                  "location": "http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E",
+                  "sourceKind": "query",
+                  "sourceId": "s_1",
+                  "origin": null,
+                  "isCrossOriginMessage": null,
+                  "responseUrl": null,
+                  "responseStatus": null,
+                  "__normalizedSource": true,
+                  "display": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_SAME</b>\")",
+                  "sourceValuePreview": "<b>CERTX_EXISTING_SAME</b>"
+                }
+              ],
+              "sink": "innerHTML",
+              "sinkContext": {
+                "requestUrl": null,
+                "method": null,
+                "headerName": null,
+                "destUrl": null,
+                "destHost": null,
+                "destOrigin": null,
+                "isCrossOrigin": null,
+                "tagName": "DIV",
+                "domPath": "div#sink",
+                "attribute": null,
+                "elementId": null,
+                "cookieName": null,
+                "cookieAttributes": null,
+                "storageKey": null,
+                "storageArea": null
+              },
+              "matched": "<b>CERTX_EXISTING_SAME</b>",
+              "trace": "Error: Sink: xss-via-innerHTML\nat document.querySelector.onclick (http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E:1:379)",
+              "traceSummary": "at document.querySelector.onclick (http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E:1:379)",
+              "context": {
+                "location": "http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E",
+                "domPath": "div#sink",
+                "elementId": "sink",
+                "tagName": "div",
+                "valuePreview": "<b>CERTX_EXISTING_SAME</b>"
+              },
+              "sinkSummary": {
+                "sinks": [
+                  "dom.innerHTML"
+                ],
+                "primarySink": "dom.innerHTML"
+              },
+              "taintSummary": {
+                "sources": [
+                  "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_SAME</b>\")",
+                  "query:q"
+                ],
+                "primarySource": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_SAME</b>\")"
+              },
+              "schemaVersion": "iast-evidence@1",
+              "primaryClass": "taint_flow",
+              "sourceRole": "origin",
+              "operation": {
+                "sinkId": "dom.innerHTML",
+                "sinkArgs": null
+              },
+              "routing": {
+                "runtimeUrl": "http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E",
+                "pathname": "/frameA",
+                "clientRoute": "/frameA",
+                "route": "/frameA",
+                "urlPattern": "http://127.0.0.1:65507/frameA"
+              },
+              "aggregate": {
+                "mode": "route-source-sink-callsite",
+                "key": "IAST|route-source-sink-callsite|d8b2a037-dfc9-44d6-860e-3fe3d901681a|127.0.0.1:65507|iast_dom_xss|dom_innerhtml_xss|http://127.0.0.1:65507/frameA|query:q|dom.innerhtml|div#sink"
+              },
+              "occurrenceCount": 2,
+              "sampleLimit": 10,
+              "truncated": false,
+              "samples": [
+                {
+                  "url": "http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E",
+                  "route": "http://127.0.0.1:65507/frameA",
+                  "sourceKey": "query:q",
+                  "sourceKind": "query",
+                  "source": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_SAME</b>\")",
+                  "sinkId": "dom.innerHTML",
+                  "callsite": "div#sink",
+                  "matched": "<b>CERTX_EXISTING_SAME</b>",
+                  "seenAt": "2026-10-22T17:43:11.690Z"
+                },
+                {
+                  "url": "http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_NAVIGATED_SAME%3C%2Fb%3E",
+                  "route": "http://127.0.0.1:65507/frameA",
+                  "sourceKey": "query:q",
+                  "sourceKind": "query",
+                  "source": "location.search parameter \"q\" (value: \"<b>CERTX_NAVIGATED_SAME</b>\")",
+                  "sinkId": "dom.innerHTML",
+                  "callsite": "div#sink",
+                  "matched": "<b>CERTX_NAVIGATED_SAME</b>",
+                  "seenAt": "2026-10-22T17:43:13.651Z"
+                }
+              ],
+              "affectedUrls": [
+                "http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E"
+              ]
+            }
+          },
+          "scanId": "d8b2a037-dfc9-44d6-860e-3fe3d901681a",
+          "createdAt": "2026-10-22T17:43:11.688Z",
+          "updatedAt": "2026-10-22T17:43:13.651Z",
+          "vulnId": "dom_xss",
+          "requestKey": null,
+          "presentationAggregate": "route-source-sink-callsite",
+          "engine": "IAST",
+          "tags": [
+            "iast",
+            "dom",
+            "xss"
+          ],
+          "lastSeenAt": "2026-10-22T17:43:13.651Z",
+          "title": "DOM XSS via Element.innerHTML"
+        },
+        {
+          "id": "d8b2a037-dfc9-44d6-860e-3fe3d901681a::IAST::deb87f0f36794beff865c984c81215361029041d",
+          "fingerprint": "deb87f0f36794beff865c984c81215361029041d",
+          "category": "xss",
+          "severity": "high",
+          "confidence": 77,
+          "cwe": [
+            "CWE-79"
+          ],
+          "owasp": [
+            "A05:2025 - Injection",
+            "A03:2021 - Injection"
+          ],
+          "location": {
+            "url": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E",
+            "scriptUrl": null,
+            "line": null,
+            "column": null,
+            "domPath": "div#sink",
+            "kind": "runtime",
+            "method": null
+          },
+          "ruleId": "dom_innerhtml_xss",
+          "ruleName": "DOM XSS via Element.innerHTML",
+          "moduleId": "iast_dom_xss",
+          "moduleName": "DOM XSS sinks",
+          "description": "Tainted data assigned to innerHTML (possible DOM XSS).",
+          "recommendation": "<ul><li>Avoid inserting untrusted strings into HTML or inline handlers.</li><li>Prefer textContent or safe templating; sanitize with DOMPurify when HTML is required.</li><li>Use CSP without unsafe-inline where possible.</li></ul>",
+          "links": {
+            "OWASP": "https://owasp.org/www-community/attacks/xss/",
+            "CWE": "https://cwe.mitre.org/data/definitions/79.html"
+          },
+          "evidence": {
+            "iast": {
+              "sinkId": "dom.innerHTML",
+              "sourceId": "query:q",
+              "sourceKey": "query:q",
+              "sourceKind": "query",
+              "sourceValuePreview": "<b>CERTX_EXISTING_CROSS</b>",
+              "taintSource": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_CROSS</b>\")",
+              "source": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_CROSS</b>\")",
+              "primarySource": {
+                "source": "query:q",
+                "raw": "<b>CERTX_EXISTING_CROSS</b>",
+                "kind": "query",
+                "matchType": "substring",
+                "score": 10001000000,
+                "lastUpdated": 1792690990132,
+                "taintKind": "user_input",
+                "key": "query:q",
+                "value": "<b>CERTX_EXISTING_CROSS</b>",
+                "label": "Query parameter \"q\"",
+                "detail": "q",
+                "location": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E",
+                "sourceKind": "query",
+                "sourceId": "s_1",
+                "origin": null,
+                "isCrossOriginMessage": null,
+                "responseUrl": null,
+                "responseStatus": null,
+                "__normalizedSource": true
+              },
+              "secondarySources": [
+                {
+                  "display": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_CROSS</b>\")",
+                  "key": "query:q",
+                  "sourceKind": "query",
+                  "score": 10001000000,
+                  "sourceValuePreview": "<b>CERTX_EXISTING_CROSS</b>"
+                }
+              ],
+              "sources": [
+                {
+                  "source": "query:q",
+                  "raw": "<b>CERTX_EXISTING_CROSS</b>",
+                  "kind": "query",
+                  "matchType": "substring",
+                  "score": 10001000000,
+                  "lastUpdated": 1792690990132,
+                  "taintKind": "user_input",
+                  "key": "query:q",
+                  "value": "<b>CERTX_EXISTING_CROSS</b>",
+                  "label": "Query parameter \"q\"",
+                  "detail": "q",
+                  "location": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E",
+                  "sourceKind": "query",
+                  "sourceId": "s_1",
+                  "origin": null,
+                  "isCrossOriginMessage": null,
+                  "responseUrl": null,
+                  "responseStatus": null,
+                  "__normalizedSource": true,
+                  "display": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_CROSS</b>\")",
+                  "sourceValuePreview": "<b>CERTX_EXISTING_CROSS</b>"
+                }
+              ],
+              "sink": "innerHTML",
+              "sinkContext": {
+                "requestUrl": null,
+                "method": null,
+                "headerName": null,
+                "destUrl": null,
+                "destHost": null,
+                "destOrigin": null,
+                "isCrossOrigin": null,
+                "tagName": "DIV",
+                "domPath": "div#sink",
+                "attribute": null,
+                "elementId": null,
+                "cookieName": null,
+                "cookieAttributes": null,
+                "storageKey": null,
+                "storageArea": null
+              },
+              "matched": "<b>CERTX_EXISTING_CROSS</b>",
+              "trace": "Error: Sink: xss-via-innerHTML\nat document.querySelector.onclick (http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E:1:379)",
+              "traceSummary": "at document.querySelector.onclick (http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E:1:379)",
+              "context": {
+                "location": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E",
+                "domPath": "div#sink",
+                "elementId": "sink",
+                "tagName": "div",
+                "valuePreview": "<b>CERTX_EXISTING_CROSS</b>"
+              },
+              "sinkSummary": {
+                "sinks": [
+                  "dom.innerHTML"
+                ],
+                "primarySink": "dom.innerHTML"
+              },
+              "taintSummary": {
+                "sources": [
+                  "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_CROSS</b>\")",
+                  "query:q"
+                ],
+                "primarySource": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_CROSS</b>\")"
+              },
+              "schemaVersion": "iast-evidence@1",
+              "primaryClass": "taint_flow",
+              "sourceRole": "origin",
+              "operation": {
+                "sinkId": "dom.innerHTML",
+                "sinkArgs": null
+              },
+              "routing": {
+                "runtimeUrl": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E",
+                "pathname": "/frameA",
+                "clientRoute": "/frameA",
+                "route": "/frameA",
+                "urlPattern": "http://localhost:65508/frameA"
+              },
+              "aggregate": {
+                "mode": "route-source-sink-callsite",
+                "key": "IAST|route-source-sink-callsite|d8b2a037-dfc9-44d6-860e-3fe3d901681a|127.0.0.1:65507|iast_dom_xss|dom_innerhtml_xss|http://localhost:65508/frameA|query:q|dom.innerhtml|div#sink"
+              },
+              "occurrenceCount": 2,
+              "sampleLimit": 10,
+              "truncated": false,
+              "samples": [
+                {
+                  "url": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E",
+                  "route": "http://localhost:65508/frameA",
+                  "sourceKey": "query:q",
+                  "sourceKind": "query",
+                  "source": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_CROSS</b>\")",
+                  "sinkId": "dom.innerHTML",
+                  "callsite": "div#sink",
+                  "matched": "<b>CERTX_EXISTING_CROSS</b>",
+                  "seenAt": "2026-10-22T17:43:11.711Z"
+                },
+                {
+                  "url": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_NAVIGATED_CROSS%3C%2Fb%3E",
+                  "route": "http://localhost:65508/frameA",
+                  "sourceKey": "query:q",
+                  "sourceKind": "query",
+                  "source": "location.search parameter \"q\" (value: \"<b>CERTX_NAVIGATED_CROSS</b>\")",
+                  "sinkId": "dom.innerHTML",
+                  "callsite": "div#sink",
+                  "matched": "<b>CERTX_NAVIGATED_CROSS</b>",
+                  "seenAt": "2026-10-22T17:43:13.710Z"
+                }
+              ],
+              "affectedUrls": [
+                "http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E"
+              ]
+            }
+          },
+          "scanId": "d8b2a037-dfc9-44d6-860e-3fe3d901681a",
+          "createdAt": "2026-10-22T17:43:11.711Z",
+          "updatedAt": "2026-10-22T17:43:13.710Z",
+          "vulnId": "dom_xss",
+          "requestKey": null,
+          "presentationAggregate": "route-source-sink-callsite",
+          "engine": "IAST",
+          "tags": [
+            "iast",
+            "dom",
+            "xss"
+          ],
+          "lastSeenAt": "2026-10-22T17:43:13.710Z",
+          "title": "DOM XSS via Element.innerHTML"
+        }
+      ]
+    },
+    {
+      "name": "revoked",
+      "frames": {
+        "same": {
+          "url": "http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_REVOKED_SAME%3C%2Fb%3E",
+          "documentId": "98b23fa2-3ee0-4bc8-8b3c-9ca7918990fa",
+          "agentLoaded": false,
+          "rendered": "<b>CERTX_REVOKED_SAME</b>"
+        },
+        "cross": {
+          "url": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_REVOKED_CROSS%3C%2Fb%3E",
+          "documentId": "0f2b9b64-2fdc-45a4-9e5c-3544db6a4699",
+          "agentLoaded": false,
+          "rendered": "<b>CERTX_REVOKED_CROSS</b>"
+        },
+        "safe": {
+          "url": "http://localhost:65508/frameB?q=%3Cb%3ECERTX_REVOKED_SAFE%3C%2Fb%3E",
+          "documentId": "2fe29cf4-6b62-46e3-b8e4-7ac464e1bfdd",
+          "agentLoaded": false,
+          "rendered": "&lt;b&gt;CERTX_REVOKED_SAFE&lt;/b&gt;"
+        },
+        "excludedPath": {
+          "url": "http://localhost:65508/excluded/frameA?q=%3Cb%3ECERTX_REVOKED_EXCLUDEDPATH%3C%2Fb%3E",
+          "documentId": "7fa2c174-f526-4ed0-9f59-61288d9fba6d",
+          "agentLoaded": false,
+          "rendered": "<b>CERTX_REVOKED_EXCLUDEDPATH</b>"
+        },
+        "foreign": {
+          "url": "http://localhost:65509/frameA?q=%3Cb%3ECERTX_REVOKED_FOREIGN%3C%2Fb%3E",
+          "documentId": "d2efb639-b270-4822-94fd-a53b9165e950",
+          "agentLoaded": false,
+          "rendered": "<b>CERTX_REVOKED_FOREIGN</b>"
+        }
+      },
+      "observations": {
+        "same": [],
+        "cross": [],
+        "safe": [],
+        "excludedPath": [],
+        "foreign": []
+      },
+      "findings": [
+        {
+          "category": "xss",
+          "confidence": 77,
+          "createdAt": "2026-10-22T17:43:11.688Z",
+          "cwe": [
+            "CWE-79"
+          ],
+          "description": "Tainted data assigned to innerHTML (possible DOM XSS).",
+          "engine": "IAST",
+          "evidence": {
+            "iast": {
+              "affectedUrls": [
+                "http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E"
+              ],
+              "aggregate": {
+                "key": "IAST|route-source-sink-callsite|d8b2a037-dfc9-44d6-860e-3fe3d901681a|127.0.0.1:65507|iast_dom_xss|dom_innerhtml_xss|http://127.0.0.1:65507/frameA|query:q|dom.innerhtml|div#sink",
+                "mode": "route-source-sink-callsite"
+              },
+              "context": {
+                "domPath": "div#sink",
+                "elementId": "sink",
+                "location": "http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E",
+                "tagName": "div",
+                "valuePreview": "<b>CERTX_EXISTING_SAME</b>"
+              },
+              "matched": "<b>CERTX_EXISTING_SAME</b>",
+              "occurrenceCount": 2,
+              "operation": {
+                "sinkArgs": null,
+                "sinkId": "dom.innerHTML"
+              },
+              "primaryClass": "taint_flow",
+              "primarySource": {
+                "__normalizedSource": true,
+                "detail": "q",
+                "isCrossOriginMessage": null,
+                "key": "query:q",
+                "kind": "query",
+                "label": "Query parameter \"q\"",
+                "lastUpdated": 1792690990122,
+                "location": "http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E",
+                "matchType": "substring",
+                "origin": null,
+                "raw": "<b>CERTX_EXISTING_SAME</b>",
+                "responseStatus": null,
+                "responseUrl": null,
+                "score": 10001000000,
+                "source": "query:q",
+                "sourceId": "s_1",
+                "sourceKind": "query",
+                "taintKind": "user_input",
+                "value": "<b>CERTX_EXISTING_SAME</b>"
+              },
+              "routing": {
+                "clientRoute": "/frameA",
+                "pathname": "/frameA",
+                "route": "/frameA",
+                "runtimeUrl": "http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E",
+                "urlPattern": "http://127.0.0.1:65507/frameA"
+              },
+              "sampleLimit": 10,
+              "samples": [
+                {
+                  "callsite": "div#sink",
+                  "matched": "<b>CERTX_EXISTING_SAME</b>",
+                  "route": "http://127.0.0.1:65507/frameA",
+                  "seenAt": "2026-10-22T17:43:11.690Z",
+                  "sinkId": "dom.innerHTML",
+                  "source": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_SAME</b>\")",
+                  "sourceKey": "query:q",
+                  "sourceKind": "query",
+                  "url": "http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E"
+                },
+                {
+                  "callsite": "div#sink",
+                  "matched": "<b>CERTX_NAVIGATED_SAME</b>",
+                  "route": "http://127.0.0.1:65507/frameA",
+                  "seenAt": "2026-10-22T17:43:13.651Z",
+                  "sinkId": "dom.innerHTML",
+                  "source": "location.search parameter \"q\" (value: \"<b>CERTX_NAVIGATED_SAME</b>\")",
+                  "sourceKey": "query:q",
+                  "sourceKind": "query",
+                  "url": "http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_NAVIGATED_SAME%3C%2Fb%3E"
+                }
+              ],
+              "schemaVersion": "iast-evidence@1",
+              "secondarySources": [
+                {
+                  "display": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_SAME</b>\")",
+                  "key": "query:q",
+                  "score": 10001000000,
+                  "sourceKind": "query",
+                  "sourceValuePreview": "<b>CERTX_EXISTING_SAME</b>"
+                }
+              ],
+              "sink": "innerHTML",
+              "sinkContext": {
+                "attribute": null,
+                "cookieAttributes": null,
+                "cookieName": null,
+                "destHost": null,
+                "destOrigin": null,
+                "destUrl": null,
+                "domPath": "div#sink",
+                "elementId": null,
+                "headerName": null,
+                "isCrossOrigin": null,
+                "method": null,
+                "requestUrl": null,
+                "storageArea": null,
+                "storageKey": null,
+                "tagName": "DIV"
+              },
+              "sinkId": "dom.innerHTML",
+              "sinkSummary": {
+                "primarySink": "dom.innerHTML",
+                "sinks": [
+                  "dom.innerHTML"
+                ]
+              },
+              "source": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_SAME</b>\")",
+              "sourceId": "query:q",
+              "sourceKey": "query:q",
+              "sourceKind": "query",
+              "sourceRole": "origin",
+              "sourceValuePreview": "<b>CERTX_EXISTING_SAME</b>",
+              "sources": [
+                {
+                  "__normalizedSource": true,
+                  "detail": "q",
+                  "display": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_SAME</b>\")",
+                  "isCrossOriginMessage": null,
+                  "key": "query:q",
+                  "kind": "query",
+                  "label": "Query parameter \"q\"",
+                  "lastUpdated": 1792690990122,
+                  "location": "http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E",
+                  "matchType": "substring",
+                  "origin": null,
+                  "raw": "<b>CERTX_EXISTING_SAME</b>",
+                  "responseStatus": null,
+                  "responseUrl": null,
+                  "score": 10001000000,
+                  "source": "query:q",
+                  "sourceId": "s_1",
+                  "sourceKind": "query",
+                  "sourceValuePreview": "<b>CERTX_EXISTING_SAME</b>",
+                  "taintKind": "user_input",
+                  "value": "<b>CERTX_EXISTING_SAME</b>"
+                }
+              ],
+              "taintSource": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_SAME</b>\")",
+              "taintSummary": {
+                "primarySource": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_SAME</b>\")",
+                "sources": [
+                  "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_SAME</b>\")",
+                  "query:q"
+                ]
+              },
+              "trace": "Error: Sink: xss-via-innerHTML\nat document.querySelector.onclick (http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E:1:379)",
+              "traceSummary": "at document.querySelector.onclick (http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E:1:379)",
+              "truncated": false
+            }
+          },
+          "fingerprint": "8e9441bdb9cb3616892bc8d59a215e223d76a322",
+          "id": "d8b2a037-dfc9-44d6-860e-3fe3d901681a::IAST::8e9441bdb9cb3616892bc8d59a215e223d76a322",
+          "lastSeenAt": "2026-10-22T17:43:13.651Z",
+          "links": {
+            "CWE": "https://cwe.mitre.org/data/definitions/79.html",
+            "OWASP": "https://owasp.org/www-community/attacks/xss/"
+          },
+          "location": {
+            "column": null,
+            "domPath": "div#sink",
+            "kind": "runtime",
+            "line": null,
+            "method": null,
+            "scriptUrl": null,
+            "url": "http://127.0.0.1:65507/frameA?q=%3Cb%3ECERTX_EXISTING_SAME%3C%2Fb%3E"
+          },
+          "moduleId": "iast_dom_xss",
+          "moduleName": "DOM XSS sinks",
+          "owasp": [
+            "A05:2025 - Injection",
+            "A03:2021 - Injection"
+          ],
+          "presentationAggregate": "route-source-sink-callsite",
+          "recommendation": "<ul><li>Avoid inserting untrusted strings into HTML or inline handlers.</li><li>Prefer textContent or safe templating; sanitize with DOMPurify when HTML is required.</li><li>Use CSP without unsafe-inline where possible.</li></ul>",
+          "requestKey": null,
+          "ruleId": "dom_innerhtml_xss",
+          "ruleName": "DOM XSS via Element.innerHTML",
+          "scanId": "d8b2a037-dfc9-44d6-860e-3fe3d901681a",
+          "severity": "high",
+          "tags": [
+            "iast",
+            "dom",
+            "xss"
+          ],
+          "title": "DOM XSS via Element.innerHTML",
+          "updatedAt": "2026-10-22T17:43:13.651Z",
+          "vulnId": "dom_xss"
+        },
+        {
+          "category": "xss",
+          "confidence": 77,
+          "createdAt": "2026-10-22T17:43:11.711Z",
+          "cwe": [
+            "CWE-79"
+          ],
+          "description": "Tainted data assigned to innerHTML (possible DOM XSS).",
+          "engine": "IAST",
+          "evidence": {
+            "iast": {
+              "affectedUrls": [
+                "http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E"
+              ],
+              "aggregate": {
+                "key": "IAST|route-source-sink-callsite|d8b2a037-dfc9-44d6-860e-3fe3d901681a|127.0.0.1:65507|iast_dom_xss|dom_innerhtml_xss|http://localhost:65508/frameA|query:q|dom.innerhtml|div#sink",
+                "mode": "route-source-sink-callsite"
+              },
+              "context": {
+                "domPath": "div#sink",
+                "elementId": "sink",
+                "location": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E",
+                "tagName": "div",
+                "valuePreview": "<b>CERTX_EXISTING_CROSS</b>"
+              },
+              "matched": "<b>CERTX_EXISTING_CROSS</b>",
+              "occurrenceCount": 2,
+              "operation": {
+                "sinkArgs": null,
+                "sinkId": "dom.innerHTML"
+              },
+              "primaryClass": "taint_flow",
+              "primarySource": {
+                "__normalizedSource": true,
+                "detail": "q",
+                "isCrossOriginMessage": null,
+                "key": "query:q",
+                "kind": "query",
+                "label": "Query parameter \"q\"",
+                "lastUpdated": 1792690990132,
+                "location": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E",
+                "matchType": "substring",
+                "origin": null,
+                "raw": "<b>CERTX_EXISTING_CROSS</b>",
+                "responseStatus": null,
+                "responseUrl": null,
+                "score": 10001000000,
+                "source": "query:q",
+                "sourceId": "s_1",
+                "sourceKind": "query",
+                "taintKind": "user_input",
+                "value": "<b>CERTX_EXISTING_CROSS</b>"
+              },
+              "routing": {
+                "clientRoute": "/frameA",
+                "pathname": "/frameA",
+                "route": "/frameA",
+                "runtimeUrl": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E",
+                "urlPattern": "http://localhost:65508/frameA"
+              },
+              "sampleLimit": 10,
+              "samples": [
+                {
+                  "callsite": "div#sink",
+                  "matched": "<b>CERTX_EXISTING_CROSS</b>",
+                  "route": "http://localhost:65508/frameA",
+                  "seenAt": "2026-10-22T17:43:11.711Z",
+                  "sinkId": "dom.innerHTML",
+                  "source": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_CROSS</b>\")",
+                  "sourceKey": "query:q",
+                  "sourceKind": "query",
+                  "url": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E"
+                },
+                {
+                  "callsite": "div#sink",
+                  "matched": "<b>CERTX_NAVIGATED_CROSS</b>",
+                  "route": "http://localhost:65508/frameA",
+                  "seenAt": "2026-10-22T17:43:13.710Z",
+                  "sinkId": "dom.innerHTML",
+                  "source": "location.search parameter \"q\" (value: \"<b>CERTX_NAVIGATED_CROSS</b>\")",
+                  "sourceKey": "query:q",
+                  "sourceKind": "query",
+                  "url": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_NAVIGATED_CROSS%3C%2Fb%3E"
+                }
+              ],
+              "schemaVersion": "iast-evidence@1",
+              "secondarySources": [
+                {
+                  "display": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_CROSS</b>\")",
+                  "key": "query:q",
+                  "score": 10001000000,
+                  "sourceKind": "query",
+                  "sourceValuePreview": "<b>CERTX_EXISTING_CROSS</b>"
+                }
+              ],
+              "sink": "innerHTML",
+              "sinkContext": {
+                "attribute": null,
+                "cookieAttributes": null,
+                "cookieName": null,
+                "destHost": null,
+                "destOrigin": null,
+                "destUrl": null,
+                "domPath": "div#sink",
+                "elementId": null,
+                "headerName": null,
+                "isCrossOrigin": null,
+                "method": null,
+                "requestUrl": null,
+                "storageArea": null,
+                "storageKey": null,
+                "tagName": "DIV"
+              },
+              "sinkId": "dom.innerHTML",
+              "sinkSummary": {
+                "primarySink": "dom.innerHTML",
+                "sinks": [
+                  "dom.innerHTML"
+                ]
+              },
+              "source": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_CROSS</b>\")",
+              "sourceId": "query:q",
+              "sourceKey": "query:q",
+              "sourceKind": "query",
+              "sourceRole": "origin",
+              "sourceValuePreview": "<b>CERTX_EXISTING_CROSS</b>",
+              "sources": [
+                {
+                  "__normalizedSource": true,
+                  "detail": "q",
+                  "display": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_CROSS</b>\")",
+                  "isCrossOriginMessage": null,
+                  "key": "query:q",
+                  "kind": "query",
+                  "label": "Query parameter \"q\"",
+                  "lastUpdated": 1792690990132,
+                  "location": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E",
+                  "matchType": "substring",
+                  "origin": null,
+                  "raw": "<b>CERTX_EXISTING_CROSS</b>",
+                  "responseStatus": null,
+                  "responseUrl": null,
+                  "score": 10001000000,
+                  "source": "query:q",
+                  "sourceId": "s_1",
+                  "sourceKind": "query",
+                  "sourceValuePreview": "<b>CERTX_EXISTING_CROSS</b>",
+                  "taintKind": "user_input",
+                  "value": "<b>CERTX_EXISTING_CROSS</b>"
+                }
+              ],
+              "taintSource": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_CROSS</b>\")",
+              "taintSummary": {
+                "primarySource": "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_CROSS</b>\")",
+                "sources": [
+                  "location.search parameter \"q\" (value: \"<b>CERTX_EXISTING_CROSS</b>\")",
+                  "query:q"
+                ]
+              },
+              "trace": "Error: Sink: xss-via-innerHTML\nat document.querySelector.onclick (http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E:1:379)",
+              "traceSummary": "at document.querySelector.onclick (http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E:1:379)",
+              "truncated": false
+            }
+          },
+          "fingerprint": "deb87f0f36794beff865c984c81215361029041d",
+          "id": "d8b2a037-dfc9-44d6-860e-3fe3d901681a::IAST::deb87f0f36794beff865c984c81215361029041d",
+          "lastSeenAt": "2026-10-22T17:43:13.710Z",
+          "links": {
+            "CWE": "https://cwe.mitre.org/data/definitions/79.html",
+            "OWASP": "https://owasp.org/www-community/attacks/xss/"
+          },
+          "location": {
+            "column": null,
+            "domPath": "div#sink",
+            "kind": "runtime",
+            "line": null,
+            "method": null,
+            "scriptUrl": null,
+            "url": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E"
+          },
+          "moduleId": "iast_dom_xss",
+          "moduleName": "DOM XSS sinks",
+          "owasp": [
+            "A05:2025 - Injection",
+            "A03:2021 - Injection"
+          ],
+          "presentationAggregate": "route-source-sink-callsite",
+          "recommendation": "<ul><li>Avoid inserting untrusted strings into HTML or inline handlers.</li><li>Prefer textContent or safe templating; sanitize with DOMPurify when HTML is required.</li><li>Use CSP without unsafe-inline where possible.</li></ul>",
+          "requestKey": null,
+          "ruleId": "dom_innerhtml_xss",
+          "ruleName": "DOM XSS via Element.innerHTML",
+          "scanId": "d8b2a037-dfc9-44d6-860e-3fe3d901681a",
+          "severity": "high",
+          "tags": [
+            "iast",
+            "dom",
+            "xss"
+          ],
+          "title": "DOM XSS via Element.innerHTML",
+          "updatedAt": "2026-10-22T17:43:13.710Z",
+          "vulnId": "dom_xss"
+        }
+      ]
+    }
+  ],
+  "origins": {
+    "primary": "http://127.0.0.1:65507",
+    "cross": "http://localhost:65508",
+    "foreign": "http://localhost:65509"
+  },
+  "initialDocuments": {
+    "same": "2c33d716-d477-4963-9b1b-70c3628fb817",
+    "cross": "1ec49d19-e0b2-4539-984a-c98d7d44becc",
+    "safe": "4c765af9-3350-4a60-87ed-1306ffb2e311",
+    "excludedPath": "f9ace5fd-5a6f-4f14-a210-5fed29f20c51",
+    "foreign": "2ede250f-9c57-4262-9ac7-7d3a4bf4746a"
+  },
+  "targetsBefore": [
+    {
+      "targetId": "AFE42F9F59890D20FAC977CB6F5A5D76",
+      "type": "iframe",
+      "title": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E",
+      "url": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_EXISTING_CROSS%3C%2Fb%3E",
+      "attached": true,
+      "parentId": "0BF4ED63B69B362FF7A23EFC4B6A3570",
+      "canAccessOpener": false,
+      "parentFrameId": "0BF4ED63B69B362FF7A23EFC4B6A3570",
+      "browserContextId": "9BFF3B18C7E1E01EB4ED6E750EDDCF85"
+    },
+    {
+      "targetId": "8AA5890FE20292F47AC10ED30336FDBA",
+      "type": "iframe",
+      "title": "http://localhost:65508/frameB?q=%3Cb%3ECERTX_EXISTING_SAFE%3C%2Fb%3E",
+      "url": "http://localhost:65508/frameB?q=%3Cb%3ECERTX_EXISTING_SAFE%3C%2Fb%3E",
+      "attached": true,
+      "parentId": "0BF4ED63B69B362FF7A23EFC4B6A3570",
+      "canAccessOpener": false,
+      "parentFrameId": "0BF4ED63B69B362FF7A23EFC4B6A3570",
+      "browserContextId": "9BFF3B18C7E1E01EB4ED6E750EDDCF85"
+    },
+    {
+      "targetId": "364CB85F7DA81C4772D151A5E7CFC4F5",
+      "type": "iframe",
+      "title": "http://localhost:65508/excluded/frameA?q=%3Cb%3ECERTX_EXISTING_EXCLUDEDPATH%3C%2Fb%3E",
+      "url": "http://localhost:65508/excluded/frameA?q=%3Cb%3ECERTX_EXISTING_EXCLUDEDPATH%3C%2Fb%3E",
+      "attached": true,
+      "parentId": "0BF4ED63B69B362FF7A23EFC4B6A3570",
+      "canAccessOpener": false,
+      "parentFrameId": "0BF4ED63B69B362FF7A23EFC4B6A3570",
+      "browserContextId": "9BFF3B18C7E1E01EB4ED6E750EDDCF85"
+    },
+    {
+      "targetId": "18E56DBB79FF587C281267355638E15B",
+      "type": "iframe",
+      "title": "http://localhost:65509/frameA?q=%3Cb%3ECERTX_EXISTING_FOREIGN%3C%2Fb%3E",
+      "url": "http://localhost:65509/frameA?q=%3Cb%3ECERTX_EXISTING_FOREIGN%3C%2Fb%3E",
+      "attached": true,
+      "parentId": "0BF4ED63B69B362FF7A23EFC4B6A3570",
+      "canAccessOpener": false,
+      "parentFrameId": "0BF4ED63B69B362FF7A23EFC4B6A3570",
+      "browserContextId": "9BFF3B18C7E1E01EB4ED6E750EDDCF85"
+    }
+  ],
+  "revokedState": {
+    "runId": "fcc8b98c-0398-4685-a5cc-9c1c1736bea1",
+    "owner": "existing-oopif",
+    "workspaceId": "frame-workspace",
+    "tabId": 1477031307,
+    "engines": [
+      "IAST"
+    ],
+    "state": "completed",
+    "config": {
+      "preset": "ptk-defaults",
+      "scanStrategy": "SMART",
+      "dastScanStrategy": "SMART",
+      "scanControlProfile": "safe",
+      "allowCaptureWithoutInteraction": false,
+      "maxRequestsPerSecond": 5,
+      "concurrency": 3,
+      "planningConcurrency": 2,
+      "runCve": true,
+      "follow_redirect": true,
+      "maxRequests": null,
+      "durationSeconds": null,
+      "acquisition": {
+        "maxResourceBytes": 8388608,
+        "maxTotalBytes": 33554432,
+        "maxScripts": 128,
+        "drainTimeoutMs": 5000
+      },
+      "limits": {}
+    },
+    "scope": {
+      "origins": [
+        "http://127.0.0.1:65507",
+        "http://localhost:65508"
+      ],
+      "excludePaths": [
+        "/excluded"
+      ]
+    },
+    "accountId": null,
+    "accountRevision": null,
+    "createdAt": 1792690989976,
+    "updatedAt": 1792690995691,
+    "requestsSent": 0,
+    "coverage": {
+      "backendGaps": [],
+      "iastDocuments": {
+        "debuggerTargets": 5,
+        "documentInjections": 7,
+        "errors": [],
+        "active": false
+      },
+      "engineFailures": [],
+      "actionableGaps": [],
+      "recovery": {
+        "runId": "fcc8b98c-0398-4685-a5cc-9c1c1736bea1",
+        "state": "reported_checks_finished",
+        "instruction": "Assess only the checks and evidence actually recorded; absence of reported gaps is not proof of full application coverage."
+      }
+    },
+    "summary": {
+      "status": "completed",
+      "releaseStatus": "clean",
+      "stats": {
+        "findingsCount": 2,
+        "bySeverity": {
+          "critical": 0,
+          "high": 2,
+          "medium": 0,
+          "low": 0,
+          "info": 0
+        }
+      },
+      "findings": 2
+    },
+    "runtimeId": "ptk-session_a56a8d62-5ca5-43a1-93ba-d09028a60dd3",
+    "engineStatus": {
+      "IAST": {
+        "status": "stopped",
+        "isRunning": false,
+        "progress": {
+          "done": 2,
+          "total": null
+        },
+        "findingsCount": 2,
+        "bySeverity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "info": 0
+        },
+        "lastActivityAt": null,
+        "warnings": [],
+        "requestsCount": 3,
+        "runtimeEventsCount": 0,
+        "agentReady": false,
+        "modulesSentOk": 11,
+        "modulesSentSkipped": 11,
+        "modulesSentError": 0,
+        "runtimeHealthState": "normal",
+        "modulesLoaded": true,
+        "modulesSignature": "strategy:SMART|version:1|policy:|name:|modules:iast_dom_xss:dom_inline_event_handler,dom_innerhtml_xss,dom_outerhtml_xss,dom_insertadjacenthtml_xss,document_write_xss,dom_mutation_xss|iast_dangerous_url_scheme_execution:href_javascript_url_execution,href_data_url_execution,src_javascript_url_execution,src_data_url_execution,location_href_javascript_url_execution,location_href_data_url_execution,location_assign_javascript_url_execution,location_assign_data_url_execution,location_replace_javascript_url_execution,location_replace_data_url_execution,window_open_javascript_url_execution,window_open_data_url_execution,iframe_src_javascript_url_execution,iframe_src_data_url_execution,script_src_data_url_execution|iast_js_execution:eval_js_execution,function_constructor_execution,function_apply_execution|iast_open_redirect:window_open_redirect,navigation_api_redirect|iast_angularjs_expression_injection:angularjs_expression_function_constructor,angularjs_parse_from_form,angularjs_parse_from_cookie,angularjs_parse_from_localstorage,angularjs_parse_from_postmessage|iast_postmessage_misuse:postmessage_star_origin_leak,postmessage_cross_origin_leak|iast_timer_js_execution:settimeout_string_execution,setinterval_string_execution|iast_iframe_navigation:iframe_src_redirect,iframe_srcdoc_xss|iast_client_http_exfiltration:fetch_url_exfiltration,fetch_headers_exfiltration,xhr_url_exfiltration,xhr_body_exfiltration,xhr_header_exfiltration,sendbeacon_exfiltration,image_src_exfiltration|iast_dom_link_manipulation:dom_attr_href_navigation,dom_attr_src_navigation,dom_attr_action_navigation,dom_attr_formaction_navigation|iast_dom_url_navigation:location_href_redirect,location_assign_redirect,location_replace_redirect,history_pushstate_open_redirect,history_replacestate_route_change|iast_dom_parser_xss:domparser_parsefromstring_html_xss,range_contextual_fragment_xss,element_sethtmlunsafe_xss,shadowroot_sethtmlunsafe_xss|iast_dom_xss_secondary_sources:dom_innerhtml_xss_secondary_sources,dom_outerhtml_xss_secondary_sources,dom_insertadjacenthtml_xss_secondary_sources,document_write_xss_secondary_sources,dom_inline_event_xss_secondary_sources,dom_mutation_xss_secondary_sources,iframe_srcdoc_xss_secondary_sources|iast_route_controlled_navigation:route_pushstate_navigation,route_replacestate_navigation,route_navigation_api_navigation|iast_form_submission_hijack:form_action_hijack,form_formaction_hijack|iast_dangerous_form_scheme_execution:form_action_javascript_url_execution,form_action_data_url_execution,form_formaction_javascript_url_execution,form_formaction_data_url_execution|iast_response_field_dom_reachability:response_dom_innerhtml_reachability,response_dom_outerhtml_reachability,response_dom_insertadjacenthtml_reachability,response_dom_document_write_reachability,response_dom_mutation_reachability,response_dom_parser_reachability,response_dom_contextual_fragment_reachability,response_dom_sethtmlunsafe_reachability,response_dom_shadow_sethtmlunsafe_reachability|iast_prototype_pollution_impact:prototype_pollution_write,prototype_pollution_fetch_init|iast_storage_taint_to_exec:eval_storage_taint_execution,function_constructor_storage_taint_execution,function_apply_storage_taint_execution,settimeout_storage_taint_execution,setinterval_storage_taint_execution|iast_source_scoped_open_redirect:location_href_redirect_sources,location_assign_redirect_sources,location_replace_redirect_sources,window_open_redirect_sources,navigation_api_redirect_sources,dom_attr_href_redirect_sources,dom_attr_action_redirect_sources",
+        "pendingFindingReports": 0,
+        "flushedPendingFindingReports": 0,
+        "runtimeUrl": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_NAVIGATED_CROSS%3C%2Fb%3E",
+        "agentBootUrl": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_NAVIGATED_CROSS%3C%2Fb%3E",
+        "documentReadyState": "complete",
+        "agentBootReadyState": "loading",
+        "agentBootAfterLoad": false,
+        "agentBootDelayMs": 9,
+        "runtimeHealthCount": 41,
+        "findingReportsAccepted": 4,
+        "runtimeSignalsAccepted": 0,
+        "lastModuleSendResult": {
+          "ok": true,
+          "skipped": false,
+          "reason": null,
+          "error": null,
+          "signature": "strategy:SMART|version:1|policy:|name:|modules:iast_dom_xss:dom_inline_event_handler,dom_innerhtml_xss,dom_outerhtml_xss,dom_insertadjacenthtml_xss,document_write_xss,dom_mutation_xss|iast_dangerous_url_scheme_execution:href_javascript_url_execution,href_data_url_execution,src_javascript_url_execution,src_data_url_execution,location_href_javascript_url_execution,location_href_data_url_execution,location_assign_javascript_url_execution,location_assign_data_url_execution,location_replace_javascript_url_execution,location_replace_data_url_execution,window_open_javascript_url_execution,window_open_data_url_execution,iframe_src_javascript_url_execution,iframe_src_data_url_execution,script_src_data_url_execution|iast_js_execution:eval_js_execution,function_constructor_execution,function_apply_execution|iast_open_redirect:window_open_redirect,navigation_api_redirect|iast_angularjs_expression_injection:angularjs_expression_function_constructor,angularjs_parse_from_form,angularjs_parse_from_cookie,angularjs_parse_from_localstorage,angularjs_parse_from_postmessage|iast_postmessage_misuse:postmessage_star_origin_leak,postmessage_cross_origin_leak|iast_timer_js_execution:settimeout_string_execution,setinterval_string_execution|iast_iframe_navigation:iframe_src_redirect,iframe_srcdoc_xss|iast_client_http_exfiltration:fetch_url_exfiltration,fetch_headers_exfiltration,xhr_url_exfiltration,xhr_body_exfiltration,xhr_header_exfiltration,sendbeacon_exfiltration,image_src_exfiltration|iast_dom_link_manipulation:dom_attr_href_navigation,dom_attr_src_navigation,dom_attr_action_navigation,dom_attr_formaction_navigation|iast_dom_url_navigation:location_href_redirect,location_assign_redirect,location_replace_redirect,history_pushstate_open_redirect,history_replacestate_route_change|iast_dom_parser_xss:domparser_parsefromstring_html_xss,range_contextual_fragment_xss,element_sethtmlunsafe_xss,shadowroot_sethtmlunsafe_xss|iast_dom_xss_secondary_sources:dom_innerhtml_xss_secondary_sources,dom_outerhtml_xss_secondary_sources,dom_insertadjacenthtml_xss_secondary_sources,document_write_xss_secondary_sources,dom_inline_event_xss_secondary_sources,dom_mutation_xss_secondary_sources,iframe_srcdoc_xss_secondary_sources|iast_route_controlled_navigation:route_pushstate_navigation,route_replacestate_navigation,route_navigation_api_navigation|iast_form_submission_hijack:form_action_hijack,form_formaction_hijack|iast_dangerous_form_scheme_execution:form_action_javascript_url_execution,form_action_data_url_execution,form_formaction_javascript_url_execution,form_formaction_data_url_execution|iast_response_field_dom_reachability:response_dom_innerhtml_reachability,response_dom_outerhtml_reachability,response_dom_insertadjacenthtml_reachability,response_dom_document_write_reachability,response_dom_mutation_reachability,response_dom_parser_reachability,response_dom_contextual_fragment_reachability,response_dom_sethtmlunsafe_reachability,response_dom_shadow_sethtmlunsafe_reachability|iast_prototype_pollution_impact:prototype_pollution_write,prototype_pollution_fetch_init|iast_storage_taint_to_exec:eval_storage_taint_execution,function_constructor_storage_taint_execution,function_apply_storage_taint_execution,settimeout_storage_taint_execution,setinterval_storage_taint_execution|iast_source_scoped_open_redirect:location_href_redirect_sources,location_assign_redirect_sources,location_replace_redirect_sources,window_open_redirect_sources,navigation_api_redirect_sources,dom_attr_href_redirect_sources,dom_attr_action_redirect_sources"
+        },
+        "lastSenderTabId": 1477031307,
+        "moduleDeliveryObserved": true,
+        "agentObservedActivity": true,
+        "readyEvidence": "finding_activity",
+        "idle": true
+      }
+    },
+    "lastStatus": {
+      "sessionId": "ptk-session_a56a8d62-5ca5-43a1-93ba-d09028a60dd3",
+      "scanId": "ptk-session_a56a8d62-5ca5-43a1-93ba-d09028a60dd3",
+      "ok": true,
+      "status": "completed",
+      "completionStatus": "completed",
+      "releaseStatus": "clean",
+      "error": null,
+      "startedAt": "2026-10-22T17:43:09.980Z",
+      "finishedAt": "2026-10-22T17:43:15.687Z",
+      "stopRequestedAt": null,
+      "closeRequestId": null,
+      "closeRequestAck": false,
+      "closeRequestMode": null,
+      "idleVerified": false,
+      "elapsedMs": 5710,
+      "lastUpdatedAt": null,
+      "engines": {
+        "IAST": {
+          "status": "stopped",
+          "isRunning": false,
+          "progress": {
+            "done": 2,
+            "total": null
+          },
+          "findingsCount": 2,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          },
+          "lastActivityAt": null,
+          "warnings": [],
+          "requestsCount": 3,
+          "runtimeEventsCount": 0,
+          "agentReady": false,
+          "modulesSentOk": 11,
+          "modulesSentSkipped": 11,
+          "modulesSentError": 0,
+          "runtimeHealthState": "normal",
+          "modulesLoaded": true,
+          "modulesSignature": "strategy:SMART|version:1|policy:|name:|modules:iast_dom_xss:dom_inline_event_handler,dom_innerhtml_xss,dom_outerhtml_xss,dom_insertadjacenthtml_xss,document_write_xss,dom_mutation_xss|iast_dangerous_url_scheme_execution:href_javascript_url_execution,href_data_url_execution,src_javascript_url_execution,src_data_url_execution,location_href_javascript_url_execution,location_href_data_url_execution,location_assign_javascript_url_execution,location_assign_data_url_execution,location_replace_javascript_url_execution,location_replace_data_url_execution,window_open_javascript_url_execution,window_open_data_url_execution,iframe_src_javascript_url_execution,iframe_src_data_url_execution,script_src_data_url_execution|iast_js_execution:eval_js_execution,function_constructor_execution,function_apply_execution|iast_open_redirect:window_open_redirect,navigation_api_redirect|iast_angularjs_expression_injection:angularjs_expression_function_constructor,angularjs_parse_from_form,angularjs_parse_from_cookie,angularjs_parse_from_localstorage,angularjs_parse_from_postmessage|iast_postmessage_misuse:postmessage_star_origin_leak,postmessage_cross_origin_leak|iast_timer_js_execution:settimeout_string_execution,setinterval_string_execution|iast_iframe_navigation:iframe_src_redirect,iframe_srcdoc_xss|iast_client_http_exfiltration:fetch_url_exfiltration,fetch_headers_exfiltration,xhr_url_exfiltration,xhr_body_exfiltration,xhr_header_exfiltration,sendbeacon_exfiltration,image_src_exfiltration|iast_dom_link_manipulation:dom_attr_href_navigation,dom_attr_src_navigation,dom_attr_action_navigation,dom_attr_formaction_navigation|iast_dom_url_navigation:location_href_redirect,location_assign_redirect,location_replace_redirect,history_pushstate_open_redirect,history_replacestate_route_change|iast_dom_parser_xss:domparser_parsefromstring_html_xss,range_contextual_fragment_xss,element_sethtmlunsafe_xss,shadowroot_sethtmlunsafe_xss|iast_dom_xss_secondary_sources:dom_innerhtml_xss_secondary_sources,dom_outerhtml_xss_secondary_sources,dom_insertadjacenthtml_xss_secondary_sources,document_write_xss_secondary_sources,dom_inline_event_xss_secondary_sources,dom_mutation_xss_secondary_sources,iframe_srcdoc_xss_secondary_sources|iast_route_controlled_navigation:route_pushstate_navigation,route_replacestate_navigation,route_navigation_api_navigation|iast_form_submission_hijack:form_action_hijack,form_formaction_hijack|iast_dangerous_form_scheme_execution:form_action_javascript_url_execution,form_action_data_url_execution,form_formaction_javascript_url_execution,form_formaction_data_url_execution|iast_response_field_dom_reachability:response_dom_innerhtml_reachability,response_dom_outerhtml_reachability,response_dom_insertadjacenthtml_reachability,response_dom_document_write_reachability,response_dom_mutation_reachability,response_dom_parser_reachability,response_dom_contextual_fragment_reachability,response_dom_sethtmlunsafe_reachability,response_dom_shadow_sethtmlunsafe_reachability|iast_prototype_pollution_impact:prototype_pollution_write,prototype_pollution_fetch_init|iast_storage_taint_to_exec:eval_storage_taint_execution,function_constructor_storage_taint_execution,function_apply_storage_taint_execution,settimeout_storage_taint_execution,setinterval_storage_taint_execution|iast_source_scoped_open_redirect:location_href_redirect_sources,location_assign_redirect_sources,location_replace_redirect_sources,window_open_redirect_sources,navigation_api_redirect_sources,dom_attr_href_redirect_sources,dom_attr_action_redirect_sources",
+          "pendingFindingReports": 0,
+          "flushedPendingFindingReports": 0,
+          "runtimeUrl": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_NAVIGATED_CROSS%3C%2Fb%3E",
+          "agentBootUrl": "http://localhost:65508/frameA?q=%3Cb%3ECERTX_NAVIGATED_CROSS%3C%2Fb%3E",
+          "documentReadyState": "complete",
+          "agentBootReadyState": "loading",
+          "agentBootAfterLoad": false,
+          "agentBootDelayMs": 9,
+          "runtimeHealthCount": 41,
+          "findingReportsAccepted": 4,
+          "runtimeSignalsAccepted": 0,
+          "lastModuleSendResult": {
+            "ok": true,
+            "skipped": false,
+            "reason": null,
+            "error": null,
+            "signature": "strategy:SMART|version:1|policy:|name:|modules:iast_dom_xss:dom_inline_event_handler,dom_innerhtml_xss,dom_outerhtml_xss,dom_insertadjacenthtml_xss,document_write_xss,dom_mutation_xss|iast_dangerous_url_scheme_execution:href_javascript_url_execution,href_data_url_execution,src_javascript_url_execution,src_data_url_execution,location_href_javascript_url_execution,location_href_data_url_execution,location_assign_javascript_url_execution,location_assign_data_url_execution,location_replace_javascript_url_execution,location_replace_data_url_execution,window_open_javascript_url_execution,window_open_data_url_execution,iframe_src_javascript_url_execution,iframe_src_data_url_execution,script_src_data_url_execution|iast_js_execution:eval_js_execution,function_constructor_execution,function_apply_execution|iast_open_redirect:window_open_redirect,navigation_api_redirect|iast_angularjs_expression_injection:angularjs_expression_function_constructor,angularjs_parse_from_form,angularjs_parse_from_cookie,angularjs_parse_from_localstorage,angularjs_parse_from_postmessage|iast_postmessage_misuse:postmessage_star_origin_leak,postmessage_cross_origin_leak|iast_timer_js_execution:settimeout_string_execution,setinterval_string_execution|iast_iframe_navigation:iframe_src_redirect,iframe_srcdoc_xss|iast_client_http_exfiltration:fetch_url_exfiltration,fetch_headers_exfiltration,xhr_url_exfiltration,xhr_body_exfiltration,xhr_header_exfiltration,sendbeacon_exfiltration,image_src_exfiltration|iast_dom_link_manipulation:dom_attr_href_navigation,dom_attr_src_navigation,dom_attr_action_navigation,dom_attr_formaction_navigation|iast_dom_url_navigation:location_href_redirect,location_assign_redirect,location_replace_redirect,history_pushstate_open_redirect,history_replacestate_route_change|iast_dom_parser_xss:domparser_parsefromstring_html_xss,range_contextual_fragment_xss,element_sethtmlunsafe_xss,shadowroot_sethtmlunsafe_xss|iast_dom_xss_secondary_sources:dom_innerhtml_xss_secondary_sources,dom_outerhtml_xss_secondary_sources,dom_insertadjacenthtml_xss_secondary_sources,document_write_xss_secondary_sources,dom_inline_event_xss_secondary_sources,dom_mutation_xss_secondary_sources,iframe_srcdoc_xss_secondary_sources|iast_route_controlled_navigation:route_pushstate_navigation,route_replacestate_navigation,route_navigation_api_navigation|iast_form_submission_hijack:form_action_hijack,form_formaction_hijack|iast_dangerous_form_scheme_execution:form_action_javascript_url_execution,form_action_data_url_execution,form_formaction_javascript_url_execution,form_formaction_data_url_execution|iast_response_field_dom_reachability:response_dom_innerhtml_reachability,response_dom_outerhtml_reachability,response_dom_insertadjacenthtml_reachability,response_dom_document_write_reachability,response_dom_mutation_reachability,response_dom_parser_reachability,response_dom_contextual_fragment_reachability,response_dom_sethtmlunsafe_reachability,response_dom_shadow_sethtmlunsafe_reachability|iast_prototype_pollution_impact:prototype_pollution_write,prototype_pollution_fetch_init|iast_storage_taint_to_exec:eval_storage_taint_execution,function_constructor_storage_taint_execution,function_apply_storage_taint_execution,settimeout_storage_taint_execution,setinterval_storage_taint_execution|iast_source_scoped_open_redirect:location_href_redirect_sources,location_assign_redirect_sources,location_replace_redirect_sources,window_open_redirect_sources,navigation_api_redirect_sources,dom_attr_href_redirect_sources,dom_attr_action_redirect_sources"
+          },
+          "lastSenderTabId": 1477031307,
+          "moduleDeliveryObserved": true,
+          "agentObservedActivity": true,
+          "readyEvidence": "finding_activity",
+          "idle": true
+        }
+      },
+      "summary": {
+        "findingsCount": 2,
+        "bySeverity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "info": 0
+        }
+      },
+      "finalSummary": {
+        "status": "completed",
+        "releaseStatus": "clean",
+        "stats": {
+          "findingsCount": 2,
+          "bySeverity": {
+            "critical": 0,
+            "high": 2,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          }
+        }
+      },
+      "warnings": [],
+      "sessionLookup": {
+        "requestedSessionId": "ptk-session_a56a8d62-5ca5-43a1-93ba-d09028a60dd3",
+        "tabId": 1477031307,
+        "strictCurrentTab": true,
+        "allowActive": true,
+        "allowCompleted": true,
+        "allowGlobalCompleted": true,
+        "lookupSource": "explicit-session",
+        "activeSessionIdForTab": null,
+        "completedSessionIdForTab": "ptk-session_a56a8d62-5ca5-43a1-93ba-d09028a60dd3",
+        "globalCompletedSessionId": "ptk-session_a56a8d62-5ca5-43a1-93ba-d09028a60dd3",
+        "sessionExists": true,
+        "sessionStatus": "completed",
+        "sessionFinishedAt": "2026-10-22T17:43:15.687Z",
+        "stopRequestedAt": null,
+        "retention": {
+          "ttlMs": 86400000,
+          "maxCompletedSessions": 20,
+          "evicted": false
+        }
+      },
+      "supplemental": {
+        "backends": {},
+        "gaps": []
+      },
+      "coverage": {
+        "backendGaps": [],
+        "iastDocuments": {
+          "debuggerTargets": 5,
+          "documentInjections": 7,
+          "errors": [],
+          "active": false
+        }
+      }
+    },
+    "stopReason": "This operation is disabled by the selected profile or Tools & permissions."
+  },
+  "summary": {
+    "passed": 31,
+    "failed": []
+  }
+}

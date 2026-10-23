@@ -1,0 +1,34 @@
+.dast-root { display: flex; flex-direction: column; gap: 20px; }
+.dast-root .dast-card { padding: 16px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.dast-root .dast-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.dast-root .dast-meta, .dast-root .dast-request small { color: var(--muted); font-size: 12px; line-height: 1.55; overflow-wrap: anywhere; margin: 0; }
+.dast-root .dast-url, .dast-root .dast-request strong { overflow-wrap: anywhere; word-break: break-word; }
+.dast-root .dast-tabs { width: 100%; min-width: 0; }
+.dast-root .dast-request, .dast-root .dast-batch, .dast-root .dast-finding, .dast-root .dast-plan-request { padding: 12px 0; border-bottom: 1px solid var(--line); min-width: 0; }
+.dast-root .dast-request:last-child, .dast-root .dast-batch:last-child, .dast-root .dast-finding:last-child { border-bottom: 0; }
+.dast-root .dast-request-head { display: flex; gap: 12px; align-items: flex-start; justify-content: space-between; }
+.dast-root .dast-request-head > div { min-width: 0; }
+.dast-root .dast-request-head > button { flex: none; }
+.dast-root .dast-request small { display: block; }
+.dast-root .dast-request [aria-pressed=true] { background: var(--accent); color: var(--accent-ink); }
+.dast-root .dast-request details { margin-top: 10px; }
+.dast-root summary { cursor: pointer; padding: 5px 0; }
+.dast-root .dast-setting-row { display: flex; flex-direction: row; gap: 12px; align-items: center; justify-content: space-between; padding: 8px 0; min-width: 0; }
+.dast-root .dast-setting-row > span { min-width: 0; overflow-wrap: anywhere; }
+.dast-root .dast-setting-row > input { width: 90px; flex: none; }
+.dast-root .dast-setting-row > button { flex: none; }
+.dast-root .dast-notice:empty { display: none; }
+.dast-root .dast-error { color: var(--danger); }
+.dast-root pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 300px; overflow: auto; font-size: 12px; }
+.dast-root .dast-results { max-height: 540px; overflow: auto; }
+.dast-root .dast-coverage-row { padding: 8px 0; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
+.dast-root .dast-coverage-row:last-child { border-bottom: 0; }
+.dast-root .dast-observations, .dast-root .dast-coverage { min-width: 0; }
+.ki-dast-panel { padding: 8px 0; font-size: 12px; color: var(--wb-text); border-bottom: 1px solid var(--wb-line); }
+.ki-dast-panel summary { cursor: pointer; }
+.ki-dast-panel .dast-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.ki-dast-panel .dast-meta { color: var(--wb-dim); overflow-wrap: anywhere; }
+.ki-dast-panel button { padding: 5px 8px; font: inherit; border: 0; border-radius: 8px; color: var(--wb-text); background: var(--wb-fill-1); cursor: pointer; }
+.ki-dast-panel button:disabled { opacity: .5; cursor: default; }
+.ki-dast-panel .dast-error { color: var(--wb-error); }
+@media (max-width: 460px) { .dast-root .dast-card { padding: 12px; } .dast-root .dast-request-head { gap: 8px; } .dast-root .dast-actions button { min-width: 0; font-size: 12px; } }

@@ -1,0 +1,64 @@
+{
+  "error": "locator.waitFor: Timeout 180000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('DAST WORKFLOW FIXTURE COMPLETE', { exact: true }) to be visible\u001b[22m\n\n    at main (C:\\Users\\zeb\\Downloads\\ki\\tools\\picker\\tests\\dast-workflow-real-test.js:97:242)",
+  "stage": "shallow",
+  "currentCase": "reflect",
+  "cases": [],
+  "wire": [
+    {
+      "method": "GET",
+      "path": "/login",
+      "body": "",
+      "authenticated": false
+    },
+    {
+      "method": "POST",
+      "path": "/login",
+      "body": "username=fixture",
+      "authenticated": false
+    },
+    {
+      "method": "GET",
+      "path": "/app/reflect",
+      "body": "",
+      "authenticated": true
+    }
+  ],
+  "modelCalls": [
+    {
+      "case": "reflect",
+      "stage": "login",
+      "tool": "navigate"
+    },
+    {
+      "case": "reflect",
+      "stage": "start",
+      "tool": "cdp"
+    }
+  ],
+  "errors": [
+    "AssertionError [ERR_ASSERTION]: Login must reach authenticated form before scan\n    at nextTask (C:\\Users\\zeb\\Downloads\\ki\\tools\\picker\\tests\\dast-workflow-real-test.js:18:12)\n    at async Server.<anonymous> (C:\\Users\\zeb\\Downloads\\ki\\tools\\picker\\tests\\dast-workflow-real-test.js:68:22)",
+    "AssertionError [ERR_ASSERTION]: Tool must be advertised: security_start_scan\n    at Server.<anonymous> (C:\\Users\\zeb\\Downloads\\ki\\tools\\picker\\tests\\dast-workflow-real-test.js:69:26)",
+    "AssertionError [ERR_ASSERTION]: Missing tool result start\n    at result (C:\\Users\\zeb\\Downloads\\ki\\tools\\picker\\tests\\dast-workflow-real-test.js:10:86)\n    at nextTask (C:\\Users\\zeb\\Downloads\\ki\\tools\\picker\\tests\\dast-workflow-real-test.js:27:193)\n    at async Server.<anonymous> (C:\\Users\\zeb\\Downloads\\ki\\tools\\picker\\tests\\dast-workflow-real-test.js:68:22)",
+    "AssertionError [ERR_ASSERTION]: Missing tool result start\n    at result (C:\\Users\\zeb\\Downloads\\ki\\tools\\picker\\tests\\dast-workflow-real-test.js:10:86)\n    at nextTask (C:\\Users\\zeb\\Downloads\\ki\\tools\\picker\\tests\\dast-workflow-real-test.js:27:193)\n    at async Server.<anonymous> (C:\\Users\\zeb\\Downloads\\ki\\tools\\picker\\tests\\dast-workflow-real-test.js:68:22)",
+    "AssertionError [ERR_ASSERTION]: Missing tool result start\n    at result (C:\\Users\\zeb\\Downloads\\ki\\tools\\picker\\tests\\dast-workflow-real-test.js:10:86)\n    at nextTask (C:\\Users\\zeb\\Downloads\\ki\\tools\\picker\\tests\\dast-workflow-real-test.js:27:193)\n    at async Server.<anonymous> (C:\\Users\\zeb\\Downloads\\ki\\tools\\picker\\tests\\dast-workflow-real-test.js:68:22)",
+    "AssertionError [ERR_ASSERTION]: Missing tool result start\n    at result (C:\\Users\\zeb\\Downloads\\ki\\tools\\picker\\tests\\dast-workflow-real-test.js:10:86)\n    at nextTask (C:\\Users\\zeb\\Downloads\\ki\\tools\\picker\\tests\\dast-workflow-real-test.js:27:193)\n    at async Server.<anonymous> (C:\\Users\\zeb\\Downloads\\ki\\tools\\picker\\tests\\dast-workflow-real-test.js:68:22)",
+    "AssertionError [ERR_ASSERTION]: Missing tool result start\n    at result (C:\\Users\\zeb\\Downloads\\ki\\tools\\picker\\tests\\dast-workflow-real-test.js:10:86)\n    at nextTask (C:\\Users\\zeb\\Downloads\\ki\\tools\\picker\\tests\\dast-workflow-real-test.js:27:193)\n    at async Server.<anonymous> (C:\\Users\\zeb\\Downloads\\ki\\tools\\picker\\tests\\dast-workflow-real-test.js:68:22)",
+    "AssertionError [ERR_ASSERTION]: Missing tool result start\n    at result (C:\\Users\\zeb\\Downloads\\ki\\tools\\picker\\tests\\dast-workflow-real-test.js:10:86)\n    at nextTask (C:\\Users\\zeb\\Downloads\\ki\\tools\\picker\\tests\\dast-workflow-real-test.js:27:193)\n    at async Server.<anonymous> (C:\\Users\\zeb\\Downloads\\ki\\tools\\picker\\tests\\dast-workflow-real-test.js:68:22)",
+    "AssertionError [ERR_ASSERTION]: Missing tool result start\n    at result (C:\\Users\\zeb\\Downloads\\ki\\tools\\picker\\tests\\dast-workflow-real-test.js:10:86)\n    at nextTask (C:\\Users\\zeb\\Downloads\\ki\\tools\\picker\\tests\\dast-workflow-real-test.js:27:193)\n    at async Server.<anonymous> (C:\\Users\\zeb\\Downloads\\ki\\tools\\picker\\tests\\dast-workflow-real-test.js:68:22)"
+  ],
+  "results": {
+    "reflect-navigate": {
+      "success": true,
+      "url": "http://127.0.0.1:60080/login?next=reflect",
+      "requested": "http://127.0.0.1:60080/login?next=reflect",
+      "redirected": false,
+      "tabId": 880167474
+    },
+    "reflect-login": {
+      "result": {
+        "type": "string",
+        "value": "submitted"
+      }
+    }
+  }
+}

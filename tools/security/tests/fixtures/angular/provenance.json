@@ -1,0 +1,7 @@
+{
+  "version": "1.1.5",
+  "source": "https://code.angularjs.org/1.1.5/angular.min.js",
+  "license": "MIT",
+  "sha256": "98488c70d12681ff4931b7f0028d0598294da2b8a4cd0e267905310b8850df8a",
+  "purpose": "Local positive and negative browser-confirmation parity fixtures; never shipped as application runtime"
+}

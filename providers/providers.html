@@ -7,7 +7,9 @@
   <link rel="stylesheet" href="providers.css">
 </head>
 <body>
-  <main class="page">
+  <main class="page" inert>
+    <nav class="settings-nav" aria-label="Settings"><a href="?section=profiles">Profiles</a><a href="?section=workspaces">Workspaces</a><a href="?section=models">Models</a><a href="?section=mcp">MCP servers</a><a href="?section=security">Security testing</a><a href="?section=local">Local computer</a><a href="?section=browser">Browser control</a><a href="?section=tools">Tools &amp; permissions</a></nav>
+    <section id="models-panel">
     <header>
       <h1 id="title">Your models</h1>
       <p id="intro">Use your own API key, or a model running on this computer. Signed-in membership models stay in the same menu.</p>
@@ -73,19 +75,17 @@
         </div>
       </form>
     </section>
-    <section id="mcp">
+    </section>
+    <section id="mcp" hidden>
+      <header><h1>MCP servers</h1><p>Connect tools to your agent.</p></header>
+      <details class="setup-details"><summary>Import configuration</summary><p class="hint">Paste an mcpServers export. Local programs may start after import if local access is enabled.</p><textarea id="mcp-import-json" rows="4" aria-label="MCP configuration JSON" spellcheck="false" placeholder='{"mcpServers": {...}}'></textarea><button type="button" id="mcp-import-preview">Preview import</button><div id="mcp-import-list"></div><button type="button" id="mcp-import-save" class="primary" hidden>Import selected</button><p id="mcp-import-status" class="hint" role="status"></p></details>
       <div class="toolbar">
         <h2 id="mcp-heading">MCP servers</h2>
         <button type="button" id="mcp-add" class="primary">Add a server</button>
       </div>
-      <p class="note" id="mcp-note"></p>
+      <p class="note" id="mcp-note" hidden></p>
       <p id="mcp-status" class="note" role="status"></p>
-      <div class="toolbar">
-        <h2 id="mcp-known-heading">Known servers</h2>
-      </div>
-      <section class="card">
-        <div id="mcp-known" class="list"></div>
-      </section>
+      <details class="quick-connect"><summary id="mcp-known-heading">Quick connect</summary><div id="mcp-known" class="list"></div></details>
       <section class="card">
         <div id="mcp-list" class="list"></div>
       </section>
@@ -95,27 +95,116 @@
           <button type="button" id="mcp-test">Test connection</button>
         </div>
         <label>
-          <span id="mcp-label-name">Name</span>
-          <input id="mcp-name" type="text" autocomplete="off" spellcheck="false">
-        </label>
-        <label>
           <span id="mcp-label-url">Server URL</span>
           <input id="mcp-url" type="url" inputmode="url" autocomplete="off" spellcheck="false" placeholder="https://example.com/mcp">
+        </label>
+        <details id="mcp-options"><summary>API key & name (optional)</summary>
+        <label>
+          <span id="mcp-label-name">Name</span>
+          <input id="mcp-name" type="text" autocomplete="off" spellcheck="false">
         </label>
         <label>
           <span id="mcp-label-token">Token</span>
           <input id="mcp-token" type="password" autocomplete="off" spellcheck="false">
           <span class="hint" id="mcp-token-hint"></span>
         </label>
+        </details>
         <div class="form-actions">
           <button type="button" id="mcp-signin">Sign in</button>
           <button type="button" id="mcp-cancel">Cancel</button>
           <button type="submit" id="mcp-save" class="primary">Save</button>
         </div>
       </form>
+
+      <section id="local-mcp">
+        <div class="toolbar"><h2>On this computer</h2><button type="button" id="local-add">Add local server</button></div>
+        <p id="local-requirement" class="hint" hidden>Enable <a href="?section=local">Local computer access</a> to run these servers.</p>
+        <div id="local-list" class="card list"></div>
+        <form id="local-form" class="card server-form" hidden>
+          <div class="form-head"><h2 id="local-title">Add local server</h2><button type="button" id="local-test">Test</button></div>
+          <label>Command<input id="local-command" required placeholder="npx" autocomplete="off" spellcheck="false"></label>
+          <label>Arguments<textarea id="local-args" rows="3" placeholder="-y&#10;@package/server" spellcheck="false"></textarea><span class="hint">One argument per line.</span></label>
+          <details id="local-options"><summary>More options</summary>
+            <label>Name<input id="local-name" autocomplete="off"></label>
+            <label>Working directory<input id="local-cwd" placeholder="Optional" spellcheck="false"></label>
+            <label>Environment variables<textarea id="local-env" rows="2" placeholder="NAME=value" spellcheck="false"></textarea><span class="hint">One NAME=value per line. Stored on this device.</span></label>
+          </details>
+          <p id="local-status" role="status" class="hint"></p>
+          <div class="form-actions"><button type="button" id="local-cancel">Cancel</button><button type="submit" class="primary">Save server</button></div>
+        </form>
+      </section>
     </section>
+    <section id="native-section" hidden>
+      <header><h1>Local computer</h1><p>Use files and run commands on this computer.</p></header>
+      <div class="card native-connection">
+        <div class="toolbar"><div><h2>Connection</h2><p id="native-status" role="status" aria-live="polite">Checking…</p></div><button type="button" id="native-check">Check again</button></div>
+        <div class="native-enable"><span id="native-enabled-label">Allow local access</span><button type="button" role="switch" aria-checked="false" aria-labelledby="native-enabled-label" id="native-enabled" class="wb-toggle wb-toggle--sm" disabled><span class="wb-toggle-thumb" aria-hidden="true"></span></button></div>
+        <p id="native-access-status" class="hint" role="status" aria-live="polite"></p>
+      </div>
+      <details id="native-setup" class="card setup-details"><summary>Set up connection</summary>
+        <p class="hint">Requires Node.js 22+. Run this once from the cert-x folder.</p>
+        <label>Browser<select id="native-browser"><option>Chrome</option><option>Edge</option><option>Chromium</option></select></label>
+        <pre id="native-install" class="native-code"></pre><button type="button" id="native-copy">Copy command</button><span id="native-copy-status" role="status"></span>
+      </details>
+      <details class="setup-details"><summary>Access & troubleshooting</summary><p class="hint">Full access runs local tools without prompts unless a tool rule says otherwise. Tools use your OS account permissions.</p><a href="?section=tools" class="section-link">Tools &amp; permissions →</a><p id="native-detail" class="hint"></p></details>
+      <a href="?section=mcp" class="section-link">Manage MCP servers →</a>
+      <details class="setup-details" id="jobs-section"><summary>Background jobs</summary>
+        <div class="toolbar"><span class="hint">Commands keep running between messages.</span><button type="button" id="jobs-refresh">Refresh</button></div>
+        <p id="jobs-status" class="hint" role="status"></p><div id="jobs-list" class="card list"></div>
+        <section id="job-output-panel" hidden><div class="toolbar"><span id="job-output-state" class="hint"></span><button type="button" id="job-output-close">Close output</button></div><pre id="job-output" class="permission-preview"></pre></section>
+        <p class="hint">Jobs stop if the browser or native host disconnects. The latest 1 MiB of output is retained per job.</p>
+      </details>
+    </section>
+    <section id="browser-section" hidden>
+      <header><h1>Browser control</h1><p>Let an external agent use this browser.</p></header>
+      <div class="tool-approval-requests" hidden></div>
+      <div class="card native-connection">
+        <div class="toolbar"><div><h2>Controller</h2><p id="browser-status" role="status" aria-live="polite">Checking…</p></div><button type="button" id="browser-connect" disabled>Connect</button></div>
+        <p id="browser-controller" class="hint"></p><p id="browser-error" class="hint" role="status"></p>
+        <button type="button" id="browser-disconnect" hidden>Disconnect & revoke</button>
+      </div>
+      <details class="card setup-details" id="browser-advanced"><summary>Custom address</summary>
+        <label>Controller address<input id="browser-url" value="ws://127.0.0.1:10086/ws" spellcheck="false" autocomplete="off"></label>
+        <button type="button" id="browser-default">Use default</button>
+        <p class="hint">Local connections use ws://. Other computers require wss://.</p>
+      </details>
+      <details class="setup-details"><summary>Setup & access</summary>
+        <p class="hint">Start your installed WebBridge companion, then connect here. This does not use the Local computer native host.</p>
+        <p class="hint">For the installed Kimi WebBridge companion on Windows:</p>
+        <pre class="native-code">&amp; "$env:USERPROFILE\.kimi-webbridge\bin\kimi-webbridge.exe" start</pre>
+        <p class="hint">No companion installed? Install a compatible WebBridge service from its publisher. cert-x does not download or run a remote installer.</p>
+        <p class="hint">Authorization trusts the selected address. The legacy protocol does not authenticate individual agents. Tool rules still apply; approval requests appear here and in Tools &amp; permissions. Disconnect revokes access and stops reconnection; an operation already running may finish.</p>
+      </details>
+      <dialog id="browser-authorize" aria-labelledby="browser-authorize-title">
+        <h2 id="browser-authorize-title">Allow browser control?</h2>
+        <p id="browser-authorize-url" class="native-code"></p>
+        <p>This controller can request browser tools to read pages, click, type and manage tabs. Your tool permissions apply to every call.</p>
+        <p class="hint">Approval trusts this address, not a verified agent identity.</p>
+        <div class="form-actions"><button id="browser-cancel" type="button">Cancel</button><button id="browser-allow" type="button" class="primary">Allow & connect</button></div>
+      </dialog>
+    </section>
+    <section id="permissions-section" hidden>
+      <header><h1>Tools &amp; permissions</h1><p>Choose what the agent can use.</p></header>
+      <div class="tool-approval-requests" hidden></div>
+      <input type="search" id="permissions-search" placeholder="Search tools" aria-label="Search tools">
+      <div class="toolbar"><button type="button" id="permissions-refresh">Refresh list</button><button type="button" id="permissions-reset">Reset defaults</button></div>
+      <p class="hint">Individual rules override group defaults. Always ask applies even in Full access.</p>
+      <p id="permissions-status" class="hint" role="status"></p>
+      <div id="permissions-groups"></div>
+      <details class="setup-details"><summary>How rules work</summary><p class="hint">Disabled tools are hidden from the agent and blocked at execution. Local access and controller authorization must still be enabled. Tools are not a sandbox: an allowed command can perform file operations even when a file tool is disabled.</p></details>
+      <dialog id="permissions-reset-confirm" aria-labelledby="permissions-reset-title"><h2 id="permissions-reset-title">Reset tool permissions?</h2><p>Remove all group defaults and individual overrides.</p><div class="form-actions"><button type="button" id="permissions-reset-cancel">Cancel</button><button type="button" id="permissions-reset-yes" class="primary">Reset defaults</button></div></dialog>
+    </section>
+    <section id="health-section" hidden>
+      <header><h1>Capability health</h1><p>Check setup and tool access.</p></header>
+      <div class="toolbar"><p id="health-status" class="hint" role="status"></p><button type="button" id="health-refresh">Refresh</button></div>
+      <div id="health-list" class="card list"></div>
+      <details class="setup-details"><summary>Details</summary><pre id="health-details" class="permission-preview"></pre></details>
+    </section>
+    <section id="profiles-section" hidden></section>
+    <section id="workspaces-section" hidden></section>
+    <section id="security-section" hidden></section>
+    <section id="authz-section" hidden></section>
   </main>
-  <script type="module" src="providers.js"></script>
-  <script type="module" src="mcp.js"></script>
+  <script type="module" src="settings-page.js"></script>
 </body>
 </html>

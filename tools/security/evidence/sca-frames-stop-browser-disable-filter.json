@@ -1,0 +1,576 @@
+{
+  "error": "AssertionError [ERR_ASSERTION]: Cross-site fixture must acquire an OOPIF session\n    at main (C:\\Users\\zeb\\Downloads\\ki\\tools\\security\\tests\\sca-frames-stop.browser.cjs:76:12)",
+  "cases": [
+    {
+      "account": "a",
+      "acquisition": {
+        "captured": 4,
+        "gaps": 0,
+        "provenance": "debugger_script_source",
+        "sessionsInspected": 2,
+        "effectiveLimits": {
+          "maxScripts": 128,
+          "maxResourceBytes": 8388608,
+          "maxTotalBytes": 33554432
+        },
+        "childDocumentsUninspected": 0
+      },
+      "drain": {
+        "complete": true,
+        "gaps": 0
+      },
+      "findings": 18,
+      "bodyCoverage": {
+        "captured": 2,
+        "analyzed": 2,
+        "gaps": 0
+      },
+      "sourceCoverage": {
+        "captured": 4,
+        "analyzed": 4,
+        "gaps": 0
+      },
+      "acquisitions": [
+        "captured_http_body"
+      ],
+      "extraReads": [],
+      "liveReads": [
+        {
+          "url": "/opaque/fetch",
+          "account": "a"
+        },
+        {
+          "url": "/opaque/xhr",
+          "account": "a"
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "account": "b",
+      "acquisition": {
+        "captured": 2,
+        "gaps": 0,
+        "provenance": "debugger_script_source",
+        "sessionsInspected": 1,
+        "effectiveLimits": {
+          "maxScripts": 128,
+          "maxResourceBytes": 8388608,
+          "maxTotalBytes": 33554432
+        },
+        "childDocumentsUninspected": 0
+      },
+      "native": {
+        "trace": [
+          {
+            "at": 1792690688651,
+            "command": "Runtime.enable",
+            "source": {
+              "tabId": 1875675322
+            },
+            "params": {}
+          },
+          {
+            "at": 1792690688661,
+            "command": "Network.enable",
+            "source": {
+              "tabId": 1875675322
+            },
+            "params": {
+              "maxResourceBufferSize": 8388608,
+              "maxTotalBufferSize": 33554432
+            }
+          },
+          {
+            "at": 1792690688662,
+            "command": "Page.enable",
+            "source": {
+              "tabId": 1875675322
+            },
+            "params": {}
+          },
+          {
+            "at": 1792690688665,
+            "source": {
+              "tabId": 1875675322
+            },
+            "method": "Target.attachedToTarget",
+            "params": {
+              "sessionId": "0FC00128E894E7E8454611BCAE1595D4",
+              "targetInfo": {
+                "attached": true,
+                "browserContextId": "9DAF1F060CF67E80F4273ECFC099A855",
+                "canAccessOpener": false,
+                "parentFrameId": "6704D17B1C09127A5624B98B53FC434A",
+                "parentId": "BD2B9EC6437672C92856C3833748B717",
+                "targetId": "F3D30E92509042D4D094D42938AFD28B",
+                "title": "https://localhost:51388/cross",
+                "type": "iframe",
+                "url": "https://localhost:51388/cross"
+              },
+              "waitingForDebugger": false
+            }
+          },
+          {
+            "at": 1792690688665,
+            "command": "Target.setAutoAttach",
+            "source": {
+              "tabId": 1875675322
+            },
+            "params": {
+              "autoAttach": true,
+              "waitForDebuggerOnStart": false,
+              "flatten": true,
+              "filter": [
+                {
+                  "type": "iframe",
+                  "exclude": false
+                },
+                {
+                  "exclude": true
+                }
+              ]
+            }
+          },
+          {
+            "at": 1792690688665,
+            "command": "Network.enable",
+            "source": {
+              "tabId": 1875675322,
+              "sessionId": "0FC00128E894E7E8454611BCAE1595D4"
+            },
+            "params": {
+              "maxResourceBufferSize": 8388608,
+              "maxTotalBufferSize": 33554432
+            }
+          },
+          {
+            "at": 1792690688665,
+            "command": "Runtime.enable",
+            "source": {
+              "tabId": 1875675322
+            },
+            "params": {}
+          },
+          {
+            "at": 1792690688666,
+            "command": "Page.enable",
+            "source": {
+              "tabId": 1875675322,
+              "sessionId": "0FC00128E894E7E8454611BCAE1595D4"
+            },
+            "params": {}
+          },
+          {
+            "at": 1792690688667,
+            "command": "Target.setAutoAttach",
+            "source": {
+              "tabId": 1875675322,
+              "sessionId": "0FC00128E894E7E8454611BCAE1595D4"
+            },
+            "params": {
+              "autoAttach": true,
+              "waitForDebuggerOnStart": false,
+              "flatten": true,
+              "filter": [
+                {
+                  "type": "iframe",
+                  "exclude": false
+                },
+                {
+                  "exclude": true
+                }
+              ]
+            }
+          },
+          {
+            "at": 1792690688668,
+            "command": "Runtime.enable",
+            "source": {
+              "tabId": 1875675322,
+              "sessionId": "0FC00128E894E7E8454611BCAE1595D4"
+            },
+            "params": {}
+          },
+          {
+            "at": 1792690688681,
+            "command": "Debugger.enable",
+            "source": {
+              "tabId": 1875675322
+            },
+            "params": {}
+          },
+          {
+            "at": 1792690688686,
+            "command": "Debugger.enable",
+            "source": {
+              "tabId": 1875675322,
+              "sessionId": "0FC00128E894E7E8454611BCAE1595D4"
+            },
+            "params": {}
+          },
+          {
+            "at": 1792690688692,
+            "command": "Debugger.disable",
+            "source": {
+              "tabId": 1875675322,
+              "sessionId": "0FC00128E894E7E8454611BCAE1595D4"
+            },
+            "params": {}
+          },
+          {
+            "at": 1792690688692,
+            "command": "Debugger.disable",
+            "source": {
+              "tabId": 1875675322
+            },
+            "params": {}
+          },
+          {
+            "at": 1792690688776,
+            "command": "Network.disable",
+            "source": {
+              "tabId": 1875675322
+            },
+            "params": {}
+          },
+          {
+            "at": 1792690688779,
+            "command": "Page.disable",
+            "source": {
+              "tabId": 1875675322
+            },
+            "params": {}
+          },
+          {
+            "at": 1792690688779,
+            "command": "Network.disable",
+            "source": {
+              "tabId": 1875675322,
+              "sessionId": "0FC00128E894E7E8454611BCAE1595D4"
+            },
+            "params": {}
+          },
+          {
+            "at": 1792690688780,
+            "command": "Page.disable",
+            "source": {
+              "tabId": 1875675322,
+              "sessionId": "0FC00128E894E7E8454611BCAE1595D4"
+            },
+            "params": {}
+          },
+          {
+            "at": 1792690688780,
+            "command": "Runtime.disable",
+            "source": {
+              "tabId": 1875675322,
+              "sessionId": "0FC00128E894E7E8454611BCAE1595D4"
+            },
+            "params": {}
+          },
+          {
+            "at": 1792690688780,
+            "command": "Target.setAutoAttach",
+            "source": {
+              "tabId": 1875675322,
+              "sessionId": "0FC00128E894E7E8454611BCAE1595D4"
+            },
+            "params": {
+              "autoAttach": false,
+              "waitForDebuggerOnStart": false,
+              "flatten": true,
+              "filter": [
+                {
+                  "type": "iframe",
+                  "exclude": false
+                },
+                {
+                  "exclude": true
+                }
+              ]
+            },
+            "error": "{\"code\":-32602,\"message\":\"Target filter should be empty when disabling auto-attach\"}"
+          },
+          {
+            "at": 1792690688796,
+            "command": "Runtime.disable",
+            "source": {
+              "tabId": 1875675322
+            },
+            "params": {}
+          },
+          {
+            "at": 1792690688808,
+            "source": {
+              "tabId": 1875675322
+            },
+            "method": "Target.detachedFromTarget",
+            "params": {
+              "sessionId": "0FC00128E894E7E8454611BCAE1595D4",
+              "targetId": "F3D30E92509042D4D094D42938AFD28B"
+            }
+          },
+          {
+            "at": 1792690688835,
+            "source": {
+              "tabId": 1875675322
+            },
+            "method": "Target.attachedToTarget",
+            "params": {
+              "sessionId": "A24B3E279E2B32DDEEA881F38DBBC2EC",
+              "targetInfo": {
+                "attached": true,
+                "browserContextId": "9DAF1F060CF67E80F4273ECFC099A855",
+                "canAccessOpener": false,
+                "parentFrameId": "E8401D8ADC2ECE843BDC7151D821D97D",
+                "parentId": "BD2B9EC6437672C92856C3833748B717",
+                "targetId": "64ACA9782715A5CA76164C680D76D67F",
+                "title": "",
+                "type": "iframe",
+                "url": ""
+              },
+              "waitingForDebugger": false
+            }
+          },
+          {
+            "at": 1792690688838,
+            "source": {
+              "tabId": 1875675322
+            },
+            "method": "Target.targetInfoChanged",
+            "params": {
+              "targetInfo": {
+                "attached": true,
+                "browserContextId": "9DAF1F060CF67E80F4273ECFC099A855",
+                "canAccessOpener": false,
+                "parentFrameId": "E8401D8ADC2ECE843BDC7151D821D97D",
+                "parentId": "BD2B9EC6437672C92856C3833748B717",
+                "targetId": "64ACA9782715A5CA76164C680D76D67F",
+                "title": "https://localhost:51388/cross",
+                "type": "iframe",
+                "url": "https://localhost:51388/cross"
+              }
+            }
+          },
+          {
+            "at": 1792690688894,
+            "command": "Runtime.enable",
+            "source": {
+              "tabId": 1875675322
+            },
+            "params": {}
+          },
+          {
+            "at": 1792690688900,
+            "command": "Network.enable",
+            "source": {
+              "tabId": 1875675322
+            },
+            "params": {
+              "maxResourceBufferSize": 8388608,
+              "maxTotalBufferSize": 33554432
+            }
+          },
+          {
+            "at": 1792690688901,
+            "command": "Page.enable",
+            "source": {
+              "tabId": 1875675322
+            },
+            "params": {}
+          },
+          {
+            "at": 1792690688902,
+            "command": "Runtime.enable",
+            "source": {
+              "tabId": 1875675322
+            },
+            "params": {}
+          },
+          {
+            "at": 1792690688914,
+            "command": "Debugger.enable",
+            "source": {
+              "tabId": 1875675322
+            },
+            "params": {}
+          },
+          {
+            "at": 1792690688916,
+            "command": "Debugger.disable",
+            "source": {
+              "tabId": 1875675322
+            },
+            "params": {}
+          }
+        ],
+        "targets": [
+          {
+            "attached": true,
+            "id": "8BDA318C6FF192E5650E272ED79A04DB",
+            "title": "Service Worker chrome-extension://ahhekijnmoinnloekbjojppgjkgmjcnm/background/entry.js",
+            "type": "worker",
+            "url": "chrome-extension://ahhekijnmoinnloekbjojppgjkgmjcnm/background/entry.js"
+          },
+          {
+            "attached": false,
+            "id": "4B741DF1E35FA11945010F20FDEA05DA",
+            "title": "",
+            "type": "other",
+            "url": ""
+          },
+          {
+            "attached": false,
+            "id": "9F89389799DBEA215B269F7F33B1F28E",
+            "title": "",
+            "type": "other",
+            "url": ""
+          },
+          {
+            "attached": false,
+            "extensionId": "ahhekijnmoinnloekbjojppgjkgmjcnm",
+            "id": "0E1B3E083EBB6D35A50D6B254E12CE81",
+            "title": "PTK analysis runtime",
+            "type": "background_page",
+            "url": "chrome-extension://ahhekijnmoinnloekbjojppgjkgmjcnm/security/ptk/offscreen/runtime_offscreen.html"
+          },
+          {
+            "attached": true,
+            "id": "CD1FE1B80D55AE99E8EBF74ED97D99E9",
+            "tabId": 1875675321,
+            "title": "about:blank",
+            "type": "page",
+            "url": "about:blank"
+          },
+          {
+            "attached": true,
+            "id": "BD2B9EC6437672C92856C3833748B717",
+            "tabId": 1875675322,
+            "title": "Frame SCA",
+            "type": "page",
+            "url": "https://127.0.0.1:51388/app"
+          },
+          {
+            "attached": true,
+            "id": "64ACA9782715A5CA76164C680D76D67F",
+            "title": "https://localhost:51388/cross",
+            "type": "other",
+            "url": "https://localhost:51388/cross"
+          }
+        ]
+      },
+      "capture": {
+        "frames": [
+          {
+            "frameId": "BD2B9EC6437672C92856C3833748B717",
+            "loaderId": "4ECB1FCB7FD3DD93456F5925618C6654",
+            "documentId": "4ECB1FCB7FD3DD93456F5925618C6654",
+            "url": "https://127.0.0.1:51388/app",
+            "sessionGeneration": 3
+          },
+          {
+            "frameId": "E8401D8ADC2ECE843BDC7151D821D97D",
+            "parentFrameId": "BD2B9EC6437672C92856C3833748B717",
+            "loaderId": "4F477D99514093E77BD573CD2D567645",
+            "documentId": "4F477D99514093E77BD573CD2D567645",
+            "url": "https://127.0.0.1:51388/frame",
+            "sessionGeneration": 3
+          }
+        ],
+        "children": [],
+        "childStates": []
+      }
+    }
+  ],
+  "wire": [
+    {
+      "url": "/login/a",
+      "account": "anonymous"
+    },
+    {
+      "url": "/app",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/asset.js",
+      "account": "a"
+    },
+    {
+      "url": "/frame",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/frame.js",
+      "account": "a"
+    },
+    {
+      "url": "/cross",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/cross.js",
+      "account": "a"
+    },
+    {
+      "url": "/nested",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/nested.js",
+      "account": "a"
+    },
+    {
+      "url": "/favicon.ico",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/fetch",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/xhr",
+      "account": "a"
+    },
+    {
+      "url": "/login/b",
+      "account": "anonymous"
+    },
+    {
+      "url": "/app",
+      "account": "b"
+    },
+    {
+      "url": "/opaque/asset.js",
+      "account": "b"
+    },
+    {
+      "url": "/frame",
+      "account": "b"
+    },
+    {
+      "url": "/opaque/frame.js",
+      "account": "b"
+    },
+    {
+      "url": "/cross",
+      "account": "b"
+    },
+    {
+      "url": "/opaque/cross.js",
+      "account": "b"
+    },
+    {
+      "url": "/nested",
+      "account": "b"
+    },
+    {
+      "url": "/opaque/nested.js",
+      "account": "b"
+    },
+    {
+      "url": "/favicon.ico",
+      "account": "b"
+    }
+  ]
+}

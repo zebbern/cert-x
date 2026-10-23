@@ -86,7 +86,9 @@ async function main() {
   const page = await ctx.newPage();
   const errors = [];
   page.on("pageerror", (e) => errors.push(String(e)));
-  await page.goto(`chrome-extension://${id}/providers/providers.html`);
+  await page.goto(`chrome-extension://${id}/providers/providers.html?section=mcp`);
+  await page.waitForFunction(() => !document.querySelector("main").inert);
+  await page.locator("#mcp-known-heading").click();
   await page.locator("#mcp-known h3", { hasText: "Postman (US)" }).waitFor();
   console.log("known:", (await page.locator("#mcp-known").innerText()).replace(/\s+/g, " ").slice(0, 180));
   await page.locator("#mcp-known button", { hasText: "Add with key" }).click();

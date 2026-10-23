@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "notice": "License texts from the dependencies used to build the supplied PTK v10 runtime. Inline upstream notices remain preserved.",
+  "notices": [
+    {
+      "package": "webextension-polyfill",
+      "version": "0.12.0",
+      "license": "MPL-2.0",
+      "file": "security/ptk/packages/browser-polyfill/LICENSE",
+      "sha256": "1f256ecad192880510e84ad60474eab7589218784b9a50bc7ceee34c2b91f1d5"
+    },
+    {
+      "package": "crypto-es",
+      "version": "3.1.2",
+      "license": "MIT",
+      "file": "security/ptk/packages/crypto-es/LICENSE",
+      "sha256": "1c027ae30d1f747c3e860406cc93eff8bc9ce0882c6c1567eb5d3f5a0eb88a73"
+    },
+    {
+      "package": "jose-browser-runtime",
+      "version": "5.10.0",
+      "license": "MIT",
+      "file": "security/ptk/packages/jose/LICENSE.md",
+      "sha256": "8078b0829d6c3e9ecde2f003e1966e4cad3efc6e7a640efbab0313cc166b1af1"
+    },
+    {
+      "package": "retire",
+      "version": "5.4.2",
+      "license": "Apache-2.0",
+      "file": "security/ptk/packages/retire/LICENSE.md",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "package": "dompurify",
+      "version": "3.4.17",
+      "license": "(MPL-2.0 OR Apache-2.0)",
+      "file": "security/ptk/packages/dompurify/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "package": "js-yaml",
+      "version": "4.3.2",
+      "license": "MIT",
+      "file": "security/ptk/packages/js-yaml/LICENSE",
+      "sha256": "a07bc24468b9654ce76a547d47a2db282d07733b715db4c73a98bd63961f9550"
+    },
+    {
+      "package": "jspdf",
+      "version": "4.2.1",
+      "license": "MIT",
+      "file": "security/ptk/packages/jspdf/LICENSE",
+      "sha256": "dc388ec35ff463288cdde3588a36fd4ed12a45deff053243b37309acc9ef583b"
+    },
+    {
+      "package": "jspdf-autotable",
+      "version": "5.0.7",
+      "license": "MIT",
+      "file": "security/ptk/packages/jspdf-autotable/LICENSE.txt",
+      "sha256": "99a374e0385cf714d2faae5f6e02ec79217c6bcecec39bdb9e102091471b960a"
+    },
+    {
+      "package": "lodash-es",
+      "version": "4.18.1",
+      "license": "MIT",
+      "file": "security/ptk/packages/lodash-es/LICENSE",
+      "sha256": "f71e8ed126b46346494aad5486874cd8f0aafe95092ed67d2e3cb6110f939abc"
+    },
+    {
+      "package": "acorn",
+      "version": "8.15.0",
+      "license": "MIT",
+      "file": "security/ptk/background/sast/acorn/LICENSE",
+      "sha256": "76a876cf886ff9be2a8b5e2e86514fed06223c8c9f0c1e9ee9606e93841e00b7"
+    },
+    {
+      "package": "acorn-walk",
+      "file": "security/ptk/background/sast/acorn/LICENSE-acorn-walk"
+    },
+    {
+      "package": "Wappalyzer detection code and databases",
+      "source": "Supplied PTK v10 src/ptk/packages/wappalyzer",
+      "status": "Vendored by PTK; no separate license file present in supplied source. npm wappalyzer7.0.3 is not the source of these runtime files; do not infer its licensing/version."
+    }
+  ]
+}

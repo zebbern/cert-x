@@ -8,7 +8,7 @@ async function kiGate(s,signal){let t=kiCtl.get(s);if(!t||!t.paused)return;t.hel
 function kiSetPaused(s,p){let t=kiState(s);t.paused=p;if(!p){let w=t.waiters;t.waiters=[],w.forEach(f=>f())}}
 function kiDrainSteer(s,acc,onCtx){let t=kiCtl.get(s);if(!t||t.steer.length===0)return;let list=t.steer;t.steer=[];for(let text of list){let i=acc.history.length;acc.appendUserMessage([{type:"text",text:"[The user sent this while you were working. Take it into account from your next step on.]\n"+text}],{kind:"user"});let m=acc.history[i];m!==void 0&&onCtx?.(m)}}
 function kiSkipped(name){return{output:`The user skipped "${name}" before it finished. Do not repeat it the same way; continue the task differently or ask the user.`,isError:!0}}
-async function kiMark(name,args){if(!kiMarkTools.has(String(name).replace(/^browser_/,""))||!args||args.target===void 0&&args.selector===void 0)return;let job=ga({target:args.target,selector:args.selector,...args._tabId===void 0?{}:{_tabId:args._tabId}},"highlight_region",async(tab,obj)=>{await E(tab,"Runtime.callFunctionOn",{objectId:obj,functionDeclaration:"function(){this.scrollIntoView({block:'center',inline:'nearest'})}"}).catch(()=>{});let id=await da(tab,obj,4e3);await new Promise(r=>setTimeout(r,650));await fa(tab,id).catch(()=>{})});await Promise.race([job.catch(()=>{}),new Promise(r=>setTimeout(r,1500))])}
+async function kiMark(name,args){if(!kiMarkTools.has(String(name).replace(/^browser_/,""))||!args||args.target===void 0&&args.selector===void 0)return;try{let policy=await kiPolicyState(kiPolicyBrowserMeta(String(name).replace(/^browser_/,"")));if(!policy.parentEnabled||policy.rule==="disabled")return}catch{return}let job=ga({target:args.target,selector:args.selector,...args._tabId===void 0?{}:{_tabId:args._tabId}},"highlight_region",async(tab,obj)=>{await E(tab,"Runtime.callFunctionOn",{objectId:obj,functionDeclaration:"function(){this.scrollIntoView({block:'center',inline:'nearest'})}"}).catch(()=>{});let id=await da(tab,obj,4e3);await new Promise(r=>setTimeout(r,650));await fa(tab,id).catch(()=>{})});await Promise.race([job.catch(()=>{}),new Promise(r=>setTimeout(r,1500))])}
 async function kiAway(s){let c=UI.get(s);if(!c||c.ports.size===0||!kiFocus.get(s)?.visible)return!0;try{return!(await chrome.windows.getLastFocused())?.focused}catch{return!1}}
 var kiNotes=new Map,kiIcons=new Map,kiBadge={done:["#22c55e","check"],failed:["#ef4444","cross"],stopped:["#8b8f98","stop"],ask:["#f59e0b","bang"],handoff:["#3b82f6","hand"]};
 function kiCut(t,n){t=String(t||"").replace(/\s+/g," ").trim();return t.length>n?t.slice(0,n-1).trimEnd()+"…":t}
@@ -55,28 +55,50 @@ async function kiMcpEnsure(server){if(kiMcpSessions.has(server.url+"|ready"))ret
 async function kiMcpList(server){await kiMcpEnsure(server);let tools=[],cursor;for(let i=0;i<8;i++){let msg=await kiMcpRpc(server,{jsonrpc:"2.0",id:kiMcpSeq++,method:"tools/list",params:cursor?{cursor}:{}});if(!msg||msg.error)throw Error(msg&&msg.error&&msg.error.message||"tools/list failed");let result=msg.result||{};for(let t of result.tools||[])t&&t.name&&tools.push(t);cursor=result.nextCursor;if(!cursor)break}return tools}
 function kiMcpText(result){if(!result)return"";if(typeof result=="string")return result.slice(0,1e5);let parts=Array.isArray(result.content)?result.content:[];if(!parts.length)return JSON.stringify(result).slice(0,2e4);return parts.map(p=>{if(!p||typeof p!="object")return String(p);if(p.type==="text")return p.text||"";if(p.type==="image")return"[image]";if(p.type==="resource"&&p.resource)return p.resource.text||p.resource.uri||"[resource]";return JSON.stringify(p)}).join("\n").slice(0,1e5)}
 async function kiMcpCall(server,name,args){await kiMcpEnsure(server);let msg=await kiMcpRpc(server,{jsonrpc:"2.0",id:kiMcpSeq++,method:"tools/call",params:{name,arguments:args&&typeof args=="object"&&!Array.isArray(args)?args:{}}});if(!msg||msg.error)throw Error(msg&&msg.error&&msg.error.message||"tools/call failed");let text=kiMcpText(msg.result);if(msg.result&&msg.result.isError)throw Error(text||"tool returned an error");return text||"(empty result)"}
-function kiMcpToolDefs(){return kiMcpCache.tools}
-async function kiMcpRefresh(){
-if(Date.now()-kiMcpCache.at<2e4)return kiMcpCache;
-let servers=await kiMcpLoad(),tools=[],errors=[],used=new Set;
-for(let server of servers){
-let slug=kiMcpSlug(server.id||server.label||server.url);
-try{
-let list=await kiMcpList(server);
-if(list.length>40)list=list.slice(0,40);
-for(let t of list){
-let base=("mcp_"+slug+"_"+kiMcpSlug(t.name)).slice(0,64),n=base,i=2;
-while(used.has(n)&&i<30)n=(base.slice(0,56)+"_"+i++).slice(0,64);
-if(used.has(n))continue;
-used.add(n);
-let original=t.name,srv={id:server.id,label:server.label,url:server.url,token:server.token||""};
-tools.push({name:n,description:("["+(server.label||slug)+"] "+(t.description||original)).slice(0,1024),parameters:kiMcpSchema(t.inputSchema),resolveExecution(args){let a=args&&typeof args=="object"?args:{};return{approvalRule:"allow",async execute(){try{return{output:await kiMcpCall(srv,original,a)}}catch(e){return{output:"MCP "+(srv.label||slug)+" / "+original+" failed: "+(e instanceof Error?e.message:String(e)),isError:!0}}}}}})
+// Discovery is cached by connection; a task never starts an unselected server.
+var kiMcpServerCache = new Map(), kiMcpGeneration = 0;
+function kiMcpToolDefs(session){return kiMcpCache.tools.filter(tool=>!session||typeof kiContextFor!=="function"||kiContextAllows(tool.kiPolicyMeta,kiContextFor(session)))}
+async function kiMcpRefresh(session){
+await kiPolicyLoad();
+await kiNativeRefresh(session);
+const generation=kiMcpGeneration, servers=await kiMcpLoad(), active=new Set();
+const groups=await Promise.all(servers.map(server=>kiPolicyServerGroup(server,"remote")));
+for(const [serverIndex,server] of servers.entries()){
+ if(generation!==kiMcpGeneration)return kiMcpCache;
+ const group=groups[serverIndex];active.add(group);
+ if(typeof kiContextServerSelected==="function"&&!await kiContextServerSelected(server,"remote",session))continue;
+ if(generation!==kiMcpGeneration)return kiMcpCache;
+ let entry=kiMcpServerCache.get(group);
+ if(entry&&Date.now()-entry.at<2e4)continue;
+ if(entry?.pending){await entry.pending;continue;}
+ entry={at:0,tools:[],errors:[]};kiMcpServerCache.set(group,entry);
+ const refresh=(async()=>{
+  try{
+   const list=(await kiMcpList(server)).slice(0,40);
+   if(generation!==kiMcpGeneration)return;
+   await kiPolicyRecordMcp(server,list,"remote");
+   if(generation!==kiMcpGeneration)return;
+   const slug=kiMcpSlug(server.id||server.label||server.url), hash=group.split(":").pop();
+   let namespace=hash.slice(0,16);
+   const collisions=[...new Set(groups.filter(id=>id.split(":").pop().startsWith(namespace)))].sort();
+   if(collisions.length>1)namespace+="_"+collisions.indexOf(group);
+   const used=new Set();
+   for(const tool of list){
+    const base=("mcp_"+namespace+"_"+kiMcpSlug(tool.name)).slice(0,64);let name=base,index=2;
+    while(used.has(name)&&index<30)name=base.slice(0,56)+"_"+index++;
+    if(used.has(name))continue;used.add(name);
+    const original=tool.name,srv=JSON.parse(JSON.stringify(server));
+    entry.tools.push({name,kiPolicyMeta:await kiPolicyMcpMeta(server,original,"remote"),description:("["+(server.label||slug)+"] "+(tool.description||original)).slice(0,1024),parameters:kiMcpSchema(tool.inputSchema),resolveExecution(args){const snapshot=JSON.parse(JSON.stringify(args&&typeof args==="object"&&!Array.isArray(args)?args:{}));return{approvalRule:"allow",async execute(context){try{await kiPolicyRecheck(context[KI_POLICY_CONTEXT]);const configured=await kiMcpLoad();let current;for(const candidate of configured)if(await kiPolicyServerGroup(candidate,"remote")===group){current=candidate;break}if(!current)throw Error("MCP connection was removed or changed; refresh the tool list.");await kiPolicyRecheck(context[KI_POLICY_CONTEXT]);return{output:await kiMcpCall(current,original,snapshot)}}catch(error){return{output:"MCP "+(srv.label||slug)+" / "+original+" failed: "+(error instanceof Error?error.message:String(error)),isError:true}}}}}});
+   }
+  }catch(error){entry.errors.push({id:server.id,label:server.label||server.url,error:error instanceof Error?error.message:String(error)});}
+  finally{entry.at=Date.now();delete entry.pending;}
+ })();entry.pending=refresh;await refresh;
 }
-}catch(e){errors.push({id:server.id,label:server.label||server.url,error:e instanceof Error?e.message:String(e)})}
+if(generation!==kiMcpGeneration)return kiMcpCache;
+for(const key of kiMcpServerCache.keys())if(!active.has(key))kiMcpServerCache.delete(key);
+kiMcpCache={at:Date.now(),tools:[...kiMcpServerCache.values()].flatMap(entry=>entry.tools),errors:[...kiMcpServerCache.values()].flatMap(entry=>entry.errors)};
+return kiMcpCache;
 }
-kiMcpCache={at:Date.now(),tools,errors};
-return kiMcpCache
-}
-function kiMcpForget(url){kiMcpSessions.delete(url);kiMcpSessions.delete(url+"|ready");kiMcpCache.at=0}
-chrome.storage.onChanged.addListener((ch,area)=>{if(area==="local"&&ch[KI_MCP_KEY]){kiMcpSessions.clear(),kiMcpCache.at=0,kiMcpRefresh().catch(()=>{})}});
-chrome.runtime.onMessage.addListener((m,sender,reply)=>{if(!m||m.type!=="KI_MCP")return;(async()=>{try{if(m.op==="status"){let cache=await kiMcpRefresh(),servers=await kiMcpLoad();reply({ok:!0,servers:servers.map(s=>{let err=cache.errors.find(e=>e.id===s.id);return{id:s.id,label:s.label||"",url:s.url,hasToken:!!s.token,toolCount:err?0:cache.tools.filter(t=>t.name.startsWith("mcp_"+kiMcpSlug(s.id)+"_")).length,error:err?err.error:""}})});return}if(m.op==="test"){let server=m.server||{};if(typeof server.url!="string"||!/^https?:\/\//i.test(server.url)){reply({ok:!1,error:"URL must start with http:// or https://"});return}kiMcpForget(server.url);let saved=(await kiMcpLoad()).find(s=>s.url===server.url),tools=await kiMcpList({url:server.url,token:typeof server.token=="string"?server.token:"",oauth:saved?.oauth});reply({ok:!0,tools:tools.map(t=>t.name).slice(0,40),truncated:tools.length>40});return}if(m.op==="auth-start"){let server=m.server||{};if(typeof server.url!="string"||!/^https?:\/\//i.test(server.url)){reply({ok:!1,error:"URL must start with http:// or https://"});return}let started=await kiMcpAuthStart(server);reply({ok:!0,...started});return}if(m.op==="auth-finish"){let done=await kiMcpAuthFinish(m.state,m.responseUrl,m.server||{});reply({ok:!0,...done});return}reply({ok:!1,error:"unknown op"})}catch(e){reply({ok:!1,needsAuth:!!e.needsAuth,needsToken:!!e.needsToken,error:e instanceof Error?e.message:String(e)})}})();return!0});
+function kiMcpForget(url){kiMcpSessions.delete(url);kiMcpSessions.delete(url+"|ready");kiMcpCache.at=0;kiMcpGeneration++;kiMcpServerCache.clear()}
+chrome.storage.onChanged.addListener((ch,area)=>{if(area==="local"&&ch[KI_MCP_KEY]){kiMcpSessions.clear();kiMcpCache={at:0,tools:[],errors:[]};kiMcpGeneration++;kiMcpServerCache.clear()}});
+chrome.runtime.onMessage.addListener((m,sender,reply)=>{if(!m||m.type!=="KI_MCP")return;(async()=>{try{if(m.op==="status"){let cache=await kiMcpRefresh(),servers=await kiMcpLoad();reply({ok:!0,servers:await Promise.all(servers.map(async s=>{let err=cache.errors.find(e=>e.id===s.id),group=await kiPolicyServerGroup(s,"remote");return{id:s.id,label:s.label||"",url:s.url,hasToken:!!s.token,toolCount:err?0:cache.tools.filter(t=>t.kiPolicyMeta?.group===group).length,error:err?err.error:""}}))});return}if(m.op==="test"){let server=m.server||{};if(typeof server.url!="string"||!/^https?:\/\//i.test(server.url)){reply({ok:!1,error:"URL must start with http:// or https://"});return}kiMcpForget(server.url);let saved=(await kiMcpLoad()).find(s=>s.url===server.url),tools=await kiMcpList({url:server.url,token:typeof server.token=="string"?server.token:"",oauth:saved?.oauth});reply({ok:!0,tools:tools.map(t=>t.name).slice(0,40),truncated:tools.length>40});return}if(m.op==="auth-start"){let server=m.server||{};if(typeof server.url!="string"||!/^https?:\/\//i.test(server.url)){reply({ok:!1,error:"URL must start with http:// or https://"});return}let started=await kiMcpAuthStart(server);reply({ok:!0,...started});return}if(m.op==="auth-finish"){let done=await kiMcpAuthFinish(m.state,m.responseUrl,m.server||{});reply({ok:!0,...done});return}reply({ok:!1,error:"unknown op"})}catch(e){reply({ok:!1,needsAuth:!!e.needsAuth,needsToken:!!e.needsToken,error:e instanceof Error?e.message:String(e)})}})();return!0});

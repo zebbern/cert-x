@@ -1,0 +1,2570 @@
+{
+  "provider": "scripted_fixture",
+  "liveModelInference": false,
+  "integerAndStringAndAliasPass": true,
+  "distinctRunOwnership": true,
+  "nativeHandleRejected": true,
+  "jwtDecodePass": true,
+  "calls": [
+    {
+      "phase": "prime",
+      "name": null,
+      "args": null,
+      "toolSchema": null
+    },
+    {
+      "phase": "main",
+      "name": "security_start_scan",
+      "args": {
+        "tabId": 1390437983,
+        "engines": [
+          "SCA"
+        ]
+      },
+      "toolSchema": {
+        "type": "object",
+        "properties": {
+          "tabId": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "expectedOrigin": {
+            "type": "string"
+          },
+          "engines": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "DAST",
+                "IAST",
+                "SAST",
+                "SCA"
+              ]
+            }
+          },
+          "accountId": {
+            "type": "string"
+          },
+          "options": {
+            "type": "object",
+            "description": "Native engine settings: preset, scanStrategy, scanControlProfile, runCve, maxRequestsPerSecond, concurrency, planningConcurrency, optional maxRequests/durationSeconds, scanControls, modules, engineOptions, acquisition. Explicit user limits remain binding.",
+            "properties": {
+              "acquisition": {
+                "type": "object",
+                "description": "Browser acquisition limits. A limit reached is a coverage gap, not a negative finding. Changes apply to the next scan.",
+                "properties": {
+                  "maxResourceBytes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 8388608,
+                    "description": "Maximum retained bytes per resource; platform ceiling 8 MiB."
+                  },
+                  "maxTotalBytes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 33554432,
+                    "description": "Maximum aggregate retained bytes; platform ceiling 32 MiB per tab."
+                  },
+                  "maxScripts": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 4096,
+                    "description": "Maximum loaded executable scripts to acquire."
+                  },
+                  "drainTimeoutMs": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 60000,
+                    "description": "Maximum time to finish pending acquisition after stop, in milliseconds. Unfinished work remains a reported gap."
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "scope": {
+            "type": "object"
+          },
+          "requests": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "tabId"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "phase": "main",
+      "name": "security_scan_status",
+      "args": {
+        "runId": "3f245664-bd26-4fc7-86b5-7d0e968838cd"
+      },
+      "toolSchema": {
+        "type": "object",
+        "properties": {
+          "runId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "runId"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "phase": "main",
+      "name": "security_stop_scan",
+      "args": {
+        "runId": "3f245664-bd26-4fc7-86b5-7d0e968838cd"
+      },
+      "toolSchema": {
+        "type": "object",
+        "properties": {
+          "runId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "runId"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "phase": "main",
+      "name": "security_start_scan",
+      "args": {
+        "tabId": "1390437983",
+        "engines": [
+          "SCA"
+        ]
+      },
+      "toolSchema": {
+        "type": "object",
+        "properties": {
+          "tabId": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "expectedOrigin": {
+            "type": "string"
+          },
+          "engines": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "DAST",
+                "IAST",
+                "SAST",
+                "SCA"
+              ]
+            }
+          },
+          "accountId": {
+            "type": "string"
+          },
+          "options": {
+            "type": "object",
+            "description": "Native engine settings: preset, scanStrategy, scanControlProfile, runCve, maxRequestsPerSecond, concurrency, planningConcurrency, optional maxRequests/durationSeconds, scanControls, modules, engineOptions, acquisition. Explicit user limits remain binding.",
+            "properties": {
+              "acquisition": {
+                "type": "object",
+                "description": "Browser acquisition limits. A limit reached is a coverage gap, not a negative finding. Changes apply to the next scan.",
+                "properties": {
+                  "maxResourceBytes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 8388608,
+                    "description": "Maximum retained bytes per resource; platform ceiling 8 MiB."
+                  },
+                  "maxTotalBytes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 33554432,
+                    "description": "Maximum aggregate retained bytes; platform ceiling 32 MiB per tab."
+                  },
+                  "maxScripts": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 4096,
+                    "description": "Maximum loaded executable scripts to acquire."
+                  },
+                  "drainTimeoutMs": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 60000,
+                    "description": "Maximum time to finish pending acquisition after stop, in milliseconds. Unfinished work remains a reported gap."
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "scope": {
+            "type": "object"
+          },
+          "requests": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "tabId"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "phase": "main",
+      "name": "security_stop_scan",
+      "args": {
+        "runId": "df779944-dde2-4436-9cff-b961d4857d7f"
+      },
+      "toolSchema": {
+        "type": "object",
+        "properties": {
+          "runId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "runId"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "phase": "main",
+      "name": "security_start_scan",
+      "args": {
+        "tab": "1390437983",
+        "engines": [
+          "SCA"
+        ]
+      },
+      "toolSchema": {
+        "type": "object",
+        "properties": {
+          "tabId": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "expectedOrigin": {
+            "type": "string"
+          },
+          "engines": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "DAST",
+                "IAST",
+                "SAST",
+                "SCA"
+              ]
+            }
+          },
+          "accountId": {
+            "type": "string"
+          },
+          "options": {
+            "type": "object",
+            "description": "Native engine settings: preset, scanStrategy, scanControlProfile, runCve, maxRequestsPerSecond, concurrency, planningConcurrency, optional maxRequests/durationSeconds, scanControls, modules, engineOptions, acquisition. Explicit user limits remain binding.",
+            "properties": {
+              "acquisition": {
+                "type": "object",
+                "description": "Browser acquisition limits. A limit reached is a coverage gap, not a negative finding. Changes apply to the next scan.",
+                "properties": {
+                  "maxResourceBytes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 8388608,
+                    "description": "Maximum retained bytes per resource; platform ceiling 8 MiB."
+                  },
+                  "maxTotalBytes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 33554432,
+                    "description": "Maximum aggregate retained bytes; platform ceiling 32 MiB per tab."
+                  },
+                  "maxScripts": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 4096,
+                    "description": "Maximum loaded executable scripts to acquire."
+                  },
+                  "drainTimeoutMs": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 60000,
+                    "description": "Maximum time to finish pending acquisition after stop, in milliseconds. Unfinished work remains a reported gap."
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "scope": {
+            "type": "object"
+          },
+          "requests": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "tabId"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "phase": "main",
+      "name": "security_stop_scan",
+      "args": {
+        "runId": "821fbb25-e95d-48ec-b37a-04d3c4703c7e"
+      },
+      "toolSchema": {
+        "type": "object",
+        "properties": {
+          "runId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "runId"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "phase": "main",
+      "name": "security_candidates",
+      "args": {
+        "arguments": {
+          "action": "list",
+          "runId": "ptk-session_e9294aac-78ff-40ef-9ee2-4c393e5dbce0"
+        }
+      },
+      "toolSchema": {
+        "type": "object",
+        "properties": {
+          "tabId": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "arguments": {
+            "type": "object",
+            "properties": {
+              "action": {
+                "type": "string",
+                "enum": [
+                  "list",
+                  "get",
+                  "recompute",
+                  "suppress",
+                  "readiness",
+                  "reproduce",
+                  "status",
+                  "stop",
+                  "objectswap",
+                  "compare",
+                  "workflow",
+                  "workflowReplay",
+                  "draft"
+                ],
+                "description": "list, get, recompute, suppress, readiness, reproduce, status, stop, objectswap, compare, workflow, workflowReplay, draft"
+              },
+              "runId": {
+                "type": "string",
+                "description": "Source security scan run ID (required)"
+              },
+              "executionRunId": {
+                "type": "string",
+                "description": "Original reproduction operation run ID for status/stop"
+              },
+              "jobId": {
+                "type": "string",
+                "description": "Reproduction job reference"
+              },
+              "candidateId": {
+                "type": "string",
+                "description": "Candidate returned by list"
+              },
+              "offset": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Zero-based pagination"
+              },
+              "limit": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "1–500"
+              },
+              "includeSuppressed": {
+                "type": "boolean",
+                "description": "Include locally suppressed candidates"
+              },
+              "suppressed": {
+                "type": "boolean",
+                "description": "false removes suppression"
+              },
+              "check": {
+                "type": "boolean",
+                "description": "Explicit true allows readiness network probes"
+              },
+              "browserSessionId": {
+                "type": "string",
+                "description": "Explicit managed browser session for reproduction"
+              },
+              "objectSwap": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "PTK object swap specification"
+              },
+              "baselineResponse": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Retained baseline HTTP response"
+              },
+              "comparisonResponse": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Retained comparison HTTP response"
+              },
+              "baselineSessionProfileId": {
+                "type": "string",
+                "description": "Private account reference"
+              },
+              "comparisonSessionProfileId": {
+                "type": "string",
+                "description": "Private account reference"
+              },
+              "profile": {
+                "type": "string",
+                "description": "smoke or deep reproduction"
+              },
+              "constraints": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Native reproduction constraints"
+              },
+              "title": {
+                "type": "string",
+                "description": "Report title"
+              },
+              "notes": {
+                "type": "string",
+                "description": "Investigation notes"
+              },
+              "snapshotId": {
+                "type": "string",
+                "description": "Pin the returned immutable candidate snapshot; stale references fail."
+              },
+              "execute": {
+                "type": "boolean",
+                "description": "For compare: true replays through both verified account references; false compares supplied response evidence."
+              },
+              "selector": {
+                "type": "object",
+                "description": "Exact input occurrence {location:query|form|json,name,index} for reproduction or comparison request mutation.",
+                "properties": {
+                  "location": {
+                    "enum": [
+                      "query",
+                      "form",
+                      "json"
+                    ],
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "index": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                },
+                "required": [
+                  "location",
+                  "name",
+                  "index"
+                ]
+              },
+              "replacement": {
+                "type": "string",
+                "description": "Replacement for the selected comparison input only."
+              }
+            },
+            "required": [
+              "action",
+              "runId"
+            ],
+            "additionalProperties": true
+          },
+          "options": {
+            "type": "object",
+            "description": "Native engine settings: preset, scanStrategy, scanControlProfile, runCve, maxRequestsPerSecond, concurrency, planningConcurrency, optional maxRequests/durationSeconds, scanControls, modules, engineOptions, acquisition. Explicit user limits remain binding.",
+            "properties": {
+              "acquisition": {
+                "type": "object",
+                "description": "Browser acquisition limits. A limit reached is a coverage gap, not a negative finding. Changes apply to the next scan.",
+                "properties": {
+                  "maxResourceBytes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 8388608,
+                    "description": "Maximum retained bytes per resource; platform ceiling 8 MiB."
+                  },
+                  "maxTotalBytes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 33554432,
+                    "description": "Maximum aggregate retained bytes; platform ceiling 32 MiB per tab."
+                  },
+                  "maxScripts": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 4096,
+                    "description": "Maximum loaded executable scripts to acquire."
+                  },
+                  "drainTimeoutMs": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 60000,
+                    "description": "Maximum time to finish pending acquisition after stop, in milliseconds. Unfinished work remains a reported gap."
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "required": [
+          "arguments"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "phase": "main",
+      "name": "security_candidates",
+      "args": {
+        "arguments": {
+          "action": "list",
+          "runId": "821fbb25-e95d-48ec-b37a-04d3c4703c7e"
+        }
+      },
+      "toolSchema": {
+        "type": "object",
+        "properties": {
+          "tabId": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "arguments": {
+            "type": "object",
+            "properties": {
+              "action": {
+                "type": "string",
+                "enum": [
+                  "list",
+                  "get",
+                  "recompute",
+                  "suppress",
+                  "readiness",
+                  "reproduce",
+                  "status",
+                  "stop",
+                  "objectswap",
+                  "compare",
+                  "workflow",
+                  "workflowReplay",
+                  "draft"
+                ],
+                "description": "list, get, recompute, suppress, readiness, reproduce, status, stop, objectswap, compare, workflow, workflowReplay, draft"
+              },
+              "runId": {
+                "type": "string",
+                "description": "Source security scan run ID (required)"
+              },
+              "executionRunId": {
+                "type": "string",
+                "description": "Original reproduction operation run ID for status/stop"
+              },
+              "jobId": {
+                "type": "string",
+                "description": "Reproduction job reference"
+              },
+              "candidateId": {
+                "type": "string",
+                "description": "Candidate returned by list"
+              },
+              "offset": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Zero-based pagination"
+              },
+              "limit": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "1–500"
+              },
+              "includeSuppressed": {
+                "type": "boolean",
+                "description": "Include locally suppressed candidates"
+              },
+              "suppressed": {
+                "type": "boolean",
+                "description": "false removes suppression"
+              },
+              "check": {
+                "type": "boolean",
+                "description": "Explicit true allows readiness network probes"
+              },
+              "browserSessionId": {
+                "type": "string",
+                "description": "Explicit managed browser session for reproduction"
+              },
+              "objectSwap": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "PTK object swap specification"
+              },
+              "baselineResponse": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Retained baseline HTTP response"
+              },
+              "comparisonResponse": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Retained comparison HTTP response"
+              },
+              "baselineSessionProfileId": {
+                "type": "string",
+                "description": "Private account reference"
+              },
+              "comparisonSessionProfileId": {
+                "type": "string",
+                "description": "Private account reference"
+              },
+              "profile": {
+                "type": "string",
+                "description": "smoke or deep reproduction"
+              },
+              "constraints": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Native reproduction constraints"
+              },
+              "title": {
+                "type": "string",
+                "description": "Report title"
+              },
+              "notes": {
+                "type": "string",
+                "description": "Investigation notes"
+              },
+              "snapshotId": {
+                "type": "string",
+                "description": "Pin the returned immutable candidate snapshot; stale references fail."
+              },
+              "execute": {
+                "type": "boolean",
+                "description": "For compare: true replays through both verified account references; false compares supplied response evidence."
+              },
+              "selector": {
+                "type": "object",
+                "description": "Exact input occurrence {location:query|form|json,name,index} for reproduction or comparison request mutation.",
+                "properties": {
+                  "location": {
+                    "enum": [
+                      "query",
+                      "form",
+                      "json"
+                    ],
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "index": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                },
+                "required": [
+                  "location",
+                  "name",
+                  "index"
+                ]
+              },
+              "replacement": {
+                "type": "string",
+                "description": "Replacement for the selected comparison input only."
+              }
+            },
+            "required": [
+              "action",
+              "runId"
+            ],
+            "additionalProperties": true
+          },
+          "options": {
+            "type": "object",
+            "description": "Native engine settings: preset, scanStrategy, scanControlProfile, runCve, maxRequestsPerSecond, concurrency, planningConcurrency, optional maxRequests/durationSeconds, scanControls, modules, engineOptions, acquisition. Explicit user limits remain binding.",
+            "properties": {
+              "acquisition": {
+                "type": "object",
+                "description": "Browser acquisition limits. A limit reached is a coverage gap, not a negative finding. Changes apply to the next scan.",
+                "properties": {
+                  "maxResourceBytes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 8388608,
+                    "description": "Maximum retained bytes per resource; platform ceiling 8 MiB."
+                  },
+                  "maxTotalBytes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 33554432,
+                    "description": "Maximum aggregate retained bytes; platform ceiling 32 MiB per tab."
+                  },
+                  "maxScripts": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 4096,
+                    "description": "Maximum loaded executable scripts to acquire."
+                  },
+                  "drainTimeoutMs": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 60000,
+                    "description": "Maximum time to finish pending acquisition after stop, in milliseconds. Unfinished work remains a reported gap."
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "required": [
+          "arguments"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "phase": "main",
+      "name": "security_utility",
+      "args": {
+        "arguments": {
+          "tool": "jwt",
+          "action": "decode",
+          "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmaXh0dXJlIn0.c2ln"
+        }
+      },
+      "toolSchema": {
+        "type": "object",
+        "properties": {
+          "tabId": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "arguments": {
+            "type": "object",
+            "properties": {},
+            "required": [],
+            "additionalProperties": true
+          },
+          "options": {
+            "type": "object",
+            "description": "Native engine settings: preset, scanStrategy, scanControlProfile, runCve, maxRequestsPerSecond, concurrency, planningConcurrency, optional maxRequests/durationSeconds, scanControls, modules, engineOptions, acquisition. Explicit user limits remain binding.",
+            "properties": {
+              "acquisition": {
+                "type": "object",
+                "description": "Browser acquisition limits. A limit reached is a coverage gap, not a negative finding. Changes apply to the next scan.",
+                "properties": {
+                  "maxResourceBytes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 8388608,
+                    "description": "Maximum retained bytes per resource; platform ceiling 8 MiB."
+                  },
+                  "maxTotalBytes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 33554432,
+                    "description": "Maximum aggregate retained bytes; platform ceiling 32 MiB per tab."
+                  },
+                  "maxScripts": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 4096,
+                    "description": "Maximum loaded executable scripts to acquire."
+                  },
+                  "drainTimeoutMs": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 60000,
+                    "description": "Maximum time to finish pending acquisition after stop, in milliseconds. Unfinished work remains a reported gap."
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "phase": "main",
+      "name": null,
+      "args": null,
+      "toolSchema": null
+    }
+  ],
+  "results": {
+    "integer": {
+      "runId": "3f245664-bd26-4fc7-86b5-7d0e968838cd",
+      "owner": "chat-d7680cfa-3519-4e2d-b921-d7c5e691bb11",
+      "workspaceId": "target-chat",
+      "tabId": 1390437983,
+      "engines": [
+        "SCA"
+      ],
+      "state": "running",
+      "config": {
+        "preset": "thorough",
+        "scanStrategy": "COMPREHENSIVE",
+        "dastScanStrategy": "COMPREHENSIVE",
+        "scanControlProfile": "wide",
+        "allowCaptureWithoutInteraction": true,
+        "maxRequestsPerSecond": 5,
+        "concurrency": 3,
+        "planningConcurrency": 2,
+        "runCve": true,
+        "follow_redirect": true,
+        "maxRequests": null,
+        "durationSeconds": null,
+        "acquisition": {
+          "maxResourceBytes": 8388608,
+          "maxTotalBytes": 33554432,
+          "maxScripts": 128,
+          "drainTimeoutMs": 5000
+        },
+        "limits": {}
+      },
+      "scope": {
+        "origins": [
+          "http://127.0.0.1:58747"
+        ],
+        "excludePaths": []
+      },
+      "accountId": null,
+      "accountRevision": null,
+      "createdAt": 1792693486735,
+      "updatedAt": 1792693486827,
+      "requestsSent": 0,
+      "coverage": {
+        "backendGaps": [],
+        "scaBodies": {
+          "captured": 0,
+          "analyzed": 0,
+          "gaps": 0,
+          "basis": "Admitted JavaScript resources observed during this scan; URI detections do not prove body analysis."
+        },
+        "scaSources": {
+          "captured": 1,
+          "analyzed": 1,
+          "gaps": 0,
+          "basis": "Executable Debugger script text, not a claim of HTTP-byte identity."
+        },
+        "scaAcquisition": {
+          "phase": "observed_content_analyzed",
+          "limits": {
+            "requested": {
+              "maxResourceBytes": 8388608,
+              "maxTotalBytes": 33554432,
+              "maxScripts": 128,
+              "drainTimeoutMs": 5000
+            },
+            "effective": {
+              "maxScripts": 128,
+              "maxResourceBytes": 8388608,
+              "maxTotalBytes": 33554432
+            }
+          },
+          "drain": null
+        },
+        "scaBodyWarnings": [],
+        "engineFailures": [],
+        "actionableGaps": [],
+        "recovery": {
+          "runId": "3f245664-bd26-4fc7-86b5-7d0e968838cd",
+          "state": "in_progress",
+          "instruction": "Assess only the checks and evidence actually recorded; absence of reported gaps is not proof of full application coverage."
+        }
+      },
+      "summary": {
+        "findingsCount": 0,
+        "bySeverity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "info": 0
+        },
+        "findings": 0
+      },
+      "runtimeId": "ptk-session_99c45647-3689-4a68-8872-e9be7028bf31",
+      "engineStatus": {
+        "SCA": {
+          "status": "running",
+          "isRunning": true,
+          "progress": {
+            "done": 0,
+            "total": null
+          },
+          "findingsCount": 0,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          },
+          "lastActivityAt": null,
+          "warnings": [],
+          "idle": false
+        }
+      },
+      "lastStatus": {
+        "sessionId": "ptk-session_99c45647-3689-4a68-8872-e9be7028bf31",
+        "scanId": "ptk-session_99c45647-3689-4a68-8872-e9be7028bf31",
+        "ok": true,
+        "status": "running",
+        "completionStatus": "running",
+        "releaseStatus": null,
+        "error": null,
+        "startedAt": "2026-10-22T18:24:46.737Z",
+        "finishedAt": null,
+        "stopRequestedAt": null,
+        "closeRequestId": null,
+        "closeRequestAck": false,
+        "closeRequestMode": null,
+        "idleVerified": false,
+        "elapsedMs": 90,
+        "lastUpdatedAt": null,
+        "engines": {
+          "SCA": {
+            "status": "running",
+            "isRunning": true,
+            "progress": {
+              "done": 0,
+              "total": null
+            },
+            "findingsCount": 0,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            },
+            "lastActivityAt": null,
+            "warnings": [],
+            "idle": false
+          }
+        },
+        "summary": {
+          "findingsCount": 0,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          }
+        },
+        "warnings": [],
+        "sessionLookup": {
+          "requestedSessionId": "ptk-session_99c45647-3689-4a68-8872-e9be7028bf31",
+          "tabId": 1390437983,
+          "strictCurrentTab": true,
+          "allowActive": true,
+          "allowCompleted": true,
+          "allowGlobalCompleted": true,
+          "lookupSource": "explicit-session",
+          "activeSessionIdForTab": "ptk-session_99c45647-3689-4a68-8872-e9be7028bf31",
+          "completedSessionIdForTab": null,
+          "globalCompletedSessionId": null,
+          "sessionExists": true,
+          "sessionStatus": "running",
+          "sessionFinishedAt": null,
+          "stopRequestedAt": null,
+          "retention": {
+            "ttlMs": 86400000,
+            "maxCompletedSessions": 20,
+            "evicted": false
+          }
+        },
+        "supplemental": {
+          "backends": {},
+          "gaps": []
+        },
+        "coverage": {
+          "backendGaps": [],
+          "scaBodies": {
+            "captured": 0,
+            "analyzed": 0,
+            "gaps": 0,
+            "basis": "Admitted JavaScript resources observed during this scan; URI detections do not prove body analysis."
+          },
+          "scaSources": {
+            "captured": 1,
+            "analyzed": 1,
+            "gaps": 0,
+            "basis": "Executable Debugger script text, not a claim of HTTP-byte identity."
+          },
+          "scaAcquisition": {
+            "phase": "observed_content_analyzed",
+            "limits": {
+              "requested": {
+                "maxResourceBytes": 8388608,
+                "maxTotalBytes": 33554432,
+                "maxScripts": 128,
+                "drainTimeoutMs": 5000
+              },
+              "effective": {
+                "maxScripts": 128,
+                "maxResourceBytes": 8388608,
+                "maxTotalBytes": 33554432
+              }
+            },
+            "drain": null
+          },
+          "scaBodyWarnings": []
+        }
+      }
+    },
+    "integer-status": {
+      "runId": "3f245664-bd26-4fc7-86b5-7d0e968838cd",
+      "owner": "chat-d7680cfa-3519-4e2d-b921-d7c5e691bb11",
+      "workspaceId": "target-chat",
+      "tabId": 1390437983,
+      "engines": [
+        "SCA"
+      ],
+      "state": "running",
+      "config": {
+        "preset": "thorough",
+        "scanStrategy": "COMPREHENSIVE",
+        "dastScanStrategy": "COMPREHENSIVE",
+        "scanControlProfile": "wide",
+        "allowCaptureWithoutInteraction": true,
+        "maxRequestsPerSecond": 5,
+        "concurrency": 3,
+        "planningConcurrency": 2,
+        "runCve": true,
+        "follow_redirect": true,
+        "maxRequests": null,
+        "durationSeconds": null,
+        "acquisition": {
+          "maxResourceBytes": 8388608,
+          "maxTotalBytes": 33554432,
+          "maxScripts": 128,
+          "drainTimeoutMs": 5000
+        },
+        "limits": {}
+      },
+      "scope": {
+        "origins": [
+          "http://127.0.0.1:58747"
+        ],
+        "excludePaths": []
+      },
+      "accountId": null,
+      "accountRevision": null,
+      "createdAt": 1792693486735,
+      "updatedAt": 1792693486850,
+      "requestsSent": 0,
+      "coverage": {
+        "backendGaps": [],
+        "scaBodies": {
+          "captured": 0,
+          "analyzed": 0,
+          "gaps": 0,
+          "basis": "Admitted JavaScript resources observed during this scan; URI detections do not prove body analysis."
+        },
+        "scaSources": {
+          "captured": 1,
+          "analyzed": 1,
+          "gaps": 0,
+          "basis": "Executable Debugger script text, not a claim of HTTP-byte identity."
+        },
+        "scaAcquisition": {
+          "phase": "observed_content_analyzed",
+          "limits": {
+            "requested": {
+              "maxResourceBytes": 8388608,
+              "maxTotalBytes": 33554432,
+              "maxScripts": 128,
+              "drainTimeoutMs": 5000
+            },
+            "effective": {
+              "maxScripts": 128,
+              "maxResourceBytes": 8388608,
+              "maxTotalBytes": 33554432
+            }
+          },
+          "drain": null
+        },
+        "scaBodyWarnings": [],
+        "engineFailures": [],
+        "actionableGaps": [],
+        "recovery": {
+          "runId": "3f245664-bd26-4fc7-86b5-7d0e968838cd",
+          "state": "in_progress",
+          "instruction": "Assess only the checks and evidence actually recorded; absence of reported gaps is not proof of full application coverage."
+        }
+      },
+      "summary": {
+        "findingsCount": 0,
+        "bySeverity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "info": 0
+        },
+        "findings": 0
+      },
+      "runtimeId": "ptk-session_99c45647-3689-4a68-8872-e9be7028bf31",
+      "engineStatus": {
+        "SCA": {
+          "status": "running",
+          "isRunning": true,
+          "progress": {
+            "done": 0,
+            "total": null
+          },
+          "findingsCount": 0,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          },
+          "lastActivityAt": null,
+          "warnings": [],
+          "idle": false
+        }
+      },
+      "lastStatus": {
+        "sessionId": "ptk-session_99c45647-3689-4a68-8872-e9be7028bf31",
+        "scanId": "ptk-session_99c45647-3689-4a68-8872-e9be7028bf31",
+        "ok": true,
+        "status": "running",
+        "completionStatus": "running",
+        "releaseStatus": null,
+        "error": null,
+        "startedAt": "2026-10-22T18:24:46.737Z",
+        "finishedAt": null,
+        "stopRequestedAt": null,
+        "closeRequestId": null,
+        "closeRequestAck": false,
+        "closeRequestMode": null,
+        "idleVerified": false,
+        "elapsedMs": 112,
+        "lastUpdatedAt": null,
+        "engines": {
+          "SCA": {
+            "status": "running",
+            "isRunning": true,
+            "progress": {
+              "done": 0,
+              "total": null
+            },
+            "findingsCount": 0,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            },
+            "lastActivityAt": null,
+            "warnings": [],
+            "idle": false
+          }
+        },
+        "summary": {
+          "findingsCount": 0,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          }
+        },
+        "warnings": [],
+        "sessionLookup": {
+          "requestedSessionId": "ptk-session_99c45647-3689-4a68-8872-e9be7028bf31",
+          "tabId": 1390437983,
+          "strictCurrentTab": true,
+          "allowActive": true,
+          "allowCompleted": true,
+          "allowGlobalCompleted": true,
+          "lookupSource": "explicit-session",
+          "activeSessionIdForTab": "ptk-session_99c45647-3689-4a68-8872-e9be7028bf31",
+          "completedSessionIdForTab": null,
+          "globalCompletedSessionId": null,
+          "sessionExists": true,
+          "sessionStatus": "running",
+          "sessionFinishedAt": null,
+          "stopRequestedAt": null,
+          "retention": {
+            "ttlMs": 86400000,
+            "maxCompletedSessions": 20,
+            "evicted": false
+          }
+        },
+        "supplemental": {
+          "backends": {},
+          "gaps": []
+        },
+        "coverage": {
+          "backendGaps": [],
+          "scaBodies": {
+            "captured": 0,
+            "analyzed": 0,
+            "gaps": 0,
+            "basis": "Admitted JavaScript resources observed during this scan; URI detections do not prove body analysis."
+          },
+          "scaSources": {
+            "captured": 1,
+            "analyzed": 1,
+            "gaps": 0,
+            "basis": "Executable Debugger script text, not a claim of HTTP-byte identity."
+          },
+          "scaAcquisition": {
+            "phase": "observed_content_analyzed",
+            "limits": {
+              "requested": {
+                "maxResourceBytes": 8388608,
+                "maxTotalBytes": 33554432,
+                "maxScripts": 128,
+                "drainTimeoutMs": 5000
+              },
+              "effective": {
+                "maxScripts": 128,
+                "maxResourceBytes": 8388608,
+                "maxTotalBytes": 33554432
+              }
+            },
+            "drain": null
+          },
+          "scaBodyWarnings": []
+        }
+      }
+    },
+    "integer-stop": {
+      "runId": "3f245664-bd26-4fc7-86b5-7d0e968838cd",
+      "owner": "chat-d7680cfa-3519-4e2d-b921-d7c5e691bb11",
+      "workspaceId": "target-chat",
+      "tabId": 1390437983,
+      "engines": [
+        "SCA"
+      ],
+      "state": "completed",
+      "config": {
+        "preset": "thorough",
+        "scanStrategy": "COMPREHENSIVE",
+        "dastScanStrategy": "COMPREHENSIVE",
+        "scanControlProfile": "wide",
+        "allowCaptureWithoutInteraction": true,
+        "maxRequestsPerSecond": 5,
+        "concurrency": 3,
+        "planningConcurrency": 2,
+        "runCve": true,
+        "follow_redirect": true,
+        "maxRequests": null,
+        "durationSeconds": null,
+        "acquisition": {
+          "maxResourceBytes": 8388608,
+          "maxTotalBytes": 33554432,
+          "maxScripts": 128,
+          "drainTimeoutMs": 5000
+        },
+        "limits": {}
+      },
+      "scope": {
+        "origins": [
+          "http://127.0.0.1:58747"
+        ],
+        "excludePaths": []
+      },
+      "accountId": null,
+      "accountRevision": null,
+      "createdAt": 1792693486735,
+      "updatedAt": 1792693486876,
+      "requestsSent": 0,
+      "coverage": {
+        "backendGaps": [],
+        "scaBodies": {
+          "captured": 0,
+          "analyzed": 0,
+          "gaps": 0,
+          "basis": "Admitted JavaScript resources observed during this scan; URI detections do not prove body analysis."
+        },
+        "scaSources": {
+          "captured": 1,
+          "analyzed": 1,
+          "gaps": 0,
+          "basis": "Executable Debugger script text, not a claim of HTTP-byte identity."
+        },
+        "scaAcquisition": {
+          "phase": "observed_content_analyzed",
+          "limits": {
+            "requested": {
+              "maxResourceBytes": 8388608,
+              "maxTotalBytes": 33554432,
+              "maxScripts": 128,
+              "drainTimeoutMs": 5000
+            },
+            "effective": {
+              "maxScripts": 128,
+              "maxResourceBytes": 8388608,
+              "maxTotalBytes": 33554432
+            }
+          },
+          "drain": {
+            "complete": true,
+            "gaps": 0,
+            "cleanupPending": false,
+            "tabs": {
+              "1390437983": {
+                "complete": true,
+                "gaps": 0
+              }
+            }
+          }
+        },
+        "scaBodyWarnings": [],
+        "engineFailures": [],
+        "actionableGaps": [],
+        "recovery": {
+          "runId": "3f245664-bd26-4fc7-86b5-7d0e968838cd",
+          "state": "reported_checks_finished",
+          "instruction": "Assess only the checks and evidence actually recorded; absence of reported gaps is not proof of full application coverage."
+        }
+      },
+      "summary": {
+        "status": "completed",
+        "releaseStatus": "clean",
+        "stats": {
+          "findingsCount": 0,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          }
+        },
+        "findings": 0
+      },
+      "runtimeId": "ptk-session_99c45647-3689-4a68-8872-e9be7028bf31",
+      "engineStatus": {
+        "SCA": {
+          "status": "stopped",
+          "isRunning": false,
+          "progress": {
+            "done": 0,
+            "total": null
+          },
+          "findingsCount": 0,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          },
+          "lastActivityAt": null,
+          "warnings": [],
+          "idle": true
+        }
+      },
+      "lastStatus": {
+        "sessionId": "ptk-session_99c45647-3689-4a68-8872-e9be7028bf31",
+        "scanId": "ptk-session_99c45647-3689-4a68-8872-e9be7028bf31",
+        "ok": true,
+        "status": "completed",
+        "completionStatus": "completed",
+        "releaseStatus": "clean",
+        "error": null,
+        "startedAt": "2026-10-22T18:24:46.737Z",
+        "finishedAt": "2026-10-22T18:24:46.873Z",
+        "stopRequestedAt": null,
+        "closeRequestId": null,
+        "closeRequestAck": false,
+        "closeRequestMode": null,
+        "idleVerified": false,
+        "elapsedMs": 139,
+        "lastUpdatedAt": null,
+        "engines": {
+          "SCA": {
+            "status": "stopped",
+            "isRunning": false,
+            "progress": {
+              "done": 0,
+              "total": null
+            },
+            "findingsCount": 0,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            },
+            "lastActivityAt": null,
+            "warnings": [],
+            "idle": true
+          }
+        },
+        "summary": {
+          "findingsCount": 0,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          }
+        },
+        "finalSummary": {
+          "status": "completed",
+          "releaseStatus": "clean",
+          "stats": {
+            "findingsCount": 0,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            }
+          }
+        },
+        "warnings": [],
+        "sessionLookup": {
+          "requestedSessionId": "ptk-session_99c45647-3689-4a68-8872-e9be7028bf31",
+          "tabId": 1390437983,
+          "strictCurrentTab": true,
+          "allowActive": true,
+          "allowCompleted": true,
+          "allowGlobalCompleted": true,
+          "lookupSource": "explicit-session",
+          "activeSessionIdForTab": null,
+          "completedSessionIdForTab": "ptk-session_99c45647-3689-4a68-8872-e9be7028bf31",
+          "globalCompletedSessionId": "ptk-session_99c45647-3689-4a68-8872-e9be7028bf31",
+          "sessionExists": true,
+          "sessionStatus": "completed",
+          "sessionFinishedAt": "2026-10-22T18:24:46.873Z",
+          "stopRequestedAt": null,
+          "retention": {
+            "ttlMs": 86400000,
+            "maxCompletedSessions": 20,
+            "evicted": false
+          }
+        },
+        "supplemental": {
+          "backends": {},
+          "gaps": []
+        },
+        "coverage": {
+          "backendGaps": [],
+          "scaBodies": {
+            "captured": 0,
+            "analyzed": 0,
+            "gaps": 0,
+            "basis": "Admitted JavaScript resources observed during this scan; URI detections do not prove body analysis."
+          },
+          "scaSources": {
+            "captured": 1,
+            "analyzed": 1,
+            "gaps": 0,
+            "basis": "Executable Debugger script text, not a claim of HTTP-byte identity."
+          },
+          "scaAcquisition": {
+            "phase": "observed_content_analyzed",
+            "limits": {
+              "requested": {
+                "maxResourceBytes": 8388608,
+                "maxTotalBytes": 33554432,
+                "maxScripts": 128,
+                "drainTimeoutMs": 5000
+              },
+              "effective": {
+                "maxScripts": 128,
+                "maxResourceBytes": 8388608,
+                "maxTotalBytes": 33554432
+              }
+            },
+            "drain": {
+              "complete": true,
+              "gaps": 0,
+              "cleanupPending": false,
+              "tabs": {
+                "1390437983": {
+                  "complete": true,
+                  "gaps": 0
+                }
+              }
+            }
+          },
+          "scaBodyWarnings": []
+        }
+      },
+      "stopReason": "Stopped by user."
+    },
+    "string": {
+      "runId": "df779944-dde2-4436-9cff-b961d4857d7f",
+      "owner": "chat-d7680cfa-3519-4e2d-b921-d7c5e691bb11",
+      "workspaceId": "target-chat",
+      "tabId": 1390437983,
+      "engines": [
+        "SCA"
+      ],
+      "state": "running",
+      "config": {
+        "preset": "thorough",
+        "scanStrategy": "COMPREHENSIVE",
+        "dastScanStrategy": "COMPREHENSIVE",
+        "scanControlProfile": "wide",
+        "allowCaptureWithoutInteraction": true,
+        "maxRequestsPerSecond": 5,
+        "concurrency": 3,
+        "planningConcurrency": 2,
+        "runCve": true,
+        "follow_redirect": true,
+        "maxRequests": null,
+        "durationSeconds": null,
+        "acquisition": {
+          "maxResourceBytes": 8388608,
+          "maxTotalBytes": 33554432,
+          "maxScripts": 128,
+          "drainTimeoutMs": 5000
+        },
+        "limits": {}
+      },
+      "scope": {
+        "origins": [
+          "http://127.0.0.1:58747"
+        ],
+        "excludePaths": []
+      },
+      "accountId": null,
+      "accountRevision": null,
+      "createdAt": 1792693486896,
+      "updatedAt": 1792693486925,
+      "requestsSent": 0,
+      "coverage": {
+        "backendGaps": [],
+        "scaBodies": {
+          "captured": 0,
+          "analyzed": 0,
+          "gaps": 0,
+          "basis": "Admitted JavaScript resources observed during this scan; URI detections do not prove body analysis."
+        },
+        "scaSources": {
+          "captured": 1,
+          "analyzed": 1,
+          "gaps": 0,
+          "basis": "Executable Debugger script text, not a claim of HTTP-byte identity."
+        },
+        "scaAcquisition": {
+          "phase": "observed_content_analyzed",
+          "limits": {
+            "requested": {
+              "maxResourceBytes": 8388608,
+              "maxTotalBytes": 33554432,
+              "maxScripts": 128,
+              "drainTimeoutMs": 5000
+            },
+            "effective": {
+              "maxScripts": 128,
+              "maxResourceBytes": 8388608,
+              "maxTotalBytes": 33554432
+            }
+          },
+          "drain": null
+        },
+        "scaBodyWarnings": [],
+        "engineFailures": [],
+        "actionableGaps": [],
+        "recovery": {
+          "runId": "df779944-dde2-4436-9cff-b961d4857d7f",
+          "state": "in_progress",
+          "instruction": "Assess only the checks and evidence actually recorded; absence of reported gaps is not proof of full application coverage."
+        }
+      },
+      "summary": {
+        "findingsCount": 0,
+        "bySeverity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "info": 0
+        },
+        "findings": 0
+      },
+      "runtimeId": "ptk-session_4f625a19-de93-475a-828c-c138656d1060",
+      "engineStatus": {
+        "SCA": {
+          "status": "running",
+          "isRunning": true,
+          "progress": {
+            "done": 0,
+            "total": null
+          },
+          "findingsCount": 0,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          },
+          "lastActivityAt": null,
+          "warnings": [],
+          "idle": false
+        }
+      },
+      "lastStatus": {
+        "sessionId": "ptk-session_4f625a19-de93-475a-828c-c138656d1060",
+        "scanId": "ptk-session_4f625a19-de93-475a-828c-c138656d1060",
+        "ok": true,
+        "status": "running",
+        "completionStatus": "running",
+        "releaseStatus": null,
+        "error": null,
+        "startedAt": "2026-10-22T18:24:46.897Z",
+        "finishedAt": null,
+        "stopRequestedAt": null,
+        "closeRequestId": null,
+        "closeRequestAck": false,
+        "closeRequestMode": null,
+        "idleVerified": false,
+        "elapsedMs": 28,
+        "lastUpdatedAt": null,
+        "engines": {
+          "SCA": {
+            "status": "running",
+            "isRunning": true,
+            "progress": {
+              "done": 0,
+              "total": null
+            },
+            "findingsCount": 0,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            },
+            "lastActivityAt": null,
+            "warnings": [],
+            "idle": false
+          }
+        },
+        "summary": {
+          "findingsCount": 0,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          }
+        },
+        "warnings": [],
+        "sessionLookup": {
+          "requestedSessionId": "ptk-session_4f625a19-de93-475a-828c-c138656d1060",
+          "tabId": 1390437983,
+          "strictCurrentTab": true,
+          "allowActive": true,
+          "allowCompleted": true,
+          "allowGlobalCompleted": true,
+          "lookupSource": "explicit-session",
+          "activeSessionIdForTab": "ptk-session_4f625a19-de93-475a-828c-c138656d1060",
+          "completedSessionIdForTab": "ptk-session_99c45647-3689-4a68-8872-e9be7028bf31",
+          "globalCompletedSessionId": "ptk-session_99c45647-3689-4a68-8872-e9be7028bf31",
+          "sessionExists": true,
+          "sessionStatus": "running",
+          "sessionFinishedAt": null,
+          "stopRequestedAt": null,
+          "retention": {
+            "ttlMs": 86400000,
+            "maxCompletedSessions": 20,
+            "evicted": false
+          }
+        },
+        "supplemental": {
+          "backends": {},
+          "gaps": []
+        },
+        "coverage": {
+          "backendGaps": [],
+          "scaBodies": {
+            "captured": 0,
+            "analyzed": 0,
+            "gaps": 0,
+            "basis": "Admitted JavaScript resources observed during this scan; URI detections do not prove body analysis."
+          },
+          "scaSources": {
+            "captured": 1,
+            "analyzed": 1,
+            "gaps": 0,
+            "basis": "Executable Debugger script text, not a claim of HTTP-byte identity."
+          },
+          "scaAcquisition": {
+            "phase": "observed_content_analyzed",
+            "limits": {
+              "requested": {
+                "maxResourceBytes": 8388608,
+                "maxTotalBytes": 33554432,
+                "maxScripts": 128,
+                "drainTimeoutMs": 5000
+              },
+              "effective": {
+                "maxScripts": 128,
+                "maxResourceBytes": 8388608,
+                "maxTotalBytes": 33554432
+              }
+            },
+            "drain": null
+          },
+          "scaBodyWarnings": []
+        }
+      }
+    },
+    "string-stop": {
+      "runId": "df779944-dde2-4436-9cff-b961d4857d7f",
+      "owner": "chat-d7680cfa-3519-4e2d-b921-d7c5e691bb11",
+      "workspaceId": "target-chat",
+      "tabId": 1390437983,
+      "engines": [
+        "SCA"
+      ],
+      "state": "completed",
+      "config": {
+        "preset": "thorough",
+        "scanStrategy": "COMPREHENSIVE",
+        "dastScanStrategy": "COMPREHENSIVE",
+        "scanControlProfile": "wide",
+        "allowCaptureWithoutInteraction": true,
+        "maxRequestsPerSecond": 5,
+        "concurrency": 3,
+        "planningConcurrency": 2,
+        "runCve": true,
+        "follow_redirect": true,
+        "maxRequests": null,
+        "durationSeconds": null,
+        "acquisition": {
+          "maxResourceBytes": 8388608,
+          "maxTotalBytes": 33554432,
+          "maxScripts": 128,
+          "drainTimeoutMs": 5000
+        },
+        "limits": {}
+      },
+      "scope": {
+        "origins": [
+          "http://127.0.0.1:58747"
+        ],
+        "excludePaths": []
+      },
+      "accountId": null,
+      "accountRevision": null,
+      "createdAt": 1792693486896,
+      "updatedAt": 1792693486954,
+      "requestsSent": 0,
+      "coverage": {
+        "backendGaps": [],
+        "scaBodies": {
+          "captured": 0,
+          "analyzed": 0,
+          "gaps": 0,
+          "basis": "Admitted JavaScript resources observed during this scan; URI detections do not prove body analysis."
+        },
+        "scaSources": {
+          "captured": 1,
+          "analyzed": 1,
+          "gaps": 0,
+          "basis": "Executable Debugger script text, not a claim of HTTP-byte identity."
+        },
+        "scaAcquisition": {
+          "phase": "observed_content_analyzed",
+          "limits": {
+            "requested": {
+              "maxResourceBytes": 8388608,
+              "maxTotalBytes": 33554432,
+              "maxScripts": 128,
+              "drainTimeoutMs": 5000
+            },
+            "effective": {
+              "maxScripts": 128,
+              "maxResourceBytes": 8388608,
+              "maxTotalBytes": 33554432
+            }
+          },
+          "drain": {
+            "complete": true,
+            "gaps": 0,
+            "cleanupPending": false,
+            "tabs": {
+              "1390437983": {
+                "complete": true,
+                "gaps": 0
+              }
+            }
+          }
+        },
+        "scaBodyWarnings": [],
+        "engineFailures": [],
+        "actionableGaps": [],
+        "recovery": {
+          "runId": "df779944-dde2-4436-9cff-b961d4857d7f",
+          "state": "reported_checks_finished",
+          "instruction": "Assess only the checks and evidence actually recorded; absence of reported gaps is not proof of full application coverage."
+        }
+      },
+      "summary": {
+        "status": "completed",
+        "releaseStatus": "clean",
+        "stats": {
+          "findingsCount": 0,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          }
+        },
+        "findings": 0
+      },
+      "runtimeId": "ptk-session_4f625a19-de93-475a-828c-c138656d1060",
+      "engineStatus": {
+        "SCA": {
+          "status": "stopped",
+          "isRunning": false,
+          "progress": {
+            "done": 0,
+            "total": null
+          },
+          "findingsCount": 0,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          },
+          "lastActivityAt": null,
+          "warnings": [],
+          "idle": true
+        }
+      },
+      "lastStatus": {
+        "sessionId": "ptk-session_4f625a19-de93-475a-828c-c138656d1060",
+        "scanId": "ptk-session_4f625a19-de93-475a-828c-c138656d1060",
+        "ok": true,
+        "status": "completed",
+        "completionStatus": "completed",
+        "releaseStatus": "clean",
+        "error": null,
+        "startedAt": "2026-10-22T18:24:46.897Z",
+        "finishedAt": "2026-10-22T18:24:46.950Z",
+        "stopRequestedAt": null,
+        "closeRequestId": null,
+        "closeRequestAck": false,
+        "closeRequestMode": null,
+        "idleVerified": false,
+        "elapsedMs": 56,
+        "lastUpdatedAt": null,
+        "engines": {
+          "SCA": {
+            "status": "stopped",
+            "isRunning": false,
+            "progress": {
+              "done": 0,
+              "total": null
+            },
+            "findingsCount": 0,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            },
+            "lastActivityAt": null,
+            "warnings": [],
+            "idle": true
+          }
+        },
+        "summary": {
+          "findingsCount": 0,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          }
+        },
+        "finalSummary": {
+          "status": "completed",
+          "releaseStatus": "clean",
+          "stats": {
+            "findingsCount": 0,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            }
+          }
+        },
+        "warnings": [],
+        "sessionLookup": {
+          "requestedSessionId": "ptk-session_4f625a19-de93-475a-828c-c138656d1060",
+          "tabId": 1390437983,
+          "strictCurrentTab": true,
+          "allowActive": true,
+          "allowCompleted": true,
+          "allowGlobalCompleted": true,
+          "lookupSource": "explicit-session",
+          "activeSessionIdForTab": null,
+          "completedSessionIdForTab": "ptk-session_4f625a19-de93-475a-828c-c138656d1060",
+          "globalCompletedSessionId": "ptk-session_4f625a19-de93-475a-828c-c138656d1060",
+          "sessionExists": true,
+          "sessionStatus": "completed",
+          "sessionFinishedAt": "2026-10-22T18:24:46.950Z",
+          "stopRequestedAt": null,
+          "retention": {
+            "ttlMs": 86400000,
+            "maxCompletedSessions": 20,
+            "evicted": false
+          }
+        },
+        "supplemental": {
+          "backends": {},
+          "gaps": []
+        },
+        "coverage": {
+          "backendGaps": [],
+          "scaBodies": {
+            "captured": 0,
+            "analyzed": 0,
+            "gaps": 0,
+            "basis": "Admitted JavaScript resources observed during this scan; URI detections do not prove body analysis."
+          },
+          "scaSources": {
+            "captured": 1,
+            "analyzed": 1,
+            "gaps": 0,
+            "basis": "Executable Debugger script text, not a claim of HTTP-byte identity."
+          },
+          "scaAcquisition": {
+            "phase": "observed_content_analyzed",
+            "limits": {
+              "requested": {
+                "maxResourceBytes": 8388608,
+                "maxTotalBytes": 33554432,
+                "maxScripts": 128,
+                "drainTimeoutMs": 5000
+              },
+              "effective": {
+                "maxScripts": 128,
+                "maxResourceBytes": 8388608,
+                "maxTotalBytes": 33554432
+              }
+            },
+            "drain": {
+              "complete": true,
+              "gaps": 0,
+              "cleanupPending": false,
+              "tabs": {
+                "1390437983": {
+                  "complete": true,
+                  "gaps": 0
+                }
+              }
+            }
+          },
+          "scaBodyWarnings": []
+        }
+      },
+      "stopReason": "Stopped by user."
+    },
+    "alias": {
+      "runId": "821fbb25-e95d-48ec-b37a-04d3c4703c7e",
+      "owner": "chat-d7680cfa-3519-4e2d-b921-d7c5e691bb11",
+      "workspaceId": "target-chat",
+      "tabId": 1390437983,
+      "engines": [
+        "SCA"
+      ],
+      "state": "running",
+      "config": {
+        "preset": "thorough",
+        "scanStrategy": "COMPREHENSIVE",
+        "dastScanStrategy": "COMPREHENSIVE",
+        "scanControlProfile": "wide",
+        "allowCaptureWithoutInteraction": true,
+        "maxRequestsPerSecond": 5,
+        "concurrency": 3,
+        "planningConcurrency": 2,
+        "runCve": true,
+        "follow_redirect": true,
+        "maxRequests": null,
+        "durationSeconds": null,
+        "acquisition": {
+          "maxResourceBytes": 8388608,
+          "maxTotalBytes": 33554432,
+          "maxScripts": 128,
+          "drainTimeoutMs": 5000
+        },
+        "limits": {}
+      },
+      "scope": {
+        "origins": [
+          "http://127.0.0.1:58747"
+        ],
+        "excludePaths": []
+      },
+      "accountId": null,
+      "accountRevision": null,
+      "createdAt": 1792693486978,
+      "updatedAt": 1792693487001,
+      "requestsSent": 0,
+      "coverage": {
+        "backendGaps": [],
+        "scaBodies": {
+          "captured": 0,
+          "analyzed": 0,
+          "gaps": 0,
+          "basis": "Admitted JavaScript resources observed during this scan; URI detections do not prove body analysis."
+        },
+        "scaSources": {
+          "captured": 1,
+          "analyzed": 1,
+          "gaps": 0,
+          "basis": "Executable Debugger script text, not a claim of HTTP-byte identity."
+        },
+        "scaAcquisition": {
+          "phase": "observed_content_analyzed",
+          "limits": {
+            "requested": {
+              "maxResourceBytes": 8388608,
+              "maxTotalBytes": 33554432,
+              "maxScripts": 128,
+              "drainTimeoutMs": 5000
+            },
+            "effective": {
+              "maxScripts": 128,
+              "maxResourceBytes": 8388608,
+              "maxTotalBytes": 33554432
+            }
+          },
+          "drain": null
+        },
+        "scaBodyWarnings": [],
+        "engineFailures": [],
+        "actionableGaps": [],
+        "recovery": {
+          "runId": "821fbb25-e95d-48ec-b37a-04d3c4703c7e",
+          "state": "in_progress",
+          "instruction": "Assess only the checks and evidence actually recorded; absence of reported gaps is not proof of full application coverage."
+        }
+      },
+      "summary": {
+        "findingsCount": 0,
+        "bySeverity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "info": 0
+        },
+        "findings": 0
+      },
+      "runtimeId": "ptk-session_e9294aac-78ff-40ef-9ee2-4c393e5dbce0",
+      "engineStatus": {
+        "SCA": {
+          "status": "running",
+          "isRunning": true,
+          "progress": {
+            "done": 0,
+            "total": null
+          },
+          "findingsCount": 0,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          },
+          "lastActivityAt": null,
+          "warnings": [],
+          "idle": false
+        }
+      },
+      "lastStatus": {
+        "sessionId": "ptk-session_e9294aac-78ff-40ef-9ee2-4c393e5dbce0",
+        "scanId": "ptk-session_e9294aac-78ff-40ef-9ee2-4c393e5dbce0",
+        "ok": true,
+        "status": "running",
+        "completionStatus": "running",
+        "releaseStatus": null,
+        "error": null,
+        "startedAt": "2026-10-22T18:24:46.980Z",
+        "finishedAt": null,
+        "stopRequestedAt": null,
+        "closeRequestId": null,
+        "closeRequestAck": false,
+        "closeRequestMode": null,
+        "idleVerified": false,
+        "elapsedMs": 21,
+        "lastUpdatedAt": null,
+        "engines": {
+          "SCA": {
+            "status": "running",
+            "isRunning": true,
+            "progress": {
+              "done": 0,
+              "total": null
+            },
+            "findingsCount": 0,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            },
+            "lastActivityAt": null,
+            "warnings": [],
+            "idle": false
+          }
+        },
+        "summary": {
+          "findingsCount": 0,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          }
+        },
+        "warnings": [],
+        "sessionLookup": {
+          "requestedSessionId": "ptk-session_e9294aac-78ff-40ef-9ee2-4c393e5dbce0",
+          "tabId": 1390437983,
+          "strictCurrentTab": true,
+          "allowActive": true,
+          "allowCompleted": true,
+          "allowGlobalCompleted": true,
+          "lookupSource": "explicit-session",
+          "activeSessionIdForTab": "ptk-session_e9294aac-78ff-40ef-9ee2-4c393e5dbce0",
+          "completedSessionIdForTab": "ptk-session_4f625a19-de93-475a-828c-c138656d1060",
+          "globalCompletedSessionId": "ptk-session_4f625a19-de93-475a-828c-c138656d1060",
+          "sessionExists": true,
+          "sessionStatus": "running",
+          "sessionFinishedAt": null,
+          "stopRequestedAt": null,
+          "retention": {
+            "ttlMs": 86400000,
+            "maxCompletedSessions": 20,
+            "evicted": false
+          }
+        },
+        "supplemental": {
+          "backends": {},
+          "gaps": []
+        },
+        "coverage": {
+          "backendGaps": [],
+          "scaBodies": {
+            "captured": 0,
+            "analyzed": 0,
+            "gaps": 0,
+            "basis": "Admitted JavaScript resources observed during this scan; URI detections do not prove body analysis."
+          },
+          "scaSources": {
+            "captured": 1,
+            "analyzed": 1,
+            "gaps": 0,
+            "basis": "Executable Debugger script text, not a claim of HTTP-byte identity."
+          },
+          "scaAcquisition": {
+            "phase": "observed_content_analyzed",
+            "limits": {
+              "requested": {
+                "maxResourceBytes": 8388608,
+                "maxTotalBytes": 33554432,
+                "maxScripts": 128,
+                "drainTimeoutMs": 5000
+              },
+              "effective": {
+                "maxScripts": 128,
+                "maxResourceBytes": 8388608,
+                "maxTotalBytes": 33554432
+              }
+            },
+            "drain": null
+          },
+          "scaBodyWarnings": []
+        }
+      }
+    },
+    "alias-stop": {
+      "runId": "821fbb25-e95d-48ec-b37a-04d3c4703c7e",
+      "owner": "chat-d7680cfa-3519-4e2d-b921-d7c5e691bb11",
+      "workspaceId": "target-chat",
+      "tabId": 1390437983,
+      "engines": [
+        "SCA"
+      ],
+      "state": "completed",
+      "config": {
+        "preset": "thorough",
+        "scanStrategy": "COMPREHENSIVE",
+        "dastScanStrategy": "COMPREHENSIVE",
+        "scanControlProfile": "wide",
+        "allowCaptureWithoutInteraction": true,
+        "maxRequestsPerSecond": 5,
+        "concurrency": 3,
+        "planningConcurrency": 2,
+        "runCve": true,
+        "follow_redirect": true,
+        "maxRequests": null,
+        "durationSeconds": null,
+        "acquisition": {
+          "maxResourceBytes": 8388608,
+          "maxTotalBytes": 33554432,
+          "maxScripts": 128,
+          "drainTimeoutMs": 5000
+        },
+        "limits": {}
+      },
+      "scope": {
+        "origins": [
+          "http://127.0.0.1:58747"
+        ],
+        "excludePaths": []
+      },
+      "accountId": null,
+      "accountRevision": null,
+      "createdAt": 1792693486978,
+      "updatedAt": 1792693487028,
+      "requestsSent": 0,
+      "coverage": {
+        "backendGaps": [],
+        "scaBodies": {
+          "captured": 0,
+          "analyzed": 0,
+          "gaps": 0,
+          "basis": "Admitted JavaScript resources observed during this scan; URI detections do not prove body analysis."
+        },
+        "scaSources": {
+          "captured": 1,
+          "analyzed": 1,
+          "gaps": 0,
+          "basis": "Executable Debugger script text, not a claim of HTTP-byte identity."
+        },
+        "scaAcquisition": {
+          "phase": "observed_content_analyzed",
+          "limits": {
+            "requested": {
+              "maxResourceBytes": 8388608,
+              "maxTotalBytes": 33554432,
+              "maxScripts": 128,
+              "drainTimeoutMs": 5000
+            },
+            "effective": {
+              "maxScripts": 128,
+              "maxResourceBytes": 8388608,
+              "maxTotalBytes": 33554432
+            }
+          },
+          "drain": {
+            "complete": true,
+            "gaps": 0,
+            "cleanupPending": false,
+            "tabs": {
+              "1390437983": {
+                "complete": true,
+                "gaps": 0
+              }
+            }
+          }
+        },
+        "scaBodyWarnings": [],
+        "engineFailures": [],
+        "actionableGaps": [],
+        "recovery": {
+          "runId": "821fbb25-e95d-48ec-b37a-04d3c4703c7e",
+          "state": "reported_checks_finished",
+          "instruction": "Assess only the checks and evidence actually recorded; absence of reported gaps is not proof of full application coverage."
+        }
+      },
+      "summary": {
+        "status": "completed",
+        "releaseStatus": "clean",
+        "stats": {
+          "findingsCount": 0,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          }
+        },
+        "findings": 0
+      },
+      "runtimeId": "ptk-session_e9294aac-78ff-40ef-9ee2-4c393e5dbce0",
+      "engineStatus": {
+        "SCA": {
+          "status": "stopped",
+          "isRunning": false,
+          "progress": {
+            "done": 0,
+            "total": null
+          },
+          "findingsCount": 0,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          },
+          "lastActivityAt": null,
+          "warnings": [],
+          "idle": true
+        }
+      },
+      "lastStatus": {
+        "sessionId": "ptk-session_e9294aac-78ff-40ef-9ee2-4c393e5dbce0",
+        "scanId": "ptk-session_e9294aac-78ff-40ef-9ee2-4c393e5dbce0",
+        "ok": true,
+        "status": "completed",
+        "completionStatus": "completed",
+        "releaseStatus": "clean",
+        "error": null,
+        "startedAt": "2026-10-22T18:24:46.980Z",
+        "finishedAt": "2026-10-22T18:24:47.026Z",
+        "stopRequestedAt": null,
+        "closeRequestId": null,
+        "closeRequestAck": false,
+        "closeRequestMode": null,
+        "idleVerified": false,
+        "elapsedMs": 48,
+        "lastUpdatedAt": null,
+        "engines": {
+          "SCA": {
+            "status": "stopped",
+            "isRunning": false,
+            "progress": {
+              "done": 0,
+              "total": null
+            },
+            "findingsCount": 0,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            },
+            "lastActivityAt": null,
+            "warnings": [],
+            "idle": true
+          }
+        },
+        "summary": {
+          "findingsCount": 0,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          }
+        },
+        "finalSummary": {
+          "status": "completed",
+          "releaseStatus": "clean",
+          "stats": {
+            "findingsCount": 0,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            }
+          }
+        },
+        "warnings": [],
+        "sessionLookup": {
+          "requestedSessionId": "ptk-session_e9294aac-78ff-40ef-9ee2-4c393e5dbce0",
+          "tabId": 1390437983,
+          "strictCurrentTab": true,
+          "allowActive": true,
+          "allowCompleted": true,
+          "allowGlobalCompleted": true,
+          "lookupSource": "explicit-session",
+          "activeSessionIdForTab": null,
+          "completedSessionIdForTab": "ptk-session_e9294aac-78ff-40ef-9ee2-4c393e5dbce0",
+          "globalCompletedSessionId": "ptk-session_e9294aac-78ff-40ef-9ee2-4c393e5dbce0",
+          "sessionExists": true,
+          "sessionStatus": "completed",
+          "sessionFinishedAt": "2026-10-22T18:24:47.026Z",
+          "stopRequestedAt": null,
+          "retention": {
+            "ttlMs": 86400000,
+            "maxCompletedSessions": 20,
+            "evicted": false
+          }
+        },
+        "supplemental": {
+          "backends": {},
+          "gaps": []
+        },
+        "coverage": {
+          "backendGaps": [],
+          "scaBodies": {
+            "captured": 0,
+            "analyzed": 0,
+            "gaps": 0,
+            "basis": "Admitted JavaScript resources observed during this scan; URI detections do not prove body analysis."
+          },
+          "scaSources": {
+            "captured": 1,
+            "analyzed": 1,
+            "gaps": 0,
+            "basis": "Executable Debugger script text, not a claim of HTTP-byte identity."
+          },
+          "scaAcquisition": {
+            "phase": "observed_content_analyzed",
+            "limits": {
+              "requested": {
+                "maxResourceBytes": 8388608,
+                "maxTotalBytes": 33554432,
+                "maxScripts": 128,
+                "drainTimeoutMs": 5000
+              },
+              "effective": {
+                "maxScripts": 128,
+                "maxResourceBytes": 8388608,
+                "maxTotalBytes": 33554432
+              }
+            },
+            "drain": {
+              "complete": true,
+              "gaps": 0,
+              "cleanupPending": false,
+              "tabs": {
+                "1390437983": {
+                  "complete": true,
+                  "gaps": 0
+                }
+              }
+            }
+          },
+          "scaBodyWarnings": []
+        }
+      },
+      "stopReason": "Stopped by user."
+    },
+    "wrong-handle": {
+      "error": "This security run does not belong to this chat."
+    },
+    "owned-handle": {
+      "candidates": [],
+      "total": 0,
+      "nextOffset": null,
+      "coverage": {
+        "enginesPresent": [
+          "SCA"
+        ],
+        "enginesMissing": [
+          "DAST",
+          "IAST",
+          "SAST"
+        ],
+        "gaps": [
+          {
+            "code": "SCA_NO_LOCKFILE_OR_PACKAGE_GRAPH",
+            "severity": "med",
+            "engine": "SCA",
+            "recommendedActionKey": "ACTION_PROVIDE_DEP_GRAPH",
+            "detail": "SCA run has no package inventory and no findings."
+          }
+        ],
+        "limitations": [],
+        "confidence": "low",
+        "confidenceScore": 25
+      },
+      "snapshotScanId": "18e31459-028f-4c76-b8fe-851367c27450",
+      "sourceRunId": "821fbb25-e95d-48ec-b37a-04d3c4703c7e",
+      "snapshotId": "f1c8c260-1ca1-4a55-838b-c189228942c0",
+      "runId": "22d3c02e-e49c-4f85-9441-4d6f60b510fa"
+    },
+    "jwt": {
+      "header": {
+        "alg": "HS256"
+      },
+      "claims": {
+        "sub": "fixture"
+      },
+      "runId": "41904bd2-310c-4a25-b33c-b1b5f7dd139d"
+    }
+  },
+  "wire": [
+    "/app",
+    "/app.js",
+    "/favicon.ico"
+  ]
+}

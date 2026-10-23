@@ -1,0 +1,3792 @@
+{
+  "schema": 1,
+  "scope": "Real ordinary GET HTTP/route correlation across declared origins and excluded controls.",
+  "wire": [
+    {
+      "server": "primary",
+      "method": "GET",
+      "path": "/app"
+    },
+    {
+      "server": "primary",
+      "method": "GET",
+      "path": "/favicon.ico"
+    },
+    {
+      "server": "primary",
+      "method": "GET",
+      "path": "/http/primary"
+    },
+    {
+      "server": "secondary",
+      "method": "GET",
+      "path": "/http/allowed"
+    },
+    {
+      "server": "foreign",
+      "method": "GET",
+      "path": "/http/foreign"
+    },
+    {
+      "server": "primary",
+      "method": "GET",
+      "path": "/excluded/primary"
+    },
+    {
+      "server": "secondary",
+      "method": "GET",
+      "path": "/excluded/secondary"
+    }
+  ],
+  "origins": {
+    "primary": "http://127.0.0.1:54548",
+    "secondary": "http://127.0.0.1:54549",
+    "foreign": "http://localhost:54550"
+  },
+  "targets": {
+    "primary": "http://127.0.0.1:54548/http/primary",
+    "secondary": "http://127.0.0.1:54549/http/allowed",
+    "foreign": "http://localhost:54550/http/foreign",
+    "excludedPrimary": "http://127.0.0.1:54548/excluded/primary",
+    "excludedSecondary": "http://127.0.0.1:54549/excluded/secondary"
+  },
+  "responses": {
+    "primary": {
+      "status": 200,
+      "body": {
+        "ok": true,
+        "server": "primary",
+        "path": "/http/primary"
+      }
+    },
+    "secondary": {
+      "status": 200,
+      "body": {
+        "ok": true,
+        "server": "secondary",
+        "path": "/http/allowed"
+      }
+    },
+    "foreign": {
+      "status": 200,
+      "body": {
+        "ok": true,
+        "server": "foreign",
+        "path": "/http/foreign"
+      }
+    },
+    "excludedPrimary": {
+      "status": 200,
+      "body": {
+        "ok": true,
+        "server": "primary",
+        "path": "/excluded/primary"
+      }
+    },
+    "excludedSecondary": {
+      "status": 200,
+      "body": {
+        "ok": true,
+        "server": "secondary",
+        "path": "/excluded/secondary"
+      }
+    }
+  },
+  "live": {
+    "version": "1.0",
+    "type": "scan_result",
+    "engine": "IAST",
+    "scanId": "a0250366-8d08-42f0-b786-2b5224155506",
+    "host": "127.0.0.1:54548",
+    "tabId": 27157171,
+    "startedAt": "2026-10-22T14:01:30.722Z",
+    "finishedAt": null,
+    "settings": {
+      "iastScanStrategy": "SMART",
+      "iastRulepackSource": "local",
+      "iastPolicyName": null,
+      "iastPackStatus": "active",
+      "iastPackError": null
+    },
+    "toolVersion": "1.0.0",
+    "stats": {
+      "findingsCount": 0,
+      "attacksCount": 0,
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "info": 0,
+      "requestsCount": 2
+    },
+    "findings": [],
+    "groups": [],
+    "codeArtifacts": {
+      "sast": {
+        "version": 2,
+        "routes": [],
+        "endpoints": [],
+        "graphql": [],
+        "surfaces": [],
+        "hiddenParams": [],
+        "gadgets": []
+      }
+    },
+    "items": [],
+    "policyId": null,
+    "httpEvents": [
+      {
+        "type": "devtools-http-request",
+        "time": 1792677690773,
+        "requestId": "11712.3",
+        "url": "http://127.0.0.1:54548/http/primary",
+        "method": "GET",
+        "tabId": 27157171,
+        "host": "127.0.0.1:54548"
+      },
+      {
+        "type": "http",
+        "time": 1792677690774,
+        "requestId": "143",
+        "url": "http://127.0.0.1:54548/http/primary",
+        "method": "GET",
+        "status": 200,
+        "ip": "127.0.0.1",
+        "fromCache": false,
+        "tabId": 27157171,
+        "host": "127.0.0.1:54548"
+      },
+      {
+        "type": "devtools-http-response",
+        "time": 1792677690774,
+        "requestId": "11712.3",
+        "url": "http://127.0.0.1:54548/http/primary",
+        "method": "GET",
+        "status": 200,
+        "mimeType": "application/json",
+        "tabId": 27157171,
+        "host": "127.0.0.1:54548"
+      },
+      {
+        "type": "devtools-http-request",
+        "time": 1792677690775,
+        "requestId": "11712.4",
+        "url": "http://127.0.0.1:54549/http/allowed",
+        "method": "GET",
+        "tabId": 27157171,
+        "host": "127.0.0.1:54549"
+      },
+      {
+        "type": "http",
+        "time": 1792677690786,
+        "requestId": "144",
+        "url": "http://127.0.0.1:54549/http/allowed",
+        "method": "GET",
+        "status": 200,
+        "ip": "127.0.0.1",
+        "fromCache": false,
+        "tabId": 27157171,
+        "host": "127.0.0.1:54549"
+      },
+      {
+        "type": "devtools-http-response",
+        "time": 1792677690787,
+        "requestId": "11712.4",
+        "url": "http://127.0.0.1:54549/http/allowed",
+        "method": "GET",
+        "status": 200,
+        "mimeType": "application/json",
+        "tabId": 27157171,
+        "host": "127.0.0.1:54549"
+      }
+    ],
+    "runtimeEvents": [
+      {
+        "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+        "eventKey": "client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+        "engine": "IAST",
+        "kind": "iast_runtime_signal",
+        "signalFamily": "client_runtime",
+        "signalCode": "client_json_parse_observed",
+        "category": null,
+        "severity": "info",
+        "confidence": 55,
+        "findingId": null,
+        "findingFingerprint": null,
+        "requestId": null,
+        "requestKey": null,
+        "moduleId": null,
+        "ruleId": null,
+        "sinkId": "client.json.parse",
+        "sourceKind": "apiResponseField",
+        "sourceKey": "response:json:ok",
+        "sourceRole": "observed",
+        "primaryClass": "observation",
+        "detection": {
+          "reason": "client_json_parse_observed",
+          "dataKind": "unknown",
+          "confidence": 55,
+          "details": {
+            "valuePreview": "true"
+          }
+        },
+        "trust": {
+          "level": "same_origin",
+          "decision": "allow"
+        },
+        "suppression": null,
+        "sanitizers": [],
+        "confidenceSignals": [],
+        "url": "http://127.0.0.1:54548/app",
+        "route": "/app",
+        "method": "GET",
+        "location": {
+          "url": "http://127.0.0.1:54548/app",
+          "method": "GET",
+          "route": "/app"
+        },
+        "routing": {
+          "runtimeUrl": "http://127.0.0.1:54548/app",
+          "pathname": "/app",
+          "clientRoute": "/app",
+          "route": "/app",
+          "urlPattern": "http://127.0.0.1:54548/app"
+        },
+        "headerName": null,
+        "storageKey": null,
+        "cookieName": null,
+        "attribute": null,
+        "isCrossOrigin": null,
+        "observedAt": null,
+        "sinkContext": {
+          "requestUrl": null,
+          "method": "GET",
+          "headerName": null,
+          "destUrl": null,
+          "destHost": null,
+          "destOrigin": null,
+          "isCrossOrigin": null,
+          "cookieName": null,
+          "storageKey": null,
+          "storageArea": null
+        },
+        "sourceValuePreview": "true",
+        "time": 1792677690775,
+        "evidenceRefs": []
+      }
+    ],
+    "requests": [
+      {
+        "key": "GET http://127.0.0.1:54548/http/primary",
+        "method": "GET",
+        "url": "http://127.0.0.1:54548/http/primary",
+        "displayUrl": "http://127.0.0.1:54548/http/primary",
+        "status": 200,
+        "host": "127.0.0.1:54548",
+        "type": "devtools-http-response",
+        "mimeType": null,
+        "lastSeen": 1792677690774
+      },
+      {
+        "key": "GET http://127.0.0.1:54549/http/allowed",
+        "method": "GET",
+        "url": "http://127.0.0.1:54549/http/allowed",
+        "displayUrl": "http://127.0.0.1:54549/http/allowed",
+        "status": 200,
+        "host": "127.0.0.1:54549",
+        "type": "devtools-http-response",
+        "mimeType": null,
+        "lastSeen": 1792677690787
+      }
+    ],
+    "pages": [],
+    "files": [],
+    "iastTelemetry": {
+      "activation": {
+        "packStatus": "active",
+        "activeModuleCount": 20,
+        "activeRuleCount": 96,
+        "activeHookGroups": [
+          "hook.angularjs",
+          "hook.code.exec",
+          "hook.dom.documentWrite",
+          "hook.dom.formAttributes",
+          "hook.dom.htmlAssignments",
+          "hook.dom.htmlParsers",
+          "hook.dom.inlineEvents",
+          "hook.dom.mutations",
+          "hook.dom.urlAttributes",
+          "hook.nav.redirects",
+          "hook.net.exfil",
+          "hook.net.responses",
+          "hook.postMessage",
+          "hook.runtime.integrity.fetchInit",
+          "hook.runtime.integrity.prototypeWrites",
+          "hook.sanitizers",
+          "hook.script.loading"
+        ],
+        "freeSafeHookGroups": [
+          "hook.angularjs",
+          "hook.code.exec",
+          "hook.dom.documentWrite",
+          "hook.dom.formAttributes",
+          "hook.dom.htmlAssignments",
+          "hook.dom.inlineEvents",
+          "hook.dom.mutations",
+          "hook.dom.urlAttributes",
+          "hook.nav.redirects",
+          "hook.net.responses",
+          "hook.postMessage",
+          "hook.runtime.integrity.fetchInit",
+          "hook.script.loading"
+        ],
+        "policyOnlyHookGroups": [
+          "hook.dom.htmlParsers",
+          "hook.net.exfil",
+          "hook.runtime.integrity.prototypeWrites",
+          "hook.sanitizers"
+        ],
+        "supportHookGroups": [],
+        "hookRuleCounts": {
+          "hook.angularjs": 4,
+          "hook.code.exec": 11,
+          "hook.dom.documentWrite": 3,
+          "hook.dom.formAttributes": 9,
+          "hook.dom.htmlAssignments": 11,
+          "hook.dom.htmlParsers": 8,
+          "hook.dom.inlineEvents": 2,
+          "hook.dom.mutations": 3,
+          "hook.dom.urlAttributes": 14,
+          "hook.nav.redirects": 23,
+          "hook.net.exfil": 7,
+          "hook.net.responses": 0,
+          "hook.postMessage": 2,
+          "hook.runtime.integrity.fetchInit": 1,
+          "hook.runtime.integrity.prototypeWrites": 1,
+          "hook.sanitizers": 0,
+          "hook.script.loading": 1
+        },
+        "rulepackSource": "local",
+        "policyId": null,
+        "policyName": null,
+        "moduleIds": [
+          "iast_angularjs_expression_injection",
+          "iast_client_http_exfiltration",
+          "iast_dangerous_form_scheme_execution",
+          "iast_dangerous_url_scheme_execution",
+          "iast_dom_link_manipulation",
+          "iast_dom_parser_xss",
+          "iast_dom_url_navigation",
+          "iast_dom_xss",
+          "iast_dom_xss_secondary_sources",
+          "iast_form_submission_hijack",
+          "iast_iframe_navigation",
+          "iast_js_execution",
+          "iast_open_redirect",
+          "iast_postmessage_misuse",
+          "iast_prototype_pollution_impact",
+          "iast_response_field_dom_reachability",
+          "iast_route_controlled_navigation",
+          "iast_source_scoped_open_redirect",
+          "iast_storage_taint_to_exec",
+          "iast_timer_js_execution"
+        ],
+        "ruleIds": [
+          "angularjs_expression_function_constructor",
+          "angularjs_parse_from_cookie",
+          "angularjs_parse_from_form",
+          "angularjs_parse_from_localstorage",
+          "angularjs_parse_from_postmessage",
+          "document_write_xss",
+          "document_write_xss_secondary_sources",
+          "dom_attr_action_navigation",
+          "dom_attr_action_redirect_sources",
+          "dom_attr_formaction_navigation",
+          "dom_attr_href_navigation",
+          "dom_attr_href_redirect_sources",
+          "dom_attr_src_navigation",
+          "dom_inline_event_handler",
+          "dom_inline_event_xss_secondary_sources",
+          "dom_innerhtml_xss",
+          "dom_innerhtml_xss_secondary_sources",
+          "dom_insertadjacenthtml_xss",
+          "dom_insertadjacenthtml_xss_secondary_sources",
+          "dom_mutation_xss",
+          "dom_mutation_xss_secondary_sources",
+          "dom_outerhtml_xss",
+          "dom_outerhtml_xss_secondary_sources",
+          "domparser_parsefromstring_html_xss",
+          "element_sethtmlunsafe_xss",
+          "eval_js_execution",
+          "eval_storage_taint_execution",
+          "fetch_headers_exfiltration",
+          "fetch_url_exfiltration",
+          "form_action_data_url_execution",
+          "form_action_hijack",
+          "form_action_javascript_url_execution",
+          "form_formaction_data_url_execution",
+          "form_formaction_hijack",
+          "form_formaction_javascript_url_execution",
+          "function_apply_execution",
+          "function_apply_storage_taint_execution",
+          "function_constructor_execution",
+          "function_constructor_storage_taint_execution",
+          "history_pushstate_open_redirect",
+          "history_replacestate_route_change",
+          "href_data_url_execution",
+          "href_javascript_url_execution",
+          "iframe_src_data_url_execution",
+          "iframe_src_javascript_url_execution",
+          "iframe_src_redirect",
+          "iframe_srcdoc_xss",
+          "iframe_srcdoc_xss_secondary_sources",
+          "image_src_exfiltration",
+          "location_assign_data_url_execution",
+          "location_assign_javascript_url_execution",
+          "location_assign_redirect",
+          "location_assign_redirect_sources",
+          "location_href_data_url_execution",
+          "location_href_javascript_url_execution",
+          "location_href_redirect",
+          "location_href_redirect_sources",
+          "location_replace_data_url_execution",
+          "location_replace_javascript_url_execution",
+          "location_replace_redirect",
+          "location_replace_redirect_sources",
+          "navigation_api_redirect",
+          "navigation_api_redirect_sources",
+          "postmessage_cross_origin_leak",
+          "postmessage_star_origin_leak",
+          "prototype_pollution_fetch_init",
+          "prototype_pollution_write",
+          "range_contextual_fragment_xss",
+          "response_dom_contextual_fragment_reachability",
+          "response_dom_document_write_reachability",
+          "response_dom_innerhtml_reachability",
+          "response_dom_insertadjacenthtml_reachability",
+          "response_dom_mutation_reachability",
+          "response_dom_outerhtml_reachability",
+          "response_dom_parser_reachability",
+          "response_dom_sethtmlunsafe_reachability",
+          "response_dom_shadow_sethtmlunsafe_reachability",
+          "route_navigation_api_navigation",
+          "route_pushstate_navigation",
+          "route_replacestate_navigation",
+          "script_src_data_url_execution",
+          "sendbeacon_exfiltration",
+          "setinterval_storage_taint_execution",
+          "setinterval_string_execution",
+          "settimeout_storage_taint_execution",
+          "settimeout_string_execution",
+          "shadowroot_sethtmlunsafe_xss",
+          "src_data_url_execution",
+          "src_javascript_url_execution",
+          "window_open_data_url_execution",
+          "window_open_javascript_url_execution",
+          "window_open_redirect",
+          "window_open_redirect_sources",
+          "xhr_body_exfiltration",
+          "xhr_header_exfiltration",
+          "xhr_url_exfiltration"
+        ],
+        "runtimeHealth": {
+          "state": "normal",
+          "enabledHookGroups": [
+            "hook.angularjs",
+            "hook.code.exec",
+            "hook.dom.documentWrite",
+            "hook.dom.formAttributes",
+            "hook.dom.htmlAssignments",
+            "hook.dom.htmlParsers",
+            "hook.dom.inlineEvents",
+            "hook.dom.mutations",
+            "hook.dom.urlAttributes",
+            "hook.nav.redirects",
+            "hook.net.exfil",
+            "hook.net.responses",
+            "hook.postMessage",
+            "hook.runtime.integrity.fetchInit",
+            "hook.runtime.integrity.prototypeWrites",
+            "hook.sanitizers",
+            "hook.script.loading"
+          ],
+          "degradedHookGroups": [],
+          "globallyDisabledHookGroups": [],
+          "hookGroupFailures": {},
+          "modulesLoaded": true,
+          "modulesSignature": "strategy:SMART|version:1|policy:|name:|modules:iast_dom_xss:dom_inline_event_handler,dom_innerhtml_xss,dom_outerhtml_xss,dom_insertadjacenthtml_xss,document_write_xss,dom_mutation_xss|iast_dangerous_url_scheme_execution:href_javascript_url_execution,href_data_url_execution,src_javascript_url_execution,src_data_url_execution,location_href_javascript_url_execution,location_href_data_url_execution,location_assign_javascript_url_execution,location_assign_data_url_execution,location_replace_javascript_url_execution,location_replace_data_url_execution,window_open_javascript_url_execution,window_open_data_url_execution,iframe_src_javascript_url_execution,iframe_src_data_url_execution,script_src_data_url_execution|iast_js_execution:eval_js_execution,function_constructor_execution,function_apply_execution|iast_open_redirect:window_open_redirect,navigation_api_redirect|iast_angularjs_expression_injection:angularjs_expression_function_constructor,angularjs_parse_from_form,angularjs_parse_from_cookie,angularjs_parse_from_localstorage,angularjs_parse_from_postmessage|iast_postmessage_misuse:postmessage_star_origin_leak,postmessage_cross_origin_leak|iast_timer_js_execution:settimeout_string_execution,setinterval_string_execution|iast_iframe_navigation:iframe_src_redirect,iframe_srcdoc_xss|iast_client_http_exfiltration:fetch_url_exfiltration,fetch_headers_exfiltration,xhr_url_exfiltration,xhr_body_exfiltration,xhr_header_exfiltration,sendbeacon_exfiltration,image_src_exfiltration|iast_dom_link_manipulation:dom_attr_href_navigation,dom_attr_src_navigation,dom_attr_action_navigation,dom_attr_formaction_navigation|iast_dom_url_navigation:location_href_redirect,location_assign_redirect,location_replace_redirect,history_pushstate_open_redirect,history_replacestate_route_change|iast_dom_parser_xss:domparser_parsefromstring_html_xss,range_contextual_fragment_xss,element_sethtmlunsafe_xss,shadowroot_sethtmlunsafe_xss|iast_dom_xss_secondary_sources:dom_innerhtml_xss_secondary_sources,dom_outerhtml_xss_secondary_sources,dom_insertadjacenthtml_xss_secondary_sources,document_write_xss_secondary_sources,dom_inline_event_xss_secondary_sources,dom_mutation_xss_secondary_sources,iframe_srcdoc_xss_secondary_sources|iast_route_controlled_navigation:route_pushstate_navigation,route_replacestate_navigation,route_navigation_api_navigation|iast_form_submission_hijack:form_action_hijack,form_formaction_hijack|iast_dangerous_form_scheme_execution:form_action_javascript_url_execution,form_action_data_url_execution,form_formaction_javascript_url_execution,form_formaction_data_url_execution|iast_response_field_dom_reachability:response_dom_innerhtml_reachability,response_dom_outerhtml_reachability,response_dom_insertadjacenthtml_reachability,response_dom_document_write_reachability,response_dom_mutation_reachability,response_dom_parser_reachability,response_dom_contextual_fragment_reachability,response_dom_sethtmlunsafe_reachability,response_dom_shadow_sethtmlunsafe_reachability|iast_prototype_pollution_impact:prototype_pollution_write,prototype_pollution_fetch_init|iast_storage_taint_to_exec:eval_storage_taint_execution,function_constructor_storage_taint_execution,function_apply_storage_taint_execution,settimeout_storage_taint_execution,setinterval_storage_taint_execution|iast_source_scoped_open_redirect:location_href_redirect_sources,location_assign_redirect_sources,location_replace_redirect_sources,window_open_redirect_sources,navigation_api_redirect_sources,dom_attr_href_redirect_sources,dom_attr_action_redirect_sources",
+          "pendingFindingReports": 0,
+          "flushedPendingFindingReports": 0,
+          "url": "http://127.0.0.1:54548/app",
+          "agentBootUrl": "http://127.0.0.1:54548/app",
+          "documentReadyState": "complete",
+          "agentBootReadyState": "complete",
+          "agentBootAt": 1792677690749,
+          "navigationStart": 1792677690639.4,
+          "agentBootDelayMs": 110,
+          "agentBootAfterLoad": true,
+          "updatedAt": 1792677690765,
+          "error": null
+        }
+      },
+      "automation": {
+        "scanStrategy": "SMART",
+        "agentReadyCount": 2,
+        "agentFailedCount": 0,
+        "runtimeHealthCount": 4,
+        "findingReportsAccepted": 0,
+        "findingReportsDroppedInactive": 0,
+        "findingReportsDroppedTabMismatch": 0,
+        "runtimeSignalsAccepted": 1,
+        "runtimeSignalsDroppedInactive": 0,
+        "runtimeSignalsDroppedTabMismatch": 0,
+        "modulesSentOk": 1,
+        "modulesSentSkipped": 2,
+        "modulesSentError": 0,
+        "expectedTabId": 27157171,
+        "lastSenderTabId": 27157171,
+        "lastDroppedReason": null,
+        "lastModuleSendResult": {
+          "ok": true,
+          "skipped": true,
+          "reason": "already_delivered",
+          "error": null,
+          "signature": "strategy:SMART|version:1|policy:|name:|modules:iast_dom_xss:dom_inline_event_handler,dom_innerhtml_xss,dom_outerhtml_xss,dom_insertadjacenthtml_xss,document_write_xss,dom_mutation_xss|iast_dangerous_url_scheme_execution:href_javascript_url_execution,href_data_url_execution,src_javascript_url_execution,src_data_url_execution,location_href_javascript_url_execution,location_href_data_url_execution,location_assign_javascript_url_execution,location_assign_data_url_execution,location_replace_javascript_url_execution,location_replace_data_url_execution,window_open_javascript_url_execution,window_open_data_url_execution,iframe_src_javascript_url_execution,iframe_src_data_url_execution,script_src_data_url_execution|iast_js_execution:eval_js_execution,function_constructor_execution,function_apply_execution|iast_open_redirect:window_open_redirect,navigation_api_redirect|iast_angularjs_expression_injection:angularjs_expression_function_constructor,angularjs_parse_from_form,angularjs_parse_from_cookie,angularjs_parse_from_localstorage,angularjs_parse_from_postmessage|iast_postmessage_misuse:postmessage_star_origin_leak,postmessage_cross_origin_leak|iast_timer_js_execution:settimeout_string_execution,setinterval_string_execution|iast_iframe_navigation:iframe_src_redirect,iframe_srcdoc_xss|iast_client_http_exfiltration:fetch_url_exfiltration,fetch_headers_exfiltration,xhr_url_exfiltration,xhr_body_exfiltration,xhr_header_exfiltration,sendbeacon_exfiltration,image_src_exfiltration|iast_dom_link_manipulation:dom_attr_href_navigation,dom_attr_src_navigation,dom_attr_action_navigation,dom_attr_formaction_navigation|iast_dom_url_navigation:location_href_redirect,location_assign_redirect,location_replace_redirect,history_pushstate_open_redirect,history_replacestate_route_change|iast_dom_parser_xss:domparser_parsefromstring_html_xss,range_contextual_fragment_xss,element_sethtmlunsafe_xss,shadowroot_sethtmlunsafe_xss|iast_dom_xss_secondary_sources:dom_innerhtml_xss_secondary_sources,dom_outerhtml_xss_secondary_sources,dom_insertadjacenthtml_xss_secondary_sources,document_write_xss_secondary_sources,dom_inline_event_xss_secondary_sources,dom_mutation_xss_secondary_sources,iframe_srcdoc_xss_secondary_sources|iast_route_controlled_navigation:route_pushstate_navigation,route_replacestate_navigation,route_navigation_api_navigation|iast_form_submission_hijack:form_action_hijack,form_formaction_hijack|iast_dangerous_form_scheme_execution:form_action_javascript_url_execution,form_action_data_url_execution,form_formaction_javascript_url_execution,form_formaction_data_url_execution|iast_response_field_dom_reachability:response_dom_innerhtml_reachability,response_dom_outerhtml_reachability,response_dom_insertadjacenthtml_reachability,response_dom_document_write_reachability,response_dom_mutation_reachability,response_dom_parser_reachability,response_dom_contextual_fragment_reachability,response_dom_sethtmlunsafe_reachability,response_dom_shadow_sethtmlunsafe_reachability|iast_prototype_pollution_impact:prototype_pollution_write,prototype_pollution_fetch_init|iast_storage_taint_to_exec:eval_storage_taint_execution,function_constructor_storage_taint_execution,function_apply_storage_taint_execution,settimeout_storage_taint_execution,setinterval_storage_taint_execution|iast_source_scoped_open_redirect:location_href_redirect_sources,location_assign_redirect_sources,location_replace_redirect_sources,window_open_redirect_sources,navigation_api_redirect_sources,dom_attr_href_redirect_sources,dom_attr_action_redirect_sources"
+        },
+        "lastUpdatedAt": 1792677690776
+      },
+      "noise": {
+        "findingCount": 0,
+        "runtimeSignalCount": 1,
+        "lowConfidenceFindingCount": 0,
+        "observationFindingCount": 0,
+        "suppressedFindingCount": 0,
+        "trustAllowedFindingCount": 0,
+        "observationRuntimeSignalCount": 1,
+        "suppressedRuntimeSignalCount": 0,
+        "trustAllowedRuntimeSignalCount": 1
+      }
+    },
+    "targetUrl": "http://127.0.0.1:54548/app",
+    "certXDocumentCoverage": {
+      "debuggerTargets": 1,
+      "documentInjections": 1,
+      "errors": [],
+      "active": true
+    },
+    "analysis": {
+      "version": "1.7.9",
+      "scanId": "a0250366-8d08-42f0-b786-2b5224155506",
+      "coverage": {
+        "enginesPresent": [
+          "IAST"
+        ],
+        "enginesMissing": [
+          "DAST",
+          "SAST",
+          "SCA"
+        ],
+        "gaps": [],
+        "limitations": [],
+        "confidence": "low",
+        "confidenceScore": 40
+      },
+      "patterns": [
+        {
+          "id": "pat_025df2c376590d8072396141",
+          "ruleCode": "R12_IAST_RUNTIME_SIGNALS",
+          "title": "IAST data exposure and storage bucket on GET /app",
+          "type": "IAST_DISCOVERY_BUCKET",
+          "routeKey": "127.0.0.1:54548|GET|/app",
+          "paramKey": "response:ok",
+          "priority": 22,
+          "signals": {
+            "source": "iast_bucket_aggregation",
+            "bucket": "data_exposure_and_storage",
+            "subtype": "client_data_parsing",
+            "hits": 1,
+            "sinkId": "client.json.parse",
+            "detectionReason": "client_json_parse_observed"
+          },
+          "evidenceRefs": [
+            {
+              "type": "runtimeEvent",
+              "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+              "loc": {
+                "method": "GET",
+                "path": "/app",
+                "route": "127.0.0.1:54548|GET|/app",
+                "kind": "data_exposure_and_storage",
+                "param": "ok"
+              }
+            }
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand_4383af81908f4970a2126bbe",
+          "suppressKey": "sup_6369f628179432c7498cc1f1",
+          "type": "RUNTIME_ANOMALY",
+          "title": "Validate client-side data exposure and storage handling on GET /app",
+          "score": 17,
+          "confidence": "low",
+          "confidenceRank": 1,
+          "routeKey": "127.0.0.1:54548|GET|/app",
+          "paramKey": "response:ok",
+          "engineSignals": [
+            "IAST"
+          ],
+          "why": [
+            {
+              "signal": "DATA_EXPOSURE_SIGNAL",
+              "value": "client.json.parse"
+            },
+            {
+              "signal": "IAST_BUCKET",
+              "value": "data_exposure_and_storage"
+            },
+            {
+              "signal": "IAST_RUNTIME_SIGNAL",
+              "value": "data_exposure_and_storage"
+            },
+            {
+              "signal": "MISSING_RELEVANT_ENGINE",
+              "value": "DAST"
+            }
+          ],
+          "evidenceRefs": [
+            {
+              "type": "runtimeEvent",
+              "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+              "loc": {
+                "method": "GET",
+                "path": "/app",
+                "route": "127.0.0.1:54548|GET|/app",
+                "kind": "data_exposure_and_storage",
+                "param": "ok"
+              }
+            }
+          ],
+          "manualSteps": [
+            "Inspect the same route and client state for token, secret, or hidden data persistence in storage, cookies, or runtime objects.",
+            "Trace whether the exposed value influences follow-up requests, auth headers, or client-side decisions.",
+            "Validate whether the same data is still reachable after reload, logout, or route changes."
+          ],
+          "createdByRule": "R12_IAST_RUNTIME_SIGNALS"
+        }
+      ],
+      "diff": null,
+      "discovery": {
+        "iastBuckets": [
+          {
+            "id": "iastbucket:127.0.0.1:54548|GET|/app|response:ok|data_exposure_and_storage",
+            "bucket": "data_exposure_and_storage",
+            "subtype": "client_data_parsing",
+            "subtypes": [
+              "client_data_parsing"
+            ],
+            "legacyFamilies": [
+              "client_runtime"
+            ],
+            "routeKey": "127.0.0.1:54548|GET|/app",
+            "paramKey": "response:ok",
+            "priority": 22,
+            "severity": "info",
+            "hits": 1,
+            "sinkId": "client.json.parse",
+            "sourceKinds": [
+              "apiresponsefield"
+            ],
+            "dataKinds": [],
+            "trustLevels": [
+              "same_origin"
+            ],
+            "trustDecisions": [
+              "allow"
+            ],
+            "crossOrigin": false,
+            "routeControlled": false,
+            "sanitizedCount": 0,
+            "sanitizerIds": [],
+            "thirdParty": false,
+            "authLike": false,
+            "corroboratingEngines": [
+              "IAST"
+            ],
+            "candidateType": "RUNTIME_ANOMALY",
+            "evidenceRefs": [
+              {
+                "type": "runtimeEvent",
+                "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+                "loc": {
+                  "method": "GET",
+                  "path": "/app",
+                  "route": "127.0.0.1:54548|GET|/app",
+                  "kind": "data_exposure_and_storage",
+                  "param": "ok"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "attackMap": {
+        "items": [
+          {
+            "id": "iastbucket:127.0.0.1:54548|GET|/app|response:ok|data_exposure_and_storage",
+            "source": "iast_bucket",
+            "title": "data_exposure_and_storage on /app",
+            "itemType": "data_exposure_and_storage",
+            "routeKey": "127.0.0.1:54548|GET|/app",
+            "path": "/app",
+            "paramKey": "response:ok",
+            "priority": 22,
+            "suggestedChecks": [
+              "manual_review"
+            ],
+            "evidenceRefs": [
+              {
+                "type": "runtimeEvent",
+                "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+                "loc": {
+                  "method": "GET",
+                  "path": "/app",
+                  "route": "127.0.0.1:54548|GET|/app",
+                  "kind": "data_exposure_and_storage",
+                  "param": "ok"
+                }
+              }
+            ]
+          },
+          {
+            "id": "pat_025df2c376590d8072396141",
+            "source": "pattern",
+            "title": "IAST data exposure and storage bucket on GET /app",
+            "itemType": "IAST_DISCOVERY_BUCKET",
+            "routeKey": "127.0.0.1:54548|GET|/app",
+            "path": "/app",
+            "paramKey": "response:ok",
+            "priority": 22,
+            "suggestedChecks": [
+              "manual_review"
+            ],
+            "evidenceRefs": [
+              {
+                "type": "runtimeEvent",
+                "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+                "loc": {
+                  "method": "GET",
+                  "path": "/app",
+                  "route": "127.0.0.1:54548|GET|/app",
+                  "kind": "data_exposure_and_storage",
+                  "param": "ok"
+                }
+              }
+            ]
+          },
+          {
+            "id": "cand_4383af81908f4970a2126bbe",
+            "source": "candidate",
+            "title": "Validate client-side data exposure and storage handling on GET /app",
+            "itemType": "RUNTIME_ANOMALY",
+            "routeKey": "127.0.0.1:54548|GET|/app",
+            "path": "/app",
+            "paramKey": "response:ok",
+            "priority": 17,
+            "suggestedChecks": [
+              "manual_review"
+            ],
+            "evidenceRefs": [
+              {
+                "type": "runtimeEvent",
+                "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+                "loc": {
+                  "method": "GET",
+                  "path": "/app",
+                  "route": "127.0.0.1:54548|GET|/app",
+                  "kind": "data_exposure_and_storage",
+                  "param": "ok"
+                }
+              }
+            ]
+          }
+        ],
+        "total": 3
+      },
+      "objectInventory": {
+        "identifiers": [],
+        "total": 0
+      },
+      "opportunities": [
+        {
+          "id": "iastbucket:127.0.0.1:54548|GET|/app|response:ok|data_exposure_and_storage",
+          "source": "iast_bucket",
+          "title": "Runtime opportunity on /app",
+          "type": "RUNTIME_ANOMALY",
+          "routeKey": "127.0.0.1:54548|GET|/app",
+          "path": "/app",
+          "paramKey": "response:ok",
+          "priority": 22,
+          "confidence": "low",
+          "confidenceRank": 1,
+          "suggestedChecks": [
+            "manual_review"
+          ],
+          "evidenceRefs": [
+            {
+              "type": "runtimeEvent",
+              "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+              "loc": {
+                "method": "GET",
+                "path": "/app",
+                "route": "127.0.0.1:54548|GET|/app",
+                "kind": "data_exposure_and_storage",
+                "param": "ok"
+              }
+            }
+          ]
+        },
+        {
+          "id": "cand_4383af81908f4970a2126bbe",
+          "source": "candidate",
+          "title": "Validate client-side data exposure and storage handling on GET /app",
+          "type": "RUNTIME_ANOMALY",
+          "routeKey": "127.0.0.1:54548|GET|/app",
+          "path": "/app",
+          "paramKey": "response:ok",
+          "priority": 17,
+          "confidence": "low",
+          "confidenceRank": 1,
+          "suggestedChecks": [
+            "manual_review"
+          ],
+          "evidenceRefs": [
+            {
+              "type": "runtimeEvent",
+              "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+              "loc": {
+                "method": "GET",
+                "path": "/app",
+                "route": "127.0.0.1:54548|GET|/app",
+                "kind": "data_exposure_and_storage",
+                "param": "ok"
+              }
+            }
+          ]
+        }
+      ],
+      "recommendations": [],
+      "explorer": {
+        "summary": {
+          "routeCount": 3,
+          "endpointCount": 2,
+          "graphqlCount": 0,
+          "hiddenParamCount": 0,
+          "surfaceCount": 0,
+          "gadgetCount": 0,
+          "enginesPresent": [
+            "IAST"
+          ]
+        },
+        "routes": [
+          {
+            "id": "runtime:127.0.0.1:54548|GET|/app",
+            "routeKey": "127.0.0.1:54548|GET|/app",
+            "path": "/app",
+            "routeType": "runtime",
+            "enginesPresent": [
+              "IAST"
+            ],
+            "sources": [
+              "runtime_event"
+            ],
+            "authHints": [],
+            "protocolHints": [],
+            "environmentHints": [],
+            "frameworks": [],
+            "sourceKinds": [
+              "apiResponseField"
+            ],
+            "hintNames": [],
+            "pageUrls": [
+              "/app"
+            ],
+            "adminLike": false,
+            "evidenceRefs": [
+              {
+                "type": "runtimeEvent",
+                "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+                "loc": {
+                  "method": "GET",
+                  "route": "127.0.0.1:54548|GET|/app"
+                }
+              }
+            ]
+          },
+          {
+            "id": "runtime:127.0.0.1:54549|GET|/http/allowed",
+            "routeKey": "127.0.0.1:54549|GET|/http/allowed",
+            "path": "/http/allowed",
+            "routeType": "runtime",
+            "enginesPresent": [
+              "IAST"
+            ],
+            "sources": [
+              "request"
+            ],
+            "authHints": [],
+            "protocolHints": [],
+            "environmentHints": [],
+            "frameworks": [],
+            "sourceKinds": [],
+            "hintNames": [],
+            "pageUrls": [
+              "http://127.0.0.1:54549/http/allowed"
+            ],
+            "adminLike": false,
+            "evidenceRefs": [
+              {
+                "type": "request",
+                "id": "GET http://127.0.0.1:54549/http/allowed",
+                "loc": {
+                  "method": "GET",
+                  "route": "127.0.0.1:54549|GET|/http/allowed"
+                }
+              }
+            ]
+          },
+          {
+            "id": "runtime:127.0.0.1:54548|GET|/http/primary",
+            "routeKey": "127.0.0.1:54548|GET|/http/primary",
+            "path": "/http/primary",
+            "routeType": "runtime",
+            "enginesPresent": [
+              "IAST"
+            ],
+            "sources": [
+              "request"
+            ],
+            "authHints": [],
+            "protocolHints": [],
+            "environmentHints": [],
+            "frameworks": [],
+            "sourceKinds": [],
+            "hintNames": [],
+            "pageUrls": [
+              "http://127.0.0.1:54548/http/primary"
+            ],
+            "adminLike": false,
+            "evidenceRefs": [
+              {
+                "type": "request",
+                "id": "GET http://127.0.0.1:54548/http/primary",
+                "loc": {
+                  "method": "GET",
+                  "route": "127.0.0.1:54548|GET|/http/primary"
+                }
+              }
+            ]
+          }
+        ],
+        "endpoints": [
+          {
+            "id": "endpoint:127.0.0.1:54549|GET|/http/allowed",
+            "routeKey": "127.0.0.1:54549|GET|/http/allowed",
+            "method": "GET",
+            "path": "/http/allowed",
+            "url": "http://127.0.0.1:54549/http/allowed",
+            "enginesPresent": [
+              "IAST"
+            ],
+            "sources": [
+              "request"
+            ],
+            "transports": [
+              "devtools-http-request"
+            ],
+            "authHints": [],
+            "contentTypes": [],
+            "paramNames": [],
+            "bodyKeys": [],
+            "headerNames": [],
+            "discoveryTags": [],
+            "environmentHints": [],
+            "pageUrls": [],
+            "adminLike": false,
+            "evidenceRefs": [
+              {
+                "type": "request",
+                "id": "GET http://127.0.0.1:54549/http/allowed",
+                "loc": {
+                  "method": "GET",
+                  "route": "127.0.0.1:54549|GET|/http/allowed"
+                }
+              }
+            ]
+          },
+          {
+            "id": "endpoint:127.0.0.1:54548|GET|/http/primary",
+            "routeKey": "127.0.0.1:54548|GET|/http/primary",
+            "method": "GET",
+            "path": "/http/primary",
+            "url": "http://127.0.0.1:54548/http/primary",
+            "enginesPresent": [
+              "IAST"
+            ],
+            "sources": [
+              "request"
+            ],
+            "transports": [
+              "devtools-http-response"
+            ],
+            "authHints": [],
+            "contentTypes": [],
+            "paramNames": [],
+            "bodyKeys": [],
+            "headerNames": [],
+            "discoveryTags": [],
+            "environmentHints": [],
+            "pageUrls": [],
+            "adminLike": false,
+            "evidenceRefs": [
+              {
+                "type": "request",
+                "id": "GET http://127.0.0.1:54548/http/primary",
+                "loc": {
+                  "method": "GET",
+                  "route": "127.0.0.1:54548|GET|/http/primary"
+                }
+              }
+            ]
+          }
+        ],
+        "graphql": [],
+        "hiddenParams": [],
+        "surfaces": [],
+        "gadgets": []
+      },
+      "schemaValidation": {
+        "ok": true,
+        "schema": "ptk-scan-analysis-v1",
+        "reason": null,
+        "explorer": {
+          "ok": true,
+          "buckets": {
+            "routes": 3,
+            "endpoints": 2,
+            "graphql": 0,
+            "hiddenParams": 0,
+            "surfaces": 0,
+            "gadgets": 0
+          }
+        },
+        "recommendations": {
+          "count": 0
+        },
+        "errorCount": 0,
+        "errors": []
+      }
+    },
+    "analysisVersion": "1.7.9"
+  },
+  "export": {
+    "run": {
+      "runId": "23c84bcb-d3c0-4449-a747-a03104e60872",
+      "owner": "iast-http-scope",
+      "workspaceId": null,
+      "tabId": 27157171,
+      "engines": [
+        "IAST"
+      ],
+      "state": "completed",
+      "config": {
+        "preset": "ptk-defaults",
+        "scanStrategy": "SMART",
+        "dastScanStrategy": "SMART",
+        "scanControlProfile": "safe",
+        "allowCaptureWithoutInteraction": false,
+        "maxRequestsPerSecond": 5,
+        "concurrency": 3,
+        "planningConcurrency": 2,
+        "runCve": true,
+        "follow_redirect": true,
+        "maxRequests": null,
+        "durationSeconds": null,
+        "limits": {}
+      },
+      "scope": {
+        "origins": [
+          "http://127.0.0.1:54548"
+        ],
+        "excludePaths": [
+          "/excluded"
+        ],
+        "matchMode": "host"
+      },
+      "accountId": null,
+      "accountRevision": null,
+      "createdAt": 1792677690710,
+      "updatedAt": 1792677691919,
+      "requestsSent": 0,
+      "coverage": {
+        "backendGaps": [],
+        "iastDocuments": {
+          "debuggerTargets": 1,
+          "documentInjections": 1,
+          "errors": [],
+          "active": false
+        }
+      },
+      "summary": {
+        "status": "completed",
+        "releaseStatus": "clean",
+        "stats": {
+          "findingsCount": 0,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          }
+        },
+        "findings": 0
+      },
+      "runtimeId": "ptk-session_cbfee5f9-0efa-4a08-a2bc-0dc1bf4781d0",
+      "engineStatus": {
+        "IAST": {
+          "status": "stopped",
+          "isRunning": false,
+          "progress": {
+            "done": 0,
+            "total": null
+          },
+          "findingsCount": 0,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          },
+          "lastActivityAt": null,
+          "warnings": [],
+          "requestsCount": 2,
+          "runtimeEventsCount": 1,
+          "agentReady": false,
+          "modulesSentOk": 1,
+          "modulesSentSkipped": 2,
+          "modulesSentError": 0,
+          "runtimeHealthState": "normal",
+          "modulesLoaded": true,
+          "modulesSignature": "strategy:SMART|version:1|policy:|name:|modules:iast_dom_xss:dom_inline_event_handler,dom_innerhtml_xss,dom_outerhtml_xss,dom_insertadjacenthtml_xss,document_write_xss,dom_mutation_xss|iast_dangerous_url_scheme_execution:href_javascript_url_execution,href_data_url_execution,src_javascript_url_execution,src_data_url_execution,location_href_javascript_url_execution,location_href_data_url_execution,location_assign_javascript_url_execution,location_assign_data_url_execution,location_replace_javascript_url_execution,location_replace_data_url_execution,window_open_javascript_url_execution,window_open_data_url_execution,iframe_src_javascript_url_execution,iframe_src_data_url_execution,script_src_data_url_execution|iast_js_execution:eval_js_execution,function_constructor_execution,function_apply_execution|iast_open_redirect:window_open_redirect,navigation_api_redirect|iast_angularjs_expression_injection:angularjs_expression_function_constructor,angularjs_parse_from_form,angularjs_parse_from_cookie,angularjs_parse_from_localstorage,angularjs_parse_from_postmessage|iast_postmessage_misuse:postmessage_star_origin_leak,postmessage_cross_origin_leak|iast_timer_js_execution:settimeout_string_execution,setinterval_string_execution|iast_iframe_navigation:iframe_src_redirect,iframe_srcdoc_xss|iast_client_http_exfiltration:fetch_url_exfiltration,fetch_headers_exfiltration,xhr_url_exfiltration,xhr_body_exfiltration,xhr_header_exfiltration,sendbeacon_exfiltration,image_src_exfiltration|iast_dom_link_manipulation:dom_attr_href_navigation,dom_attr_src_navigation,dom_attr_action_navigation,dom_attr_formaction_navigation|iast_dom_url_navigation:location_href_redirect,location_assign_redirect,location_replace_redirect,history_pushstate_open_redirect,history_replacestate_route_change|iast_dom_parser_xss:domparser_parsefromstring_html_xss,range_contextual_fragment_xss,element_sethtmlunsafe_xss,shadowroot_sethtmlunsafe_xss|iast_dom_xss_secondary_sources:dom_innerhtml_xss_secondary_sources,dom_outerhtml_xss_secondary_sources,dom_insertadjacenthtml_xss_secondary_sources,document_write_xss_secondary_sources,dom_inline_event_xss_secondary_sources,dom_mutation_xss_secondary_sources,iframe_srcdoc_xss_secondary_sources|iast_route_controlled_navigation:route_pushstate_navigation,route_replacestate_navigation,route_navigation_api_navigation|iast_form_submission_hijack:form_action_hijack,form_formaction_hijack|iast_dangerous_form_scheme_execution:form_action_javascript_url_execution,form_action_data_url_execution,form_formaction_javascript_url_execution,form_formaction_data_url_execution|iast_response_field_dom_reachability:response_dom_innerhtml_reachability,response_dom_outerhtml_reachability,response_dom_insertadjacenthtml_reachability,response_dom_document_write_reachability,response_dom_mutation_reachability,response_dom_parser_reachability,response_dom_contextual_fragment_reachability,response_dom_sethtmlunsafe_reachability,response_dom_shadow_sethtmlunsafe_reachability|iast_prototype_pollution_impact:prototype_pollution_write,prototype_pollution_fetch_init|iast_storage_taint_to_exec:eval_storage_taint_execution,function_constructor_storage_taint_execution,function_apply_storage_taint_execution,settimeout_storage_taint_execution,setinterval_storage_taint_execution|iast_source_scoped_open_redirect:location_href_redirect_sources,location_assign_redirect_sources,location_replace_redirect_sources,window_open_redirect_sources,navigation_api_redirect_sources,dom_attr_href_redirect_sources,dom_attr_action_redirect_sources",
+          "pendingFindingReports": 0,
+          "flushedPendingFindingReports": 0,
+          "runtimeUrl": "http://127.0.0.1:54548/app",
+          "agentBootUrl": "http://127.0.0.1:54548/app",
+          "documentReadyState": "complete",
+          "agentBootReadyState": "complete",
+          "agentBootAfterLoad": true,
+          "agentBootDelayMs": 110,
+          "runtimeHealthCount": 4,
+          "findingReportsAccepted": 0,
+          "runtimeSignalsAccepted": 1,
+          "lastModuleSendResult": {
+            "ok": true,
+            "skipped": true,
+            "reason": "already_delivered",
+            "error": null,
+            "signature": "strategy:SMART|version:1|policy:|name:|modules:iast_dom_xss:dom_inline_event_handler,dom_innerhtml_xss,dom_outerhtml_xss,dom_insertadjacenthtml_xss,document_write_xss,dom_mutation_xss|iast_dangerous_url_scheme_execution:href_javascript_url_execution,href_data_url_execution,src_javascript_url_execution,src_data_url_execution,location_href_javascript_url_execution,location_href_data_url_execution,location_assign_javascript_url_execution,location_assign_data_url_execution,location_replace_javascript_url_execution,location_replace_data_url_execution,window_open_javascript_url_execution,window_open_data_url_execution,iframe_src_javascript_url_execution,iframe_src_data_url_execution,script_src_data_url_execution|iast_js_execution:eval_js_execution,function_constructor_execution,function_apply_execution|iast_open_redirect:window_open_redirect,navigation_api_redirect|iast_angularjs_expression_injection:angularjs_expression_function_constructor,angularjs_parse_from_form,angularjs_parse_from_cookie,angularjs_parse_from_localstorage,angularjs_parse_from_postmessage|iast_postmessage_misuse:postmessage_star_origin_leak,postmessage_cross_origin_leak|iast_timer_js_execution:settimeout_string_execution,setinterval_string_execution|iast_iframe_navigation:iframe_src_redirect,iframe_srcdoc_xss|iast_client_http_exfiltration:fetch_url_exfiltration,fetch_headers_exfiltration,xhr_url_exfiltration,xhr_body_exfiltration,xhr_header_exfiltration,sendbeacon_exfiltration,image_src_exfiltration|iast_dom_link_manipulation:dom_attr_href_navigation,dom_attr_src_navigation,dom_attr_action_navigation,dom_attr_formaction_navigation|iast_dom_url_navigation:location_href_redirect,location_assign_redirect,location_replace_redirect,history_pushstate_open_redirect,history_replacestate_route_change|iast_dom_parser_xss:domparser_parsefromstring_html_xss,range_contextual_fragment_xss,element_sethtmlunsafe_xss,shadowroot_sethtmlunsafe_xss|iast_dom_xss_secondary_sources:dom_innerhtml_xss_secondary_sources,dom_outerhtml_xss_secondary_sources,dom_insertadjacenthtml_xss_secondary_sources,document_write_xss_secondary_sources,dom_inline_event_xss_secondary_sources,dom_mutation_xss_secondary_sources,iframe_srcdoc_xss_secondary_sources|iast_route_controlled_navigation:route_pushstate_navigation,route_replacestate_navigation,route_navigation_api_navigation|iast_form_submission_hijack:form_action_hijack,form_formaction_hijack|iast_dangerous_form_scheme_execution:form_action_javascript_url_execution,form_action_data_url_execution,form_formaction_javascript_url_execution,form_formaction_data_url_execution|iast_response_field_dom_reachability:response_dom_innerhtml_reachability,response_dom_outerhtml_reachability,response_dom_insertadjacenthtml_reachability,response_dom_document_write_reachability,response_dom_mutation_reachability,response_dom_parser_reachability,response_dom_contextual_fragment_reachability,response_dom_sethtmlunsafe_reachability,response_dom_shadow_sethtmlunsafe_reachability|iast_prototype_pollution_impact:prototype_pollution_write,prototype_pollution_fetch_init|iast_storage_taint_to_exec:eval_storage_taint_execution,function_constructor_storage_taint_execution,function_apply_storage_taint_execution,settimeout_storage_taint_execution,setinterval_storage_taint_execution|iast_source_scoped_open_redirect:location_href_redirect_sources,location_assign_redirect_sources,location_replace_redirect_sources,window_open_redirect_sources,navigation_api_redirect_sources,dom_attr_href_redirect_sources,dom_attr_action_redirect_sources"
+          },
+          "lastSenderTabId": 27157171,
+          "moduleDeliveryObserved": true,
+          "agentObservedActivity": true,
+          "readyEvidence": "runtime_activity",
+          "idle": true
+        }
+      },
+      "stopReason": "Stopped by user.",
+      "lastStatus": {
+        "sessionId": "ptk-session_cbfee5f9-0efa-4a08-a2bc-0dc1bf4781d0",
+        "scanId": "ptk-session_cbfee5f9-0efa-4a08-a2bc-0dc1bf4781d0",
+        "ok": true,
+        "status": "completed",
+        "completionStatus": "completed",
+        "releaseStatus": "clean",
+        "error": null,
+        "startedAt": "2026-10-22T14:01:30.714Z",
+        "finishedAt": "2026-10-22T14:01:31.917Z",
+        "stopRequestedAt": null,
+        "closeRequestId": null,
+        "closeRequestAck": false,
+        "closeRequestMode": null,
+        "idleVerified": false,
+        "elapsedMs": 1204,
+        "lastUpdatedAt": null,
+        "engines": {
+          "IAST": {
+            "status": "stopped",
+            "isRunning": false,
+            "progress": {
+              "done": 0,
+              "total": null
+            },
+            "findingsCount": 0,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            },
+            "lastActivityAt": null,
+            "warnings": [],
+            "requestsCount": 2,
+            "runtimeEventsCount": 1,
+            "agentReady": false,
+            "modulesSentOk": 1,
+            "modulesSentSkipped": 2,
+            "modulesSentError": 0,
+            "runtimeHealthState": "normal",
+            "modulesLoaded": true,
+            "modulesSignature": "strategy:SMART|version:1|policy:|name:|modules:iast_dom_xss:dom_inline_event_handler,dom_innerhtml_xss,dom_outerhtml_xss,dom_insertadjacenthtml_xss,document_write_xss,dom_mutation_xss|iast_dangerous_url_scheme_execution:href_javascript_url_execution,href_data_url_execution,src_javascript_url_execution,src_data_url_execution,location_href_javascript_url_execution,location_href_data_url_execution,location_assign_javascript_url_execution,location_assign_data_url_execution,location_replace_javascript_url_execution,location_replace_data_url_execution,window_open_javascript_url_execution,window_open_data_url_execution,iframe_src_javascript_url_execution,iframe_src_data_url_execution,script_src_data_url_execution|iast_js_execution:eval_js_execution,function_constructor_execution,function_apply_execution|iast_open_redirect:window_open_redirect,navigation_api_redirect|iast_angularjs_expression_injection:angularjs_expression_function_constructor,angularjs_parse_from_form,angularjs_parse_from_cookie,angularjs_parse_from_localstorage,angularjs_parse_from_postmessage|iast_postmessage_misuse:postmessage_star_origin_leak,postmessage_cross_origin_leak|iast_timer_js_execution:settimeout_string_execution,setinterval_string_execution|iast_iframe_navigation:iframe_src_redirect,iframe_srcdoc_xss|iast_client_http_exfiltration:fetch_url_exfiltration,fetch_headers_exfiltration,xhr_url_exfiltration,xhr_body_exfiltration,xhr_header_exfiltration,sendbeacon_exfiltration,image_src_exfiltration|iast_dom_link_manipulation:dom_attr_href_navigation,dom_attr_src_navigation,dom_attr_action_navigation,dom_attr_formaction_navigation|iast_dom_url_navigation:location_href_redirect,location_assign_redirect,location_replace_redirect,history_pushstate_open_redirect,history_replacestate_route_change|iast_dom_parser_xss:domparser_parsefromstring_html_xss,range_contextual_fragment_xss,element_sethtmlunsafe_xss,shadowroot_sethtmlunsafe_xss|iast_dom_xss_secondary_sources:dom_innerhtml_xss_secondary_sources,dom_outerhtml_xss_secondary_sources,dom_insertadjacenthtml_xss_secondary_sources,document_write_xss_secondary_sources,dom_inline_event_xss_secondary_sources,dom_mutation_xss_secondary_sources,iframe_srcdoc_xss_secondary_sources|iast_route_controlled_navigation:route_pushstate_navigation,route_replacestate_navigation,route_navigation_api_navigation|iast_form_submission_hijack:form_action_hijack,form_formaction_hijack|iast_dangerous_form_scheme_execution:form_action_javascript_url_execution,form_action_data_url_execution,form_formaction_javascript_url_execution,form_formaction_data_url_execution|iast_response_field_dom_reachability:response_dom_innerhtml_reachability,response_dom_outerhtml_reachability,response_dom_insertadjacenthtml_reachability,response_dom_document_write_reachability,response_dom_mutation_reachability,response_dom_parser_reachability,response_dom_contextual_fragment_reachability,response_dom_sethtmlunsafe_reachability,response_dom_shadow_sethtmlunsafe_reachability|iast_prototype_pollution_impact:prototype_pollution_write,prototype_pollution_fetch_init|iast_storage_taint_to_exec:eval_storage_taint_execution,function_constructor_storage_taint_execution,function_apply_storage_taint_execution,settimeout_storage_taint_execution,setinterval_storage_taint_execution|iast_source_scoped_open_redirect:location_href_redirect_sources,location_assign_redirect_sources,location_replace_redirect_sources,window_open_redirect_sources,navigation_api_redirect_sources,dom_attr_href_redirect_sources,dom_attr_action_redirect_sources",
+            "pendingFindingReports": 0,
+            "flushedPendingFindingReports": 0,
+            "runtimeUrl": "http://127.0.0.1:54548/app",
+            "agentBootUrl": "http://127.0.0.1:54548/app",
+            "documentReadyState": "complete",
+            "agentBootReadyState": "complete",
+            "agentBootAfterLoad": true,
+            "agentBootDelayMs": 110,
+            "runtimeHealthCount": 4,
+            "findingReportsAccepted": 0,
+            "runtimeSignalsAccepted": 1,
+            "lastModuleSendResult": {
+              "ok": true,
+              "skipped": true,
+              "reason": "already_delivered",
+              "error": null,
+              "signature": "strategy:SMART|version:1|policy:|name:|modules:iast_dom_xss:dom_inline_event_handler,dom_innerhtml_xss,dom_outerhtml_xss,dom_insertadjacenthtml_xss,document_write_xss,dom_mutation_xss|iast_dangerous_url_scheme_execution:href_javascript_url_execution,href_data_url_execution,src_javascript_url_execution,src_data_url_execution,location_href_javascript_url_execution,location_href_data_url_execution,location_assign_javascript_url_execution,location_assign_data_url_execution,location_replace_javascript_url_execution,location_replace_data_url_execution,window_open_javascript_url_execution,window_open_data_url_execution,iframe_src_javascript_url_execution,iframe_src_data_url_execution,script_src_data_url_execution|iast_js_execution:eval_js_execution,function_constructor_execution,function_apply_execution|iast_open_redirect:window_open_redirect,navigation_api_redirect|iast_angularjs_expression_injection:angularjs_expression_function_constructor,angularjs_parse_from_form,angularjs_parse_from_cookie,angularjs_parse_from_localstorage,angularjs_parse_from_postmessage|iast_postmessage_misuse:postmessage_star_origin_leak,postmessage_cross_origin_leak|iast_timer_js_execution:settimeout_string_execution,setinterval_string_execution|iast_iframe_navigation:iframe_src_redirect,iframe_srcdoc_xss|iast_client_http_exfiltration:fetch_url_exfiltration,fetch_headers_exfiltration,xhr_url_exfiltration,xhr_body_exfiltration,xhr_header_exfiltration,sendbeacon_exfiltration,image_src_exfiltration|iast_dom_link_manipulation:dom_attr_href_navigation,dom_attr_src_navigation,dom_attr_action_navigation,dom_attr_formaction_navigation|iast_dom_url_navigation:location_href_redirect,location_assign_redirect,location_replace_redirect,history_pushstate_open_redirect,history_replacestate_route_change|iast_dom_parser_xss:domparser_parsefromstring_html_xss,range_contextual_fragment_xss,element_sethtmlunsafe_xss,shadowroot_sethtmlunsafe_xss|iast_dom_xss_secondary_sources:dom_innerhtml_xss_secondary_sources,dom_outerhtml_xss_secondary_sources,dom_insertadjacenthtml_xss_secondary_sources,document_write_xss_secondary_sources,dom_inline_event_xss_secondary_sources,dom_mutation_xss_secondary_sources,iframe_srcdoc_xss_secondary_sources|iast_route_controlled_navigation:route_pushstate_navigation,route_replacestate_navigation,route_navigation_api_navigation|iast_form_submission_hijack:form_action_hijack,form_formaction_hijack|iast_dangerous_form_scheme_execution:form_action_javascript_url_execution,form_action_data_url_execution,form_formaction_javascript_url_execution,form_formaction_data_url_execution|iast_response_field_dom_reachability:response_dom_innerhtml_reachability,response_dom_outerhtml_reachability,response_dom_insertadjacenthtml_reachability,response_dom_document_write_reachability,response_dom_mutation_reachability,response_dom_parser_reachability,response_dom_contextual_fragment_reachability,response_dom_sethtmlunsafe_reachability,response_dom_shadow_sethtmlunsafe_reachability|iast_prototype_pollution_impact:prototype_pollution_write,prototype_pollution_fetch_init|iast_storage_taint_to_exec:eval_storage_taint_execution,function_constructor_storage_taint_execution,function_apply_storage_taint_execution,settimeout_storage_taint_execution,setinterval_storage_taint_execution|iast_source_scoped_open_redirect:location_href_redirect_sources,location_assign_redirect_sources,location_replace_redirect_sources,window_open_redirect_sources,navigation_api_redirect_sources,dom_attr_href_redirect_sources,dom_attr_action_redirect_sources"
+            },
+            "lastSenderTabId": 27157171,
+            "moduleDeliveryObserved": true,
+            "agentObservedActivity": true,
+            "readyEvidence": "runtime_activity",
+            "idle": true
+          }
+        },
+        "summary": {
+          "findingsCount": 0,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          }
+        },
+        "finalSummary": {
+          "status": "completed",
+          "releaseStatus": "clean",
+          "stats": {
+            "findingsCount": 0,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            }
+          }
+        },
+        "warnings": [],
+        "sessionLookup": {
+          "requestedSessionId": "ptk-session_cbfee5f9-0efa-4a08-a2bc-0dc1bf4781d0",
+          "tabId": 27157171,
+          "strictCurrentTab": true,
+          "allowActive": true,
+          "allowCompleted": true,
+          "allowGlobalCompleted": true,
+          "lookupSource": "explicit-session",
+          "activeSessionIdForTab": null,
+          "completedSessionIdForTab": "ptk-session_cbfee5f9-0efa-4a08-a2bc-0dc1bf4781d0",
+          "globalCompletedSessionId": "ptk-session_cbfee5f9-0efa-4a08-a2bc-0dc1bf4781d0",
+          "sessionExists": true,
+          "sessionStatus": "completed",
+          "sessionFinishedAt": "2026-10-22T14:01:31.917Z",
+          "stopRequestedAt": null,
+          "retention": {
+            "ttlMs": 86400000,
+            "maxCompletedSessions": 20,
+            "evicted": false
+          }
+        },
+        "supplemental": {
+          "backends": {},
+          "gaps": []
+        },
+        "coverage": {
+          "backendGaps": [],
+          "iastDocuments": {
+            "debuggerTargets": 1,
+            "documentInjections": 1,
+            "errors": [],
+            "active": false
+          }
+        }
+      }
+    },
+    "report": {
+      "schema": "cert-x-security-report/v1",
+      "run": {
+        "runId": "23c84bcb-d3c0-4449-a747-a03104e60872",
+        "owner": "iast-http-scope",
+        "workspaceId": null,
+        "tabId": 27157171,
+        "engines": [
+          "IAST"
+        ],
+        "state": "completed",
+        "config": {
+          "preset": "ptk-defaults",
+          "scanStrategy": "SMART",
+          "dastScanStrategy": "SMART",
+          "scanControlProfile": "safe",
+          "allowCaptureWithoutInteraction": false,
+          "maxRequestsPerSecond": 5,
+          "concurrency": 3,
+          "planningConcurrency": 2,
+          "runCve": true,
+          "follow_redirect": true,
+          "maxRequests": null,
+          "durationSeconds": null,
+          "limits": {}
+        },
+        "scope": {
+          "origins": [
+            "http://127.0.0.1:54548"
+          ],
+          "excludePaths": [
+            "/excluded"
+          ],
+          "matchMode": "host"
+        },
+        "accountId": null,
+        "accountRevision": null,
+        "createdAt": 1792677690710,
+        "updatedAt": 1792677691919,
+        "requestsSent": 0,
+        "coverage": {
+          "backendGaps": [],
+          "iastDocuments": {
+            "debuggerTargets": 1,
+            "documentInjections": 1,
+            "errors": [],
+            "active": false
+          }
+        },
+        "summary": {
+          "status": "completed",
+          "releaseStatus": "clean",
+          "stats": {
+            "findingsCount": 0,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            }
+          },
+          "findings": 0
+        },
+        "runtimeId": "ptk-session_cbfee5f9-0efa-4a08-a2bc-0dc1bf4781d0",
+        "engineStatus": {
+          "IAST": {
+            "status": "stopped",
+            "isRunning": false,
+            "progress": {
+              "done": 0,
+              "total": null
+            },
+            "findingsCount": 0,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            },
+            "lastActivityAt": null,
+            "warnings": [],
+            "requestsCount": 2,
+            "runtimeEventsCount": 1,
+            "agentReady": false,
+            "modulesSentOk": 1,
+            "modulesSentSkipped": 2,
+            "modulesSentError": 0,
+            "runtimeHealthState": "normal",
+            "modulesLoaded": true,
+            "modulesSignature": "strategy:SMART|version:1|policy:|name:|modules:iast_dom_xss:dom_inline_event_handler,dom_innerhtml_xss,dom_outerhtml_xss,dom_insertadjacenthtml_xss,document_write_xss,dom_mutation_xss|iast_dangerous_url_scheme_execution:href_javascript_url_execution,href_data_url_execution,src_javascript_url_execution,src_data_url_execution,location_href_javascript_url_execution,location_href_data_url_execution,location_assign_javascript_url_execution,location_assign_data_url_execution,location_replace_javascript_url_execution,location_replace_data_url_execution,window_open_javascript_url_execution,window_open_data_url_execution,iframe_src_javascript_url_execution,iframe_src_data_url_execution,script_src_data_url_execution|iast_js_execution:eval_js_execution,function_constructor_execution,function_apply_execution|iast_open_redirect:window_open_redirect,navigation_api_redirect|iast_angularjs_expression_injection:angularjs_expression_function_constructor,angularjs_parse_from_form,angularjs_parse_from_cookie,angularjs_parse_from_localstorage,angularjs_parse_from_postmessage|iast_postmessage_misuse:postmessage_star_origin_leak,postmessage_cross_origin_leak|iast_timer_js_execution:settimeout_string_execution,setinterval_string_execution|iast_iframe_navigation:iframe_src_redirect,iframe_srcdoc_xss|iast_client_http_exfiltration:fetch_url_exfiltration,fetch_headers_exfiltration,xhr_url_exfiltration,xhr_body_exfiltration,xhr_header_exfiltration,sendbeacon_exfiltration,image_src_exfiltration|iast_dom_link_manipulation:dom_attr_href_navigation,dom_attr_src_navigation,dom_attr_action_navigation,dom_attr_formaction_navigation|iast_dom_url_navigation:location_href_redirect,location_assign_redirect,location_replace_redirect,history_pushstate_open_redirect,history_replacestate_route_change|iast_dom_parser_xss:domparser_parsefromstring_html_xss,range_contextual_fragment_xss,element_sethtmlunsafe_xss,shadowroot_sethtmlunsafe_xss|iast_dom_xss_secondary_sources:dom_innerhtml_xss_secondary_sources,dom_outerhtml_xss_secondary_sources,dom_insertadjacenthtml_xss_secondary_sources,document_write_xss_secondary_sources,dom_inline_event_xss_secondary_sources,dom_mutation_xss_secondary_sources,iframe_srcdoc_xss_secondary_sources|iast_route_controlled_navigation:route_pushstate_navigation,route_replacestate_navigation,route_navigation_api_navigation|iast_form_submission_hijack:form_action_hijack,form_formaction_hijack|iast_dangerous_form_scheme_execution:form_action_javascript_url_execution,form_action_data_url_execution,form_formaction_javascript_url_execution,form_formaction_data_url_execution|iast_response_field_dom_reachability:response_dom_innerhtml_reachability,response_dom_outerhtml_reachability,response_dom_insertadjacenthtml_reachability,response_dom_document_write_reachability,response_dom_mutation_reachability,response_dom_parser_reachability,response_dom_contextual_fragment_reachability,response_dom_sethtmlunsafe_reachability,response_dom_shadow_sethtmlunsafe_reachability|iast_prototype_pollution_impact:prototype_pollution_write,prototype_pollution_fetch_init|iast_storage_taint_to_exec:eval_storage_taint_execution,function_constructor_storage_taint_execution,function_apply_storage_taint_execution,settimeout_storage_taint_execution,setinterval_storage_taint_execution|iast_source_scoped_open_redirect:location_href_redirect_sources,location_assign_redirect_sources,location_replace_redirect_sources,window_open_redirect_sources,navigation_api_redirect_sources,dom_attr_href_redirect_sources,dom_attr_action_redirect_sources",
+            "pendingFindingReports": 0,
+            "flushedPendingFindingReports": 0,
+            "runtimeUrl": "http://127.0.0.1:54548/app",
+            "agentBootUrl": "http://127.0.0.1:54548/app",
+            "documentReadyState": "complete",
+            "agentBootReadyState": "complete",
+            "agentBootAfterLoad": true,
+            "agentBootDelayMs": 110,
+            "runtimeHealthCount": 4,
+            "findingReportsAccepted": 0,
+            "runtimeSignalsAccepted": 1,
+            "lastModuleSendResult": {
+              "ok": true,
+              "skipped": true,
+              "reason": "already_delivered",
+              "error": null,
+              "signature": "strategy:SMART|version:1|policy:|name:|modules:iast_dom_xss:dom_inline_event_handler,dom_innerhtml_xss,dom_outerhtml_xss,dom_insertadjacenthtml_xss,document_write_xss,dom_mutation_xss|iast_dangerous_url_scheme_execution:href_javascript_url_execution,href_data_url_execution,src_javascript_url_execution,src_data_url_execution,location_href_javascript_url_execution,location_href_data_url_execution,location_assign_javascript_url_execution,location_assign_data_url_execution,location_replace_javascript_url_execution,location_replace_data_url_execution,window_open_javascript_url_execution,window_open_data_url_execution,iframe_src_javascript_url_execution,iframe_src_data_url_execution,script_src_data_url_execution|iast_js_execution:eval_js_execution,function_constructor_execution,function_apply_execution|iast_open_redirect:window_open_redirect,navigation_api_redirect|iast_angularjs_expression_injection:angularjs_expression_function_constructor,angularjs_parse_from_form,angularjs_parse_from_cookie,angularjs_parse_from_localstorage,angularjs_parse_from_postmessage|iast_postmessage_misuse:postmessage_star_origin_leak,postmessage_cross_origin_leak|iast_timer_js_execution:settimeout_string_execution,setinterval_string_execution|iast_iframe_navigation:iframe_src_redirect,iframe_srcdoc_xss|iast_client_http_exfiltration:fetch_url_exfiltration,fetch_headers_exfiltration,xhr_url_exfiltration,xhr_body_exfiltration,xhr_header_exfiltration,sendbeacon_exfiltration,image_src_exfiltration|iast_dom_link_manipulation:dom_attr_href_navigation,dom_attr_src_navigation,dom_attr_action_navigation,dom_attr_formaction_navigation|iast_dom_url_navigation:location_href_redirect,location_assign_redirect,location_replace_redirect,history_pushstate_open_redirect,history_replacestate_route_change|iast_dom_parser_xss:domparser_parsefromstring_html_xss,range_contextual_fragment_xss,element_sethtmlunsafe_xss,shadowroot_sethtmlunsafe_xss|iast_dom_xss_secondary_sources:dom_innerhtml_xss_secondary_sources,dom_outerhtml_xss_secondary_sources,dom_insertadjacenthtml_xss_secondary_sources,document_write_xss_secondary_sources,dom_inline_event_xss_secondary_sources,dom_mutation_xss_secondary_sources,iframe_srcdoc_xss_secondary_sources|iast_route_controlled_navigation:route_pushstate_navigation,route_replacestate_navigation,route_navigation_api_navigation|iast_form_submission_hijack:form_action_hijack,form_formaction_hijack|iast_dangerous_form_scheme_execution:form_action_javascript_url_execution,form_action_data_url_execution,form_formaction_javascript_url_execution,form_formaction_data_url_execution|iast_response_field_dom_reachability:response_dom_innerhtml_reachability,response_dom_outerhtml_reachability,response_dom_insertadjacenthtml_reachability,response_dom_document_write_reachability,response_dom_mutation_reachability,response_dom_parser_reachability,response_dom_contextual_fragment_reachability,response_dom_sethtmlunsafe_reachability,response_dom_shadow_sethtmlunsafe_reachability|iast_prototype_pollution_impact:prototype_pollution_write,prototype_pollution_fetch_init|iast_storage_taint_to_exec:eval_storage_taint_execution,function_constructor_storage_taint_execution,function_apply_storage_taint_execution,settimeout_storage_taint_execution,setinterval_storage_taint_execution|iast_source_scoped_open_redirect:location_href_redirect_sources,location_assign_redirect_sources,location_replace_redirect_sources,window_open_redirect_sources,navigation_api_redirect_sources,dom_attr_href_redirect_sources,dom_attr_action_redirect_sources"
+            },
+            "lastSenderTabId": 27157171,
+            "moduleDeliveryObserved": true,
+            "agentObservedActivity": true,
+            "readyEvidence": "runtime_activity",
+            "idle": true
+          }
+        },
+        "stopReason": "Stopped by user.",
+        "lastStatus": {
+          "sessionId": "ptk-session_cbfee5f9-0efa-4a08-a2bc-0dc1bf4781d0",
+          "scanId": "ptk-session_cbfee5f9-0efa-4a08-a2bc-0dc1bf4781d0",
+          "ok": true,
+          "status": "completed",
+          "completionStatus": "completed",
+          "releaseStatus": "clean",
+          "error": null,
+          "startedAt": "2026-10-22T14:01:30.714Z",
+          "finishedAt": "2026-10-22T14:01:31.917Z",
+          "stopRequestedAt": null,
+          "closeRequestId": null,
+          "closeRequestAck": false,
+          "closeRequestMode": null,
+          "idleVerified": false,
+          "elapsedMs": 1204,
+          "lastUpdatedAt": null,
+          "engines": {
+            "IAST": {
+              "status": "stopped",
+              "isRunning": false,
+              "progress": {
+                "done": 0,
+                "total": null
+              },
+              "findingsCount": 0,
+              "bySeverity": {
+                "critical": 0,
+                "high": 0,
+                "medium": 0,
+                "low": 0,
+                "info": 0
+              },
+              "lastActivityAt": null,
+              "warnings": [],
+              "requestsCount": 2,
+              "runtimeEventsCount": 1,
+              "agentReady": false,
+              "modulesSentOk": 1,
+              "modulesSentSkipped": 2,
+              "modulesSentError": 0,
+              "runtimeHealthState": "normal",
+              "modulesLoaded": true,
+              "modulesSignature": "strategy:SMART|version:1|policy:|name:|modules:iast_dom_xss:dom_inline_event_handler,dom_innerhtml_xss,dom_outerhtml_xss,dom_insertadjacenthtml_xss,document_write_xss,dom_mutation_xss|iast_dangerous_url_scheme_execution:href_javascript_url_execution,href_data_url_execution,src_javascript_url_execution,src_data_url_execution,location_href_javascript_url_execution,location_href_data_url_execution,location_assign_javascript_url_execution,location_assign_data_url_execution,location_replace_javascript_url_execution,location_replace_data_url_execution,window_open_javascript_url_execution,window_open_data_url_execution,iframe_src_javascript_url_execution,iframe_src_data_url_execution,script_src_data_url_execution|iast_js_execution:eval_js_execution,function_constructor_execution,function_apply_execution|iast_open_redirect:window_open_redirect,navigation_api_redirect|iast_angularjs_expression_injection:angularjs_expression_function_constructor,angularjs_parse_from_form,angularjs_parse_from_cookie,angularjs_parse_from_localstorage,angularjs_parse_from_postmessage|iast_postmessage_misuse:postmessage_star_origin_leak,postmessage_cross_origin_leak|iast_timer_js_execution:settimeout_string_execution,setinterval_string_execution|iast_iframe_navigation:iframe_src_redirect,iframe_srcdoc_xss|iast_client_http_exfiltration:fetch_url_exfiltration,fetch_headers_exfiltration,xhr_url_exfiltration,xhr_body_exfiltration,xhr_header_exfiltration,sendbeacon_exfiltration,image_src_exfiltration|iast_dom_link_manipulation:dom_attr_href_navigation,dom_attr_src_navigation,dom_attr_action_navigation,dom_attr_formaction_navigation|iast_dom_url_navigation:location_href_redirect,location_assign_redirect,location_replace_redirect,history_pushstate_open_redirect,history_replacestate_route_change|iast_dom_parser_xss:domparser_parsefromstring_html_xss,range_contextual_fragment_xss,element_sethtmlunsafe_xss,shadowroot_sethtmlunsafe_xss|iast_dom_xss_secondary_sources:dom_innerhtml_xss_secondary_sources,dom_outerhtml_xss_secondary_sources,dom_insertadjacenthtml_xss_secondary_sources,document_write_xss_secondary_sources,dom_inline_event_xss_secondary_sources,dom_mutation_xss_secondary_sources,iframe_srcdoc_xss_secondary_sources|iast_route_controlled_navigation:route_pushstate_navigation,route_replacestate_navigation,route_navigation_api_navigation|iast_form_submission_hijack:form_action_hijack,form_formaction_hijack|iast_dangerous_form_scheme_execution:form_action_javascript_url_execution,form_action_data_url_execution,form_formaction_javascript_url_execution,form_formaction_data_url_execution|iast_response_field_dom_reachability:response_dom_innerhtml_reachability,response_dom_outerhtml_reachability,response_dom_insertadjacenthtml_reachability,response_dom_document_write_reachability,response_dom_mutation_reachability,response_dom_parser_reachability,response_dom_contextual_fragment_reachability,response_dom_sethtmlunsafe_reachability,response_dom_shadow_sethtmlunsafe_reachability|iast_prototype_pollution_impact:prototype_pollution_write,prototype_pollution_fetch_init|iast_storage_taint_to_exec:eval_storage_taint_execution,function_constructor_storage_taint_execution,function_apply_storage_taint_execution,settimeout_storage_taint_execution,setinterval_storage_taint_execution|iast_source_scoped_open_redirect:location_href_redirect_sources,location_assign_redirect_sources,location_replace_redirect_sources,window_open_redirect_sources,navigation_api_redirect_sources,dom_attr_href_redirect_sources,dom_attr_action_redirect_sources",
+              "pendingFindingReports": 0,
+              "flushedPendingFindingReports": 0,
+              "runtimeUrl": "http://127.0.0.1:54548/app",
+              "agentBootUrl": "http://127.0.0.1:54548/app",
+              "documentReadyState": "complete",
+              "agentBootReadyState": "complete",
+              "agentBootAfterLoad": true,
+              "agentBootDelayMs": 110,
+              "runtimeHealthCount": 4,
+              "findingReportsAccepted": 0,
+              "runtimeSignalsAccepted": 1,
+              "lastModuleSendResult": {
+                "ok": true,
+                "skipped": true,
+                "reason": "already_delivered",
+                "error": null,
+                "signature": "strategy:SMART|version:1|policy:|name:|modules:iast_dom_xss:dom_inline_event_handler,dom_innerhtml_xss,dom_outerhtml_xss,dom_insertadjacenthtml_xss,document_write_xss,dom_mutation_xss|iast_dangerous_url_scheme_execution:href_javascript_url_execution,href_data_url_execution,src_javascript_url_execution,src_data_url_execution,location_href_javascript_url_execution,location_href_data_url_execution,location_assign_javascript_url_execution,location_assign_data_url_execution,location_replace_javascript_url_execution,location_replace_data_url_execution,window_open_javascript_url_execution,window_open_data_url_execution,iframe_src_javascript_url_execution,iframe_src_data_url_execution,script_src_data_url_execution|iast_js_execution:eval_js_execution,function_constructor_execution,function_apply_execution|iast_open_redirect:window_open_redirect,navigation_api_redirect|iast_angularjs_expression_injection:angularjs_expression_function_constructor,angularjs_parse_from_form,angularjs_parse_from_cookie,angularjs_parse_from_localstorage,angularjs_parse_from_postmessage|iast_postmessage_misuse:postmessage_star_origin_leak,postmessage_cross_origin_leak|iast_timer_js_execution:settimeout_string_execution,setinterval_string_execution|iast_iframe_navigation:iframe_src_redirect,iframe_srcdoc_xss|iast_client_http_exfiltration:fetch_url_exfiltration,fetch_headers_exfiltration,xhr_url_exfiltration,xhr_body_exfiltration,xhr_header_exfiltration,sendbeacon_exfiltration,image_src_exfiltration|iast_dom_link_manipulation:dom_attr_href_navigation,dom_attr_src_navigation,dom_attr_action_navigation,dom_attr_formaction_navigation|iast_dom_url_navigation:location_href_redirect,location_assign_redirect,location_replace_redirect,history_pushstate_open_redirect,history_replacestate_route_change|iast_dom_parser_xss:domparser_parsefromstring_html_xss,range_contextual_fragment_xss,element_sethtmlunsafe_xss,shadowroot_sethtmlunsafe_xss|iast_dom_xss_secondary_sources:dom_innerhtml_xss_secondary_sources,dom_outerhtml_xss_secondary_sources,dom_insertadjacenthtml_xss_secondary_sources,document_write_xss_secondary_sources,dom_inline_event_xss_secondary_sources,dom_mutation_xss_secondary_sources,iframe_srcdoc_xss_secondary_sources|iast_route_controlled_navigation:route_pushstate_navigation,route_replacestate_navigation,route_navigation_api_navigation|iast_form_submission_hijack:form_action_hijack,form_formaction_hijack|iast_dangerous_form_scheme_execution:form_action_javascript_url_execution,form_action_data_url_execution,form_formaction_javascript_url_execution,form_formaction_data_url_execution|iast_response_field_dom_reachability:response_dom_innerhtml_reachability,response_dom_outerhtml_reachability,response_dom_insertadjacenthtml_reachability,response_dom_document_write_reachability,response_dom_mutation_reachability,response_dom_parser_reachability,response_dom_contextual_fragment_reachability,response_dom_sethtmlunsafe_reachability,response_dom_shadow_sethtmlunsafe_reachability|iast_prototype_pollution_impact:prototype_pollution_write,prototype_pollution_fetch_init|iast_storage_taint_to_exec:eval_storage_taint_execution,function_constructor_storage_taint_execution,function_apply_storage_taint_execution,settimeout_storage_taint_execution,setinterval_storage_taint_execution|iast_source_scoped_open_redirect:location_href_redirect_sources,location_assign_redirect_sources,location_replace_redirect_sources,window_open_redirect_sources,navigation_api_redirect_sources,dom_attr_href_redirect_sources,dom_attr_action_redirect_sources"
+              },
+              "lastSenderTabId": 27157171,
+              "moduleDeliveryObserved": true,
+              "agentObservedActivity": true,
+              "readyEvidence": "runtime_activity",
+              "idle": true
+            }
+          },
+          "summary": {
+            "findingsCount": 0,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            }
+          },
+          "finalSummary": {
+            "status": "completed",
+            "releaseStatus": "clean",
+            "stats": {
+              "findingsCount": 0,
+              "bySeverity": {
+                "critical": 0,
+                "high": 0,
+                "medium": 0,
+                "low": 0,
+                "info": 0
+              }
+            }
+          },
+          "warnings": [],
+          "sessionLookup": {
+            "requestedSessionId": "ptk-session_cbfee5f9-0efa-4a08-a2bc-0dc1bf4781d0",
+            "tabId": 27157171,
+            "strictCurrentTab": true,
+            "allowActive": true,
+            "allowCompleted": true,
+            "allowGlobalCompleted": true,
+            "lookupSource": "explicit-session",
+            "activeSessionIdForTab": null,
+            "completedSessionIdForTab": "ptk-session_cbfee5f9-0efa-4a08-a2bc-0dc1bf4781d0",
+            "globalCompletedSessionId": "ptk-session_cbfee5f9-0efa-4a08-a2bc-0dc1bf4781d0",
+            "sessionExists": true,
+            "sessionStatus": "completed",
+            "sessionFinishedAt": "2026-10-22T14:01:31.917Z",
+            "stopRequestedAt": null,
+            "retention": {
+              "ttlMs": 86400000,
+              "maxCompletedSessions": 20,
+              "evicted": false
+            }
+          },
+          "supplemental": {
+            "backends": {},
+            "gaps": []
+          },
+          "coverage": {
+            "backendGaps": [],
+            "iastDocuments": {
+              "debuggerTargets": 1,
+              "documentInjections": 1,
+              "errors": [],
+              "active": false
+            }
+          }
+        }
+      },
+      "native": {
+        "sessionId": "ptk-session_cbfee5f9-0efa-4a08-a2bc-0dc1bf4781d0",
+        "reports": [
+          {
+            "engine": "IAST",
+            "data": {
+              "version": "1.0",
+              "type": "scan_result",
+              "engine": "IAST",
+              "scanId": "a0250366-8d08-42f0-b786-2b5224155506",
+              "host": "127.0.0.1:54548",
+              "tabId": null,
+              "startedAt": "2026-10-22T14:01:30.722Z",
+              "finishedAt": "2026-10-22T14:01:31.913Z",
+              "settings": {
+                "iastScanStrategy": "SMART",
+                "iastRulepackSource": "local",
+                "iastPolicyName": null,
+                "iastPackStatus": "active",
+                "iastPackError": null
+              },
+              "toolVersion": "1.0.0",
+              "stats": {
+                "findingsCount": 0,
+                "critical": 0,
+                "high": 0,
+                "medium": 0,
+                "low": 0,
+                "info": 0
+              },
+              "findings": [],
+              "groups": [],
+              "codeArtifacts": {
+                "sast": {
+                  "version": 2,
+                  "routes": [],
+                  "endpoints": [],
+                  "graphql": [],
+                  "surfaces": [],
+                  "hiddenParams": [],
+                  "gadgets": []
+                }
+              },
+              "items": [],
+              "policyId": null,
+              "httpEvents": [
+                {
+                  "type": "devtools-http-request",
+                  "time": 1792677690773,
+                  "requestId": "11712.3",
+                  "url": "http://127.0.0.1:54548/http/primary",
+                  "method": "GET",
+                  "tabId": 27157171,
+                  "host": "127.0.0.1:54548"
+                },
+                {
+                  "type": "http",
+                  "time": 1792677690774,
+                  "requestId": "143",
+                  "url": "http://127.0.0.1:54548/http/primary",
+                  "method": "GET",
+                  "status": 200,
+                  "ip": "127.0.0.1",
+                  "fromCache": false,
+                  "tabId": 27157171,
+                  "host": "127.0.0.1:54548"
+                },
+                {
+                  "type": "devtools-http-response",
+                  "time": 1792677690774,
+                  "requestId": "11712.3",
+                  "url": "http://127.0.0.1:54548/http/primary",
+                  "method": "GET",
+                  "status": 200,
+                  "mimeType": "application/json",
+                  "tabId": 27157171,
+                  "host": "127.0.0.1:54548"
+                },
+                {
+                  "type": "devtools-http-request",
+                  "time": 1792677690775,
+                  "requestId": "11712.4",
+                  "url": "http://127.0.0.1:54549/http/allowed",
+                  "method": "GET",
+                  "tabId": 27157171,
+                  "host": "127.0.0.1:54549"
+                },
+                {
+                  "type": "http",
+                  "time": 1792677690786,
+                  "requestId": "144",
+                  "url": "http://127.0.0.1:54549/http/allowed",
+                  "method": "GET",
+                  "status": 200,
+                  "ip": "127.0.0.1",
+                  "fromCache": false,
+                  "tabId": 27157171,
+                  "host": "127.0.0.1:54549"
+                },
+                {
+                  "type": "devtools-http-response",
+                  "time": 1792677690787,
+                  "requestId": "11712.4",
+                  "url": "http://127.0.0.1:54549/http/allowed",
+                  "method": "GET",
+                  "status": 200,
+                  "mimeType": "application/json",
+                  "tabId": 27157171,
+                  "host": "127.0.0.1:54549"
+                }
+              ],
+              "runtimeEvents": [
+                {
+                  "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+                  "eventKey": "client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+                  "engine": "IAST",
+                  "kind": "iast_runtime_signal",
+                  "signalFamily": "client_runtime",
+                  "signalCode": "client_json_parse_observed",
+                  "category": null,
+                  "severity": "info",
+                  "confidence": 55,
+                  "findingId": null,
+                  "findingFingerprint": null,
+                  "requestId": null,
+                  "requestKey": null,
+                  "moduleId": null,
+                  "ruleId": null,
+                  "sinkId": "client.json.parse",
+                  "sourceKind": "apiResponseField",
+                  "sourceKey": "response:json:ok",
+                  "sourceRole": "observed",
+                  "primaryClass": "observation",
+                  "detection": {
+                    "reason": "client_json_parse_observed",
+                    "dataKind": "unknown",
+                    "confidence": 55,
+                    "details": {
+                      "valuePreview": "true"
+                    }
+                  },
+                  "trust": {
+                    "level": "same_origin",
+                    "decision": "allow"
+                  },
+                  "suppression": null,
+                  "sanitizers": [],
+                  "confidenceSignals": [],
+                  "url": "http://127.0.0.1:54548/app",
+                  "route": "/app",
+                  "method": "GET",
+                  "location": {
+                    "url": "http://127.0.0.1:54548/app",
+                    "method": "GET",
+                    "route": "/app"
+                  },
+                  "routing": {
+                    "runtimeUrl": "http://127.0.0.1:54548/app",
+                    "pathname": "/app",
+                    "clientRoute": "/app",
+                    "route": "/app",
+                    "urlPattern": "http://127.0.0.1:54548/app"
+                  },
+                  "headerName": null,
+                  "storageKey": null,
+                  "cookieName": null,
+                  "attribute": null,
+                  "isCrossOrigin": null,
+                  "observedAt": null,
+                  "sinkContext": {
+                    "requestUrl": null,
+                    "method": "GET",
+                    "headerName": null,
+                    "destUrl": null,
+                    "destHost": null,
+                    "destOrigin": null,
+                    "isCrossOrigin": null,
+                    "cookieName": null,
+                    "storageKey": null,
+                    "storageArea": null
+                  },
+                  "sourceValuePreview": "true",
+                  "time": 1792677690775,
+                  "evidenceRefs": []
+                }
+              ],
+              "requests": [
+                {
+                  "key": "GET http://127.0.0.1:54548/http/primary",
+                  "method": "GET",
+                  "url": "http://127.0.0.1:54548/http/primary",
+                  "displayUrl": "http://127.0.0.1:54548/http/primary",
+                  "status": 200,
+                  "host": "127.0.0.1:54548",
+                  "type": "devtools-http-response",
+                  "mimeType": null,
+                  "lastSeen": 1792677690774
+                },
+                {
+                  "key": "GET http://127.0.0.1:54549/http/allowed",
+                  "method": "GET",
+                  "url": "http://127.0.0.1:54549/http/allowed",
+                  "displayUrl": "http://127.0.0.1:54549/http/allowed",
+                  "status": 200,
+                  "host": "127.0.0.1:54549",
+                  "type": "devtools-http-response",
+                  "mimeType": null,
+                  "lastSeen": 1792677690787
+                }
+              ],
+              "pages": [],
+              "files": [],
+              "iastTelemetry": {
+                "activation": {
+                  "packStatus": "active",
+                  "activeModuleCount": 20,
+                  "activeRuleCount": 96,
+                  "activeHookGroups": [
+                    "hook.angularjs",
+                    "hook.code.exec",
+                    "hook.dom.documentWrite",
+                    "hook.dom.formAttributes",
+                    "hook.dom.htmlAssignments",
+                    "hook.dom.htmlParsers",
+                    "hook.dom.inlineEvents",
+                    "hook.dom.mutations",
+                    "hook.dom.urlAttributes",
+                    "hook.nav.redirects",
+                    "hook.net.exfil",
+                    "hook.net.responses",
+                    "hook.postMessage",
+                    "hook.runtime.integrity.fetchInit",
+                    "hook.runtime.integrity.prototypeWrites",
+                    "hook.sanitizers",
+                    "hook.script.loading"
+                  ],
+                  "freeSafeHookGroups": [
+                    "hook.angularjs",
+                    "hook.code.exec",
+                    "hook.dom.documentWrite",
+                    "hook.dom.formAttributes",
+                    "hook.dom.htmlAssignments",
+                    "hook.dom.inlineEvents",
+                    "hook.dom.mutations",
+                    "hook.dom.urlAttributes",
+                    "hook.nav.redirects",
+                    "hook.net.responses",
+                    "hook.postMessage",
+                    "hook.runtime.integrity.fetchInit",
+                    "hook.script.loading"
+                  ],
+                  "policyOnlyHookGroups": [
+                    "hook.dom.htmlParsers",
+                    "hook.net.exfil",
+                    "hook.runtime.integrity.prototypeWrites",
+                    "hook.sanitizers"
+                  ],
+                  "supportHookGroups": [],
+                  "hookRuleCounts": {
+                    "hook.angularjs": 4,
+                    "hook.code.exec": 11,
+                    "hook.dom.documentWrite": 3,
+                    "hook.dom.formAttributes": 9,
+                    "hook.dom.htmlAssignments": 11,
+                    "hook.dom.htmlParsers": 8,
+                    "hook.dom.inlineEvents": 2,
+                    "hook.dom.mutations": 3,
+                    "hook.dom.urlAttributes": 14,
+                    "hook.nav.redirects": 23,
+                    "hook.net.exfil": 7,
+                    "hook.net.responses": 0,
+                    "hook.postMessage": 2,
+                    "hook.runtime.integrity.fetchInit": 1,
+                    "hook.runtime.integrity.prototypeWrites": 1,
+                    "hook.sanitizers": 0,
+                    "hook.script.loading": 1
+                  },
+                  "rulepackSource": "local",
+                  "policyId": null,
+                  "policyName": null,
+                  "moduleIds": [
+                    "iast_angularjs_expression_injection",
+                    "iast_client_http_exfiltration",
+                    "iast_dangerous_form_scheme_execution",
+                    "iast_dangerous_url_scheme_execution",
+                    "iast_dom_link_manipulation",
+                    "iast_dom_parser_xss",
+                    "iast_dom_url_navigation",
+                    "iast_dom_xss",
+                    "iast_dom_xss_secondary_sources",
+                    "iast_form_submission_hijack",
+                    "iast_iframe_navigation",
+                    "iast_js_execution",
+                    "iast_open_redirect",
+                    "iast_postmessage_misuse",
+                    "iast_prototype_pollution_impact",
+                    "iast_response_field_dom_reachability",
+                    "iast_route_controlled_navigation",
+                    "iast_source_scoped_open_redirect",
+                    "iast_storage_taint_to_exec",
+                    "iast_timer_js_execution"
+                  ],
+                  "ruleIds": [
+                    "angularjs_expression_function_constructor",
+                    "angularjs_parse_from_cookie",
+                    "angularjs_parse_from_form",
+                    "angularjs_parse_from_localstorage",
+                    "angularjs_parse_from_postmessage",
+                    "document_write_xss",
+                    "document_write_xss_secondary_sources",
+                    "dom_attr_action_navigation",
+                    "dom_attr_action_redirect_sources",
+                    "dom_attr_formaction_navigation",
+                    "dom_attr_href_navigation",
+                    "dom_attr_href_redirect_sources",
+                    "dom_attr_src_navigation",
+                    "dom_inline_event_handler",
+                    "dom_inline_event_xss_secondary_sources",
+                    "dom_innerhtml_xss",
+                    "dom_innerhtml_xss_secondary_sources",
+                    "dom_insertadjacenthtml_xss",
+                    "dom_insertadjacenthtml_xss_secondary_sources",
+                    "dom_mutation_xss",
+                    "dom_mutation_xss_secondary_sources",
+                    "dom_outerhtml_xss",
+                    "dom_outerhtml_xss_secondary_sources",
+                    "domparser_parsefromstring_html_xss",
+                    "element_sethtmlunsafe_xss",
+                    "eval_js_execution",
+                    "eval_storage_taint_execution",
+                    "fetch_headers_exfiltration",
+                    "fetch_url_exfiltration",
+                    "form_action_data_url_execution",
+                    "form_action_hijack",
+                    "form_action_javascript_url_execution",
+                    "form_formaction_data_url_execution",
+                    "form_formaction_hijack",
+                    "form_formaction_javascript_url_execution",
+                    "function_apply_execution",
+                    "function_apply_storage_taint_execution",
+                    "function_constructor_execution",
+                    "function_constructor_storage_taint_execution",
+                    "history_pushstate_open_redirect",
+                    "history_replacestate_route_change",
+                    "href_data_url_execution",
+                    "href_javascript_url_execution",
+                    "iframe_src_data_url_execution",
+                    "iframe_src_javascript_url_execution",
+                    "iframe_src_redirect",
+                    "iframe_srcdoc_xss",
+                    "iframe_srcdoc_xss_secondary_sources",
+                    "image_src_exfiltration",
+                    "location_assign_data_url_execution",
+                    "location_assign_javascript_url_execution",
+                    "location_assign_redirect",
+                    "location_assign_redirect_sources",
+                    "location_href_data_url_execution",
+                    "location_href_javascript_url_execution",
+                    "location_href_redirect",
+                    "location_href_redirect_sources",
+                    "location_replace_data_url_execution",
+                    "location_replace_javascript_url_execution",
+                    "location_replace_redirect",
+                    "location_replace_redirect_sources",
+                    "navigation_api_redirect",
+                    "navigation_api_redirect_sources",
+                    "postmessage_cross_origin_leak",
+                    "postmessage_star_origin_leak",
+                    "prototype_pollution_fetch_init",
+                    "prototype_pollution_write",
+                    "range_contextual_fragment_xss",
+                    "response_dom_contextual_fragment_reachability",
+                    "response_dom_document_write_reachability",
+                    "response_dom_innerhtml_reachability",
+                    "response_dom_insertadjacenthtml_reachability",
+                    "response_dom_mutation_reachability",
+                    "response_dom_outerhtml_reachability",
+                    "response_dom_parser_reachability",
+                    "response_dom_sethtmlunsafe_reachability",
+                    "response_dom_shadow_sethtmlunsafe_reachability",
+                    "route_navigation_api_navigation",
+                    "route_pushstate_navigation",
+                    "route_replacestate_navigation",
+                    "script_src_data_url_execution",
+                    "sendbeacon_exfiltration",
+                    "setinterval_storage_taint_execution",
+                    "setinterval_string_execution",
+                    "settimeout_storage_taint_execution",
+                    "settimeout_string_execution",
+                    "shadowroot_sethtmlunsafe_xss",
+                    "src_data_url_execution",
+                    "src_javascript_url_execution",
+                    "window_open_data_url_execution",
+                    "window_open_javascript_url_execution",
+                    "window_open_redirect",
+                    "window_open_redirect_sources",
+                    "xhr_body_exfiltration",
+                    "xhr_header_exfiltration",
+                    "xhr_url_exfiltration"
+                  ],
+                  "runtimeHealth": {
+                    "state": "normal",
+                    "enabledHookGroups": [
+                      "hook.angularjs",
+                      "hook.code.exec",
+                      "hook.dom.documentWrite",
+                      "hook.dom.formAttributes",
+                      "hook.dom.htmlAssignments",
+                      "hook.dom.htmlParsers",
+                      "hook.dom.inlineEvents",
+                      "hook.dom.mutations",
+                      "hook.dom.urlAttributes",
+                      "hook.nav.redirects",
+                      "hook.net.exfil",
+                      "hook.net.responses",
+                      "hook.postMessage",
+                      "hook.runtime.integrity.fetchInit",
+                      "hook.runtime.integrity.prototypeWrites",
+                      "hook.sanitizers",
+                      "hook.script.loading"
+                    ],
+                    "degradedHookGroups": [],
+                    "globallyDisabledHookGroups": [],
+                    "hookGroupFailures": {},
+                    "modulesLoaded": true,
+                    "modulesSignature": "strategy:SMART|version:1|policy:|name:|modules:iast_dom_xss:dom_inline_event_handler,dom_innerhtml_xss,dom_outerhtml_xss,dom_insertadjacenthtml_xss,document_write_xss,dom_mutation_xss|iast_dangerous_url_scheme_execution:href_javascript_url_execution,href_data_url_execution,src_javascript_url_execution,src_data_url_execution,location_href_javascript_url_execution,location_href_data_url_execution,location_assign_javascript_url_execution,location_assign_data_url_execution,location_replace_javascript_url_execution,location_replace_data_url_execution,window_open_javascript_url_execution,window_open_data_url_execution,iframe_src_javascript_url_execution,iframe_src_data_url_execution,script_src_data_url_execution|iast_js_execution:eval_js_execution,function_constructor_execution,function_apply_execution|iast_open_redirect:window_open_redirect,navigation_api_redirect|iast_angularjs_expression_injection:angularjs_expression_function_constructor,angularjs_parse_from_form,angularjs_parse_from_cookie,angularjs_parse_from_localstorage,angularjs_parse_from_postmessage|iast_postmessage_misuse:postmessage_star_origin_leak,postmessage_cross_origin_leak|iast_timer_js_execution:settimeout_string_execution,setinterval_string_execution|iast_iframe_navigation:iframe_src_redirect,iframe_srcdoc_xss|iast_client_http_exfiltration:fetch_url_exfiltration,fetch_headers_exfiltration,xhr_url_exfiltration,xhr_body_exfiltration,xhr_header_exfiltration,sendbeacon_exfiltration,image_src_exfiltration|iast_dom_link_manipulation:dom_attr_href_navigation,dom_attr_src_navigation,dom_attr_action_navigation,dom_attr_formaction_navigation|iast_dom_url_navigation:location_href_redirect,location_assign_redirect,location_replace_redirect,history_pushstate_open_redirect,history_replacestate_route_change|iast_dom_parser_xss:domparser_parsefromstring_html_xss,range_contextual_fragment_xss,element_sethtmlunsafe_xss,shadowroot_sethtmlunsafe_xss|iast_dom_xss_secondary_sources:dom_innerhtml_xss_secondary_sources,dom_outerhtml_xss_secondary_sources,dom_insertadjacenthtml_xss_secondary_sources,document_write_xss_secondary_sources,dom_inline_event_xss_secondary_sources,dom_mutation_xss_secondary_sources,iframe_srcdoc_xss_secondary_sources|iast_route_controlled_navigation:route_pushstate_navigation,route_replacestate_navigation,route_navigation_api_navigation|iast_form_submission_hijack:form_action_hijack,form_formaction_hijack|iast_dangerous_form_scheme_execution:form_action_javascript_url_execution,form_action_data_url_execution,form_formaction_javascript_url_execution,form_formaction_data_url_execution|iast_response_field_dom_reachability:response_dom_innerhtml_reachability,response_dom_outerhtml_reachability,response_dom_insertadjacenthtml_reachability,response_dom_document_write_reachability,response_dom_mutation_reachability,response_dom_parser_reachability,response_dom_contextual_fragment_reachability,response_dom_sethtmlunsafe_reachability,response_dom_shadow_sethtmlunsafe_reachability|iast_prototype_pollution_impact:prototype_pollution_write,prototype_pollution_fetch_init|iast_storage_taint_to_exec:eval_storage_taint_execution,function_constructor_storage_taint_execution,function_apply_storage_taint_execution,settimeout_storage_taint_execution,setinterval_storage_taint_execution|iast_source_scoped_open_redirect:location_href_redirect_sources,location_assign_redirect_sources,location_replace_redirect_sources,window_open_redirect_sources,navigation_api_redirect_sources,dom_attr_href_redirect_sources,dom_attr_action_redirect_sources",
+                    "pendingFindingReports": 0,
+                    "flushedPendingFindingReports": 0,
+                    "url": "http://127.0.0.1:54548/app",
+                    "agentBootUrl": "http://127.0.0.1:54548/app",
+                    "documentReadyState": "complete",
+                    "agentBootReadyState": "complete",
+                    "agentBootAt": 1792677690749,
+                    "navigationStart": 1792677690639.4,
+                    "agentBootDelayMs": 110,
+                    "agentBootAfterLoad": true,
+                    "updatedAt": 1792677690765,
+                    "error": null
+                  }
+                },
+                "automation": {
+                  "scanStrategy": "SMART",
+                  "agentReadyCount": 2,
+                  "agentFailedCount": 0,
+                  "runtimeHealthCount": 4,
+                  "findingReportsAccepted": 0,
+                  "findingReportsDroppedInactive": 0,
+                  "findingReportsDroppedTabMismatch": 0,
+                  "runtimeSignalsAccepted": 1,
+                  "runtimeSignalsDroppedInactive": 0,
+                  "runtimeSignalsDroppedTabMismatch": 0,
+                  "modulesSentOk": 1,
+                  "modulesSentSkipped": 2,
+                  "modulesSentError": 0,
+                  "expectedTabId": 27157171,
+                  "lastSenderTabId": 27157171,
+                  "lastDroppedReason": null,
+                  "lastModuleSendResult": {
+                    "ok": true,
+                    "skipped": true,
+                    "reason": "already_delivered",
+                    "error": null,
+                    "signature": "strategy:SMART|version:1|policy:|name:|modules:iast_dom_xss:dom_inline_event_handler,dom_innerhtml_xss,dom_outerhtml_xss,dom_insertadjacenthtml_xss,document_write_xss,dom_mutation_xss|iast_dangerous_url_scheme_execution:href_javascript_url_execution,href_data_url_execution,src_javascript_url_execution,src_data_url_execution,location_href_javascript_url_execution,location_href_data_url_execution,location_assign_javascript_url_execution,location_assign_data_url_execution,location_replace_javascript_url_execution,location_replace_data_url_execution,window_open_javascript_url_execution,window_open_data_url_execution,iframe_src_javascript_url_execution,iframe_src_data_url_execution,script_src_data_url_execution|iast_js_execution:eval_js_execution,function_constructor_execution,function_apply_execution|iast_open_redirect:window_open_redirect,navigation_api_redirect|iast_angularjs_expression_injection:angularjs_expression_function_constructor,angularjs_parse_from_form,angularjs_parse_from_cookie,angularjs_parse_from_localstorage,angularjs_parse_from_postmessage|iast_postmessage_misuse:postmessage_star_origin_leak,postmessage_cross_origin_leak|iast_timer_js_execution:settimeout_string_execution,setinterval_string_execution|iast_iframe_navigation:iframe_src_redirect,iframe_srcdoc_xss|iast_client_http_exfiltration:fetch_url_exfiltration,fetch_headers_exfiltration,xhr_url_exfiltration,xhr_body_exfiltration,xhr_header_exfiltration,sendbeacon_exfiltration,image_src_exfiltration|iast_dom_link_manipulation:dom_attr_href_navigation,dom_attr_src_navigation,dom_attr_action_navigation,dom_attr_formaction_navigation|iast_dom_url_navigation:location_href_redirect,location_assign_redirect,location_replace_redirect,history_pushstate_open_redirect,history_replacestate_route_change|iast_dom_parser_xss:domparser_parsefromstring_html_xss,range_contextual_fragment_xss,element_sethtmlunsafe_xss,shadowroot_sethtmlunsafe_xss|iast_dom_xss_secondary_sources:dom_innerhtml_xss_secondary_sources,dom_outerhtml_xss_secondary_sources,dom_insertadjacenthtml_xss_secondary_sources,document_write_xss_secondary_sources,dom_inline_event_xss_secondary_sources,dom_mutation_xss_secondary_sources,iframe_srcdoc_xss_secondary_sources|iast_route_controlled_navigation:route_pushstate_navigation,route_replacestate_navigation,route_navigation_api_navigation|iast_form_submission_hijack:form_action_hijack,form_formaction_hijack|iast_dangerous_form_scheme_execution:form_action_javascript_url_execution,form_action_data_url_execution,form_formaction_javascript_url_execution,form_formaction_data_url_execution|iast_response_field_dom_reachability:response_dom_innerhtml_reachability,response_dom_outerhtml_reachability,response_dom_insertadjacenthtml_reachability,response_dom_document_write_reachability,response_dom_mutation_reachability,response_dom_parser_reachability,response_dom_contextual_fragment_reachability,response_dom_sethtmlunsafe_reachability,response_dom_shadow_sethtmlunsafe_reachability|iast_prototype_pollution_impact:prototype_pollution_write,prototype_pollution_fetch_init|iast_storage_taint_to_exec:eval_storage_taint_execution,function_constructor_storage_taint_execution,function_apply_storage_taint_execution,settimeout_storage_taint_execution,setinterval_storage_taint_execution|iast_source_scoped_open_redirect:location_href_redirect_sources,location_assign_redirect_sources,location_replace_redirect_sources,window_open_redirect_sources,navigation_api_redirect_sources,dom_attr_href_redirect_sources,dom_attr_action_redirect_sources"
+                  },
+                  "lastUpdatedAt": 1792677690776
+                },
+                "noise": {
+                  "findingCount": 0,
+                  "runtimeSignalCount": 1,
+                  "lowConfidenceFindingCount": 0,
+                  "observationFindingCount": 0,
+                  "suppressedFindingCount": 0,
+                  "trustAllowedFindingCount": 0,
+                  "observationRuntimeSignalCount": 1,
+                  "suppressedRuntimeSignalCount": 0,
+                  "trustAllowedRuntimeSignalCount": 1
+                }
+              },
+              "targetUrl": "http://127.0.0.1:54548/app",
+              "certXDocumentCoverage": {
+                "debuggerTargets": 1,
+                "documentInjections": 1,
+                "errors": [],
+                "active": false
+              },
+              "analysis": {
+                "version": "1.7.9",
+                "scanId": "a0250366-8d08-42f0-b786-2b5224155506",
+                "coverage": {
+                  "enginesPresent": [
+                    "IAST"
+                  ],
+                  "enginesMissing": [
+                    "DAST",
+                    "SAST",
+                    "SCA"
+                  ],
+                  "gaps": [],
+                  "limitations": [],
+                  "confidence": "low",
+                  "confidenceScore": 40
+                },
+                "patterns": [
+                  {
+                    "id": "pat_025df2c376590d8072396141",
+                    "ruleCode": "R12_IAST_RUNTIME_SIGNALS",
+                    "title": "IAST data exposure and storage bucket on GET /app",
+                    "type": "IAST_DISCOVERY_BUCKET",
+                    "routeKey": "127.0.0.1:54548|GET|/app",
+                    "paramKey": "response:ok",
+                    "priority": 22,
+                    "signals": {
+                      "source": "iast_bucket_aggregation",
+                      "bucket": "data_exposure_and_storage",
+                      "subtype": "client_data_parsing",
+                      "hits": 1,
+                      "sinkId": "client.json.parse",
+                      "detectionReason": "client_json_parse_observed"
+                    },
+                    "evidenceRefs": [
+                      {
+                        "type": "runtimeEvent",
+                        "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+                        "loc": {
+                          "method": "GET",
+                          "path": "/app",
+                          "route": "127.0.0.1:54548|GET|/app",
+                          "kind": "data_exposure_and_storage",
+                          "param": "ok"
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "candidates": [
+                  {
+                    "id": "cand_4383af81908f4970a2126bbe",
+                    "suppressKey": "sup_6369f628179432c7498cc1f1",
+                    "type": "RUNTIME_ANOMALY",
+                    "title": "Validate client-side data exposure and storage handling on GET /app",
+                    "score": 17,
+                    "confidence": "low",
+                    "confidenceRank": 1,
+                    "routeKey": "127.0.0.1:54548|GET|/app",
+                    "paramKey": "response:ok",
+                    "engineSignals": [
+                      "IAST"
+                    ],
+                    "why": [
+                      {
+                        "signal": "DATA_EXPOSURE_SIGNAL",
+                        "value": "client.json.parse"
+                      },
+                      {
+                        "signal": "IAST_BUCKET",
+                        "value": "data_exposure_and_storage"
+                      },
+                      {
+                        "signal": "IAST_RUNTIME_SIGNAL",
+                        "value": "data_exposure_and_storage"
+                      },
+                      {
+                        "signal": "MISSING_RELEVANT_ENGINE",
+                        "value": "DAST"
+                      }
+                    ],
+                    "evidenceRefs": [
+                      {
+                        "type": "runtimeEvent",
+                        "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+                        "loc": {
+                          "method": "GET",
+                          "path": "/app",
+                          "route": "127.0.0.1:54548|GET|/app",
+                          "kind": "data_exposure_and_storage",
+                          "param": "ok"
+                        }
+                      }
+                    ],
+                    "manualSteps": [
+                      "Inspect the same route and client state for token, secret, or hidden data persistence in storage, cookies, or runtime objects.",
+                      "Trace whether the exposed value influences follow-up requests, auth headers, or client-side decisions.",
+                      "Validate whether the same data is still reachable after reload, logout, or route changes."
+                    ],
+                    "createdByRule": "R12_IAST_RUNTIME_SIGNALS"
+                  }
+                ],
+                "diff": null,
+                "discovery": {
+                  "iastBuckets": [
+                    {
+                      "id": "iastbucket:127.0.0.1:54548|GET|/app|response:ok|data_exposure_and_storage",
+                      "bucket": "data_exposure_and_storage",
+                      "subtype": "client_data_parsing",
+                      "subtypes": [
+                        "client_data_parsing"
+                      ],
+                      "legacyFamilies": [
+                        "client_runtime"
+                      ],
+                      "routeKey": "127.0.0.1:54548|GET|/app",
+                      "paramKey": "response:ok",
+                      "priority": 22,
+                      "severity": "info",
+                      "hits": 1,
+                      "sinkId": "client.json.parse",
+                      "sourceKinds": [
+                        "apiresponsefield"
+                      ],
+                      "dataKinds": [],
+                      "trustLevels": [
+                        "same_origin"
+                      ],
+                      "trustDecisions": [
+                        "allow"
+                      ],
+                      "crossOrigin": false,
+                      "routeControlled": false,
+                      "sanitizedCount": 0,
+                      "sanitizerIds": [],
+                      "thirdParty": false,
+                      "authLike": false,
+                      "corroboratingEngines": [
+                        "IAST"
+                      ],
+                      "candidateType": "RUNTIME_ANOMALY",
+                      "evidenceRefs": [
+                        {
+                          "type": "runtimeEvent",
+                          "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+                          "loc": {
+                            "method": "GET",
+                            "path": "/app",
+                            "route": "127.0.0.1:54548|GET|/app",
+                            "kind": "data_exposure_and_storage",
+                            "param": "ok"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "attackMap": {
+                  "items": [
+                    {
+                      "id": "iastbucket:127.0.0.1:54548|GET|/app|response:ok|data_exposure_and_storage",
+                      "source": "iast_bucket",
+                      "title": "data_exposure_and_storage on /app",
+                      "itemType": "data_exposure_and_storage",
+                      "routeKey": "127.0.0.1:54548|GET|/app",
+                      "path": "/app",
+                      "paramKey": "response:ok",
+                      "priority": 22,
+                      "suggestedChecks": [
+                        "manual_review"
+                      ],
+                      "evidenceRefs": [
+                        {
+                          "type": "runtimeEvent",
+                          "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+                          "loc": {
+                            "method": "GET",
+                            "path": "/app",
+                            "route": "127.0.0.1:54548|GET|/app",
+                            "kind": "data_exposure_and_storage",
+                            "param": "ok"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "pat_025df2c376590d8072396141",
+                      "source": "pattern",
+                      "title": "IAST data exposure and storage bucket on GET /app",
+                      "itemType": "IAST_DISCOVERY_BUCKET",
+                      "routeKey": "127.0.0.1:54548|GET|/app",
+                      "path": "/app",
+                      "paramKey": "response:ok",
+                      "priority": 22,
+                      "suggestedChecks": [
+                        "manual_review"
+                      ],
+                      "evidenceRefs": [
+                        {
+                          "type": "runtimeEvent",
+                          "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+                          "loc": {
+                            "method": "GET",
+                            "path": "/app",
+                            "route": "127.0.0.1:54548|GET|/app",
+                            "kind": "data_exposure_and_storage",
+                            "param": "ok"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "cand_4383af81908f4970a2126bbe",
+                      "source": "candidate",
+                      "title": "Validate client-side data exposure and storage handling on GET /app",
+                      "itemType": "RUNTIME_ANOMALY",
+                      "routeKey": "127.0.0.1:54548|GET|/app",
+                      "path": "/app",
+                      "paramKey": "response:ok",
+                      "priority": 17,
+                      "suggestedChecks": [
+                        "manual_review"
+                      ],
+                      "evidenceRefs": [
+                        {
+                          "type": "runtimeEvent",
+                          "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+                          "loc": {
+                            "method": "GET",
+                            "path": "/app",
+                            "route": "127.0.0.1:54548|GET|/app",
+                            "kind": "data_exposure_and_storage",
+                            "param": "ok"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "total": 3
+                },
+                "objectInventory": {
+                  "identifiers": [],
+                  "total": 0
+                },
+                "opportunities": [
+                  {
+                    "id": "iastbucket:127.0.0.1:54548|GET|/app|response:ok|data_exposure_and_storage",
+                    "source": "iast_bucket",
+                    "title": "Runtime opportunity on /app",
+                    "type": "RUNTIME_ANOMALY",
+                    "routeKey": "127.0.0.1:54548|GET|/app",
+                    "path": "/app",
+                    "paramKey": "response:ok",
+                    "priority": 22,
+                    "confidence": "low",
+                    "confidenceRank": 1,
+                    "suggestedChecks": [
+                      "manual_review"
+                    ],
+                    "evidenceRefs": [
+                      {
+                        "type": "runtimeEvent",
+                        "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+                        "loc": {
+                          "method": "GET",
+                          "path": "/app",
+                          "route": "127.0.0.1:54548|GET|/app",
+                          "kind": "data_exposure_and_storage",
+                          "param": "ok"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "id": "cand_4383af81908f4970a2126bbe",
+                    "source": "candidate",
+                    "title": "Validate client-side data exposure and storage handling on GET /app",
+                    "type": "RUNTIME_ANOMALY",
+                    "routeKey": "127.0.0.1:54548|GET|/app",
+                    "path": "/app",
+                    "paramKey": "response:ok",
+                    "priority": 17,
+                    "confidence": "low",
+                    "confidenceRank": 1,
+                    "suggestedChecks": [
+                      "manual_review"
+                    ],
+                    "evidenceRefs": [
+                      {
+                        "type": "runtimeEvent",
+                        "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+                        "loc": {
+                          "method": "GET",
+                          "path": "/app",
+                          "route": "127.0.0.1:54548|GET|/app",
+                          "kind": "data_exposure_and_storage",
+                          "param": "ok"
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "recommendations": [],
+                "explorer": {
+                  "summary": {
+                    "routeCount": 3,
+                    "endpointCount": 2,
+                    "graphqlCount": 0,
+                    "hiddenParamCount": 0,
+                    "surfaceCount": 0,
+                    "gadgetCount": 0,
+                    "enginesPresent": [
+                      "IAST"
+                    ]
+                  },
+                  "routes": [
+                    {
+                      "id": "runtime:127.0.0.1:54548|GET|/app",
+                      "routeKey": "127.0.0.1:54548|GET|/app",
+                      "path": "/app",
+                      "routeType": "runtime",
+                      "enginesPresent": [
+                        "IAST"
+                      ],
+                      "sources": [
+                        "runtime_event"
+                      ],
+                      "authHints": [],
+                      "protocolHints": [],
+                      "environmentHints": [],
+                      "frameworks": [],
+                      "sourceKinds": [
+                        "apiResponseField"
+                      ],
+                      "hintNames": [],
+                      "pageUrls": [
+                        "/app"
+                      ],
+                      "adminLike": false,
+                      "evidenceRefs": [
+                        {
+                          "type": "runtimeEvent",
+                          "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+                          "loc": {
+                            "method": "GET",
+                            "route": "127.0.0.1:54548|GET|/app"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "runtime:127.0.0.1:54549|GET|/http/allowed",
+                      "routeKey": "127.0.0.1:54549|GET|/http/allowed",
+                      "path": "/http/allowed",
+                      "routeType": "runtime",
+                      "enginesPresent": [
+                        "IAST"
+                      ],
+                      "sources": [
+                        "request"
+                      ],
+                      "authHints": [],
+                      "protocolHints": [],
+                      "environmentHints": [],
+                      "frameworks": [],
+                      "sourceKinds": [],
+                      "hintNames": [],
+                      "pageUrls": [
+                        "http://127.0.0.1:54549/http/allowed"
+                      ],
+                      "adminLike": false,
+                      "evidenceRefs": [
+                        {
+                          "type": "request",
+                          "id": "GET http://127.0.0.1:54549/http/allowed",
+                          "loc": {
+                            "method": "GET",
+                            "route": "127.0.0.1:54549|GET|/http/allowed"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "runtime:127.0.0.1:54548|GET|/http/primary",
+                      "routeKey": "127.0.0.1:54548|GET|/http/primary",
+                      "path": "/http/primary",
+                      "routeType": "runtime",
+                      "enginesPresent": [
+                        "IAST"
+                      ],
+                      "sources": [
+                        "request"
+                      ],
+                      "authHints": [],
+                      "protocolHints": [],
+                      "environmentHints": [],
+                      "frameworks": [],
+                      "sourceKinds": [],
+                      "hintNames": [],
+                      "pageUrls": [
+                        "http://127.0.0.1:54548/http/primary"
+                      ],
+                      "adminLike": false,
+                      "evidenceRefs": [
+                        {
+                          "type": "request",
+                          "id": "GET http://127.0.0.1:54548/http/primary",
+                          "loc": {
+                            "method": "GET",
+                            "route": "127.0.0.1:54548|GET|/http/primary"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "endpoints": [
+                    {
+                      "id": "endpoint:127.0.0.1:54549|GET|/http/allowed",
+                      "routeKey": "127.0.0.1:54549|GET|/http/allowed",
+                      "method": "GET",
+                      "path": "/http/allowed",
+                      "url": "http://127.0.0.1:54549/http/allowed",
+                      "enginesPresent": [
+                        "IAST"
+                      ],
+                      "sources": [
+                        "request"
+                      ],
+                      "transports": [
+                        "devtools-http-response"
+                      ],
+                      "authHints": [],
+                      "contentTypes": [],
+                      "paramNames": [],
+                      "bodyKeys": [],
+                      "headerNames": [],
+                      "discoveryTags": [],
+                      "environmentHints": [],
+                      "pageUrls": [],
+                      "adminLike": false,
+                      "evidenceRefs": [
+                        {
+                          "type": "request",
+                          "id": "GET http://127.0.0.1:54549/http/allowed",
+                          "loc": {
+                            "method": "GET",
+                            "route": "127.0.0.1:54549|GET|/http/allowed"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "endpoint:127.0.0.1:54548|GET|/http/primary",
+                      "routeKey": "127.0.0.1:54548|GET|/http/primary",
+                      "method": "GET",
+                      "path": "/http/primary",
+                      "url": "http://127.0.0.1:54548/http/primary",
+                      "enginesPresent": [
+                        "IAST"
+                      ],
+                      "sources": [
+                        "request"
+                      ],
+                      "transports": [
+                        "devtools-http-response"
+                      ],
+                      "authHints": [],
+                      "contentTypes": [],
+                      "paramNames": [],
+                      "bodyKeys": [],
+                      "headerNames": [],
+                      "discoveryTags": [],
+                      "environmentHints": [],
+                      "pageUrls": [],
+                      "adminLike": false,
+                      "evidenceRefs": [
+                        {
+                          "type": "request",
+                          "id": "GET http://127.0.0.1:54548/http/primary",
+                          "loc": {
+                            "method": "GET",
+                            "route": "127.0.0.1:54548|GET|/http/primary"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "graphql": [],
+                  "hiddenParams": [],
+                  "surfaces": [],
+                  "gadgets": []
+                },
+                "schemaValidation": {
+                  "ok": true,
+                  "schema": "ptk-scan-analysis-v1",
+                  "reason": null,
+                  "explorer": {
+                    "ok": true,
+                    "buckets": {
+                      "routes": 3,
+                      "endpoints": 2,
+                      "graphql": 0,
+                      "hiddenParams": 0,
+                      "surfaces": 0,
+                      "gadgets": 0
+                    }
+                  },
+                  "recommendations": {
+                    "count": 0
+                  },
+                  "errorCount": 0,
+                  "errors": []
+                }
+              },
+              "analysisVersion": "1.7.9",
+              "scanConfiguration": {
+                "iastScanStrategy": "SMART",
+                "iastRulepackSource": "local",
+                "iastPolicyName": null,
+                "iastPackStatus": "active",
+                "iastPackError": null
+              },
+              "meta": {
+                "privacy": {
+                  "secretsIncluded": false,
+                  "exportMode": "evidence",
+                  "redactionEnforced": true
+                },
+                "automation": {
+                  "sessionId": "ptk-session_cbfee5f9-0efa-4a08-a2bc-0dc1bf4781d0",
+                  "testRunId": null,
+                  "project": null,
+                  "policyCode": "SMART",
+                  "startedAt": "2026-10-22T14:01:30.714Z",
+                  "finishedAt": "2026-10-22T14:01:31.917Z",
+                  "durationMs": 1203,
+                  "ptkVersion": "10.0.0",
+                  "schemaVersion": 1
+                }
+              }
+            },
+            "truncated": false
+          }
+        ],
+        "supplemental": {
+          "backends": {},
+          "gaps": []
+        }
+      },
+      "evidence": {
+        "findings": [],
+        "nativeFindings": {
+          "sessionId": "ptk-session_cbfee5f9-0efa-4a08-a2bc-0dc1bf4781d0",
+          "findings": [],
+          "total": 0,
+          "nextOffset": null,
+          "truncated": false,
+          "iastDocuments": {
+            "debuggerTargets": 1,
+            "documentInjections": 1,
+            "errors": [],
+            "active": false
+          }
+        },
+        "truncated": false,
+        "capturedAt": 1792677691920
+      }
+    },
+    "warnings": []
+  },
+  "scan": {
+    "version": "1.0",
+    "type": "scan_result",
+    "engine": "IAST",
+    "scanId": "a0250366-8d08-42f0-b786-2b5224155506",
+    "host": "127.0.0.1:54548",
+    "tabId": null,
+    "startedAt": "2026-10-22T14:01:30.722Z",
+    "finishedAt": "2026-10-22T14:01:31.913Z",
+    "settings": {
+      "iastScanStrategy": "SMART",
+      "iastRulepackSource": "local",
+      "iastPolicyName": null,
+      "iastPackStatus": "active",
+      "iastPackError": null
+    },
+    "toolVersion": "1.0.0",
+    "stats": {
+      "findingsCount": 0,
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "info": 0
+    },
+    "findings": [],
+    "groups": [],
+    "codeArtifacts": {
+      "sast": {
+        "version": 2,
+        "routes": [],
+        "endpoints": [],
+        "graphql": [],
+        "surfaces": [],
+        "hiddenParams": [],
+        "gadgets": []
+      }
+    },
+    "items": [],
+    "policyId": null,
+    "httpEvents": [
+      {
+        "type": "devtools-http-request",
+        "time": 1792677690773,
+        "requestId": "11712.3",
+        "url": "http://127.0.0.1:54548/http/primary",
+        "method": "GET",
+        "tabId": 27157171,
+        "host": "127.0.0.1:54548"
+      },
+      {
+        "type": "http",
+        "time": 1792677690774,
+        "requestId": "143",
+        "url": "http://127.0.0.1:54548/http/primary",
+        "method": "GET",
+        "status": 200,
+        "ip": "127.0.0.1",
+        "fromCache": false,
+        "tabId": 27157171,
+        "host": "127.0.0.1:54548"
+      },
+      {
+        "type": "devtools-http-response",
+        "time": 1792677690774,
+        "requestId": "11712.3",
+        "url": "http://127.0.0.1:54548/http/primary",
+        "method": "GET",
+        "status": 200,
+        "mimeType": "application/json",
+        "tabId": 27157171,
+        "host": "127.0.0.1:54548"
+      },
+      {
+        "type": "devtools-http-request",
+        "time": 1792677690775,
+        "requestId": "11712.4",
+        "url": "http://127.0.0.1:54549/http/allowed",
+        "method": "GET",
+        "tabId": 27157171,
+        "host": "127.0.0.1:54549"
+      },
+      {
+        "type": "http",
+        "time": 1792677690786,
+        "requestId": "144",
+        "url": "http://127.0.0.1:54549/http/allowed",
+        "method": "GET",
+        "status": 200,
+        "ip": "127.0.0.1",
+        "fromCache": false,
+        "tabId": 27157171,
+        "host": "127.0.0.1:54549"
+      },
+      {
+        "type": "devtools-http-response",
+        "time": 1792677690787,
+        "requestId": "11712.4",
+        "url": "http://127.0.0.1:54549/http/allowed",
+        "method": "GET",
+        "status": 200,
+        "mimeType": "application/json",
+        "tabId": 27157171,
+        "host": "127.0.0.1:54549"
+      }
+    ],
+    "runtimeEvents": [
+      {
+        "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+        "eventKey": "client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+        "engine": "IAST",
+        "kind": "iast_runtime_signal",
+        "signalFamily": "client_runtime",
+        "signalCode": "client_json_parse_observed",
+        "category": null,
+        "severity": "info",
+        "confidence": 55,
+        "findingId": null,
+        "findingFingerprint": null,
+        "requestId": null,
+        "requestKey": null,
+        "moduleId": null,
+        "ruleId": null,
+        "sinkId": "client.json.parse",
+        "sourceKind": "apiResponseField",
+        "sourceKey": "response:json:ok",
+        "sourceRole": "observed",
+        "primaryClass": "observation",
+        "detection": {
+          "reason": "client_json_parse_observed",
+          "dataKind": "unknown",
+          "confidence": 55,
+          "details": {
+            "valuePreview": "true"
+          }
+        },
+        "trust": {
+          "level": "same_origin",
+          "decision": "allow"
+        },
+        "suppression": null,
+        "sanitizers": [],
+        "confidenceSignals": [],
+        "url": "http://127.0.0.1:54548/app",
+        "route": "/app",
+        "method": "GET",
+        "location": {
+          "url": "http://127.0.0.1:54548/app",
+          "method": "GET",
+          "route": "/app"
+        },
+        "routing": {
+          "runtimeUrl": "http://127.0.0.1:54548/app",
+          "pathname": "/app",
+          "clientRoute": "/app",
+          "route": "/app",
+          "urlPattern": "http://127.0.0.1:54548/app"
+        },
+        "headerName": null,
+        "storageKey": null,
+        "cookieName": null,
+        "attribute": null,
+        "isCrossOrigin": null,
+        "observedAt": null,
+        "sinkContext": {
+          "requestUrl": null,
+          "method": "GET",
+          "headerName": null,
+          "destUrl": null,
+          "destHost": null,
+          "destOrigin": null,
+          "isCrossOrigin": null,
+          "cookieName": null,
+          "storageKey": null,
+          "storageArea": null
+        },
+        "sourceValuePreview": "true",
+        "time": 1792677690775,
+        "evidenceRefs": []
+      }
+    ],
+    "requests": [
+      {
+        "key": "GET http://127.0.0.1:54548/http/primary",
+        "method": "GET",
+        "url": "http://127.0.0.1:54548/http/primary",
+        "displayUrl": "http://127.0.0.1:54548/http/primary",
+        "status": 200,
+        "host": "127.0.0.1:54548",
+        "type": "devtools-http-response",
+        "mimeType": null,
+        "lastSeen": 1792677690774
+      },
+      {
+        "key": "GET http://127.0.0.1:54549/http/allowed",
+        "method": "GET",
+        "url": "http://127.0.0.1:54549/http/allowed",
+        "displayUrl": "http://127.0.0.1:54549/http/allowed",
+        "status": 200,
+        "host": "127.0.0.1:54549",
+        "type": "devtools-http-response",
+        "mimeType": null,
+        "lastSeen": 1792677690787
+      }
+    ],
+    "pages": [],
+    "files": [],
+    "iastTelemetry": {
+      "activation": {
+        "packStatus": "active",
+        "activeModuleCount": 20,
+        "activeRuleCount": 96,
+        "activeHookGroups": [
+          "hook.angularjs",
+          "hook.code.exec",
+          "hook.dom.documentWrite",
+          "hook.dom.formAttributes",
+          "hook.dom.htmlAssignments",
+          "hook.dom.htmlParsers",
+          "hook.dom.inlineEvents",
+          "hook.dom.mutations",
+          "hook.dom.urlAttributes",
+          "hook.nav.redirects",
+          "hook.net.exfil",
+          "hook.net.responses",
+          "hook.postMessage",
+          "hook.runtime.integrity.fetchInit",
+          "hook.runtime.integrity.prototypeWrites",
+          "hook.sanitizers",
+          "hook.script.loading"
+        ],
+        "freeSafeHookGroups": [
+          "hook.angularjs",
+          "hook.code.exec",
+          "hook.dom.documentWrite",
+          "hook.dom.formAttributes",
+          "hook.dom.htmlAssignments",
+          "hook.dom.inlineEvents",
+          "hook.dom.mutations",
+          "hook.dom.urlAttributes",
+          "hook.nav.redirects",
+          "hook.net.responses",
+          "hook.postMessage",
+          "hook.runtime.integrity.fetchInit",
+          "hook.script.loading"
+        ],
+        "policyOnlyHookGroups": [
+          "hook.dom.htmlParsers",
+          "hook.net.exfil",
+          "hook.runtime.integrity.prototypeWrites",
+          "hook.sanitizers"
+        ],
+        "supportHookGroups": [],
+        "hookRuleCounts": {
+          "hook.angularjs": 4,
+          "hook.code.exec": 11,
+          "hook.dom.documentWrite": 3,
+          "hook.dom.formAttributes": 9,
+          "hook.dom.htmlAssignments": 11,
+          "hook.dom.htmlParsers": 8,
+          "hook.dom.inlineEvents": 2,
+          "hook.dom.mutations": 3,
+          "hook.dom.urlAttributes": 14,
+          "hook.nav.redirects": 23,
+          "hook.net.exfil": 7,
+          "hook.net.responses": 0,
+          "hook.postMessage": 2,
+          "hook.runtime.integrity.fetchInit": 1,
+          "hook.runtime.integrity.prototypeWrites": 1,
+          "hook.sanitizers": 0,
+          "hook.script.loading": 1
+        },
+        "rulepackSource": "local",
+        "policyId": null,
+        "policyName": null,
+        "moduleIds": [
+          "iast_angularjs_expression_injection",
+          "iast_client_http_exfiltration",
+          "iast_dangerous_form_scheme_execution",
+          "iast_dangerous_url_scheme_execution",
+          "iast_dom_link_manipulation",
+          "iast_dom_parser_xss",
+          "iast_dom_url_navigation",
+          "iast_dom_xss",
+          "iast_dom_xss_secondary_sources",
+          "iast_form_submission_hijack",
+          "iast_iframe_navigation",
+          "iast_js_execution",
+          "iast_open_redirect",
+          "iast_postmessage_misuse",
+          "iast_prototype_pollution_impact",
+          "iast_response_field_dom_reachability",
+          "iast_route_controlled_navigation",
+          "iast_source_scoped_open_redirect",
+          "iast_storage_taint_to_exec",
+          "iast_timer_js_execution"
+        ],
+        "ruleIds": [
+          "angularjs_expression_function_constructor",
+          "angularjs_parse_from_cookie",
+          "angularjs_parse_from_form",
+          "angularjs_parse_from_localstorage",
+          "angularjs_parse_from_postmessage",
+          "document_write_xss",
+          "document_write_xss_secondary_sources",
+          "dom_attr_action_navigation",
+          "dom_attr_action_redirect_sources",
+          "dom_attr_formaction_navigation",
+          "dom_attr_href_navigation",
+          "dom_attr_href_redirect_sources",
+          "dom_attr_src_navigation",
+          "dom_inline_event_handler",
+          "dom_inline_event_xss_secondary_sources",
+          "dom_innerhtml_xss",
+          "dom_innerhtml_xss_secondary_sources",
+          "dom_insertadjacenthtml_xss",
+          "dom_insertadjacenthtml_xss_secondary_sources",
+          "dom_mutation_xss",
+          "dom_mutation_xss_secondary_sources",
+          "dom_outerhtml_xss",
+          "dom_outerhtml_xss_secondary_sources",
+          "domparser_parsefromstring_html_xss",
+          "element_sethtmlunsafe_xss",
+          "eval_js_execution",
+          "eval_storage_taint_execution",
+          "fetch_headers_exfiltration",
+          "fetch_url_exfiltration",
+          "form_action_data_url_execution",
+          "form_action_hijack",
+          "form_action_javascript_url_execution",
+          "form_formaction_data_url_execution",
+          "form_formaction_hijack",
+          "form_formaction_javascript_url_execution",
+          "function_apply_execution",
+          "function_apply_storage_taint_execution",
+          "function_constructor_execution",
+          "function_constructor_storage_taint_execution",
+          "history_pushstate_open_redirect",
+          "history_replacestate_route_change",
+          "href_data_url_execution",
+          "href_javascript_url_execution",
+          "iframe_src_data_url_execution",
+          "iframe_src_javascript_url_execution",
+          "iframe_src_redirect",
+          "iframe_srcdoc_xss",
+          "iframe_srcdoc_xss_secondary_sources",
+          "image_src_exfiltration",
+          "location_assign_data_url_execution",
+          "location_assign_javascript_url_execution",
+          "location_assign_redirect",
+          "location_assign_redirect_sources",
+          "location_href_data_url_execution",
+          "location_href_javascript_url_execution",
+          "location_href_redirect",
+          "location_href_redirect_sources",
+          "location_replace_data_url_execution",
+          "location_replace_javascript_url_execution",
+          "location_replace_redirect",
+          "location_replace_redirect_sources",
+          "navigation_api_redirect",
+          "navigation_api_redirect_sources",
+          "postmessage_cross_origin_leak",
+          "postmessage_star_origin_leak",
+          "prototype_pollution_fetch_init",
+          "prototype_pollution_write",
+          "range_contextual_fragment_xss",
+          "response_dom_contextual_fragment_reachability",
+          "response_dom_document_write_reachability",
+          "response_dom_innerhtml_reachability",
+          "response_dom_insertadjacenthtml_reachability",
+          "response_dom_mutation_reachability",
+          "response_dom_outerhtml_reachability",
+          "response_dom_parser_reachability",
+          "response_dom_sethtmlunsafe_reachability",
+          "response_dom_shadow_sethtmlunsafe_reachability",
+          "route_navigation_api_navigation",
+          "route_pushstate_navigation",
+          "route_replacestate_navigation",
+          "script_src_data_url_execution",
+          "sendbeacon_exfiltration",
+          "setinterval_storage_taint_execution",
+          "setinterval_string_execution",
+          "settimeout_storage_taint_execution",
+          "settimeout_string_execution",
+          "shadowroot_sethtmlunsafe_xss",
+          "src_data_url_execution",
+          "src_javascript_url_execution",
+          "window_open_data_url_execution",
+          "window_open_javascript_url_execution",
+          "window_open_redirect",
+          "window_open_redirect_sources",
+          "xhr_body_exfiltration",
+          "xhr_header_exfiltration",
+          "xhr_url_exfiltration"
+        ],
+        "runtimeHealth": {
+          "state": "normal",
+          "enabledHookGroups": [
+            "hook.angularjs",
+            "hook.code.exec",
+            "hook.dom.documentWrite",
+            "hook.dom.formAttributes",
+            "hook.dom.htmlAssignments",
+            "hook.dom.htmlParsers",
+            "hook.dom.inlineEvents",
+            "hook.dom.mutations",
+            "hook.dom.urlAttributes",
+            "hook.nav.redirects",
+            "hook.net.exfil",
+            "hook.net.responses",
+            "hook.postMessage",
+            "hook.runtime.integrity.fetchInit",
+            "hook.runtime.integrity.prototypeWrites",
+            "hook.sanitizers",
+            "hook.script.loading"
+          ],
+          "degradedHookGroups": [],
+          "globallyDisabledHookGroups": [],
+          "hookGroupFailures": {},
+          "modulesLoaded": true,
+          "modulesSignature": "strategy:SMART|version:1|policy:|name:|modules:iast_dom_xss:dom_inline_event_handler,dom_innerhtml_xss,dom_outerhtml_xss,dom_insertadjacenthtml_xss,document_write_xss,dom_mutation_xss|iast_dangerous_url_scheme_execution:href_javascript_url_execution,href_data_url_execution,src_javascript_url_execution,src_data_url_execution,location_href_javascript_url_execution,location_href_data_url_execution,location_assign_javascript_url_execution,location_assign_data_url_execution,location_replace_javascript_url_execution,location_replace_data_url_execution,window_open_javascript_url_execution,window_open_data_url_execution,iframe_src_javascript_url_execution,iframe_src_data_url_execution,script_src_data_url_execution|iast_js_execution:eval_js_execution,function_constructor_execution,function_apply_execution|iast_open_redirect:window_open_redirect,navigation_api_redirect|iast_angularjs_expression_injection:angularjs_expression_function_constructor,angularjs_parse_from_form,angularjs_parse_from_cookie,angularjs_parse_from_localstorage,angularjs_parse_from_postmessage|iast_postmessage_misuse:postmessage_star_origin_leak,postmessage_cross_origin_leak|iast_timer_js_execution:settimeout_string_execution,setinterval_string_execution|iast_iframe_navigation:iframe_src_redirect,iframe_srcdoc_xss|iast_client_http_exfiltration:fetch_url_exfiltration,fetch_headers_exfiltration,xhr_url_exfiltration,xhr_body_exfiltration,xhr_header_exfiltration,sendbeacon_exfiltration,image_src_exfiltration|iast_dom_link_manipulation:dom_attr_href_navigation,dom_attr_src_navigation,dom_attr_action_navigation,dom_attr_formaction_navigation|iast_dom_url_navigation:location_href_redirect,location_assign_redirect,location_replace_redirect,history_pushstate_open_redirect,history_replacestate_route_change|iast_dom_parser_xss:domparser_parsefromstring_html_xss,range_contextual_fragment_xss,element_sethtmlunsafe_xss,shadowroot_sethtmlunsafe_xss|iast_dom_xss_secondary_sources:dom_innerhtml_xss_secondary_sources,dom_outerhtml_xss_secondary_sources,dom_insertadjacenthtml_xss_secondary_sources,document_write_xss_secondary_sources,dom_inline_event_xss_secondary_sources,dom_mutation_xss_secondary_sources,iframe_srcdoc_xss_secondary_sources|iast_route_controlled_navigation:route_pushstate_navigation,route_replacestate_navigation,route_navigation_api_navigation|iast_form_submission_hijack:form_action_hijack,form_formaction_hijack|iast_dangerous_form_scheme_execution:form_action_javascript_url_execution,form_action_data_url_execution,form_formaction_javascript_url_execution,form_formaction_data_url_execution|iast_response_field_dom_reachability:response_dom_innerhtml_reachability,response_dom_outerhtml_reachability,response_dom_insertadjacenthtml_reachability,response_dom_document_write_reachability,response_dom_mutation_reachability,response_dom_parser_reachability,response_dom_contextual_fragment_reachability,response_dom_sethtmlunsafe_reachability,response_dom_shadow_sethtmlunsafe_reachability|iast_prototype_pollution_impact:prototype_pollution_write,prototype_pollution_fetch_init|iast_storage_taint_to_exec:eval_storage_taint_execution,function_constructor_storage_taint_execution,function_apply_storage_taint_execution,settimeout_storage_taint_execution,setinterval_storage_taint_execution|iast_source_scoped_open_redirect:location_href_redirect_sources,location_assign_redirect_sources,location_replace_redirect_sources,window_open_redirect_sources,navigation_api_redirect_sources,dom_attr_href_redirect_sources,dom_attr_action_redirect_sources",
+          "pendingFindingReports": 0,
+          "flushedPendingFindingReports": 0,
+          "url": "http://127.0.0.1:54548/app",
+          "agentBootUrl": "http://127.0.0.1:54548/app",
+          "documentReadyState": "complete",
+          "agentBootReadyState": "complete",
+          "agentBootAt": 1792677690749,
+          "navigationStart": 1792677690639.4,
+          "agentBootDelayMs": 110,
+          "agentBootAfterLoad": true,
+          "updatedAt": 1792677690765,
+          "error": null
+        }
+      },
+      "automation": {
+        "scanStrategy": "SMART",
+        "agentReadyCount": 2,
+        "agentFailedCount": 0,
+        "runtimeHealthCount": 4,
+        "findingReportsAccepted": 0,
+        "findingReportsDroppedInactive": 0,
+        "findingReportsDroppedTabMismatch": 0,
+        "runtimeSignalsAccepted": 1,
+        "runtimeSignalsDroppedInactive": 0,
+        "runtimeSignalsDroppedTabMismatch": 0,
+        "modulesSentOk": 1,
+        "modulesSentSkipped": 2,
+        "modulesSentError": 0,
+        "expectedTabId": 27157171,
+        "lastSenderTabId": 27157171,
+        "lastDroppedReason": null,
+        "lastModuleSendResult": {
+          "ok": true,
+          "skipped": true,
+          "reason": "already_delivered",
+          "error": null,
+          "signature": "strategy:SMART|version:1|policy:|name:|modules:iast_dom_xss:dom_inline_event_handler,dom_innerhtml_xss,dom_outerhtml_xss,dom_insertadjacenthtml_xss,document_write_xss,dom_mutation_xss|iast_dangerous_url_scheme_execution:href_javascript_url_execution,href_data_url_execution,src_javascript_url_execution,src_data_url_execution,location_href_javascript_url_execution,location_href_data_url_execution,location_assign_javascript_url_execution,location_assign_data_url_execution,location_replace_javascript_url_execution,location_replace_data_url_execution,window_open_javascript_url_execution,window_open_data_url_execution,iframe_src_javascript_url_execution,iframe_src_data_url_execution,script_src_data_url_execution|iast_js_execution:eval_js_execution,function_constructor_execution,function_apply_execution|iast_open_redirect:window_open_redirect,navigation_api_redirect|iast_angularjs_expression_injection:angularjs_expression_function_constructor,angularjs_parse_from_form,angularjs_parse_from_cookie,angularjs_parse_from_localstorage,angularjs_parse_from_postmessage|iast_postmessage_misuse:postmessage_star_origin_leak,postmessage_cross_origin_leak|iast_timer_js_execution:settimeout_string_execution,setinterval_string_execution|iast_iframe_navigation:iframe_src_redirect,iframe_srcdoc_xss|iast_client_http_exfiltration:fetch_url_exfiltration,fetch_headers_exfiltration,xhr_url_exfiltration,xhr_body_exfiltration,xhr_header_exfiltration,sendbeacon_exfiltration,image_src_exfiltration|iast_dom_link_manipulation:dom_attr_href_navigation,dom_attr_src_navigation,dom_attr_action_navigation,dom_attr_formaction_navigation|iast_dom_url_navigation:location_href_redirect,location_assign_redirect,location_replace_redirect,history_pushstate_open_redirect,history_replacestate_route_change|iast_dom_parser_xss:domparser_parsefromstring_html_xss,range_contextual_fragment_xss,element_sethtmlunsafe_xss,shadowroot_sethtmlunsafe_xss|iast_dom_xss_secondary_sources:dom_innerhtml_xss_secondary_sources,dom_outerhtml_xss_secondary_sources,dom_insertadjacenthtml_xss_secondary_sources,document_write_xss_secondary_sources,dom_inline_event_xss_secondary_sources,dom_mutation_xss_secondary_sources,iframe_srcdoc_xss_secondary_sources|iast_route_controlled_navigation:route_pushstate_navigation,route_replacestate_navigation,route_navigation_api_navigation|iast_form_submission_hijack:form_action_hijack,form_formaction_hijack|iast_dangerous_form_scheme_execution:form_action_javascript_url_execution,form_action_data_url_execution,form_formaction_javascript_url_execution,form_formaction_data_url_execution|iast_response_field_dom_reachability:response_dom_innerhtml_reachability,response_dom_outerhtml_reachability,response_dom_insertadjacenthtml_reachability,response_dom_document_write_reachability,response_dom_mutation_reachability,response_dom_parser_reachability,response_dom_contextual_fragment_reachability,response_dom_sethtmlunsafe_reachability,response_dom_shadow_sethtmlunsafe_reachability|iast_prototype_pollution_impact:prototype_pollution_write,prototype_pollution_fetch_init|iast_storage_taint_to_exec:eval_storage_taint_execution,function_constructor_storage_taint_execution,function_apply_storage_taint_execution,settimeout_storage_taint_execution,setinterval_storage_taint_execution|iast_source_scoped_open_redirect:location_href_redirect_sources,location_assign_redirect_sources,location_replace_redirect_sources,window_open_redirect_sources,navigation_api_redirect_sources,dom_attr_href_redirect_sources,dom_attr_action_redirect_sources"
+        },
+        "lastUpdatedAt": 1792677690776
+      },
+      "noise": {
+        "findingCount": 0,
+        "runtimeSignalCount": 1,
+        "lowConfidenceFindingCount": 0,
+        "observationFindingCount": 0,
+        "suppressedFindingCount": 0,
+        "trustAllowedFindingCount": 0,
+        "observationRuntimeSignalCount": 1,
+        "suppressedRuntimeSignalCount": 0,
+        "trustAllowedRuntimeSignalCount": 1
+      }
+    },
+    "targetUrl": "http://127.0.0.1:54548/app",
+    "certXDocumentCoverage": {
+      "debuggerTargets": 1,
+      "documentInjections": 1,
+      "errors": [],
+      "active": false
+    },
+    "analysis": {
+      "version": "1.7.9",
+      "scanId": "a0250366-8d08-42f0-b786-2b5224155506",
+      "coverage": {
+        "enginesPresent": [
+          "IAST"
+        ],
+        "enginesMissing": [
+          "DAST",
+          "SAST",
+          "SCA"
+        ],
+        "gaps": [],
+        "limitations": [],
+        "confidence": "low",
+        "confidenceScore": 40
+      },
+      "patterns": [
+        {
+          "id": "pat_025df2c376590d8072396141",
+          "ruleCode": "R12_IAST_RUNTIME_SIGNALS",
+          "title": "IAST data exposure and storage bucket on GET /app",
+          "type": "IAST_DISCOVERY_BUCKET",
+          "routeKey": "127.0.0.1:54548|GET|/app",
+          "paramKey": "response:ok",
+          "priority": 22,
+          "signals": {
+            "source": "iast_bucket_aggregation",
+            "bucket": "data_exposure_and_storage",
+            "subtype": "client_data_parsing",
+            "hits": 1,
+            "sinkId": "client.json.parse",
+            "detectionReason": "client_json_parse_observed"
+          },
+          "evidenceRefs": [
+            {
+              "type": "runtimeEvent",
+              "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+              "loc": {
+                "method": "GET",
+                "path": "/app",
+                "route": "127.0.0.1:54548|GET|/app",
+                "kind": "data_exposure_and_storage",
+                "param": "ok"
+              }
+            }
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "cand_4383af81908f4970a2126bbe",
+          "suppressKey": "sup_6369f628179432c7498cc1f1",
+          "type": "RUNTIME_ANOMALY",
+          "title": "Validate client-side data exposure and storage handling on GET /app",
+          "score": 17,
+          "confidence": "low",
+          "confidenceRank": 1,
+          "routeKey": "127.0.0.1:54548|GET|/app",
+          "paramKey": "response:ok",
+          "engineSignals": [
+            "IAST"
+          ],
+          "why": [
+            {
+              "signal": "DATA_EXPOSURE_SIGNAL",
+              "value": "client.json.parse"
+            },
+            {
+              "signal": "IAST_BUCKET",
+              "value": "data_exposure_and_storage"
+            },
+            {
+              "signal": "IAST_RUNTIME_SIGNAL",
+              "value": "data_exposure_and_storage"
+            },
+            {
+              "signal": "MISSING_RELEVANT_ENGINE",
+              "value": "DAST"
+            }
+          ],
+          "evidenceRefs": [
+            {
+              "type": "runtimeEvent",
+              "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+              "loc": {
+                "method": "GET",
+                "path": "/app",
+                "route": "127.0.0.1:54548|GET|/app",
+                "kind": "data_exposure_and_storage",
+                "param": "ok"
+              }
+            }
+          ],
+          "manualSteps": [
+            "Inspect the same route and client state for token, secret, or hidden data persistence in storage, cookies, or runtime objects.",
+            "Trace whether the exposed value influences follow-up requests, auth headers, or client-side decisions.",
+            "Validate whether the same data is still reachable after reload, logout, or route changes."
+          ],
+          "createdByRule": "R12_IAST_RUNTIME_SIGNALS"
+        }
+      ],
+      "diff": null,
+      "discovery": {
+        "iastBuckets": [
+          {
+            "id": "iastbucket:127.0.0.1:54548|GET|/app|response:ok|data_exposure_and_storage",
+            "bucket": "data_exposure_and_storage",
+            "subtype": "client_data_parsing",
+            "subtypes": [
+              "client_data_parsing"
+            ],
+            "legacyFamilies": [
+              "client_runtime"
+            ],
+            "routeKey": "127.0.0.1:54548|GET|/app",
+            "paramKey": "response:ok",
+            "priority": 22,
+            "severity": "info",
+            "hits": 1,
+            "sinkId": "client.json.parse",
+            "sourceKinds": [
+              "apiresponsefield"
+            ],
+            "dataKinds": [],
+            "trustLevels": [
+              "same_origin"
+            ],
+            "trustDecisions": [
+              "allow"
+            ],
+            "crossOrigin": false,
+            "routeControlled": false,
+            "sanitizedCount": 0,
+            "sanitizerIds": [],
+            "thirdParty": false,
+            "authLike": false,
+            "corroboratingEngines": [
+              "IAST"
+            ],
+            "candidateType": "RUNTIME_ANOMALY",
+            "evidenceRefs": [
+              {
+                "type": "runtimeEvent",
+                "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+                "loc": {
+                  "method": "GET",
+                  "path": "/app",
+                  "route": "127.0.0.1:54548|GET|/app",
+                  "kind": "data_exposure_and_storage",
+                  "param": "ok"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "attackMap": {
+        "items": [
+          {
+            "id": "iastbucket:127.0.0.1:54548|GET|/app|response:ok|data_exposure_and_storage",
+            "source": "iast_bucket",
+            "title": "data_exposure_and_storage on /app",
+            "itemType": "data_exposure_and_storage",
+            "routeKey": "127.0.0.1:54548|GET|/app",
+            "path": "/app",
+            "paramKey": "response:ok",
+            "priority": 22,
+            "suggestedChecks": [
+              "manual_review"
+            ],
+            "evidenceRefs": [
+              {
+                "type": "runtimeEvent",
+                "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+                "loc": {
+                  "method": "GET",
+                  "path": "/app",
+                  "route": "127.0.0.1:54548|GET|/app",
+                  "kind": "data_exposure_and_storage",
+                  "param": "ok"
+                }
+              }
+            ]
+          },
+          {
+            "id": "pat_025df2c376590d8072396141",
+            "source": "pattern",
+            "title": "IAST data exposure and storage bucket on GET /app",
+            "itemType": "IAST_DISCOVERY_BUCKET",
+            "routeKey": "127.0.0.1:54548|GET|/app",
+            "path": "/app",
+            "paramKey": "response:ok",
+            "priority": 22,
+            "suggestedChecks": [
+              "manual_review"
+            ],
+            "evidenceRefs": [
+              {
+                "type": "runtimeEvent",
+                "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+                "loc": {
+                  "method": "GET",
+                  "path": "/app",
+                  "route": "127.0.0.1:54548|GET|/app",
+                  "kind": "data_exposure_and_storage",
+                  "param": "ok"
+                }
+              }
+            ]
+          },
+          {
+            "id": "cand_4383af81908f4970a2126bbe",
+            "source": "candidate",
+            "title": "Validate client-side data exposure and storage handling on GET /app",
+            "itemType": "RUNTIME_ANOMALY",
+            "routeKey": "127.0.0.1:54548|GET|/app",
+            "path": "/app",
+            "paramKey": "response:ok",
+            "priority": 17,
+            "suggestedChecks": [
+              "manual_review"
+            ],
+            "evidenceRefs": [
+              {
+                "type": "runtimeEvent",
+                "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+                "loc": {
+                  "method": "GET",
+                  "path": "/app",
+                  "route": "127.0.0.1:54548|GET|/app",
+                  "kind": "data_exposure_and_storage",
+                  "param": "ok"
+                }
+              }
+            ]
+          }
+        ],
+        "total": 3
+      },
+      "objectInventory": {
+        "identifiers": [],
+        "total": 0
+      },
+      "opportunities": [
+        {
+          "id": "iastbucket:127.0.0.1:54548|GET|/app|response:ok|data_exposure_and_storage",
+          "source": "iast_bucket",
+          "title": "Runtime opportunity on /app",
+          "type": "RUNTIME_ANOMALY",
+          "routeKey": "127.0.0.1:54548|GET|/app",
+          "path": "/app",
+          "paramKey": "response:ok",
+          "priority": 22,
+          "confidence": "low",
+          "confidenceRank": 1,
+          "suggestedChecks": [
+            "manual_review"
+          ],
+          "evidenceRefs": [
+            {
+              "type": "runtimeEvent",
+              "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+              "loc": {
+                "method": "GET",
+                "path": "/app",
+                "route": "127.0.0.1:54548|GET|/app",
+                "kind": "data_exposure_and_storage",
+                "param": "ok"
+              }
+            }
+          ]
+        },
+        {
+          "id": "cand_4383af81908f4970a2126bbe",
+          "source": "candidate",
+          "title": "Validate client-side data exposure and storage handling on GET /app",
+          "type": "RUNTIME_ANOMALY",
+          "routeKey": "127.0.0.1:54548|GET|/app",
+          "path": "/app",
+          "paramKey": "response:ok",
+          "priority": 17,
+          "confidence": "low",
+          "confidenceRank": 1,
+          "suggestedChecks": [
+            "manual_review"
+          ],
+          "evidenceRefs": [
+            {
+              "type": "runtimeEvent",
+              "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+              "loc": {
+                "method": "GET",
+                "path": "/app",
+                "route": "127.0.0.1:54548|GET|/app",
+                "kind": "data_exposure_and_storage",
+                "param": "ok"
+              }
+            }
+          ]
+        }
+      ],
+      "recommendations": [],
+      "explorer": {
+        "summary": {
+          "routeCount": 3,
+          "endpointCount": 2,
+          "graphqlCount": 0,
+          "hiddenParamCount": 0,
+          "surfaceCount": 0,
+          "gadgetCount": 0,
+          "enginesPresent": [
+            "IAST"
+          ]
+        },
+        "routes": [
+          {
+            "id": "runtime:127.0.0.1:54548|GET|/app",
+            "routeKey": "127.0.0.1:54548|GET|/app",
+            "path": "/app",
+            "routeType": "runtime",
+            "enginesPresent": [
+              "IAST"
+            ],
+            "sources": [
+              "runtime_event"
+            ],
+            "authHints": [],
+            "protocolHints": [],
+            "environmentHints": [],
+            "frameworks": [],
+            "sourceKinds": [
+              "apiResponseField"
+            ],
+            "hintNames": [],
+            "pageUrls": [
+              "/app"
+            ],
+            "adminLike": false,
+            "evidenceRefs": [
+              {
+                "type": "runtimeEvent",
+                "id": "runtimeevent:client.json.parse:client_json_parse_observed:apiResponseField:response:json:ok:_app",
+                "loc": {
+                  "method": "GET",
+                  "route": "127.0.0.1:54548|GET|/app"
+                }
+              }
+            ]
+          },
+          {
+            "id": "runtime:127.0.0.1:54549|GET|/http/allowed",
+            "routeKey": "127.0.0.1:54549|GET|/http/allowed",
+            "path": "/http/allowed",
+            "routeType": "runtime",
+            "enginesPresent": [
+              "IAST"
+            ],
+            "sources": [
+              "request"
+            ],
+            "authHints": [],
+            "protocolHints": [],
+            "environmentHints": [],
+            "frameworks": [],
+            "sourceKinds": [],
+            "hintNames": [],
+            "pageUrls": [
+              "http://127.0.0.1:54549/http/allowed"
+            ],
+            "adminLike": false,
+            "evidenceRefs": [
+              {
+                "type": "request",
+                "id": "GET http://127.0.0.1:54549/http/allowed",
+                "loc": {
+                  "method": "GET",
+                  "route": "127.0.0.1:54549|GET|/http/allowed"
+                }
+              }
+            ]
+          },
+          {
+            "id": "runtime:127.0.0.1:54548|GET|/http/primary",
+            "routeKey": "127.0.0.1:54548|GET|/http/primary",
+            "path": "/http/primary",
+            "routeType": "runtime",
+            "enginesPresent": [
+              "IAST"
+            ],
+            "sources": [
+              "request"
+            ],
+            "authHints": [],
+            "protocolHints": [],
+            "environmentHints": [],
+            "frameworks": [],
+            "sourceKinds": [],
+            "hintNames": [],
+            "pageUrls": [
+              "http://127.0.0.1:54548/http/primary"
+            ],
+            "adminLike": false,
+            "evidenceRefs": [
+              {
+                "type": "request",
+                "id": "GET http://127.0.0.1:54548/http/primary",
+                "loc": {
+                  "method": "GET",
+                  "route": "127.0.0.1:54548|GET|/http/primary"
+                }
+              }
+            ]
+          }
+        ],
+        "endpoints": [
+          {
+            "id": "endpoint:127.0.0.1:54549|GET|/http/allowed",
+            "routeKey": "127.0.0.1:54549|GET|/http/allowed",
+            "method": "GET",
+            "path": "/http/allowed",
+            "url": "http://127.0.0.1:54549/http/allowed",
+            "enginesPresent": [
+              "IAST"
+            ],
+            "sources": [
+              "request"
+            ],
+            "transports": [
+              "devtools-http-response"
+            ],
+            "authHints": [],
+            "contentTypes": [],
+            "paramNames": [],
+            "bodyKeys": [],
+            "headerNames": [],
+            "discoveryTags": [],
+            "environmentHints": [],
+            "pageUrls": [],
+            "adminLike": false,
+            "evidenceRefs": [
+              {
+                "type": "request",
+                "id": "GET http://127.0.0.1:54549/http/allowed",
+                "loc": {
+                  "method": "GET",
+                  "route": "127.0.0.1:54549|GET|/http/allowed"
+                }
+              }
+            ]
+          },
+          {
+            "id": "endpoint:127.0.0.1:54548|GET|/http/primary",
+            "routeKey": "127.0.0.1:54548|GET|/http/primary",
+            "method": "GET",
+            "path": "/http/primary",
+            "url": "http://127.0.0.1:54548/http/primary",
+            "enginesPresent": [
+              "IAST"
+            ],
+            "sources": [
+              "request"
+            ],
+            "transports": [
+              "devtools-http-response"
+            ],
+            "authHints": [],
+            "contentTypes": [],
+            "paramNames": [],
+            "bodyKeys": [],
+            "headerNames": [],
+            "discoveryTags": [],
+            "environmentHints": [],
+            "pageUrls": [],
+            "adminLike": false,
+            "evidenceRefs": [
+              {
+                "type": "request",
+                "id": "GET http://127.0.0.1:54548/http/primary",
+                "loc": {
+                  "method": "GET",
+                  "route": "127.0.0.1:54548|GET|/http/primary"
+                }
+              }
+            ]
+          }
+        ],
+        "graphql": [],
+        "hiddenParams": [],
+        "surfaces": [],
+        "gadgets": []
+      },
+      "schemaValidation": {
+        "ok": true,
+        "schema": "ptk-scan-analysis-v1",
+        "reason": null,
+        "explorer": {
+          "ok": true,
+          "buckets": {
+            "routes": 3,
+            "endpoints": 2,
+            "graphql": 0,
+            "hiddenParams": 0,
+            "surfaces": 0,
+            "gadgets": 0
+          }
+        },
+        "recommendations": {
+          "count": 0
+        },
+        "errorCount": 0,
+        "errors": []
+      }
+    },
+    "analysisVersion": "1.7.9",
+    "scanConfiguration": {
+      "iastScanStrategy": "SMART",
+      "iastRulepackSource": "local",
+      "iastPolicyName": null,
+      "iastPackStatus": "active",
+      "iastPackError": null
+    },
+    "meta": {
+      "privacy": {
+        "secretsIncluded": false,
+        "exportMode": "evidence",
+        "redactionEnforced": true
+      },
+      "automation": {
+        "sessionId": "ptk-session_cbfee5f9-0efa-4a08-a2bc-0dc1bf4781d0",
+        "testRunId": null,
+        "project": null,
+        "policyCode": "SMART",
+        "startedAt": "2026-10-22T14:01:30.714Z",
+        "finishedAt": "2026-10-22T14:01:31.917Z",
+        "durationMs": 1203,
+        "ptkVersion": "10.0.0",
+        "schemaVersion": 1
+      }
+    }
+  },
+  "summary": {
+    "counts": {
+      "primary": {
+        "events": [
+          {
+            "type": "devtools-http-request",
+            "method": "GET",
+            "host": "127.0.0.1:54548"
+          },
+          {
+            "type": "http",
+            "status": 200,
+            "method": "GET",
+            "host": "127.0.0.1:54548"
+          },
+          {
+            "type": "devtools-http-response",
+            "status": 200,
+            "method": "GET",
+            "host": "127.0.0.1:54548"
+          }
+        ],
+        "routes": [
+          {
+            "url": "http://127.0.0.1:54548/http/primary",
+            "displayUrl": "http://127.0.0.1:54548/http/primary",
+            "status": 200,
+            "type": "devtools-http-response",
+            "host": "127.0.0.1:54548"
+          }
+        ]
+      },
+      "secondary": {
+        "events": [
+          {
+            "type": "devtools-http-request",
+            "method": "GET",
+            "host": "127.0.0.1:54549"
+          },
+          {
+            "type": "http",
+            "status": 200,
+            "method": "GET",
+            "host": "127.0.0.1:54549"
+          },
+          {
+            "type": "devtools-http-response",
+            "status": 200,
+            "method": "GET",
+            "host": "127.0.0.1:54549"
+          }
+        ],
+        "routes": [
+          {
+            "url": "http://127.0.0.1:54549/http/allowed",
+            "displayUrl": "http://127.0.0.1:54549/http/allowed",
+            "status": 200,
+            "type": "devtools-http-response",
+            "host": "127.0.0.1:54549"
+          }
+        ]
+      },
+      "foreign": {
+        "events": [],
+        "routes": []
+      },
+      "excludedPrimary": {
+        "events": [],
+        "routes": []
+      },
+      "excludedSecondary": {
+        "events": [],
+        "routes": []
+      }
+    },
+    "checks": [
+      {
+        "name": "primary retained HTTP event",
+        "passed": true
+      },
+      {
+        "name": "primary retained route record",
+        "passed": true
+      },
+      {
+        "name": "primary route identifies actual target host",
+        "passed": true
+      },
+      {
+        "name": "secondary retained HTTP event",
+        "passed": true
+      },
+      {
+        "name": "secondary retained route record",
+        "passed": true
+      },
+      {
+        "name": "secondary route identifies actual target host",
+        "passed": true
+      },
+      {
+        "name": "foreign not in HTTP events",
+        "passed": true
+      },
+      {
+        "name": "foreign not in route records",
+        "passed": true
+      },
+      {
+        "name": "excludedPrimary not in HTTP events",
+        "passed": true
+      },
+      {
+        "name": "excludedPrimary not in route records",
+        "passed": true
+      },
+      {
+        "name": "excludedSecondary not in HTTP events",
+        "passed": true
+      },
+      {
+        "name": "excludedSecondary not in route records",
+        "passed": true
+      }
+    ],
+    "passed": 12,
+    "failed": []
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "schema": 1,
+  "version": "10.0.0",
+  "source": "supplied pentestkit-10.0.0-release/src",
+  "sha256": "901619844a281628f9dc9eb17ff978cc3498cf05b9548cea15808c706c42c581",
+  "files": 1465,
+  "purpose": "Independent unmodified browser parity oracle; excludes cert-x companion patches"
+}

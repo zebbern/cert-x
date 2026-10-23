@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCase>
+  <selenese>
+    <command>open</command>
+    <target><![CDATA[http://localhost:3001/#/login]]></target>
+    <value><![CDATA[]]></value>
+  </selenese>
+  <selenese>
+    <command>type</command>
+    <target><![CDATA[id=email]]></target>
+    <value><![CDATA[ptk@example.invalid]]></value>
+  </selenese>
+  <selenese>
+    <command>type</command>
+    <target><![CDATA[id=password]]></target>
+    <value><![CDATA[fixture-password-value]]></value>
+  </selenese>
+  <selenese>
+    <command>click</command>
+    <target><![CDATA[id=loginButton]]></target>
+    <value><![CDATA[]]></value>
+  </selenese>
+</TestCase>

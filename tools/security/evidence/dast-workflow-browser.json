@@ -1,0 +1,750 @@
+{
+  "provider": "scripted_fixture",
+  "liveModelInference": false,
+  "cases": [
+    {
+      "name": "reflect",
+      "runId": "4055f0bb-08bc-42f0-9adb-7cd20cd7cce3",
+      "shallow": {
+        "backendGaps": [],
+        "engineFailures": [],
+        "dast": {
+          "phase": "waiting_for_attackable_inputs",
+          "applicationRequestsObserved": 0,
+          "applicationRequestsQueued": 0,
+          "proxySeededRequests": 0,
+          "selectedTargetSeededRequests": 1,
+          "seedCandidates": 0,
+          "unsafeSeedSkipped": 0,
+          "tasksPlanned": 0,
+          "tasksExecuted": 0,
+          "taskCounterMeaning": "Tasks entered execution before any transport attempt",
+          "plannedMinusEntered": 0,
+          "plannedMinusEnteredMeaning": "Accounting difference only; this is not an exact count of skipped HTTP requests. Inspect stop state, strategy skips and retained task errors.",
+          "probeDispatches": 0,
+          "baselineDispatches": 1,
+          "dastRequestsDispatched": 1,
+          "runRequestsDispatched": 1,
+          "skippedDueToStrategy": 0,
+          "taskErrors": 0,
+          "lastTaskError": null,
+          "taskSkips": 0,
+          "lastTaskSkip": null,
+          "captureErrors": 0,
+          "waitingForInteraction": false
+        },
+        "actionableGaps": [
+          {
+            "code": "no_active_probe_coverage",
+            "engine": "DAST",
+            "summary": "A page or baseline was captured, but active probe coverage is absent.",
+            "sampledOccurrences": 1,
+            "retryUnchanged": false,
+            "recovery": {
+              "action": "exercise_workflow",
+              "instruction": "Exercise forms or API workflows with attackable inputs. Inspect selected modules and task skips; do not repeatedly restart an unchanged scan."
+            },
+            "examples": []
+          }
+        ],
+        "recovery": {
+          "runId": "4055f0bb-08bc-42f0-9adb-7cd20cd7cce3",
+          "state": "in_progress",
+          "instruction": "Address applicable recovery steps or include unresolved gaps in the final report. Do not repeat unchanged failed calls."
+        }
+      },
+      "afterWorkflow": {
+        "backendGaps": [],
+        "engineFailures": [],
+        "dast": {
+          "phase": "watching_for_activity",
+          "applicationRequestsObserved": 1,
+          "applicationRequestsQueued": 1,
+          "proxySeededRequests": 0,
+          "selectedTargetSeededRequests": 1,
+          "seedCandidates": 0,
+          "unsafeSeedSkipped": 0,
+          "tasksPlanned": 18,
+          "tasksExecuted": 18,
+          "taskCounterMeaning": "Tasks entered execution before any transport attempt",
+          "plannedMinusEntered": 0,
+          "plannedMinusEnteredMeaning": "Accounting difference only; this is not an exact count of skipped HTTP requests. Inspect stop state, strategy skips and retained task errors.",
+          "probeDispatches": 18,
+          "baselineDispatches": 2,
+          "dastRequestsDispatched": 20,
+          "runRequestsDispatched": 20,
+          "skippedDueToStrategy": 0,
+          "taskErrors": 0,
+          "lastTaskError": null,
+          "taskSkips": 0,
+          "lastTaskSkip": null,
+          "captureErrors": 0,
+          "waitingForInteraction": false
+        },
+        "actionableGaps": [],
+        "recovery": {
+          "runId": "4055f0bb-08bc-42f0-9adb-7cd20cd7cce3",
+          "state": "in_progress",
+          "instruction": "Assess only the checks and evidence actually recorded; absence of reported gaps is not proof of full application coverage."
+        }
+      },
+      "state": "completed",
+      "findings": [
+        {
+          "id": "c4314169-d8df-4ff0-a3a5-6619f63a9c6c::DAST::xss::xss_1::req-2::atk-6",
+          "engine": "DAST",
+          "moduleId": "xss",
+          "title": "XSS - Unfiltered <script> tag",
+          "severity": "high",
+          "confidence": 78,
+          "ruleId": "xss_1",
+          "location": {
+            "url": "http://127.0.0.1:57829/test/reflect",
+            "method": "POST",
+            "param": "q",
+            "kind": "http"
+          },
+          "description": "Reflected Cross-site Scripting (XSS) is another name for non-persistent XSS, where the attack doesn't load with the vulnerable web application but is originated by the victim loading the offending URI. In this article we will see some ways ",
+          "evidenceAvailable": true
+        },
+        {
+          "id": "c4314169-d8df-4ff0-a3a5-6619f63a9c6c::DAST::xss::xss_2::req-2::atk-7",
+          "engine": "DAST",
+          "moduleId": "xss",
+          "title": "XSS - Script tag after noscript tag",
+          "severity": "high",
+          "confidence": 78,
+          "ruleId": "xss_2",
+          "location": {
+            "url": "http://127.0.0.1:57829/test/reflect",
+            "method": "POST",
+            "param": "q",
+            "kind": "http"
+          },
+          "description": "Reflected Cross-site Scripting (XSS) is another name for non-persistent XSS, where the attack doesn't load with the vulnerable web application but is originated by the victim loading the offending URI. In this article we will see some ways ",
+          "evidenceAvailable": true
+        },
+        {
+          "id": "c4314169-d8df-4ff0-a3a5-6619f63a9c6c::DAST::xss::xss_3::req-2::atk-13",
+          "engine": "DAST",
+          "moduleId": "xss",
+          "title": "XSS - Svg tag with animation event",
+          "severity": "high",
+          "confidence": 78,
+          "ruleId": "xss_3",
+          "location": {
+            "url": "http://127.0.0.1:57829/test/reflect",
+            "method": "POST",
+            "param": "q",
+            "kind": "http"
+          },
+          "description": "Reflected Cross-site Scripting (XSS) is another name for non-persistent XSS, where the attack doesn't load with the vulnerable web application but is originated by the victim loading the offending URI. In this article we will see some ways ",
+          "evidenceAvailable": true
+        },
+        {
+          "id": "c4314169-d8df-4ff0-a3a5-6619f63a9c6c::DAST::xss::xss_event_handler_polyglot::req-2::atk-14",
+          "engine": "DAST",
+          "moduleId": "xss",
+          "title": "XSS - SVG onload polyglot",
+          "severity": "high",
+          "confidence": 78,
+          "ruleId": "xss_event_handler_polyglot",
+          "location": {
+            "url": "http://127.0.0.1:57829/test/reflect",
+            "method": "POST",
+            "param": "q",
+            "kind": "http"
+          },
+          "description": "Reflected Cross-site Scripting (XSS) is another name for non-persistent XSS, where the attack doesn't load with the vulnerable web application but is originated by the victim loading the offending URI. In this article we will see some ways ",
+          "evidenceAvailable": true
+        },
+        {
+          "id": "c4314169-d8df-4ff0-a3a5-6619f63a9c6c::DAST::xss::xss_4::req-2::atk-15",
+          "engine": "DAST",
+          "moduleId": "xss",
+          "title": "XSS - Img onerror",
+          "severity": "high",
+          "confidence": 78,
+          "ruleId": "xss_4",
+          "location": {
+            "url": "http://127.0.0.1:57829/test/reflect",
+            "method": "POST",
+            "param": "q",
+            "kind": "http"
+          },
+          "description": "Reflected Cross-site Scripting (XSS) is another name for non-persistent XSS, where the attack doesn't load with the vulnerable web application but is originated by the victim loading the offending URI. In this article we will see some ways ",
+          "evidenceAvailable": true
+        },
+        {
+          "id": "c4314169-d8df-4ff0-a3a5-6619f63a9c6c::DAST::xss::xss_5::req-2::atk-16",
+          "engine": "DAST",
+          "moduleId": "xss",
+          "title": "XSS - Img onerror",
+          "severity": "high",
+          "confidence": 78,
+          "ruleId": "xss_5",
+          "location": {
+            "url": "http://127.0.0.1:57829/test/reflect",
+            "method": "POST",
+            "param": "q",
+            "kind": "http"
+          },
+          "description": "Reflected Cross-site Scripting (XSS) is another name for non-persistent XSS, where the attack doesn't load with the vulnerable web application but is originated by the victim loading the offending URI. In this article we will see some ways ",
+          "evidenceAvailable": true
+        },
+        {
+          "id": "c4314169-d8df-4ff0-a3a5-6619f63a9c6c::DAST::xss::xss_attr_1::req-2::atk-17",
+          "engine": "DAST",
+          "moduleId": "xss",
+          "title": "XSS - attribute context img onerror",
+          "severity": "high",
+          "confidence": 78,
+          "ruleId": "xss_attr_1",
+          "location": {
+            "url": "http://127.0.0.1:57829/test/reflect",
+            "method": "POST",
+            "param": "q",
+            "kind": "http"
+          },
+          "description": "Reflected Cross-site Scripting (XSS) is another name for non-persistent XSS, where the attack doesn't load with the vulnerable web application but is originated by the victim loading the offending URI. In this article we will see some ways ",
+          "evidenceAvailable": true
+        }
+      ],
+      "postCount": 20,
+      "mutations": 18
+    },
+    {
+      "name": "safe",
+      "runId": "cedb2c85-4990-40a7-88a5-3d21930c7313",
+      "shallow": {
+        "backendGaps": [],
+        "engineFailures": [],
+        "dast": {
+          "phase": "waiting_for_attackable_inputs",
+          "applicationRequestsObserved": 0,
+          "applicationRequestsQueued": 0,
+          "proxySeededRequests": 0,
+          "selectedTargetSeededRequests": 1,
+          "seedCandidates": 0,
+          "unsafeSeedSkipped": 0,
+          "tasksPlanned": 0,
+          "tasksExecuted": 0,
+          "taskCounterMeaning": "Tasks entered execution before any transport attempt",
+          "plannedMinusEntered": 0,
+          "plannedMinusEnteredMeaning": "Accounting difference only; this is not an exact count of skipped HTTP requests. Inspect stop state, strategy skips and retained task errors.",
+          "probeDispatches": 0,
+          "baselineDispatches": 1,
+          "dastRequestsDispatched": 1,
+          "runRequestsDispatched": 1,
+          "skippedDueToStrategy": 0,
+          "taskErrors": 0,
+          "lastTaskError": null,
+          "taskSkips": 0,
+          "lastTaskSkip": null,
+          "captureErrors": 0,
+          "waitingForInteraction": false
+        },
+        "actionableGaps": [
+          {
+            "code": "no_active_probe_coverage",
+            "engine": "DAST",
+            "summary": "A page or baseline was captured, but active probe coverage is absent.",
+            "sampledOccurrences": 1,
+            "retryUnchanged": false,
+            "recovery": {
+              "action": "exercise_workflow",
+              "instruction": "Exercise forms or API workflows with attackable inputs. Inspect selected modules and task skips; do not repeatedly restart an unchanged scan."
+            },
+            "examples": []
+          }
+        ],
+        "recovery": {
+          "runId": "cedb2c85-4990-40a7-88a5-3d21930c7313",
+          "state": "in_progress",
+          "instruction": "Address applicable recovery steps or include unresolved gaps in the final report. Do not repeat unchanged failed calls."
+        }
+      },
+      "afterWorkflow": {
+        "backendGaps": [],
+        "engineFailures": [],
+        "dast": {
+          "phase": "watching_for_activity",
+          "applicationRequestsObserved": 1,
+          "applicationRequestsQueued": 1,
+          "proxySeededRequests": 0,
+          "selectedTargetSeededRequests": 1,
+          "seedCandidates": 0,
+          "unsafeSeedSkipped": 0,
+          "tasksPlanned": 18,
+          "tasksExecuted": 18,
+          "taskCounterMeaning": "Tasks entered execution before any transport attempt",
+          "plannedMinusEntered": 0,
+          "plannedMinusEnteredMeaning": "Accounting difference only; this is not an exact count of skipped HTTP requests. Inspect stop state, strategy skips and retained task errors.",
+          "probeDispatches": 18,
+          "baselineDispatches": 2,
+          "dastRequestsDispatched": 20,
+          "runRequestsDispatched": 20,
+          "skippedDueToStrategy": 0,
+          "taskErrors": 0,
+          "lastTaskError": null,
+          "taskSkips": 0,
+          "lastTaskSkip": null,
+          "captureErrors": 0,
+          "waitingForInteraction": false
+        },
+        "actionableGaps": [],
+        "recovery": {
+          "runId": "cedb2c85-4990-40a7-88a5-3d21930c7313",
+          "state": "in_progress",
+          "instruction": "Assess only the checks and evidence actually recorded; absence of reported gaps is not proof of full application coverage."
+        }
+      },
+      "state": "completed",
+      "findings": [],
+      "postCount": 20,
+      "mutations": 18
+    }
+  ],
+  "wire": [
+    {
+      "method": "GET",
+      "path": "/login",
+      "body": "",
+      "authenticated": false
+    },
+    {
+      "method": "POST",
+      "path": "/login",
+      "body": "username=fixture",
+      "authenticated": false
+    },
+    {
+      "method": "GET",
+      "path": "/app/reflect",
+      "body": "",
+      "authenticated": true
+    },
+    {
+      "method": "GET",
+      "path": "/app/reflect",
+      "body": "",
+      "authenticated": false
+    },
+    {
+      "method": "POST",
+      "path": "/test/reflect",
+      "body": "q=workflow-marker",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/reflect",
+      "body": "q=workflow-marker",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/reflect",
+      "body": "q=svg+onload%3Dalert%28987305%29&ptk_rnd=c7mxu9f8ztbj",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/reflect",
+      "body": "q=%22+onmouseover%3Dalert%28987301%29+x%3D%22&ptk_rnd=n1s2w04bud4c",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/reflect",
+      "body": "q=%27+onmouseover%3Dalert%28987302%29+x%3D%27&ptk_rnd=bphxcp2nigc5",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/reflect",
+      "body": "q=x+onmouseover%3Dalert%28987303%29+&ptk_rnd=239kbegixbed",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/reflect",
+      "body": "q=onmouseover%3Dalert%28987304%29+x&ptk_rnd=47qymijh1fb6",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/reflect",
+      "body": "q=workflow-marker%3Cscript%3Ealert%28987101%29%3C%2Fscript%3E&ptk_rnd=syzbhbanjgba",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/reflect",
+      "body": "q=workflow-marker%3C%2Fnoscript%3E%3Cscript%3Ealert%28987102%29%3C%2Fscript%3E&ptk_rnd=trujg3z674xt",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/reflect",
+      "body": "q=workflow-marker%22%3Balert%28987106%29%3B%2F%2F&ptk_rnd=on47w9784z46",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/reflect",
+      "body": "q=workflow-marker%60%3Balert%28987107%29%3B%2F%2F&ptk_rnd=t9qvthsykejt",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/reflect",
+      "body": "q=%27%3Balert%28987202%29%3B%2F%2F&ptk_rnd=ur2m82at642i",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/reflect",
+      "body": "q=a%2F%3Balert%28987203%29%3B%2F%2F&ptk_rnd=eqmcq7p5a439",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/reflect",
+      "body": "q=*%2Falert%28987204%29%3B%2F*&ptk_rnd=4nkxy7tn86i0",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/reflect",
+      "body": "q=workflow-marker%3Csvg%3E%3Canimate+onbegin%3Dalert%28987103%29+attributeName%3Dx+dur%3D1s%3E&ptk_rnd=0ph131kog4ng",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/reflect",
+      "body": "q=workflow-marker%3Csvg%2Fonload%3Dalert%28987105%29%3E&ptk_rnd=6nmecmabphb5",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/reflect",
+      "body": "q=%3Cimg+src%3Dx+onerror%3Dwindow.postMessage%28%7B%22ptk%22%3A%22b0cbe8huwfr9%22%7D%29%3Eworkflow-marker&ptk_rnd=285ff7dgdi2t",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/reflect",
+      "body": "q=%3C%3E%3Cimg+src%3Dx+onerror%3Dwindow.postMessage%28%7B%22ptk%22%3A%22qby09ngvs2ix%22%7D%29%3Eworkflow-marker&ptk_rnd=b9wvxh7r205y",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/reflect",
+      "body": "q=workflow-marker%22%3E%3Cimg+src%3Dx+onerror%3Dalert%28987104%29%3E&ptk_rnd=y84a7oivkajj",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/reflect",
+      "body": "q=alert%28987201%29&ptk_rnd=5nr62dz8198y",
+      "authenticated": true
+    },
+    {
+      "method": "GET",
+      "path": "/login",
+      "body": "",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/login",
+      "body": "username=fixture",
+      "authenticated": true
+    },
+    {
+      "method": "GET",
+      "path": "/app/safe",
+      "body": "",
+      "authenticated": true
+    },
+    {
+      "method": "GET",
+      "path": "/app/safe",
+      "body": "",
+      "authenticated": false
+    },
+    {
+      "method": "POST",
+      "path": "/test/safe",
+      "body": "q=workflow-marker",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/safe",
+      "body": "q=workflow-marker",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/safe",
+      "body": "q=svg+onload%3Dalert%28987305%29&ptk_rnd=bffpbh2cv1oi",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/safe",
+      "body": "q=%22+onmouseover%3Dalert%28987301%29+x%3D%22&ptk_rnd=mfapdapam9le",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/safe",
+      "body": "q=%27+onmouseover%3Dalert%28987302%29+x%3D%27&ptk_rnd=5hwl4dxlsoxu",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/safe",
+      "body": "q=x+onmouseover%3Dalert%28987303%29+&ptk_rnd=y8n45lf5qme5",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/safe",
+      "body": "q=onmouseover%3Dalert%28987304%29+x&ptk_rnd=e2bvb9atknsr",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/safe",
+      "body": "q=workflow-marker%3Cscript%3Ealert%28987101%29%3C%2Fscript%3E&ptk_rnd=dbe1xo18mi4v",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/safe",
+      "body": "q=workflow-marker%3C%2Fnoscript%3E%3Cscript%3Ealert%28987102%29%3C%2Fscript%3E&ptk_rnd=gjo7rk0k74zz",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/safe",
+      "body": "q=workflow-marker%22%3Balert%28987106%29%3B%2F%2F&ptk_rnd=98jsmdac80w8",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/safe",
+      "body": "q=workflow-marker%60%3Balert%28987107%29%3B%2F%2F&ptk_rnd=ti90q1dafxlq",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/safe",
+      "body": "q=%27%3Balert%28987202%29%3B%2F%2F&ptk_rnd=x37418r89c9v",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/safe",
+      "body": "q=a%2F%3Balert%28987203%29%3B%2F%2F&ptk_rnd=q3ihyzq2tqa2",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/safe",
+      "body": "q=*%2Falert%28987204%29%3B%2F*&ptk_rnd=7aarahrkrlcy",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/safe",
+      "body": "q=workflow-marker%3Csvg%3E%3Canimate+onbegin%3Dalert%28987103%29+attributeName%3Dx+dur%3D1s%3E&ptk_rnd=iq827pff70qh",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/safe",
+      "body": "q=workflow-marker%3Csvg%2Fonload%3Dalert%28987105%29%3E&ptk_rnd=ow02yjiaf130",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/safe",
+      "body": "q=%3Cimg+src%3Dx+onerror%3Dwindow.postMessage%28%7B%22ptk%22%3A%22xy3y2t35o4dw%22%7D%29%3Eworkflow-marker&ptk_rnd=nlr1txu85nzq",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/safe",
+      "body": "q=%3C%3E%3Cimg+src%3Dx+onerror%3Dwindow.postMessage%28%7B%22ptk%22%3A%22m6maxvz2f1b6%22%7D%29%3Eworkflow-marker&ptk_rnd=sc0ta7j24trz",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/safe",
+      "body": "q=workflow-marker%22%3E%3Cimg+src%3Dx+onerror%3Dalert%28987104%29%3E&ptk_rnd=tt3h2geloulf",
+      "authenticated": true
+    },
+    {
+      "method": "POST",
+      "path": "/test/safe",
+      "body": "q=alert%28987201%29&ptk_rnd=tafxchvq99z5",
+      "authenticated": true
+    }
+  ],
+  "modelCalls": [
+    {
+      "case": "reflect",
+      "stage": "navigate",
+      "tool": null
+    },
+    {
+      "case": "reflect",
+      "stage": "login",
+      "tool": "navigate"
+    },
+    {
+      "case": "reflect",
+      "stage": "start",
+      "tool": "cdp"
+    },
+    {
+      "case": "reflect",
+      "stage": "shallow",
+      "tool": "security_start_scan"
+    },
+    {
+      "case": "reflect",
+      "stage": "shallow",
+      "tool": "security_scan_status"
+    },
+    {
+      "case": "reflect",
+      "stage": "active",
+      "tool": "cdp"
+    },
+    {
+      "case": "reflect",
+      "stage": "active",
+      "tool": "security_scan_status"
+    },
+    {
+      "case": "reflect",
+      "stage": "active",
+      "tool": "security_scan_status"
+    },
+    {
+      "case": "reflect",
+      "stage": "active",
+      "tool": "security_scan_status"
+    },
+    {
+      "case": "reflect",
+      "stage": "active",
+      "tool": "security_scan_status"
+    },
+    {
+      "case": "reflect",
+      "stage": "active",
+      "tool": "security_scan_status"
+    },
+    {
+      "case": "reflect",
+      "stage": "active",
+      "tool": "security_scan_status"
+    },
+    {
+      "case": "reflect",
+      "stage": "active",
+      "tool": "security_scan_status"
+    },
+    {
+      "case": "reflect",
+      "stage": "findings",
+      "tool": "security_stop_scan"
+    },
+    {
+      "case": "reflect",
+      "stage": "check",
+      "tool": "security_get_findings"
+    },
+    {
+      "case": "safe",
+      "stage": "login",
+      "tool": "navigate"
+    },
+    {
+      "case": "safe",
+      "stage": "start",
+      "tool": "cdp"
+    },
+    {
+      "case": "safe",
+      "stage": "shallow",
+      "tool": "security_start_scan"
+    },
+    {
+      "case": "safe",
+      "stage": "shallow",
+      "tool": "security_scan_status"
+    },
+    {
+      "case": "safe",
+      "stage": "active",
+      "tool": "cdp"
+    },
+    {
+      "case": "safe",
+      "stage": "active",
+      "tool": "security_scan_status"
+    },
+    {
+      "case": "safe",
+      "stage": "active",
+      "tool": "security_scan_status"
+    },
+    {
+      "case": "safe",
+      "stage": "active",
+      "tool": "security_scan_status"
+    },
+    {
+      "case": "safe",
+      "stage": "active",
+      "tool": "security_scan_status"
+    },
+    {
+      "case": "safe",
+      "stage": "active",
+      "tool": "security_scan_status"
+    },
+    {
+      "case": "safe",
+      "stage": "active",
+      "tool": "security_scan_status"
+    },
+    {
+      "case": "safe",
+      "stage": "active",
+      "tool": "security_scan_status"
+    },
+    {
+      "case": "safe",
+      "stage": "findings",
+      "tool": "security_stop_scan"
+    },
+    {
+      "case": "safe",
+      "stage": "check",
+      "tool": "security_get_findings"
+    },
+    {
+      "case": "safe",
+      "stage": "done",
+      "tool": null
+    }
+  ]
+}

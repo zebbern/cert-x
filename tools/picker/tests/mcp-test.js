@@ -98,14 +98,16 @@ async function main() {
   const page = await ctx.newPage();
   const errors = [];
   page.on("pageerror", (e) => errors.push(String(e)));
-  await page.goto(`chrome-extension://${id}/providers/providers.html`);
+  await page.goto(`chrome-extension://${id}/providers/providers.html?section=mcp`);
+  await page.waitForFunction(() => !document.querySelector("main").inert);
   await page.locator("#mcp-heading").waitFor();
   console.log("section:", await page.locator("#mcp-heading").innerText(), "|", (await page.locator("#mcp-note").innerText()).slice(0, 48));
   await page.locator("#mcp-add").click();
+  await page.locator("#mcp-options > summary").click();
   await page.locator("#mcp-name").fill("Mock");
   await page.locator("#mcp-url").fill("http://127.0.0.1:8791/mcp");
   await page.locator("#mcp-test").click();
-  await page.waitForFunction(() => /Tools: echo/.test(document.getElementById("mcp-status").textContent || ""));
+  await page.waitForFunction(() => /Connected · 1 tool/.test(document.getElementById("mcp-status").textContent || ""));
   const testStatus = await page.locator("#mcp-status").innerText();
   console.log("test connection:", testStatus);
   await page.locator("#mcp-save").click();
@@ -114,7 +116,7 @@ async function main() {
   console.log("stored:", JSON.stringify((stored.ki_mcp_servers || []).map((s) => ({ id: s.id, label: s.label, url: s.url }))));
 
   for (let i = 0; i < 8; i++) {
-    await sw.evaluate(() => chrome.storage.local.set({ sidepanel_connections: [{ id: "mock", label: "Mock", presetId: "openrouter", apiKey: "x", host: "http://127.0.0.1:8788/api/v1" }] }));
+    await sw.evaluate(() => chrome.storage.local.set({ sidepanel_approval_mode: "full_access", sidepanel_connections: [{ id: "mock", label: "Mock", presetId: "openrouter", apiKey: "x", host: "http://127.0.0.1:8788/api/v1" }] }));
     await wait(700);
     if (await sw.evaluate(() => chrome.storage.local.get("sidepanel_connections").then((s) => (s.sidepanel_connections || []).length))) break;
   }

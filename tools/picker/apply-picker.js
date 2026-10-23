@@ -6,6 +6,9 @@ const original = path.join(__dirname, "original");
 const jsName = "chunks/sidepanel-CUbsl7eV.js";
 const cssName = "assets/sidepanel-DD7JAQkM.css";
 const kiTools = require("./src/ki-tools");
+const kiProviderCompat = fs.readFileSync(path.join(__dirname,'src/ki-provider-compat.js'),'utf8');
+const securityBuildFingerprint = require('node:crypto').createHash('sha256').update(['tools/picker/src/ki-security.js','tools/picker/src/ki-context.js','tools/picker/src/ki-provider-compat.js','tools/picker/src/ki-upload.js','security/config.mjs','security/service.mjs','security/runtime.mjs','security/engine/coverage.mjs','security/engine/operation-arguments.mjs','security/ptk/background/automation.js','security/ptk/background/dast/dastEngine.js','security/ptk/background/sast.js','security/skills/security-testing.md'].map(file => fs.readFileSync(path.join(root,file),'utf8')).join('\n')).digest('hex');
+require('node:child_process').execFileSync(process.execPath, [path.join(root, 'tools/security/validate.mjs')], { stdio: 'inherit', windowsHide: true });
 
 function once(src, needle) {
   const first = src.indexOf(needle);
@@ -20,9 +23,60 @@ function swap(src, needle, replacement) {
 }
 
 let js = fs.readFileSync(path.join(original, path.basename(jsName)), "utf8");
-const components = ["ki-vendor-icons.js", "ki-components.js", "ki-live.js"].map((f) => fs.readFileSync(path.join(__dirname, "src", f), "utf8").trim()).join("\n");
+const components = ["ki-vendor-icons.js", "ki-components.js", "ki-live.js", "ki-settings.js", "ki-context-ui.js", "ki-csp-ui.js", "ki-ptk-ui.js", "ki-dast-ui.js", "ki-outputs.js"].map((f) => fs.readFileSync(path.join(__dirname, "src", f), "utf8").trim()).join("\n");
 
 js = swap(js, "function PI(){", components + "\nfunction PI(){");
+js = swap(js, "function PI(){", "function PI(){const[kiSettingsSection,kiSetSettingsSection]=(0,_.useState)(`home`);");
+
+// Dedicated settings destinations; preserve the existing provider editor route.
+const modelsGroupStart = once(js, '(0,A.jsxs)(`div`,{className:`wb-set-group`,children:[(0,A.jsx)(`div`,{className:`wb-set-group-label`,children:n===`zh-CN`?`你的模型`:`Your models`})');
+const daemonGroupStart = once(js, '(0,A.jsxs)(`div`,{className:`wb-set-group`,children:[(0,A.jsx)(`div`,{className:`wb-set-group-label`,children:v(`settings.groupDaemon`)})');
+if (daemonGroupStart <= modelsGroupStart || daemonGroupStart - modelsGroupStart > 1800) throw Error("Unexpected settings group span");
+js = js.slice(0, modelsGroupStart) + '(0,A.jsx)(KiContextSettingsEntry,{onOpen:T}),(0,A.jsx)(KiConnectionsSettings,{lang:n,onOpen:T,connected:c}),(0,A.jsx)(KiToolsSettingsEntry,{lang:n,onOpen:T}),' + js.slice(daemonGroupStart);
+js = swap(js, 'w===`models`?n===`zh-CN`?`你的模型`:`Your models`:v(`settings.dev.rowLabel`)', 'w===`models`?n===`zh-CN`?`模型`:`Models`:w===`mcp`?n===`zh-CN`?`MCP 服务器`:`MCP servers`:w===`local`?n===`zh-CN`?`本机`:`Local computer`:v(`settings.dev.rowLabel`)');
+js = swap(js, 'w===`models`&&(0,A.jsx)(`iframe`,{className:`wb-models-frame`,title:n===`zh-CN`?`你的模型`:`Your models`', '[`models`,`mcp`,`local`].includes(w)&&(0,A.jsx)(`iframe`,{className:`wb-models-frame`,title:He');
+js = swap(js, 'providers/providers.html?embed=1&theme=${i===`dark`||i===`light`?i:`system`}', 'providers/providers.html?section=${w}&embed=1&session=${encodeURIComponent(kiSession||``)}&theme=${i===`dark`||i===`light`?i:`system`}');
+js = swap(js, 'function wk({connections:e,agentgwMeta:t,language:n,', 'function wk({kiSession,initialSection,connections:e,agentgwMeta:t,language:n,');
+js = swap(js, '[w,T]=(0,_.useState)(`home`)', '[w,T]=(0,_.useState)(initialSection||`home`)');
+js = swap(js, '(0,A.jsx)(wk,{connections:Gn,', '(0,A.jsx)(wk,{kiSession:Hr,initialSection:kiSettingsSection,connections:Gn,');
+js = swap(js, 'Nn=(0,_.useCallback)(()=>{Ht({kind:`composer`}),Ge(!1),An(!1)}', 'Nn=(0,_.useCallback)(()=>{kiSetSettingsSection(`home`);Ht({kind:`composer`}),Ge(!1),An(!1)}');
+js = swap(js, ':v(`settings.dev.rowLabel`);return(0,A.jsxs)(`section`', ':v(`settings.dev.rowLabel`);(0,_.useEffect)(()=>{const handler=ev=>{const frame=document.querySelector(`.wb-models-frame`);if(ev.source===frame?.contentWindow&&ev.data?.type===`settings-section`&&[`models`,`mcp`,`local`].includes(ev.data.section))T(ev.data.section)};window.addEventListener(`message`,handler);return()=>window.removeEventListener(`message`,handler)},[T]);return(0,A.jsxs)(`section`');
+// Move the old connection/address card out of the settings home entirely.
+const oldRemoteStart = once(js, '(0,A.jsxs)(`div`,{className:`wb-set-group`,children:[(0,A.jsx)(`div`,{className:`wb-set-group-label`,children:v(`settings.groupDaemon`)})');
+const quickActionsStart = once(js, '(0,A.jsxs)(`div`,{className:`wb-set-group`,children:[(0,A.jsx)(`div`,{className:`wb-set-group-label`,children:v(`settings.groupQuickActions`)})');
+if (quickActionsStart <= oldRemoteStart || quickActionsStart - oldRemoteStart > 5000) throw Error("Unexpected remote-control settings span");
+js = js.slice(0, oldRemoteStart) + js.slice(quickActionsStart);
+js = swap(js, 'w===`local`?n===`zh-CN`?`本机`:`Local computer`:v(`settings.dev.rowLabel`)', 'w===`local`?n===`zh-CN`?`本机`:`Local computer`:w===`browser`?n===`zh-CN`?`浏览器控制`:`Browser control`:v(`settings.dev.rowLabel`)');
+js = js.replaceAll('[`models`,`mcp`,`local`]', '[`models`,`mcp`,`local`,`browser`,`tools`,`health`]');
+js = swap(js, ':v(`settings.dev.rowLabel`);(0,_.useEffect)', ':w===`tools`?n===`zh-CN`?`工具与权限`:`Tools & permissions`:v(`settings.dev.rowLabel`);(0,_.useEffect)');
+js = swap(js, ':v(`settings.dev.rowLabel`);(0,_.useEffect)', ':w===`health`?n===`zh-CN`?`功能状态`:`Capability health`:v(`settings.dev.rowLabel`);(0,_.useEffect)');
+js = js.replaceAll('[`models`,`mcp`,`local`,`browser`,`tools`,`health`]', '[`models`,`mcp`,`local`,`browser`,`tools`,`health`,`profiles`,`workspaces`]');
+js = swap(js, ':v(`settings.dev.rowLabel`);(0,_.useEffect)', ':w===`profiles`?`Profiles`:w===`workspaces`?`Workspaces`:v(`settings.dev.rowLabel`);(0,_.useEffect)');
+js = js.replaceAll('[`models`,`mcp`,`local`,`browser`,`tools`,`health`,`profiles`,`workspaces`]', '[`models`,`mcp`,`local`,`browser`,`tools`,`health`,`profiles`,`workspaces`,`ptk`]');
+js = swap(js, ':v(`settings.dev.rowLabel`);(0,_.useEffect)', ':w===`ptk`?`PTK analysis`:v(`settings.dev.rowLabel`);(0,_.useEffect)');
+js = js.replaceAll('[`models`,`mcp`,`local`,`browser`,`tools`,`health`,`profiles`,`workspaces`,`ptk`]', '[`models`,`mcp`,`local`,`browser`,`tools`,`health`,`profiles`,`workspaces`,`ptk`,`dast`]');
+js = swap(js, ':v(`settings.dev.rowLabel`);(0,_.useEffect)', ':w===`dast`?`Targeted DAST`:v(`settings.dev.rowLabel`);(0,_.useEffect)');
+js = js.replaceAll('[`models`,`mcp`,`local`,`browser`,`tools`,`health`,`profiles`,`workspaces`,`ptk`,`dast`]', '[`models`,`mcp`,`local`,`browser`,`tools`,`health`,`profiles`,`workspaces`,`ptk`,`dast`,`authz`]');
+js = swap(js, ':v(`settings.dev.rowLabel`);(0,_.useEffect)', ':w===`authz`?`Compare accounts`:v(`settings.dev.rowLabel`);(0,_.useEffect)');
+js = js.replaceAll('[`models`,`mcp`,`local`,`browser`,`tools`,`health`,`profiles`,`workspaces`,`ptk`,`dast`,`authz`]', '[`models`,`mcp`,`local`,`browser`,`tools`,`health`,`profiles`,`workspaces`,`ptk`,`dast`,`authz`,`security`]');
+js = swap(js, ':v(`settings.dev.rowLabel`);(0,_.useEffect)', ':w===`security`?`Security testing`:v(`settings.dev.rowLabel`);(0,_.useEffect)');
+
+// Keep explicit task configuration beside existing model/session controls.
+js = swap(js, '[Wr,Gr]=(0,_.useState)(null);', '[Wr,Gr]=(0,_.useState)(null);let kiTaskContext=KiUseContextState(Hr);');
+js = swap(js, 'let u=(await OM(i)).items;', 'await KiInitializeChat(i,r&&!a?l:null);let u=(await OM(i)).items;');
+js = swap(js, 'let r=await Hj(e,Yn);', 'let r=await KiResolveChatModel(e,Yn);');
+js = swap(js, 'return n(),()=>{t=!0}},[Hr,Yn,ht,byokShowProvider,Gn])', 'return n().catch(e=>{if(!t){rr(null);k(e.message)}}),()=>{t=!0}},[Hr,Yn,ht,byokShowProvider,Gn,kiTaskContext.revision])');
+js = swap(js, 'yt.current=null,await EA(e,{connectionId:n.model.connectionId,modelId:n.model.modelId})', 'yt.current=null,await KiRememberModel(e,n.model),await EA(e,{connectionId:n.model.connectionId,modelId:n.model.modelId})');
+js = swap(js, 'Ri=(0,_.useCallback)(e=>{Hr&&(rr({connectionId:e.connectionId,modelId:e.modelId,route:e.route,...e.maxContextTokens===void 0?{}:{maxContextTokens:e.maxContextTokens}}),Wn(byokTitle(e)),Xe(!1),et(null),EA(Hr,{connectionId:e.connectionId,modelId:e.modelId}).then(()=>gt(e=>e+1)))},[Hr])',
+  'Ri=(0,_.useCallback)(async e=>{if(!Hr)return;try{await KiRememberModel(Hr,e);rr({connectionId:e.connectionId,modelId:e.modelId,route:e.route,...e.maxContextTokens===void 0?{}:{maxContextTokens:e.maxContextTokens}});Wn(byokTitle(e));Xe(!1);et(null);await EA(Hr,{connectionId:e.connectionId,modelId:e.modelId});gt(e=>e+1)}catch(e){k(e.message)}},[Hr])');
+js = swap(js, 'if(nr?.connectionId===e.connectionId&&nr.modelId===e.modelId){Xe(!1);return}', 'if(nr?.connectionId===e.connectionId&&nr.modelId===e.modelId){KiRememberModel(Hr,e).catch(e=>k(e.message));Xe(!1);return}');
+// Filter existing history without moving transcripts or altering tab groups.
+js = swap(js, '},[s]),m=Date.now(),h=t=>{let n=gn', '},[s]),kiHistory=KiUseHistoryFilter(a),kiEntries=kiHistory.entries,m=Date.now(),h=t=>{let n=gn');
+const historyStart = once(js, 'function Un({language:e,currentChatId:t,onOpen:n,onClose:r})');
+const historyEnd = js.indexOf('function Wn(e)', historyStart);
+let history = js.slice(historyStart, historyEnd).replaceAll('a!==null&&a.length', 'kiEntries!==null&&kiEntries.length').replace('children:a.map(e=>', 'children:kiEntries.map(e=>');
+history = history.replace('className:`wb-settings-body wb-history-body`,children:[', 'className:`wb-settings-body wb-history-body`,children:[(0,A.jsx)(KiHistoryFilter,{value:kiHistory}),');
+js = js.slice(0, historyStart) + history + js.slice(historyEnd);
 
 const ooStart = once(js, "Oo=(0,A.jsxs)(`div`,{ref:Ze");
 const ooEnd = js.indexOf(";", js.indexOf("},e.tier)})})]})]})]})", ooStart)) + 1;
@@ -51,7 +105,7 @@ js = js.slice(0, ooStart) + newOo + js.slice(ooEnd);
 js = swap(
   js,
   ",Oo,de?",
-  ",Oo,oo!==void 0&&ao&&(0,A.jsx)(KiEffortPill,{options:oo,current:po,label:ho,onPick:To,lang:C}),de?"
+  ",(0,A.jsx)(KiProfileSelector,{session:Hr,state:kiTaskContext,busy:de}),Oo,oo!==void 0&&ao&&(0,A.jsx)(KiEffortPill,{options:oo,current:po,label:ho,onPick:To,lang:C}),de?"
 );
 
 js = swap(
@@ -81,7 +135,35 @@ const toolDoneAt = "r[n]={...i,status:a?`error`:`success`,output:o,images:s,isEr
 js = swap(js, toolDone, toolDoneAt);
 
 let bg = fs.readFileSync(path.join(original, "background.js"), "utf8");
-bg = swap(bg, "var background=(function(){", "var background=(function(){\n" + fs.readFileSync(path.join(__dirname, "src", "ki-background.js"), "utf8").trim() + "\n");
+bg = swap(bg, 'let e=Array.isArray(a.attachments),t=Array.isArray(a.files);if(e===t)', 'let e=Array.isArray(a.attachments),t=Array.isArray(a.files),g=a.generated!==void 0;if(Number(e)+Number(t)+Number(g)!==1)');
+bg = swap(bg, 'if(Number(e)+Number(t)+Number(g)!==1)return{output:t?"upload: give either `attachments` or `files`, not both — the two sources cannot be combined in one call.":"upload: give `attachments` (attachment_ids from the <context> block) or `files` (absolute local paths).",isError:!0}', 'if(Number(e)+Number(t)+Number(g)!==1)return{output:"upload: choose exactly one source: attachments, files, or generated.",isError:!0}');
+bg = swap(bg, 'var mP={navigate:new Kt,', fs.readFileSync(path.join(__dirname, 'src/ki-upload.js'), 'utf8').trim() + '\nvar mP={navigate:new Kt,');
+// The favicon/cursor marker is cosmetic. On a second file selection after a
+// download it can leave a Runtime.evaluate pending and block upload CDP work.
+bg = swap(bg, 'await Da(n,u)}try{let o={', 'if(e!==`upload`)await Da(n,u)}try{let o={');
+// Saving a local artifact does not interact with the page; do not start a
+// concurrent cursor-marker debugger call that can hold the next file upload.
+bg = swap(bg, '&&e!==`close_session`&&(await T(r),Fa(i,r))', '&&e!==`close_session`&&e!==`save_file`&&(await T(r),Fa(i,r))');
+const securitySkill = { name: "security-testing", source: "builtin", description: "Investigate applications with the integrated security engines, verified accounts, evidence, and coordinated subagents.", whenToUse: "Bug bounty testing, application security assessment, or reproducing scanner findings.", content: fs.readFileSync(path.join(root, "security/skills/security-testing.md"), "utf8") };
+bg = swap(bg, 'var lj=[{name:`web-skill-creator`', 'var lj=[' + JSON.stringify(securitySkill) + ',{name:`web-skill-creator`');
+const dastInputs = fs.readFileSync(path.join(root, "security/compat/dast-inputs.js"), "utf8").trim();
+bg = swap(bg, "var background=(function(){", "var background=(function(){\nvar kiBrowserChrome=globalThis.certXBrowserChrome||chrome;\nglobalThis.certXSecurityBuild=" + JSON.stringify({contract:'agent-security-v2',fingerprint:securityBuildFingerprint}) + ";\n" + kiProviderCompat + '\n' + dastInputs + "\n" + ["ki-context.js", "ki-csp.js", "ki-security.js", "ki-ptk.js", "ki-dast-transport.js", "ki-dast.js", "ki-authz.js", "ki-permissions.js", "ki-background.js", "ki-browser-results.js", "ki-native.js", "ki-browser-control.js", "ki-workspace.js"].map(file => fs.readFileSync(path.join(__dirname, "src", file), "utf8").trim()).join("\n") + "\n");
+bg = swap(bg, 't.length>0&&(c.tools=t.map(e=>Ey(e)))', 't.length>0&&(c.tools=t.map(e=>Ey(e))),kiProviderToolOptions(c)');
+// Resolve preferences before model construction, never silently substitute a missing preferred model.
+bg = swap(bg, 'async function OF(e){let t=', 'async function OF(e){if(!GP(e.profile)){let context=await kiContextPrepare(e.conversationId),preferred=context.model||await Vl(),catalog=(await pu()).models,selected=catalog.find(m=>m.connectionId===preferred?.connectionId&&m.modelId===preferred?.modelId)||(!context.model?catalog[0]:null);if(!selected)throw Error(`Preferred model unavailable. Choose an available model to continue.`);e={...e,selection:await cu(selected,ou(selected,await iu()))}}let t=');
+bg = swap(bg, 'systemPrompt:r===`quick-translate`?await SF(i):r===`quick-explain`?await ZP():mF(c.getModelSkillListing())', 'systemPrompt:r===`quick-translate`?await SF(i):r===`quick-explain`?await ZP():mF(c.getModelSkillListing())+kiContextPrompt(t)');
+bg = swap(bg, 'i=async n=>{let r=await yu(e.conversationId,', 'i=async n=>{if(kiContextFor(e.conversationId)?.model)throw Error(`Preferred model unavailable. Choose an available model to continue.`);let r=await yu(e.conversationId,');
+// Assigned workspace chats must survive the legacy ten-unassigned-chat history sweep.
+bg = swap(bg, 'async function Vk(e,t){let n=(await Ek()).filter(t=>t.lastActiveAt!==void 0&&Pk(t)===e),r=n.length-10;', 'async function Vk(e,t){let context=await kiContextLoad(),n=(await Ek()).filter(t=>t.lastActiveAt!==void 0&&Pk(t)===e&&!context.chats[t.chatId]?.workspaceId),r=n.length-10;');
+js = swap(js, 'className:`wb-history-foot`,children:i(`history.limit`,{n:10})', 'className:`wb-history-foot`,children:`Workspace chats are kept until deleted. Other chats keep the latest 10.`');
+const browserClientStart = once(bg, "var RB=class");
+const browserClientEnd = bg.indexOf(",zB=", browserClientStart);
+if (browserClientEnd < 0 || browserClientEnd - browserClientStart > 10000) throw Error("Unexpected WebBridge client span");
+bg = bg.slice(0, browserClientStart) + "var RB=KiBrowserControl" + bg.slice(browserClientEnd);
+bg = swap(bg, 'try{switch(e.type){case`GET_STATUS`:', 'try{if([`CONNECT`,`DISCONNECT`,`TEST_CONNECTION`,`RECONCILE_NOW`,`UPGRADE_DAEMON`,`GENERATE_CONNECTION`].includes(e.type)&&(t.id!==chrome.runtime.id||!t.url?.startsWith(chrome.runtime.getURL(``)))){n({error:`forbidden`});return}switch(e.type){case`GET_STATUS`:');
+bg = swap(bg, 'await n(WF(e))', 'await n(WF(e),{signal:AbortSignal.timeout(3000),redirect:`error`})');
+bg = swap(bg, 'function Ot(e,t){let n=Xe.get(t);', 'function Ot(e,t){kiWorkspaceParents.set(e,kiWorkspaceOwner(t));let n=Xe.get(t);');
+bg = swap(bg, 'function kt(e){Xe.delete(e)}', 'function kt(e){Xe.delete(e),kiWorkspaceParents.delete(e),kiContextTurns.delete(e)}');
 bg = swap(bg, "maxRetryAttempts:h}=e,g=sf()", "maxRetryAttempts:h,kiBefore:kiB}=e,g=sf()");
 bg = swap(bg, "try{for(;;){if(n.throwIfAborted(),_>=m)throw kE(m);", "try{for(;;){if(await kiB?.(),n.throwIfAborted(),_>=m)throw kE(m);");
 bg = swap(
@@ -116,11 +198,21 @@ bg = swap(bg, "if(e===`navigate`||e===`find_tab`){let e=c?.tabId;", "if(e===`nav
 bg = swap(
   bg,
   "return Object.entries(pP).filter(([e])=>i===`main`||e!==`agent`).map(([i,a])=>i===`agent`?AP(e,t,r?.onChildEvent):i===`await_user_action`?PP(e):i===`skill`?FP(n):i===`save_skill`?IP():i===`delete_skill`?LP():i===`run_saved_skill`?zP(e):kP(i,a,e))}",
-  "return[...Object.entries(pP).filter(([e])=>i===`main`||e!==`agent`).map(([i,a])=>i===`agent`?AP(e,t,r?.onChildEvent):i===`await_user_action`?PP(e):i===`skill`?FP(n):i===`save_skill`?IP():i===`delete_skill`?LP():i===`run_saved_skill`?zP(e):kP(i,a,e)),...kiMcpToolDefs()]}"
+  "return kiPolicyTools([...Object.entries(pP).filter(([e])=>i===`main`||e!==`agent`).map(([i,a])=>i===`agent`?AP(e,t,r?.onChildEvent):i===`await_user_action`?PP(e):i===`skill`?FP(n):i===`save_skill`?IP():i===`delete_skill`?LP():i===`run_saved_skill`?zP(e):kP(i,a,e)),...kiMcpToolDefs(e),...kiNativeToolDefs(e),...kiProductTools(i,e),...kiSecurityToolDefs(e)],e)}"
 );
-bg = swap(bg, ",d=u(e.llm),f=t=>new cM", ",d=(await kiMcpRefresh(),u(e.llm)),f=t=>new cM");
-bg = swap(bg, "loopTools:BP(e.conversationId,t,i)", "loopTools:(await kiMcpRefresh(),BP(e.conversationId,t,i))");
-bg = swap(bg, "default:n({error:`unknown type: ${e.type}`})", "default:e.type===`KI_MCP`||n({error:`unknown type: ${e.type}`})");
+bg = swap(bg, 'async function TP(e,t){if(QN(e)||await FN(e.domain,e.action))return null;let n=await KN.request(e,t);return n===`deny`?{output:`Permission denied by user.`,isError:!0}:(n===`allow_for_domain`&&await IN(e.domain,e.action),null)}',
+  'async function TP(e,t){if(e.policyLease){await kiPolicyRecheck(e.policyLease);if(e.policyLease.authorized||await FN(e.domain,e.action))return null}else if(QN(e)||await FN(e.domain,e.action))return null;let{policyLease:kiLease,...kiRequest}=e;let n=await KN.request(kiRequest,t);if(n===`deny`)return{output:`Permission denied by user.`,isError:!0};if(e.policyLease){e.policyLease.approved=!0;e.policyLease.authorized=!0}if(n===`allow_for_domain`)await IN(e.domain,e.action);return null}');
+bg = swap(bg, 'toolName:e,session:n,preview:f===void 0?', 'toolName:e,policyLease:i[KI_POLICY_CONTEXT],session:n,preview:f===void 0?');
+bg = swap(bg, 'let c=await r.execute(o);', 'await kiPolicyRecheck(i[KI_POLICY_CONTEXT]);let c=await kiBrowserAgentResult(e,o,await r.execute(o),n);');
+bg = swap(bg, 'a=e.tools?.find(e=>e.name===n);if(a===void 0)', 'a=e.tools?.find(e=>e.name===n)||kiSecurityLegacyLookup(e.tools,n);if(a===void 0)');
+// Saved workflows have their own browser approval entry point.
+bg = swap(bg, 'toolName:`run_saved_skill`,session:e,preview:', 'toolName:`run_saved_skill`,policyLease:n[KI_POLICY_CONTEXT],session:e,preview:');
+bg = swap(bg, ",d=u(e.llm),f=t=>new cM", ",d=(GP(e.turnProfile)?[]:(kiContextTurns.has(kiContextOwner(e.conversationId))||await kiContextPrepare(e.conversationId),await kiMcpRefresh(e.conversationId),await kiPtkLoad(),await kiDastLoad(),await kiAuthzLoad(),u(e.llm))),f=t=>new cM");
+bg = swap(bg, "loopTools:BP(e.conversationId,t,i)", "loopTools:(await kiContextPrepare(e.conversationId),await kiMcpRefresh(e.conversationId),await kiPtkLoad(),await kiDastLoad(),await kiAuthzLoad(),BP(e.conversationId,t,i))");
+bg = swap(bg, "default:n({error:`unknown type: ${e.type}`})", "default:(typeof e.channel===`string`&&(e.channel.startsWith(`ptk_`)||e.channel.startsWith(`CERT_X_SECURITY_`)))||e.type===`KI_MCP`||e.type===`KI_NATIVE`||e.type===`KI_BROWSER_CONTROL`||e.type===`KI_PERMISSIONS`||e.type===`KI_WORKSPACE`||e.type===`KI_CONTEXT`||e.type===`KI_CSP`||e.type===`KI_PTK`||e.type===`KI_DAST`||e.type===`KI_AUTHZ`||e.type===`KI_SECURITY`||n({error:`unknown type: ${e.type}`})");
+bg = swap(bg, 'return{mimeType:`application/pdf`,dataLength:o.data.length', 'return{...await kiWorkspaceSavePdf(o.data,e.file_name),mimeType:`application/pdf`,dataLength:o.data.length');
+bg = swap(bg, 'PDF generated (${o.data.length} base64 chars) and not inlined, so it does not flood the transcript.', 'PDF download started; see its returned state. Added to task outputs.');
+js = swap(js, 'ref:Pt,className:`wb-composer`,children:[', 'ref:Pt,className:`wb-composer`,children:[(0,A.jsx)(KiWorkspaceSelector,{session:Hr,state:kiTaskContext,busy:de,models:Yn,modelsReady:Zn}),(0,A.jsx)(KiPtkPanel,{session:Hr,state:kiTaskContext,onOpen:section=>{kiSetSettingsSection(section);Li()}}),(0,A.jsx)(KiDastPanel,{session:Hr,state:kiTaskContext}),(0,A.jsx)(KiDastPanel,{session:Hr,kind:`authz`}),(0,A.jsx)(KiCspIndicator,{session:Hr}),(0,A.jsx)(KiTaskOutputs,{session:Hr,onAttach:va,workspaceId:kiTaskContext.chats[Hr]?.workspaceId}),');
 // Let the page/working-tab tools accept the optional `tab` arg like the built-in
 // interaction tools. Two lists must agree: the schema-augmentation loop (adds the
 // `tab` property) and the kP execution guard (accepts it at call time). The three
@@ -175,6 +267,7 @@ for (const need of ["function wbExpandClosed(", "__wb_read_file", "func:Fr", "wb
   if (!bg.includes(need)) throw new Error("background rebuild missing " + need + " — the picker snapshot is older than the working tools");
 }
 if (bg.includes("frame-read.js")) throw new Error("background rebuild still injects frame-read.js, which is not in the extension");
+bg = bg.replaceAll('chrome.debugger', 'kiBrowserChrome.debugger').replaceAll('chrome.runtime.lastError', 'kiBrowserChrome.runtime.lastError');
 fs.writeFileSync(path.join(root, "background/background.js"), bg);
 console.log("patched background.js", bg.length, "bytes");
 
@@ -231,8 +324,20 @@ if (process.env.KI_FAKE_EFFORT) {
   console.log("TEST BUILD: fake effort options on every model");
 }
 
+// Outside Full access, native approvals show the full payload and offer
+// once/deny only. Browser domain grants do not authorize OS operations.
+js = swap(js, "description:f(e,`approval.fullDesc`)", "description:f(e,`approval.fullDesc`)+(e===`en`?` Also applies to local computer tools when enabled. Tool rules still apply.`:` 启用本机工具后也适用于本机操作。`)");
+js = swap(js, "description:P(`approval.fullConfirmBody`)", "description:P(`approval.fullConfirmBody`)+(C===`en`?` When local computer access is enabled, local commands, file operations and local MCP tools also run without approval prompts. Custom tool rules still apply.`:` 启用本机访问后，本机命令、文件操作和本机 MCP 工具也会直接执行，无需逐次批准。`)");
+js = swap(js, "l=gT(e.action,i),u=e.preview?.url", "l=e.policyPrompt?(i===`en`?`use this tool`:`使用此工具`):e.local?(i===`en`?`access your local computer`:`访问本机`):gT(e.action,i),u=e.preview?.url");
+js = swap(js, "children:a(`perm.subtitle`)", "children:e.policyPrompt?(i===`en`?`Review this tool call. Approval applies once.`:`请检查工具调用。批准仅限本次。`):e.local?(i===`en`?`Review this local operation. Approval applies once.`:`请检查本机操作。批准仅限本次。`):a(`perm.subtitle`)");
+js = swap(js, "children:_T(u,60)", "style:e.local?{whiteSpace:`pre-wrap`,maxHeight:`320px`,overflow:`auto`,overflowWrap:`anywhere`}:void 0,children:e.local?u:_T(u,60)");
+js = swap(js, "(0,A.jsx)(`button`,{type:`button`,className:`wb-btn wb-btn--primary`,onClick:o,children:a(`perm.remember`)})", "!e.local&&(0,A.jsx)(`button`,{type:`button`,className:`wb-btn wb-btn--primary`,onClick:o,children:a(`perm.remember`)})");
+js = swap(js, 'for(let e of dT.listPending())dT.resolve(e.toolCallId,`allow_once`)', 'for(let e of dT.listPending())if(!e.policyExplicit)dT.resolve(e.toolCallId,`allow_once`)');
+js = swap(js, 'children:Ea.label', 'children:(0,A.jsxs)(A.Fragment,{children:[Ea.label,(0,A.jsx)(KiPolicyIndicator,{lang:C})]})');
+
 const css = fs.readFileSync(path.join(original, path.basename(cssName)), "utf8") +
-  "\n" + fs.readFileSync(path.join(__dirname, "src", "ki-picker.css"), "utf8");
+  "\n" + fs.readFileSync(path.join(__dirname, "src", "ki-picker.css"), "utf8") +
+  "\n" + fs.readFileSync(path.join(root, "providers/security.css"), "utf8");
 
 fs.writeFileSync(path.join(root, jsName), js);
 fs.writeFileSync(path.join(root, cssName), css);

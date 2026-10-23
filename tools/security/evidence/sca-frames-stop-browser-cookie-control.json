@@ -1,0 +1,84 @@
+{
+  "error": "AssertionError [ERR_ASSERTION]: Root, nested same-site, OOPIF and nested OOPIF document sources\n\n2 !== 4\n\n    at main (C:\\Users\\zeb\\Downloads\\ki\\tools\\security\\tests\\sca-frames-stop.browser.cjs:64:14)",
+  "cases": [
+    {
+      "account": "a",
+      "findings": 18,
+      "bodyCoverage": {
+        "captured": 2,
+        "analyzed": 2,
+        "gaps": 0
+      },
+      "sourceCoverage": {
+        "captured": 2,
+        "analyzed": 2,
+        "gaps": 0
+      },
+      "acquisitions": [
+        "captured_http_body"
+      ],
+      "extraReads": [],
+      "liveReads": [
+        {
+          "url": "/opaque/fetch",
+          "account": "a"
+        },
+        {
+          "url": "/opaque/xhr",
+          "account": "a"
+        }
+      ],
+      "warnings": []
+    }
+  ],
+  "wire": [
+    {
+      "url": "/login/a",
+      "account": "anonymous"
+    },
+    {
+      "url": "/app",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/asset.js",
+      "account": "a"
+    },
+    {
+      "url": "/frame",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/frame.js",
+      "account": "a"
+    },
+    {
+      "url": "/cross",
+      "account": "anonymous"
+    },
+    {
+      "url": "/opaque/cross.js",
+      "account": "anonymous"
+    },
+    {
+      "url": "/nested",
+      "account": "anonymous"
+    },
+    {
+      "url": "/opaque/nested.js",
+      "account": "anonymous"
+    },
+    {
+      "url": "/favicon.ico",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/fetch",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/xhr",
+      "account": "a"
+    }
+  ]
+}

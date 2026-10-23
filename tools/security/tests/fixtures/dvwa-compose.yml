@@ -1,0 +1,29 @@
+# Resettable local comparison target. Image digests were resolved from the
+# official DVWA compose image and MariaDB 10 on 2026-10-23.
+name: ${CERTX_DVWA_PROJECT:-certx-dvwa-eval}
+services:
+  db:
+    image: docker.io/library/mariadb@sha256:0d0945c57f75b3a3b9ebe71aedaaad005fa5305054e8fca3d2e42a8c92b43b5e
+    environment:
+      MYSQL_ROOT_PASSWORD: dvwa
+      MYSQL_DATABASE: dvwa
+      MYSQL_USER: dvwa
+      MYSQL_PASSWORD: p@ssw0rd
+    volumes:
+      - database:/var/lib/mysql
+    networks:
+      - lab
+  web:
+    image: ghcr.io/digininja/dvwa@sha256:8029450682bd70e2e8cd1ffe8e46dd1885ff2a913296091cebfa8ba0a7d36498
+    environment:
+      DB_SERVER: db
+    depends_on:
+      - db
+    ports:
+      - 127.0.0.1:${CERTX_DVWA_PORT:-4281}:80
+    networks:
+      - lab
+volumes:
+  database:
+networks:
+  lab:

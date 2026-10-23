@@ -125,8 +125,9 @@ function kiGraphToolDefs(session) {
   ];
 }
 // Playbook seed layer, distilled from the checkbox methodology sources
-// (Get Root Access + file-upload attack map). Pulled via graph_find on
-// demand; deliberately terse — chains of moves, not prose.
+// (Get Root Access, the file-upload attack map, and the Agentic AI Red Team
+// Checklist). Pulled via graph_find on demand; deliberately terse — chains
+// of moves, not prose.
 var KI_GRAPH_PLAYBOOKS = [
   { id: "pb:recon-entry", kind: "playbook", label: "Recon and entry points", data: { triggers: [], chain: ["Map assets, subdomains and origins", "Enumerate entry points: routes, forms, API operations", "Identify roles and account tiers", "Fingerprint technologies", "Write everything to the graph before testing"] } },
   { id: "pb:file-upload", kind: "playbook", label: "File upload attacks", data: { triggers: ["upload", "avatar", "import", "attachment", "file"], chain: ["Probe default web-shell extensions per language (php/asp/jsp)", "Content-Type and magic-byte mismatches", "Filename tricks: null byte, special characters, double extensions", "Configuration files (.htaccess, web.config) as payload", "Parser CVEs (ImageMagick, image libraries)", "ZIP: ZipSlip path traversal on extraction", "SVG/XXE upload for exotic-file XXE", "Prove execution, then bound impact"] } },
@@ -139,5 +140,6 @@ var KI_GRAPH_PLAYBOOKS = [
   { id: "pb:business-logic", kind: "playbook", label: "Business logic (purchase flows)", data: { triggers: ["price", "cart", "voucher", "coupon", "gift", "checkout", "order", "quantity"], chain: ["Client-side price tampering", "Voucher reuse and race conditions", "Rounding and currency confusion", "Negative quantities and integer edges", "Order-state and workflow skips"] } },
   { id: "pb:ssrf-oob", kind: "playbook", label: "SSRF and out-of-band", data: { triggers: ["url", "fetch", "preview", "import", "webhook", "callback"], chain: ["URL parameter scheme and host probing", "Internal ranges and metadata endpoints", "Response differentials when blind", "Out-of-band callback confirmation", "Bound impact to observed internal interaction"] } },
   { id: "pb:deserialization", kind: "playbook", label: "Insecure deserialization", data: { triggers: ["cookie", "session", "serialize", "export", "base64"], chain: ["Identify framework by blob shape", "Known gadget chains for the stack", "Read-only probes before execution attempts", "RCE proof with controlled marker"] } },
+  { id: "pb:agentic-ai", kind: "playbook", label: "Agentic AI and LLM attacks", data: { triggers: ["chat", "prompt", "assistant", "agent", "mcp", "llm", "gpt", "rag", "embedding", "vector", "summar", "translate", "tool_call"], chain: ["Fingerprint the AI stack from public artifacts and responses (model, framework, provider)", "Recover system prompts, AGENTS/SKILL instruction files and tool manifests", "Direct prompt injection; then indirect injection through ingested content (pages, emails, documents, RAG corpus)", "Encoding and filter-evasion variants when input filters engage", "Abuse exposed tools/MCP endpoints: unauthorized actions, cross-tool chaining", "Poison memory or vector stores for persistence", "Exfiltrate through tool calls, webhooks or CI/CD autonomy", "Bound impact: distinguish executed action from refusal or hallucination"] } },
 ];
 if (typeof module === "object" && module.exports) module.exports = { kiGraphToolDefs, kiGraphApply, kiGraphFindRaw, kiGraphDigest, KI_GRAPH_PLAYBOOKS };

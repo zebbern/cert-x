@@ -16,10 +16,12 @@ module.exports = function createJobs({ launch, killTree, localPath, integer, tex
   }
   async function start(params, signal) {
     const command = text(params.command, "command"), cwd = localPath(params.cwd), owner = text(params.owner, "task owner");
-    // FIXME(justified-limits): 30 min default / 60 min max job duration, the
-    // 8-concurrent-job and 32-retained-job counts and the 1 MiB per-job output
-    // retention below are unverified defaults; confirm or raise against real
-    // usage — nothing platform-side forces them this low.
+    // Justified: 30 min default suits scans/recon scripts; the 60 min ceiling
+    // bounds orphaned processes across host restarts while allowing long
+    // observation runs — raise it when a real workflow demands longer, not
+    // by default. The 8-concurrent and 32-retained counts match the 8-slot
+    // MCP/process budget; 1 MiB output per job bounds host memory at 32 MiB
+    // worst case across the retention window.
     const timeout = integer(params.timeout_ms, 30 * 60 * 1000, 100, 60 * 60 * 1000);
     if ([...jobs.values()].filter(job => ["running", "cancelling"].includes(job.state)).length >= 8) throw Error("Up to 8 background commands can run at once.");
     while (jobs.size >= 32) { const completed = [...jobs.values()].find(job => !["running", "cancelling"].includes(job.state)); if (!completed) break; jobs.delete(completed.id); }

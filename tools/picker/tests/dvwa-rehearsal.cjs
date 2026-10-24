@@ -8,7 +8,7 @@ const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'C:/Users/zeb/AppData/Ro
 const root=path.resolve(__dirname,'../../..'),temp=fs.mkdtempSync(path.join(os.tmpdir(),'cert-x-dvwa-rehearsal-'));
 const origin=process.env.DVWA_ORIGIN||'http://127.0.0.1:4280',sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 let browser,panel,worker,base,session,modelStep=0;
-const pageErrors=[],modelCalls=[],toolResults=[];
+const pageErrors=[],modelCalls=[],toolResults=[],resumeSeen=[];
 const mark=(phase,detail)=>console.log('REHEARSAL',phase,detail||'');
 async function main(){
 let provider;
@@ -25,15 +25,21 @@ try{
    // task brief carries the marker; the subagent writes the graph and returns
    // a summary, then the orchestrator reads the digest.
    const isSub=(request.messages||[]).some(item=>item.role==='user'&&String(item.content).includes('RECON-BRIEF'));
+   const isResume=(request.messages||[]).some(item=>item.role==='user'&&String(item.content).includes('[resume]'));
    const hadToolResult=(request.messages||[]).some(item=>item.role==='tool');
+   if(isResume)resumeSeen.push(1);
    const graphWrite={name:'graph_write',arguments:JSON.stringify({nodes:[
       {id:'dvwa',kind:'origin',label:origin},
       {id:'r-sqli',kind:'route',label:'/vulnerabilities/sqli/'},
       {id:'p-id',kind:'param',label:'id'}],
      edges:[{from:'dvwa',to:'r-sqli',kind:'hosts'},{from:'r-sqli',to:'p-id',kind:'has_param'}]})};
-   let action;
-   if(isSub)action=hadToolResult?null:graphWrite;
+   // Failure injection: the subagent's would-be final answer (after its graph
+   // write) is killed mid-stream; the resume path must retry with [resume]
+   // and only then deliver the summary.
+   let action,killStream=false;
+   if(isSub){if(isResume)action=null;else if(hadToolResult)killStream=true;else action=graphWrite;}
    else{const main=[{name:'agent',arguments:JSON.stringify({description:'Recon the DVWA sqli area',prompt:'RECON-BRIEF: enumerate the DVWA sqli area and record it with graph_write, then summarize.'})},{name:'graph_digest',arguments:'{}'}];action=main[modelStep++]||null;}
+   if(killStream){res.writeHead(200,{'Content-Type':'text/event-stream'});res.write('data: '+JSON.stringify({id:'rehearsal',object:'chat.completion.chunk',choices:[{index:0,delta:{role:'assistant',content:'SUBAG'}}]})+'\n\n');res.destroy();return;}
    const finalText=isSub?'SUBAGENT-DONE':'REHEARSAL-DONE';
    res.writeHead(200,{'Content-Type':'text/event-stream'});const send=x=>res.write('data: '+JSON.stringify(x)+'\n\n');
    send({id:'rehearsal',object:'chat.completion.chunk',choices:[{index:0,delta:action?{role:'assistant',tool_calls:[{index:0,id:'reh-'+Math.floor(Math.random()*1e9),type:'function',function:{name:action.name,arguments:action.arguments}}]}:{role:'assistant',content:finalText}}]});
@@ -120,6 +126,7 @@ try{
  const writeResult=JSON.parse(toolResults.find(text=>text.includes('"written"')));
  assert.equal(writeResult.written.nodes,3);
  assert.ok(toolResults.some(text=>text.includes('SUBAGENT-DONE')),'The subagent summary must return to the orchestrator');
+ assert.equal(resumeSeen.length,1,'the killed subagent stream must trigger exactly one [resume] retry');
  const digest=JSON.parse(toolResults.find(text=>text.includes('"unvisitedRoutes"')));
  assert.equal(digest.counts.nodes>=3,true);
  assert.ok(digest.unvisitedRoutes.includes('/vulnerabilities/sqli/'),'frontier must list the unvisited sqli route');

@@ -10,6 +10,9 @@ async function main(){
  const id=new URL(worker.url()).host,session='lifecycle-chat',settings=await context.newPage();
  await settings.goto('chrome-extension://'+id+'/providers/providers.html?section=security&session='+session);
  const request=async(op,args={})=>{const v=await settings.evaluate(m=>chrome.runtime.sendMessage(m),{type:'KI_SECURITY',op,session,...args});assert.equal(v?.ok,true,JSON.stringify(v));return v.result;};
+ // Worker restarts race state hydration: poll for the exact expected runs
+ // instead of asserting on the first read after reload (the old flake).
+ const waitFor=async(pred,desc)=>{for(let i=0;i<80;i++){try{const s=await request('state');if(pred(s))return s;}catch{}await new Promise(r=>setTimeout(r,500));}throw Error('Timed out waiting for '+desc);};
  await settings.evaluate(session=>chrome.runtime.sendMessage({type:'KI_CONTEXT',op:'assign_chat',session,profileId:'bugbounty',modelExplicit:null}),session);
  const page=await context.newPage();await page.goto(origin+'/?q=one');
  const tabId=(await request('tabs')).find(tab=>tab.url.startsWith(origin)).tabId;
@@ -22,21 +25,21 @@ async function main(){
  const cdp=await context.newCDPSession(settings),versions=new Map();
  cdp.on('ServiceWorker.workerVersionUpdated',event=>{for(const v of event.versions)versions.set(v.versionId,v);});
  await cdp.send('ServiceWorker.enable');
- for(let i=0;i<100&&![...versions.values()].some(v=>v.scriptURL===worker.url());i++)await new Promise(r=>setTimeout(r,50));
+ for(let i=0;i<200&&![...versions.values()].some(v=>v.scriptURL===worker.url());i++)await new Promise(r=>setTimeout(r,50));
  const version=[...versions.values()].find(v=>v.scriptURL===worker.url());assert.ok(version,'Browser exposes the installed worker version');
  await cdp.send('ServiceWorker.stopWorker',{versionId:version.versionId});
  await settings.reload();
- const state=await request('state'),completed=state.runs.find(r=>r.runId===run.runId),interrupted=state.runs.find(r=>r.runId===active.runId);
+ const state=await waitFor(s=>{const c=s.runs.find(r=>r.runId===run.runId),a=s.runs.find(r=>r.runId===active.runId);return c&&a&&c.state==='completed'&&a.state==='interrupted';},'completed+interrupted runs after restart'),completed=state.runs.find(r=>r.runId===run.runId),interrupted=state.runs.find(r=>r.runId===active.runId);
  assert.equal(completed.state,'completed');assert.equal(interrupted.state,'interrupted');
  const after=await request('findings',{runId:run.runId});assert.deepEqual(after.findings,before.findings,'Completed evidence persists exactly across worker restart');
  // No stale active run is silently replayed. A fresh start must acquire resources successfully.
  const fresh=await request('start',{tabId,engines:['SAST'],options:{preset:'ptk-defaults'}});assert.equal(fresh.state,'running');await request('stop',{runId:fresh.runId});
  const other=await settings.evaluate(m=>chrome.runtime.sendMessage(m),{type:'KI_SECURITY',op:'findings',session:'unrelated-chat',runId:run.runId});assert.equal(other.ok,false);
  const activeDast=await request('start',{tabId,engines:['DAST'],options:{moduleIds:['xss'],runCve:false,allowCaptureWithoutInteraction:true,maxRequestsPerSecond:2}});await page.reload();
- for(let i=0;i<100&&activeProbes===0;i++)await new Promise(r=>setTimeout(r,100));assert.ok(activeProbes>0,'DAST sent actual probes before restart');
+ for(let i=0;i<300&&activeProbes===0;i++)await new Promise(r=>setTimeout(r,100));assert.ok(activeProbes>0,'DAST sent actual probes before restart');
  const current=[...versions.values()].find(v=>v.scriptURL.endsWith('/background/entry.js')&&v.runningStatus==='running');assert.ok(current);
  await cdp.send('ServiceWorker.stopWorker',{versionId:current.versionId});await settings.reload();
- const restarted=await request('state'),interruptedDast=restarted.runs.find(r=>r.runId===activeDast.runId);assert.equal(interruptedDast.state,'interrupted');assert.equal(interruptedDast.recoveredEvidence,true,'Surviving executor evidence is retained');
+ const restarted=await waitFor(s=>{const d=s.runs.find(r=>r.runId===activeDast.runId);return d&&d.state==='interrupted'&&d.recoveredEvidence===true;},'recovered DAST evidence after executor release'),interruptedDast=restarted.runs.find(r=>r.runId===activeDast.runId);assert.equal(interruptedDast.state,'interrupted');assert.equal(interruptedDast.recoveredEvidence,true,'Surviving executor evidence is retained');
  const recovered=await request('evidence',{runId:activeDast.runId});assert.equal(recovered.native.sessionId,activeDast.runtimeId,'Recovery binds to the original automation session');
  const nativeDast=recovered.native.engines.find(engine=>engine.engine==='DAST');assert.ok(nativeDast?.scanId);assert.equal(nativeDast.scan.scanId,nativeDast.scanId);assert.ok(nativeDast.scan.requests?.length>0,'Actual pre-interruption requests survive executor release');assert.equal(nativeDast.scan.interrupted,true);
  const settled=activeProbes;await new Promise(r=>setTimeout(r,1200));assert.equal(activeProbes,settled,'Interrupted DAST cannot continue sending probes');

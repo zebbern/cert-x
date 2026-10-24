@@ -14,9 +14,14 @@ let browser,panel,worker,session;
 const started=Date.now();let mark=(p,d)=>console.log('M4',p,d||'');
 async function main(){
 try{
- const downloads=path.join(temp,'downloads'),profile=path.join(temp,'profile');fs.mkdirSync(downloads);fs.mkdirSync(path.join(profile,'Default'),{recursive:true});
- fs.writeFileSync(path.join(profile,'Default/Preferences'),JSON.stringify({download:{default_directory:downloads,prompt_for_download:false}}));
- browser=await chromium.launchPersistentContext(profile,{headless:true,downloadsPath:downloads,viewport:{width:1100,height:1000},executablePath:process.env.CHROMIUM_PATH||path.join(process.env.LOCALAPPDATA,'ms-playwright/chromium-1234/chrome-win64/chrome.exe'),args:['--disable-extensions-except='+root,'--load-extension='+root]});
+ // M4_PROFILE: persistent profile dir (login survives across runs — set up
+ // once via gs-login.cjs). M4_HEADED=1 shows the window for interactive login.
+ const persistentProfile=process.env.M4_PROFILE||'';
+ const downloads=path.join(persistentProfile||temp,'downloads'),profile=persistentProfile||path.join(temp,'profile');
+ fs.mkdirSync(downloads,{recursive:true});fs.mkdirSync(path.join(profile,'Default'),{recursive:true});
+ const prefsPath=path.join(profile,'Default/Preferences');
+ if(!fs.existsSync(prefsPath))fs.writeFileSync(prefsPath,JSON.stringify({download:{default_directory:downloads,prompt_for_download:false}}));
+ browser=await chromium.launchPersistentContext(profile,{headless:process.env.M4_HEADED==='1'?false:true,downloadsPath:downloads,viewport:{width:1100,height:1000},executablePath:process.env.CHROMIUM_PATH||path.join(process.env.LOCALAPPDATA,'ms-playwright/chromium-1234/chrome-win64/chrome.exe'),args:['--disable-extensions-except='+root,'--load-extension='+root]});
  browser.on('console',message=>{const text=message.text();if(!/favicon|preload|net::ERR_FAILED.*favicon/i.test(text))console.log('CONSOLE['+message.type()+']',text.slice(0,300));});
  browser.on('pageerror',error=>console.log('PAGEERROR',String(error).slice(0,300)));
  browser.on('request',request=>{if(request.url().includes('openrouter')){console.log('NET-REQ',request.method(),request.url().slice(0,140));if(request.method()==='POST'){const body=request.postData();if(body){const n=(fs.readdirSync('C:/tmp').filter(f=>f.startsWith('m4-req-')).length)+1;fs.writeFileSync('C:/tmp/m4-req-'+n+'.json',body);console.log('REQ-BODY saved','C:/tmp/m4-req-'+n+'.json',body.length+' chars');}}}});

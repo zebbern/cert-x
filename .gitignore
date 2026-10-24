@@ -9,3 +9,4 @@ tools/picker/tests/shots/
 providers/ptk-connection.json
 providers/ptk-connection.json.tmp
 .env.local
+.zcode/

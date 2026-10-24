@@ -2,12 +2,12 @@
 
 Ordered by expected value, not by age.
 
-1. **Surface provider refusals.** A `content_filter` refusal currently reads
-   as "turn interrupted". Investigated 2026-10-23: refusals arrive in the
-   response stream inside the minified provider layer — a picker-source shim
-   cannot reach them without fetch-body interception, which is invasive for
-   all model traffic. Deferred because the primary setup (MiMo) is unaffected;
-   revisit if Anthropic models become the default. See `docs/provider-notes.md`.
+1. ~~**Surface provider refusals.**~~ **Done (2026-10-24):** the provider-compat
+   fetch wrapper now detects `content_filter`/refusal markers inside 200 SSE
+   streams and fails the turn with a named error and model-switch recovery
+   (`tools/picker/src/ki-provider-compat.js`, 4 unit contracts, suite 713).
+   The live Anthropic end-to-end check was killed mid-run; unit coverage is
+   deterministic — verify in a real session when convenient.
 2. **Subagent stream resume.** The graph-checkpoint recovery envelope works
    live (runs 4–5 of the M4 baseline); the deeper fix resumes the subagent
    thread itself instead of re-delegating with a digest brief.

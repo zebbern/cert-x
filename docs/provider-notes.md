@@ -7,9 +7,10 @@
 - **Anthropic models via OpenRouter blanket-refuse cert-x's security-testing
   prompt at the provider level** (`refusal` + `finish_reason:
   content_filter` on the first turn of an authorized lab session). The
-  harness currently surfaces this as a generic "turn interrupted" — naming
-  provider refusals explicitly is on the backlog. Non-Anthropic models
-  tested (MiMo) proceed normally.
+  provider-compat fetch wrapper now names this in the turn error with a
+  model-switch recovery suggestion; clean streams and non-chat endpoints
+  pass through untouched (`ki-provider-compat.js`, unit-tested). Non-Anthropic
+  models tested (MiMo) proceed normally.
 - **Large-context streaming**: early live sessions died mid-stream at
   ~170–340 KB contexts while the provider completes the identical requests
   standalone — a client-side drop. Keeping the side panel resident

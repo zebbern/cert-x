@@ -157,6 +157,14 @@ bg = swap(bg, kiOpResumeNeedle, kiOpResumeReplacement);
 // BugStore: 10 wasted re-probe turns recovering bodies the fetch already had).
 bg = swap(bg, 'let n=Math.min(Math.max(e.max_bytes??2e6,1),8e6),r=await fetch(t);if(!r.ok)throw Error(`download: HTTP ${r.status} for ${t}`);',
   'let n=Math.min(Math.max(e.max_bytes??2e6,1),8e6),r;try{r=await fetch(t)}catch(x){throw Error(`download: network error fetching ${t}: ${x&&x.message||x}`)}');
+// read_file misuse teaches at the failure point: URLs belong to download, and
+// with no directory listing, path-guessing must stop after one error (observed
+// live: a subagent burned five calls guessing Downloads paths, then three more
+// feeding URLs to read_file).
+bg = swap(bg, 'let max=Math.min(Math.max(e.max_chars??2e5,1),1e6),tab=await chrome.tabs.create({url:`about:blank`,active:!1});',
+  'if(/^https?:\\/\\//i.test(path))throw Error(`read_file: local files only — for http(s) URLs use download (returns the body inline, any status)`);let max=Math.min(Math.max(e.max_chars??2e5,1),1e6),tab=await chrome.tabs.create({url:`about:blank`,active:!1});');
+bg = swap(bg, 'catch(err){throw Error(`read_file: could not read ${raw}. (${err instanceof Error?err.message:String(err)})`)}',
+  'catch(err){throw Error(`read_file: could not read ${raw}. (${err instanceof Error?err.message:String(err)}) If a tool call produced this file, use the exact saved path from that call result; there is no directory listing, so do not guess paths.`)}');
 // The favicon/cursor marker is cosmetic. On a second file selection after a
 // download it can leave a Runtime.evaluate pending and block upload CDP work.
 bg = swap(bg, 'await Da(n,u)}try{let o={', 'if(e!==`upload`)await Da(n,u)}try{let o={');

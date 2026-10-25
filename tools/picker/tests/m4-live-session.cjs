@@ -91,8 +91,10 @@ let posts=0,lastPostAt=Date.now();
    await sleep(5000);
    // At 60% of the timebox, steer the model to stop expanding and deliver:
    // thorough models accept this but need the remaining box to generate the
-   // report — 75% proved too late twice (report lost mid-generation).
-   if(!steered&&elapsed>=timeboxMinutes*36){try{steered=true;mark('wrap-up steering '+(await sendText('Wrap up now: stop starting new tests and produce your final report. State every proven finding with the invariant (given [prerequisites], I demonstrated [unauthorized action] across [security boundary], producing [observable effect]); list hypotheses you did not prove as such.')),Math.round(elapsed)+'s');}catch{}}
+   // report — 75% proved too late twice (report lost mid-generation). The
+   // send is retried until verified (a queued-behind-turn or await-user send
+   // delivers nothing; verification makes the retry observable).
+   if(!steered&&elapsed>=timeboxMinutes*36&&elapsed%20<5){try{const r=await sendText('Wrap up now: stop starting new tests and produce your final report. State every proven finding with the invariant (given [prerequisites], I demonstrated [unauthorized action] across [security boundary], producing [observable effect]); list hypotheses you did not prove as such.');mark('wrap-up steering '+r,Math.round(elapsed)+'s');if(r!=='SEND FAILED')steered=true;}catch{}}
    // Natural finish (headless only; a headed run has a human judge): no model
    // traffic anywhere — main chat or subagents — for 4 minutes. The old DOM
    // signal ([aria-label="Profile"] re-enabled) went stale: it never re-enabled

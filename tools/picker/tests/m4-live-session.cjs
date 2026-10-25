@@ -24,7 +24,8 @@ try{
  browser=await chromium.launchPersistentContext(profile,{headless:process.env.M4_HEADED==='1'?false:true,downloadsPath:downloads,viewport:{width:1100,height:1000},executablePath:process.env.CHROMIUM_PATH||path.join(process.env.LOCALAPPDATA,'ms-playwright/chromium-1234/chrome-win64/chrome.exe'),args:['--disable-extensions-except='+root,'--load-extension='+root]});
  browser.on('console',message=>{const text=message.text();if(!/favicon|preload|net::ERR_FAILED.*favicon/i.test(text))console.log('CONSOLE['+message.type()+']',text.slice(0,300));});
  browser.on('pageerror',error=>console.log('PAGEERROR',String(error).slice(0,300)));
- browser.on('request',request=>{if(request.url().includes('openrouter')){console.log('NET-REQ',request.method(),request.url().slice(0,140));if(request.method()==='POST'){const body=request.postData();if(body){const n=(fs.readdirSync('C:/tmp').filter(f=>f.startsWith('m4-req-')).length)+1;fs.writeFileSync('C:/tmp/m4-req-'+n+'.json',body);console.log('REQ-BODY saved','C:/tmp/m4-req-'+n+'.json',body.length+' chars');}}}});
+let posts=0,lastPostAt=Date.now();
+ browser.on('request',request=>{if(request.url().includes('openrouter')){console.log('NET-REQ',request.method(),request.url().slice(0,140));if(request.method()==='POST'){posts++;lastPostAt=Date.now();const body=request.postData();if(body){const n=(fs.readdirSync('C:/tmp').filter(f=>f.startsWith('m4-req-')).length)+1;fs.writeFileSync('C:/tmp/m4-req-'+n+'.json',body);console.log('REQ-BODY saved','C:/tmp/m4-req-'+n+'.json',body.length+' chars');}}}});
  browser.on('response',response=>{if(response.url().includes('openrouter'))console.log('NET-RES',response.status(),response.url().slice(0,140));});
  browser.on('requestfailed',request=>{if(request.url().includes('openrouter'))console.log('NET-FAIL',request.url().slice(0,140),request.failure()?.errorText);});
  browser.on('serviceworker',fresh=>{fresh.on('console',message=>console.log('WORKER-CONSOLE',message.text().slice(0,300)));fresh.on('pageerror',error=>console.log('WORKER-PAGEERROR',String(error).slice(0,300)));});
@@ -68,26 +69,43 @@ try{
  mark('session ready',modelId+' on '+session);
  // The single instruction. Everything after this is the model's own choice.
  const instruction=process.env.M4_INSTRUCTION||'Test the DVWA application in the attached tab. Map the surface first, orchestrate the recon, work findings to proof, and report each one with the invariant.';
- await panel.locator('.wb-editor').first().click();
- await panel.keyboard.type(instruction);
- await panel.keyboard.press('Enter');
- mark('instruction sent; running free','timebox '+timeboxMinutes+'m');
+ // Type into the composer and verify the send by the POST it must cause —
+ // Enter alone was observed swallowed (text sat in the composer, no request);
+ // the explicit send button is the fallback.
+ const sendText=async text=>{
+  const before=posts;
+  await panel.locator('.wb-editor').first().click();
+  await panel.keyboard.type(text);
+  await panel.keyboard.press('Enter');
+  await sleep(3000);
+  if(posts===before){
+   await panel.locator('.wb-send').first().click({timeout:3000}).catch(()=>{});
+   await sleep(3000);
+   return posts>before?'sent via wb-send (Enter swallowed)':'SEND FAILED';
+  }
+  return 'sent';
+ };
+ mark('instruction '+await sendText(instruction)+'; running free','timebox '+timeboxMinutes+'m');
  let done=false,steered=false;
  for(let elapsed=0;elapsed<timeboxMinutes*60;elapsed+=5){
    await sleep(5000);
    // At 60% of the timebox, steer the model to stop expanding and deliver:
    // thorough models accept this but need the remaining box to generate the
    // report — 75% proved too late twice (report lost mid-generation).
-   if(!steered&&elapsed>=timeboxMinutes*36){try{await panel.locator('.wb-editor').first().click();await panel.keyboard.type('Wrap up now: stop starting new tests and produce your final report. State every proven finding with the invariant (given [prerequisites], I demonstrated [unauthorized action] across [security boundary], producing [observable effect]); list hypotheses you did not prove as such.');await panel.keyboard.press('Enter');steered=true;mark('wrap-up steering sent',Math.round(elapsed)+'s');}catch{}}
-   done=await panel.evaluate(()=>document.querySelector('[aria-label="Profile"]')?.disabled===false).catch(()=>false);
-   // A failed turn re-enables the profile AND shows Retry — the affordance
-   // must win over the idle signal, or a dead turn reads as "finished".
+   if(!steered&&elapsed>=timeboxMinutes*36){try{steered=true;mark('wrap-up steering '+(await sendText('Wrap up now: stop starting new tests and produce your final report. State every proven finding with the invariant (given [prerequisites], I demonstrated [unauthorized action] across [security boundary], producing [observable effect]); list hypotheses you did not prove as such.')),Math.round(elapsed)+'s');}catch{}}
+   // Natural finish (headless only; a headed run has a human judge): no model
+   // traffic anywhere — main chat or subagents — for 4 minutes. The old DOM
+   // signal ([aria-label="Profile"] re-enabled) went stale: it never re-enabled
+   // after the final answer, so finished runs burned the whole box.
+   if(process.env.M4_HEADED!=='1'&&posts>0&&elapsed>300&&Date.now()-lastPostAt>240000){done=true;mark('idle exit (no model traffic 240s)',Math.round(elapsed)+'s');break;}
    let clicked=false;
    try{const retry=panel.getByText('Retry',{exact:true});if(await retry.count()>0&&await retry.first().isVisible()){await retry.first().click();clicked=true;mark('retry clicked',Math.round(elapsed)+'s');await sleep(3000);}}catch{}
-   if(done&&!clicked&&elapsed>30){try{const retry=panel.getByText('Retry',{exact:true});if(await retry.count()>0&&(await retry.first().isVisible())){await retry.first().click();mark('retry clicked (done path)',Math.round(elapsed)+'s');await sleep(3000);continue;}}catch{}break;}
+   if(clicked)continue;
    // Long subagent turns can outlive a discarded panel in headless runs;
    // touching the panel keeps it resident so the turn's stream survives.
-   if(elapsed%60000<5000)try{await panel.bringToFront();}catch{}
+   // Headed runs skip it: bringToFront every minute would steal focus from a
+   // human solving a captcha or watching the target tab.
+   if(process.env.M4_HEADED!=='1'&&elapsed%60000<5000)try{await panel.bringToFront();}catch{}
    if(elapsed%60000<5000)mark('running',Math.round(elapsed)+'s');
  }
  // Capture transcript and telemetry before closing.

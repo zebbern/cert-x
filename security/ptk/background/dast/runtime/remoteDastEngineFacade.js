@@ -473,6 +473,28 @@ export class RemoteDastEngineFacade {
             this.eventApplyChain = Promise.resolve()
         }
         if (requiredCursor !== null && this.publicationCursor >= requiredCursor) return
+        // A replaced controller (worker restart) adopts an executor that keeps
+        // publishing live: a live event can overtake this replay, and its cursor gap
+        // rejects the ordered chain before the replayed page lands. Everything it
+        // skipped is still in the worker journal, so page again from the last applied
+        // receipt. A re-page that applied events is progress however often live events
+        // cut in; only re-pages that apply nothing count, and three of those in a row
+        // mean the next event is missing from the journal, not racing live delivery.
+        for (let stalled = 0; ;) {
+            const before = this.publicationCursor
+            try { await this._replayPages(requiredCursor); await this.eventApplyChain; break }
+            catch (error) {
+                if (String(error?.message || error) !== "dast_runtime_event_cursor_gap") throw error
+                stalled = this.publicationCursor > before ? 0 : stalled + 1
+                if (stalled >= 3) throw error
+                this.eventApplyChain = Promise.resolve()
+            }
+        }
+        if (requiredCursor !== null && this.publicationCursor < requiredCursor) {
+            throw new Error("dast_runtime_event_watermark_unavailable")
+        }
+    }
+    async _replayPages(requiredCursor) {
         while (true) {
             const response = await this.client.request(DAST_RUNTIME_MESSAGE.EVENTS_PAGE, {
                 sessionId: this.sessionId,
@@ -507,10 +529,6 @@ export class RemoteDastEngineFacade {
             await this.eventApplyChain
             if (requiredCursor !== null && this.publicationCursor >= requiredCursor) break
             if (!response.page?.hasMore || !items.length) break
-        }
-        await this.eventApplyChain
-        if (requiredCursor !== null && this.publicationCursor < requiredCursor) {
-            throw new Error("dast_runtime_event_watermark_unavailable")
         }
     }
     async _notifyResultMutation(payload) {

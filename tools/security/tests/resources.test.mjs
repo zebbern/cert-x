@@ -31,6 +31,22 @@ function fixture() {
 
 const iframeAutoAttach={autoAttach:true,waitForDebuggerOnStart:false,flatten:true,filter:[{type:'iframe',exclude:false},{exclude:true}]};
 
+// A JavaScript dialog blocks the page, so a command that awaits page work (Runtime.evaluate
+// with awaitPromise, or a click whose handler calls alert) cannot settle until the dialog
+// is handled. Queued behind it, the handling command waited for the 300 s CDP timeout.
+test('handling a JavaScript dialog is not queued behind a command the dialog blocks', async () => {
+ const f=fixture(),r=createSecurityResources(f.chrome),a=r.forOwner('browser'),target={tabId:9};
+ await r.ready;await a.debugger.attach(target,'1.3');
+ let release,inFlight;const sent=new Promise(r=>{inFlight=r}),send=f.chrome.debugger.sendCommand;
+ f.chrome.debugger.sendCommand=(t,method,params,cb)=>{if(method==='Runtime.evaluate'){release=()=>cb({result:'late'});inFlight();return}send(t,method,params,cb);if(method==='Page.handleJavaScriptDialog')release?.()};
+ const pending=a.debugger.sendCommand(target,'Runtime.evaluate',{expression:'new Promise(r=>{alert(1);r()})',awaitPromise:true});
+ await sent;
+ const handled=await Promise.race([a.debugger.sendCommand(target,'Page.handleJavaScriptDialog',{accept:true}),new Promise(r=>setTimeout(()=>r('still queued behind the blocked evaluate'),500))]);
+ assert.deepEqual(handled,{result:'ok'});
+ assert.deepEqual(await pending,{result:'late'});
+ await assert.rejects(r.forOwner('scan').debugger.sendCommand(target,'Page.handleJavaScriptDialog',{accept:true}),/not acquired/,'only an owner of the attachment may handle its dialogs');
+});
+
 test('new Runtime owner receives exact live contexts without disabling another owner', async () => {
  const f=fixture(),r=createSecurityResources(f.chrome),a=r.forOwner('browser'),b=r.forOwner('scan'),target={tabId:4},child={tabId:4,sessionId:'child'},seen=[];
  await r.ready;await a.debugger.attach(target,'1.3');await a.debugger.sendCommand(target,'Runtime.enable');

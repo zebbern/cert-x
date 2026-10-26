@@ -215,6 +215,16 @@ export function createSecurityResources(native = globalThis.chrome) {
       },
       sendCommand(target, method, params = {}, callback) {
         if (typeof params === 'function') { callback = params; params = {}; }
+        // A JavaScript dialog blocks the page, so a queued command awaiting page work
+        // (an awaitPromise evaluate, a click whose handler alerts) cannot settle until the
+        // dialog is handled. The handling command must not wait behind it; it touches no
+        // domain or attachment bookkeeping, so it needs only the ownership check.
+        if (method === 'Page.handleJavaScriptDialog') return finish((async () => {
+          const state = attachments.get(keyOf(target));
+          if (!state?.owners.has(owner)) throw Error('Debugger resource is not acquired by ' + owner + '.');
+          assertLiveSession(state, target);
+          return call(native.debugger, 'sendCommand', target, method, params);
+        })(), callback);
         return finish(serial('debug:' + keyOf(target), async () => {
           const state = attachments.get(keyOf(target));
           if (!state?.owners.has(owner)) throw Error('Debugger resource is not acquired by ' + owner + '.');

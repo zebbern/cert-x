@@ -37,6 +37,11 @@ async function main(){
  const other=await settings.evaluate(m=>chrome.runtime.sendMessage(m),{type:'KI_SECURITY',op:'findings',session:'unrelated-chat',runId:run.runId});assert.equal(other.ok,false);
  const activeDast=await request('start',{tabId,engines:['DAST'],options:{moduleIds:['xss'],runCve:false,allowCaptureWithoutInteraction:true,maxRequestsPerSecond:2}});await page.reload();
  for(let i=0;i<300&&activeProbes===0;i++)await new Promise(r=>setTimeout(r,100));assert.ok(activeProbes>0,'DAST sent actual probes before restart');
+ // The fixture counts the planner's baseline replay as a probe before the executor has saved
+ // any request record (observed under load: requests:0 recovered). A dispatched task means
+ // its plan was enqueued, and the record is saved at enqueue, so wait for that first.
+ const dispatched=async()=>(await request('status',{runId:activeDast.runId})).engineStatus?.DAST?.progress?.done>0;
+ for(let i=0;i<300&&!await dispatched();i++)await new Promise(r=>setTimeout(r,100));assert.ok(await dispatched(),'DAST dispatched a planned task before restart');
  const current=[...versions.values()].find(v=>v.scriptURL.endsWith('/background/entry.js')&&v.runningStatus==='running');assert.ok(current);
  await cdp.send('ServiceWorker.stopWorker',{versionId:current.versionId});await settings.reload();
  const restarted=await waitFor(s=>{const d=s.runs.find(r=>r.runId===activeDast.runId);return d&&d.state==='interrupted'&&d.recoveredEvidence===true;},'recovered DAST evidence after executor release'),interruptedDast=restarted.runs.find(r=>r.runId===activeDast.runId);assert.equal(interruptedDast.state,'interrupted');assert.equal(interruptedDast.recoveredEvidence,true,'Surviving executor evidence is retained');

@@ -90,6 +90,63 @@ test('a missing live event cannot be cumulatively acknowledged; replay fills the
   assert.equal(f.runtime.acknowledgedEventCursor, 2)
 })
 
+// Worker restart: the executor keeps emitting live events to the new controller
+// while adoption replays the ones the old controller never acknowledged. A live
+// event that overtakes the replay must not fail adoption (observed in the
+// lifecycle browser test as error "dast_runtime_event_cursor_gap", losing the
+// interrupted scan's evidence).
+for (const at of ['events_page', 'ack_events']) test(`a live event overtaking replay at ${at} does not fail the drain`, async () => {
+  const f = fixture()
+  await f.start()
+  const events = [1, 2, 3].map(n => f.runtime.publishEvent({ type: 'result_mutation', payload: { type: 'event-' + n } }))
+  const seen = []
+  f.facade.setResultMutationListener(value => seen.push(value.type))
+  const request = f.facade.client.request
+  let injected = false
+  f.facade.client.request = async (type, payload) => {
+    const response = await request(type, payload)
+    if (type === at && !injected) { injected = true; f.facade._queueEngineMessage(events[2].event, events[2].cursor).catch(() => {}) }
+    return response
+  }
+  await f.facade.drainEvents()
+  assert.equal(injected, true)
+  assert.equal(f.runtime.acknowledgedEventCursor, 3)
+  assert.deepEqual(seen, ['event-1', 'event-2', 'event-3'], 'every event applied once, in order')
+})
+
+// Steady live traffic during a long replay is progress, not a missing event: each
+// overtake costs a re-page, and the drain must still finish.
+test('a drain overtaken by live events many times still completes in order', async () => {
+  const f = fixture()
+  await f.start()
+  const events = Array.from({ length: 30 }, (_, n) => f.runtime.publishEvent({ type: 'result_mutation', payload: { type: 'event-' + n } }))
+  const seen = []
+  f.facade.setResultMutationListener(value => seen.push(value.type))
+  const request = f.facade.client.request
+  let acks = 0
+  f.facade.client.request = async (type, payload) => {
+    const response = await request(type, payload)
+    if (type === 'ack_events' && ++acks % 3 === 0) {
+      const live = f.runtime.publishEvent({ type: 'result_mutation', payload: { type: 'live-' + acks } })
+      f.facade._queueEngineMessage(live.event, live.cursor).catch(() => {})
+    }
+    return response
+  }
+  await f.facade.drainEvents()
+  assert.equal(f.runtime.acknowledgedEventCursor, f.runtime.eventCursor)
+  assert.equal(new Set(seen).size, seen.length, 'no event applied twice')
+  assert.deepEqual(seen.slice(0, 30), events.map((_, n) => 'event-' + n))
+})
+
+test('a genuinely missing journal event still fails the drain instead of being skipped', async () => {
+  const f = fixture()
+  await f.start()
+  for (let n = 0; n < 3; n++) f.runtime.publishEvent({ type: 'result_mutation', payload: { type: 'event-' + n } })
+  f.runtime.eventJournal = f.runtime.eventJournal.filter(item => item.cursor !== 2)
+  await assert.rejects(f.facade.drainEvents(), /cursor_gap/)
+  assert.equal(f.runtime.acknowledgedEventCursor, 1, 'nothing past the hole is acknowledged')
+})
+
 test('missing canonical progress fails explicitly without fabricating idle', async () => {
   const f = fixture(null)
   await f.start()

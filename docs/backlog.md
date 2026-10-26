@@ -21,3 +21,13 @@ network errors now name the URL); lifecycle flake (deterministic
 condition-waits, 4/4 solo + 15/15 full battery); FIXME limits (read cap
 raised 128→512 KiB against the 900 KiB frame ceiling; foreground/job/save
 caps each carry their stated reason).
+
+Reopened and closed 2026-10-26: the lifecycle flake returned (8/8 failures in
+one window). Two root causes, found by reproducing under full CPU load: a live
+DAST event overtaking the adoption replay failed it with
+`dast_runtime_event_cursor_gap` and lost the interrupted scan's evidence (a
+product bug, also seen unloaded), and the test restarted the worker before the
+executor had saved a request record. 15/15 after the fixes (10 normal, 5 with
+every core saturated). Same day: Page.handleJavaScriptDialog no longer queues
+behind a debugger command the dialog itself blocks (it waited out the 300 s
+CDP timeout after a click whose handler alerted).

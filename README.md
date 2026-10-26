@@ -191,6 +191,8 @@ node tools/security/tests/browser-parity.cjs
 node tools/security/tests/runtime-browser-dast.cjs
 ```
 
+`tools/picker/tests/ref-guard.browser.cjs` (non-blocking interact highlight, changed-element ref refusal) drives tool executors directly, so it needs a test build first: `KI_TEST_HOOKS=1 node tools/picker/apply-picker.js`. Rebuild without the variable afterwards.
+
 The native-host test checks same-conversation tool enablement, Full access, approval overrides, files, commands, local/remote MCP, jobs and outputs. It uses temporary Chromium host registration and refuses to replace an existing registration. Chrome/Edge registrations are unaffected. Browser control tests use a local WebSocket fixture, never the user's running controller.
 
 Use `PLAYWRIGHT_MODULE` and `CHROMIUM_PATH` to select installed browser-test dependencies. The expanded targeted fixtures also require Node's SQLite support and Python with Jinja2. Security detector tests include isolated browser execution; see [security verification](security/README.md) for the independent PTK reference and per-engine parity commands. Historical companion-specific fixtures are preserved under `tools/security/reference`; they are not the current installation workflow.

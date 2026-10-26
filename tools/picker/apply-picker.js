@@ -204,6 +204,22 @@ bg = swap(
   "async function tN(e,t,n,r,i){let{dispatchEvent:a,signal:kiO,turnId:s}=e,kiS=GI.get(n.id);kiS&&await kiGate(kiS,kiO);kiO.throwIfAborted();let kiC=new AbortController,o=AbortSignal.any([kiO,kiC.signal]);kiSkips.set(n.id,kiC);try{let x=await nN(t.execute({turnId:s,toolCallId:n.id,metadata:i,signal:o,onUpdate:e=>{o.aborted||a({type:`tool.progress`,toolCallId:n.id,update:e})}}),o,r);return kiC.signal.aborted&&!kiO.aborted?kiSkipped(r):x}catch(x){if(kiC.signal.aborted&&!kiO.aborted)return kiSkipped(r);throw x}finally{kiSkips.delete(n.id)}}"
 );
 bg = swap(bg, "c=iN(await tN(e,i,o,s,r),s)", "c=iN((await kiMark(s,n),await tN(e,i,o,s,r)),s)");
+// Refs resolve through mr; mutating tools check the element still matches what was read
+// (kiRefGuard). inspect_region names refs from the DOM, not the accessibility tree, so
+// its refs are flagged and skipped rather than compared against a different naming; it never
+// overwrites a node's existing accessibility-named entry, so inspecting cannot unguard a ref.
+bg = swap(bg, 'is no longer on the page. Read the page again.`);return a.objectId}', 'is no longer on the page. Read the page again.`);return await kiRefGuard(e,t,n,r),a.objectId}');
+bg = swap(bg, 'function fe(e,t,n,r){let i=oe(e),a=i.byBackendNode.get(t);if(a!==void 0)return i.refs.set(a,{backendDOMNodeId:t,role:n,name:r,documentKey:i.documentKey}),a;let o=`e${re()}`;return i.refs.set(o,{backendDOMNodeId:t,role:n,name:r,documentKey:i.documentKey}),',
+  'function fe(e,t,n,r,x){let i=oe(e),a=i.byBackendNode.get(t);if(a!==void 0){let old=i.refs.get(a);return x&&old&&!old.dom||i.refs.set(a,{backendDOMNodeId:t,role:n,name:r,documentKey:i.documentKey,...x?{dom:!0}:{}}),a}let o=`e${re()}`;return i.refs.set(o,{backendDOMNodeId:t,role:n,name:r,documentKey:i.documentKey,...x?{dom:!0}:{}}),');
+bg = swap(bg, 'fe(e,c.backendNodeId,s.role||s.tag,s.label||s.text.slice(0,160))', 'fe(e,c.backendNodeId,s.role||s.tag,s.label||s.text.slice(0,160),!0)');
+// hr (mouse_click/hover geometry) reads the box right after scrolling; on pages with
+// scroll-behavior:smooth that is mid-animation, so the pointer lands off-target or out of view.
+bg = swap(bg, "async function hr(e,t,n,r=``){await E(e,`Runtime.callFunctionOn`,{objectId:t,functionDeclaration:`function() {\n      this.scrollIntoView({ block: 'center', inline: 'center' });",
+  "async function hr(e,t,n,r=``){await E(e,`Runtime.callFunctionOn`,{objectId:t,functionDeclaration:`function() {\n      this.scrollIntoView({ block: 'center', inline: 'center', behavior: 'instant' });");
+// set_checked re-reads its target to verify after clicking; only the first read (before any
+// click) is a guarded resolution, so a toggle that already happened is never reported as refused.
+bg = swap(bg, "let i=async()=>gr(r,await mr(r,t,`set_checked`),Gi,`set_checked`),a=await i();",
+  "let i=async g=>gr(r,await mr(r,t,g?`set_checked`:`set_checked (verify)`),Gi,`set_checked`),a=await i(!0);");
 bg = swap(bg, "function Q(e,t){e.timeline=$a(e.timeline,t),", "function Q(e,t){kiWatch(e,t),e.timeline=$a(e.timeline,t),");
 bg = swap(bg, "QI(e)}}async function xL(", "QI(e),kiTurnEnd(e,u,l)}}async function xL(");
 bg = swap(bg, toolDone, toolDoneAt);
@@ -287,7 +303,7 @@ for (const n of kiTools.toolNames) {
   if (n !== 2) throw new Error("tab-arg self-check: expected 2 patched lists, found " + n);
 }
 if (process.env.KI_TEST_HOOKS) {
-  bg = swap(bg, "var dV={debug:", "globalThis.kiTest={kiMark,setTab:je,kiNotify,kiIcon,kiFocus};var dV={debug:");
+  bg = swap(bg, "var dV={debug:", "globalThis.kiTest={kiMark,setTab:je,kiNotify,kiIcon,kiFocus,refs:le,get tools(){return mP}};var dV={debug:");
   console.log("TEST BUILD: background test hooks exposed");
 }
 for (const need of ["function wbExpandClosed(", "__wb_read_file", "func:Fr", "wbAssertContained", "function kiGate", "kiSaveFileTool=class", "function kiMcpToolDefs", "function kiMcpRefresh", "function kiTelemetryRecord", "function kiErrorEnvelope", "function kiGraphToolDefs", "try { kiTelemetryRecord(executionMeta"]) {

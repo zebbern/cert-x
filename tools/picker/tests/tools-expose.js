@@ -9,13 +9,14 @@ const { chromium } = require("C:/Users/zeb/AppData/Roaming/npm/node_modules/@pla
 
 const ext = path.join(__dirname, "..", "..", "..");
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
-const EXPECT = ["list_browser_tabs", "attach_tab", "activate_tab", "set_checked", "cdp", "inspect_region", "highlight_region", "clear_highlight", "save_file"];
+const EXPECT = ["list_browser_tabs", "attach_tab", "activate_tab", "set_checked", "cdp", "inspect_region", "highlight_region", "clear_highlight", "save_file", "browse"];
 
 let advertised = null;
 let toolsFull = null;
 let toolResult = null;
 let calledTool = false;
-const TAB_YES = ["cdp", "set_checked", "inspect_region", "highlight_region", "clear_highlight"];
+// browse is advertised because the seeded OpenRouter connection is a decision backend.
+const TAB_YES = ["cdp", "set_checked", "inspect_region", "highlight_region", "clear_highlight", "browse"];
 const TAB_NO = ["list_browser_tabs", "attach_tab", "activate_tab", "save_file"];
 
 const server = http.createServer((req, res) => {
@@ -103,7 +104,7 @@ async function main() {
   };
   const yesOk = TAB_YES.filter(hasTab);
   const noBad = TAB_NO.filter(hasTab);
-  console.log("tab arg present on working-tab tools:", yesOk.length === TAB_YES.length ? "ALL 5 OK" : "MISSING " + TAB_YES.filter((n) => !hasTab(n)).join(", "));
+  console.log("tab arg present on working-tab tools:", yesOk.length === TAB_YES.length ? "ALL " + TAB_YES.length + " OK" : "MISSING " + TAB_YES.filter((n) => !hasTab(n)).join(", "));
   console.log("tab arg correctly absent on tab-mgmt tools:", noBad.length === 0 ? "OK" : "WRONGLY PRESENT " + noBad.join(", "));
   console.log("errors:", errors.length ? errors : "none");
   await ctx.close();

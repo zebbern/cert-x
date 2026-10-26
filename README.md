@@ -65,6 +65,10 @@ Recon and findings build a persistent map of the target, stored per workspace an
 
 Tool-failure telemetry — per-tool error counts and which tool ran next after each error — is collected automatically and surfaced through `get_capabilities` under `telemetry`.
 
+## Fast browse
+
+With a TypeSafe API key (**Settings → Models → Fast browse**) or an OpenRouter provider, the agent gets a `browse` tool. It finishes a multi-step page task — signing in, getting past a consent wall, reaching a form, walking an app so capture records its API — in one tool call instead of one model turn per click. A fast decision model picks each click, value, option and Enter until the goal is visibly done, then the tool returns the steps and the final page with live refs. TypeSafe Jev is preferred (about 200 ms per decision); without a key the saved OpenRouter provider is used. Text to type goes in named `values`: the decision model gets the names, and their text is replaced by the name wherever it shows up in what is sent or returned (URL, page text, element names; a value under four characters only in the field it was typed into). The page's own text is sent to the decision model as data. Actions run through the normal click/fill/select tools, so the changed-element guard and the highlight apply, and Stop ends the loop. Without a configured backend the tool is not offered.
+
 ## Live sessions
 
 The extension can be exercised end-to-end against a practice target with a real model, unattended; the M4 evidence baseline was produced this way. See [docs/live-sessions.md](docs/live-sessions.md) for the runner, targets and how to read results; [docs/backlog.md](docs/backlog.md) tracks open items.
@@ -191,7 +195,7 @@ node tools/security/tests/browser-parity.cjs
 node tools/security/tests/runtime-browser-dast.cjs
 ```
 
-`tools/picker/tests/ref-guard.browser.cjs` (non-blocking interact highlight, changed-element ref refusal) drives tool executors directly, so it needs a test build first: `KI_TEST_HOOKS=1 node tools/picker/apply-picker.js`. Rebuild without the variable afterwards.
+`tools/picker/tests/ref-guard.browser.cjs` (non-blocking interact highlight, changed-element ref refusal) and `tools/picker/tests/browse.browser.cjs` (the browse loop with a scripted decision model) drive tool executors directly, so they need a test build first: `KI_TEST_HOOKS=1 node tools/picker/apply-picker.js`. Rebuild without the variable afterwards. On the same build, `node tools/picker/tests/browse-live.cjs typesafe:jev-latest openrouter:<model>` runs real decision models (keys from `.env.local`, never printed) on seven local fixtures and reports pass rate and latency per backend; a scenario passes on what the fixture server received, not on the model's own "done".
 
 The native-host test checks same-conversation tool enablement, Full access, approval overrides, files, commands, local/remote MCP, jobs and outputs. It uses temporary Chromium host registration and refuses to replace an existing registration. Chrome/Edge registrations are unaffected. Browser control tests use a local WebSocket fixture, never the user's running controller.
 

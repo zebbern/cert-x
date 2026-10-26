@@ -21,9 +21,10 @@ const mpEntries =
   "list_browser_tabs:new ji,attach_tab:new Mi,activate_tab:new Ni," +
   "set_checked:new Ki,cdp:new ri,inspect_region:new _a," +
   "highlight_region:new va,clear_highlight:new ya," +
-  // save_file is a new tool implemented in ki-background.js (injected at the top
-  // of the IIFE, so kiSaveFileTool is in scope here where mP is defined).
-  "save_file:new kiSaveFileTool,";
+  // save_file and browse are new tools implemented in ki-background.js and
+  // ki-browse.js (injected at the top of the IIFE, so their classes are in scope
+  // here where mP is defined).
+  "save_file:new kiSaveFileTool,browse:new kiBrowseTool,";
 
 // Schema table (pP) entries. Keys match mP and the executor classes' name=.
 // permissionAction must be one of: navigate, read_page, interact, execute_js, manage_tabs.
@@ -142,6 +143,22 @@ const specs = {
     permissionAction: "read_page",
     attachesBeforeRun: false,
   },
+  // Advertised only while a decision backend is configured (kiBrowseReady in apply-picker).
+  browse: {
+    description:
+      "Drive the working tab toward a UI goal (sign in, reach a form, walk an app's pages so capture records them) in one call: a fast decision model clicks, types, selects and waits until the goal is visibly done. Put all text to type in values and refer to the names in goal; returns the steps, the final page with refs, and a recovery hint if it stopped early.",
+    parameters: {
+      type: "object",
+      properties: {
+        goal: { type: "string", description: "What must be visibly true when done, e.g. 'sign in, then open Settings > API keys'." },
+        values: { type: "object", additionalProperties: { type: "string" }, description: "Exact text to type, keyed by the names goal uses, e.g. {\"email\":\"a@b.c\",\"password\":\"...\"}. Only the names reach the decision model." },
+        url: { type: "string", description: "Optional page to open first." },
+        max_steps: { type: "number", description: "Action budget 1-60 (default 25)." },
+      },
+      required: ["goal"],
+    },
+    permissionAction: "interact",
+  },
 };
 
 const toolNames = Object.keys(specs);
@@ -153,7 +170,7 @@ const specEntries = toolNames.map((n) => n + ":" + JSON.stringify(specs[n])).joi
 // (list_browser_tabs, attach_tab, activate_tab) are intentionally excluded: a
 // `tab` argument is meaningless for them. This list is spliced into BOTH the
 // schema-augmentation loop and the kP execution guard so the two stay in sync.
-const tabCapable = ["cdp", "set_checked", "inspect_region", "highlight_region", "clear_highlight"];
+const tabCapable = ["cdp", "set_checked", "inspect_region", "highlight_region", "clear_highlight", "browse"];
 const tabListSuffix = tabCapable.map((n) => ",`" + n + "`").join("");
 
-module.exports = { classMap, mpEntries, specEntries, toolNames, tabCapable, tabListSuffix };
+module.exports = { classMap, mpEntries, specs, specEntries, toolNames, tabCapable, tabListSuffix };

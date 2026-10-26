@@ -1,14 +1,23 @@
 // Enforces the AGENTS.md prompt budget: the standing surface a Bug bounty chat
-// sees every turn stays under 8,500 characters. Counted here: the security
-// workflow system-prompt block, the security-testing skill, the security
+// sees every turn stays under 13,000 characters. Counted here: the
+// [User-selected task context] block with the builtin Bug bounty instructions,
+// the security workflow system-prompt block, the security-testing skill, the security
 // registry, targeted-DAST and account-comparison description maps, the
-// appended prefixes, and the knowledge-graph tool descriptions. NOT counted:
-// per-parameter schema descriptions and remote-MCP server descriptions, which
-// are separate surfaces. The ceiling was raised once from 8,000 to complete
-// accounting for the graph tools (previously uncounted, not new prose) —
-// raise it only to correct accounting, never to fit new content.
+// appended prefixes, the knowledge-graph tool descriptions, and every tool
+// description cert-x writes for the browser surface (ki-tools.js specs, the
+// upload override, get_capabilities). NOT counted: per-parameter schema
+// descriptions, remote-MCP server descriptions, Local-computer tools (only
+// present once the user turns local access on), and the vendor's own tool
+// table and system prompt, which cert-x does not author.
+// Ceiling history: 8,000 -> 8,500 to count the graph tools; 8,500 -> 13,000 on
+// 2026-10-26: 8,415 counted before + 1,188 task context and 2,823 browser/product
+// tool descriptions (both always sent, never counted) + 356 for browse(goal),
+// which the user approved = 12,782, leaving 218 so new standing prose must
+// displace old. Raise it only to correct accounting or for a capability the
+// user asked for, never to fit prose that belongs in tool results.
 // Measurement is static on the source text: description strings must not
-// contain escaped quotes of their own quoting character (they do not today).
+// contain escaped quotes of their own quoting character, except where a
+// helper below unescapes them.
 const { test } = require("node:test");
 const assert = require("node:assert/strict");
 const fs = require("node:fs"), path = require("node:path");
@@ -34,6 +43,17 @@ function graphDescriptions() {
   return found;
 }
 
+// The [User-selected task context] block a Bug bounty chat gets from kiContextPrompt:
+// the fixed wrapper text plus the builtin profile's name and instructions (no workspace).
+function bugBountyContextLength() {
+  const source = src("ki-context.js");
+  const instructions = source.match(/base\("bugbounty", "Bug bounty", "((?:[^"\\]|\\.)*)"/);
+  const trailer = source.match(/"(\\nPinned references are references[^"]*\[\/User-selected task context\])"/);
+  assert.ok(instructions && trailer, "Bug bounty profile instructions or task-context wrapper not found");
+  const header = "\n\n[User-selected task context]\n";
+  return header.length + JSON.stringify({ profile: "Bug bounty", instructions: JSON.parse('"' + instructions[1] + '"') }).length + JSON.parse('"' + trailer[1] + '"').length;
+}
+
 function workflowBlockLength() {
   const source = src("ki-context.js"), open = "[Security testing workflow]", close = "[/Security testing workflow]";
   const start = source.indexOf(open), end = source.indexOf(close, start);
@@ -49,17 +69,25 @@ function appendedPrefixLengths() {
   return account[1].length + targeted[1].length;
 }
 
-test("Bug bounty standing prompt surface stays under the 8,500-character budget", () => {
+function browserToolDescriptions() {
+  const specs = Object.values(require("../src/ki-tools.js").specs).map(spec => spec.description);
+  const upload = src("ki-upload.js").match(/pP\.upload\.description = '([^']*)'/);
+  const capabilities = src("ki-workspace.js").match(/name: "get_capabilities", description: "((?:[^"\\]|\\.)*)"/);
+  assert.ok(specs.length >= 10 && upload && capabilities, "browser tool descriptions not found");
+  return [...specs, upload[1], JSON.parse('"' + capabilities[1] + '"')];
+}
+
+test("Bug bounty standing prompt surface stays under the 13,000-character budget", () => {
   const skill = fs.readFileSync(path.join(__dirname, "..", "..", "..", "security", "skills", "security-testing.md"), "utf8");
-  const registry = registryDescriptions(), dast = descriptionMap("ki-dast.js"), authz = descriptionMap("ki-authz.js"), graph = graphDescriptions();
-  const workflow = workflowBlockLength(), prefixes = appendedPrefixLengths();
+  const registry = registryDescriptions(), dast = descriptionMap("ki-dast.js"), authz = descriptionMap("ki-authz.js"), graph = graphDescriptions(), browser = browserToolDescriptions();
+  const workflow = workflowBlockLength(), prefixes = appendedPrefixLengths(), context = bugBountyContextLength();
   const sum = list => list.reduce((total, text) => total + text.length, 0);
-  const total = skill.length + workflow + prefixes + sum(registry) + sum(dast) + sum(authz) + sum(graph);
-  console.log("prompt surface: skill " + skill.length + " + workflow " + workflow + " + prefixes " + prefixes +
-    " + registry " + sum(registry) + " + dast " + sum(dast) + " + authz " + sum(authz) + " + graph " + sum(graph) + " = " + total);
-  assert.ok(total < 8500, "standing prompt surface is " + total + " chars; budget is 8,500 — move prose into tool results or trim");
+  const total = skill.length + context + workflow + prefixes + sum(registry) + sum(dast) + sum(authz) + sum(graph) + sum(browser);
+  console.log("prompt surface: skill " + skill.length + " + task context " + context + " + workflow " + workflow + " + prefixes " + prefixes +
+    " + registry " + sum(registry) + " + dast " + sum(dast) + " + authz " + sum(authz) + " + graph " + sum(graph) + " + browser tools " + sum(browser) + " = " + total);
+  assert.ok(total < 13000, "standing prompt surface is " + total + " chars; budget is 13,000 — move prose into tool results or trim");
   assert.ok(workflow < 300, "the system-prompt workflow block must stay a pointer to the skill, not a rulebook");
   assert.ok(skill.length < 5000, "the skill file is growing past its share of the budget");
   assert.ok(sum(graph) < 500, "the graph tool descriptions must stay terse");
-  assert.ok(registry.length >= 20, "expected the full security registry");
+  assert.ok(sum(browser) < 3500, "cert-x browser tool descriptions are growing past their share of the budget");  assert.ok(registry.length >= 20, "expected the full security registry");
 });

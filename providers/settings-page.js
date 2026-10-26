@@ -19,7 +19,7 @@ document.querySelectorAll("a[href^='?section=']").forEach(link => {
     parent.postMessage({ type: "settings-section", section: target.searchParams.get("section") }, location.origin);
   });
 });
-if (section === "models") await import("./providers.js");
+if (section === "models") { await import("./providers.js"); await import("./fast-browse.js"); }
 if (section === "mcp") { await import("./mcp.js"); await import("./local-mcp.js"); await import("./mcp-import-ui.js"); }
 if (section === "local") { await import("./native.js"); await import("./jobs.js"); }
 if (section === "browser") await import("./browser-control.js");

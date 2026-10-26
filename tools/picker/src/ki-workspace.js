@@ -77,6 +77,8 @@ async function kiWorkspaceHealth(query = "", profile = "main", session) {
   const accountTools = new Set(["security_list_accounts","security_save_account","security_verify_account","security_prepare_access_test","security_run_access_test","security_access_status","security_stop_access_test","security_access_findings","security_access_export"]);
   const securitySelected = !taskContext || taskContext.tools.groups.ptk === true || Object.entries(taskContext.tools.tools || {}).some(([name, enabled]) => enabled === true && (name.startsWith("ptk:") || name.startsWith("security_")));
   const ptk = securitySelected && typeof kiPtkHealth === "function" ? kiPtkHealth(session) : undefined;
+  // The Fast browse flag starts false in a restarted worker; read the setting before reporting it.
+  if (typeof kiBrowseLoad === "function") await kiBrowseLoad();
   const data = await chrome.storage.local.get(["ki_native_settings", "ki_mcp_servers", "sidepanel_connections", "sidepanel_approval_mode", KI_POLICY_KEY]);
   let host;
   try {
@@ -98,6 +100,7 @@ async function kiWorkspaceHealth(query = "", profile = "main", session) {
     if (tool.family === "mcp" && !live) reasons.push("This MCP tool has not been discovered in the current worker.");
     if ([tool.family, tool.transport].includes("local") && host.state !== "connected") reasons.push("Native host is unavailable.");
     if (["local_read_job", "local_cancel_job"].includes(tool.name) && !host.jobs) reasons.push("Native host needs an update for command jobs.");
+    if (tool.name === "browse" && typeof kiBrowseReady === "function" && !kiBrowseReady()) reasons.push(kiBrowseOffReason);
     if (localSecurityTools.has(tool.name) && data.ki_native_settings?.enabled !== true) reasons.push("Local computer access is disabled.");
     if (targetedTools.has(tool.name) && !scopedWorkspace && !targetedOwned) reasons.push("Selected-request testing needs target origins in a workspace.");
     if (accountTools.has(tool.name) && !scopedWorkspace && !accountOwned) reasons.push("Account comparison needs target origins in a workspace.");

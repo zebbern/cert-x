@@ -75,6 +75,39 @@
         </div>
       </form>
     </section>
+    <div class="toolbar">
+      <h2 id="fast-browse-heading">Fast browse</h2>
+      <button type="button" id="fast-browse-test">Test</button>
+    </div>
+    <section class="card" id="fast-browse" aria-labelledby="fast-browse-heading">
+      <p class="hint">Lets the agent finish multi-step page tasks, like signing in or reaching a form, in one step with a fast decision model. The page's text goes to that model; the values it types are replaced by their names.</p>
+      <label>
+        <span>TypeSafe API key</span>
+        <span class="key-row">
+          <input id="fast-browse-key" type="password" autocomplete="off" spellcheck="false" aria-describedby="fast-browse-key-hint">
+          <button type="button" id="fast-browse-toggle">Show</button>
+        </span>
+        <span class="hint" id="fast-browse-key-hint">Fastest option. Without a key, Fast browse uses your OpenRouter provider if you saved one above.</span>
+      </label>
+      <label>
+        <span>Use</span>
+        <select id="fast-browse-backend">
+          <option value="auto">TypeSafe if a key is set, otherwise OpenRouter</option>
+          <option value="typesafe">TypeSafe only</option>
+          <option value="openrouter">OpenRouter only</option>
+          <option value="off">Off</option>
+        </select>
+      </label>
+      <details>
+        <summary>Models</summary>
+        <label><span>TypeSafe model</span><input id="fast-browse-typesafe-model" type="text" autocomplete="off" spellcheck="false" placeholder="jev-latest"></label>
+        <label><span>OpenRouter model</span><input id="fast-browse-openrouter-model" type="text" autocomplete="off" spellcheck="false" placeholder="google/gemini-3.1-flash-lite"></label>
+      </details>
+      <div class="form-actions">
+        <span id="fast-browse-status" class="hint" role="status"></span>
+        <button type="button" id="fast-browse-save" class="primary">Save</button>
+      </div>
+    </section>
     </section>
     <section id="mcp" hidden>
       <header><h1>MCP servers</h1><p>Connect tools to your agent.</p></header>

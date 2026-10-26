@@ -8,8 +8,19 @@ function kiBrowserResult(name, args, value) {
   if (!mimeType) throw Error("Unsupported screenshot format: " + format);
   return { ...value, format, mimeType, dataLength: value.data.length };
 }
+// Fast browse is chosen at the moment a form is in view, not from its tool
+// description alone (measured: 0/7 fixture tasks used browse from the description).
+// Once per page per chat, so a model that prefers to drive the form itself is not
+// told again on every read.
+var kiBrowseHinted = new Set();
+function kiBrowseHint(name, value, session) {
+  if (name !== 'snapshot' || typeof value?.tree_text !== 'string' || typeof kiBrowseReady !== 'function' || !kiBrowseReady()) return value;
+  if (!/\b(textbox|searchbox|combobox|checkbox|radio|spinbutton)\b/.test(value.tree_text) || kiBrowseHinted.has(session + '|' + value.url)) return value;
+  kiBrowseHinted.add(session + '|' + value.url);
+  return { ...value, hint: 'browse({goal, values}) can fill and submit this form, or take the next several steps, in one call.' };
+}
 async function kiBrowserAgentResult(name, args, value, session) {
-  if (name !== 'cdp' || args?.method !== 'Page.printToPDF') return kiBrowserResult(name, args, value);
+  if (name !== 'cdp' || args?.method !== 'Page.printToPDF') return kiBrowseHint(name, kiBrowserResult(name, args, value), session);
   // Stream callers explicitly asked for an IO handle; keep that protocol path.
   if (value?.stream && !value.data) return value;
   const data = value?.data;

@@ -21,3 +21,15 @@ test('PDF results become owned Outputs metadata without embedding binary text',a
  const stream={stream:'io-handle',data:''};assert.equal(await local.kiBrowserAgentResult('cdp',{method:'Page.printToPDF'},stream,'chat'),stream);
  await assert.rejects(local.kiBrowserAgentResult('cdp',{method:'Page.printToPDF'},{data:'QUFBQQ=='},'chat'),/invalid data/);assert.equal(stored.length,1);
 });
+test('Fast browse hint: only while on, only on a page with a form, once per page per chat',async()=>{
+ let ready=true;const local=vm.createContext({kiBrowseReady:()=>ready});
+ vm.runInContext(fs.readFileSync(path.join(__dirname,'../src/ki-browser-results.js'),'utf8'),local);
+ const form={url:'https://a.test/login',tree_text:'- textbox "Email" [ref=e1]\n- button "Sign in" [ref=e2]'},links={url:'https://a.test/',tree_text:'- link "Home" [ref=e1]'};
+ const first=await local.kiBrowserAgentResult('snapshot',{},form,'chat');
+ assert.match(first.hint,/^browse\(\{goal, values\}\)/);assert.equal(first.tree_text,form.tree_text);assert.equal(form.hint,undefined,'the original result is not mutated');
+ assert.equal((await local.kiBrowserAgentResult('snapshot',{},form,'chat')).hint,undefined,'not repeated on the same page in the same chat');
+ assert.ok((await local.kiBrowserAgentResult('snapshot',{},form,'other chat')).hint,'another chat gets it once');
+ assert.equal((await local.kiBrowserAgentResult('snapshot',{},links,'chat2')).hint,undefined,'no form, no hint');
+ assert.equal((await local.kiBrowserAgentResult('find',{},form,'chat3')).hint,undefined,'only snapshot reads');
+ ready=false;assert.equal((await local.kiBrowserAgentResult('snapshot',{},form,'chat4')).hint,undefined,'not while Fast browse is off');
+});

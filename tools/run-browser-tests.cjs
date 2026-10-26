@@ -22,6 +22,7 @@ const tests = [
   ["security lifecycle", "tools/security/tests/lifecycle.browser.cjs"],
   ["engine parity", "tools/security/tests/browser-parity.cjs"],
   ["runtime DAST", "tools/security/tests/runtime-browser-dast.cjs"],
+  ["recording follows tabs", "tools/picker/tests/record-arm.browser.cjs"],
   ["DVWA demo rehearsal", "tools/picker/tests/dvwa-rehearsal.cjs"],
 ];
 async function main() {

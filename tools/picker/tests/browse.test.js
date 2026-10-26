@@ -211,3 +211,20 @@ test("SELECT: the dropdown and its option come from separate heads, one budget p
     ["option_" + c]: { choice: c + ":1", probabilities: Object.fromEntries(Object.keys(space.selects[c].options).map((k, i) => [k, i ? 0 : 1])) } };
   assert.deepEqual(B.kiBrowseFromAnswers(answers, space), { op: "SELECT", target: s + ":1", p: 0.9 });
 });
+
+test("the Fast browse setting: one switch, one key box, a saved OpenRouter provider needs nothing", () => {
+  global.Dc = c => c.host;
+  const provider = [{ presetId: "openrouter", apiKey: "sk-or-provider", host: "https://openrouter.ai/api/v1/" }], other = [{ presetId: "custom", apiKey: "x", host: "http://localhost" }];
+  assert.ok(B.kiBrowseResolve({}, []).off, "nothing to use");
+  assert.ok(B.kiBrowseResolve({}, other).off, "only an OpenRouter provider can stand in for a key");
+  assert.deepEqual(B.kiBrowseResolve({}, provider), { backend: "openrouter", key: "sk-or-provider", base: "https://openrouter.ai/api/v1", model: "google/gemini-3.1-flash-lite", source: "provider" }, "on by default with a provider");
+  assert.deepEqual(B.kiBrowseResolve({ key: " ts-key " }, provider), { backend: "typesafe", key: "ts-key", model: "jev-latest", source: "key" }, "a pasted key wins over the provider");
+  assert.equal(B.kiBrowseResolve({ key: "sk-or-v1-abc" }, []).backend, "openrouter", "an OpenRouter key is recognized by its prefix");
+  assert.equal(B.kiBrowseResolve({ key: "sk-or-v1-abc" }, []).base, "https://openrouter.ai/api/v1");
+  assert.ok(B.kiBrowseResolve({ key: "ts-key", on: false }, provider).off, "the switch turns it off");
+  assert.deepEqual(B.kiBrowseStatus({ key: "ts-key", on: false }, []), { on: false, ready: false, available: true, label: "TypeSafe Jev", source: "key", reason: B.kiBrowseResolve({ on: false }, []).off });
+  assert.deepEqual(B.kiBrowseStatus({}, provider), { on: true, ready: true, available: true, label: "Gemini 3.1 Flash Lite via OpenRouter", source: "provider", reason: "" });
+  const none = B.kiBrowseStatus({}, other);
+  assert.equal(none.ready || none.available, false, "no key and no provider: the switch opens the key box");
+  assert.match(none.reason, /TypeSafe or OpenRouter key/);
+});

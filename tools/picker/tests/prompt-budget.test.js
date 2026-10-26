@@ -13,7 +13,9 @@
 // 2026-10-26: 8,415 counted before + 1,188 task context and 2,823 browser/product
 // tool descriptions (both always sent, never counted) + 356 for browse(goal),
 // which the user approved = 12,782, leaving 218 so new standing prose must
-// displace old. Raise it only to correct accounting or for a capability the
+// displace old. Since then the [Fast browse] system-prompt line (213, sent while
+// Fast browse is on; measured: without it 0/7 fixture tasks used browse) is
+// counted too, paid for by a shorter browse description: 12,995. Raise it only to correct accounting or for a capability the
 // user asked for, never to fit prose that belongs in tool results.
 // Measurement is static on the source text: description strings must not
 // contain escaped quotes of their own quoting character, except where a
@@ -69,6 +71,13 @@ function appendedPrefixLengths() {
   return account[1].length + targeted[1].length;
 }
 
+// The [Fast browse] system-prompt line, sent every turn while Fast browse is on.
+function fastBrowsePromptLength() {
+  const found = src("ki-browse.js").match(/var KI_BROWSE_PROMPT = "((?:[^"\\]|\\.)*)";/);
+  assert.ok(found, "KI_BROWSE_PROMPT not found in ki-browse.js");
+  return JSON.parse('"' + found[1] + '"').length;
+}
+
 function browserToolDescriptions() {
   const specs = Object.values(require("../src/ki-tools.js").specs).map(spec => spec.description);
   const upload = src("ki-upload.js").match(/pP\.upload\.description = '([^']*)'/);
@@ -80,10 +89,10 @@ function browserToolDescriptions() {
 test("Bug bounty standing prompt surface stays under the 13,000-character budget", () => {
   const skill = fs.readFileSync(path.join(__dirname, "..", "..", "..", "security", "skills", "security-testing.md"), "utf8");
   const registry = registryDescriptions(), dast = descriptionMap("ki-dast.js"), authz = descriptionMap("ki-authz.js"), graph = graphDescriptions(), browser = browserToolDescriptions();
-  const workflow = workflowBlockLength(), prefixes = appendedPrefixLengths(), context = bugBountyContextLength();
+  const workflow = workflowBlockLength(), prefixes = appendedPrefixLengths(), context = bugBountyContextLength(), fast = fastBrowsePromptLength();
   const sum = list => list.reduce((total, text) => total + text.length, 0);
-  const total = skill.length + context + workflow + prefixes + sum(registry) + sum(dast) + sum(authz) + sum(graph) + sum(browser);
-  console.log("prompt surface: skill " + skill.length + " + task context " + context + " + workflow " + workflow + " + prefixes " + prefixes +
+  const total = skill.length + context + workflow + fast + prefixes + sum(registry) + sum(dast) + sum(authz) + sum(graph) + sum(browser);
+  console.log("prompt surface: skill " + skill.length + " + task context " + context + " + workflow " + workflow + " + fast browse " + fast + " + prefixes " + prefixes +
     " + registry " + sum(registry) + " + dast " + sum(dast) + " + authz " + sum(authz) + " + graph " + sum(graph) + " + browser tools " + sum(browser) + " = " + total);
   assert.ok(total < 13000, "standing prompt surface is " + total + " chars; budget is 13,000 — move prose into tool results or trim");
   assert.ok(workflow < 300, "the system-prompt workflow block must stay a pointer to the skill, not a rulebook");

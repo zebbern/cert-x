@@ -22,6 +22,16 @@ function swap(src, needle, replacement) {
   return src.slice(0, at) + replacement + src.slice(at + needle.length);
 }
 
+// A name bound twice in a bundle's top scope silently replaces the other binding
+// (scope-check.mjs); refuse to write such a bundle.
+function checkScope(src, name, ...flags) {
+  try { require("node:child_process").execFileSync(process.execPath, [path.join(__dirname, "scope-check.mjs"), ...flags], { input: src, stdio: ["pipe", "inherit", "inherit"], windowsHide: true }); }
+  catch (e) {
+    if (e.status === 1) throw new Error(name + ": a name is bound twice in its top scope (listed above); rename the added binding");
+    throw new Error(name + ": the scope check did not run (" + (e.status === 2 ? "parse failure, above" : e.message) + ")");
+  }
+}
+
 let js = fs.readFileSync(path.join(original, path.basename(jsName)), "utf8");
 const components = ["ki-vendor-icons.js", "ki-components.js", "ki-live.js", "ki-settings.js", "ki-context-ui.js", "ki-csp-ui.js", "ki-ptk-ui.js", "ki-dast-ui.js", "ki-outputs.js"].map((f) => fs.readFileSync(path.join(__dirname, "src", f), "utf8").trim()).join("\n");
 
@@ -96,9 +106,9 @@ const newOo =
   "kiAo=ao?kiSplit(ao,byokTitle(ao,!1),Gn.find(e=>e.id===ao.connectionId)?.label):null," +
   "kiEffortFor=e=>{let t=e.route===`zebbern`&&e.reasoningEffortOptions?.length?e.reasoningEffortOptions:void 0;return t?{options:t,current:$A(t,it[e.modelId],e.defaultThinkingLevel),label:ho}:null}," +
   swap(head, oldName, newName) +
-  "Ye&&(0,A.jsx)(KiModelMenu,{models:Yn,connections:Gn,selected:nr,onSelect:Ki,titleOf:e=>byokTitle(e,!1),lang:C,effortFor:kiEffortFor,onEffort:(e,t)=>{HA(e.modelId,t.effort)},footer:" +
+  "Ye&&(0,A.jsx)(KiModelMenu,{models:Yn,connections:Gn,selected:nr,onSelect:Ki,titleOf:e=>byokTitle(e,!1),lang:C,effortFor:kiEffortFor,onEffort:(e,t)=>{HA(e.modelId,t.effort)},footer:(0,A.jsxs)(A.Fragment,{children:[(0,A.jsx)(KiFastBrowse,{lang:C})," +
   capacity +
-  "})]});";
+  "]})})]});";
 
 js = js.slice(0, ooStart) + newOo + js.slice(ooEnd);
 
@@ -176,10 +186,37 @@ bg = swap(bg, 'var lj=[{name:`web-skill-creator`', 'var lj=[' + JSON.stringify(s
 const dastInputs = fs.readFileSync(path.join(root, "security/compat/dast-inputs.js"), "utf8").trim();
 bg = swap(bg, "var background=(function(){", "var background=(function(){\nvar kiBrowserChrome=globalThis.certXBrowserChrome||chrome;\nglobalThis.certXSecurityBuild=" + JSON.stringify({contract:'agent-security-v2',fingerprint:securityBuildFingerprint}) + ";\n" + kiProviderCompat + '\n' + dastInputs + "\n" + ["ki-context.js", "ki-telemetry.js", "ki-graph.js", "ki-csp.js", "ki-security.js", "ki-ptk.js", "ki-dast-transport.js", "ki-dast.js", "ki-authz.js", "ki-permissions.js", "ki-background.js", "ki-browse.js", "ki-browser-results.js", "ki-native.js", "ki-browser-control.js", "ki-workspace.js"].map(file => fs.readFileSync(path.join(__dirname, "src", file), "utf8").trim()).join("\n") + "\n");
 bg = swap(bg, 't.length>0&&(c.tools=t.map(e=>Ey(e)))', 't.length>0&&(c.tools=t.map(e=>Ey(e))),kiProviderToolOptions(c)');
+// The vendor bundle's hand-added tools reused names the minifier had already given
+// to other bindings in the same scope, and the later `var` wins at load: read_file's
+// class replaced the retryable-error check Rd (every failed model call then threw
+// "Class constructor Rd cannot be invoked without 'new'", live in BugStore run 2),
+// expand_disclosures replaced the incomplete-response error Ed, download replaced
+// the media-error list Fd, and the expand script string replaced recording's XD.
+// Rename the hand-added side; checkScope below keeps it from coming back.
+bg = swap(bg, 'var Fd=class{name=`download`;', 'var kiDownloadTool=class{name=`download`;');
+bg = swap(bg, 'var Rd=class{name=`read_file`;', 'var kiReadFileTool=class{name=`read_file`;');
+bg = swap(bg, 'var Ed=class{name=`expand_disclosures`;', 'var kiExpandDisclosuresTool=class{name=`expand_disclosures`;');
+bg = swap(bg, 'download:new Fd,read_file:new Rd,expand_disclosures:new Ed}', 'download:new kiDownloadTool,read_file:new kiReadFileTool,expand_disclosures:new kiExpandDisclosuresTool}');
+bg = swap(bg, 'var XD=`(${wbExpandClosed.toString()})()`;', 'var kiExpandClosedJs=`(${wbExpandClosed.toString()})()`;');
+bg = swap(bg, '{expression:XD,awaitPromise:!0,returnByValue:!0}).catch(()=>{})', '{expression:kiExpandClosedJs,awaitPromise:!0,returnByValue:!0}).catch(()=>{})');
+bg = swap(bg, '{expression:XD,awaitPromise:!0,returnByValue:!0});if(r.exceptionDetails)', '{expression:kiExpandClosedJs,awaitPromise:!0,returnByValue:!0});if(r.exceptionDetails)');
+bg = swap(bg, 'await ${XD};', 'await ${kiExpandClosedJs};');
+// The 90 s stall timer (Xd) restarts only on a parsed part, and the parser reads
+// reasoning only from delta.reasoning_content. OpenRouter streams it as
+// delta.reasoning / reasoning_details (captured from xiaomi/mimo-v2.6-pro), so a
+// model thinking for 90 s looked dead and was cut, three tries per run (13 cuts,
+// ~20 of 60 min in BugStore run 2). A reasoning chunk now counts as liveness; it is
+// not kept, so nothing new is shown or echoed back in the history.
+bg = swap(bg, 'i.content&&(yield{type:`text`,text:i.content});for(let e of i.tool_calls??[])', 'i.content&&(yield{type:`text`,text:i.content}),!a&&!i.content&&!i.tool_calls?.length&&(i.reasoning||i.reasoning_details?.length)&&(yield{type:`ki_alive`});for(let e of i.tool_calls??[])');
+bg = swap(bg, 'if(e.done===!0){f=!0;break}let t=e.value;', 'if(e.done===!0){f=!0;break}let t=e.value;if(t.type===`ki_alive`)continue;');
 // Resolve preferences before model construction, never silently substitute a missing preferred model.
 bg = swap(bg, 'async function OF(e){let t=', 'async function OF(e){if(!GP(e.profile)){let context=await kiContextPrepare(e.conversationId),preferred=context.model||await Vl(),catalog=(await pu()).models,selected=catalog.find(m=>m.connectionId===preferred?.connectionId&&m.modelId===preferred?.modelId)||(!context.model?catalog[0]:null);if(!selected)throw Error(`Preferred model unavailable. Choose an available model to continue.`);e={...e,selection:await cu(selected,ou(selected,await iu()))}}let t=');
-bg = swap(bg, 'systemPrompt:r===`quick-translate`?await SF(i):r===`quick-explain`?await ZP():mF(c.getModelSkillListing())', 'systemPrompt:r===`quick-translate`?await SF(i):r===`quick-explain`?await ZP():mF(c.getModelSkillListing())+kiContextPrompt(t)');
-bg = swap(bg, 'i=async n=>{let r=await yu(e.conversationId,', 'i=async n=>{if(kiContextFor(e.conversationId)?.model)throw Error(`Preferred model unavailable. Choose an available model to continue.`);let r=await yu(e.conversationId,');
+bg = swap(bg, 'systemPrompt:r===`quick-translate`?await SF(i):r===`quick-explain`?await ZP():mF(c.getModelSkillListing())', 'systemPrompt:r===`quick-translate`?await SF(i):r===`quick-explain`?await ZP():mF(c.getModelSkillListing())+kiContextPrompt(t)+(await kiBrowseLoad(),kiBrowseReady()?KI_BROWSE_PROMPT:``)');
+// Same rule when the provider answers 404 mid-turn: the vendor's recovery clears the
+// saved default and resends the conversation to the first other model, on any
+// connection. It never ran here (the Rd clash threw first); keep it off so the
+// provider's own error reaches the user.
+bg = swap(bg, 'i=async n=>{let r=await yu(e.conversationId,{connectionId:n.connectionId,modelId:n.modelId});return r?{...await DF(r,e.conversationId,t,e.profile,e.quickTranslateFormat,e.observeRequest),selection:r}:null}', 'i=async()=>null');
 // Assigned workspace chats must survive the legacy ten-unassigned-chat history sweep.
 bg = swap(bg, 'async function Vk(e,t){let n=(await Ek()).filter(t=>t.lastActiveAt!==void 0&&Pk(t)===e),r=n.length-10;', 'async function Vk(e,t){let context=await kiContextLoad(),n=(await Ek()).filter(t=>t.lastActiveAt!==void 0&&Pk(t)===e&&!context.chats[t.chatId]?.workspaceId),r=n.length-10;');
 js = swap(js, 'className:`wb-history-foot`,children:i(`history.limit`,{n:10})', 'className:`wb-history-foot`,children:`Workspace chats are kept until deleted. Other chats keep the latest 10.`');
@@ -309,7 +346,7 @@ for (const n of kiTools.toolNames) {
   if (n !== 2) throw new Error("tab-arg self-check: expected 2 patched lists, found " + n);
 }
 if (process.env.KI_TEST_HOOKS) {
-  bg = swap(bg, "var dV={debug:", "globalThis.kiTest={kiMark,setTab:je,kiNotify,kiIcon,kiFocus,refs:le,get tools(){return mP},setBrowseDecide(f){kiBrowseDecide=f},browseRun:kiBrowseRun,async browseReady(){await kiBrowseLoad();return kiBrowseReady()}};var dV={debug:");
+  bg = swap(bg, "var dV={debug:", "globalThis.kiTest={kiMark,setTab:je,kiNotify,kiIcon,kiFocus,refs:le,get tools(){return mP},setBrowseDecide(f){kiBrowseDecide=f},browseRun:kiBrowseRun,async browseReady(){await kiBrowseLoad();return kiBrowseReady()},setStreamIdle(ms){Xd=ms}};var dV={debug:");
   console.log("TEST BUILD: background test hooks exposed");
 }
 for (const need of ["function wbExpandClosed(", "__wb_read_file", "func:Fr", "wbAssertContained", "function kiGate", "kiSaveFileTool=class", "var kiBrowseTool = class", "async function sn(e,t){await te();", "function jn(e,t){", "function Mn(e,t){", "function kiMcpToolDefs", "function kiMcpRefresh", "function kiTelemetryRecord", "function kiErrorEnvelope", "function kiGraphToolDefs", "try { kiTelemetryRecord(executionMeta"]) {
@@ -317,6 +354,7 @@ for (const need of ["function wbExpandClosed(", "__wb_read_file", "func:Fr", "wb
 }
 if (bg.includes("frame-read.js")) throw new Error("background rebuild still injects frame-read.js, which is not in the extension");
 bg = bg.replaceAll('chrome.debugger', 'kiBrowserChrome.debugger').replaceAll('chrome.runtime.lastError', 'kiBrowserChrome.runtime.lastError');
+checkScope(bg, "background.js");
 fs.writeFileSync(path.join(root, "background/background.js"), bg);
 console.log("patched background.js", bg.length, "bytes");
 
@@ -388,6 +426,7 @@ const css = fs.readFileSync(path.join(original, path.basename(cssName)), "utf8")
   "\n" + fs.readFileSync(path.join(__dirname, "src", "ki-picker.css"), "utf8") +
   "\n" + fs.readFileSync(path.join(root, "providers/security.css"), "utf8");
 
+checkScope(js, jsName, "--module");
 fs.writeFileSync(path.join(root, jsName), js);
 fs.writeFileSync(path.join(root, cssName), css);
 console.log("patched", jsName, js.length, "bytes;", cssName, css.length, "bytes");

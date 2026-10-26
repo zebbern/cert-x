@@ -7,7 +7,7 @@
 //   node tools/picker/tests/browse-live.cjs [typesafe:jev-latest] [openrouter:anthropic/claude-haiku-5.5] ... [--runs=2] [--only=login,catalog]
 const fs = require('node:fs'), path = require('node:path'), os = require('node:os'), http = require('node:http');
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'C:/Users/zeb/AppData/Roaming/npm/node_modules/@playwright/cli/node_modules/playwright-core');
-const root = path.resolve(__dirname, '../../..'), temp = fs.mkdtempSync(path.join(os.tmpdir(), 'cert-x-browse-live-'));
+const root = path.resolve(__dirname, '../../..');
 const env = Object.fromEntries(fs.readFileSync(path.join(root, '.env.local'), 'utf8').split(/\r?\n/).map(l => /^([A-Z_]+)=(.*)$/.exec(l)).filter(Boolean).map(m => [m[1], m[2].trim()]));
 const args = process.argv.slice(2), runs = Number((args.find(a => a.startsWith('--runs=')) || '--runs=1').slice(7));
 const only = (args.find(a => a.startsWith('--only=')) || '').slice(7).split(',').filter(Boolean);
@@ -62,6 +62,7 @@ const scenarios = [
 ].filter(s => !only.length || only.includes(s.id));
 
 async function main() {
+  const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'cert-x-browse-live-'));
   const server = http.createServer((req, res) => handler(req, res).catch(e => { res.statusCode = 500; res.end(String(e)); }));
   await new Promise(r => server.listen(0, '127.0.0.1', r));
   const origin = 'http://127.0.0.1:' + server.address().port;
@@ -99,4 +100,6 @@ async function main() {
   for (const [k, b] of Object.entries(by)) console.log(k.padEnd(42), b.pass + '/' + b.n + ' pass', 'median run ' + median(b.ms) + 'ms', 'median decision ' + median(b.modelPerCall) + 'ms');
   fs.writeFileSync(path.join(os.tmpdir(), 'cert-x-browse-live.json'), JSON.stringify(rows, null, 1));
 }
-main().catch(error => { console.error(error); process.exitCode = 1; });
+// browse-ab.cjs reuses the fixtures to compare whole chats with Fast browse on and off.
+if (require.main === module) main().catch(error => { console.error(error); process.exitCode = 1; });
+module.exports = { handler, scenarios, reset, env };

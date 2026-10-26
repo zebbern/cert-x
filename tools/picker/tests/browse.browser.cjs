@@ -149,9 +149,9 @@ async function main() {
 
   await check('browse is advertised only while a backend is configured', async () => {
     const before = await worker.evaluate(() => kiTest.browseReady());
-    await worker.evaluate(() => chrome.storage.local.set({ ki_fast_browse: { typesafeKey: 'test-key' } }));
+    await worker.evaluate(() => chrome.storage.local.set({ ki_fast_browse: { key: 'test-key' } }));
     const after = await worker.evaluate(() => kiTest.browseReady());
-    await worker.evaluate(() => chrome.storage.local.set({ ki_fast_browse: { typesafeKey: 'test-key', backend: 'off' } }));
+    await worker.evaluate(() => chrome.storage.local.set({ ki_fast_browse: { key: 'test-key', on: false } }));
     const off = await worker.evaluate(() => kiTest.browseReady());
     assert.deepEqual([before, after, off], [false, true, false]);
   });

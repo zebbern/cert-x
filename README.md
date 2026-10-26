@@ -67,7 +67,7 @@ Tool-failure telemetry — per-tool error counts and which tool ran next after e
 
 ## Fast browse
 
-With a TypeSafe API key (**Settings → Models → Fast browse**) or an OpenRouter provider, the agent gets a `browse` tool. It finishes a multi-step page task — signing in, getting past a consent wall, reaching a form, walking an app so capture records its API — in one tool call instead of one model turn per click. A fast decision model picks each click, value, option and Enter until the goal is visibly done, then the tool returns the steps and the final page with live refs. TypeSafe Jev is preferred (about 200 ms per decision); without a key the saved OpenRouter provider is used. Text to type goes in named `values`: the decision model gets the names, and their text is replaced by the name wherever it shows up in what is sent or returned (URL, page text, element names; a value under four characters only in the field it was typed into). The page's own text is sent to the decision model as data. Actions run through the normal click/fill/select tools, so the changed-element guard and the highlight apply, and Stop ends the loop. Without a configured backend the tool is not offered.
+Fast browse is a switch at the bottom of the model menu (also under **Settings → Models**). It is on by default once there is something to run it with: a saved OpenRouter provider needs nothing more; otherwise the switch asks for one key, TypeSafe or OpenRouter (recognized by its `sk-or-` prefix), and checks it with one real decision before saving it. While it is on, the agent gets a `browse` tool and one system-prompt line telling it to hand multi-step page tasks to it (without that line, models measured kept driving pages click by click and never called it). It finishes a multi-step page task — signing in, getting past a consent wall, reaching a form, walking an app so capture records its API — in one tool call instead of one model turn per click. A fast decision model picks each click, value, option and Enter until the goal is visibly done, then the tool returns the steps and the final page with live refs. A TypeSafe key runs Jev (about 200 ms per decision); OpenRouter runs Gemini 3.1 Flash Lite (about 0.7 s). Text to type goes in named `values`: the decision model gets the names, and their text is replaced by the name wherever it shows up in what is sent or returned (URL, page text, element names; a value under four characters only in the field it was typed into). The page's own text is sent to the decision model as data. Actions run through the normal click/fill/select tools, so the changed-element guard and the highlight apply, and Stop ends the loop. While the switch is off, or has nothing to run on, the tool is not offered.
 
 ## Live sessions
 
@@ -162,7 +162,7 @@ The legacy companion does **not** authenticate individual agents. Endpoint autho
 
 ## Validation
 
-Build and run maintained contracts:
+Build and run maintained contracts. The build refuses to write a bundle whose top scope binds one name twice (`tools/picker/scope-check.mjs`); rename the added binding when it reports one.
 
 ```text
 node tools/picker/apply-picker.js
@@ -183,6 +183,7 @@ node tools/picker/tests/dvwa-rehearsal.cjs
 node tools/picker/tests/browser-control-ui-test.js
 node tools/picker/tests/contexts-ui-test.js
 node tools/picker/tests/csp-ui-test.js
+node tools/picker/tests/record-arm.browser.cjs
 node tools/security/tests/browser-smoke.cjs
 node tools/security/tests/ui.browser.cjs
 node tools/security/tests/utilities.browser.cjs
@@ -195,7 +196,7 @@ node tools/security/tests/browser-parity.cjs
 node tools/security/tests/runtime-browser-dast.cjs
 ```
 
-`tools/picker/tests/ref-guard.browser.cjs` (non-blocking interact highlight, changed-element ref refusal) and `tools/picker/tests/browse.browser.cjs` (the browse loop with a scripted decision model) drive tool executors directly, so they need a test build first: `KI_TEST_HOOKS=1 node tools/picker/apply-picker.js`. Rebuild without the variable afterwards. On the same build, `node tools/picker/tests/browse-live.cjs typesafe:jev-latest openrouter:<model>` runs real decision models (keys from `.env.local`, never printed) on seven local fixtures and reports pass rate and latency per backend; a scenario passes on what the fixture server received, not on the model's own "done".
+`tools/picker/tests/ref-guard.browser.cjs` (non-blocking interact highlight, changed-element ref refusal), `tools/picker/tests/browse.browser.cjs` (the browse loop with a scripted decision model), `tools/picker/tests/fast-browse-ui.browser.cjs` (the Fast browse switch and key check in the model menu and Settings) and `tools/picker/tests/stream-liveness.browser.cjs` (a subagent that streams reasoning past the stall budget finishes; a silent or cut stream reaches the orchestrator as its own error after the retries) use test hooks, so they need a test build first: `KI_TEST_HOOKS=1 node tools/picker/apply-picker.js`. Rebuild without the variable afterwards. `node tools/picker/tests/browse-ab.cjs --model=<openrouter model>` compares whole chats with Fast browse on and off on the same fixtures (real chat model from `OPENROUTER_API_KEY`, production build): tasks done, time, chat-model calls and how often the model chose `browse`. On the test build, `node tools/picker/tests/browse-live.cjs typesafe:jev-latest openrouter:<model>` runs real decision models (keys from `.env.local`, never printed) on seven local fixtures and reports pass rate and latency per backend; a scenario passes on what the fixture server received, not on the model's own "done".
 
 The native-host test checks same-conversation tool enablement, Full access, approval overrides, files, commands, local/remote MCP, jobs and outputs. It uses temporary Chromium host registration and refuses to replace an existing registration. Chrome/Edge registrations are unaffected. Browser control tests use a local WebSocket fixture, never the user's running controller.
 

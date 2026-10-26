@@ -75,39 +75,24 @@
         </div>
       </form>
     </section>
-    <div class="toolbar">
+    <div class="toolbar" id="fast-browse-bar">
       <h2 id="fast-browse-heading">Fast browse</h2>
-      <button type="button" id="fast-browse-test">Test</button>
+      <button type="button" id="fast-browse-switch" class="wb-toggle" role="switch" aria-checked="false" aria-labelledby="fast-browse-heading" disabled><span class="wb-toggle-thumb" aria-hidden="true"></span></button>
     </div>
-    <section class="card" id="fast-browse" aria-labelledby="fast-browse-heading">
-      <p class="hint">Lets the agent finish multi-step page tasks, like signing in or reaching a form, in one step with a fast decision model. The page's text goes to that model; the values it types are replaced by their names.</p>
+    <form class="card" id="fast-browse" aria-labelledby="fast-browse-heading" novalidate>
+      <p class="note">The agent finishes page tasks like signing in or reaching a form in one step, using a fast model.</p>
+      <p id="fast-browse-status" class="fast-browse-status" role="status"></p>
       <label>
-        <span>TypeSafe API key</span>
+        <span>Key</span>
         <span class="key-row">
-          <input id="fast-browse-key" type="password" autocomplete="off" spellcheck="false" aria-describedby="fast-browse-key-hint">
-          <button type="button" id="fast-browse-toggle">Show</button>
+          <input id="fast-browse-key" type="password" autocomplete="off" spellcheck="false" placeholder="Paste a TypeSafe or OpenRouter key" aria-describedby="fast-browse-hint">
+          <button type="button" id="fast-browse-show">Show</button>
+          <button type="submit" id="fast-browse-save" class="primary">Save</button>
         </span>
-        <span class="hint" id="fast-browse-key-hint">Fastest option. Without a key, Fast browse uses your OpenRouter provider if you saved one above.</span>
+        <span class="error" id="fast-browse-error" role="alert" hidden></span>
+        <span class="hint" id="fast-browse-hint">TypeSafe is fastest: <a href="https://console.typesafe.ai/keys" target="_blank" rel="noopener">get a key</a>. An OpenRouter provider saved above works without one. Page text goes to the fast model; what the agent types does not.</span>
       </label>
-      <label>
-        <span>Use</span>
-        <select id="fast-browse-backend">
-          <option value="auto">TypeSafe if a key is set, otherwise OpenRouter</option>
-          <option value="typesafe">TypeSafe only</option>
-          <option value="openrouter">OpenRouter only</option>
-          <option value="off">Off</option>
-        </select>
-      </label>
-      <details>
-        <summary>Models</summary>
-        <label><span>TypeSafe model</span><input id="fast-browse-typesafe-model" type="text" autocomplete="off" spellcheck="false" placeholder="jev-latest"></label>
-        <label><span>OpenRouter model</span><input id="fast-browse-openrouter-model" type="text" autocomplete="off" spellcheck="false" placeholder="google/gemini-3.1-flash-lite"></label>
-      </details>
-      <div class="form-actions">
-        <span id="fast-browse-status" class="hint" role="status"></span>
-        <button type="button" id="fast-browse-save" class="primary">Save</button>
-      </div>
-    </section>
+    </form>
     </section>
     <section id="mcp" hidden>
       <header><h1>MCP servers</h1><p>Connect tools to your agent.</p></header>

@@ -65,6 +65,8 @@ body.embed .toolbar { margin: 0; }
 body.embed form { margin-top: 0; }
 body.editing #saved-bar,
 body.editing #saved,
+body.editing #fast-browse-bar,
+body.editing #fast-browse,
 body.editing #mcp { display: none; }
 
 #mcp { display: flex; flex-direction: column; gap: 8px; }
@@ -571,3 +573,6 @@ textarea {
 .quick-connect { margin: 4px 0 12px; }
 .quick-connect[open] { background: var(--card); border-radius: 12px; padding: 12px; }
 form details label { display: flex; flex-direction: column; gap: 6px; }
+
+.fast-browse-status { margin: 0; color: var(--text); font-size: 13px; line-height: 18px; }
+#fast-browse-hint a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }

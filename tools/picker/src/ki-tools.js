@@ -146,7 +146,7 @@ const specs = {
   // Advertised only while a decision backend is configured (kiBrowseReady in apply-picker).
   browse: {
     description:
-      "Drive the working tab toward a UI goal (sign in, reach a form, walk an app's pages so capture records them) in one call: a fast decision model clicks, types, selects and waits until the goal is visibly done. Put all text to type in values and refer to the names in goal; returns the steps, the final page with refs, and a recovery hint if it stopped early.",
+      "Do a whole page task in one call; prefer it over snapshot then click/fill/select whenever the task takes more than one action (sign in, fill and submit a form, get past a banner, open each section of an app). A fast model acts until the goal is visibly done. Put text to type in values and name them in goal; returns the steps and the final page with refs.",
     parameters: {
       type: "object",
       properties: {

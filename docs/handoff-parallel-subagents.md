@@ -38,20 +38,18 @@ pace.
   one conversation.
 - A subagent shares its parent's tab-group session and starts without a primary
   tab of its own. It can still be told to act on the parent's tab.
-- `graph_write` is not safe to run concurrently: `kiGraphApply`
-  (`tools/picker/src/ki-graph.js`) loads the whole record, edits it, and only the
-  save (`kiGraphPersist`) is queued. Two writes at once lose one. It also
-  rewrites every workspace's graph, not just the caller's.
+- `graph_write` was not safe to run concurrently: two writes at once lost one,
+  across workspaces too, because one key holds every workspace's graph. Fixed
+  2026-10-28: the whole load-edit-save runs one at a time (`kiGraphSerial` in
+  `tools/picker/src/ki-graph.js`), covered by `tools/picker/tests/graph.test.js`.
 
 Minified names (`LM`, `wM`, `UM`, ...) change if the vendor snapshot changes;
 find them by the quoted anchors.
 
 ### Plan
 
-1. **Graph writes.** Queue the whole load-edit-save of `kiGraphApply` on
-   `kiGraphWrites`. Pitfall: `kiGraphPersist` must then stop chaining on the same
-   queue, or the apply waits on itself. Check for other writers of
-   `KI_GRAPH_KEY` first.
+1. **Graph writes.** Done 2026-10-28 (see above); nothing else writes
+   `KI_GRAPH_KEY`.
 2. **Audit other shared state** that subagents' tools write at the same time;
    this was not done. Candidates: Outputs (`kiWorkspaceOutput`, used by
    download and save_file results), `ki-telemetry.js`, security run and capture
@@ -87,8 +85,8 @@ find them by the quoted anchors.
   - an agent call plus a browser tool in the same turn do not overlap.
   Undo each fix in the built bundle and confirm its check fails, as was done for
   stream-liveness.
-- A unit test for concurrent `kiGraphApply` calls (both writes survive). Do not
-  name it `graph.test.js`; see `docs/backlog.md` item 2.
+- The unit test for concurrent graph writes exists:
+  `tools/picker/tests/graph.test.js`.
 - The full suite, `node tools/run-browser-tests.cjs`. It needs the local DVWA:
   `docker start cert-x-dvwa`, and stop it afterwards. The DVWA rehearsal covers
   the subagent resume path. Run it once before your change as a baseline: its

@@ -215,8 +215,22 @@ bg = swap(bg, 'systemPrompt:r===`quick-translate`?await SF(i):r===`quick-explain
 // Same rule when the provider answers 404 mid-turn: the vendor's recovery clears the
 // saved default and resends the conversation to the first other model, on any
 // connection. It never ran here (the Rd clash threw first); keep it off so the
-// provider's own error reaches the user.
+// provider's own error reaches the user. Manual /compact had the same switch
+// inline; it goes too.
 bg = swap(bg, 'i=async n=>{let r=await yu(e.conversationId,{connectionId:n.connectionId,modelId:n.modelId});return r?{...await DF(r,e.conversationId,t,e.profile,e.quickTranslateFormat,e.observeRequest),selection:r}:null}', 'i=async()=>null');
+bg = swap(bg, 'let c=s,l;try{l=await kF({messages:i,conversationId:e.session,selection:c,instruction:t,signal:a.signal})}catch(n){if(!(n instanceof rE))throw n;let r=await yu(e.session,{connectionId:c.connectionId,modelId:c.modelId});if(!r)throw n;c=r,e.modelId=r.modelId,Q(e,{type:`notice`,id:Z(`n`),level:`warn`,text:k(A(),`bg.modelRecoveredMidturn`,{from:s.modelId,to:r.modelId})}),l=await kF({messages:i,conversationId:e.session,selection:c,instruction:t,signal:a.signal})}', 'let l=await kF({messages:i,conversationId:e.session,selection:s,instruction:t,signal:a.signal});');
+// The vendor's text for it says the catalog has no replacement and to try later. Say
+// which model the provider refused, what it said, and where to pick another
+// (kiModelUnavailableText). The 404 error carries the model from createLLM (e is
+// shadowed inside generate); the failure class carries it into the turn notice (UE,
+// also the persisted turn the replay renders) and the compaction/flow reason (WE).
+bg = swap(bg, 'n=e.authResolver;return{llm:new Ry(', 'n=e.authResolver,kiModel=e.model;return{llm:new Ry(');
+bg = swap(bg, 'throw e.statusCode===404?new rE(e.message,e.requestId):e', 'throw e.statusCode===404?Object.assign(new rE(e.message,e.requestId),{kiModel}):e');
+// Compaction's runner has its own generate; its catch sees the runner options as e.
+bg = swap(bg, 'let n=new rE(t.message,t.requestId);throw e.onModelUnavailable?.(n),n}', 'let n=Object.assign(new rE(t.message,t.requestId),{kiModel:e.model});throw e.onModelUnavailable?.(n),n}');
+bg = swap(bg, 'if(r instanceof rE)return{cls:`model-unavailable`,status:r.statusCode}', 'if(r instanceof rE)return{cls:`model-unavailable`,status:r.statusCode,model:r.kiModel,detail:DE(r.message).replace(/^404 /,``)}');
+bg = swap(bg, 'let i=LE[e.cls],a=RE[e.cls];return{text:k(n,i??`bg.failUnexpected`,r)', 'if(e.cls===`model-unavailable`&&e.model)return{text:kiModelUnavailableText(e),action:`retry`};let i=LE[e.cls],a=RE[e.cls];return{text:k(n,i??`bg.failUnexpected`,r)');
+bg = swap(bg, 'function WE(e,t){let n=PE(e,t),r={};', 'function WE(e,t){let n=PE(e,t),r={};if(n.cls===`model-unavailable`&&n.model)return kiModelUnavailableText(n);');
 // Assigned workspace chats must survive the legacy ten-unassigned-chat history sweep.
 bg = swap(bg, 'async function Vk(e,t){let n=(await Ek()).filter(t=>t.lastActiveAt!==void 0&&Pk(t)===e),r=n.length-10;', 'async function Vk(e,t){let context=await kiContextLoad(),n=(await Ek()).filter(t=>t.lastActiveAt!==void 0&&Pk(t)===e&&!context.chats[t.chatId]?.workspaceId),r=n.length-10;');
 js = swap(js, 'className:`wb-history-foot`,children:i(`history.limit`,{n:10})', 'className:`wb-history-foot`,children:`Workspace chats are kept until deleted. Other chats keep the latest 10.`');

@@ -2,15 +2,18 @@
 
 Ordered by expected value, not by age.
 
-1. **`tools/picker/tests/graph.test.js`** — behavior verified inline but the
+1. **Parallel subagents** — a batch of subagents runs one after another (about
+   54 of 60 minutes in BugStore run 2). Cause, plan, the two safety fixes it
+   needs, and tests: `docs/handoff-parallel-subagents.md`.
+2. **`tools/picker/tests/graph.test.js`** — behavior verified inline but the
    security scanner persistently blocks writing the file (false-positive SQL
    findings on content with no SQL). Whitelist the path or paste the file
    from the 2026-10-23 session log.
-2. **Mimosa scanning**: exclude generated bundles (`background/background.js`,
+3. **Mimosa scanning**: exclude generated bundles (`background/background.js`,
    `chunks/*`) from line-level diff scans — their line numbers shift every
    rebuild and produce phantom findings. Scan `tools/picker/src/`,
    `security/`, `providers/` instead.
-3. **omnigraph**: deferred until graph-query volume justifies a real graph
+4. **omnigraph**: deferred until graph-query volume justifies a real graph
    engine; the embedded graph has not been a bottleneck in any session.
 
 Closed 2026-10-24: provider-refusal surfacing (named errors, unit-tested);

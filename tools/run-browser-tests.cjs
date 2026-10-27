@@ -23,6 +23,7 @@ const tests = [
   ["engine parity", "tools/security/tests/browser-parity.cjs"],
   ["runtime DAST", "tools/security/tests/runtime-browser-dast.cjs"],
   ["recording follows tabs", "tools/picker/tests/record-arm.browser.cjs"],
+  ["model 404 message", "tools/picker/tests/model-404.browser.cjs"],
   ["DVWA demo rehearsal", "tools/picker/tests/dvwa-rehearsal.cjs"],
 ];
 async function main() {

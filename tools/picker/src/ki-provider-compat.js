@@ -7,6 +7,13 @@ function kiProviderToolOptions(request) {
   return request;
 }
 
+// The provider answered 404 for the chosen model: name it, quote the provider and
+// say where to pick another. Shared by the turn notice and the compaction and
+// flow failure reasons.
+function kiModelUnavailableText(failure) {
+  return `Model ${failure.model} isn't available (provider said: ${failure.detail}). Pick another model in the model menu.`;
+}
+
 // Surface provider-level refusals as actionable errors instead of dead turns.
 // Anthropic via OpenRouter blanket-refuses security-testing conversations with
 // finish_reason "content_filter" plus a non-empty refusal delta INSIDE an

@@ -184,6 +184,7 @@ node tools/picker/tests/browser-control-ui-test.js
 node tools/picker/tests/contexts-ui-test.js
 node tools/picker/tests/csp-ui-test.js
 node tools/picker/tests/record-arm.browser.cjs
+node tools/picker/tests/model-404.browser.cjs
 node tools/security/tests/browser-smoke.cjs
 node tools/security/tests/ui.browser.cjs
 node tools/security/tests/utilities.browser.cjs

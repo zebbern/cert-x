@@ -12,7 +12,10 @@ Ordered by expected value, not by age.
 3. **Mimosa scanning**: exclude generated bundles (`background/background.js`,
    `chunks/*`) from line-level diff scans — their line numbers shift every
    rebuild and produce phantom findings. Scan `tools/picker/src/`,
-   `security/`, `providers/` instead.
+   `security/`, `providers/` instead. Blocked 2026-10-27: Mimosa is no longer
+   installed (no hook, plugin or binary; its last run in `.mimosa/` is from
+   2026-10-25), so there is no config to change. Do this when it is
+   reinstalled.
 4. **omnigraph**: deferred until graph-query volume justifies a real graph
    engine; the embedded graph has not been a bottleneck in any session.
 

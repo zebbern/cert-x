@@ -9,6 +9,12 @@
 //   incomplete-response error and must be reported as one.
 // - error: the provider reports an error inside the stream, a generic provider error
 //   whose retry decision goes through the media-error check (Rd, Fd).
+// - quiet: only OpenRouter's keep-alive comments (": OPENROUTER PROCESSING") for
+//   longer than the stall budget, then the answer: a model working without
+//   streaming anything is alive too.
+// - refused, gone: a content-filter refusal and a 404 for the model. Delegating
+//   again fails the same way, so the orchestrator is told it is not retryable and
+//   that the user has to act; silent, cut and error are retryable.
 // The stall budget is shortened through a test hook, so this needs a test build:
 // KI_TEST_HOOKS=1 node tools/picker/apply-picker.js
 const fs = require('node:fs'), os = require('node:os'), path = require('node:path'), http = require('node:http'), assert = require('node:assert/strict');
@@ -17,7 +23,7 @@ const root = path.resolve(__dirname, '../../..'), temp = fs.mkdtempSync(path.joi
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 // 1.5 s instead of 90 s; the think scenario reasons for three budgets.
 const IDLE_MS = 1500, THINK_MS = 3 * IDLE_MS, THINK_EVERY_MS = 200;
-const SCENARIOS = ['think', 'silent', 'cut', 'error'];
+const SCENARIOS = ['think', 'silent', 'cut', 'error', 'quiet', 'refused', 'gone'];
 const sub = Object.fromEntries(SCENARIOS.map(s => [s, { requests: 0, resumes: 0 }])), results = {}, pageErrors = [];
 let echoed = null;
 
@@ -26,7 +32,20 @@ const chunk = delta => 'data: ' + JSON.stringify({ id: 'liveness', object: 'chat
 const finish = reason => 'data: ' + JSON.stringify({ id: 'liveness', object: 'chat.completion.chunk', model: 'mock/liveness', choices: [{ index: 0, delta: {}, finish_reason: reason }] }) + '\n\ndata: [DONE]\n\n';
 
 async function subagent(scenario, res, request) {
+  if (scenario === 'gone') {
+    res.writeHead(404, { 'Content-Type': 'application/json' });
+    return res.end(JSON.stringify({ error: { message: 'No endpoints found for mock/liveness.', code: 404 } }));
+  }
   res.writeHead(200, { 'Content-Type': 'text/event-stream' });
+  if (scenario === 'refused') return res.end(chunk({ role: 'assistant', content: '' }) + 'data: ' + JSON.stringify({ choices: [{ index: 0, delta: { refusal: 'blocked' }, finish_reason: 'content_filter' }] }) + '\n\n');
+  if (scenario === 'quiet') {
+    res.flushHeaders();
+    for (const end = Date.now() + THINK_MS; Date.now() < end && !res.destroyed;) {
+      res.write(': OPENROUTER PROCESSING\n\n');
+      await sleep(THINK_EVERY_MS);
+    }
+    return res.end(chunk({ role: 'assistant', content: 'SUB-QUIET-OK' }) + finish('stop'));
+  }
   // Headers out, then nothing: what the live run saw (NET-RES 200, then silence).
   if (scenario === 'silent') return res.flushHeaders();
   if (scenario === 'cut') return res.end(chunk({ role: 'assistant', content: 'partial' }));
@@ -115,6 +134,17 @@ async function main() {
     assert.match(results.silent, /no chunk arrived for 1500ms/, 'the orchestrator gets the stall error itself');
     assert.match(results.cut, /ended without a finish reason/, 'the orchestrator gets the incomplete-response error itself');
     assert.match(results.error, /Provider returned error/, 'the orchestrator gets the provider error itself');
+    assert.equal(sub.quiet.requests, 1, 'keep-alive comments keep the stream alive: no stall retry');
+    assert.match(results.quiet, /SUB-QUIET-OK/, 'the quiet subagent answer reaches the orchestrator');
+    const envelope = scenario => JSON.parse(results[scenario].slice(results[scenario].indexOf('{')));
+    for (const scenario of ['silent', 'cut', 'error']) assert.equal(envelope(scenario).retryable, true, scenario + ': delegating again can work');
+    for (const scenario of ['refused', 'gone']) {
+      assert.equal(sub[scenario].requests, 1, scenario + ': neither the stream retry nor the [resume] rerun repeats it');
+      assert.equal(envelope(scenario).retryable, false, scenario + ': delegating again fails the same way');
+      assert.equal(envelope(scenario).userAction, true, scenario + ': only the user can fix it');
+    }
+    assert.match(results.refused, /provider refused this request/, 'the refusal names its cause');
+    assert.match(results.gone, /No endpoints found/, 'the 404 quotes the provider');
     assert.deepEqual(pageErrors, [], 'no page errors');
     console.log('STREAM-LIVENESS-PASS');
   } catch (error) {

@@ -43,22 +43,58 @@ function send(message) {
   process.stdout.write(Buffer.concat([header, body]));
 }
 function launch(command, args, options = {}) {
+  const startedAt = Date.now();
   const child = spawn(command, args, { windowsHide: true, detached: process.platform !== "win32", stdio: ["pipe", "pipe", "pipe"], ...options });
+  child.startedAt = startedAt; child.once("exit", () => { child.exitedAt = Date.now(); });
   processes.add(child);
   child.once("close", () => processes.delete(child));
   return child;
 }
+// taskkill /t snapshots the tree, then takes ~700 ms to kill it, and children the shell starts in
+// between survive. Instead the root dies first, so it stops spawning, and the script then sweeps
+// its descendants: each pass re-reads every process, follows ParentProcessId links from the root
+// and from members it has seen alive (their orphans keep the dead parent's id), and kills the
+// live members, until a pass adds none. A process only counts as a member if it was created while
+// its parent was alive, and it is killed through a handle whose start time matches, so a reused
+// PID never hits an unrelated program. Like taskkill, it cannot link children of an intermediate
+// that exited before any pass saw it. Ten passes are enough: each pass kills every member it
+// adds, so a new one has to be spawned inside the previous pass. Exit 2: no process list (WMI).
+const treeKillScript = (pid, startedAt, diedAt) => `$ErrorActionPreference = 'SilentlyContinue'
+$epoch = [DateTime]::new(1970, 1, 1, 0, 0, 0, [DateTimeKind]::Utc); $alive = [long]::MaxValue
+function Ms($date) { [long]($date.ToUniversalTime() - $epoch).TotalMilliseconds }
+$born = @{ ${pid} = ${startedAt} }; $died = @{ ${pid} = ${diedAt} }
+for ($pass = 0; $pass -lt 10; $pass++) {
+  $all = @(Get-CimInstance Win32_Process -Property ProcessId, ParentProcessId, CreationDate)
+  if (-not $all.Count) { exit 2 }
+  $seen = @{}; foreach ($p in $all) { $seen[[int]$p.ProcessId] = Ms $p.CreationDate }
+  do {
+    $grew = $false
+    foreach ($p in $all) {
+      $id = [int]$p.ProcessId; $parent = [int]$p.ParentProcessId
+      if ($born.ContainsKey($id) -or -not $born.ContainsKey($parent)) { continue }
+      if ($seen[$id] -ge $born[$parent] -and $seen[$id] -le $died[$parent]) { $born[$id] = $seen[$id]; $died[$id] = $alive; $grew = $true }
+    }
+  } while ($grew)
+  $live = @($born.Keys | Where-Object { $died[$_] -eq $alive })
+  if (-not $live.Count) { break }
+  foreach ($id in $live) {
+    try { $process = Get-Process -Id $id -ErrorAction Stop; $null = $process.Handle; if ([math]::Abs((Ms $process.StartTime) - $born[$id]) -le 1) { $process.Kill() } } catch {}
+    $died[$id] = Ms ([DateTime]::UtcNow)
+  }
+}`;
+const CLEANUP_WARNING = "Child processes may still be running: Windows could not list processes (WMI), so only the command's shell was stopped.";
+// Resolves to a warning when descendants could not be swept, otherwise undefined.
 async function killTree(child) {
   if (!child.pid) return;
-  if (process.platform === "win32") {
-    await new Promise(resolve => {
-      const killer = spawn("taskkill.exe", ["/pid", String(child.pid), "/t", "/f"], { windowsHide: true, stdio: "ignore" });
-      killer.once("error", () => { child.kill(); resolve(); });
-      killer.once("close", resolve);
-    });
-  } else {
-    try { process.kill(-child.pid, "SIGKILL"); } catch { child.kill("SIGKILL"); }
-  }
+  if (process.platform !== "win32") { try { process.kill(-child.pid, "SIGKILL"); } catch { child.kill("SIGKILL"); } return; }
+  if (!Number.isFinite(child.startedAt)) throw Error("killTree needs a child started by launch()");
+  if (child.exitCode === null && child.signalCode === null) child.kill();
+  const script = Buffer.from(treeKillScript(child.pid, child.startedAt, child.exitedAt ?? Date.now()), "utf16le").toString("base64");
+  return new Promise(resolve => {
+    const killer = spawn("powershell.exe", ["-NoLogo", "-NoProfile", "-NonInteractive", "-EncodedCommand", script], { windowsHide: true, stdio: "ignore" });
+    killer.once("error", () => resolve(CLEANUP_WARNING));
+    killer.once("close", code => resolve(code === 0 ? undefined : CLEANUP_WARNING));
+  });
 }
 function abortCheck(signal) { signal?.throwIfAborted(); }
 function commandLine(command) {
@@ -109,9 +145,9 @@ async function runCommand(p, signal) {
     child.once("close", async (code, exitSignal) => {
       clearTimeout(timer);
       signal?.removeEventListener("abort", abort);
-      if (killing) await killing;
+      const warning = killing && await killing;
       resolve({ exitCode: code, signal: exitSignal, timedOut, cancelled, truncated,
-        stdout: Buffer.concat(output.stdout).toString("utf8"), stderr: Buffer.concat(output.stderr).toString("utf8") });
+        stdout: Buffer.concat(output.stdout).toString("utf8"), stderr: Buffer.concat(output.stderr).toString("utf8"), ...(warning && { warning }) });
     });
     if (signal?.aborted) abort();
   });

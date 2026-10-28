@@ -184,6 +184,22 @@ test("command cancellation kills the shell's child process", { timeout: 15000 },
   await assertGone(Number(fs.readFileSync(pidFile)), t.signal);
 });
 
+test("cancellation also kills children the shell starts while it is being killed", { skip: process.platform !== "win32", timeout: 30000 }, async t => {
+  const dir = temp(), c = client(t), script = path.join(dir, "child.js"), pids = path.join(dir, "pids");
+  fs.writeFileSync(script, "setInterval(() => {}, 1000);"); fs.mkdirSync(pids);
+  const started = () => fs.readdirSync(pids).map(Number);
+  t.after(() => { for (const pid of started()) try { process.kill(pid); } catch {} });
+  // The shell keeps starting children, so some start during the kill itself; a tree snapshot taken first misses them.
+  const quote = value => "'" + value.replaceAll("'", "''") + "'";
+  const command = `while ($true) { $child = Start-Process -FilePath ${quote(process.execPath)} -ArgumentList ${quote('"' + script + '"')} -WindowStyle Hidden -PassThru; New-Item -ItemType File -Path (Join-Path ${quote(pids)} $child.Id) | Out-Null; Start-Sleep -Milliseconds 20 }`;
+  const running = c.send("command", { cwd: dir, command });
+  while (started().length < 3) await sleep(30, undefined, { signal: t.signal });
+  await c.rpc("cancel", { id: running.id });
+  assert.equal((await running.promise).result.cancelled, true);
+  const alive = started().filter(pid => { try { process.kill(pid, 0); return true; } catch { return false; } });
+  assert.deepEqual(alive, [], `${alive.length} of ${started().length} children outlived the cancellation`);
+});
+
 test("oversized native frames close the host", { timeout: 10000 }, async t => {
   const c = client(t), header = Buffer.alloc(4);
   header.writeUInt32LE(1024 * 1024);

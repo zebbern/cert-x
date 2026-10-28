@@ -24,3 +24,10 @@ test("a finished job reports its terminal state only once its outputs are collec
   const done = jobs.read({ job_id: jobId, owner: "task" });
   assert.equal(done.state, "completed"); assert.equal(done.exitCode, 0); assert.deepEqual(done.outputs, [{ path: "/work/out.txt", size: 4 }]);
 });
+
+test("a job whose process tree could not be fully stopped says so", { timeout: 5000 }, async () => {
+  const warning = "Child processes may still be running.";
+  const { jobs, jobId } = await started(child => ({ killTree: async () => { setImmediate(() => child.emit("close", 1)); return warning; } }));
+  const cancelled = await jobs.cancel({ job_id: jobId, owner: "task" });
+  assert.equal(cancelled.state, "cancelled"); assert.equal(cancelled.warning, warning);
+});

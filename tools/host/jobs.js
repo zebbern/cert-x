@@ -12,7 +12,7 @@ module.exports = function createJobs({ launch, killTree, localPath, integer, tex
   }
   function summary(job) {
     return { jobId: job.id, owner: job.owner, instance, command: job.command.slice(0, 2000), commandTruncated: job.command.length > 2000, cwd: job.cwd, state: job.state, startedAt: job.startedAt, endedAt: job.endedAt,
-      exitCode: job.exitCode, error: job.error, outputs: job.outputs || [], outputWarnings: job.outputWarnings || [], firstCursor: job.chunks[0]?.seq ?? job.next, nextCursor: job.next };
+      exitCode: job.exitCode, error: job.error, warning: job.warning, outputs: job.outputs || [], outputWarnings: job.outputWarnings || [], firstCursor: job.chunks[0]?.seq ?? job.next, nextCursor: job.next };
   }
   async function start(params, signal) {
     const command = text(params.command, "command"), cwd = localPath(params.cwd), owner = text(params.owner, "task owner");
@@ -50,7 +50,7 @@ module.exports = function createJobs({ launch, killTree, localPath, integer, tex
     job.done = new Promise(resolve => {
       child.once("error", error => { job.error = error.message; });
       child.once("close", async code => {
-        clearTimeout(job.timer); if (job.killing) await job.killing;
+        clearTimeout(job.timer); if (job.killing) job.warning = await job.killing;
         const endedAt = Date.now();
         try { Object.assign(job, await collectOutputs(params.outputs)); } catch (error) { job.outputWarnings = [error.message]; }
         // The terminal state goes last so a job_read during collection never sees "completed" without its outputs.

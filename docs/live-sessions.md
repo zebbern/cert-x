@@ -1,8 +1,9 @@
 # Live autonomous sessions
 
 How to run cert-x end-to-end against a practice target with a real model,
-unattended. Session evidence lives in `tools/security/evidence/m4-live-baseline/`
-(see `INDEX.md` there).
+unattended. Session evidence stays local in
+`tools/security/evidence/m4-live-baseline/` (gitignored, since transcripts of
+live runs don't belong in a public repo; see `INDEX.md` there).
 
 ## Runner
 

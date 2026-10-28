@@ -2,7 +2,7 @@
 
 Status: section 1 designed and measured on 2026-10-26, not started; section 2
 done. Base: branch
-`fast-browse` at `7ed96cc`. Read AGENTS.md first; the build rules there apply
+`fast-browse` at `d6a64b9`. Read AGENTS.md first; the build rules there apply
 (patch through `tools/picker/apply-picker.js`, never hand-edit
 `background/background.js` or `chunks/*`).
 
@@ -12,7 +12,7 @@ done. Base: branch
 
 When the model dispatches several subagents in one turn, they run one after
 another. BugStore live run 2 (request bodies in `C:/tmp/m4-req-*.json`, run log
-in `tools/security/evidence/m4-live-baseline/bugstore-run2-run.log`):
+in `tools/security/evidence/m4-live-baseline/bugstore-run2-run.log`, local only):
 
 | Batch | Run one after another | Longest single subagent |
 |---|---|---|
@@ -20,7 +20,7 @@ in `tools/security/evidence/m4-live-baseline/bugstore-run2-run.log`):
 | 3 more subagents | 18.5 min | about 9 min |
 
 Subagents took about 54 of the 60 minutes. In parallel that is roughly 20, less
-now that `7ed96cc` stopped the 90 s stall cuts that padded several of them. The
+now that `d6a64b9` stopped the 90 s stall cuts that padded several of them. The
 orchestrator waits for the whole batch either way, so the slowest one sets the
 pace.
 
@@ -90,7 +90,7 @@ find them by the quoted anchors.
 - The full suite, `node tools/run-browser-tests.cjs`. It needs the local DVWA:
   `docker start cert-x-dvwa`, and stop it afterwards. The DVWA rehearsal covers
   the subagent resume path. Run it once before your change as a baseline: its
-  last run on `7ed96cc` was stopped because the machine ran low on memory.
+  last run on `d6a64b9` was stopped because the machine ran low on memory.
 - Rebuild production afterwards: `background/background.js` must contain no
   `globalThis.kiTest`. A live comparison of batch wall time is a session the user
   runs.
@@ -102,7 +102,7 @@ Done 2026-10-27: swaps after "Same rule when the provider answers 404" in
 manual `/compact` that gets a 404 no longer switches models either. Tested by
 `tools/picker/tests/model-404.browser.cjs` (turn and compaction).
 
-- In `7ed96cc` the vendor's 404 model recovery is off. In `apply-picker.js`,
+- In `d6a64b9` the vendor's 404 model recovery is off. In `apply-picker.js`,
   search for "Same rule when the provider answers 404". That recovery cleared
   the saved default model and re-sent the conversation to another model on any
   connection. The provider's raw 404 now reaches the user as
@@ -121,6 +121,6 @@ manual `/compact` that gets a 404 no longer switches models either. Tested by
 - `swap()` anchors must be unique, and the build refuses a bundle whose top scope
   binds a name twice (`tools/picker/scope-check.mjs`). Name new top-level
   helpers `ki*`.
-- Unit tests: the command in AGENTS.md (735 passing at `7ed96cc`).
-- Background on why streams and subagents failed before `7ed96cc`: its commit
+- Unit tests: the command in AGENTS.md (735 passing at `d6a64b9`).
+- Background on why streams and subagents failed before `d6a64b9`: its commit
   message, and `tools/picker/tests/stream-liveness.browser.cjs`.

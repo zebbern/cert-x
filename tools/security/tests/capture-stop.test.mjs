@@ -4,7 +4,9 @@ import { BrowserCaptureManager } from '../../../security/ptk/background/capture/
 const deferred = () => { let resolve; const promise = new Promise(r => resolve = r); return { promise, resolve }; };
 const frame = { tabId: 1, frameId: 'root', documentId: 'doc', loaderId: 'doc', sessionGeneration: 1, url: 'https://app.test/', documentUrl: 'https://app.test/' };
 const request = { ...frame, requestId: 'xhr', resourceType: 'XHR', url: 'https://app.test/opaque', method: 'GET' };
-async function harness({ timeout = 1000, barrier, drain, active = () => true } = {}) {
+// Tests hold the drain open on purpose; the default drain timeout must outlast any process stall
+// (1 s did not), and the test that exercises the timeout passes its own.
+async function harness({ timeout = 10000, barrier, drain, active = () => true } = {}) {
  let emit, admit;
  const adapter = { setEventSink(fn) { emit = fn; }, setAdmission(fn) { admit = fn; },
    async configure() {}, async release() {}, getSnapshot: () => ({ frames: [frame] }),

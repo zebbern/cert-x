@@ -319,16 +319,17 @@ test('stop outcome and effective acquisition configuration survive reload with b
     assert.deepEqual(invalid.scaAcquisitionLimits, { effective: {} })
 })
 
-test('stop does not wait for blocked initial source collection once lease exists', async () => {
+// Collection and cleanup stay blocked until released below, so stop must return on its 10 ms
+// drain bound. The timeout stays under the 5000 ms default bound, so ignoring the configured one
+// fails, and above any process stall (a racing 100 ms guard lost to an 85 ms stall).
+test('stop does not wait for blocked initial source collection once lease exists', { timeout: 2500 }, async () => {
     const h = harness()
     let resolveInitial, releaseCleanup
     h.entry.promise = new Promise(resolve => { resolveInitial = resolve })
     h.entry.acquisition = { drainTimeoutMs: 10 }
     h.lease.stopAndDrain = async () => ({ complete: false, reason: 'capture_drain_timeout' })
     h.lease.release = () => new Promise(resolve => { releaseCleanup = resolve })
-    const stopping = h.sca._releaseBrowserCapture(1)
-    const result = await Promise.race([stopping.then(() => 'stopped'), new Promise(resolve => setTimeout(() => resolve('hung'), 100))])
-    assert.equal(result, 'stopped')
+    await h.sca._releaseBrowserCapture(1)
     assert.equal(h.sca.scanResult.scaDrain.complete, false)
     assert.equal(h.sca.scanResult.scaDrain.cleanupPending, true)
     assert.equal(h.sca.captureLeases.has(1), false)

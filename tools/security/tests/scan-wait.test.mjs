@@ -29,7 +29,8 @@ async function fixture(engines = ['DAST']) {
 test('status can await actual DAST queue idle without marking the observing run complete', async () => {
   const f = await fixture(); let idle = false, reads = 0;
   f.runtime.query = async () => { reads++; return progress(idle); };
-  const pending = f.wait({ timeoutMs: 1500 }); setTimeout(() => { idle = true; }, 15);
+  // The second read follows a 1 s poll pause; the deadline sits well past it so a stalled process still sees idle.
+  const pending = f.wait({ timeoutMs: 5000 }); setTimeout(() => { idle = true; }, 15);
   const result = await pending;
   assert.equal(result.state, 'running'); assert.equal(result.wait.outcome, 'idle'); assert.equal(result.wait.idle, true);
   assert.equal(result.wait.timedOut, false); assert.equal(result.engineStatus.DAST.idle, true);
@@ -46,7 +47,7 @@ test('wait ends on terminal engine state and retains its final result', async ()
 
 test('wait timeout reports current progress without completing or stopping the scan', async () => {
   const f = await fixture(); const started = Date.now(), result = await f.wait({ timeoutMs: 25 });
-  assert.ok(Date.now() - started < 500); assert.equal(result.wait.outcome, 'timeout'); assert.equal(result.wait.timedOut, true);
+  assert.ok(Date.now() - started < 900, 'The 25 ms timeout cuts the 1 s poll pause short'); assert.equal(result.wait.outcome, 'timeout'); assert.equal(result.wait.timedOut, true);
   assert.equal(result.state, 'running'); assert.equal(result.engineStatus.DAST.idle, false);
   assert.equal(f.calls.filter(op => op === 'stopScan').length, 0);
 });

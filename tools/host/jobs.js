@@ -51,8 +51,10 @@ module.exports = function createJobs({ launch, killTree, localPath, integer, tex
       child.once("error", error => { job.error = error.message; });
       child.once("close", async code => {
         clearTimeout(job.timer); if (job.killing) await job.killing;
-        job.exitCode = code; job.state = job.stopping || (code === 0 ? "completed" : "failed"); job.endedAt = Date.now();
+        const endedAt = Date.now();
         try { Object.assign(job, await collectOutputs(params.outputs)); } catch (error) { job.outputWarnings = [error.message]; }
+        // The terminal state goes last so a job_read during collection never sees "completed" without its outputs.
+        job.exitCode = code; job.state = job.stopping || (code === 0 ? "completed" : "failed"); job.endedAt = endedAt;
         onUpdate(summary(job));
         resolve(summary(job));
       });

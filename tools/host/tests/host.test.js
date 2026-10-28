@@ -1,10 +1,11 @@
-const { test } = require("node:test");
+const { test, after } = require("node:test");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const os = require("node:os");
 const path = require("node:path");
 const { spawn } = require("node:child_process");
 const { once } = require("node:events");
+const { setTimeout: sleep } = require("node:timers/promises");
 const hostPath = path.resolve(__dirname, "../ki-host.js");
 const fixture = path.join(__dirname, "fixture-mcp.js");
 
@@ -42,21 +43,27 @@ function client(t) {
     return message.result;
   } };
 }
-function temp(t) {
+// Temp dirs go after the whole file: a test that fails mid-command leaves PowerShell
+// holding its dir as cwd until the host closes, and a per-test rm that threw EPERM
+// first would skip the host-closing hook and leave the run hanging. The retries cover a child a
+// failing test has just killed, which releases its cwd a moment later.
+const dirs = [];
+after(() => { for (const dir of dirs) fs.rmSync(dir, { recursive: true, force: true, maxRetries: 5 }); });
+function temp() {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "cert-x-host-"));
-  t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
+  dirs.push(dir);
   return dir;
 }
-async function waitForFile(file) {
-  for (let i = 0; i < 100; i++) { if (fs.existsSync(file)) return; await new Promise(r => setTimeout(r, 30)); }
-  throw Error("Fixture did not start");
+// Waits poll the condition itself and end with the test (its signal aborts on timeout), so each
+// test's timeout is the one bound and a slow PowerShell or Node start is not a failure.
+async function waitForFile(file, signal) {
+  while (!fs.existsSync(file)) await sleep(30, undefined, { signal });
 }
-async function assertGone(pid) {
-  for (let i = 0; i < 100; i++) {
+async function assertGone(pid, signal) {
+  for (;;) {
     try { process.kill(pid, 0); } catch (error) { if (error.code === "ESRCH") return; throw error; }
-    await new Promise(r => setTimeout(r, 30));
+    await sleep(30, undefined, { signal });
   }
-  assert.fail(`Child ${pid} survived cleanup`);
 }
 
 test("native framing, concurrent correlation and unsupported operation", { timeout: 10000 }, async t => {
@@ -68,13 +75,13 @@ test("native framing, concurrent correlation and unsupported operation", { timeo
 });
 
 test("background commands return promptly, stream bounded Unicode output and collect files", { timeout: 20000 }, async t => {
-  const dir = temp(t), c = client(t), file = path.join(dir, "job.txt"), win = process.platform === "win32";
+  const dir = temp(), c = client(t), file = path.join(dir, "job.txt"), win = process.platform === "win32";
   const command = win ? `Write-Output 'héllo'; Start-Sleep -Seconds 1; Set-Content -LiteralPath '${file}' -Value 'done'; Write-Output ('界' * 400000)` : `printf héllo; sleep 1; printf done > '${file}'; python3 -c "print('界'*400000)"`;
   const started = await c.rpc("command", { command, cwd: dir, background: true, owner: "task-a", outputs: [file] });
   assert.equal(started.state, "running"); assert.ok(started.jobId);
   await assert.rejects(c.rpc("job_read", { job_id: started.jobId, owner: "task-b" }), /another task/);
   let result;
-  for (let i = 0; i < 100; i++) { result = await c.rpc("job_read", { job_id: started.jobId, owner: "task-a", cursor: 0 }); if (result.state === "completed") break; await new Promise(resolve => setTimeout(resolve, 50)); }
+  while ((result = await c.rpc("job_read", { job_id: started.jobId, owner: "task-a", cursor: 0 })).state === "running") await sleep(50, undefined, { signal: t.signal });
   assert.equal(result.state, "completed"); assert.equal(result.outputs[0].path, file); assert.equal(result.truncated, true);
   assert.equal((await c.rpc("job_read", { job_id: started.jobId, owner: "task-a" })).truncated, true);
   assert.ok(result.chunks.every(chunk => !chunk.text.includes("�")));
@@ -83,18 +90,18 @@ test("background commands return promptly, stream bounded Unicode output and col
   assert.equal((await c.rpc("job_list", { owner: "task-b" })).length, 0);
 });
 test("background jobs cancel, time out and survive MCP configuration resets", { timeout: 15000 }, async t => {
-  const dir = temp(t), c = client(t), command = process.platform === "win32" ? "Start-Sleep -Seconds 30" : "sleep 30";
+  const dir = temp(), c = client(t), command = process.platform === "win32" ? "Start-Sleep -Seconds 30" : "sleep 30";
   const started = await c.rpc("command", { command, cwd: dir, background: true, owner: "task" });
   await c.rpc("mcp_reset");
   assert.equal((await c.rpc("job_read", { job_id: started.jobId, owner: "task" })).state, "running");
   assert.equal((await c.rpc("job_cancel", { job_id: started.jobId, owner: "task" })).state, "cancelled");
   const timed = await c.rpc("command", { command, cwd: dir, background: true, owner: "task", timeout_ms: 150 });
   let status;
-  for (let i = 0; i < 100; i++) { status = await c.rpc("job_read", { job_id: timed.jobId, owner: "task" }); if (status.state === "timed_out") break; await new Promise(resolve => setTimeout(resolve, 30)); }
+  while (["running", "cancelling"].includes((status = await c.rpc("job_read", { job_id: timed.jobId, owner: "task" })).state)) await sleep(30, undefined, { signal: t.signal });
   assert.equal(status.state, "timed_out");
 });
 test("local files: paging, binary bytes, exclusive creation, explicit overwrite, invalid inputs", { timeout: 10000 }, async t => {
-  const dir = temp(t), c = client(t), file = path.join(dir, "例 binary.bin");
+  const dir = temp(), c = client(t), file = path.join(dir, "例 binary.bin");
   const bytes = Buffer.from([0, 1, 127, 128, 255]);
   assert.equal((await c.rpc("write_file", { path: file, content: bytes.toString("base64"), encoding: "base64" })).bytesWritten, 5);
   await assert.rejects(c.rpc("write_file", { path: file, content: "replace" }), /EEXIST/);
@@ -115,7 +122,7 @@ test("local files: paging, binary bytes, exclusive creation, explicit overwrite,
   await assert.rejects(c.rpc("read_file", { path: file, max_bytes: 999999 }), /integer/);
 });
 test("commands: cwd, output, nonzero exit, bounds, timeout and cancellation", { timeout: 30000 }, async t => {
-  const dir = temp(t), c = client(t), win = process.platform === "win32";
+  const dir = temp(), c = client(t), win = process.platform === "win32";
   const result = await c.rpc("command", { cwd: dir, command: win ? "Write-Output (Get-Location).Path; [Console]::Error.Write('err'); exit 7" : "pwd; printf err >&2; exit 7" });
   assert.equal(result.exitCode, 7); assert.ok(result.stdout.includes(dir)); assert.equal(result.stderr, "err");
   const capped = await c.rpc("command", { cwd: dir, command: win ? "Write-Output ('x' * 10000)" : "printf '%10000s' x", max_output_bytes: 100 });
@@ -129,7 +136,7 @@ test("commands: cwd, output, nonzero exit, bounds, timeout and cancellation", { 
   assert.equal(cancelled.result.cancelled, true);
 });
 test("stdio MCP: initialization, pagination, Unicode, errors, size limits and restart", { timeout: 20000 }, async t => {
-  const dir = temp(t), c = client(t), server = { command: process.execPath, args: [fixture], cwd: dir };
+  const dir = temp(), c = client(t), server = { command: process.execPath, args: [fixture], cwd: dir };
   assert.deepEqual((await c.rpc("mcp_list", { server })).tools.map(x => x.name), ["echo", "fail"]);
   const call = name => c.rpc("mcp_call", { server, name, arguments: { text: "你好 héllo" } });
   assert.equal((await call("echo")).content[0].text, "echo:你好 héllo");
@@ -142,7 +149,7 @@ test("stdio MCP: initialization, pagination, Unicode, errors, size limits and re
   await assert.rejects(c.rpc("mcp_list", { server: { command: path.join(dir, "missing-executable") } }), /ENOENT/);
 });
 test("cancellation and native disconnect terminate MCP children", { timeout: 20000 }, async t => {
-  const dir = temp(t), c = client(t), pidFile = path.join(dir, "pid");
+  const dir = temp(), c = client(t), pidFile = path.join(dir, "pid");
   const server = { command: process.execPath, args: [fixture], env: { PID_FILE: pidFile } };
   await c.rpc("mcp_list", { server });
   const pid = Number(fs.readFileSync(pidFile));
@@ -150,31 +157,31 @@ test("cancellation and native disconnect terminate MCP children", { timeout: 200
   await new Promise(r => setTimeout(r, 80));
   await c.rpc("cancel", { id: running.id });
   assert.equal((await running.promise).ok, false);
-  await assertGone(pid);
+  await assertGone(pid, t.signal);
   await c.rpc("mcp_list", { server });
   const secondPid = Number(fs.readFileSync(pidFile));
   const done = once(c.child, "exit"); c.child.stdin.end(); await done;
-  await assertGone(secondPid);
+  await assertGone(secondPid, t.signal);
 });
 test("cancelling MCP initialization terminates the child", { timeout: 10000 }, async t => {
-  const dir = temp(t), c = client(t), pidFile = path.join(dir, "pid");
+  const dir = temp(), c = client(t), pidFile = path.join(dir, "pid");
   const running = c.send("mcp_list", { server: { command: process.execPath, args: [fixture], env: { HANG_INIT: "1", PID_FILE: pidFile } } });
-  await waitForFile(pidFile);
+  await waitForFile(pidFile, t.signal);
   await c.rpc("cancel", { id: running.id });
   assert.equal((await running.promise).ok, false);
-  await assertGone(Number(fs.readFileSync(pidFile)));
+  await assertGone(Number(fs.readFileSync(pidFile)), t.signal);
 });
 
 test("command cancellation kills the shell's child process", { timeout: 15000 }, async t => {
-  const dir = temp(t), c = client(t), script = path.join(dir, "child.js"), pidFile = path.join(dir, "child.pid");
+  const dir = temp(), c = client(t), script = path.join(dir, "child.js"), pidFile = path.join(dir, "child.pid");
   fs.writeFileSync(script, "require('fs').writeFileSync(process.argv[2], String(process.pid)); setInterval(() => {}, 1000);");
   const quote = value => "'" + value.replaceAll("'", process.platform === "win32" ? "''" : "'\\''") + "'";
   const command = (process.platform === "win32" ? "& " : "") + [process.execPath, script, pidFile].map(quote).join(" ");
   const running = c.send("command", { cwd: dir, command });
-  await waitForFile(pidFile);
+  await waitForFile(pidFile, t.signal);
   await c.rpc("cancel", { id: running.id });
   assert.equal((await running.promise).result.cancelled, true);
-  await assertGone(Number(fs.readFileSync(pidFile)));
+  await assertGone(Number(fs.readFileSync(pidFile)), t.signal);
 });
 
 test("oversized native frames close the host", { timeout: 10000 }, async t => {

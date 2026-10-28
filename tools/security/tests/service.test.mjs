@@ -33,7 +33,7 @@ test('raw evidence paging does not resend original wire bytes or response fields
  assert.deepEqual(calls[1],{action:'evidence',runId:run.runId,evidenceId:'evidence-a',offset:0});
 });
 
-function fixture(seed = {}) {
+function fixture(seed = {}, options = {}) {
   const data = structuredClone(seed), calls = [], contexts = new Map(); let sequence = 0;
   const storage = { async get(keys) { return Object.fromEntries((Array.isArray(keys) ? keys : [keys]).map(key => [key, structuredClone(data[key])])); }, async set(value) { Object.assign(data, structuredClone(value)); } };
   const runtime = { ready: Promise.resolve(), describe: async () => ({ operations: ['startScan','scanStatus','stopScan','getFindings','exportFullReport','replay','utility'], version: '10.0.0' }),
@@ -46,7 +46,7 @@ function fixture(seed = {}) {
       if (op === 'exportFullReport') return { reports: [{ engine: 'DAST', data: { native: true } }] };
       return { ok: true, result: 'done' };
     } };
-  const service = createSecurityService(runtime, { storage, uuid: () => 'run-' + ++sequence });
+  const service = createSecurityService(runtime, { storage, uuid: () => 'run-' + ++sequence, ...options });
   const context = { owner: 'chat-a', workspaceId: 'work-a', scope: { origins: ['https://app.test', 'https://api.test'], excludePaths: ['/excluded'] } };
   return { service, runtime, storage, data, calls, contexts, context, start: options => service.handle('start', { tabId: 1, engines: ['DAST'], options }, context) };
 }
@@ -302,17 +302,20 @@ test('restart retains evidence, marks interrupted work and never repeats a start
   const state=await recovered.handle('state',{},f.context);assert.equal(state.runs[0].state,'interrupted');assert.equal(f.calls.filter(x=>x.op==='startScan').length,starts);
   const findings=await recovered.handle('findings',{runId:run.runId},f.context);assert.equal(findings.findings[0].id,'one');assert.equal(f.data[RUNS_KEY][0].state,'interrupted');
 });
-test('scope revocation during a rate wait rejects queued work without counting it as sent', async () => {
-  const f=fixture(); let scope=f.context.scope;f.context.scopeNow=async()=>scope;
+// The clock moves only after the change below, so the queued request is still in its 50 ms rate
+// wait however long the process stalls (on the real clock ~46 ms let it dispatch first), and a
+// missing re-check dispatches at once instead of waiting forever.
+test('scope revocation during a rate wait rejects queued work without counting it as sent', { timeout: 5000 }, async () => {
+  let clock=1000;const f=fixture({},{now:()=>clock}); let scope=f.context.scope;f.context.scopeNow=async()=>scope;
   const run=await f.start({maxRequestsPerSecond:20}),guard=[...f.contexts.values()][0].checkRequest;
   await guard({url:'https://app.test/a'});const queued=guard({url:'https://app.test/b'});
-  await new Promise(resolve=>setTimeout(resolve,5));scope={origins:['https://api.test'],excludePaths:[]};
+  await new Promise(resolve=>setTimeout(resolve,5));scope={origins:['https://api.test'],excludePaths:[]};clock+=1000;
   await assert.rejects(queued,/scope changed/);const state=await f.service.handle('state',{},f.context);assert.equal(state.runs[0].requestsSent,1);assert.equal(state.runs[0].requestsReserved,0);await f.service.handle('stop',{runId:run.runId},f.context);
 });
-test('limits reduced during a rate wait are checked at actual dispatch', async () => {
-  const f=fixture();await f.start({maxRequestsPerSecond:20});const guard=[...f.contexts.values()][0].checkRequest;
+test('limits reduced during a rate wait are checked at actual dispatch', { timeout: 5000 }, async () => {
+  let clock=1000;const f=fixture({},{now:()=>clock});await f.start({maxRequestsPerSecond:20});const guard=[...f.contexts.values()][0].checkRequest;
   await guard({url:'https://app.test/a'});const queued=guard({url:'https://app.test/b'});
-  await new Promise(resolve=>setTimeout(resolve,5));await f.storage.set({[SETTINGS_KEY]:{limits:{maxRequests:1}}});
+  await new Promise(resolve=>setTimeout(resolve,5));await f.storage.set({[SETTINGS_KEY]:{limits:{maxRequests:1}}});clock+=1000;
   await assert.rejects(queued,/budget exhausted/);const state=await f.service.handle('state',{},f.context);assert.equal(state.runs[0].requestsSent,1);assert.equal(state.runs[0].requestsReserved,0);
 });
 test('replay transport errors inside native request schemas are failed operations with retained evidence',async()=>{

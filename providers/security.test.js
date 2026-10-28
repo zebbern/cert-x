@@ -48,7 +48,7 @@ test("security settings preserve explicit limits, show lifecycle and evidence, a
           if (securityMock.failStart) return { ok: true, result: { success: false, error: "Account identity changed." } };
           result = { runId: "run-one", owner: message.session, workspaceId: "workspace-one", tabId: message.tabId, engines: message.engines, config: message.options, title: "Application", origin: "https://target.example", state: "running", summary: { findingsCount: 1 }, coverage: { warnings: ["One resource was unavailable."] } }; securityMock.runs = [result];
         } else if (message.op === "stop") { securityMock.runs[0].state = "stopping"; result = securityMock.runs[0]; }
-        else if (message.op === "status") { if (securityMock.runs[0].state === "stopping") securityMock.runs[0].state = "completed"; result = securityMock.runs[0]; }
+        else if (message.op === "status") { if (securityMock.runs[0].state === "stopping" && securityMock.releaseStop) securityMock.runs[0].state = "completed"; result = securityMock.runs[0]; }
         else if (message.op === "findings") result = { findings: [{ id: "finding-" + message.offset, title: message.offset ? "Second finding" : '<img src=x onerror="window.findingExecuted=true">', engine: "DAST", severity: "high", classification: message.offset ? "execution_observed" : "observation", executionObserved: !!message.offset, evidenceId: "evidence-one", evidence: { reflection: true } }], nextOffset: message.offset ? null : 1, warnings: ["Partial response capture."] };
         else if (message.op === "evidence") result = { request: { method: "GET", url: "https://target.example/search?q=marker" }, response: { status: 200, body: "marker" } };
         else if (message.op === "export") { if (securityMock.failExport) return { ok: false, error: "Export could not be saved." }; result = { reports: [{ downloadId: 5, name: "report.json", size: 125 }] }; }
@@ -137,7 +137,9 @@ test("security settings preserve explicit limits, show lifecycle and evidence, a
     await page.getByText("Configuration and coverage", { exact: true }).click(); await page.getByRole("button", { name: "Stop", exact: true }).focus();
     await page.evaluate(() => { securityMock.runs[0].summary.findingsCount = 2; for (const listener of securityMock.listeners) listener({ ki_security_runs: {} }, "local"); });
     await page.getByText(/2 findings/).waitFor(); assert.equal(await page.evaluate(() => document.activeElement.textContent), "Stop"); assert.equal(await page.getByText("Configuration and coverage", { exact: true }).evaluate(node => node.parentElement.open), true);
-    await page.getByRole("button", { name: "Stop", exact: true }).click(); await page.getByRole("button", { name: "Stopping…", exact: true }).waitFor(); await page.getByText(/Completed ·/).waitFor();
+    await page.getByRole("button", { name: "Stop", exact: true }).click(); await page.getByRole("button", { name: "Stopping…", exact: true }).waitFor();
+    // The run stays stopping until released, so the page's 3 s status poll cannot clear it before the check above.
+    await page.evaluate(() => securityMock.releaseStop = true); await page.getByText(/Completed ·/).waitFor();
     await page.evaluate(() => securityMock.failStart = true); await page.getByRole("button", { name: "Start scan", exact: true }).click(); await page.getByText("Account identity changed.", { exact: true }).waitFor();
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
     await page.getByText('Scan options', { exact: true }).click(); await page.getByText('Acquisition limits', { exact: true }).click();

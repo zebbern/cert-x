@@ -1,0 +1,86 @@
+{
+  "about": "Sanitized PTK Zest fixture",
+  "zestVersion": "0.3",
+  "title": "Sanitized login",
+  "description": "No real credentials",
+  "prefix": "",
+  "type": "StandAlone",
+  "parameters": {
+    "tokenStart": "{{",
+    "tokenEnd": "}}",
+    "tokens": {},
+    "elementType": "ZestVariables"
+  },
+  "statements": [
+    {
+      "comment": "Open and authenticate",
+      "index": 1,
+      "enabled": true,
+      "elementType": "ZestComment"
+    },
+    {
+      "browserType": "chrome-headless",
+      "capabilities": "",
+      "headless": true,
+      "url": "http://localhost:3001/#/login",
+      "windowHandle": "windowHandle1",
+      "index": 2,
+      "enabled": true,
+      "elementType": "ZestClientLaunch"
+    },
+    {
+      "windowHandle": "windowHandle1",
+      "type": "id",
+      "element": "email",
+      "waitForMsec": 5000,
+      "index": 3,
+      "enabled": true,
+      "elementType": "ZestClientElementClick"
+    },
+    {
+      "windowHandle": "windowHandle1",
+      "type": "id",
+      "element": "email",
+      "waitForMsec": 5000,
+      "value": "ptk@example.invalid",
+      "index": 4,
+      "enabled": true,
+      "elementType": "ZestClientElementSendKeys"
+    },
+    {
+      "windowHandle": "windowHandle1",
+      "type": "id",
+      "element": "password",
+      "waitForMsec": 5000,
+      "value": "${PTK_SECRET:PASSWORD}",
+      "index": 5,
+      "enabled": true,
+      "elementType": "ZestClientElementSendKeys"
+    },
+    {
+      "windowHandle": "windowHandle1",
+      "type": "cssSelector",
+      "element": "button[type=submit]",
+      "waitForMsec": 5000,
+      "index": 6,
+      "enabled": true,
+      "elementType": "ZestClientElementClick"
+    },
+    {
+      "windowHandle": "windowHandle1",
+      "type": "xpath",
+      "element": "//body",
+      "waitForMsec": 5000,
+      "index": 7,
+      "enabled": true,
+      "elementType": "ZestClientElementScrollTo"
+    }
+  ],
+  "authentication": [],
+  "index": 0,
+  "enabled": true,
+  "elementType": "ZestScript",
+  "options": {
+    "statementDelay": 0
+  }
+}

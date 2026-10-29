@@ -1,0 +1,4346 @@
+{
+  "wire": [
+    {
+      "name": "primary",
+      "path": "/app"
+    },
+    {
+      "name": "secondary",
+      "path": "/allowed.js"
+    },
+    {
+      "name": "secondary",
+      "path": "/excluded/hidden.js"
+    },
+    {
+      "name": "secondary",
+      "path": "/jquery-1.12.4.js"
+    },
+    {
+      "name": "primary",
+      "path": "/favicon.ico"
+    },
+    {
+      "name": "primary",
+      "path": "/app"
+    },
+    {
+      "name": "secondary",
+      "path": "/allowed.js"
+    },
+    {
+      "name": "secondary",
+      "path": "/excluded/hidden.js"
+    },
+    {
+      "name": "secondary",
+      "path": "/jquery-1.12.4.js"
+    },
+    {
+      "name": "secondary",
+      "path": "/allowed.js"
+    },
+    {
+      "name": "primary",
+      "path": "/favicon.ico"
+    },
+    {
+      "name": "primary",
+      "path": "/app"
+    },
+    {
+      "name": "secondary",
+      "path": "/jquery-1.12.4.js"
+    },
+    {
+      "name": "primary",
+      "path": "/favicon.ico"
+    }
+  ],
+  "export": {
+    "run": {
+      "runId": "5fa65d26-82f8-4b8b-b67f-d9a1eee5ecfe",
+      "owner": "collection-host",
+      "workspaceId": null,
+      "tabId": 232388853,
+      "engines": [
+        "SAST",
+        "SCA"
+      ],
+      "state": "completed",
+      "config": {
+        "preset": "ptk-defaults",
+        "scanStrategy": "SMART",
+        "dastScanStrategy": "SMART",
+        "scanControlProfile": "safe",
+        "allowCaptureWithoutInteraction": false,
+        "maxRequestsPerSecond": 5,
+        "concurrency": 3,
+        "planningConcurrency": 2,
+        "runCve": true,
+        "follow_redirect": true,
+        "maxRequests": null,
+        "durationSeconds": null,
+        "limits": {}
+      },
+      "scope": {
+        "origins": [
+          "http://127.0.0.1:52492"
+        ],
+        "excludePaths": [
+          "/excluded"
+        ],
+        "matchMode": "host"
+      },
+      "accountId": null,
+      "accountRevision": null,
+      "createdAt": 1792678888616,
+      "updatedAt": 1792678891234,
+      "requestsSent": 4,
+      "coverage": {
+        "backendGaps": []
+      },
+      "summary": {
+        "status": "completed",
+        "releaseStatus": "clean",
+        "stats": {
+          "findingsCount": 9,
+          "bySeverity": {
+            "critical": 0,
+            "high": 2,
+            "medium": 5,
+            "low": 2,
+            "info": 0
+          }
+        },
+        "findings": 9
+      },
+      "runtimeId": "ptk-session_c2883223-da97-455e-afad-6a864ee9c913",
+      "engineStatus": {
+        "SAST": {
+          "status": "stopped",
+          "isRunning": false,
+          "progress": {
+            "done": 2,
+            "total": 2,
+            "remaining": 0
+          },
+          "findingsCount": 3,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          },
+          "lastActivityAt": null,
+          "warnings": [],
+          "phase": "waiting",
+          "totalFiles": 2,
+          "completedFiles": 2,
+          "totalModules": 11,
+          "completedModules": 11,
+          "currentFile": null,
+          "currentModule": null,
+          "lastStatus": "SAST analysis complete",
+          "findings": 2,
+          "hints": 1,
+          "isSessionRunning": false,
+          "isAnalysisRunning": false,
+          "collectionState": "completed",
+          "sessionState": "idle",
+          "analysisState": "complete",
+          "firstCollectionStarted": false,
+          "firstCollectionSettled": false,
+          "firstCollectionError": null,
+          "initialCollectionDeferred": null,
+          "activeCollectionCount": 0,
+          "pendingCollectionCount": 0,
+          "currentGeneration": 0,
+          "lastCompletedGeneration": 8,
+          "currentCollectionId": null,
+          "currentCollectionFile": null,
+          "currentCollectionScriptsCount": 0,
+          "currentCollectionHtmlChars": 0,
+          "currentCollectionFindingsCount": 0,
+          "currentCollectionStartedAt": null,
+          "currentCollectionPayloadAt": null,
+          "lastCompletedCollectionId": null,
+          "lastCompletedFile": "http://127.0.0.1:52493/jquery-1.12.4.js",
+          "lastCompletedModule": "DOM Data Manipulation",
+          "lastCompletedScriptsCount": 0,
+          "lastCompletedHtmlChars": 0,
+          "lastCompletedFindingsCount": 0,
+          "lastCompletedArtifactsCount": 0,
+          "lastCompletedAt": null,
+          "hasObservedCollection": true,
+          "idle": true
+        },
+        "SCA": {
+          "status": "stopped",
+          "isRunning": false,
+          "progress": {
+            "done": 6,
+            "total": null
+          },
+          "findingsCount": 6,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          },
+          "lastActivityAt": null,
+          "warnings": [],
+          "idle": true
+        }
+      },
+      "inFlight": 0,
+      "requestsReserved": 0,
+      "httpRequestsSent": 4,
+      "stopReason": "Stopped by user.",
+      "lastStatus": {
+        "sessionId": "ptk-session_c2883223-da97-455e-afad-6a864ee9c913",
+        "scanId": "ptk-session_c2883223-da97-455e-afad-6a864ee9c913",
+        "ok": true,
+        "status": "completed",
+        "completionStatus": "completed",
+        "releaseStatus": "clean",
+        "error": null,
+        "startedAt": "2026-10-22T14:21:28.621Z",
+        "finishedAt": "2026-10-22T14:21:31.231Z",
+        "stopRequestedAt": null,
+        "closeRequestId": null,
+        "closeRequestAck": false,
+        "closeRequestMode": null,
+        "idleVerified": false,
+        "elapsedMs": 2612,
+        "lastUpdatedAt": null,
+        "engines": {
+          "SAST": {
+            "status": "stopped",
+            "isRunning": false,
+            "progress": {
+              "done": 2,
+              "total": 2,
+              "remaining": 0
+            },
+            "findingsCount": 3,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            },
+            "lastActivityAt": null,
+            "warnings": [],
+            "phase": "waiting",
+            "totalFiles": 2,
+            "completedFiles": 2,
+            "totalModules": 11,
+            "completedModules": 11,
+            "currentFile": null,
+            "currentModule": null,
+            "lastStatus": "SAST analysis complete",
+            "findings": 2,
+            "hints": 1,
+            "isSessionRunning": false,
+            "isAnalysisRunning": false,
+            "collectionState": "completed",
+            "sessionState": "idle",
+            "analysisState": "complete",
+            "firstCollectionStarted": false,
+            "firstCollectionSettled": false,
+            "firstCollectionError": null,
+            "initialCollectionDeferred": null,
+            "activeCollectionCount": 0,
+            "pendingCollectionCount": 0,
+            "currentGeneration": 0,
+            "lastCompletedGeneration": 8,
+            "currentCollectionId": null,
+            "currentCollectionFile": null,
+            "currentCollectionScriptsCount": 0,
+            "currentCollectionHtmlChars": 0,
+            "currentCollectionFindingsCount": 0,
+            "currentCollectionStartedAt": null,
+            "currentCollectionPayloadAt": null,
+            "lastCompletedCollectionId": null,
+            "lastCompletedFile": "http://127.0.0.1:52493/jquery-1.12.4.js",
+            "lastCompletedModule": "DOM Data Manipulation",
+            "lastCompletedScriptsCount": 0,
+            "lastCompletedHtmlChars": 0,
+            "lastCompletedFindingsCount": 0,
+            "lastCompletedArtifactsCount": 0,
+            "lastCompletedAt": null,
+            "hasObservedCollection": true,
+            "idle": true
+          },
+          "SCA": {
+            "status": "stopped",
+            "isRunning": false,
+            "progress": {
+              "done": 6,
+              "total": null
+            },
+            "findingsCount": 6,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            },
+            "lastActivityAt": null,
+            "warnings": [],
+            "idle": true
+          }
+        },
+        "summary": {
+          "findingsCount": 9,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          }
+        },
+        "finalSummary": {
+          "status": "completed",
+          "releaseStatus": "clean",
+          "stats": {
+            "findingsCount": 9,
+            "bySeverity": {
+              "critical": 0,
+              "high": 2,
+              "medium": 5,
+              "low": 2,
+              "info": 0
+            }
+          }
+        },
+        "warnings": [],
+        "sessionLookup": {
+          "requestedSessionId": "ptk-session_c2883223-da97-455e-afad-6a864ee9c913",
+          "tabId": 232388853,
+          "strictCurrentTab": true,
+          "allowActive": true,
+          "allowCompleted": true,
+          "allowGlobalCompleted": true,
+          "lookupSource": "explicit-session",
+          "activeSessionIdForTab": null,
+          "completedSessionIdForTab": "ptk-session_c2883223-da97-455e-afad-6a864ee9c913",
+          "globalCompletedSessionId": "ptk-session_c2883223-da97-455e-afad-6a864ee9c913",
+          "sessionExists": true,
+          "sessionStatus": "completed",
+          "sessionFinishedAt": "2026-10-22T14:21:31.231Z",
+          "stopRequestedAt": null,
+          "retention": {
+            "ttlMs": 86400000,
+            "maxCompletedSessions": 20,
+            "evicted": false
+          }
+        },
+        "supplemental": {
+          "backends": {},
+          "gaps": []
+        },
+        "coverage": {
+          "backendGaps": []
+        }
+      }
+    },
+    "report": {
+      "schema": "cert-x-security-report/v1",
+      "run": {
+        "runId": "5fa65d26-82f8-4b8b-b67f-d9a1eee5ecfe",
+        "owner": "collection-host",
+        "workspaceId": null,
+        "tabId": 232388853,
+        "engines": [
+          "SAST",
+          "SCA"
+        ],
+        "state": "completed",
+        "config": {
+          "preset": "ptk-defaults",
+          "scanStrategy": "SMART",
+          "dastScanStrategy": "SMART",
+          "scanControlProfile": "safe",
+          "allowCaptureWithoutInteraction": false,
+          "maxRequestsPerSecond": 5,
+          "concurrency": 3,
+          "planningConcurrency": 2,
+          "runCve": true,
+          "follow_redirect": true,
+          "maxRequests": null,
+          "durationSeconds": null,
+          "limits": {}
+        },
+        "scope": {
+          "origins": [
+            "http://127.0.0.1:52492"
+          ],
+          "excludePaths": [
+            "/excluded"
+          ],
+          "matchMode": "host"
+        },
+        "accountId": null,
+        "accountRevision": null,
+        "createdAt": 1792678888616,
+        "updatedAt": 1792678891234,
+        "requestsSent": 4,
+        "coverage": {
+          "backendGaps": []
+        },
+        "summary": {
+          "status": "completed",
+          "releaseStatus": "clean",
+          "stats": {
+            "findingsCount": 9,
+            "bySeverity": {
+              "critical": 0,
+              "high": 2,
+              "medium": 5,
+              "low": 2,
+              "info": 0
+            }
+          },
+          "findings": 9
+        },
+        "runtimeId": "ptk-session_c2883223-da97-455e-afad-6a864ee9c913",
+        "engineStatus": {
+          "SAST": {
+            "status": "stopped",
+            "isRunning": false,
+            "progress": {
+              "done": 2,
+              "total": 2,
+              "remaining": 0
+            },
+            "findingsCount": 3,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            },
+            "lastActivityAt": null,
+            "warnings": [],
+            "phase": "waiting",
+            "totalFiles": 2,
+            "completedFiles": 2,
+            "totalModules": 11,
+            "completedModules": 11,
+            "currentFile": null,
+            "currentModule": null,
+            "lastStatus": "SAST analysis complete",
+            "findings": 2,
+            "hints": 1,
+            "isSessionRunning": false,
+            "isAnalysisRunning": false,
+            "collectionState": "completed",
+            "sessionState": "idle",
+            "analysisState": "complete",
+            "firstCollectionStarted": false,
+            "firstCollectionSettled": false,
+            "firstCollectionError": null,
+            "initialCollectionDeferred": null,
+            "activeCollectionCount": 0,
+            "pendingCollectionCount": 0,
+            "currentGeneration": 0,
+            "lastCompletedGeneration": 8,
+            "currentCollectionId": null,
+            "currentCollectionFile": null,
+            "currentCollectionScriptsCount": 0,
+            "currentCollectionHtmlChars": 0,
+            "currentCollectionFindingsCount": 0,
+            "currentCollectionStartedAt": null,
+            "currentCollectionPayloadAt": null,
+            "lastCompletedCollectionId": null,
+            "lastCompletedFile": "http://127.0.0.1:52493/jquery-1.12.4.js",
+            "lastCompletedModule": "DOM Data Manipulation",
+            "lastCompletedScriptsCount": 0,
+            "lastCompletedHtmlChars": 0,
+            "lastCompletedFindingsCount": 0,
+            "lastCompletedArtifactsCount": 0,
+            "lastCompletedAt": null,
+            "hasObservedCollection": true,
+            "idle": true
+          },
+          "SCA": {
+            "status": "stopped",
+            "isRunning": false,
+            "progress": {
+              "done": 6,
+              "total": null
+            },
+            "findingsCount": 6,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            },
+            "lastActivityAt": null,
+            "warnings": [],
+            "idle": true
+          }
+        },
+        "inFlight": 0,
+        "requestsReserved": 0,
+        "httpRequestsSent": 4,
+        "stopReason": "Stopped by user.",
+        "lastStatus": {
+          "sessionId": "ptk-session_c2883223-da97-455e-afad-6a864ee9c913",
+          "scanId": "ptk-session_c2883223-da97-455e-afad-6a864ee9c913",
+          "ok": true,
+          "status": "completed",
+          "completionStatus": "completed",
+          "releaseStatus": "clean",
+          "error": null,
+          "startedAt": "2026-10-22T14:21:28.621Z",
+          "finishedAt": "2026-10-22T14:21:31.231Z",
+          "stopRequestedAt": null,
+          "closeRequestId": null,
+          "closeRequestAck": false,
+          "closeRequestMode": null,
+          "idleVerified": false,
+          "elapsedMs": 2612,
+          "lastUpdatedAt": null,
+          "engines": {
+            "SAST": {
+              "status": "stopped",
+              "isRunning": false,
+              "progress": {
+                "done": 2,
+                "total": 2,
+                "remaining": 0
+              },
+              "findingsCount": 3,
+              "bySeverity": {
+                "critical": 0,
+                "high": 0,
+                "medium": 0,
+                "low": 0,
+                "info": 0
+              },
+              "lastActivityAt": null,
+              "warnings": [],
+              "phase": "waiting",
+              "totalFiles": 2,
+              "completedFiles": 2,
+              "totalModules": 11,
+              "completedModules": 11,
+              "currentFile": null,
+              "currentModule": null,
+              "lastStatus": "SAST analysis complete",
+              "findings": 2,
+              "hints": 1,
+              "isSessionRunning": false,
+              "isAnalysisRunning": false,
+              "collectionState": "completed",
+              "sessionState": "idle",
+              "analysisState": "complete",
+              "firstCollectionStarted": false,
+              "firstCollectionSettled": false,
+              "firstCollectionError": null,
+              "initialCollectionDeferred": null,
+              "activeCollectionCount": 0,
+              "pendingCollectionCount": 0,
+              "currentGeneration": 0,
+              "lastCompletedGeneration": 8,
+              "currentCollectionId": null,
+              "currentCollectionFile": null,
+              "currentCollectionScriptsCount": 0,
+              "currentCollectionHtmlChars": 0,
+              "currentCollectionFindingsCount": 0,
+              "currentCollectionStartedAt": null,
+              "currentCollectionPayloadAt": null,
+              "lastCompletedCollectionId": null,
+              "lastCompletedFile": "http://127.0.0.1:52493/jquery-1.12.4.js",
+              "lastCompletedModule": "DOM Data Manipulation",
+              "lastCompletedScriptsCount": 0,
+              "lastCompletedHtmlChars": 0,
+              "lastCompletedFindingsCount": 0,
+              "lastCompletedArtifactsCount": 0,
+              "lastCompletedAt": null,
+              "hasObservedCollection": true,
+              "idle": true
+            },
+            "SCA": {
+              "status": "stopped",
+              "isRunning": false,
+              "progress": {
+                "done": 6,
+                "total": null
+              },
+              "findingsCount": 6,
+              "bySeverity": {
+                "critical": 0,
+                "high": 0,
+                "medium": 0,
+                "low": 0,
+                "info": 0
+              },
+              "lastActivityAt": null,
+              "warnings": [],
+              "idle": true
+            }
+          },
+          "summary": {
+            "findingsCount": 9,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            }
+          },
+          "finalSummary": {
+            "status": "completed",
+            "releaseStatus": "clean",
+            "stats": {
+              "findingsCount": 9,
+              "bySeverity": {
+                "critical": 0,
+                "high": 2,
+                "medium": 5,
+                "low": 2,
+                "info": 0
+              }
+            }
+          },
+          "warnings": [],
+          "sessionLookup": {
+            "requestedSessionId": "ptk-session_c2883223-da97-455e-afad-6a864ee9c913",
+            "tabId": 232388853,
+            "strictCurrentTab": true,
+            "allowActive": true,
+            "allowCompleted": true,
+            "allowGlobalCompleted": true,
+            "lookupSource": "explicit-session",
+            "activeSessionIdForTab": null,
+            "completedSessionIdForTab": "ptk-session_c2883223-da97-455e-afad-6a864ee9c913",
+            "globalCompletedSessionId": "ptk-session_c2883223-da97-455e-afad-6a864ee9c913",
+            "sessionExists": true,
+            "sessionStatus": "completed",
+            "sessionFinishedAt": "2026-10-22T14:21:31.231Z",
+            "stopRequestedAt": null,
+            "retention": {
+              "ttlMs": 86400000,
+              "maxCompletedSessions": 20,
+              "evicted": false
+            }
+          },
+          "supplemental": {
+            "backends": {},
+            "gaps": []
+          },
+          "coverage": {
+            "backendGaps": []
+          }
+        }
+      },
+      "native": {
+        "sessionId": "ptk-session_c2883223-da97-455e-afad-6a864ee9c913",
+        "reports": [
+          {
+            "engine": "SAST",
+            "data": {
+              "version": "1.0",
+              "engine": "SAST",
+              "scanId": "584b1ed6-310f-49a3-9fc7-29b381c79a47",
+              "host": "127.0.0.1:52492",
+              "startedAt": "2026-10-22T14:21:28.636Z",
+              "finishedAt": "2026-10-22T14:21:31.227Z",
+              "settings": {
+                "policyCode": "SMART",
+                "scanStrategyCode": 0
+              },
+              "toolVersion": "1.0.0",
+              "stats": {
+                "findingsCount": 3,
+                "critical": 0,
+                "high": 2,
+                "medium": 0,
+                "low": 1,
+                "info": 0
+              },
+              "findings": [
+                {
+                  "id": "584b1ed6-310f-49a3-9fc7-29b381c79a47::SAST::dom-xss::no-inner-outer-html::db4a64cb3180ad3b",
+                  "engine": "SAST",
+                  "scanId": "584b1ed6-310f-49a3-9fc7-29b381c79a47",
+                  "moduleId": "dom-xss",
+                  "moduleName": "DOM-based XSS",
+                  "ruleId": "no-inner-outer-html",
+                  "ruleName": "Disallow innerHTML/outerHTML assignments",
+                  "vulnId": "dom_xss",
+                  "category": "xss",
+                  "severity": "low",
+                  "owasp": [
+                    "A05:2025 - Injection",
+                    "A03:2021 - Injection"
+                  ],
+                  "cwe": [
+                    "CWE-79"
+                  ],
+                  "tags": [
+                    "sast",
+                    "dom",
+                    "xss"
+                  ],
+                  "description": "Assignments to innerHTML/outerHTML are dangerous when they contain untrusted data and may lead to XSS.",
+                  "recommendation": "<p>Prevent DOM-based XSS by never inserting untrusted strings directly into HTML or executing them as code. Prefer DOM/text APIs, safe templating, or a vetted sanitizer and apply context-aware encoding where needed.</p><ul><li><strong>Primary:</strong> Use <code>textContent</code> / <code>innerText</code> or create DOM nodes instead of string-based HTML insertion. If you must insert HTML, sanitize it with a vetted library such as <a href=\"https://github.com/cure53/DOMPurify\" target=\"_blank\">DOMPurify</a>.</li><li><strong>Secondary:</strong> Apply context-sensitive encoding for attributes and JavaScript contexts, avoid <code>eval</code>/<code>new Function</code>/<code>setTimeout</code> with strings, and prefer safe templating engines.</li><li><strong>Controls:</strong> Use Content Security Policy (CSP), follow least-privilege principles, and validate/allow-list input shapes where practical.</li><li><strong>Testing:</strong> Add unit/browser tests for inline handlers and client-side flows that read from <code>location</code>, form inputs, storage, and <code>postMessage</code>.</li></ul>",
+                  "links": {
+                    "OWASP": "https://owasp.org/www-community/attacks/xss/",
+                    "CWE": "https://cwe.mitre.org/data/definitions/79.html"
+                  },
+                  "location": {
+                    "file": "http://127.0.0.1:52493/allowed.js",
+                    "line": 1,
+                    "column": 25,
+                    "runtimeUrl": "http://127.0.0.1:52492/app",
+                    "runtimeUrls": [
+                      "http://127.0.0.1:52492/app"
+                    ],
+                    "pageUrl": "http://127.0.0.1:52492/app",
+                    "pageUrls": [
+                      "http://127.0.0.1:52492/app"
+                    ],
+                    "url": "http://127.0.0.1:52492/app",
+                    "param": null,
+                    "kind": "code",
+                    "route": "/app",
+                    "urlPattern": "http://127.0.0.1:52492/app"
+                  },
+                  "createdAt": "2026-10-22T14:21:28.778Z",
+                  "fingerprint": "no-inner-outer-html@@low@@http://127.0.0.1:52493/allowed.js@@http://127.0.0.1:52493/allowed.js@@{\"start\":{\"line\":1,\"column\":25},\"end\":{\"line\":1,\"column\":116}}@@{\"start\":{\"line\":1,\"column\":25},\"end\":{\"line\":1,\"column\":66}}@@",
+                  "findingKind": "hint",
+                  "confidence": 38,
+                  "evidence": {
+                    "sast": {
+                      "codeSnippet": "Source context:\nfunction sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}\n\nSink context:\nfunction sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}",
+                      "source": {
+                        "label": "innerHTML",
+                        "path": null,
+                        "sourceFile": "http://127.0.0.1:52493/allowed.js",
+                        "sourceFileFull": "http://127.0.0.1:52493/allowed.js",
+                        "sourceLoc": {
+                          "start": {
+                            "line": 1,
+                            "column": 25
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 116
+                          }
+                        },
+                        "sourceName": "innerHTML",
+                        "sourceSnippet": "function sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}"
+                      },
+                      "sink": {
+                        "kind": "assign",
+                        "label": "innerHTML",
+                        "path": [],
+                        "sinkFile": "http://127.0.0.1:52493/allowed.js",
+                        "sinkFileFull": "http://127.0.0.1:52493/allowed.js",
+                        "sinkLoc": {
+                          "start": {
+                            "line": 1,
+                            "column": 25
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 66
+                          }
+                        },
+                        "sinkName": "innerHTML",
+                        "sinkSnippet": "function sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}"
+                      },
+                      "nodeType": "AssignmentExpression",
+                      "trace": [],
+                      "mode": "pattern",
+                      "findingKind": "hint",
+                      "confidenceSignals": [
+                        "base:pattern:58",
+                        "finding_kind:hint:-20"
+                      ]
+                    }
+                  },
+                  "updatedAt": "2026-10-22T14:21:28.778Z",
+                  "pageUrl": "http://127.0.0.1:52492/app",
+                  "correlationKey": "33929abe0e53ce62d6f23b24c6b59bb40b4d04af355c194e664ef179d011d872"
+                },
+                {
+                  "id": "584b1ed6-310f-49a3-9fc7-29b381c79a47::SAST::dom-xss::dom-xss-taint::249d13501eb8091b",
+                  "engine": "SAST",
+                  "scanId": "584b1ed6-310f-49a3-9fc7-29b381c79a47",
+                  "moduleId": "dom-xss",
+                  "moduleName": "DOM-based XSS",
+                  "ruleId": "dom-xss-taint",
+                  "ruleName": "DOM-based XSS (taint flow)",
+                  "vulnId": "dom_xss",
+                  "category": "xss",
+                  "severity": "high",
+                  "owasp": [
+                    "A05:2025 - Injection",
+                    "A03:2021 - Injection"
+                  ],
+                  "cwe": [
+                    "CWE-79"
+                  ],
+                  "tags": [
+                    "sast",
+                    "dom",
+                    "xss"
+                  ],
+                  "description": "Detects flows where untrusted DOM-derived data (location, element values, storage, message data) reaches HTML/JS execution sinks (e.g., innerHTML, document.write, insertAdjacentHTML, location assignment, eval/Function) without passing through a recognized sanitizer.",
+                  "recommendation": "<p>Prevent DOM-based XSS by never inserting untrusted strings directly into HTML or executing them as code. Prefer DOM/text APIs, safe templating, or a vetted sanitizer and apply context-aware encoding where needed.</p><ul><li><strong>Primary:</strong> Use <code>textContent</code> / <code>innerText</code> or create DOM nodes instead of string-based HTML insertion. If you must insert HTML, sanitize it with a vetted library such as <a href=\"https://github.com/cure53/DOMPurify\" target=\"_blank\">DOMPurify</a>.</li><li><strong>Secondary:</strong> Apply context-sensitive encoding for attributes and JavaScript contexts, avoid <code>eval</code>/<code>new Function</code>/<code>setTimeout</code> with strings, and prefer safe templating engines.</li><li><strong>Controls:</strong> Use Content Security Policy (CSP), follow least-privilege principles, and validate/allow-list input shapes where practical.</li><li><strong>Testing:</strong> Add unit/browser tests for inline handlers and client-side flows that read from <code>location</code>, form inputs, storage, and <code>postMessage</code>.</li></ul>",
+                  "links": {
+                    "OWASP": "https://owasp.org/www-community/attacks/xss/",
+                    "CWE": "https://cwe.mitre.org/data/definitions/79.html"
+                  },
+                  "location": {
+                    "file": "http://127.0.0.1:52493/allowed.js",
+                    "line": 1,
+                    "column": 25,
+                    "runtimeUrl": "http://127.0.0.1:52492/app",
+                    "runtimeUrls": [
+                      "http://127.0.0.1:52492/app"
+                    ],
+                    "pageUrl": "http://127.0.0.1:52492/app",
+                    "pageUrls": [
+                      "http://127.0.0.1:52492/app"
+                    ],
+                    "url": "http://127.0.0.1:52492/app",
+                    "param": "value",
+                    "kind": "code",
+                    "route": "/app",
+                    "urlPattern": "http://127.0.0.1:52492/app"
+                  },
+                  "createdAt": "2026-10-22T14:21:28.779Z",
+                  "fingerprint": "dom-xss-taint@@high@@http://127.0.0.1:52493/allowed.js@@http://127.0.0.1:52493/allowed.js@@{\"start\":{\"line\":1,\"column\":87},\"end\":{\"line\":1,\"column\":102}}@@{\"start\":{\"line\":1,\"column\":25},\"end\":{\"line\":1,\"column\":66}}@@",
+                  "findingKind": "finding",
+                  "confidence": 92,
+                  "evidence": {
+                    "sast": {
+                      "codeSnippet": "Source context:\nfunction sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}\n\nSink context:\nfunction sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}",
+                      "source": {
+                        "label": "URLSearchParams.get from location.search",
+                        "path": "searchParams.value",
+                        "sourceFile": "http://127.0.0.1:52493/allowed.js",
+                        "sourceFileFull": "http://127.0.0.1:52493/allowed.js",
+                        "sourceLoc": {
+                          "start": {
+                            "line": 1,
+                            "column": 87
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 102
+                          }
+                        },
+                        "sourceName": "URLSearchParams.get from location.search",
+                        "sourceSnippet": "function sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}"
+                      },
+                      "sink": {
+                        "kind": "assign",
+                        "label": "innerHTML",
+                        "path": [
+                          "innerHTML"
+                        ],
+                        "framework": null,
+                        "api": null,
+                        "argIndex": null,
+                        "sinkFile": "http://127.0.0.1:52493/allowed.js",
+                        "sinkFileFull": "http://127.0.0.1:52493/allowed.js",
+                        "sinkLoc": {
+                          "start": {
+                            "line": 1,
+                            "column": 25
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 66
+                          }
+                        },
+                        "sinkName": "innerHTML",
+                        "sinkSnippet": "function sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}"
+                      },
+                      "nodeType": "AssignmentExpression",
+                      "trace": [
+                        {
+                          "kind": "source",
+                          "label": "location.search",
+                          "file": "http://127.0.0.1:52493/allowed.js",
+                          "loc": {
+                            "start": {
+                              "line": 1,
+                              "column": 87
+                            },
+                            "end": {
+                              "line": 1,
+                              "column": 102
+                            }
+                          }
+                        },
+                        {
+                          "kind": "propagation",
+                          "label": "function sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}",
+                          "file": "http://127.0.0.1:52493/allowed.js",
+                          "loc": {
+                            "start": {
+                              "line": 1,
+                              "column": 67
+                            },
+                            "end": {
+                              "line": 1,
+                              "column": 103
+                            }
+                          }
+                        },
+                        {
+                          "kind": "propagation",
+                          "label": "get",
+                          "file": "http://127.0.0.1:52493/allowed.js",
+                          "loc": {
+                            "start": {
+                              "line": 1,
+                              "column": 67
+                            },
+                            "end": {
+                              "line": 1,
+                              "column": 116
+                            }
+                          }
+                        },
+                        {
+                          "kind": "sink",
+                          "label": "innerHTML",
+                          "file": "http://127.0.0.1:52493/allowed.js",
+                          "loc": {
+                            "start": {
+                              "line": 1,
+                              "column": 25
+                            },
+                            "end": {
+                              "line": 1,
+                              "column": 116
+                            }
+                          }
+                        }
+                      ],
+                      "mode": "taint",
+                      "findingKind": "finding",
+                      "sinkContext": "html",
+                      "sourceTier": "url",
+                      "confidenceSignals": [
+                        "base:taint:78",
+                        "sink_context:html:+8",
+                        "source_tier:url:+6"
+                      ]
+                    }
+                  },
+                  "updatedAt": "2026-10-22T14:21:28.779Z",
+                  "pageUrl": "http://127.0.0.1:52492/app",
+                  "source": {
+                    "kind": "query",
+                    "name": "value",
+                    "path": "searchParams.value"
+                  },
+                  "correlationKey": "638aed3f3e531d2ea8979dc9fca34ae1cae2e1e3156c71da884b77a3f0d84f0f"
+                },
+                {
+                  "id": "584b1ed6-310f-49a3-9fc7-29b381c79a47::SAST::client-template-injection::client-template-injection-taint::88ea70f65c8d227b",
+                  "engine": "SAST",
+                  "scanId": "584b1ed6-310f-49a3-9fc7-29b381c79a47",
+                  "moduleId": "client-template-injection",
+                  "moduleName": "Client-side Template Injection",
+                  "ruleId": "client-template-injection-taint",
+                  "ruleName": "Template injection (taint flow)",
+                  "vulnId": "code_injection",
+                  "category": "injection",
+                  "severity": "high",
+                  "owasp": [
+                    "A05:2025 - Injection",
+                    "A03:2021 - Injection"
+                  ],
+                  "cwe": [
+                    "CWE-94"
+                  ],
+                  "tags": [
+                    "sast",
+                    "template",
+                    "injection"
+                  ],
+                  "description": "Tainted data flows into client-side template sources or rendered HTML sinks.",
+                  "recommendation": "<ul><li>Avoid compiling templates from untrusted strings; use precompiled templates.</li><li>Sanitize render output before inserting into the DOM.</li></ul>",
+                  "links": {
+                    "OWASP": "https://owasp.org/www-community/attacks/Template_Injection",
+                    "CWE": "https://cwe.mitre.org/data/definitions/94.html"
+                  },
+                  "location": {
+                    "file": "http://127.0.0.1:52493/allowed.js",
+                    "line": 1,
+                    "column": 25,
+                    "runtimeUrl": "http://127.0.0.1:52492/app",
+                    "runtimeUrls": [
+                      "http://127.0.0.1:52492/app"
+                    ],
+                    "pageUrl": "http://127.0.0.1:52492/app",
+                    "pageUrls": [
+                      "http://127.0.0.1:52492/app"
+                    ],
+                    "url": "http://127.0.0.1:52492/app",
+                    "param": "value",
+                    "kind": "code",
+                    "route": "/app",
+                    "urlPattern": "http://127.0.0.1:52492/app"
+                  },
+                  "createdAt": "2026-10-22T14:21:28.779Z",
+                  "fingerprint": "client-template-injection-taint@@high@@http://127.0.0.1:52493/allowed.js@@http://127.0.0.1:52493/allowed.js@@{\"start\":{\"line\":1,\"column\":87},\"end\":{\"line\":1,\"column\":102}}@@{\"start\":{\"line\":1,\"column\":25},\"end\":{\"line\":1,\"column\":66}}@@",
+                  "findingKind": "finding",
+                  "confidence": 78,
+                  "evidence": {
+                    "sast": {
+                      "codeSnippet": "Source context:\nfunction sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}\n\nSink context:\nfunction sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}",
+                      "source": {
+                        "label": "location.search",
+                        "path": "searchParams.value",
+                        "sourceFile": "http://127.0.0.1:52493/allowed.js",
+                        "sourceFileFull": "http://127.0.0.1:52493/allowed.js",
+                        "sourceLoc": {
+                          "start": {
+                            "line": 1,
+                            "column": 87
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 102
+                          }
+                        },
+                        "sourceName": "location.search",
+                        "sourceSnippet": "function sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}"
+                      },
+                      "sink": {
+                        "kind": "assign",
+                        "label": "innerHTML",
+                        "path": [
+                          "innerHTML"
+                        ],
+                        "framework": null,
+                        "api": null,
+                        "argIndex": null,
+                        "sinkFile": "http://127.0.0.1:52493/allowed.js",
+                        "sinkFileFull": "http://127.0.0.1:52493/allowed.js",
+                        "sinkLoc": {
+                          "start": {
+                            "line": 1,
+                            "column": 25
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 66
+                          }
+                        },
+                        "sinkName": "innerHTML",
+                        "sinkSnippet": "function sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}"
+                      },
+                      "nodeType": "AssignmentExpression",
+                      "trace": [
+                        {
+                          "kind": "source",
+                          "label": "location.search",
+                          "file": "http://127.0.0.1:52493/allowed.js",
+                          "loc": {
+                            "start": {
+                              "line": 1,
+                              "column": 87
+                            },
+                            "end": {
+                              "line": 1,
+                              "column": 102
+                            }
+                          }
+                        },
+                        {
+                          "kind": "propagation",
+                          "label": "function sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}",
+                          "file": "http://127.0.0.1:52493/allowed.js",
+                          "loc": {
+                            "start": {
+                              "line": 1,
+                              "column": 67
+                            },
+                            "end": {
+                              "line": 1,
+                              "column": 103
+                            }
+                          }
+                        },
+                        {
+                          "kind": "propagation",
+                          "label": "get",
+                          "file": "http://127.0.0.1:52493/allowed.js",
+                          "loc": {
+                            "start": {
+                              "line": 1,
+                              "column": 67
+                            },
+                            "end": {
+                              "line": 1,
+                              "column": 116
+                            }
+                          }
+                        },
+                        {
+                          "kind": "sink",
+                          "label": "innerHTML",
+                          "file": "http://127.0.0.1:52493/allowed.js",
+                          "loc": {
+                            "start": {
+                              "line": 1,
+                              "column": 25
+                            },
+                            "end": {
+                              "line": 1,
+                              "column": 116
+                            }
+                          }
+                        }
+                      ],
+                      "mode": "taint",
+                      "findingKind": "finding",
+                      "sinkContext": "generic",
+                      "sourceTier": "url",
+                      "confidenceSignals": [
+                        "base:taint:78",
+                        "sink_context:generic:-6",
+                        "source_tier:url:+6"
+                      ]
+                    }
+                  },
+                  "updatedAt": "2026-10-22T14:21:28.779Z",
+                  "pageUrl": "http://127.0.0.1:52492/app",
+                  "source": {
+                    "kind": "query",
+                    "name": "value",
+                    "path": "searchParams.value"
+                  },
+                  "correlationKey": "39b2e5bcff79ee034e078e559c0c4836a056bab95c51c84b7fcf740306f263ec"
+                }
+              ],
+              "groups": [
+                {
+                  "id": "SAST@@dom_xss@@dom-xss@@no-inner-outer-html@@http://127.0.0.1:52493/allowed.js@@1",
+                  "engine": "SAST",
+                  "scanId": "584b1ed6-310f-49a3-9fc7-29b381c79a47",
+                  "vulnId": "dom_xss",
+                  "category": "xss",
+                  "severity": "low",
+                  "correlationKey": "33929abe0e53ce62d6f23b24c6b59bb40b4d04af355c194e664ef179d011d872",
+                  "location": {
+                    "url": "http://127.0.0.1:52492/app",
+                    "runtimeUrl": "http://127.0.0.1:52492/app",
+                    "file": "http://127.0.0.1:52493/allowed.js",
+                    "param": null,
+                    "sink": "innerHTML"
+                  },
+                  "occurrenceIds": [
+                    "584b1ed6-310f-49a3-9fc7-29b381c79a47::SAST::dom-xss::no-inner-outer-html::db4a64cb3180ad3b"
+                  ],
+                  "count": 1
+                },
+                {
+                  "id": "SAST@@dom_xss@@dom-xss@@dom-xss-taint@@http://127.0.0.1:52493/allowed.js@@1",
+                  "engine": "SAST",
+                  "scanId": "584b1ed6-310f-49a3-9fc7-29b381c79a47",
+                  "vulnId": "dom_xss",
+                  "category": "xss",
+                  "severity": "high",
+                  "correlationKey": "638aed3f3e531d2ea8979dc9fca34ae1cae2e1e3156c71da884b77a3f0d84f0f",
+                  "location": {
+                    "url": "http://127.0.0.1:52492/app",
+                    "runtimeUrl": "http://127.0.0.1:52492/app",
+                    "file": "http://127.0.0.1:52493/allowed.js",
+                    "param": "value",
+                    "sink": "innerHTML"
+                  },
+                  "occurrenceIds": [
+                    "584b1ed6-310f-49a3-9fc7-29b381c79a47::SAST::dom-xss::dom-xss-taint::249d13501eb8091b"
+                  ],
+                  "count": 1
+                },
+                {
+                  "id": "SAST@@code_injection@@client-template-injection@@client-template-injection-taint@@http://127.0.0.1:52493/allowed.js@@1",
+                  "engine": "SAST",
+                  "scanId": "584b1ed6-310f-49a3-9fc7-29b381c79a47",
+                  "vulnId": "code_injection",
+                  "category": "injection",
+                  "severity": "high",
+                  "correlationKey": "39b2e5bcff79ee034e078e559c0c4836a056bab95c51c84b7fcf740306f263ec",
+                  "location": {
+                    "url": "http://127.0.0.1:52492/app",
+                    "runtimeUrl": "http://127.0.0.1:52492/app",
+                    "file": "http://127.0.0.1:52493/allowed.js",
+                    "param": "value",
+                    "sink": "innerHTML"
+                  },
+                  "occurrenceIds": [
+                    "584b1ed6-310f-49a3-9fc7-29b381c79a47::SAST::client-template-injection::client-template-injection-taint::88ea70f65c8d227b"
+                  ],
+                  "count": 1
+                }
+              ],
+              "codeArtifacts": {
+                "sast": {
+                  "version": 2,
+                  "routes": [],
+                  "endpoints": [],
+                  "graphql": [],
+                  "surfaces": [],
+                  "hiddenParams": [],
+                  "gadgets": [
+                    {
+                      "id": "sast-gadget::127.0.0.1:52492|*|/app::dom-html-sink::innerHTML",
+                      "bucketId": "sast-gadget::127.0.0.1:52492|*|/app::dom-html-sink::innerHTML",
+                      "artifactType": "gadget",
+                      "moduleId": "sast-gadget-path-hints",
+                      "ruleId": "gadget-artifact",
+                      "gadgetType": "dom-html-sink",
+                      "label": "innerHTML",
+                      "routeKey": "127.0.0.1:52492|*|/app",
+                      "occurrenceCount": 2,
+                      "sourceFiles": [
+                        "http://127.0.0.1:52493/allowed.js"
+                      ],
+                      "sourceFile": "http://127.0.0.1:52493/allowed.js",
+                      "sourceLoc": {
+                        "line": 1,
+                        "column": 25
+                      },
+                      "pageUrl": "http://127.0.0.1:52492/app",
+                      "pageCanon": "http://127.0.0.1:52492/app",
+                      "pageUrls": [
+                        "http://127.0.0.1:52492/app"
+                      ],
+                      "runtimeUrls": [
+                        "http://127.0.0.1:52492/app"
+                      ],
+                      "observedUrls": [
+                        "http://127.0.0.1:52492/app"
+                      ],
+                      "runtimeUrl": "http://127.0.0.1:52492/app",
+                      "authHints": [],
+                      "protocolHints": [],
+                      "discoveryTags": [],
+                      "environmentHints": [],
+                      "storageHints": [],
+                      "uploadSignals": [],
+                      "paramNames": [],
+                      "bodyKeys": [],
+                      "headerNames": [],
+                      "operationTypes": [],
+                      "operationNames": [],
+                      "rootFields": [],
+                      "variableNames": [],
+                      "hintNames": [],
+                      "hintTypes": [],
+                      "actions": [],
+                      "transports": []
+                    }
+                  ]
+                }
+              },
+              "files": [
+                "http://127.0.0.1:52493/allowed.js",
+                "http://127.0.0.1:52493/jquery-1.12.4.js"
+              ],
+              "scanStrategy": {
+                "policyCode": "SMART",
+                "scanStrategyCode": 0
+              },
+              "pages": [
+                {
+                  "url": "http://127.0.0.1:52492/app",
+                  "stats": {
+                    "totalFindings": 3,
+                    "byCategory": {
+                      "xss": 2,
+                      "injection": 1
+                    },
+                    "bySeverity": {
+                      "low": 1,
+                      "high": 2
+                    }
+                  },
+                  "findingIds": [
+                    "584b1ed6-310f-49a3-9fc7-29b381c79a47::SAST::dom-xss::no-inner-outer-html::db4a64cb3180ad3b",
+                    "584b1ed6-310f-49a3-9fc7-29b381c79a47::SAST::dom-xss::dom-xss-taint::249d13501eb8091b",
+                    "584b1ed6-310f-49a3-9fc7-29b381c79a47::SAST::client-template-injection::client-template-injection-taint::88ea70f65c8d227b"
+                  ]
+                }
+              ],
+              "analysis": {
+                "version": "1.7.9",
+                "scanId": "584b1ed6-310f-49a3-9fc7-29b381c79a47",
+                "coverage": {
+                  "enginesPresent": [
+                    "SAST"
+                  ],
+                  "enginesMissing": [
+                    "DAST",
+                    "IAST",
+                    "SCA"
+                  ],
+                  "gaps": [],
+                  "limitations": [],
+                  "confidence": "low",
+                  "confidenceScore": 35
+                },
+                "patterns": [
+                  {
+                    "id": "pat_f48df5bece904a90b777a7b7",
+                    "ruleCode": "R11_SAST_CODE_ARTIFACTS",
+                    "title": "Code-discovered gadget innerHTML",
+                    "type": "SAST_GADGET_ARTIFACT",
+                    "routeKey": "127.0.0.1:52492|*|/app",
+                    "paramKey": "param:<none>",
+                    "priority": 26,
+                    "signals": {
+                      "source": "sast_code_artifacts",
+                      "artifactType": "gadget",
+                      "gadgetType": "dom-html-sink",
+                      "label": "innerHTML"
+                    },
+                    "evidenceRefs": [
+                      {
+                        "type": "artifact",
+                        "id": "sast-gadget::127.0.0.1:52492|*|/app::dom-html-sink::innerHTML",
+                        "loc": {
+                          "route": "127.0.0.1:52492|*|/app",
+                          "module": "sast-gadget-path-hints",
+                          "rule": "gadget-artifact",
+                          "kind": "gadget"
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "candidates": [
+                  {
+                    "id": "cand_a0fc5f154a61ed7882474cfb",
+                    "suppressKey": "sup_cb74947299da754b3be8c8a3",
+                    "type": "CODE_HOTSPOT",
+                    "title": "Trace gadget innerHTML",
+                    "score": 18,
+                    "confidence": "low",
+                    "confidenceRank": 1,
+                    "routeKey": "127.0.0.1:52492|*|/app",
+                    "paramKey": "param:<none>",
+                    "engineSignals": [
+                      "SAST"
+                    ],
+                    "why": [
+                      {
+                        "signal": "DOM_HTML_GADGET",
+                        "value": "innerHTML"
+                      }
+                    ],
+                    "evidenceRefs": [
+                      {
+                        "type": "artifact",
+                        "id": "sast-gadget::127.0.0.1:52492|*|/app::dom-html-sink::innerHTML",
+                        "loc": {
+                          "route": "127.0.0.1:52492|*|/app",
+                          "module": "sast-gadget-path-hints",
+                          "rule": "gadget-artifact",
+                          "kind": "gadget"
+                        }
+                      }
+                    ],
+                    "manualSteps": [
+                      "Trace whether attacker-controlled data can reach the discovered sink primitive through message, URL, storage, or form inputs.",
+                      "Exercise the sink with benign structured payloads first to understand required shape and encoding.",
+                      "Confirm whether context-aware sanitization is consistently applied before the sink."
+                    ],
+                    "createdByRule": "R11_SAST_CODE_ARTIFACTS"
+                  }
+                ],
+                "diff": null,
+                "discovery": {
+                  "iastBuckets": []
+                },
+                "attackMap": {
+                  "items": [
+                    {
+                      "id": "pat_f48df5bece904a90b777a7b7",
+                      "source": "pattern",
+                      "title": "Code-discovered gadget innerHTML",
+                      "itemType": "SAST_GADGET_ARTIFACT",
+                      "routeKey": "127.0.0.1:52492|*|/app",
+                      "path": "/app",
+                      "paramKey": "param:<none>",
+                      "priority": 26,
+                      "suggestedChecks": [
+                        "manual_review"
+                      ],
+                      "evidenceRefs": [
+                        {
+                          "type": "artifact",
+                          "id": "sast-gadget::127.0.0.1:52492|*|/app::dom-html-sink::innerHTML",
+                          "loc": {
+                            "route": "127.0.0.1:52492|*|/app",
+                            "module": "sast-gadget-path-hints",
+                            "rule": "gadget-artifact",
+                            "kind": "gadget"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "cand_a0fc5f154a61ed7882474cfb",
+                      "source": "candidate",
+                      "title": "Trace gadget innerHTML",
+                      "itemType": "CODE_HOTSPOT",
+                      "routeKey": "127.0.0.1:52492|*|/app",
+                      "path": "/app",
+                      "paramKey": "param:<none>",
+                      "priority": 18,
+                      "suggestedChecks": [
+                        "code_hotspot_review"
+                      ],
+                      "evidenceRefs": [
+                        {
+                          "type": "artifact",
+                          "id": "sast-gadget::127.0.0.1:52492|*|/app::dom-html-sink::innerHTML",
+                          "loc": {
+                            "route": "127.0.0.1:52492|*|/app",
+                            "module": "sast-gadget-path-hints",
+                            "rule": "gadget-artifact",
+                            "kind": "gadget"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "total": 2
+                },
+                "objectInventory": {
+                  "identifiers": [],
+                  "total": 0
+                },
+                "opportunities": [
+                  {
+                    "id": "cand_a0fc5f154a61ed7882474cfb",
+                    "source": "candidate",
+                    "title": "Trace gadget innerHTML",
+                    "type": "CODE_HOTSPOT",
+                    "routeKey": "127.0.0.1:52492|*|/app",
+                    "path": "/app",
+                    "paramKey": "param:<none>",
+                    "priority": 18,
+                    "confidence": "low",
+                    "confidenceRank": 1,
+                    "suggestedChecks": [
+                      "code_hotspot_review"
+                    ],
+                    "evidenceRefs": [
+                      {
+                        "type": "artifact",
+                        "id": "sast-gadget::127.0.0.1:52492|*|/app::dom-html-sink::innerHTML",
+                        "loc": {
+                          "route": "127.0.0.1:52492|*|/app",
+                          "module": "sast-gadget-path-hints",
+                          "rule": "gadget-artifact",
+                          "kind": "gadget"
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "recommendations": [
+                  {
+                    "id": "rec_dom_xss_7ce811f6",
+                    "surfaceType": "dom_xss",
+                    "title": "Client-side execution path",
+                    "priority": 65,
+                    "confidence": "low",
+                    "sourceEngines": [
+                      "SAST"
+                    ],
+                    "evidenceSummary": {
+                      "method": "*",
+                      "path": "/app",
+                      "routeKey": "127.0.0.1:52492|*|/app",
+                      "routeFamilyKey": "127.0.0.1:52492|*|/app",
+                      "paramKey": "param:<none>",
+                      "sourceEngines": [
+                        "SAST"
+                      ],
+                      "evidenceCount": 1,
+                      "observations": [
+                        "Explorer found client-side gadget evidence",
+                        "client-side gadget discovered"
+                      ]
+                    },
+                    "routeKey": "127.0.0.1:52492|*|/app",
+                    "routeFamilyKey": "127.0.0.1:52492|*|/app",
+                    "paramKey": "param:<none>",
+                    "evidenceRefs": [
+                      {
+                        "type": "artifact",
+                        "id": "sast-gadget::127.0.0.1:52492|*|/app::dom-html-sink::innerHTML",
+                        "loc": {
+                          "route": "127.0.0.1:52492|*|/app",
+                          "kind": "gadget",
+                          "engine": "SAST"
+                        }
+                      }
+                    ],
+                    "signals": [
+                      {
+                        "code": "CLIENT_GADGET",
+                        "label": "client-side gadget discovered",
+                        "weight": 30
+                      }
+                    ],
+                    "freeGuidance": [
+                      "Review source-to-sink paths and route-controlled rendering.",
+                      "Prioritize sinks reachable from URL, storage, referrer, or postMessage data.",
+                      "Confirm behavior with safe, scoped payloads only."
+                    ],
+                    "matchedModules": [
+                      {
+                        "engine": "DAST",
+                        "moduleId": "angularjs_client_template_injection",
+                        "name": "AngularJS client-side template / expression injection",
+                        "tier": "free",
+                        "category": "xss",
+                        "severity": "high",
+                        "vulnId": "angularjs_client_template_injection",
+                        "tags": [
+                          "dast",
+                          "xss",
+                          "angularjs",
+                          "client-template-injection",
+                          "sandbox-bypass"
+                        ],
+                        "description": "Detects AngularJS client-side template and expression injection by sending version-gated AngularJS sandbox-escape probes to query and form parameters, then requiring browser-executed proof from the PTK browser-nav harness.",
+                        "recommendationSummary": "Do not render attacker-controlled values inside AngularJS templates or expressions. Treat reflected values as data, avoid dynamic expression evaluation, upgrade away from AngularJS where possible, and apply contextual output encoding plus a restrictive CSP.",
+                        "links": {
+                          "PortSwigger AngularJS sandbox contexts": "https://portswigger.net/web-security/cross-site-scripting/contexts/angularjs-sandbox",
+                          "PortSwigger XSS cheat sheet": "https://portswigger.net/web-security/cross-site-scripting/cheat-sheet",
+                          "AngularJS security guide": "https://docs.angularjs.org/guide/security"
+                        },
+                        "surfaceHints": [
+                          "dom_xss",
+                          "template_rendering"
+                        ],
+                        "matchScore": 100,
+                        "matchReasons": [
+                          "surface:dom_xss",
+                          "alias:dom",
+                          "alias:xss",
+                          "alias:template"
+                        ]
+                      },
+                      {
+                        "engine": "DAST",
+                        "moduleId": "jsonp_callback_injection",
+                        "name": "JSONP Callback Injection (generic)",
+                        "tier": "free",
+                        "category": "xss",
+                        "severity": "medium",
+                        "vulnId": "jsonp_callback_injection",
+                        "tags": [
+                          "dast",
+                          "jsonp",
+                          "callback",
+                          "xss"
+                        ],
+                        "description": "Tests callback-like parameters for JSONP-style JavaScript responses where user input controls the executed callback name.",
+                        "recommendationSummary": "Avoid JSONP for new APIs. Return JSON with CORS controls instead. If JSONP must be supported, validate callbacks against a strict identifier allowlist. Return an error for callback names that are not known safe JavaScript identifiers. Prefer same-origin JSON APIs and explicit COR",
+                        "links": {
+                          "CWE-79": "https://cwe.mitre.org/data/definitions/79.html",
+                          "CWE-94": "https://cwe.mitre.org/data/definitions/94.html"
+                        },
+                        "surfaceHints": [
+                          "cors_cross_origin",
+                          "dom_xss",
+                          "ssrf"
+                        ],
+                        "matchScore": 100,
+                        "matchReasons": [
+                          "surface:dom_xss",
+                          "alias:dom",
+                          "alias:xss",
+                          "alias:script"
+                        ]
+                      },
+                      {
+                        "engine": "DAST",
+                        "moduleId": "spa_dom_xss",
+                        "name": "SPA hash-based DOM XSS",
+                        "tier": "free",
+                        "category": "xss",
+                        "severity": "high",
+                        "vulnId": "dom_xss",
+                        "tags": [
+                          "dast",
+                          "spa",
+                          "xss"
+                        ],
+                        "description": "Tests hash-based SPA parameters (http://host/#/route?param=value for DOM XSS by mutating the hash in a dedicated attack tab and inspecting the DOM.",
+                        "recommendationSummary": "Treat all hash-based parameters and client-side routing inputs as untrusted, and ensure they are never inserted into the DOM as HTML or script. Use safe DOM APIs that set text content rather than HTML where user input is involved. Avoid building HTML strings from concatenated par",
+                        "links": {
+                          "OWASP": "https://owasp.org/Top10/2025/A05_2025-Injection/",
+                          "CWE": "https://cwe.mitre.org/data/definitions/79.html"
+                        },
+                        "surfaceHints": [
+                          "dom_xss"
+                        ],
+                        "matchScore": 100,
+                        "matchReasons": [
+                          "surface:dom_xss",
+                          "alias:dom",
+                          "alias:xss",
+                          "alias:html",
+                          "alias:script"
+                        ]
+                      },
+                      {
+                        "engine": "DAST",
+                        "moduleId": "xss",
+                        "name": "Reflected Cross-Site Scripting (XSS)",
+                        "tier": "free",
+                        "category": "xss",
+                        "severity": "high",
+                        "vulnId": "reflected_xss",
+                        "tags": [
+                          "dast",
+                          "xss",
+                          "dom"
+                        ],
+                        "description": "Reflected Cross-site Scripting (XSS) is another name for non-persistent XSS, where the attack doesn't load with the vulnerable web application but is originated by the victim loading the offending URI. In this article we will see some ways to test a web application for this kind of vulnerability.",
+                        "recommendationSummary": "Reflected XSS attacks are the most frequent type of XSS attacks found nowadays. When a web application is vulnerable to this type of attack, it will pass unvalidated input sent through requests to the client. Reflected attacks are delivered to the victim in various ways, such as ",
+                        "links": {
+                          "OWASP": "https://owasp.org/Top10/2025/A05_2025-Injection/",
+                          "CWE": "https://cwe.mitre.org/data/definitions/79.html"
+                        },
+                        "surfaceHints": [
+                          "dom_xss"
+                        ],
+                        "matchScore": 100,
+                        "matchReasons": [
+                          "surface:dom_xss",
+                          "alias:dom",
+                          "alias:xss",
+                          "alias:script"
+                        ]
+                      },
+                      {
+                        "engine": "IAST",
+                        "moduleId": "iast_angularjs_expression_injection",
+                        "name": "AngularJS expression / client-template injection",
+                        "tier": "free",
+                        "category": "xss",
+                        "severity": "high",
+                        "vulnId": "angularjs_client_template_injection",
+                        "tags": [
+                          "iast",
+                          "angularjs",
+                          "xss",
+                          "client-template-injection"
+                        ],
+                        "description": "Runtime detection for AngularJS expression injection paths: interpolation templates, ng-* expression attributes and $parse inputs from query, form, cookie, storage and postMessage sources.",
+                        "recommendationSummary": "Do not evaluate user-controlled AngularJS expressions. Do not render untrusted input inside AngularJS interpolation or ng-* expression attributes. Do not pass cookie, storage, message, URL or form values to $parse/$compile/$interpolate without strict allow-listing. Migrate away f",
+                        "links": {
+                          "PortSwigger AngularJS sandbox contexts": "https://portswigger.net/web-security/cross-site-scripting/contexts/angularjs-sandbox",
+                          "CWE": "https://cwe.mitre.org/data/definitions/79.html"
+                        },
+                        "surfaceHints": [
+                          "cors_cross_origin",
+                          "dom_xss",
+                          "template_rendering"
+                        ],
+                        "matchScore": 100,
+                        "matchReasons": [
+                          "surface:dom_xss",
+                          "alias:dom",
+                          "alias:xss",
+                          "alias:postmessage",
+                          "alias:template"
+                        ]
+                      }
+                    ],
+                    "proActions": [
+                      {
+                        "id": "dast_angularjs_client_template_injection",
+                        "label": "AngularJS client-side template / expression injection",
+                        "status": "available",
+                        "moduleIds": [
+                          "angularjs_client_template_injection"
+                        ]
+                      },
+                      {
+                        "id": "dast_jsonp_callback_injection",
+                        "label": "JSONP Callback Injection (generic)",
+                        "status": "available",
+                        "moduleIds": [
+                          "jsonp_callback_injection"
+                        ]
+                      },
+                      {
+                        "id": "dast_spa_dom_xss",
+                        "label": "SPA hash-based DOM XSS",
+                        "status": "available",
+                        "moduleIds": [
+                          "spa_dom_xss"
+                        ]
+                      },
+                      {
+                        "id": "dast_xss",
+                        "label": "Reflected Cross-Site Scripting (XSS)",
+                        "status": "available",
+                        "moduleIds": [
+                          "xss"
+                        ]
+                      },
+                      {
+                        "id": "iast_iast_angularjs_expression_injection",
+                        "label": "AngularJS expression / client-template injection",
+                        "status": "available",
+                        "moduleIds": [
+                          "iast_angularjs_expression_injection"
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "explorer": {
+                  "summary": {
+                    "routeCount": 1,
+                    "endpointCount": 0,
+                    "graphqlCount": 0,
+                    "hiddenParamCount": 0,
+                    "surfaceCount": 0,
+                    "gadgetCount": 1,
+                    "enginesPresent": [
+                      "SAST"
+                    ]
+                  },
+                  "routes": [
+                    {
+                      "id": "spa:127.0.0.1:52492|*|/app",
+                      "routeKey": "127.0.0.1:52492|*|/app",
+                      "path": "/app",
+                      "routeType": "spa",
+                      "enginesPresent": [
+                        "SAST"
+                      ],
+                      "sources": [
+                        "code_gadget"
+                      ],
+                      "authHints": [],
+                      "protocolHints": [],
+                      "environmentHints": [],
+                      "frameworks": [],
+                      "sourceKinds": [],
+                      "hintNames": [],
+                      "pageUrls": [
+                        "http://127.0.0.1:52492/app"
+                      ],
+                      "adminLike": false,
+                      "evidenceRefs": [
+                        {
+                          "type": "artifact",
+                          "id": "sast-gadget::127.0.0.1:52492|*|/app::dom-html-sink::innerHTML",
+                          "loc": {
+                            "route": "127.0.0.1:52492|*|/app",
+                            "kind": "gadget"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "endpoints": [],
+                  "graphql": [],
+                  "hiddenParams": [],
+                  "surfaces": [],
+                  "gadgets": [
+                    {
+                      "id": "gadget:127.0.0.1:52492|*|/app|dom-html-sink|innerHTML",
+                      "routeKey": "127.0.0.1:52492|*|/app",
+                      "path": "/app",
+                      "surfaceType": "dom-html-sink",
+                      "gadgetType": "dom-html-sink",
+                      "label": "innerHTML",
+                      "hintNames": [],
+                      "engine": "SAST",
+                      "enginesPresent": [
+                        "SAST"
+                      ],
+                      "pageUrls": [
+                        "http://127.0.0.1:52492/app"
+                      ],
+                      "adminLike": false,
+                      "evidenceRefs": [
+                        {
+                          "type": "artifact",
+                          "id": "sast-gadget::127.0.0.1:52492|*|/app::dom-html-sink::innerHTML",
+                          "loc": {
+                            "route": "127.0.0.1:52492|*|/app",
+                            "kind": "gadget"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "schemaValidation": {
+                  "ok": true,
+                  "schema": "ptk-scan-analysis-v1",
+                  "reason": null,
+                  "explorer": {
+                    "ok": true,
+                    "buckets": {
+                      "routes": 1,
+                      "endpoints": 0,
+                      "graphql": 0,
+                      "hiddenParams": 0,
+                      "surfaces": 0,
+                      "gadgets": 1
+                    }
+                  },
+                  "recommendations": {
+                    "count": 1
+                  },
+                  "errorCount": 0,
+                  "errors": []
+                }
+              },
+              "analysisVersion": "1.7.9",
+              "scanConfiguration": {
+                "policyCode": "SMART",
+                "scanStrategyCode": 0
+              },
+              "meta": {
+                "privacy": {
+                  "secretsIncluded": false,
+                  "exportMode": "evidence",
+                  "redactionEnforced": true
+                },
+                "automation": {
+                  "sessionId": "ptk-session_c2883223-da97-455e-afad-6a864ee9c913",
+                  "testRunId": null,
+                  "project": null,
+                  "policyCode": "SMART",
+                  "startedAt": "2026-10-22T14:21:28.621Z",
+                  "finishedAt": "2026-10-22T14:21:31.231Z",
+                  "durationMs": 2610,
+                  "ptkVersion": "10.0.0",
+                  "schemaVersion": 1
+                }
+              }
+            },
+            "truncated": false
+          },
+          {
+            "engine": "SCA",
+            "data": {
+              "version": "1.0",
+              "type": "scan_result",
+              "engine": "SCA",
+              "scanId": "f9b715bc-1e73-4171-83dd-e22d49757293",
+              "host": "127.0.0.1:52492",
+              "tabId": "232388853",
+              "startedAt": "2026-10-22T14:21:28.676Z",
+              "finishedAt": "2026-10-22T14:21:31.231Z",
+              "settings": {},
+              "toolVersion": "1.0.0",
+              "stats": {
+                "findingsCount": 6,
+                "critical": 0,
+                "high": 0,
+                "medium": 5,
+                "low": 1,
+                "info": 0
+              },
+              "findings": [
+                {
+                  "id": "f9b715bc-1e73-4171-83dd-e22d49757293::SCA::sca::sca-jquery-1.12.4::jquery@1.12.4",
+                  "engine": "SCA",
+                  "scanId": "f9b715bc-1e73-4171-83dd-e22d49757293",
+                  "moduleId": "sca",
+                  "moduleName": "Software Composition Analysis",
+                  "ruleId": "sca-jquery-1.12.4",
+                  "ruleName": "parseHTML() executes scripts in event handlers",
+                  "severity": "medium",
+                  "category": "supply_chain",
+                  "vulnId": "vulnerable_component",
+                  "cwe": [
+                    "CWE-79"
+                  ],
+                  "owasp": [
+                    "A03:2025 - Software Supply Chain Failures",
+                    "A06:2021 - Vulnerable and Outdated Components"
+                  ],
+                  "tags": [
+                    "sca",
+                    "dependency",
+                    "filename"
+                  ],
+                  "links": {
+                    "ref_1": "http://research.insecurelabs.org/jquery/test/",
+                    "ref_2": "https://bugs.jquery.com/ticket/11974"
+                  },
+                  "location": {
+                    "kind": "package",
+                    "file": "http://127.0.0.1:52493/jquery-1.12.4.js"
+                  },
+                  "description": "parseHTML() executes scripts in event handlers",
+                  "recommendation": "Upgrade jquery (currently 1.12.4) to a secure release that is not affected by sca-jquery-1.12.4.",
+                  "createdAt": "2026-10-22T14:21:29.119Z",
+                  "evidence": {
+                    "sca": {
+                      "component": {
+                        "name": "jquery",
+                        "version": "1.12.4",
+                        "npmname": "jquery",
+                        "purl": "pkg:npm/jquery@1.12.4",
+                        "basePurl": null,
+                        "detection": "filename",
+                        "source": null,
+                        "ecosystem": "npm",
+                        "locations": [
+                          "http://127.0.0.1:52493/jquery-1.12.4.js"
+                        ]
+                      },
+                      "identifiers": {
+                        "summary": "parseHTML() executes scripts in event handlers",
+                        "issue": "11974",
+                        "cwe": [
+                          "CWE-79"
+                        ]
+                      },
+                      "versionRange": {
+                        "atOrAbove": "1.8.0",
+                        "above": null,
+                        "atOrBelow": null,
+                        "below": "2.2.0"
+                      },
+                      "info": [
+                        "http://research.insecurelabs.org/jquery/test/",
+                        "https://bugs.jquery.com/ticket/11974"
+                      ],
+                      "summary": "parseHTML() executes scripts in event handlers",
+                      "sourceFile": "http://127.0.0.1:52493/jquery-1.12.4.js"
+                    }
+                  },
+                  "updatedAt": "2026-10-22T14:21:29.119Z",
+                  "correlationKey": "8f123214789947175dc47402ab8197e2efd298ca41c796a4ee073b3225e1d6f9"
+                },
+                {
+                  "id": "f9b715bc-1e73-4171-83dd-e22d49757293::SCA::sca::73::jquery@1.12.4",
+                  "engine": "SCA",
+                  "scanId": "f9b715bc-1e73-4171-83dd-e22d49757293",
+                  "moduleId": "sca",
+                  "moduleName": "Software Composition Analysis",
+                  "ruleId": "73",
+                  "ruleName": "jQuery 1.x and 2.x are End-of-Life and no longer receiving security updates",
+                  "severity": "low",
+                  "category": "supply_chain",
+                  "vulnId": "vulnerable_component",
+                  "cwe": [
+                    "CWE-1104"
+                  ],
+                  "owasp": [
+                    "A03:2025 - Software Supply Chain Failures",
+                    "A06:2021 - Vulnerable and Outdated Components"
+                  ],
+                  "tags": [
+                    "sca",
+                    "dependency",
+                    "filename"
+                  ],
+                  "links": {
+                    "ref_1": "https://github.com/jquery/jquery.com/issues/162"
+                  },
+                  "location": {
+                    "kind": "package",
+                    "file": "http://127.0.0.1:52493/jquery-1.12.4.js"
+                  },
+                  "description": "jQuery 1.x and 2.x are End-of-Life and no longer receiving security updates",
+                  "recommendation": "Upgrade jquery (currently 1.12.4) to a secure release that is not affected by 73.",
+                  "createdAt": "2026-10-22T14:21:29.119Z",
+                  "evidence": {
+                    "sca": {
+                      "component": {
+                        "name": "jquery",
+                        "version": "1.12.4",
+                        "npmname": "jquery",
+                        "purl": "pkg:npm/jquery@1.12.4",
+                        "basePurl": null,
+                        "detection": "filename",
+                        "source": null,
+                        "ecosystem": "npm",
+                        "locations": [
+                          "http://127.0.0.1:52493/jquery-1.12.4.js"
+                        ]
+                      },
+                      "identifiers": {
+                        "summary": "jQuery 1.x and 2.x are End-of-Life and no longer receiving security updates",
+                        "retid": "73",
+                        "issue": "162",
+                        "cwe": [
+                          "CWE-1104"
+                        ]
+                      },
+                      "versionRange": {
+                        "atOrAbove": null,
+                        "above": null,
+                        "atOrBelow": null,
+                        "below": "2.999.999"
+                      },
+                      "info": [
+                        "https://github.com/jquery/jquery.com/issues/162"
+                      ],
+                      "summary": "jQuery 1.x and 2.x are End-of-Life and no longer receiving security updates",
+                      "sourceFile": "http://127.0.0.1:52493/jquery-1.12.4.js"
+                    }
+                  },
+                  "updatedAt": "2026-10-22T14:21:29.119Z",
+                  "correlationKey": "2be394359a6ee55216d5a39b536ade47434593b9d82da80758d94ae929090c8b"
+                },
+                {
+                  "id": "f9b715bc-1e73-4171-83dd-e22d49757293::SCA::sca::GHSA-rmxg-73gg-4p98::jquery@1.12.4",
+                  "engine": "SCA",
+                  "scanId": "f9b715bc-1e73-4171-83dd-e22d49757293",
+                  "moduleId": "sca",
+                  "moduleName": "Software Composition Analysis",
+                  "ruleId": "GHSA-rmxg-73gg-4p98",
+                  "ruleName": "3rd party CORS request may execute",
+                  "severity": "medium",
+                  "category": "supply_chain",
+                  "vulnId": "vulnerable_component",
+                  "cwe": [
+                    "CWE-79"
+                  ],
+                  "owasp": [
+                    "A03:2025 - Software Supply Chain Failures",
+                    "A06:2021 - Vulnerable and Outdated Components"
+                  ],
+                  "tags": [
+                    "sca",
+                    "dependency",
+                    "filename"
+                  ],
+                  "links": {
+                    "ref_1": "http://blog.jquery.com/2016/01/08/jquery-2-2-and-1-12-released/",
+                    "ref_2": "http://research.insecurelabs.org/jquery/test/",
+                    "ref_3": "https://github.com/advisories/GHSA-rmxg-73gg-4p98",
+                    "ref_4": "https://github.com/jquery/jquery/issues/2432",
+                    "ref_5": "https://nvd.nist.gov/vuln/detail/CVE-2015-9251"
+                  },
+                  "location": {
+                    "kind": "package",
+                    "file": "http://127.0.0.1:52493/jquery-1.12.4.js"
+                  },
+                  "description": "3rd party CORS request may execute",
+                  "recommendation": "Upgrade jquery (currently 1.12.4) to a secure release that is not affected by GHSA-rmxg-73gg-4p98.",
+                  "createdAt": "2026-10-22T14:21:29.119Z",
+                  "evidence": {
+                    "sca": {
+                      "component": {
+                        "name": "jquery",
+                        "version": "1.12.4",
+                        "npmname": "jquery",
+                        "purl": "pkg:npm/jquery@1.12.4",
+                        "basePurl": null,
+                        "detection": "filename",
+                        "source": null,
+                        "ecosystem": "npm",
+                        "locations": [
+                          "http://127.0.0.1:52493/jquery-1.12.4.js"
+                        ]
+                      },
+                      "identifiers": {
+                        "summary": "3rd party CORS request may execute",
+                        "issue": "2432",
+                        "CVE": [
+                          "CVE-2015-9251"
+                        ],
+                        "githubID": "GHSA-rmxg-73gg-4p98",
+                        "cwe": [
+                          "CWE-79"
+                        ]
+                      },
+                      "versionRange": {
+                        "atOrAbove": "1.12.3",
+                        "above": null,
+                        "atOrBelow": null,
+                        "below": "3.0.0-beta1"
+                      },
+                      "info": [
+                        "http://blog.jquery.com/2016/01/08/jquery-2-2-and-1-12-released/",
+                        "http://research.insecurelabs.org/jquery/test/",
+                        "https://github.com/advisories/GHSA-rmxg-73gg-4p98",
+                        "https://github.com/jquery/jquery/issues/2432",
+                        "https://nvd.nist.gov/vuln/detail/CVE-2015-9251"
+                      ],
+                      "summary": "3rd party CORS request may execute",
+                      "sourceFile": "http://127.0.0.1:52493/jquery-1.12.4.js"
+                    }
+                  },
+                  "updatedAt": "2026-10-22T14:21:29.119Z",
+                  "correlationKey": "f5dd49a7100ce494b7bb36dacfc2314f675095927158e0e2961aecb20a23c3ce"
+                },
+                {
+                  "id": "f9b715bc-1e73-4171-83dd-e22d49757293::SCA::sca::GHSA-6c3j-c64m-qhgq::jquery@1.12.4",
+                  "engine": "SCA",
+                  "scanId": "f9b715bc-1e73-4171-83dd-e22d49757293",
+                  "moduleId": "sca",
+                  "moduleName": "Software Composition Analysis",
+                  "ruleId": "GHSA-6c3j-c64m-qhgq",
+                  "ruleName": "jQuery before 3.4.0, as used in Drupal, Backdrop CMS, and other products, mishandles jQuery.extend(true, {}, ...) because of Object.prototype pollution",
+                  "severity": "medium",
+                  "category": "supply_chain",
+                  "vulnId": "vulnerable_component",
+                  "cwe": [
+                    "CWE-1321",
+                    "CWE-79"
+                  ],
+                  "owasp": [
+                    "A03:2025 - Software Supply Chain Failures",
+                    "A06:2021 - Vulnerable and Outdated Components"
+                  ],
+                  "tags": [
+                    "sca",
+                    "dependency",
+                    "filename"
+                  ],
+                  "links": {
+                    "ref_1": "https://blog.jquery.com/2019/04/10/jquery-3-4-0-released/",
+                    "ref_2": "https://github.com/jquery/jquery/commit/753d591aea698e57d6db58c9f722cd0808619b1b",
+                    "ref_3": "https://nvd.nist.gov/vuln/detail/CVE-2019-11358"
+                  },
+                  "location": {
+                    "kind": "package",
+                    "file": "http://127.0.0.1:52493/jquery-1.12.4.js"
+                  },
+                  "description": "jQuery before 3.4.0, as used in Drupal, Backdrop CMS, and other products, mishandles jQuery.extend(true, {}, ...) because of Object.prototype pollution",
+                  "recommendation": "Upgrade jquery (currently 1.12.4) to a secure release that is not affected by GHSA-6c3j-c64m-qhgq.",
+                  "createdAt": "2026-10-22T14:21:29.119Z",
+                  "evidence": {
+                    "sca": {
+                      "component": {
+                        "name": "jquery",
+                        "version": "1.12.4",
+                        "npmname": "jquery",
+                        "purl": "pkg:npm/jquery@1.12.4",
+                        "basePurl": null,
+                        "detection": "filename",
+                        "source": null,
+                        "ecosystem": "npm",
+                        "locations": [
+                          "http://127.0.0.1:52493/jquery-1.12.4.js"
+                        ]
+                      },
+                      "identifiers": {
+                        "summary": "jQuery before 3.4.0, as used in Drupal, Backdrop CMS, and other products, mishandles jQuery.extend(true, {}, ...) because of Object.prototype pollution",
+                        "CVE": [
+                          "CVE-2019-11358"
+                        ],
+                        "PR": "4333",
+                        "githubID": "GHSA-6c3j-c64m-qhgq",
+                        "cwe": [
+                          "CWE-1321",
+                          "CWE-79"
+                        ]
+                      },
+                      "versionRange": {
+                        "atOrAbove": "1.1.4",
+                        "above": null,
+                        "atOrBelow": null,
+                        "below": "3.4.0"
+                      },
+                      "info": [
+                        "https://blog.jquery.com/2019/04/10/jquery-3-4-0-released/",
+                        "https://github.com/jquery/jquery/commit/[REDACTED]",
+                        "https://nvd.nist.gov/vuln/detail/CVE-2019-11358"
+                      ],
+                      "summary": "jQuery before 3.4.0, as used in Drupal, Backdrop CMS, and other products, mishandles jQuery.extend(true, {}, ...) because of Object.prototype pollution",
+                      "sourceFile": "http://127.0.0.1:52493/jquery-1.12.4.js"
+                    }
+                  },
+                  "updatedAt": "2026-10-22T14:21:29.119Z",
+                  "correlationKey": "6d2cfad8ee338565fb6c0aeb30e0982b368291102c6fde5deafba9d4f8caf564"
+                },
+                {
+                  "id": "f9b715bc-1e73-4171-83dd-e22d49757293::SCA::sca::GHSA-jpcq-cgw6-v4j6::jquery@1.12.4",
+                  "engine": "SCA",
+                  "scanId": "f9b715bc-1e73-4171-83dd-e22d49757293",
+                  "moduleId": "sca",
+                  "moduleName": "Software Composition Analysis",
+                  "ruleId": "GHSA-jpcq-cgw6-v4j6",
+                  "ruleName": "passing HTML containing <option> elements from untrusted sources - even after sanitizing it - to one of jQuery's DOM manipulation methods (i.e. .html(), .append(), and others) may execute untrusted code.",
+                  "severity": "medium",
+                  "category": "supply_chain",
+                  "vulnId": "vulnerable_component",
+                  "cwe": [
+                    "CWE-79"
+                  ],
+                  "owasp": [
+                    "A03:2025 - Software Supply Chain Failures",
+                    "A06:2021 - Vulnerable and Outdated Components"
+                  ],
+                  "tags": [
+                    "sca",
+                    "dependency",
+                    "filename"
+                  ],
+                  "links": {
+                    "ref_1": "https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/"
+                  },
+                  "location": {
+                    "kind": "package",
+                    "file": "http://127.0.0.1:52493/jquery-1.12.4.js"
+                  },
+                  "description": "passing HTML containing <option> elements from untrusted sources - even after sanitizing it - to one of jQuery's DOM manipulation methods (i.e. .html(), .append(), and others) may execute untrusted code.",
+                  "recommendation": "Upgrade jquery (currently 1.12.4) to a secure release that is not affected by GHSA-jpcq-cgw6-v4j6.",
+                  "createdAt": "2026-10-22T14:21:29.119Z",
+                  "evidence": {
+                    "sca": {
+                      "component": {
+                        "name": "jquery",
+                        "version": "1.12.4",
+                        "npmname": "jquery",
+                        "purl": "pkg:npm/jquery@1.12.4",
+                        "basePurl": null,
+                        "detection": "filename",
+                        "source": null,
+                        "ecosystem": "npm",
+                        "locations": [
+                          "http://127.0.0.1:52493/jquery-1.12.4.js"
+                        ]
+                      },
+                      "identifiers": {
+                        "summary": "passing HTML containing <option> elements from untrusted sources - even after sanitizing it - to one of jQuery's DOM manipulation methods (i.e. .html(), .append(), and others) may execute untrusted code.",
+                        "CVE": [
+                          "CVE-2020-11023"
+                        ],
+                        "issue": "4647",
+                        "githubID": "GHSA-jpcq-cgw6-v4j6",
+                        "cwe": [
+                          "CWE-79"
+                        ]
+                      },
+                      "versionRange": {
+                        "atOrAbove": "1.0.3",
+                        "above": null,
+                        "atOrBelow": null,
+                        "below": "3.5.0"
+                      },
+                      "info": [
+                        "https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/"
+                      ],
+                      "summary": "passing HTML containing <option> elements from untrusted sources - even after sanitizing it - to one of jQuery's DOM manipulation methods (i.e. .html(), .append(), and others) may execute untrusted code.",
+                      "sourceFile": "http://127.0.0.1:52493/jquery-1.12.4.js"
+                    }
+                  },
+                  "updatedAt": "2026-10-22T14:21:29.119Z",
+                  "correlationKey": "d3b7e2e89590a629e9507a44fe867b258c8f5c8c380deaac3168309a7a4c3051"
+                },
+                {
+                  "id": "f9b715bc-1e73-4171-83dd-e22d49757293::SCA::sca::GHSA-gxr4-xjj5-5px2::jquery@1.12.4",
+                  "engine": "SCA",
+                  "scanId": "f9b715bc-1e73-4171-83dd-e22d49757293",
+                  "moduleId": "sca",
+                  "moduleName": "Software Composition Analysis",
+                  "ruleId": "GHSA-gxr4-xjj5-5px2",
+                  "ruleName": "Regex in its jQuery.htmlPrefilter sometimes may introduce XSS",
+                  "severity": "medium",
+                  "category": "supply_chain",
+                  "vulnId": "vulnerable_component",
+                  "cwe": [
+                    "CWE-79"
+                  ],
+                  "owasp": [
+                    "A03:2025 - Software Supply Chain Failures",
+                    "A06:2021 - Vulnerable and Outdated Components"
+                  ],
+                  "tags": [
+                    "sca",
+                    "dependency",
+                    "filename"
+                  ],
+                  "links": {
+                    "ref_1": "https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/"
+                  },
+                  "location": {
+                    "kind": "package",
+                    "file": "http://127.0.0.1:52493/jquery-1.12.4.js"
+                  },
+                  "description": "Regex in its jQuery.htmlPrefilter sometimes may introduce XSS",
+                  "recommendation": "Upgrade jquery (currently 1.12.4) to a secure release that is not affected by GHSA-gxr4-xjj5-5px2.",
+                  "createdAt": "2026-10-22T14:21:29.119Z",
+                  "evidence": {
+                    "sca": {
+                      "component": {
+                        "name": "jquery",
+                        "version": "1.12.4",
+                        "npmname": "jquery",
+                        "purl": "pkg:npm/jquery@1.12.4",
+                        "basePurl": null,
+                        "detection": "filename",
+                        "source": null,
+                        "ecosystem": "npm",
+                        "locations": [
+                          "http://127.0.0.1:52493/jquery-1.12.4.js"
+                        ]
+                      },
+                      "identifiers": {
+                        "summary": "Regex in its jQuery.htmlPrefilter sometimes may introduce XSS",
+                        "CVE": [
+                          "CVE-2020-11022"
+                        ],
+                        "issue": "4642",
+                        "githubID": "GHSA-gxr4-xjj5-5px2",
+                        "cwe": [
+                          "CWE-79"
+                        ]
+                      },
+                      "versionRange": {
+                        "atOrAbove": "1.2.0",
+                        "above": null,
+                        "atOrBelow": null,
+                        "below": "3.5.0"
+                      },
+                      "info": [
+                        "https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/"
+                      ],
+                      "summary": "Regex in its jQuery.htmlPrefilter sometimes may introduce XSS",
+                      "sourceFile": "http://127.0.0.1:52493/jquery-1.12.4.js"
+                    }
+                  },
+                  "updatedAt": "2026-10-22T14:21:29.119Z",
+                  "correlationKey": "f062bb1c2b2628930d8fbe79188ab6da9b1728ddf0661ecc8f10f134407d452c"
+                }
+              ],
+              "groups": [],
+              "codeArtifacts": {
+                "sast": {
+                  "version": 2,
+                  "routes": [],
+                  "endpoints": [],
+                  "graphql": [],
+                  "surfaces": [],
+                  "hiddenParams": [],
+                  "gadgets": []
+                }
+              },
+              "items": [],
+              "packages": [
+                {
+                  "name": "jquery",
+                  "version": "1.12.4",
+                  "file": "http://127.0.0.1:52493/jquery-1.12.4.js",
+                  "npmname": "jquery",
+                  "purl": "pkg:npm/jquery@1.12.4",
+                  "basePurl": null,
+                  "detection": "filename",
+                  "source": null,
+                  "ecosystem": "npm",
+                  "locations": [
+                    "http://127.0.0.1:52493/jquery-1.12.4.js"
+                  ]
+                }
+              ],
+              "coverageWarnings": [
+                {
+                  "url": "http://127.0.0.1:52493/excluded/hidden.js",
+                  "reason": "Target is outside run scope: http://127.0.0.1:52493/excluded/hidden.js. Review the target scope in Workspace settings."
+                }
+              ],
+              "analysis": {
+                "version": "1.7.9",
+                "scanId": "f9b715bc-1e73-4171-83dd-e22d49757293",
+                "coverage": {
+                  "enginesPresent": [
+                    "SCA"
+                  ],
+                  "enginesMissing": [
+                    "DAST",
+                    "IAST",
+                    "SAST"
+                  ],
+                  "gaps": [],
+                  "limitations": [],
+                  "confidence": "low",
+                  "confidenceScore": 35
+                },
+                "patterns": [],
+                "candidates": [],
+                "diff": null,
+                "discovery": {
+                  "iastBuckets": []
+                },
+                "attackMap": {
+                  "items": [],
+                  "total": 0
+                },
+                "objectInventory": {
+                  "identifiers": [],
+                  "total": 0
+                },
+                "opportunities": [],
+                "recommendations": [],
+                "explorer": {
+                  "summary": {
+                    "routeCount": 0,
+                    "endpointCount": 0,
+                    "graphqlCount": 0,
+                    "hiddenParamCount": 0,
+                    "surfaceCount": 0,
+                    "gadgetCount": 0,
+                    "enginesPresent": []
+                  },
+                  "routes": [],
+                  "endpoints": [],
+                  "graphql": [],
+                  "hiddenParams": [],
+                  "surfaces": [],
+                  "gadgets": []
+                },
+                "schemaValidation": {
+                  "ok": true,
+                  "schema": "ptk-scan-analysis-v1",
+                  "reason": null,
+                  "explorer": {
+                    "ok": true,
+                    "buckets": {
+                      "routes": 0,
+                      "endpoints": 0,
+                      "graphql": 0,
+                      "hiddenParams": 0,
+                      "surfaces": 0,
+                      "gadgets": 0
+                    }
+                  },
+                  "recommendations": {
+                    "count": 0
+                  },
+                  "errorCount": 0,
+                  "errors": []
+                }
+              },
+              "analysisVersion": "1.7.9",
+              "scanConfiguration": {},
+              "meta": {
+                "privacy": {
+                  "secretsIncluded": false,
+                  "exportMode": "evidence",
+                  "redactionEnforced": true
+                },
+                "automation": {
+                  "sessionId": "ptk-session_c2883223-da97-455e-afad-6a864ee9c913",
+                  "testRunId": null,
+                  "project": null,
+                  "policyCode": "SMART",
+                  "startedAt": "2026-10-22T14:21:28.621Z",
+                  "finishedAt": "2026-10-22T14:21:31.231Z",
+                  "durationMs": 2610,
+                  "ptkVersion": "10.0.0",
+                  "schemaVersion": 1
+                }
+              }
+            },
+            "truncated": false
+          }
+        ],
+        "supplemental": {
+          "backends": {},
+          "gaps": []
+        }
+      },
+      "evidence": {
+        "findings": [
+          {
+            "id": "584b1ed6-310f-49a3-9fc7-29b381c79a47::SAST::dom-xss::no-inner-outer-html::db4a64cb3180ad3b",
+            "engine": "SAST",
+            "scanId": "584b1ed6-310f-49a3-9fc7-29b381c79a47",
+            "moduleId": "dom-xss",
+            "moduleName": "DOM-based XSS",
+            "ruleId": "no-inner-outer-html",
+            "ruleName": "Disallow innerHTML/outerHTML assignments",
+            "vulnId": "dom_xss",
+            "category": "xss",
+            "severity": "low",
+            "owasp": [
+              "A05:2025 - Injection",
+              "A03:2021 - Injection"
+            ],
+            "cwe": [
+              "CWE-79"
+            ],
+            "tags": [
+              "sast",
+              "dom",
+              "xss"
+            ],
+            "description": "Assignments to innerHTML/outerHTML are dangerous when they contain untrusted data and may lead to XSS.",
+            "recommendation": "<p>Prevent DOM-based XSS by never inserting untrusted strings directly into HTML or executing them as code. Prefer DOM/text APIs, safe templating, or a vetted sanitizer and apply context-aware encoding where needed.</p><ul><li><strong>Primary:</strong> Use <code>textContent</code> / <code>innerText</code> or create DOM nodes instead of string-based HTML insertion. If you must insert HTML, sanitize it with a vetted library such as <a href=\"https://github.com/cure53/DOMPurify\" target=\"_blank\">DOMPurify</a>.</li><li><strong>Secondary:</strong> Apply context-sensitive encoding for attributes and JavaScript contexts, avoid <code>eval</code>/<code>new Function</code>/<code>setTimeout</code> with strings, and prefer safe templating engines.</li><li><strong>Controls:</strong> Use Content Security Policy (CSP), follow least-privilege principles, and validate/allow-list input shapes where practical.</li><li><strong>Testing:</strong> Add unit/browser tests for inline handlers and client-side flows that read from <code>location</code>, form inputs, storage, and <code>postMessage</code>.</li></ul>",
+            "links": {
+              "OWASP": "https://owasp.org/www-community/attacks/xss/",
+              "CWE": "https://cwe.mitre.org/data/definitions/79.html"
+            },
+            "location": {
+              "file": "http://127.0.0.1:52493/allowed.js",
+              "line": 1,
+              "column": 25,
+              "runtimeUrl": "http://127.0.0.1:52492/app",
+              "runtimeUrls": [
+                "http://127.0.0.1:52492/app"
+              ],
+              "pageUrl": "http://127.0.0.1:52492/app",
+              "pageUrls": [
+                "http://127.0.0.1:52492/app"
+              ],
+              "url": "http://127.0.0.1:52492/app",
+              "param": null,
+              "kind": "code"
+            },
+            "createdAt": "2026-10-22T14:21:28.778Z",
+            "fingerprint": "no-inner-outer-html@@low@@http://127.0.0.1:52493/allowed.js@@http://127.0.0.1:52493/allowed.js@@{\"start\":{\"line\":1,\"column\":25},\"end\":{\"line\":1,\"column\":116}}@@{\"start\":{\"line\":1,\"column\":25},\"end\":{\"line\":1,\"column\":66}}@@",
+            "findingKind": "hint",
+            "confidence": 38,
+            "evidence": {
+              "sast": {
+                "codeSnippet": "Source context:\nfunction sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}\n\nSink context:\nfunction sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}",
+                "source": {
+                  "label": "innerHTML",
+                  "path": null,
+                  "sourceFile": "http://127.0.0.1:52493/allowed.js",
+                  "sourceFileFull": "http://127.0.0.1:52493/allowed.js",
+                  "sourceLoc": {
+                    "start": {
+                      "line": 1,
+                      "column": 25
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 116
+                    }
+                  },
+                  "sourceName": "innerHTML",
+                  "sourceSnippet": "function sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}"
+                },
+                "sink": {
+                  "kind": "assign",
+                  "label": "innerHTML",
+                  "path": [],
+                  "sinkFile": "http://127.0.0.1:52493/allowed.js",
+                  "sinkFileFull": "http://127.0.0.1:52493/allowed.js",
+                  "sinkLoc": {
+                    "start": {
+                      "line": 1,
+                      "column": 25
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 66
+                    }
+                  },
+                  "sinkName": "innerHTML",
+                  "sinkSnippet": "function sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}"
+                },
+                "nodeType": "AssignmentExpression",
+                "trace": [],
+                "mode": "pattern",
+                "findingKind": "hint",
+                "confidenceSignals": [
+                  "base:pattern:58",
+                  "finding_kind:hint:-20"
+                ]
+              }
+            },
+            "updatedAt": "2026-10-22T14:21:28.778Z",
+            "pageUrl": "http://127.0.0.1:52492/app",
+            "title": "Disallow innerHTML/outerHTML assignments"
+          },
+          {
+            "id": "584b1ed6-310f-49a3-9fc7-29b381c79a47::SAST::dom-xss::dom-xss-taint::249d13501eb8091b",
+            "engine": "SAST",
+            "scanId": "584b1ed6-310f-49a3-9fc7-29b381c79a47",
+            "moduleId": "dom-xss",
+            "moduleName": "DOM-based XSS",
+            "ruleId": "dom-xss-taint",
+            "ruleName": "DOM-based XSS (taint flow)",
+            "vulnId": "dom_xss",
+            "category": "xss",
+            "severity": "high",
+            "owasp": [
+              "A05:2025 - Injection",
+              "A03:2021 - Injection"
+            ],
+            "cwe": [
+              "CWE-79"
+            ],
+            "tags": [
+              "sast",
+              "dom",
+              "xss"
+            ],
+            "description": "Detects flows where untrusted DOM-derived data (location, element values, storage, message data) reaches HTML/JS execution sinks (e.g., innerHTML, document.write, insertAdjacentHTML, location assignment, eval/Function) without passing through a recognized sanitizer.",
+            "recommendation": "<p>Prevent DOM-based XSS by never inserting untrusted strings directly into HTML or executing them as code. Prefer DOM/text APIs, safe templating, or a vetted sanitizer and apply context-aware encoding where needed.</p><ul><li><strong>Primary:</strong> Use <code>textContent</code> / <code>innerText</code> or create DOM nodes instead of string-based HTML insertion. If you must insert HTML, sanitize it with a vetted library such as <a href=\"https://github.com/cure53/DOMPurify\" target=\"_blank\">DOMPurify</a>.</li><li><strong>Secondary:</strong> Apply context-sensitive encoding for attributes and JavaScript contexts, avoid <code>eval</code>/<code>new Function</code>/<code>setTimeout</code> with strings, and prefer safe templating engines.</li><li><strong>Controls:</strong> Use Content Security Policy (CSP), follow least-privilege principles, and validate/allow-list input shapes where practical.</li><li><strong>Testing:</strong> Add unit/browser tests for inline handlers and client-side flows that read from <code>location</code>, form inputs, storage, and <code>postMessage</code>.</li></ul>",
+            "links": {
+              "OWASP": "https://owasp.org/www-community/attacks/xss/",
+              "CWE": "https://cwe.mitre.org/data/definitions/79.html"
+            },
+            "location": {
+              "file": "http://127.0.0.1:52493/allowed.js",
+              "line": 1,
+              "column": 25,
+              "runtimeUrl": "http://127.0.0.1:52492/app",
+              "runtimeUrls": [
+                "http://127.0.0.1:52492/app"
+              ],
+              "pageUrl": "http://127.0.0.1:52492/app",
+              "pageUrls": [
+                "http://127.0.0.1:52492/app"
+              ],
+              "url": "http://127.0.0.1:52492/app",
+              "param": "value",
+              "kind": "code"
+            },
+            "createdAt": "2026-10-22T14:21:28.779Z",
+            "fingerprint": "dom-xss-taint@@high@@http://127.0.0.1:52493/allowed.js@@http://127.0.0.1:52493/allowed.js@@{\"start\":{\"line\":1,\"column\":87},\"end\":{\"line\":1,\"column\":102}}@@{\"start\":{\"line\":1,\"column\":25},\"end\":{\"line\":1,\"column\":66}}@@",
+            "findingKind": "finding",
+            "confidence": 92,
+            "evidence": {
+              "sast": {
+                "codeSnippet": "Source context:\nfunction sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}\n\nSink context:\nfunction sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}",
+                "source": {
+                  "label": "URLSearchParams.get from location.search",
+                  "path": "searchParams.value",
+                  "sourceFile": "http://127.0.0.1:52493/allowed.js",
+                  "sourceFileFull": "http://127.0.0.1:52493/allowed.js",
+                  "sourceLoc": {
+                    "start": {
+                      "line": 1,
+                      "column": 87
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 102
+                    }
+                  },
+                  "sourceName": "URLSearchParams.get from location.search",
+                  "sourceSnippet": "function sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}"
+                },
+                "sink": {
+                  "kind": "assign",
+                  "label": "innerHTML",
+                  "path": [
+                    "innerHTML"
+                  ],
+                  "framework": null,
+                  "api": null,
+                  "argIndex": null,
+                  "sinkFile": "http://127.0.0.1:52493/allowed.js",
+                  "sinkFileFull": "http://127.0.0.1:52493/allowed.js",
+                  "sinkLoc": {
+                    "start": {
+                      "line": 1,
+                      "column": 25
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 66
+                    }
+                  },
+                  "sinkName": "innerHTML",
+                  "sinkSnippet": "function sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}"
+                },
+                "nodeType": "AssignmentExpression",
+                "trace": [
+                  {
+                    "kind": "source",
+                    "label": "location.search",
+                    "file": "http://127.0.0.1:52493/allowed.js",
+                    "loc": {
+                      "start": {
+                        "line": 1,
+                        "column": 87
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 102
+                      }
+                    }
+                  },
+                  {
+                    "kind": "propagation",
+                    "label": "function sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}",
+                    "file": "http://127.0.0.1:52493/allowed.js",
+                    "loc": {
+                      "start": {
+                        "line": 1,
+                        "column": 67
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 103
+                      }
+                    }
+                  },
+                  {
+                    "kind": "propagation",
+                    "label": "get",
+                    "file": "http://127.0.0.1:52493/allowed.js",
+                    "loc": {
+                      "start": {
+                        "line": 1,
+                        "column": 67
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 116
+                      }
+                    }
+                  },
+                  {
+                    "kind": "sink",
+                    "label": "innerHTML",
+                    "file": "http://127.0.0.1:52493/allowed.js",
+                    "loc": {
+                      "start": {
+                        "line": 1,
+                        "column": 25
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 116
+                      }
+                    }
+                  }
+                ],
+                "mode": "taint",
+                "findingKind": "finding",
+                "sinkContext": "html",
+                "sourceTier": "url",
+                "confidenceSignals": [
+                  "base:taint:78",
+                  "sink_context:html:+8",
+                  "source_tier:url:+6"
+                ]
+              }
+            },
+            "updatedAt": "2026-10-22T14:21:28.779Z",
+            "pageUrl": "http://127.0.0.1:52492/app",
+            "title": "DOM-based XSS (taint flow)"
+          },
+          {
+            "id": "584b1ed6-310f-49a3-9fc7-29b381c79a47::SAST::client-template-injection::client-template-injection-taint::88ea70f65c8d227b",
+            "engine": "SAST",
+            "scanId": "584b1ed6-310f-49a3-9fc7-29b381c79a47",
+            "moduleId": "client-template-injection",
+            "moduleName": "Client-side Template Injection",
+            "ruleId": "client-template-injection-taint",
+            "ruleName": "Template injection (taint flow)",
+            "vulnId": "code_injection",
+            "category": "injection",
+            "severity": "high",
+            "owasp": [
+              "A05:2025 - Injection",
+              "A03:2021 - Injection"
+            ],
+            "cwe": [
+              "CWE-94"
+            ],
+            "tags": [
+              "sast",
+              "template",
+              "injection"
+            ],
+            "description": "Tainted data flows into client-side template sources or rendered HTML sinks.",
+            "recommendation": "<ul><li>Avoid compiling templates from untrusted strings; use precompiled templates.</li><li>Sanitize render output before inserting into the DOM.</li></ul>",
+            "links": {
+              "OWASP": "https://owasp.org/www-community/attacks/Template_Injection",
+              "CWE": "https://cwe.mitre.org/data/definitions/94.html"
+            },
+            "location": {
+              "file": "http://127.0.0.1:52493/allowed.js",
+              "line": 1,
+              "column": 25,
+              "runtimeUrl": "http://127.0.0.1:52492/app",
+              "runtimeUrls": [
+                "http://127.0.0.1:52492/app"
+              ],
+              "pageUrl": "http://127.0.0.1:52492/app",
+              "pageUrls": [
+                "http://127.0.0.1:52492/app"
+              ],
+              "url": "http://127.0.0.1:52492/app",
+              "param": "value",
+              "kind": "code"
+            },
+            "createdAt": "2026-10-22T14:21:28.779Z",
+            "fingerprint": "client-template-injection-taint@@high@@http://127.0.0.1:52493/allowed.js@@http://127.0.0.1:52493/allowed.js@@{\"start\":{\"line\":1,\"column\":87},\"end\":{\"line\":1,\"column\":102}}@@{\"start\":{\"line\":1,\"column\":25},\"end\":{\"line\":1,\"column\":66}}@@",
+            "findingKind": "finding",
+            "confidence": 78,
+            "evidence": {
+              "sast": {
+                "codeSnippet": "Source context:\nfunction sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}\n\nSink context:\nfunction sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}",
+                "source": {
+                  "label": "location.search",
+                  "path": "searchParams.value",
+                  "sourceFile": "http://127.0.0.1:52493/allowed.js",
+                  "sourceFileFull": "http://127.0.0.1:52493/allowed.js",
+                  "sourceLoc": {
+                    "start": {
+                      "line": 1,
+                      "column": 87
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 102
+                    }
+                  },
+                  "sourceName": "location.search",
+                  "sourceSnippet": "function sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}"
+                },
+                "sink": {
+                  "kind": "assign",
+                  "label": "innerHTML",
+                  "path": [
+                    "innerHTML"
+                  ],
+                  "framework": null,
+                  "api": null,
+                  "argIndex": null,
+                  "sinkFile": "http://127.0.0.1:52493/allowed.js",
+                  "sinkFileFull": "http://127.0.0.1:52493/allowed.js",
+                  "sinkLoc": {
+                    "start": {
+                      "line": 1,
+                      "column": 25
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 66
+                    }
+                  },
+                  "sinkName": "innerHTML",
+                  "sinkSnippet": "function sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}"
+                },
+                "nodeType": "AssignmentExpression",
+                "trace": [
+                  {
+                    "kind": "source",
+                    "label": "location.search",
+                    "file": "http://127.0.0.1:52493/allowed.js",
+                    "loc": {
+                      "start": {
+                        "line": 1,
+                        "column": 87
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 102
+                      }
+                    }
+                  },
+                  {
+                    "kind": "propagation",
+                    "label": "function sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}",
+                    "file": "http://127.0.0.1:52493/allowed.js",
+                    "loc": {
+                      "start": {
+                        "line": 1,
+                        "column": 67
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 103
+                      }
+                    }
+                  },
+                  {
+                    "kind": "propagation",
+                    "label": "get",
+                    "file": "http://127.0.0.1:52493/allowed.js",
+                    "loc": {
+                      "start": {
+                        "line": 1,
+                        "column": 67
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 116
+                      }
+                    }
+                  },
+                  {
+                    "kind": "sink",
+                    "label": "innerHTML",
+                    "file": "http://127.0.0.1:52493/allowed.js",
+                    "loc": {
+                      "start": {
+                        "line": 1,
+                        "column": 25
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 116
+                      }
+                    }
+                  }
+                ],
+                "mode": "taint",
+                "findingKind": "finding",
+                "sinkContext": "generic",
+                "sourceTier": "url",
+                "confidenceSignals": [
+                  "base:taint:78",
+                  "sink_context:generic:-6",
+                  "source_tier:url:+6"
+                ]
+              }
+            },
+            "updatedAt": "2026-10-22T14:21:28.779Z",
+            "pageUrl": "http://127.0.0.1:52492/app",
+            "title": "Template injection (taint flow)"
+          },
+          {
+            "id": "f9b715bc-1e73-4171-83dd-e22d49757293::SCA::sca::sca-jquery-1.12.4::jquery@1.12.4",
+            "engine": "SCA",
+            "scanId": "f9b715bc-1e73-4171-83dd-e22d49757293",
+            "moduleId": "sca",
+            "moduleName": "Software Composition Analysis",
+            "ruleId": "sca-jquery-1.12.4",
+            "ruleName": "parseHTML() executes scripts in event handlers",
+            "severity": "medium",
+            "category": "supply_chain",
+            "vulnId": "vulnerable_component",
+            "cwe": [
+              "CWE-79"
+            ],
+            "owasp": [
+              "A03:2025 - Software Supply Chain Failures",
+              "A06:2021 - Vulnerable and Outdated Components"
+            ],
+            "tags": [
+              "sca",
+              "dependency",
+              "filename"
+            ],
+            "links": {
+              "ref_1": "http://research.insecurelabs.org/jquery/test/",
+              "ref_2": "https://bugs.jquery.com/ticket/11974"
+            },
+            "location": {
+              "kind": "package",
+              "file": "http://127.0.0.1:52493/jquery-1.12.4.js"
+            },
+            "description": "parseHTML() executes scripts in event handlers",
+            "recommendation": "Upgrade jquery (currently 1.12.4) to a secure release that is not affected by sca-jquery-1.12.4.",
+            "createdAt": "2026-10-22T14:21:29.119Z",
+            "evidence": {
+              "sca": {
+                "component": {
+                  "name": "jquery",
+                  "version": "1.12.4",
+                  "npmname": "jquery",
+                  "purl": "pkg:npm/jquery@1.12.4",
+                  "basePurl": null,
+                  "detection": "filename",
+                  "source": null,
+                  "ecosystem": "npm",
+                  "locations": [
+                    "http://127.0.0.1:52493/jquery-1.12.4.js"
+                  ]
+                },
+                "identifiers": {
+                  "summary": "parseHTML() executes scripts in event handlers",
+                  "issue": "11974",
+                  "cwe": [
+                    "CWE-79"
+                  ]
+                },
+                "versionRange": {
+                  "atOrAbove": "1.8.0",
+                  "above": null,
+                  "atOrBelow": null,
+                  "below": "2.2.0"
+                },
+                "info": [
+                  "http://research.insecurelabs.org/jquery/test/",
+                  "https://bugs.jquery.com/ticket/11974"
+                ],
+                "summary": "parseHTML() executes scripts in event handlers",
+                "sourceFile": "http://127.0.0.1:52493/jquery-1.12.4.js"
+              }
+            },
+            "updatedAt": "2026-10-22T14:21:29.119Z",
+            "title": "parseHTML() executes scripts in event handlers"
+          },
+          {
+            "id": "f9b715bc-1e73-4171-83dd-e22d49757293::SCA::sca::73::jquery@1.12.4",
+            "engine": "SCA",
+            "scanId": "f9b715bc-1e73-4171-83dd-e22d49757293",
+            "moduleId": "sca",
+            "moduleName": "Software Composition Analysis",
+            "ruleId": "73",
+            "ruleName": "jQuery 1.x and 2.x are End-of-Life and no longer receiving security updates",
+            "severity": "low",
+            "category": "supply_chain",
+            "vulnId": "vulnerable_component",
+            "cwe": [
+              "CWE-1104"
+            ],
+            "owasp": [
+              "A03:2025 - Software Supply Chain Failures",
+              "A06:2021 - Vulnerable and Outdated Components"
+            ],
+            "tags": [
+              "sca",
+              "dependency",
+              "filename"
+            ],
+            "links": {
+              "ref_1": "https://github.com/jquery/jquery.com/issues/162"
+            },
+            "location": {
+              "kind": "package",
+              "file": "http://127.0.0.1:52493/jquery-1.12.4.js"
+            },
+            "description": "jQuery 1.x and 2.x are End-of-Life and no longer receiving security updates",
+            "recommendation": "Upgrade jquery (currently 1.12.4) to a secure release that is not affected by 73.",
+            "createdAt": "2026-10-22T14:21:29.119Z",
+            "evidence": {
+              "sca": {
+                "component": {
+                  "name": "jquery",
+                  "version": "1.12.4",
+                  "npmname": "jquery",
+                  "purl": "pkg:npm/jquery@1.12.4",
+                  "basePurl": null,
+                  "detection": "filename",
+                  "source": null,
+                  "ecosystem": "npm",
+                  "locations": [
+                    "http://127.0.0.1:52493/jquery-1.12.4.js"
+                  ]
+                },
+                "identifiers": {
+                  "summary": "jQuery 1.x and 2.x are End-of-Life and no longer receiving security updates",
+                  "retid": "73",
+                  "issue": "162",
+                  "cwe": [
+                    "CWE-1104"
+                  ]
+                },
+                "versionRange": {
+                  "atOrAbove": null,
+                  "above": null,
+                  "atOrBelow": null,
+                  "below": "2.999.999"
+                },
+                "info": [
+                  "https://github.com/jquery/jquery.com/issues/162"
+                ],
+                "summary": "jQuery 1.x and 2.x are End-of-Life and no longer receiving security updates",
+                "sourceFile": "http://127.0.0.1:52493/jquery-1.12.4.js"
+              }
+            },
+            "updatedAt": "2026-10-22T14:21:29.119Z",
+            "title": "jQuery 1.x and 2.x are End-of-Life and no longer receiving security updates"
+          },
+          {
+            "id": "f9b715bc-1e73-4171-83dd-e22d49757293::SCA::sca::GHSA-rmxg-73gg-4p98::jquery@1.12.4",
+            "engine": "SCA",
+            "scanId": "f9b715bc-1e73-4171-83dd-e22d49757293",
+            "moduleId": "sca",
+            "moduleName": "Software Composition Analysis",
+            "ruleId": "GHSA-rmxg-73gg-4p98",
+            "ruleName": "3rd party CORS request may execute",
+            "severity": "medium",
+            "category": "supply_chain",
+            "vulnId": "vulnerable_component",
+            "cwe": [
+              "CWE-79"
+            ],
+            "owasp": [
+              "A03:2025 - Software Supply Chain Failures",
+              "A06:2021 - Vulnerable and Outdated Components"
+            ],
+            "tags": [
+              "sca",
+              "dependency",
+              "filename"
+            ],
+            "links": {
+              "ref_1": "http://blog.jquery.com/2016/01/08/jquery-2-2-and-1-12-released/",
+              "ref_2": "http://research.insecurelabs.org/jquery/test/",
+              "ref_3": "https://github.com/advisories/GHSA-rmxg-73gg-4p98",
+              "ref_4": "https://github.com/jquery/jquery/issues/2432",
+              "ref_5": "https://nvd.nist.gov/vuln/detail/CVE-2015-9251"
+            },
+            "location": {
+              "kind": "package",
+              "file": "http://127.0.0.1:52493/jquery-1.12.4.js"
+            },
+            "description": "3rd party CORS request may execute",
+            "recommendation": "Upgrade jquery (currently 1.12.4) to a secure release that is not affected by GHSA-rmxg-73gg-4p98.",
+            "createdAt": "2026-10-22T14:21:29.119Z",
+            "evidence": {
+              "sca": {
+                "component": {
+                  "name": "jquery",
+                  "version": "1.12.4",
+                  "npmname": "jquery",
+                  "purl": "pkg:npm/jquery@1.12.4",
+                  "basePurl": null,
+                  "detection": "filename",
+                  "source": null,
+                  "ecosystem": "npm",
+                  "locations": [
+                    "http://127.0.0.1:52493/jquery-1.12.4.js"
+                  ]
+                },
+                "identifiers": {
+                  "summary": "3rd party CORS request may execute",
+                  "issue": "2432",
+                  "CVE": [
+                    "CVE-2015-9251"
+                  ],
+                  "githubID": "GHSA-rmxg-73gg-4p98",
+                  "cwe": [
+                    "CWE-79"
+                  ]
+                },
+                "versionRange": {
+                  "atOrAbove": "1.12.3",
+                  "above": null,
+                  "atOrBelow": null,
+                  "below": "3.0.0-beta1"
+                },
+                "info": [
+                  "http://blog.jquery.com/2016/01/08/jquery-2-2-and-1-12-released/",
+                  "http://research.insecurelabs.org/jquery/test/",
+                  "https://github.com/advisories/GHSA-rmxg-73gg-4p98",
+                  "https://github.com/jquery/jquery/issues/2432",
+                  "https://nvd.nist.gov/vuln/detail/CVE-2015-9251"
+                ],
+                "summary": "3rd party CORS request may execute",
+                "sourceFile": "http://127.0.0.1:52493/jquery-1.12.4.js"
+              }
+            },
+            "updatedAt": "2026-10-22T14:21:29.119Z",
+            "title": "3rd party CORS request may execute"
+          },
+          {
+            "id": "f9b715bc-1e73-4171-83dd-e22d49757293::SCA::sca::GHSA-6c3j-c64m-qhgq::jquery@1.12.4",
+            "engine": "SCA",
+            "scanId": "f9b715bc-1e73-4171-83dd-e22d49757293",
+            "moduleId": "sca",
+            "moduleName": "Software Composition Analysis",
+            "ruleId": "GHSA-6c3j-c64m-qhgq",
+            "ruleName": "jQuery before 3.4.0, as used in Drupal, Backdrop CMS, and other products, mishandles jQuery.extend(true, {}, ...) because of Object.prototype pollution",
+            "severity": "medium",
+            "category": "supply_chain",
+            "vulnId": "vulnerable_component",
+            "cwe": [
+              "CWE-1321",
+              "CWE-79"
+            ],
+            "owasp": [
+              "A03:2025 - Software Supply Chain Failures",
+              "A06:2021 - Vulnerable and Outdated Components"
+            ],
+            "tags": [
+              "sca",
+              "dependency",
+              "filename"
+            ],
+            "links": {
+              "ref_1": "https://blog.jquery.com/2019/04/10/jquery-3-4-0-released/",
+              "ref_2": "https://github.com/jquery/jquery/commit/753d591aea698e57d6db58c9f722cd0808619b1b",
+              "ref_3": "https://nvd.nist.gov/vuln/detail/CVE-2019-11358"
+            },
+            "location": {
+              "kind": "package",
+              "file": "http://127.0.0.1:52493/jquery-1.12.4.js"
+            },
+            "description": "jQuery before 3.4.0, as used in Drupal, Backdrop CMS, and other products, mishandles jQuery.extend(true, {}, ...) because of Object.prototype pollution",
+            "recommendation": "Upgrade jquery (currently 1.12.4) to a secure release that is not affected by GHSA-6c3j-c64m-qhgq.",
+            "createdAt": "2026-10-22T14:21:29.119Z",
+            "evidence": {
+              "sca": {
+                "component": {
+                  "name": "jquery",
+                  "version": "1.12.4",
+                  "npmname": "jquery",
+                  "purl": "pkg:npm/jquery@1.12.4",
+                  "basePurl": null,
+                  "detection": "filename",
+                  "source": null,
+                  "ecosystem": "npm",
+                  "locations": [
+                    "http://127.0.0.1:52493/jquery-1.12.4.js"
+                  ]
+                },
+                "identifiers": {
+                  "summary": "jQuery before 3.4.0, as used in Drupal, Backdrop CMS, and other products, mishandles jQuery.extend(true, {}, ...) because of Object.prototype pollution",
+                  "CVE": [
+                    "CVE-2019-11358"
+                  ],
+                  "PR": "4333",
+                  "githubID": "GHSA-6c3j-c64m-qhgq",
+                  "cwe": [
+                    "CWE-1321",
+                    "CWE-79"
+                  ]
+                },
+                "versionRange": {
+                  "atOrAbove": "1.1.4",
+                  "above": null,
+                  "atOrBelow": null,
+                  "below": "3.4.0"
+                },
+                "info": [
+                  "https://blog.jquery.com/2019/04/10/jquery-3-4-0-released/",
+                  "https://github.com/jquery/jquery/commit/753d591aea698e57d6db58c9f722cd0808619b1b",
+                  "https://nvd.nist.gov/vuln/detail/CVE-2019-11358"
+                ],
+                "summary": "jQuery before 3.4.0, as used in Drupal, Backdrop CMS, and other products, mishandles jQuery.extend(true, {}, ...) because of Object.prototype pollution",
+                "sourceFile": "http://127.0.0.1:52493/jquery-1.12.4.js"
+              }
+            },
+            "updatedAt": "2026-10-22T14:21:29.119Z",
+            "title": "jQuery before 3.4.0, as used in Drupal, Backdrop CMS, and other products, mishandles jQuery.extend(true, {}, ...) because of Object.prototype pollution"
+          },
+          {
+            "id": "f9b715bc-1e73-4171-83dd-e22d49757293::SCA::sca::GHSA-jpcq-cgw6-v4j6::jquery@1.12.4",
+            "engine": "SCA",
+            "scanId": "f9b715bc-1e73-4171-83dd-e22d49757293",
+            "moduleId": "sca",
+            "moduleName": "Software Composition Analysis",
+            "ruleId": "GHSA-jpcq-cgw6-v4j6",
+            "ruleName": "passing HTML containing <option> elements from untrusted sources - even after sanitizing it - to one of jQuery's DOM manipulation methods (i.e. .html(), .append(), and others) may execute untrusted code.",
+            "severity": "medium",
+            "category": "supply_chain",
+            "vulnId": "vulnerable_component",
+            "cwe": [
+              "CWE-79"
+            ],
+            "owasp": [
+              "A03:2025 - Software Supply Chain Failures",
+              "A06:2021 - Vulnerable and Outdated Components"
+            ],
+            "tags": [
+              "sca",
+              "dependency",
+              "filename"
+            ],
+            "links": {
+              "ref_1": "https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/"
+            },
+            "location": {
+              "kind": "package",
+              "file": "http://127.0.0.1:52493/jquery-1.12.4.js"
+            },
+            "description": "passing HTML containing <option> elements from untrusted sources - even after sanitizing it - to one of jQuery's DOM manipulation methods (i.e. .html(), .append(), and others) may execute untrusted code.",
+            "recommendation": "Upgrade jquery (currently 1.12.4) to a secure release that is not affected by GHSA-jpcq-cgw6-v4j6.",
+            "createdAt": "2026-10-22T14:21:29.119Z",
+            "evidence": {
+              "sca": {
+                "component": {
+                  "name": "jquery",
+                  "version": "1.12.4",
+                  "npmname": "jquery",
+                  "purl": "pkg:npm/jquery@1.12.4",
+                  "basePurl": null,
+                  "detection": "filename",
+                  "source": null,
+                  "ecosystem": "npm",
+                  "locations": [
+                    "http://127.0.0.1:52493/jquery-1.12.4.js"
+                  ]
+                },
+                "identifiers": {
+                  "summary": "passing HTML containing <option> elements from untrusted sources - even after sanitizing it - to one of jQuery's DOM manipulation methods (i.e. .html(), .append(), and others) may execute untrusted code.",
+                  "CVE": [
+                    "CVE-2020-11023"
+                  ],
+                  "issue": "4647",
+                  "githubID": "GHSA-jpcq-cgw6-v4j6",
+                  "cwe": [
+                    "CWE-79"
+                  ]
+                },
+                "versionRange": {
+                  "atOrAbove": "1.0.3",
+                  "above": null,
+                  "atOrBelow": null,
+                  "below": "3.5.0"
+                },
+                "info": [
+                  "https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/"
+                ],
+                "summary": "passing HTML containing <option> elements from untrusted sources - even after sanitizing it - to one of jQuery's DOM manipulation methods (i.e. .html(), .append(), and others) may execute untrusted code.",
+                "sourceFile": "http://127.0.0.1:52493/jquery-1.12.4.js"
+              }
+            },
+            "updatedAt": "2026-10-22T14:21:29.119Z",
+            "title": "passing HTML containing <option> elements from untrusted sources - even after sanitizing it - to one of jQuery's DOM manipulation methods (i.e. .html(), .append(), and others) may execute untrusted code."
+          },
+          {
+            "id": "f9b715bc-1e73-4171-83dd-e22d49757293::SCA::sca::GHSA-gxr4-xjj5-5px2::jquery@1.12.4",
+            "engine": "SCA",
+            "scanId": "f9b715bc-1e73-4171-83dd-e22d49757293",
+            "moduleId": "sca",
+            "moduleName": "Software Composition Analysis",
+            "ruleId": "GHSA-gxr4-xjj5-5px2",
+            "ruleName": "Regex in its jQuery.htmlPrefilter sometimes may introduce XSS",
+            "severity": "medium",
+            "category": "supply_chain",
+            "vulnId": "vulnerable_component",
+            "cwe": [
+              "CWE-79"
+            ],
+            "owasp": [
+              "A03:2025 - Software Supply Chain Failures",
+              "A06:2021 - Vulnerable and Outdated Components"
+            ],
+            "tags": [
+              "sca",
+              "dependency",
+              "filename"
+            ],
+            "links": {
+              "ref_1": "https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/"
+            },
+            "location": {
+              "kind": "package",
+              "file": "http://127.0.0.1:52493/jquery-1.12.4.js"
+            },
+            "description": "Regex in its jQuery.htmlPrefilter sometimes may introduce XSS",
+            "recommendation": "Upgrade jquery (currently 1.12.4) to a secure release that is not affected by GHSA-gxr4-xjj5-5px2.",
+            "createdAt": "2026-10-22T14:21:29.119Z",
+            "evidence": {
+              "sca": {
+                "component": {
+                  "name": "jquery",
+                  "version": "1.12.4",
+                  "npmname": "jquery",
+                  "purl": "pkg:npm/jquery@1.12.4",
+                  "basePurl": null,
+                  "detection": "filename",
+                  "source": null,
+                  "ecosystem": "npm",
+                  "locations": [
+                    "http://127.0.0.1:52493/jquery-1.12.4.js"
+                  ]
+                },
+                "identifiers": {
+                  "summary": "Regex in its jQuery.htmlPrefilter sometimes may introduce XSS",
+                  "CVE": [
+                    "CVE-2020-11022"
+                  ],
+                  "issue": "4642",
+                  "githubID": "GHSA-gxr4-xjj5-5px2",
+                  "cwe": [
+                    "CWE-79"
+                  ]
+                },
+                "versionRange": {
+                  "atOrAbove": "1.2.0",
+                  "above": null,
+                  "atOrBelow": null,
+                  "below": "3.5.0"
+                },
+                "info": [
+                  "https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/"
+                ],
+                "summary": "Regex in its jQuery.htmlPrefilter sometimes may introduce XSS",
+                "sourceFile": "http://127.0.0.1:52493/jquery-1.12.4.js"
+              }
+            },
+            "updatedAt": "2026-10-22T14:21:29.119Z",
+            "title": "Regex in its jQuery.htmlPrefilter sometimes may introduce XSS"
+          }
+        ],
+        "nativeFindings": {
+          "sessionId": "ptk-session_c2883223-da97-455e-afad-6a864ee9c913",
+          "findings": [
+            {
+              "id": "584b1ed6-310f-49a3-9fc7-29b381c79a47::SAST::dom-xss::no-inner-outer-html::db4a64cb3180ad3b",
+              "engine": "SAST",
+              "scanId": "584b1ed6-310f-49a3-9fc7-29b381c79a47",
+              "moduleId": "dom-xss",
+              "moduleName": "DOM-based XSS",
+              "ruleId": "no-inner-outer-html",
+              "ruleName": "Disallow innerHTML/outerHTML assignments",
+              "vulnId": "dom_xss",
+              "category": "xss",
+              "severity": "low",
+              "owasp": [
+                "A05:2025 - Injection",
+                "A03:2021 - Injection"
+              ],
+              "cwe": [
+                "CWE-79"
+              ],
+              "tags": [
+                "sast",
+                "dom",
+                "xss"
+              ],
+              "description": "Assignments to innerHTML/outerHTML are dangerous when they contain untrusted data and may lead to XSS.",
+              "recommendation": "<p>Prevent DOM-based XSS by never inserting untrusted strings directly into HTML or executing them as code. Prefer DOM/text APIs, safe templating, or a vetted sanitizer and apply context-aware encoding where needed.</p><ul><li><strong>Primary:</strong> Use <code>textContent</code> / <code>innerText</code> or create DOM nodes instead of string-based HTML insertion. If you must insert HTML, sanitize it with a vetted library such as <a href=\"https://github.com/cure53/DOMPurify\" target=\"_blank\">DOMPurify</a>.</li><li><strong>Secondary:</strong> Apply context-sensitive encoding for attributes and JavaScript contexts, avoid <code>eval</code>/<code>new Function</code>/<code>setTimeout</code> with strings, and prefer safe templating engines.</li><li><strong>Controls:</strong> Use Content Security Policy (CSP), follow least-privilege principles, and validate/allow-list input shapes where practical.</li><li><strong>Testing:</strong> Add unit/browser tests for inline handlers and client-side flows that read from <code>location</code>, form inputs, storage, and <code>postMessage</code>.</li></ul>",
+              "links": {
+                "OWASP": "https://owasp.org/www-community/attacks/xss/",
+                "CWE": "https://cwe.mitre.org/data/definitions/79.html"
+              },
+              "location": {
+                "file": "http://127.0.0.1:52493/allowed.js",
+                "line": 1,
+                "column": 25,
+                "runtimeUrl": "http://127.0.0.1:52492/app",
+                "runtimeUrls": [
+                  "http://127.0.0.1:52492/app"
+                ],
+                "pageUrl": "http://127.0.0.1:52492/app",
+                "pageUrls": [
+                  "http://127.0.0.1:52492/app"
+                ],
+                "url": "http://127.0.0.1:52492/app",
+                "param": null,
+                "kind": "code"
+              },
+              "createdAt": "2026-10-22T14:21:28.778Z",
+              "fingerprint": "no-inner-outer-html@@low@@http://127.0.0.1:52493/allowed.js@@http://127.0.0.1:52493/allowed.js@@{\"start\":{\"line\":1,\"column\":25},\"end\":{\"line\":1,\"column\":116}}@@{\"start\":{\"line\":1,\"column\":25},\"end\":{\"line\":1,\"column\":66}}@@",
+              "findingKind": "hint",
+              "confidence": 38,
+              "evidence": {
+                "sast": {
+                  "codeSnippet": "Source context:\nfunction sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}\n\nSink context:\nfunction sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}",
+                  "source": {
+                    "label": "innerHTML",
+                    "path": null,
+                    "sourceFile": "http://127.0.0.1:52493/allowed.js",
+                    "sourceFileFull": "http://127.0.0.1:52493/allowed.js",
+                    "sourceLoc": {
+                      "start": {
+                        "line": 1,
+                        "column": 25
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 116
+                      }
+                    },
+                    "sourceName": "innerHTML",
+                    "sourceSnippet": "function sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}"
+                  },
+                  "sink": {
+                    "kind": "assign",
+                    "label": "innerHTML",
+                    "path": [],
+                    "sinkFile": "http://127.0.0.1:52493/allowed.js",
+                    "sinkFileFull": "http://127.0.0.1:52493/allowed.js",
+                    "sinkLoc": {
+                      "start": {
+                        "line": 1,
+                        "column": 25
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 66
+                      }
+                    },
+                    "sinkName": "innerHTML",
+                    "sinkSnippet": "function sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}"
+                  },
+                  "nodeType": "AssignmentExpression",
+                  "trace": [],
+                  "mode": "pattern",
+                  "findingKind": "hint",
+                  "confidenceSignals": [
+                    "base:pattern:58",
+                    "finding_kind:hint:-20"
+                  ]
+                }
+              },
+              "updatedAt": "2026-10-22T14:21:28.778Z",
+              "pageUrl": "http://127.0.0.1:52492/app",
+              "title": "Disallow innerHTML/outerHTML assignments"
+            },
+            {
+              "id": "584b1ed6-310f-49a3-9fc7-29b381c79a47::SAST::dom-xss::dom-xss-taint::249d13501eb8091b",
+              "engine": "SAST",
+              "scanId": "584b1ed6-310f-49a3-9fc7-29b381c79a47",
+              "moduleId": "dom-xss",
+              "moduleName": "DOM-based XSS",
+              "ruleId": "dom-xss-taint",
+              "ruleName": "DOM-based XSS (taint flow)",
+              "vulnId": "dom_xss",
+              "category": "xss",
+              "severity": "high",
+              "owasp": [
+                "A05:2025 - Injection",
+                "A03:2021 - Injection"
+              ],
+              "cwe": [
+                "CWE-79"
+              ],
+              "tags": [
+                "sast",
+                "dom",
+                "xss"
+              ],
+              "description": "Detects flows where untrusted DOM-derived data (location, element values, storage, message data) reaches HTML/JS execution sinks (e.g., innerHTML, document.write, insertAdjacentHTML, location assignment, eval/Function) without passing through a recognized sanitizer.",
+              "recommendation": "<p>Prevent DOM-based XSS by never inserting untrusted strings directly into HTML or executing them as code. Prefer DOM/text APIs, safe templating, or a vetted sanitizer and apply context-aware encoding where needed.</p><ul><li><strong>Primary:</strong> Use <code>textContent</code> / <code>innerText</code> or create DOM nodes instead of string-based HTML insertion. If you must insert HTML, sanitize it with a vetted library such as <a href=\"https://github.com/cure53/DOMPurify\" target=\"_blank\">DOMPurify</a>.</li><li><strong>Secondary:</strong> Apply context-sensitive encoding for attributes and JavaScript contexts, avoid <code>eval</code>/<code>new Function</code>/<code>setTimeout</code> with strings, and prefer safe templating engines.</li><li><strong>Controls:</strong> Use Content Security Policy (CSP), follow least-privilege principles, and validate/allow-list input shapes where practical.</li><li><strong>Testing:</strong> Add unit/browser tests for inline handlers and client-side flows that read from <code>location</code>, form inputs, storage, and <code>postMessage</code>.</li></ul>",
+              "links": {
+                "OWASP": "https://owasp.org/www-community/attacks/xss/",
+                "CWE": "https://cwe.mitre.org/data/definitions/79.html"
+              },
+              "location": {
+                "file": "http://127.0.0.1:52493/allowed.js",
+                "line": 1,
+                "column": 25,
+                "runtimeUrl": "http://127.0.0.1:52492/app",
+                "runtimeUrls": [
+                  "http://127.0.0.1:52492/app"
+                ],
+                "pageUrl": "http://127.0.0.1:52492/app",
+                "pageUrls": [
+                  "http://127.0.0.1:52492/app"
+                ],
+                "url": "http://127.0.0.1:52492/app",
+                "param": "value",
+                "kind": "code"
+              },
+              "createdAt": "2026-10-22T14:21:28.779Z",
+              "fingerprint": "dom-xss-taint@@high@@http://127.0.0.1:52493/allowed.js@@http://127.0.0.1:52493/allowed.js@@{\"start\":{\"line\":1,\"column\":87},\"end\":{\"line\":1,\"column\":102}}@@{\"start\":{\"line\":1,\"column\":25},\"end\":{\"line\":1,\"column\":66}}@@",
+              "findingKind": "finding",
+              "confidence": 92,
+              "evidence": {
+                "sast": {
+                  "codeSnippet": "Source context:\nfunction sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}\n\nSink context:\nfunction sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}",
+                  "source": {
+                    "label": "URLSearchParams.get from location.search",
+                    "path": "searchParams.value",
+                    "sourceFile": "http://127.0.0.1:52493/allowed.js",
+                    "sourceFileFull": "http://127.0.0.1:52493/allowed.js",
+                    "sourceLoc": {
+                      "start": {
+                        "line": 1,
+                        "column": 87
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 102
+                      }
+                    },
+                    "sourceName": "URLSearchParams.get from location.search",
+                    "sourceSnippet": "function sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}"
+                  },
+                  "sink": {
+                    "kind": "assign",
+                    "label": "innerHTML",
+                    "path": [
+                      "innerHTML"
+                    ],
+                    "framework": null,
+                    "api": null,
+                    "argIndex": null,
+                    "sinkFile": "http://127.0.0.1:52493/allowed.js",
+                    "sinkFileFull": "http://127.0.0.1:52493/allowed.js",
+                    "sinkLoc": {
+                      "start": {
+                        "line": 1,
+                        "column": 25
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 66
+                      }
+                    },
+                    "sinkName": "innerHTML",
+                    "sinkSnippet": "function sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}"
+                  },
+                  "nodeType": "AssignmentExpression",
+                  "trace": [
+                    {
+                      "kind": "source",
+                      "label": "location.search",
+                      "file": "http://127.0.0.1:52493/allowed.js",
+                      "loc": {
+                        "start": {
+                          "line": 1,
+                          "column": 87
+                        },
+                        "end": {
+                          "line": 1,
+                          "column": 102
+                        }
+                      }
+                    },
+                    {
+                      "kind": "propagation",
+                      "label": "function sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}",
+                      "file": "http://127.0.0.1:52493/allowed.js",
+                      "loc": {
+                        "start": {
+                          "line": 1,
+                          "column": 67
+                        },
+                        "end": {
+                          "line": 1,
+                          "column": 103
+                        }
+                      }
+                    },
+                    {
+                      "kind": "propagation",
+                      "label": "get",
+                      "file": "http://127.0.0.1:52493/allowed.js",
+                      "loc": {
+                        "start": {
+                          "line": 1,
+                          "column": 67
+                        },
+                        "end": {
+                          "line": 1,
+                          "column": 116
+                        }
+                      }
+                    },
+                    {
+                      "kind": "sink",
+                      "label": "innerHTML",
+                      "file": "http://127.0.0.1:52493/allowed.js",
+                      "loc": {
+                        "start": {
+                          "line": 1,
+                          "column": 25
+                        },
+                        "end": {
+                          "line": 1,
+                          "column": 116
+                        }
+                      }
+                    }
+                  ],
+                  "mode": "taint",
+                  "findingKind": "finding",
+                  "sinkContext": "html",
+                  "sourceTier": "url",
+                  "confidenceSignals": [
+                    "base:taint:78",
+                    "sink_context:html:+8",
+                    "source_tier:url:+6"
+                  ]
+                }
+              },
+              "updatedAt": "2026-10-22T14:21:28.779Z",
+              "pageUrl": "http://127.0.0.1:52492/app",
+              "title": "DOM-based XSS (taint flow)"
+            },
+            {
+              "id": "584b1ed6-310f-49a3-9fc7-29b381c79a47::SAST::client-template-injection::client-template-injection-taint::88ea70f65c8d227b",
+              "engine": "SAST",
+              "scanId": "584b1ed6-310f-49a3-9fc7-29b381c79a47",
+              "moduleId": "client-template-injection",
+              "moduleName": "Client-side Template Injection",
+              "ruleId": "client-template-injection-taint",
+              "ruleName": "Template injection (taint flow)",
+              "vulnId": "code_injection",
+              "category": "injection",
+              "severity": "high",
+              "owasp": [
+                "A05:2025 - Injection",
+                "A03:2021 - Injection"
+              ],
+              "cwe": [
+                "CWE-94"
+              ],
+              "tags": [
+                "sast",
+                "template",
+                "injection"
+              ],
+              "description": "Tainted data flows into client-side template sources or rendered HTML sinks.",
+              "recommendation": "<ul><li>Avoid compiling templates from untrusted strings; use precompiled templates.</li><li>Sanitize render output before inserting into the DOM.</li></ul>",
+              "links": {
+                "OWASP": "https://owasp.org/www-community/attacks/Template_Injection",
+                "CWE": "https://cwe.mitre.org/data/definitions/94.html"
+              },
+              "location": {
+                "file": "http://127.0.0.1:52493/allowed.js",
+                "line": 1,
+                "column": 25,
+                "runtimeUrl": "http://127.0.0.1:52492/app",
+                "runtimeUrls": [
+                  "http://127.0.0.1:52492/app"
+                ],
+                "pageUrl": "http://127.0.0.1:52492/app",
+                "pageUrls": [
+                  "http://127.0.0.1:52492/app"
+                ],
+                "url": "http://127.0.0.1:52492/app",
+                "param": "value",
+                "kind": "code"
+              },
+              "createdAt": "2026-10-22T14:21:28.779Z",
+              "fingerprint": "client-template-injection-taint@@high@@http://127.0.0.1:52493/allowed.js@@http://127.0.0.1:52493/allowed.js@@{\"start\":{\"line\":1,\"column\":87},\"end\":{\"line\":1,\"column\":102}}@@{\"start\":{\"line\":1,\"column\":25},\"end\":{\"line\":1,\"column\":66}}@@",
+              "findingKind": "finding",
+              "confidence": 78,
+              "evidence": {
+                "sast": {
+                  "codeSnippet": "Source context:\nfunction sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}\n\nSink context:\nfunction sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}",
+                  "source": {
+                    "label": "location.search",
+                    "path": "searchParams.value",
+                    "sourceFile": "http://127.0.0.1:52493/allowed.js",
+                    "sourceFileFull": "http://127.0.0.1:52493/allowed.js",
+                    "sourceLoc": {
+                      "start": {
+                        "line": 1,
+                        "column": 87
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 102
+                      }
+                    },
+                    "sourceName": "location.search",
+                    "sourceSnippet": "function sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}"
+                  },
+                  "sink": {
+                    "kind": "assign",
+                    "label": "innerHTML",
+                    "path": [
+                      "innerHTML"
+                    ],
+                    "framework": null,
+                    "api": null,
+                    "argIndex": null,
+                    "sinkFile": "http://127.0.0.1:52493/allowed.js",
+                    "sinkFileFull": "http://127.0.0.1:52493/allowed.js",
+                    "sinkLoc": {
+                      "start": {
+                        "line": 1,
+                        "column": 25
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 66
+                      }
+                    },
+                    "sinkName": "innerHTML",
+                    "sinkSnippet": "function sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}"
+                  },
+                  "nodeType": "AssignmentExpression",
+                  "trace": [
+                    {
+                      "kind": "source",
+                      "label": "location.search",
+                      "file": "http://127.0.0.1:52493/allowed.js",
+                      "loc": {
+                        "start": {
+                          "line": 1,
+                          "column": 87
+                        },
+                        "end": {
+                          "line": 1,
+                          "column": 102
+                        }
+                      }
+                    },
+                    {
+                      "kind": "propagation",
+                      "label": "function sourceFixture(){document.getElementById(\"sink\").innerHTML=new URLSearchParams(location.search).get(\"value\")}",
+                      "file": "http://127.0.0.1:52493/allowed.js",
+                      "loc": {
+                        "start": {
+                          "line": 1,
+                          "column": 67
+                        },
+                        "end": {
+                          "line": 1,
+                          "column": 103
+                        }
+                      }
+                    },
+                    {
+                      "kind": "propagation",
+                      "label": "get",
+                      "file": "http://127.0.0.1:52493/allowed.js",
+                      "loc": {
+                        "start": {
+                          "line": 1,
+                          "column": 67
+                        },
+                        "end": {
+                          "line": 1,
+                          "column": 116
+                        }
+                      }
+                    },
+                    {
+                      "kind": "sink",
+                      "label": "innerHTML",
+                      "file": "http://127.0.0.1:52493/allowed.js",
+                      "loc": {
+                        "start": {
+                          "line": 1,
+                          "column": 25
+                        },
+                        "end": {
+                          "line": 1,
+                          "column": 116
+                        }
+                      }
+                    }
+                  ],
+                  "mode": "taint",
+                  "findingKind": "finding",
+                  "sinkContext": "generic",
+                  "sourceTier": "url",
+                  "confidenceSignals": [
+                    "base:taint:78",
+                    "sink_context:generic:-6",
+                    "source_tier:url:+6"
+                  ]
+                }
+              },
+              "updatedAt": "2026-10-22T14:21:28.779Z",
+              "pageUrl": "http://127.0.0.1:52492/app",
+              "title": "Template injection (taint flow)"
+            },
+            {
+              "id": "f9b715bc-1e73-4171-83dd-e22d49757293::SCA::sca::sca-jquery-1.12.4::jquery@1.12.4",
+              "engine": "SCA",
+              "scanId": "f9b715bc-1e73-4171-83dd-e22d49757293",
+              "moduleId": "sca",
+              "moduleName": "Software Composition Analysis",
+              "ruleId": "sca-jquery-1.12.4",
+              "ruleName": "parseHTML() executes scripts in event handlers",
+              "severity": "medium",
+              "category": "supply_chain",
+              "vulnId": "vulnerable_component",
+              "cwe": [
+                "CWE-79"
+              ],
+              "owasp": [
+                "A03:2025 - Software Supply Chain Failures",
+                "A06:2021 - Vulnerable and Outdated Components"
+              ],
+              "tags": [
+                "sca",
+                "dependency",
+                "filename"
+              ],
+              "links": {
+                "ref_1": "http://research.insecurelabs.org/jquery/test/",
+                "ref_2": "https://bugs.jquery.com/ticket/11974"
+              },
+              "location": {
+                "kind": "package",
+                "file": "http://127.0.0.1:52493/jquery-1.12.4.js"
+              },
+              "description": "parseHTML() executes scripts in event handlers",
+              "recommendation": "Upgrade jquery (currently 1.12.4) to a secure release that is not affected by sca-jquery-1.12.4.",
+              "createdAt": "2026-10-22T14:21:29.119Z",
+              "evidence": {
+                "sca": {
+                  "component": {
+                    "name": "jquery",
+                    "version": "1.12.4",
+                    "npmname": "jquery",
+                    "purl": "pkg:npm/jquery@1.12.4",
+                    "basePurl": null,
+                    "detection": "filename",
+                    "source": null,
+                    "ecosystem": "npm",
+                    "locations": [
+                      "http://127.0.0.1:52493/jquery-1.12.4.js"
+                    ]
+                  },
+                  "identifiers": {
+                    "summary": "parseHTML() executes scripts in event handlers",
+                    "issue": "11974",
+                    "cwe": [
+                      "CWE-79"
+                    ]
+                  },
+                  "versionRange": {
+                    "atOrAbove": "1.8.0",
+                    "above": null,
+                    "atOrBelow": null,
+                    "below": "2.2.0"
+                  },
+                  "info": [
+                    "http://research.insecurelabs.org/jquery/test/",
+                    "https://bugs.jquery.com/ticket/11974"
+                  ],
+                  "summary": "parseHTML() executes scripts in event handlers",
+                  "sourceFile": "http://127.0.0.1:52493/jquery-1.12.4.js"
+                }
+              },
+              "updatedAt": "2026-10-22T14:21:29.119Z",
+              "title": "parseHTML() executes scripts in event handlers"
+            },
+            {
+              "id": "f9b715bc-1e73-4171-83dd-e22d49757293::SCA::sca::73::jquery@1.12.4",
+              "engine": "SCA",
+              "scanId": "f9b715bc-1e73-4171-83dd-e22d49757293",
+              "moduleId": "sca",
+              "moduleName": "Software Composition Analysis",
+              "ruleId": "73",
+              "ruleName": "jQuery 1.x and 2.x are End-of-Life and no longer receiving security updates",
+              "severity": "low",
+              "category": "supply_chain",
+              "vulnId": "vulnerable_component",
+              "cwe": [
+                "CWE-1104"
+              ],
+              "owasp": [
+                "A03:2025 - Software Supply Chain Failures",
+                "A06:2021 - Vulnerable and Outdated Components"
+              ],
+              "tags": [
+                "sca",
+                "dependency",
+                "filename"
+              ],
+              "links": {
+                "ref_1": "https://github.com/jquery/jquery.com/issues/162"
+              },
+              "location": {
+                "kind": "package",
+                "file": "http://127.0.0.1:52493/jquery-1.12.4.js"
+              },
+              "description": "jQuery 1.x and 2.x are End-of-Life and no longer receiving security updates",
+              "recommendation": "Upgrade jquery (currently 1.12.4) to a secure release that is not affected by 73.",
+              "createdAt": "2026-10-22T14:21:29.119Z",
+              "evidence": {
+                "sca": {
+                  "component": {
+                    "name": "jquery",
+                    "version": "1.12.4",
+                    "npmname": "jquery",
+                    "purl": "pkg:npm/jquery@1.12.4",
+                    "basePurl": null,
+                    "detection": "filename",
+                    "source": null,
+                    "ecosystem": "npm",
+                    "locations": [
+                      "http://127.0.0.1:52493/jquery-1.12.4.js"
+                    ]
+                  },
+                  "identifiers": {
+                    "summary": "jQuery 1.x and 2.x are End-of-Life and no longer receiving security updates",
+                    "retid": "73",
+                    "issue": "162",
+                    "cwe": [
+                      "CWE-1104"
+                    ]
+                  },
+                  "versionRange": {
+                    "atOrAbove": null,
+                    "above": null,
+                    "atOrBelow": null,
+                    "below": "2.999.999"
+                  },
+                  "info": [
+                    "https://github.com/jquery/jquery.com/issues/162"
+                  ],
+                  "summary": "jQuery 1.x and 2.x are End-of-Life and no longer receiving security updates",
+                  "sourceFile": "http://127.0.0.1:52493/jquery-1.12.4.js"
+                }
+              },
+              "updatedAt": "2026-10-22T14:21:29.119Z",
+              "title": "jQuery 1.x and 2.x are End-of-Life and no longer receiving security updates"
+            },
+            {
+              "id": "f9b715bc-1e73-4171-83dd-e22d49757293::SCA::sca::GHSA-rmxg-73gg-4p98::jquery@1.12.4",
+              "engine": "SCA",
+              "scanId": "f9b715bc-1e73-4171-83dd-e22d49757293",
+              "moduleId": "sca",
+              "moduleName": "Software Composition Analysis",
+              "ruleId": "GHSA-rmxg-73gg-4p98",
+              "ruleName": "3rd party CORS request may execute",
+              "severity": "medium",
+              "category": "supply_chain",
+              "vulnId": "vulnerable_component",
+              "cwe": [
+                "CWE-79"
+              ],
+              "owasp": [
+                "A03:2025 - Software Supply Chain Failures",
+                "A06:2021 - Vulnerable and Outdated Components"
+              ],
+              "tags": [
+                "sca",
+                "dependency",
+                "filename"
+              ],
+              "links": {
+                "ref_1": "http://blog.jquery.com/2016/01/08/jquery-2-2-and-1-12-released/",
+                "ref_2": "http://research.insecurelabs.org/jquery/test/",
+                "ref_3": "https://github.com/advisories/GHSA-rmxg-73gg-4p98",
+                "ref_4": "https://github.com/jquery/jquery/issues/2432",
+                "ref_5": "https://nvd.nist.gov/vuln/detail/CVE-2015-9251"
+              },
+              "location": {
+                "kind": "package",
+                "file": "http://127.0.0.1:52493/jquery-1.12.4.js"
+              },
+              "description": "3rd party CORS request may execute",
+              "recommendation": "Upgrade jquery (currently 1.12.4) to a secure release that is not affected by GHSA-rmxg-73gg-4p98.",
+              "createdAt": "2026-10-22T14:21:29.119Z",
+              "evidence": {
+                "sca": {
+                  "component": {
+                    "name": "jquery",
+                    "version": "1.12.4",
+                    "npmname": "jquery",
+                    "purl": "pkg:npm/jquery@1.12.4",
+                    "basePurl": null,
+                    "detection": "filename",
+                    "source": null,
+                    "ecosystem": "npm",
+                    "locations": [
+                      "http://127.0.0.1:52493/jquery-1.12.4.js"
+                    ]
+                  },
+                  "identifiers": {
+                    "summary": "3rd party CORS request may execute",
+                    "issue": "2432",
+                    "CVE": [
+                      "CVE-2015-9251"
+                    ],
+                    "githubID": "GHSA-rmxg-73gg-4p98",
+                    "cwe": [
+                      "CWE-79"
+                    ]
+                  },
+                  "versionRange": {
+                    "atOrAbove": "1.12.3",
+                    "above": null,
+                    "atOrBelow": null,
+                    "below": "3.0.0-beta1"
+                  },
+                  "info": [
+                    "http://blog.jquery.com/2016/01/08/jquery-2-2-and-1-12-released/",
+                    "http://research.insecurelabs.org/jquery/test/",
+                    "https://github.com/advisories/GHSA-rmxg-73gg-4p98",
+                    "https://github.com/jquery/jquery/issues/2432",
+                    "https://nvd.nist.gov/vuln/detail/CVE-2015-9251"
+                  ],
+                  "summary": "3rd party CORS request may execute",
+                  "sourceFile": "http://127.0.0.1:52493/jquery-1.12.4.js"
+                }
+              },
+              "updatedAt": "2026-10-22T14:21:29.119Z",
+              "title": "3rd party CORS request may execute"
+            },
+            {
+              "id": "f9b715bc-1e73-4171-83dd-e22d49757293::SCA::sca::GHSA-6c3j-c64m-qhgq::jquery@1.12.4",
+              "engine": "SCA",
+              "scanId": "f9b715bc-1e73-4171-83dd-e22d49757293",
+              "moduleId": "sca",
+              "moduleName": "Software Composition Analysis",
+              "ruleId": "GHSA-6c3j-c64m-qhgq",
+              "ruleName": "jQuery before 3.4.0, as used in Drupal, Backdrop CMS, and other products, mishandles jQuery.extend(true, {}, ...) because of Object.prototype pollution",
+              "severity": "medium",
+              "category": "supply_chain",
+              "vulnId": "vulnerable_component",
+              "cwe": [
+                "CWE-1321",
+                "CWE-79"
+              ],
+              "owasp": [
+                "A03:2025 - Software Supply Chain Failures",
+                "A06:2021 - Vulnerable and Outdated Components"
+              ],
+              "tags": [
+                "sca",
+                "dependency",
+                "filename"
+              ],
+              "links": {
+                "ref_1": "https://blog.jquery.com/2019/04/10/jquery-3-4-0-released/",
+                "ref_2": "https://github.com/jquery/jquery/commit/753d591aea698e57d6db58c9f722cd0808619b1b",
+                "ref_3": "https://nvd.nist.gov/vuln/detail/CVE-2019-11358"
+              },
+              "location": {
+                "kind": "package",
+                "file": "http://127.0.0.1:52493/jquery-1.12.4.js"
+              },
+              "description": "jQuery before 3.4.0, as used in Drupal, Backdrop CMS, and other products, mishandles jQuery.extend(true, {}, ...) because of Object.prototype pollution",
+              "recommendation": "Upgrade jquery (currently 1.12.4) to a secure release that is not affected by GHSA-6c3j-c64m-qhgq.",
+              "createdAt": "2026-10-22T14:21:29.119Z",
+              "evidence": {
+                "sca": {
+                  "component": {
+                    "name": "jquery",
+                    "version": "1.12.4",
+                    "npmname": "jquery",
+                    "purl": "pkg:npm/jquery@1.12.4",
+                    "basePurl": null,
+                    "detection": "filename",
+                    "source": null,
+                    "ecosystem": "npm",
+                    "locations": [
+                      "http://127.0.0.1:52493/jquery-1.12.4.js"
+                    ]
+                  },
+                  "identifiers": {
+                    "summary": "jQuery before 3.4.0, as used in Drupal, Backdrop CMS, and other products, mishandles jQuery.extend(true, {}, ...) because of Object.prototype pollution",
+                    "CVE": [
+                      "CVE-2019-11358"
+                    ],
+                    "PR": "4333",
+                    "githubID": "GHSA-6c3j-c64m-qhgq",
+                    "cwe": [
+                      "CWE-1321",
+                      "CWE-79"
+                    ]
+                  },
+                  "versionRange": {
+                    "atOrAbove": "1.1.4",
+                    "above": null,
+                    "atOrBelow": null,
+                    "below": "3.4.0"
+                  },
+                  "info": [
+                    "https://blog.jquery.com/2019/04/10/jquery-3-4-0-released/",
+                    "https://github.com/jquery/jquery/commit/753d591aea698e57d6db58c9f722cd0808619b1b",
+                    "https://nvd.nist.gov/vuln/detail/CVE-2019-11358"
+                  ],
+                  "summary": "jQuery before 3.4.0, as used in Drupal, Backdrop CMS, and other products, mishandles jQuery.extend(true, {}, ...) because of Object.prototype pollution",
+                  "sourceFile": "http://127.0.0.1:52493/jquery-1.12.4.js"
+                }
+              },
+              "updatedAt": "2026-10-22T14:21:29.119Z",
+              "title": "jQuery before 3.4.0, as used in Drupal, Backdrop CMS, and other products, mishandles jQuery.extend(true, {}, ...) because of Object.prototype pollution"
+            },
+            {
+              "id": "f9b715bc-1e73-4171-83dd-e22d49757293::SCA::sca::GHSA-jpcq-cgw6-v4j6::jquery@1.12.4",
+              "engine": "SCA",
+              "scanId": "f9b715bc-1e73-4171-83dd-e22d49757293",
+              "moduleId": "sca",
+              "moduleName": "Software Composition Analysis",
+              "ruleId": "GHSA-jpcq-cgw6-v4j6",
+              "ruleName": "passing HTML containing <option> elements from untrusted sources - even after sanitizing it - to one of jQuery's DOM manipulation methods (i.e. .html(), .append(), and others) may execute untrusted code.",
+              "severity": "medium",
+              "category": "supply_chain",
+              "vulnId": "vulnerable_component",
+              "cwe": [
+                "CWE-79"
+              ],
+              "owasp": [
+                "A03:2025 - Software Supply Chain Failures",
+                "A06:2021 - Vulnerable and Outdated Components"
+              ],
+              "tags": [
+                "sca",
+                "dependency",
+                "filename"
+              ],
+              "links": {
+                "ref_1": "https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/"
+              },
+              "location": {
+                "kind": "package",
+                "file": "http://127.0.0.1:52493/jquery-1.12.4.js"
+              },
+              "description": "passing HTML containing <option> elements from untrusted sources - even after sanitizing it - to one of jQuery's DOM manipulation methods (i.e. .html(), .append(), and others) may execute untrusted code.",
+              "recommendation": "Upgrade jquery (currently 1.12.4) to a secure release that is not affected by GHSA-jpcq-cgw6-v4j6.",
+              "createdAt": "2026-10-22T14:21:29.119Z",
+              "evidence": {
+                "sca": {
+                  "component": {
+                    "name": "jquery",
+                    "version": "1.12.4",
+                    "npmname": "jquery",
+                    "purl": "pkg:npm/jquery@1.12.4",
+                    "basePurl": null,
+                    "detection": "filename",
+                    "source": null,
+                    "ecosystem": "npm",
+                    "locations": [
+                      "http://127.0.0.1:52493/jquery-1.12.4.js"
+                    ]
+                  },
+                  "identifiers": {
+                    "summary": "passing HTML containing <option> elements from untrusted sources - even after sanitizing it - to one of jQuery's DOM manipulation methods (i.e. .html(), .append(), and others) may execute untrusted code.",
+                    "CVE": [
+                      "CVE-2020-11023"
+                    ],
+                    "issue": "4647",
+                    "githubID": "GHSA-jpcq-cgw6-v4j6",
+                    "cwe": [
+                      "CWE-79"
+                    ]
+                  },
+                  "versionRange": {
+                    "atOrAbove": "1.0.3",
+                    "above": null,
+                    "atOrBelow": null,
+                    "below": "3.5.0"
+                  },
+                  "info": [
+                    "https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/"
+                  ],
+                  "summary": "passing HTML containing <option> elements from untrusted sources - even after sanitizing it - to one of jQuery's DOM manipulation methods (i.e. .html(), .append(), and others) may execute untrusted code.",
+                  "sourceFile": "http://127.0.0.1:52493/jquery-1.12.4.js"
+                }
+              },
+              "updatedAt": "2026-10-22T14:21:29.119Z",
+              "title": "passing HTML containing <option> elements from untrusted sources - even after sanitizing it - to one of jQuery's DOM manipulation methods (i.e. .html(), .append(), and others) may execute untrusted code."
+            },
+            {
+              "id": "f9b715bc-1e73-4171-83dd-e22d49757293::SCA::sca::GHSA-gxr4-xjj5-5px2::jquery@1.12.4",
+              "engine": "SCA",
+              "scanId": "f9b715bc-1e73-4171-83dd-e22d49757293",
+              "moduleId": "sca",
+              "moduleName": "Software Composition Analysis",
+              "ruleId": "GHSA-gxr4-xjj5-5px2",
+              "ruleName": "Regex in its jQuery.htmlPrefilter sometimes may introduce XSS",
+              "severity": "medium",
+              "category": "supply_chain",
+              "vulnId": "vulnerable_component",
+              "cwe": [
+                "CWE-79"
+              ],
+              "owasp": [
+                "A03:2025 - Software Supply Chain Failures",
+                "A06:2021 - Vulnerable and Outdated Components"
+              ],
+              "tags": [
+                "sca",
+                "dependency",
+                "filename"
+              ],
+              "links": {
+                "ref_1": "https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/"
+              },
+              "location": {
+                "kind": "package",
+                "file": "http://127.0.0.1:52493/jquery-1.12.4.js"
+              },
+              "description": "Regex in its jQuery.htmlPrefilter sometimes may introduce XSS",
+              "recommendation": "Upgrade jquery (currently 1.12.4) to a secure release that is not affected by GHSA-gxr4-xjj5-5px2.",
+              "createdAt": "2026-10-22T14:21:29.119Z",
+              "evidence": {
+                "sca": {
+                  "component": {
+                    "name": "jquery",
+                    "version": "1.12.4",
+                    "npmname": "jquery",
+                    "purl": "pkg:npm/jquery@1.12.4",
+                    "basePurl": null,
+                    "detection": "filename",
+                    "source": null,
+                    "ecosystem": "npm",
+                    "locations": [
+                      "http://127.0.0.1:52493/jquery-1.12.4.js"
+                    ]
+                  },
+                  "identifiers": {
+                    "summary": "Regex in its jQuery.htmlPrefilter sometimes may introduce XSS",
+                    "CVE": [
+                      "CVE-2020-11022"
+                    ],
+                    "issue": "4642",
+                    "githubID": "GHSA-gxr4-xjj5-5px2",
+                    "cwe": [
+                      "CWE-79"
+                    ]
+                  },
+                  "versionRange": {
+                    "atOrAbove": "1.2.0",
+                    "above": null,
+                    "atOrBelow": null,
+                    "below": "3.5.0"
+                  },
+                  "info": [
+                    "https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/"
+                  ],
+                  "summary": "Regex in its jQuery.htmlPrefilter sometimes may introduce XSS",
+                  "sourceFile": "http://127.0.0.1:52493/jquery-1.12.4.js"
+                }
+              },
+              "updatedAt": "2026-10-22T14:21:29.119Z",
+              "title": "Regex in its jQuery.htmlPrefilter sometimes may introduce XSS"
+            }
+          ],
+          "total": 9,
+          "nextOffset": null,
+          "truncated": false
+        },
+        "truncated": false,
+        "capturedAt": 1792678891236
+      }
+    },
+    "warnings": []
+  },
+  "summary": {
+    "sast": [
+      {
+        "ruleId": "no-inner-outer-html",
+        "url": "http://127.0.0.1:52493/allowed.js"
+      },
+      {
+        "ruleId": "dom-xss-taint",
+        "url": "http://127.0.0.1:52493/allowed.js"
+      },
+      {
+        "ruleId": "client-template-injection-taint",
+        "url": "http://127.0.0.1:52493/allowed.js"
+      }
+    ],
+    "sca": [
+      {
+        "ruleId": "sca-jquery-1.12.4",
+        "url": "http://127.0.0.1:52493/jquery-1.12.4.js"
+      },
+      {
+        "ruleId": "73",
+        "url": "http://127.0.0.1:52493/jquery-1.12.4.js"
+      },
+      {
+        "ruleId": "GHSA-rmxg-73gg-4p98",
+        "url": "http://127.0.0.1:52493/jquery-1.12.4.js"
+      },
+      {
+        "ruleId": "GHSA-6c3j-c64m-qhgq",
+        "url": "http://127.0.0.1:52493/jquery-1.12.4.js"
+      },
+      {
+        "ruleId": "GHSA-jpcq-cgw6-v4j6",
+        "url": "http://127.0.0.1:52493/jquery-1.12.4.js"
+      },
+      {
+        "ruleId": "GHSA-gxr4-xjj5-5px2",
+        "url": "http://127.0.0.1:52493/jquery-1.12.4.js"
+      }
+    ]
+  }
+}

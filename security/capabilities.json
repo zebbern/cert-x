@@ -1,0 +1,3551 @@
+{
+  "schema": 1,
+  "baseline": "PTK 10.0.0",
+  "capabilities": [
+    {
+      "id": "candidate-investigation",
+      "entryPoint": "candidate/evidencePackage",
+      "source": "background/dast/services/dastCandidateRunService.js",
+      "verification": "focused-service-contract",
+      "verificationEvidence": [
+        "tools/security/tests/investigation-api.test.mjs"
+      ],
+      "notes": "Owned immutable scan snapshots; PTK readiness, object swaps, response comparison, workflow summaries, evidence packages and drafts. Browser reproduction requires an explicitly selected managed session."
+    },
+    {
+      "id": "openapi-execution",
+      "entryPoint": "api",
+      "source": "security/engine/openapi.mjs",
+      "verification": "focused-service-contract",
+      "verificationEvidence": [
+        "tools/security/tests/investigation-api.test.mjs"
+      ],
+      "notes": "Explicit scoped references, required path/query/header/cookie/JSON/form/multipart values, private prepared plans and batch partial errors."
+    },
+    {
+      "id": "private-cookie-transfer",
+      "entryPoint": "utility.cookies.import/export",
+      "source": "background/session.js",
+      "verification": "focused-service-contract",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-cookies.test.mjs"
+      ],
+      "notes": "Opaque owner-bound private artifacts; values are not exposed to the model."
+    },
+    {
+      "id": "supplemental-backend-selection",
+      "entryPoint": "startScan/backend configuration",
+      "verification": "focused-service-contract",
+      "verificationEvidence": [
+        "tools/security/tests/backend-selection.test.mjs",
+        "tools/security/tests/service.test.mjs"
+      ],
+      "notes": "Thorough uses configured backends and exact candidate-correlated OAST vectors. PTK defaults stays native-only. Missing vectors and provider failures remain explicit coverage gaps."
+    },
+    {
+      "id": "DAST",
+      "verification": "representative-browser-parity",
+      "entryPoint": "startScan",
+      "verificationEvidence": [
+        "tools/security/tests/browser-parity.cjs"
+      ]
+    },
+    {
+      "id": "IAST",
+      "verification": "representative-browser-parity",
+      "entryPoint": "startScan",
+      "verificationEvidence": [
+        "tools/security/tests/browser-parity.cjs"
+      ]
+    },
+    {
+      "id": "SAST",
+      "verification": "representative-browser-parity",
+      "entryPoint": "startScan",
+      "verificationEvidence": [
+        "tools/security/tests/browser-parity.cjs"
+      ]
+    },
+    {
+      "id": "SCA",
+      "verification": "representative-browser-parity",
+      "entryPoint": "startScan",
+      "verificationEvidence": [
+        "tools/security/tests/browser-parity.cjs"
+      ]
+    },
+    {
+      "id": "capture",
+      "verification": "browser-functional",
+      "entryPoint": "capture/listRequests",
+      "verificationEvidence": [
+        "tools/security/tests/utilities.browser.cjs"
+      ]
+    },
+    {
+      "id": "replay",
+      "verification": "browser-functional",
+      "entryPoint": "replay",
+      "verificationEvidence": [
+        "tools/security/tests/utilities.browser.cjs"
+      ]
+    },
+    {
+      "id": "macros",
+      "verification": "browser-functional",
+      "entryPoint": "macro",
+      "verificationEvidence": [
+        "tools/security/tests/utilities.browser.cjs"
+      ]
+    },
+    {
+      "id": "jwt",
+      "verification": "browser-functional",
+      "entryPoint": "utility(jwt)",
+      "verificationEvidence": [
+        "tools/security/tests/utilities.browser.cjs"
+      ]
+    },
+    {
+      "id": "reconnaissance",
+      "verification": "browser-functional",
+      "entryPoint": "utility(recon)",
+      "verificationEvidence": [
+        "tools/security/tests/utilities.browser.cjs"
+      ]
+    },
+    {
+      "id": "port_probe",
+      "verification": "browser-functional",
+      "entryPoint": "utility(portscan)",
+      "verificationEvidence": [
+        "tools/security/tests/utilities.browser.cjs"
+      ]
+    },
+    {
+      "id": "encode",
+      "verification": "browser-functional",
+      "entryPoint": "utility(encode)",
+      "verificationEvidence": [
+        "tools/security/tests/utilities.browser.cjs"
+      ]
+    },
+    {
+      "id": "decode",
+      "verification": "browser-functional",
+      "entryPoint": "utility(decode)",
+      "verificationEvidence": [
+        "tools/security/tests/utilities.browser.cjs"
+      ]
+    },
+    {
+      "id": "report_export",
+      "verification": "browser-functional",
+      "entryPoint": "exportFullReport",
+      "verificationEvidence": [
+        "tools/security/tests/utilities.browser.cjs",
+        "tools/security/tests/runtime-browser-reports.cjs",
+        "tools/security/tests/reporting.browser.cjs"
+      ],
+      "formats": [
+        "json",
+        "markdown",
+        "pdf"
+      ],
+      "presets": [
+        "technical",
+        "executive"
+      ]
+    },
+    {
+      "id": "macro_import",
+      "verification": "browser-functional",
+      "entryPoint": "import",
+      "verificationEvidence": [
+        "tools/security/tests/utilities.browser.cjs"
+      ]
+    },
+    {
+      "id": "macro_export",
+      "verification": "browser-functional",
+      "entryPoint": "macro(export)",
+      "verificationEvidence": [
+        "tools/security/tests/utilities.browser.cjs"
+      ]
+    },
+    {
+      "id": "scan_import",
+      "entryPoint": "import(format:ptk-report|ptk-report-gzip)",
+      "verification": "native-contract-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-import-explorer.test.mjs"
+      ]
+    },
+    {
+      "id": "api_explorer",
+      "entryPoint": "utility(api_explorer)",
+      "verification": "native-contract-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-import-explorer.test.mjs"
+      ]
+    },
+    {
+      "id": "openapi",
+      "entryPoint": "utility(openapi)",
+      "verification": "native-parser-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-openapi.test.mjs"
+      ]
+    },
+    {
+      "id": "cookies",
+      "entryPoint": "utility(cookies)",
+      "source": "background/session.js",
+      "verification": "browser-functional-private-persistence",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-cookies.test.mjs",
+        "tools/security/tests/runtime-browser-cookies.cjs",
+        "tools/security/tests/runtime-browser-cookie-bridge.cjs"
+      ],
+      "actions": [
+        "list",
+        "set",
+        "remove",
+        "block",
+        "readonly",
+        "unset",
+        "listpolicies"
+      ],
+      "limitations": "Browser cookie scope is domain/path/store/partition, not origin-port isolation. Retained values stay in private extension storage and are not returned to the agent."
+    },
+    {
+      "id": "candidate_investigation",
+      "entryPoint": "candidate",
+      "verification": "owned-contracts-and-extension-browser",
+      "verificationEvidence": [
+        "tools/security/tests/investigation-api.test.mjs",
+        "tools/security/tests/investigation.browser.cjs"
+      ]
+    },
+    {
+      "id": "evidence_packages",
+      "entryPoint": "evidencePackage",
+      "verification": "owned-contracts-and-extension-browser",
+      "verificationEvidence": [
+        "tools/security/tests/investigation-api.test.mjs",
+        "tools/security/tests/investigation.browser.cjs"
+      ]
+    },
+    {
+      "id": "api_execution",
+      "entryPoint": "api",
+      "verification": "owned-contracts-and-extension-browser",
+      "verificationEvidence": [
+        "tools/security/tests/investigation-api.test.mjs",
+        "tools/security/tests/investigation.browser.cjs"
+      ]
+    },
+    {
+      "id": "isolated_browsers",
+      "entryPoint": "browser",
+      "verification": "managed-browser-and-model-roundtrip",
+      "verificationEvidence": [
+        "tools/host/tests/security-browser.test.cjs",
+        "tools/host/tests/security-browser-workers.test.cjs",
+        "tools/security/tests/managed-agent.browser.cjs"
+      ]
+    },
+    {
+      "id": "callback_testing",
+      "entryPoint": "oast",
+      "verification": "native-contracts-and-bounded-live-provider",
+      "verificationEvidence": [
+        "tools/host/tests/security-oast.test.js",
+        "tools/security/tests/managed-oast-live.cjs"
+      ]
+    },
+    {
+      "id": "zap_backend",
+      "entryPoint": "zap",
+      "verification": "managed-passive-active-ajax-fixtures",
+      "verificationEvidence": [
+        "tools/security/tests/managed-zap.cjs",
+        "tools/security/tests/managed-zap-guard.cjs"
+      ]
+    },
+    {
+      "id": "manual_raw_transport",
+      "entryPoint": "raw",
+      "verification": "independent-framing-controls-and-native-evidence-bridge",
+      "verificationEvidence": [
+        "tools/host/tests/security-raw-complete.test.cjs",
+        "tools/host/tests/security-transport-contract.test.js",
+        "tools/security/tests/raw-bridge.browser.cjs",
+        "tools/security/raw-contract.md"
+      ]
+    },
+    {
+      "id": "managed_setup",
+      "entryPoint": "security_setup",
+      "verification": "setup-contracts-and-local-installation",
+      "verificationEvidence": [
+        "tools/host/tests/security-setup.test.cjs",
+        "tools/security/tests/managed-python-fallback.cjs"
+      ]
+    }
+  ],
+  "modules": [
+    {
+      "engine": "DAST",
+      "id": "sql_injection",
+      "name": "SQL Injection",
+      "source": "background/dast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "sqlinjection_1"
+        },
+        {
+          "id": "sqlinjection_3"
+        },
+        {
+          "id": "sqlinjection_2"
+        },
+        {
+          "id": "sqlinjection_4"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "os_command_injection",
+      "name": "OS command injection",
+      "source": "background/dast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "oscommand_inband_pipe_passwd"
+        },
+        {
+          "id": "oscommand_inband_printf_pipe"
+        },
+        {
+          "id": "oscommand_inband_printf_separator"
+        }
+      ],
+      "verification": "planner-shell-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs",
+        "tools/security/tests/command-detection.test.mjs",
+        "tools/security/tests/command-injection.browser.cjs",
+        "tools/security/tests/command-injection-public.cjs"
+      ],
+      "differential": "Supplied legacy payload had a dangling terminal pipe. Preserve its ID and intended detection with repaired syntax; additional per-probe printf output markers exceed baseline coverage, with safely quoted and reflection-only negatives."
+    },
+    {
+      "engine": "DAST",
+      "id": "xss",
+      "name": "Reflected Cross-Site Scripting (XSS)",
+      "source": "background/dast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "xss_1"
+        },
+        {
+          "id": "xss_2"
+        },
+        {
+          "id": "xss_3"
+        },
+        {
+          "id": "xss_4"
+        },
+        {
+          "id": "xss_5"
+        },
+        {
+          "id": "xss_attr_1"
+        },
+        {
+          "id": "xss_event_handler_polyglot"
+        },
+        {
+          "id": "xss_jsstring_1"
+        },
+        {
+          "id": "xss_template_literal_breakout"
+        },
+        {
+          "id": "xss_js_expression_replace"
+        },
+        {
+          "id": "xss_js_single_quote_breakout"
+        },
+        {
+          "id": "xss_js_slash_regex_breakout"
+        },
+        {
+          "id": "xss_js_comment_breakout"
+        },
+        {
+          "id": "xss_attr_double_quote_event_injection"
+        },
+        {
+          "id": "xss_attr_single_quote_event_injection"
+        },
+        {
+          "id": "xss_attr_unquoted_event_injection"
+        },
+        {
+          "id": "xss_attribute_name_event_injection"
+        },
+        {
+          "id": "xss_tagname_svg_onload"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "angularjs_client_template_injection",
+      "name": "AngularJS client-side template / expression injection",
+      "source": "background/dast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "angularjs_csti_reflected_1_0_1_to_1_1_5"
+        },
+        {
+          "id": "angularjs_csti_expression_1_0_1_to_1_1_5"
+        },
+        {
+          "id": "angularjs_csti_reflected_short_1_0_1_to_1_1_5"
+        },
+        {
+          "id": "angularjs_csti_reflected_1_2_0_to_1_2_1"
+        },
+        {
+          "id": "angularjs_csti_expression_1_2_0_to_1_2_18"
+        },
+        {
+          "id": "angularjs_csti_reflected_1_2_2_to_1_2_5"
+        },
+        {
+          "id": "angularjs_csti_reflected_1_2_6_to_1_2_18"
+        },
+        {
+          "id": "angularjs_csti_expression_1_2_6_to_1_2_18"
+        },
+        {
+          "id": "angularjs_csti_reflected_1_2_19_to_1_2_23"
+        },
+        {
+          "id": "angularjs_csti_expression_1_2_19_to_1_2_23"
+        },
+        {
+          "id": "angularjs_csti_expression_single_quote_1_2_19_to_1_2_23"
+        },
+        {
+          "id": "angularjs_csti_reflected_1_2_24_to_1_2_29"
+        },
+        {
+          "id": "angularjs_csti_expression_1_2_24_to_1_2_26"
+        },
+        {
+          "id": "angularjs_csti_expression_breakout_1_2_27_to_1_3_20"
+        },
+        {
+          "id": "angularjs_csti_reflected_1_4_0_to_1_4_9"
+        },
+        {
+          "id": "angularjs_csti_reflected_eval_1_4_0_to_1_4_9"
+        },
+        {
+          "id": "angularjs_csti_reflected_entity_default_1_4_0_to_1_4_9"
+        },
+        {
+          "id": "angularjs_csti_reflected_entity_alt_1_4_0_to_1_4_9"
+        },
+        {
+          "id": "angularjs_csti_expression_1_4_0_to_1_4_5"
+        },
+        {
+          "id": "angularjs_csti_expression_eval_1_4_0_to_1_4_9"
+        },
+        {
+          "id": "angularjs_csti_reflected_1_5_0_to_1_5_8"
+        },
+        {
+          "id": "angularjs_csti_expression_1_4_2_to_1_5_8"
+        },
+        {
+          "id": "angularjs_csti_reflected_1_6_plus"
+        },
+        {
+          "id": "angularjs_csti_reflected_alt_1_6_plus"
+        },
+        {
+          "id": "angularjs_csti_expression_1_6_plus"
+        }
+      ],
+      "verification": "browser-positive-negative-parity",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-browser-dast.cjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "jwt_injection",
+      "name": "JWT None Algorithm attacks",
+      "source": "background/dast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "jwt_probe_no_both"
+        },
+        {
+          "id": "jwt_probe_no_authz"
+        },
+        {
+          "id": "jwt_probe_no_cookie"
+        },
+        {
+          "id": "jwt_probe_no_form"
+        },
+        {
+          "id": "jwt_probe_no_json"
+        },
+        {
+          "id": "jwt_1"
+        },
+        {
+          "id": "jwt_2"
+        },
+        {
+          "id": "jwt_3"
+        },
+        {
+          "id": "jwt_4"
+        }
+      ],
+      "verification": "native-probe-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-dastJwtModule.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "version_control_exposure",
+      "name": "Exposure of Version-Control Repository",
+      "source": "background/dast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "repo_1"
+        },
+        {
+          "id": "repo_2"
+        },
+        {
+          "id": "repo_3"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "headers",
+      "name": "OWASP Secure Headers",
+      "source": "background/dast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "header_csp_missing"
+        },
+        {
+          "id": "header_csp_weak_scripts"
+        },
+        {
+          "id": "header_csp_frame_ancestors_missing_or_weak"
+        },
+        {
+          "id": "header_csp_report_only_without_enforce"
+        },
+        {
+          "id": "header_hsts_missing"
+        },
+        {
+          "id": "header_hsts_ineffective_on_http"
+        },
+        {
+          "id": "header_hsts_weak"
+        },
+        {
+          "id": "header_powered_by_present"
+        },
+        {
+          "id": "header_server_banner_disclosure"
+        },
+        {
+          "id": "header_x_content_type_options_missing_or_invalid"
+        },
+        {
+          "id": "header_xss_protection_obsolete"
+        },
+        {
+          "id": "header_expect_ct_obsolete"
+        },
+        {
+          "id": "header_hpkp_obsolete"
+        },
+        {
+          "id": "header_coop_without_coep_or_corp"
+        },
+        {
+          "id": "header_coop_value_weak"
+        },
+        {
+          "id": "header_coep_value_weak"
+        },
+        {
+          "id": "header_permissions_policy_legacy_or_unknown"
+        },
+        {
+          "id": "header_referrer_policy_missing_or_weak"
+        },
+        {
+          "id": "header_clear_site_data_incomplete"
+        },
+        {
+          "id": "header_clear_site_data_wildcard"
+        },
+        {
+          "id": "header_cors_wildcard_with_credentials"
+        },
+        {
+          "id": "header_set_cookie_flags_missing"
+        },
+        {
+          "id": "header_cache_control_sensitive_missing_no_store"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "sensitive_data_exposure",
+      "name": "Sensitive data exposure",
+      "source": "background/dast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "credit_card_number"
+        },
+        {
+          "id": "social_securityn_umber"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "spa_dom_xss",
+      "name": "SPA hash-based DOM XSS",
+      "source": "background/dast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "spa_dom_xss_default"
+        }
+      ],
+      "verification": "browser-positive-negative-parity",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-browser-dast.cjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "websocket_security",
+      "name": "WebSocket security indicators",
+      "source": "background/dast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "ws_1"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "recon_sourcemaps_debug",
+      "name": "Passive Recon: Source Maps & Debug Artifacts",
+      "source": "background/dast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "recon_sourcemap_in_js"
+        },
+        {
+          "id": "recon_sourcemap_reference_in_html"
+        },
+        {
+          "id": "recon_webpack_devserver_artifacts"
+        },
+        {
+          "id": "recon_nextjs_build_metadata"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "recon_error_stacktraces",
+      "name": "Passive Recon: Error & Stack Trace Disclosure",
+      "source": "background/dast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "recon_node_stacktrace"
+        },
+        {
+          "id": "recon_java_stacktrace"
+        },
+        {
+          "id": "recon_dotnet_stacktrace"
+        },
+        {
+          "id": "recon_python_traceback"
+        },
+        {
+          "id": "recon_php_fatal_error"
+        },
+        {
+          "id": "recon_internal_path_disclosure"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "recon_client_config_secrets",
+      "name": "Passive Recon: Client Config & Secret-Like Values",
+      "source": "background/dast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "recon_private_key_material"
+        },
+        {
+          "id": "recon_aws_access_key_id"
+        },
+        {
+          "id": "recon_slack_token"
+        },
+        {
+          "id": "recon_github_token"
+        },
+        {
+          "id": "recon_sentry_dsn"
+        },
+        {
+          "id": "recon_firebase_config"
+        },
+        {
+          "id": "recon_stripe_publishable_key"
+        },
+        {
+          "id": "recon_mapbox_token"
+        },
+        {
+          "id": "recon_google_api_key"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "recon_api_docs_specs",
+      "name": "Passive Recon: API Docs & Specs Exposure",
+      "source": "background/dast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "recon_swagger_ui"
+        },
+        {
+          "id": "recon_openapi_spec"
+        },
+        {
+          "id": "recon_api_docs_routes"
+        },
+        {
+          "id": "recon_graphql_endpoint"
+        },
+        {
+          "id": "recon_graphiql_console"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "recon_well_known_metadata",
+      "name": "Passive Recon: .well-known & Metadata Files",
+      "source": "background/dast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "recon_security_txt"
+        },
+        {
+          "id": "recon_oidc_well_known"
+        },
+        {
+          "id": "recon_assetlinks"
+        },
+        {
+          "id": "recon_apple_association"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "recon_tokens_in_url",
+      "name": "Passive Recon: Tokens & Secrets in URLs",
+      "source": "background/dast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "recon_access_token_param"
+        },
+        {
+          "id": "recon_jwt_like_in_url"
+        },
+        {
+          "id": "recon_api_key_param"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "recon_parameter_leads",
+      "name": "Passive Recon: High-Risk Parameter Names",
+      "source": "background/dast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "recon_param_open_redirect"
+        },
+        {
+          "id": "recon_param_ssrf"
+        },
+        {
+          "id": "recon_param_file_path"
+        },
+        {
+          "id": "recon_param_idor"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "recon_internal_hosts_env_hints",
+      "name": "Passive Recon: Internal Hosts & Environment Hints",
+      "source": "background/dast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "recon_internal_ip_leak"
+        },
+        {
+          "id": "recon_localhost_leak"
+        },
+        {
+          "id": "recon_env_hints"
+        },
+        {
+          "id": "recon_cloud_metadata_hints"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "recon_cors_posture",
+      "name": "Passive Recon: CORS Posture Indicators",
+      "source": "background/dast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "recon_cors_missing_vary_origin"
+        },
+        {
+          "id": "recon_cors_permissive_methods"
+        },
+        {
+          "id": "recon_cors_permissive_headers"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "recon_cache_privacy",
+      "name": "Passive Recon: Cache & Privacy Posture",
+      "source": "background/dast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "recon_cache_public_with_set_cookie"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "recon_interesting_endpoints",
+      "name": "Passive Recon: Interesting Endpoint Patterns",
+      "source": "background/dast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "recon_admin_paths"
+        },
+        {
+          "id": "recon_debug_paths"
+        },
+        {
+          "id": "recon_spring_actuator"
+        },
+        {
+          "id": "recon_swagger_paths"
+        },
+        {
+          "id": "recon_graphql_paths"
+        },
+        {
+          "id": "recon_backup_files"
+        },
+        {
+          "id": "recon_dotenv_files"
+        },
+        {
+          "id": "recon_git_exposure"
+        },
+        {
+          "id": "recon_phpinfo"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "jsonp_callback_injection",
+      "name": "JSONP Callback Injection (generic)",
+      "source": "background/dast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "jsonp_callback_1"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "open_redirect",
+      "name": "Open Redirect (generic)",
+      "source": "background/dast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "redir_1"
+        },
+        {
+          "id": "redir_2"
+        },
+        {
+          "id": "redir_3"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "cve_2025_55182_react_rsc",
+      "name": "React2Shell: React Server Components RCE (CVE-2025-55182)",
+      "source": "background/dast/modules/modules_cve.json",
+      "tier": "cve",
+      "executable": true,
+      "checks": [
+        {
+          "id": "react2shell_safe_probe_v1"
+        },
+        {
+          "id": "react2shell_safe_probe_v2"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "cve_2015_1635",
+      "name": "Microsoft Windows 'HTTP.sys' - Remote Code Execution (CVE-2015-1635)",
+      "source": "background/dast/modules/modules_cve.json",
+      "tier": "cve",
+      "executable": true,
+      "checks": [
+        {
+          "id": "cve-2015-1635_r1_p1"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "cve_2018_20062",
+      "name": "ThinkPHP 5.0.23 - Remote Code Execution (CVE-2018-20062)",
+      "source": "background/dast/modules/modules_cve.json",
+      "tier": "cve",
+      "executable": true,
+      "checks": [
+        {
+          "id": "cve-2018-20062_r1_p1"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "cve_2019_10692",
+      "name": "WordPress Google Maps <7.11.18 - SQL Injection (CVE-2019-10692)",
+      "source": "background/dast/modules/modules_cve.json",
+      "tier": "cve",
+      "executable": true,
+      "checks": [
+        {
+          "id": "cve-2019-10692_r1_p1"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "cve_2020_14092",
+      "name": "WordPress PayPal Pro <1.1.65 - SQL Injection (CVE-2020-14092)",
+      "source": "background/dast/modules/modules_cve.json",
+      "tier": "cve",
+      "executable": true,
+      "checks": [
+        {
+          "id": "cve-2020-14092_r1_p1"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "cve_2020_17530",
+      "name": "Apache Struts 2.0.0-2.5.25 - Remote Code Execution (CVE-2020-17530)",
+      "source": "background/dast/modules/modules_cve.json",
+      "tier": "cve",
+      "executable": true,
+      "checks": [
+        {
+          "id": "cve-2020-17530_r1_p1"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "cve_2021_28918",
+      "name": "Netmask NPM Package - Server-Side Request Forgery (CVE-2021-28918)",
+      "source": "background/dast/modules/modules_cve.json",
+      "tier": "cve",
+      "executable": true,
+      "checks": [
+        {
+          "id": "cve-2021-28918_r1_p1"
+        },
+        {
+          "id": "cve-2021-28918_r1_p2"
+        },
+        {
+          "id": "cve-2021-28918_r1_p3"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "cve_2022_47945",
+      "name": "Thinkphp Lang - Local File Inclusion (CVE-2022-47945)",
+      "source": "background/dast/modules/modules_cve.json",
+      "tier": "cve",
+      "executable": true,
+      "checks": [
+        {
+          "id": "cve-2022-47945_r1_p1"
+        },
+        {
+          "id": "cve-2022-47945_r1_p2"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "cve_2023_34598",
+      "name": "Gibbon v25.0.0 - Local File Inclusion (CVE-2023-34598)",
+      "source": "background/dast/modules/modules_cve.json",
+      "tier": "cve",
+      "executable": true,
+      "checks": [
+        {
+          "id": "cve-2023-34598_r1_p1"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "cve_2023_5991",
+      "name": "Hotel Booking Lite < 4.8.5 - Arbitrary File Download & Deletion (CVE-2023-5991)",
+      "source": "background/dast/modules/modules_cve.json",
+      "tier": "cve",
+      "executable": true,
+      "checks": [
+        {
+          "id": "cve-2023-5991_r1_p1"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "DAST",
+      "id": "cve_2022_1970_cve_2024_27954",
+      "name": "WordPress Automatic Plugin <3.92.1 - Arbitrary File Download and SSRF (CVE-2022-1970)",
+      "source": "background/dast/modules/modules_cve.json",
+      "tier": "cve",
+      "executable": true,
+      "checks": [
+        {
+          "id": "cve-2024-27954_r1_p1"
+        }
+      ],
+      "verification": "http-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/runtime-detectors.test.mjs",
+        "tools/security/tests/dast-differential.test.mjs"
+      ]
+    },
+    {
+      "engine": "SAST",
+      "id": "dom-xss",
+      "name": "DOM-based XSS",
+      "source": "background/sast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "no-inner-outer-html"
+        },
+        {
+          "id": "no-appendchild"
+        },
+        {
+          "id": "no-document-write"
+        },
+        {
+          "id": "domparser-dynamic-html-parse"
+        },
+        {
+          "id": "template-innerhtml-dynamic"
+        },
+        {
+          "id": "inline-event-handler-dynamic"
+        },
+        {
+          "id": "no-insertadjacenthtml"
+        },
+        {
+          "id": "dom-xss-taint"
+        },
+        {
+          "id": "dom-xss-taint-angular"
+        }
+      ],
+      "verification": "native-engine-code-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual SAST engine scanCodeDetailed over positive and negative source fixtures."
+    },
+    {
+      "engine": "SAST",
+      "id": "cookie-manipulation",
+      "name": "DOM-based Cookie Manipulation",
+      "source": "background/sast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "no-document-cookie-assignment"
+        },
+        {
+          "id": "cookie-manipulation-taint"
+        }
+      ],
+      "verification": "native-engine-code-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual SAST engine scanCodeDetailed over positive and negative source fixtures."
+    },
+    {
+      "engine": "SAST",
+      "id": "open-redirection",
+      "name": "Open Redirection",
+      "source": "background/sast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "no-open-primitive-usage"
+        },
+        {
+          "id": "same-origin-url-mutation"
+        },
+        {
+          "id": "open-redirection-taint"
+        }
+      ],
+      "verification": "native-engine-code-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual SAST engine scanCodeDetailed over positive and negative source fixtures."
+    },
+    {
+      "engine": "SAST",
+      "id": "javascript-injection",
+      "name": "DOM-based JavaScript Injection",
+      "source": "background/sast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "no-string-based-timers"
+        },
+        {
+          "id": "no-execscript"
+        },
+        {
+          "id": "no-eval-strings"
+        },
+        {
+          "id": "no-function-ctor-strings"
+        },
+        {
+          "id": "javascript-injection-taint"
+        }
+      ],
+      "verification": "native-engine-code-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual SAST engine scanCodeDetailed over positive and negative source fixtures."
+    },
+    {
+      "engine": "SAST",
+      "id": "angularjs-expression-injection",
+      "name": "AngularJS client-side template / expression injection",
+      "source": "background/sast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "angularjs-tainted-dollar-parse"
+        },
+        {
+          "id": "angularjs-tainted-template-compile"
+        },
+        {
+          "id": "angularjs-dollar-parse-dynamic-argument"
+        },
+        {
+          "id": "angularjs-template-compiler-dynamic-argument"
+        },
+        {
+          "id": "angularjs-interpolation-template-literal"
+        },
+        {
+          "id": "angularjs-ng-expression-attribute-literal"
+        }
+      ],
+      "verification": "native-engine-code-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual SAST engine scanCodeDetailed over positive and negative source fixtures."
+    },
+    {
+      "engine": "SAST",
+      "id": "client-template-injection",
+      "name": "Client-side Template Injection",
+      "source": "background/sast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "dynamic-template-compilation"
+        },
+        {
+          "id": "template-output-dom-injection"
+        },
+        {
+          "id": "vue-v-html-template-review"
+        },
+        {
+          "id": "client-template-injection-taint"
+        },
+        {
+          "id": "react-dangerouslysetinnerhtml-taint"
+        },
+        {
+          "id": "lit-unsafehtml-taint"
+        }
+      ],
+      "verification": "native-engine-code-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual SAST engine scanCodeDetailed over positive and negative source fixtures."
+    },
+    {
+      "engine": "SAST",
+      "id": "network-destination-poisoning",
+      "name": "Network Destination Poisoning",
+      "source": "background/sast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "sendbeacon-review"
+        },
+        {
+          "id": "sendbeacon-body-review"
+        },
+        {
+          "id": "eventsource-constructor-review"
+        },
+        {
+          "id": "axios-direct-request-review"
+        },
+        {
+          "id": "network-destination-url-taint"
+        }
+      ],
+      "verification": "native-engine-code-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual SAST engine scanCodeDetailed over positive and negative source fixtures."
+    },
+    {
+      "engine": "SAST",
+      "id": "client-script-loader-poisoning",
+      "name": "Client Script Loader Poisoning",
+      "source": "background/sast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "jquery-getscript-review"
+        },
+        {
+          "id": "systemjs-import-review"
+        },
+        {
+          "id": "dynamic-import-review"
+        },
+        {
+          "id": "worker-constructor-review"
+        },
+        {
+          "id": "sharedworker-constructor-review"
+        },
+        {
+          "id": "serviceworker-register-review"
+        },
+        {
+          "id": "importscripts-review"
+        },
+        {
+          "id": "script-loader-url-taint"
+        }
+      ],
+      "verification": "native-engine-code-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual SAST engine scanCodeDetailed over positive and negative source fixtures."
+    },
+    {
+      "engine": "SAST",
+      "id": "web-message",
+      "name": "Web Message Handling",
+      "source": "background/sast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "postmessage-wildcard-target"
+        },
+        {
+          "id": "postmessage-missing-target"
+        },
+        {
+          "id": "weak-message-origin-check"
+        },
+        {
+          "id": "weak-message-origin-regex-check"
+        },
+        {
+          "id": "message-origin-check-without-scheme"
+        },
+        {
+          "id": "message-listener-review"
+        },
+        {
+          "id": "message-handler-missing-origin-check"
+        },
+        {
+          "id": "message-handler-wildcard-reply"
+        },
+        {
+          "id": "web-message-taint"
+        }
+      ],
+      "verification": "native-engine-code-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual SAST engine scanCodeDetailed over positive and negative source fixtures."
+    },
+    {
+      "engine": "SAST",
+      "id": "link-manipulation",
+      "name": "DOM-based Link Manipulation",
+      "source": "background/sast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "link-attribute-assignment"
+        },
+        {
+          "id": "link-manipulation-taint"
+        }
+      ],
+      "verification": "native-engine-code-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual SAST engine scanCodeDetailed over positive and negative source fixtures."
+    },
+    {
+      "engine": "SAST",
+      "id": "dom-data-manipulation",
+      "name": "DOM Data Manipulation",
+      "source": "background/sast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "dom-data-nav-taint"
+        },
+        {
+          "id": "dom-data-htmldoc-taint"
+        },
+        {
+          "id": "dom-data-ui-taint"
+        }
+      ],
+      "verification": "native-engine-code-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual SAST engine scanCodeDetailed over positive and negative source fixtures."
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_dom_xss",
+      "name": "DOM XSS sinks",
+      "source": "background/iast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "dom_inline_event_handler"
+        },
+        {
+          "id": "dom_innerhtml_xss"
+        },
+        {
+          "id": "dom_outerhtml_xss"
+        },
+        {
+          "id": "dom_insertadjacenthtml_xss"
+        },
+        {
+          "id": "document_write_xss"
+        },
+        {
+          "id": "dom_mutation_xss"
+        }
+      ],
+      "verification": "browser-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual rule filtering, heuristics and emitted findings in Chromium with supplied source observations. Complete hook acquisition is separately tested for representative DOM flows."
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_dangerous_url_scheme_execution",
+      "name": "Dangerous URL scheme execution sinks",
+      "source": "background/iast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "href_javascript_url_execution"
+        },
+        {
+          "id": "href_data_url_execution"
+        },
+        {
+          "id": "src_javascript_url_execution"
+        },
+        {
+          "id": "src_data_url_execution"
+        },
+        {
+          "id": "location_href_javascript_url_execution"
+        },
+        {
+          "id": "location_href_data_url_execution"
+        },
+        {
+          "id": "location_assign_javascript_url_execution"
+        },
+        {
+          "id": "location_assign_data_url_execution"
+        },
+        {
+          "id": "location_replace_javascript_url_execution"
+        },
+        {
+          "id": "location_replace_data_url_execution"
+        },
+        {
+          "id": "window_open_javascript_url_execution"
+        },
+        {
+          "id": "window_open_data_url_execution"
+        },
+        {
+          "id": "iframe_src_javascript_url_execution"
+        },
+        {
+          "id": "iframe_src_data_url_execution"
+        },
+        {
+          "id": "script_src_data_url_execution"
+        }
+      ],
+      "verification": "browser-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual rule filtering, heuristics and emitted findings in Chromium with supplied source observations. Complete hook acquisition is separately tested for representative DOM flows."
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_js_execution",
+      "name": "Dynamic JS execution",
+      "source": "background/iast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "eval_js_execution"
+        },
+        {
+          "id": "function_constructor_execution"
+        },
+        {
+          "id": "function_apply_execution"
+        }
+      ],
+      "verification": "browser-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual rule filtering, heuristics and emitted findings in Chromium with supplied source observations. Complete hook acquisition is separately tested for representative DOM flows."
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_open_redirect",
+      "name": "Client-side navigation sinks",
+      "source": "background/iast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "window_open_redirect"
+        },
+        {
+          "id": "navigation_api_redirect"
+        }
+      ],
+      "verification": "browser-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual rule filtering, heuristics and emitted findings in Chromium with supplied source observations. Complete hook acquisition is separately tested for representative DOM flows."
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_angularjs_expression_injection",
+      "name": "AngularJS expression / client-template injection",
+      "source": "background/iast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "angularjs_expression_function_constructor"
+        },
+        {
+          "id": "angularjs_parse_from_form"
+        },
+        {
+          "id": "angularjs_parse_from_cookie"
+        },
+        {
+          "id": "angularjs_parse_from_localstorage"
+        },
+        {
+          "id": "angularjs_parse_from_postmessage"
+        }
+      ],
+      "verification": "browser-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual rule filtering, heuristics and emitted findings in Chromium with supplied source observations. Complete hook acquisition is separately tested for representative DOM flows."
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_postmessage_misuse",
+      "name": "window.postMessage misuse",
+      "source": "background/iast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "postmessage_star_origin_leak"
+        },
+        {
+          "id": "postmessage_cross_origin_leak"
+        }
+      ],
+      "verification": "browser-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual rule filtering, heuristics and emitted findings in Chromium with supplied source observations. Complete hook acquisition is separately tested for representative DOM flows."
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_timer_js_execution",
+      "name": "Timer-based JS execution sinks",
+      "source": "background/iast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "settimeout_string_execution"
+        },
+        {
+          "id": "setinterval_string_execution"
+        }
+      ],
+      "verification": "browser-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual rule filtering, heuristics and emitted findings in Chromium with supplied source observations. Complete hook acquisition is separately tested for representative DOM flows."
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_iframe_navigation",
+      "name": "IFrame navigation and content sinks",
+      "source": "background/iast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "iframe_src_redirect"
+        },
+        {
+          "id": "iframe_srcdoc_xss"
+        }
+      ],
+      "verification": "browser-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual rule filtering, heuristics and emitted findings in Chromium with supplied source observations. Complete hook acquisition is separately tested for representative DOM flows."
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_client_http_exfiltration",
+      "name": "Client-side HTTP exfiltration sinks",
+      "source": "background/iast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "fetch_url_exfiltration"
+        },
+        {
+          "id": "fetch_headers_exfiltration"
+        },
+        {
+          "id": "xhr_url_exfiltration"
+        },
+        {
+          "id": "xhr_body_exfiltration"
+        },
+        {
+          "id": "xhr_header_exfiltration"
+        },
+        {
+          "id": "sendbeacon_exfiltration"
+        },
+        {
+          "id": "image_src_exfiltration"
+        }
+      ],
+      "verification": "browser-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual rule filtering, heuristics and emitted findings in Chromium with supplied source observations. Complete hook acquisition is separately tested for representative DOM flows."
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_dom_link_manipulation",
+      "name": "DOM link and attribute navigation sinks",
+      "source": "background/iast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "dom_attr_href_navigation"
+        },
+        {
+          "id": "dom_attr_src_navigation"
+        },
+        {
+          "id": "dom_attr_action_navigation"
+        },
+        {
+          "id": "dom_attr_formaction_navigation"
+        }
+      ],
+      "verification": "browser-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual rule filtering, heuristics and emitted findings in Chromium with supplied source observations. Complete hook acquisition is separately tested for representative DOM flows."
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_dom_url_navigation",
+      "name": "DOM URL-based navigation sinks",
+      "source": "background/iast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "location_href_redirect"
+        },
+        {
+          "id": "location_assign_redirect"
+        },
+        {
+          "id": "location_replace_redirect"
+        },
+        {
+          "id": "history_pushstate_open_redirect"
+        },
+        {
+          "id": "history_replacestate_route_change"
+        }
+      ],
+      "verification": "browser-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual rule filtering, heuristics and emitted findings in Chromium with supplied source observations. Complete hook acquisition is separately tested for representative DOM flows."
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_dom_parser_xss",
+      "name": "DOM parser and unsafe HTML sinks",
+      "source": "background/iast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "domparser_parsefromstring_html_xss"
+        },
+        {
+          "id": "range_contextual_fragment_xss"
+        },
+        {
+          "id": "element_sethtmlunsafe_xss"
+        },
+        {
+          "id": "shadowroot_sethtmlunsafe_xss"
+        }
+      ],
+      "verification": "browser-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual rule filtering, heuristics and emitted findings in Chromium with supplied source observations. Complete hook acquisition is separately tested for representative DOM flows."
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_dom_xss_secondary_sources",
+      "name": "DOM XSS from secondary client-side sources",
+      "source": "background/iast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "dom_innerhtml_xss_secondary_sources"
+        },
+        {
+          "id": "dom_outerhtml_xss_secondary_sources"
+        },
+        {
+          "id": "dom_insertadjacenthtml_xss_secondary_sources"
+        },
+        {
+          "id": "document_write_xss_secondary_sources"
+        },
+        {
+          "id": "dom_inline_event_xss_secondary_sources"
+        },
+        {
+          "id": "dom_mutation_xss_secondary_sources"
+        },
+        {
+          "id": "iframe_srcdoc_xss_secondary_sources"
+        }
+      ],
+      "verification": "browser-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual rule filtering, heuristics and emitted findings in Chromium with supplied source observations. Complete hook acquisition is separately tested for representative DOM flows."
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_route_controlled_navigation",
+      "name": "Route-controlled client navigation",
+      "source": "background/iast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "route_pushstate_navigation"
+        },
+        {
+          "id": "route_replacestate_navigation"
+        },
+        {
+          "id": "route_navigation_api_navigation"
+        }
+      ],
+      "verification": "browser-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual rule filtering, heuristics and emitted findings in Chromium with supplied source observations. Complete hook acquisition is separately tested for representative DOM flows."
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_form_submission_hijack",
+      "name": "Form submission target hijack",
+      "source": "background/iast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "form_action_hijack"
+        },
+        {
+          "id": "form_formaction_hijack"
+        }
+      ],
+      "verification": "browser-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual rule filtering, heuristics and emitted findings in Chromium with supplied source observations. Complete hook acquisition is separately tested for representative DOM flows."
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_dangerous_form_scheme_execution",
+      "name": "Dangerous form target URL schemes",
+      "source": "background/iast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "form_action_javascript_url_execution"
+        },
+        {
+          "id": "form_action_data_url_execution"
+        },
+        {
+          "id": "form_formaction_javascript_url_execution"
+        },
+        {
+          "id": "form_formaction_data_url_execution"
+        }
+      ],
+      "verification": "browser-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual rule filtering, heuristics and emitted findings in Chromium with supplied source observations. Complete hook acquisition is separately tested for representative DOM flows."
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_response_field_dom_reachability",
+      "name": "Response-derived DOM execution reachability",
+      "source": "background/iast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "response_dom_innerhtml_reachability"
+        },
+        {
+          "id": "response_dom_outerhtml_reachability"
+        },
+        {
+          "id": "response_dom_insertadjacenthtml_reachability"
+        },
+        {
+          "id": "response_dom_document_write_reachability"
+        },
+        {
+          "id": "response_dom_mutation_reachability"
+        },
+        {
+          "id": "response_dom_parser_reachability"
+        },
+        {
+          "id": "response_dom_contextual_fragment_reachability"
+        },
+        {
+          "id": "response_dom_sethtmlunsafe_reachability"
+        },
+        {
+          "id": "response_dom_shadow_sethtmlunsafe_reachability"
+        }
+      ],
+      "verification": "browser-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual rule filtering, heuristics and emitted findings in Chromium with supplied source observations. Complete hook acquisition is separately tested for representative DOM flows."
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_prototype_pollution_impact",
+      "name": "Prototype pollution impact confirmation",
+      "source": "background/iast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "prototype_pollution_write"
+        },
+        {
+          "id": "prototype_pollution_fetch_init"
+        }
+      ],
+      "verification": "browser-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual rule filtering, heuristics and emitted findings in Chromium with supplied source observations. Complete hook acquisition is separately tested for representative DOM flows."
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_storage_taint_to_exec",
+      "name": "Storage/referrer taint to execution sinks",
+      "source": "background/iast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "eval_storage_taint_execution"
+        },
+        {
+          "id": "function_constructor_storage_taint_execution"
+        },
+        {
+          "id": "function_apply_storage_taint_execution"
+        },
+        {
+          "id": "settimeout_storage_taint_execution"
+        },
+        {
+          "id": "setinterval_storage_taint_execution"
+        }
+      ],
+      "verification": "browser-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual rule filtering, heuristics and emitted findings in Chromium with supplied source observations. Complete hook acquisition is separately tested for representative DOM flows."
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_source_scoped_open_redirect",
+      "name": "Open redirect from client-side taint sources",
+      "source": "background/iast/modules/modules.json",
+      "tier": "standard",
+      "executable": true,
+      "checks": [
+        {
+          "id": "location_href_redirect_sources"
+        },
+        {
+          "id": "location_assign_redirect_sources"
+        },
+        {
+          "id": "location_replace_redirect_sources"
+        },
+        {
+          "id": "window_open_redirect_sources"
+        },
+        {
+          "id": "navigation_api_redirect_sources"
+        },
+        {
+          "id": "dom_attr_href_redirect_sources"
+        },
+        {
+          "id": "dom_attr_action_redirect_sources"
+        }
+      ],
+      "verification": "browser-detector-positive-negative",
+      "verificationEvidence": [
+        "tools/security/tests/detectors-analysis.test.mjs"
+      ],
+      "verificationScope": "Actual rule filtering, heuristics and emitted findings in Chromium with supplied source observations. Complete hook acquisition is separately tested for representative DOM flows."
+    }
+  ],
+  "metadataOnly": [
+    {
+      "engine": "DAST",
+      "id": "access_control_coverage",
+      "name": "Access control coverage probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "access_control_idor_bola",
+      "name": "Access control IDOR/BOLA probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "access_control_multi_identity",
+      "name": "Access control multi-identity diff",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "api_mass_assignment",
+      "name": "API mass assignment probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "api_parameter_pollution",
+      "name": "API parameter pollution probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "api_testing_coverage",
+      "name": "API testing coverage probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "authentication_browser_workflows",
+      "name": "Authentication browser workflow checks",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "authentication_coverage",
+      "name": "Authentication coverage probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "authentication_flaws",
+      "name": "Authentication flaw probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "bsql_cookie_boolean_oracle",
+      "name": "Blind SQL injection (Cookie boolean oracle)",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "bsql_cookie_boolean_time_confirm",
+      "name": "Blind SQL injection (Cookie boolean oracle + Time confirm)",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "bsql_injection",
+      "name": "Blind SQL injection",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "bsql_param_boolean_oracle",
+      "name": "Blind SQL injection (Param boolean oracle)",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "business_logic_abuse",
+      "name": "Business logic abuse probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "business_logic_coverage",
+      "name": "Business logic coverage probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "cache_poisoning",
+      "name": "Web cache poisoning probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "clickjacking_coverage",
+      "name": "Clickjacking coverage probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "client_prototype_pollution_spa",
+      "name": "SPA client prototype pollution",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "cors_advanced",
+      "name": "CORS advanced probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "cors_coverage",
+      "name": "CORS coverage probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "cors_misconfig",
+      "name": "CORS misconfiguration",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "crlf_header_injection",
+      "name": "CRLF / Response Header Injection",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "csrf_protection",
+      "name": "CSRF protection checks",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "deserialization_active_tamper",
+      "name": "Insecure deserialization active tamper",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "dom_based_vuln_coverage",
+      "name": "DOM-based vulnerability coverage probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "dom_xss_url_params",
+      "name": "Browser-navigation DOM XSS via URL parameters",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "el_injection",
+      "name": "Expression Language Injection",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "file_upload_advanced",
+      "name": "Advanced file upload abuse",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "file_upload_misconfig",
+      "name": "File upload misconfiguration",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "framework_exposure_pack",
+      "name": "Passive Recon: Framework Exposure Pack",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "graphql_advanced",
+      "name": "GraphQL advanced probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "graphql_coverage",
+      "name": "GraphQL coverage probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "graphql_introspection",
+      "name": "GraphQL Introspection",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "graphql_realtime_upload",
+      "name": "GraphQL realtime upload probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "host_header_poisoning",
+      "name": "Host Header Injection / Poisoning",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "information_disclosure_advanced",
+      "name": "Information disclosure advanced probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "information_disclosure_coverage",
+      "name": "Information disclosure coverage probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "insecure_deserialization",
+      "name": "Insecure deserialization",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "jwt_advanced",
+      "name": "JWT advanced attacks",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "llm_prompt_injection",
+      "name": "LLM prompt injection probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "nosql_injection",
+      "name": "NoSQL Injection (Mongo-style)",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "oauth_advanced",
+      "name": "OAuth advanced probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "oauth_flaws",
+      "name": "OAuth misconfiguration probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "os_command_injection_blind",
+      "name": "OS command injection (blind)",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "path_traversal_advanced",
+      "name": "Advanced directory traversal",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "php_code_injection",
+      "name": "PHP Code Injection",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "prototype_pollution_server",
+      "name": "Server-side prototype pollution probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "race_condition_burst",
+      "name": "Race-condition burst probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "recon_auth_identity_surfaces",
+      "name": "Passive Recon: Auth & Identity Surfaces",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "recon_business_workflow_surfaces",
+      "name": "Passive Recon: Billing, Admin & Support Workflows",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "recon_client_trust_boundaries",
+      "name": "Passive Recon: CSP & Client Trust Boundaries",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "recon_file_data_surfaces",
+      "name": "Passive Recon: File & Data Transfer Surfaces",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "recon_graphql_operation_shapes",
+      "name": "Passive Recon: GraphQL Operation & Schema Shapes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "recon_header_tech_hints",
+      "name": "Passive Recon: Header Technology & Auth Hints",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "recon_html_workflow_leads",
+      "name": "Passive Recon: HTML Workflow & Hidden Field Leads",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "recon_realtime_surfaces",
+      "name": "Passive Recon: WebSocket, Socket.IO & Realtime Surfaces",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "recon_tenant_boundary_surfaces",
+      "name": "Passive Recon: SaaS Tenant-Boundary Surfaces",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "request_smuggling_h1",
+      "name": "HTTP request smuggling H1 probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "request_smuggling_h2",
+      "name": "HTTP request smuggling H2 probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "saml_flaws",
+      "name": "SAML flow flaws",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "server_side_parameter_pollution",
+      "name": "Server-side parameter pollution",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "spa_client_storage_token_misuse",
+      "name": "SPA client-side token storage misuse",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "spa_cors_trusts_any_origin",
+      "name": "SPA CORS trusts any origin",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "spa_csrf_missing",
+      "name": "SPA CSRF missing protections",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "spa_dom_open_redirect",
+      "name": "SPA hash-based open redirect",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "spa_dom_sensitive_data_exposure",
+      "name": "SPA DOM sensitive data exposure",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "spa_insecure_postmessage",
+      "name": "SPA insecure postMessage",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "spa_js_injection",
+      "name": "SPA hash-based JavaScript injection",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "spa_token_in_fragment",
+      "name": "SPA token in URL fragment",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "spa_token_leak_third_party",
+      "name": "SPA token leak to third-party",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "sql_auth_bypass",
+      "name": "SQL injection Auth Bypass",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "sql_blind_conditional_error",
+      "name": "SQL blind conditional error",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "sql_boolean_hidden_data",
+      "name": "SQL boolean-based hidden data",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "sql_boolean_status_oracle",
+      "name": "SQL boolean semantic/status oracle",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "sql_content_length_oracle",
+      "name": "SQL content-length oracle",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "sql_oast",
+      "name": "SQL OAST-style callback probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "sql_time_delay",
+      "name": "SQL time-delay confirmation",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "sql_union_extract_version",
+      "name": "SQL [SQL example redacted]",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "sql_union_recon",
+      "name": "SQL UNION recon",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "sql_union_schema_enumeration",
+      "name": "SQL [SQL example redacted]",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "sql_visible_error_extract",
+      "name": "SQL visible error extract",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "sql_xml_encoded",
+      "name": "SQL XML/encoded payload bypass",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "ssrf_advanced",
+      "name": "SSRF advanced probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "ssrf_coverage",
+      "name": "SSRF coverage probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "ssrf_oast",
+      "name": "SSRF blind OAST probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "ssrf_probes",
+      "name": "Server-Side Request Forgery (generic probes)",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "ssti",
+      "name": "Server-Side Template Injection",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "stored_xss_blind",
+      "name": "Stored XSS blind follow-up probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "web_cache_deception",
+      "name": "Web cache deception probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "web_cache_poisoning_coverage",
+      "name": "Web cache poisoning coverage probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "websocket_frames_security",
+      "name": "WebSocket frame security probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "websocket_handshake_security",
+      "name": "WebSocket handshake security probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "xpath_injection",
+      "name": "XPath injection",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "xxe_advanced",
+      "name": "XXE advanced probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "xxe_advanced_oast",
+      "name": "XXE advanced blind OAST probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "xxe_coverage",
+      "name": "XXE coverage probes",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "DAST",
+      "id": "xxe_file_read",
+      "name": "XXE file read",
+      "source": "background/dast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "SAST",
+      "id": "ajax-request-header",
+      "name": "Ajax Request Header Manipulation",
+      "source": "background/sast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "SAST",
+      "id": "browser-privileged-surface-review",
+      "name": "Browser Privileged Surface Discovery",
+      "source": "background/sast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "SAST",
+      "id": "client-injection",
+      "name": "Client-side JSON / SQL / XPath Injection",
+      "source": "background/sast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "SAST",
+      "id": "client-regex-dos",
+      "name": "Client-side Regex DoS",
+      "source": "background/sast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "SAST",
+      "id": "cross-context-channel-review",
+      "name": "Cross-context Channel Discovery",
+      "source": "background/sast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "SAST",
+      "id": "document-domain-manipulation",
+      "name": "Document Domain Manipulation",
+      "source": "background/sast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "SAST",
+      "id": "dom-clobbering",
+      "name": "DOM Clobbering",
+      "source": "background/sast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "SAST",
+      "id": "dom-local-file-path-manipulation",
+      "name": "DOM Local File Path Manipulation",
+      "source": "background/sast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "SAST",
+      "id": "dom-selector",
+      "name": "DOM Selector Injection",
+      "source": "background/sast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "SAST",
+      "id": "graphql-client-review",
+      "name": "GraphQL Client Discovery",
+      "source": "background/sast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "SAST",
+      "id": "internal-host-and-env-discovery",
+      "name": "Internal Host and Environment Discovery",
+      "source": "background/sast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "SAST",
+      "id": "jwt-client-misuse",
+      "name": "JWT Client Misuse",
+      "source": "background/sast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "SAST",
+      "id": "markdown-html-rendering",
+      "name": "Markdown and Rich Content Rendering",
+      "source": "background/sast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "SAST",
+      "id": "oauth-oidc-client-flows",
+      "name": "OAuth and OIDC Client Flow Discovery",
+      "source": "background/sast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "SAST",
+      "id": "prototype-pollution-client",
+      "name": "Client-side Prototype Pollution",
+      "source": "background/sast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "SAST",
+      "id": "proxy-override-header-poisoning",
+      "name": "Proxy Override Header Poisoning",
+      "source": "background/sast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "SAST",
+      "id": "realtime-transport-poisoning",
+      "name": "Real-time Transport Poisoning",
+      "source": "background/sast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "SAST",
+      "id": "saml-sso-client-flows",
+      "name": "SAML SSO Client Flow Discovery",
+      "source": "background/sast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "SAST",
+      "id": "secrets",
+      "name": "Secrets & Credentials Exposure",
+      "source": "background/sast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "SAST",
+      "id": "service-worker-cache-poisoning",
+      "name": "Service Worker Cache Poisoning",
+      "source": "background/sast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "SAST",
+      "id": "storage-security",
+      "name": "Storage Security",
+      "source": "background/sast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "SAST",
+      "id": "trusted-types-policy-review",
+      "name": "Trusted Types Policy Review",
+      "source": "background/sast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "SAST",
+      "id": "upload-object-storage-discovery",
+      "name": "Upload and Object Storage Discovery",
+      "source": "background/sast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "SAST",
+      "id": "webauthn-passkey-discovery",
+      "name": "WebAuthn and Passkey Discovery",
+      "source": "background/sast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "SAST",
+      "id": "websocket-url-poisoning",
+      "name": "WebSocket URL Poisoning",
+      "source": "background/sast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_blob_object_url_execution",
+      "name": "Blob and object URL execution",
+      "source": "background/iast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_client_json_parsing",
+      "name": "Client-side JSON parsing sinks",
+      "source": "background/iast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_client_sql_injection",
+      "name": "Client-side SQL injection (WebSQL)",
+      "source": "background/iast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_clipboard_exfiltration",
+      "name": "Clipboard exfiltration sinks",
+      "source": "background/iast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_csrf_like_requests",
+      "name": "Potential CSRF-prone cross-site requests",
+      "source": "background/iast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_debug_logging_leaks",
+      "name": "Debug logging and console leaks",
+      "source": "background/iast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_document_domain_manipulation",
+      "name": "Document domain manipulation",
+      "source": "background/iast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_dom_clobbering",
+      "name": "DOM clobbering candidates",
+      "source": "background/iast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_dynamic_import_loading",
+      "name": "Dynamic import and loader surfaces",
+      "source": "background/iast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_file_reader_sensitive_flows",
+      "name": "FileReader sink coverage",
+      "source": "background/iast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_form_submit_csrf",
+      "name": "Programmatic form submission trust and CSRF",
+      "source": "background/iast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_inbound_channel_trust",
+      "name": "Inbound channel trust boundaries",
+      "source": "background/iast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_indexeddb_cache_storage",
+      "name": "IndexedDB and CacheStorage persistence",
+      "source": "background/iast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_realtime_exfiltration",
+      "name": "Real-time channel exfiltration sinks",
+      "source": "background/iast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_response_field_form_targets",
+      "name": "Response-derived form targets",
+      "source": "background/iast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_session_material_cross_boundary_exfiltration",
+      "name": "Session material crossing trust boundaries",
+      "source": "background/iast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_storage_backed_request_reuse",
+      "name": "Storage-backed request shaping",
+      "source": "background/iast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_storage_token_leaks",
+      "name": "Client-side token and sensitive data storage",
+      "source": "background/iast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_trusted_types_and_sanitizer_misuse",
+      "name": "Trusted Types and sanitizer misuse",
+      "source": "background/iast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_web_messaging_channels",
+      "name": "Web messaging channel misuse",
+      "source": "background/iast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_websocket_url_poisoning",
+      "name": "WebSocket URL poisoning",
+      "source": "background/iast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    },
+    {
+      "engine": "IAST",
+      "id": "iast_xpath_injection",
+      "name": "Client-side XPath injection",
+      "source": "background/iast/modules/modules_pro_metadata.json",
+      "executable": false,
+      "reason": "metadata_only_in_standard_rulepacks"
+    }
+  ],
+  "v9Comparison": [
+    {
+      "file": "background/dast/modules/modules.json",
+      "additionalModuleIds": [],
+      "identical": false
+    },
+    {
+      "file": "background/dast/modules/modules_cve.json",
+      "additionalModuleIds": [],
+      "identical": true
+    },
+    {
+      "file": "background/sast/modules/modules.json",
+      "additionalModuleIds": [],
+      "identical": true
+    },
+    {
+      "file": "background/iast/modules/modules.json",
+      "additionalModuleIds": [],
+      "identical": true
+    }
+  ],
+  "v9AdditionalImplementationFiles": [],
+  "verificationNotes": [
+    "Module fixtures establish detector contracts, not universal vulnerability coverage.",
+    "PTK SPA harmless text reflection remains visible as an observation with executionObserved=false.",
+    "Native cache/privacy constant-scope defect and comprehensive IAST propagation recursion are corrected with explicit baseline characterization tests.",
+    "COMPREHENSIVE IAST also preserves boxed String receiver taint; reentrant bookkeeping is suppressed without disabling application propagation."
+  ],
+  "sourceAudit": {
+    "v9AdditionalImplementationFiles": [],
+    "additionalExecutableRuleDefinitions": 0,
+    "checked": "All JSON files in both supplied trees and all non-UI/non-package implementation paths; executable rules present only in the four inventoried rulepacks.",
+    "additionalV9AttackOrRuleIds": []
+  },
+  "advancedBrowserVerification": {
+    "evidence": "tools/security/evidence/README.md",
+    "storedInertWorkflow": "matched real submission/retrieval and negative browser confirmation",
+    "storedPositiveExecution": "matched original/owned planner, mutation, stored retrieval and browser execution: two positives including authenticated flow and three negative controls; fixture-derived executable rule, not a premium rule catalog",
+    "scopedFrames": "31 browser checks passed: existing and navigated same-origin/OOPIF documents, no reload, safe/excluded controls, revocation, retained evidence and browser debugger coexistence",
+    "messaging": "first-event difference characterized by listener ordering; existing-document first-consumption fix verified with native getter identity/receiver contracts, safe controls, callback counts and stop behavior",
+    "httpScope": "12 browser checks passed: allowed primary/secondary events and actual-host routes, with foreign/excluded-path events absent from retained evidence",
+    "scriptCollection": "authenticated SCA body findings match PTK at opaque URLs: 18/0/0 for A/B/anonymous, with no owned refetch; preloaded main-frame scripts and extensionless JavaScript Fetch/XHR verified",
+    "storedPositiveEvidence": [
+      "tools/security/stored-positive-verification.md",
+      "tools/security/evidence/stored-positive.json"
+    ],
+    "additionalCollectionCombinations": {
+      "evidence": "tools/security/evidence/collection-combinations.json",
+      "cases": 5,
+      "asyncStorage": "matched localStorage → innerHTML observation and safe text control",
+      "objectMessage": "historical baseline gap; now owned object/query/history/foreign-message observations intentionally exceed original PTK, with safe controls and native identity preserved",
+      "authenticatedSPA": "matched SAST dynamic-script and SCA dependency detections; synthetic version fixture",
+      "wireDifference": "historical replay difference led to captured-body acquisition; current authenticated fixture matches body findings without extra owned GETs"
+    },
+    "iastAcquisition": {
+      "evidence": ["tools/security/evidence/iast-acquisition-browser.json", "tools/security/evidence/collection-iast-acquisition-full.json"],
+      "classification": "source/sink observations, not demonstrated execution",
+      "bounds": { "depth": 4, "nodes": 64, "leaves": 16, "propertiesPerNode": 32, "leafCharacters": 1024, "messageSourceKeys": 128 },
+      "limits": "plain own-data objects/arrays only; accessors, exotic objects and prototype-related keys skipped",
+      "history": "successful pushState/replaceState and popstate refresh sources; stopped hooks do not acquire new values"
+    }
+  },
+  "managedRuntime": {
+    "platform": "win32-x64",
+    "setup": "explicit_user_action",
+    "lifecycle": {
+      "installation": "staged publication with rollback; Windows fixture passed",
+      "daemonUpdates": "source revision negotiation; idle replacement and active resource preservation tested",
+      "legacyExplicitRestart": "Windows lifecycle suite passed 8 tests including valid identity restart and substituted PID rejection",
+      "cleanMachineSetup": "pending: no Windows VM available",
+      "evidence": [
+        "tools/host/tests/install.test.js",
+        "tools/host/tests/security-upgrade.test.cjs",
+        "tools/security/tests/managed-java-fallback.cjs"
+      ]
+    },
+    "investigation": {
+      "scriptedModelProtocol": "captured candidate reproduction, native artifact read, and report references passed",
+      "liveModelInference": "passed: xiaomi/mimo-v2.6-flash, 11 requests, 23 checks including intended-input mutation, independent impact/control and retained reports",
+      "candidateInputs": "existing query/form/JSON/header inputs; exact selectors for ambiguous occurrences; unsupported/missing inputs are explicit skips",
+      "requiredHostFeature": "security_candidate_replay_v2",
+      "evidence": "tools/security/tests/managed-agent.browser.cjs",
+      "liveEvidence": [
+        "tools/security/tests/live-model.browser.cjs",
+        "tools/security/tests/live-model-verify.cjs",
+        "tools/security/live-model-verification.md"
+      ]
+    },
+    "raw": {
+      "verification": "local-independent-framing-fixtures-and-native-bridge",
+      "automaticDesynchronizationConfirmation": true,
+      "confirmationModes": [
+        "paired_backend_observation",
+        "paired_controlled_response_queue"
+      ],
+      "scope": "connection and decoded HTTP/1/HTTP/2 routes, including request-looking nested routes; unknown/unsupported routing rejected",
+      "largeEvidencePagination": true,
+      "structuredHttp2": true,
+      "validatedWebSocketUpgrade": true,
+      "limitations": [
+        "HTTP/2 structured body limited to initial 65535-byte connection/stream window; no dynamic window negotiation",
+        "No opaque leading HTTP/1 bytes or bare-LF boundaries",
+        "No HTTP/2 CONNECT, PUSH_PROMISE or unknown extension frames",
+        "Controlled response-queue confirmation requires distinguishable response bodies; arbitrary deployment interpretations are not proven"
+      ],
+      "evidence": [
+        "tools/host/tests/security-raw-complete.test.cjs",
+        "tools/host/tests/security-transport-contract.test.js",
+        "tools/security/tests/raw-bridge.browser.cjs",
+        "tools/security/raw-contract.md"
+      ]
+    },
+    "verification": "security/advanced-verification.md",
+    "scope": {
+      "default": "exact origins",
+      "optional": "same host across HTTP(S) and ports; optional subdomains",
+      "whenUnset": "explicit selected target per new operation",
+      "exclusions": "retained; current scope restrictions checked during execution",
+      "hostFeature": "security_scope_v2",
+      "verification": [
+        "tools/security/tests/scope-modes.test.mjs",
+        "tools/security/tests/iast-http-scope.browser.cjs (SCOPE_HOST_MODE=1)",
+        "tools/security/tests/raw-bridge.browser.cjs (CERT_X_SCOPE_HOST=1)",
+        "tools/security/tests/collection-host-scope.browser.cjs"
+      ]
+    }
+  },
+  "dastExecutionVerification": {
+    "thoroughStart": "bounded prior safe GET captures or one selected-page GET",
+    "ptkDefaults": "interaction prerequisite retained and reported",
+    "outcomes": "zero-input, baseline-only, limited and failed execution cannot imply a clean assessment",
+    "counts": "observations, seeds, tasks entered, baselines/probes, other admissions, errors and skips remain distinct",
+    "evidence": ["tools/picker/tests/dast-start-real-test.js", "tools/picker/tests/dast-service-outcome.test.mjs", "tools/security/evidence/dast-public-smoke.json"]
+  },
+  "scaAcquisitionVerification": {
+    "bodies": "exact owner/tab/document/request/hop grants; MIME-selected extensionless Fetch/XHR supported",
+    "preloaded": "current root, nested same-process and cross-origin child executable Debugger text with exact document grants; separate provenance and no new GET",
+    "stop": "protocol cut plus owned in-flight request/analysis drain; bounded incomplete outcomes retain evidence and recovery guidance",
+    "configuration": "acquisition preferences merge global/workspace/run fields; explicit user ceilings cannot be raised; effective settings retained in run and reports",
+    "limits": ["defaults: 128 scripts, 8 MiB per resource, 32 MiB acquired content and 5 s drain; configurable within advertised platform bounds", "shared capture pressure, navigation and unavailable debugger contexts remain explicit gaps", "mislabeled JavaScript may not receive body admission", "a pending native CDP command cannot be cancelled; cleanup state is reported separately"],
+    "evidence": ["tools/security/evidence/sca-authenticated-browser.json", "tools/security/tests/sca-authenticated-verify.cjs", "tools/security/evidence/sca-preloaded-browser.json", "tools/security/evidence/sca-frames-stop-browser.json", "tools/security/evidence/acquisition-flow-browser.json", "tools/security/tests/capture-stop.test.mjs", "tools/security/tests/resources.test.mjs"]
+  },
+  "agentCoverageRecovery": {
+    "targetInput": "canonical tabId plus compatible decimal-string/tab alias; invalid/conflicting IDs rejected before browser effects with non-retryable recovery",
+    "coverage": "actionableGaps and recovery accompany status/findings and JSON/Markdown/PDF exports; incomplete acquisition never establishes a clean result",
+    "evidence": ["tools/picker/tests/security-targets.test.js", "tools/security/tests/coverage-recovery.test.mjs", "tools/security/tests/report-coverage.browser.cjs", "tools/security/tests/managed-agent.browser.cjs"]
+  },
+  "agentHealthFollowup": {
+    "integerTarget": "integer tabId, string tabId and string tab alias pass through actual scripted chat tools; reported integer-only failure remains unconfirmed",
+    "toolContract": "public capability schemas use runId; utility selector/fields are advertised; unsupported selection fails before dispatch; owned paginated run lookup preserves chat isolation",
+    "sast": "owned preloaded client JavaScript analyzed without refetch; original HTML absence and missing-resource partials remain explicit; server-side source is not inspected",
+    "workflow": "same active DAST run consumes authenticated form submission: 18 POST mutations, seven reflected-XSS candidates on positive, zero on escaped control",
+    "evidence": ["tools/security/evidence/tool-target-chat.json", "tools/security/evidence/sast-preloaded-combined.json", "tools/security/evidence/dast-workflow-browser.json", "tools/security/tests/progress.test.mjs", "tools/security/tests/operation-schemas.test.mjs"],
+    "limits": "scripted providers establish execution and recovery, not live model investigation quality; exact user's missing source and previous loaded build unknown"
+  },
+  "liveDvwaVerification": {
+    "model": "xiaomi/mimo-v2.6-flash",
+    "target": "https://pentest-ground.com:4280",
+    "runId": "6737e02b-4771-4551-8f81-1361ad62fa0e",
+    "modelGenerated": ["browser navigation", "normal form submissions", "scan start/status/findings/stop", "Markdown export"],
+    "inputModules": ["xss_r", "sqli", "exec"],
+    "outcome": { "tasksPlanned": 184, "tasksExecuted": 184, "probesDispatched": 184, "baselinesDispatched": 8, "taskErrors": 0, "taskSkips": 0, "rawAlerts": 11, "candidateGroups": 2, "exportBytes": 38535 },
+    "narrative": "In-chat response hit the test output cap; one separate same-model report-only request completed the narrative. Original uninterrupted-chat checks remain false.",
+    "limitations": ["explicit route/module prompt and budget reminders", "missing dvwa.users baseline table", "no independent exploit confirmation", "command route yielded no finding", "not all DVWA modules exercised"],
+    "evidence": ["tools/security/tests/dvwa-live.browser.cjs", "tools/security/tests/dvwa-live-verify.cjs", "tools/security/tests/dvwa-report-complete.cjs", "tools/security/live-model-verification.md", "%LOCALAPPDATA%/cert-x/verification/dvwa-live-2026-10-22T19-09-04-186Z.verified.json"]
+  },
+  "commandInjectionFollowup": {
+    "cause": "Invalid dangling terminal pipe in the supplied legacy POSIX payload; syntax-only and paired public marker tests distinguish the repaired form.",
+    "preserved": "Original attack ID/validator retained; original PTK source unchanged; intentional payload differential tested explicitly.",
+    "added": ["oscommand_inband_printf_pipe", "oscommand_inband_printf_separator"],
+    "controls": "Computed per-probe output absent from the request and baseline; local quoted/reflection negatives; nine focused public requests total.",
+    "liveRunId": "9ad4c72b-6210-41b1-b7b4-49183c804d32",
+    "liveOutcome": "Actual model detected the repaired legacy command probe, used native queue waits, exported report and finished original chat with no reminders/continuation; 33 model requests, final 1115 tokens. Scan budget caused 18 skips, explicitly reported.",
+    "narrativeLimitations": "Raw narrative has an XSS alert tally error and conflates unselected analysis engines with unavailable backends; verifier preserves both. Structured per-module counts and selected-engine metadata added afterward.",
+    "evidence": ["tools/security/tests/command-detection.test.mjs", "tools/security/tests/command-injection.browser.cjs", "tools/security/tests/command-injection-syntax-public.cjs", "tools/security/tests/scan-wait.test.mjs", "tools/security/tests/command-report-live-verify.cjs", "security/advanced-verification.md"]
+  }
+}

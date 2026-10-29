@@ -1,0 +1,176 @@
+{
+  "error": "AssertionError [ERR_ASSERTION]: Cross-site fixture must acquire an OOPIF session\n    at main (C:\\Users\\zeb\\Downloads\\ki\\tools\\security\\tests\\sca-frames-stop.browser.cjs:64:12)",
+  "cases": [
+    {
+      "account": "a",
+      "acquisition": {
+        "captured": 4,
+        "gaps": 0,
+        "provenance": "debugger_script_source",
+        "sessionsInspected": 2,
+        "effectiveLimits": {
+          "maxScripts": 128,
+          "maxResourceBytes": 8388608,
+          "maxTotalBytes": 33554432
+        },
+        "childDocumentsUninspected": 0
+      },
+      "drain": {
+        "complete": true,
+        "gaps": 0
+      },
+      "findings": 18,
+      "bodyCoverage": {
+        "captured": 2,
+        "analyzed": 2,
+        "gaps": 0
+      },
+      "sourceCoverage": {
+        "captured": 4,
+        "analyzed": 4,
+        "gaps": 0
+      },
+      "acquisitions": [
+        "captured_http_body"
+      ],
+      "extraReads": [],
+      "liveReads": [
+        {
+          "url": "/opaque/fetch",
+          "account": "a"
+        },
+        {
+          "url": "/opaque/xhr",
+          "account": "a"
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "account": "b",
+      "acquisition": {
+        "captured": 2,
+        "gaps": 0,
+        "provenance": "debugger_script_source",
+        "sessionsInspected": 1,
+        "effectiveLimits": {
+          "maxScripts": 128,
+          "maxResourceBytes": 8388608,
+          "maxTotalBytes": 33554432
+        },
+        "childDocumentsUninspected": 0
+      },
+      "capture": {
+        "frames": [
+          {
+            "frameId": "E051670033CCFC731549844D62DD5CCD",
+            "loaderId": "C9392F40E74BF201F425DACA39F3C523",
+            "documentId": "C9392F40E74BF201F425DACA39F3C523",
+            "url": "https://127.0.0.1:62087/app",
+            "sessionGeneration": 3
+          },
+          {
+            "frameId": "D26E93A579413F54E2229D45515321E9",
+            "parentFrameId": "E051670033CCFC731549844D62DD5CCD",
+            "loaderId": "0C8999C325CBAA1599D558E321DD6AF4",
+            "documentId": "0C8999C325CBAA1599D558E321DD6AF4",
+            "url": "https://127.0.0.1:62087/frame",
+            "sessionGeneration": 3
+          }
+        ],
+        "children": [],
+        "childStates": []
+      }
+    }
+  ],
+  "wire": [
+    {
+      "url": "/login/a",
+      "account": "anonymous"
+    },
+    {
+      "url": "/app",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/asset.js",
+      "account": "a"
+    },
+    {
+      "url": "/frame",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/frame.js",
+      "account": "a"
+    },
+    {
+      "url": "/cross",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/cross.js",
+      "account": "a"
+    },
+    {
+      "url": "/nested",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/nested.js",
+      "account": "a"
+    },
+    {
+      "url": "/favicon.ico",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/fetch",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/xhr",
+      "account": "a"
+    },
+    {
+      "url": "/login/b",
+      "account": "anonymous"
+    },
+    {
+      "url": "/app",
+      "account": "b"
+    },
+    {
+      "url": "/opaque/asset.js",
+      "account": "b"
+    },
+    {
+      "url": "/frame",
+      "account": "b"
+    },
+    {
+      "url": "/opaque/frame.js",
+      "account": "b"
+    },
+    {
+      "url": "/cross",
+      "account": "b"
+    },
+    {
+      "url": "/opaque/cross.js",
+      "account": "b"
+    },
+    {
+      "url": "/nested",
+      "account": "b"
+    },
+    {
+      "url": "/opaque/nested.js",
+      "account": "b"
+    },
+    {
+      "url": "/favicon.ico",
+      "account": "b"
+    }
+  ]
+}

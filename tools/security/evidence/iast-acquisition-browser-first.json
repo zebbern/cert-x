@@ -1,0 +1,587 @@
+{
+  "schema": 1,
+  "scope": "Local inert browser acquisition; matching values are observations, not exploit proof.",
+  "referenceSha256": "901619844a281628f9dc9eb17ff978cc3498cf05b9548cea15808c706c42c581",
+  "origins": {
+    "document": "http://127.0.0.1:57734",
+    "foreignFrame": "http://127.0.0.1:57735"
+  },
+  "reference": {
+    "steps": {
+      "object": {
+        "observations": [],
+        "findings": []
+      },
+      "safe": {
+        "observations": [],
+        "findings": []
+      },
+      "accessorReads": 2,
+      "query": {
+        "observations": [],
+        "findings": []
+      },
+      "state": {
+        "observations": [],
+        "findings": []
+      },
+      "stateSafe": {
+        "observations": [],
+        "findings": []
+      },
+      "foreign": {
+        "observations": [],
+        "findings": []
+      }
+    },
+    "contract": {
+      "documentIdentity": "28b5d720-34f0-42fa-8797-e8b136f0f303",
+      "calls": {
+        "object": 1,
+        "safe": 1,
+        "foreign": 1,
+        "accessor": 1
+      },
+      "identities": [
+        {
+          "tag": "object",
+          "same": true,
+          "repeat": true,
+          "origin": "http://127.0.0.1:57734"
+        },
+        {
+          "tag": "safe",
+          "same": true,
+          "repeat": true,
+          "origin": "http://127.0.0.1:57734"
+        },
+        {
+          "tag": "foreign",
+          "same": true,
+          "repeat": true,
+          "origin": "http://127.0.0.1:57735"
+        }
+      ],
+      "accessorReads": 2,
+      "receiverErrors": [
+        [
+          "TypeError",
+          "TypeError"
+        ],
+        [
+          "TypeError",
+          "TypeError"
+        ],
+        [
+          "TypeError",
+          "TypeError"
+        ]
+      ],
+      "staleQuery": [],
+      "stateKeys": []
+    },
+    "initialIdentity": "28b5d720-34f0-42fa-8797-e8b136f0f303",
+    "stopUnchanged": true,
+    "finalFindingCount": 3
+  },
+  "owned": {
+    "steps": {
+      "object": {
+        "observations": [
+          {
+            "ruleId": "dom_innerhtml_xss",
+            "moduleId": "iast_dom_xss",
+            "sourceKinds": [
+              "postMessage"
+            ],
+            "sink": "dom.innerHTML",
+            "sourceLocations": [
+              "http://127.0.0.1:57734/app"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "6bbe6d4f-49dc-4692-a891-6f0f56cfdf4c::IAST::86176941a46316fc0ef39355592b866d81a9a9d3",
+            "fingerprint": "86176941a46316fc0ef39355592b866d81a9a9d3",
+            "category": "xss",
+            "severity": "high",
+            "confidence": 29,
+            "cwe": [
+              "CWE-79"
+            ],
+            "owasp": [
+              "A05:2025 - Injection",
+              "A03:2021 - Injection"
+            ],
+            "location": {
+              "url": "http://127.0.0.1:57734/app",
+              "scriptUrl": null,
+              "line": null,
+              "column": null,
+              "domPath": "div#sink",
+              "kind": "runtime",
+              "method": null
+            },
+            "ruleId": "dom_innerhtml_xss",
+            "ruleName": "DOM XSS via Element.innerHTML",
+            "moduleId": "iast_dom_xss",
+            "moduleName": "DOM XSS sinks",
+            "description": "Tainted data assigned to innerHTML (possible DOM XSS).",
+            "recommendation": "<ul><li>Avoid inserting untrusted strings into HTML or inline handlers.</li><li>Prefer textContent or safe templating; sanitize with DOMPurify when HTML is required.</li><li>Use CSP without unsafe-inline where possible.</li></ul>",
+            "links": {
+              "OWASP": "https://owasp.org/www-community/attacks/xss/",
+              "CWE": "https://cwe.mitre.org/data/definitions/79.html"
+            },
+            "evidence": {
+              "iast": {
+                "sinkId": "dom.innerHTML",
+                "sourceId": "postMessage:http://127.0.0.1:57734:payload.items.0.html",
+                "sourceKey": "postMessage:http://127.0.0.1:57734:payload.items.0.html",
+                "sourceKind": "postMessage",
+                "sourceValuePreview": "<b>CERTX_IAST_OBJECT</b>",
+                "taintSource": "postMessage from http://127.0.0.1:57734:payload.items.0.html (<b>CERTX_IAST_OBJECT</b>)",
+                "source": "postMessage from http://127.0.0.1:57734:payload.items.0.html (<b>CERTX_IAST_OBJECT</b>)",
+                "primarySource": {
+                  "source": "postMessage:http://127.0.0.1:57734:payload.items.0.html",
+                  "raw": "<b>CERTX_IAST_OBJECT</b>",
+                  "kind": "postMessage",
+                  "matchType": "substring",
+                  "score": 3001000000,
+                  "lastUpdated": 1792680558281,
+                  "taintKind": "user_input",
+                  "key": "postMessage:http://127.0.0.1:57734:payload.items.0.html",
+                  "value": "<b>CERTX_IAST_OBJECT</b>",
+                  "label": "postMessage from http://127.0.0.1:57734:payload.items.0.html",
+                  "detail": "postMessage:http://127.0.0.1:57734:payload.items.0.html",
+                  "location": "http://127.0.0.1:57734/app",
+                  "sourceKind": "postMessage",
+                  "sourceId": "s_5",
+                  "origin": null,
+                  "isCrossOriginMessage": null,
+                  "responseUrl": null,
+                  "responseStatus": null,
+                  "__normalizedSource": true
+                },
+                "secondarySources": [
+                  {
+                    "display": "postMessage from http://127.0.0.1:57734:payload.items.0.html (<b>CERTX_IAST_OBJECT</b>)",
+                    "key": "postMessage:http://127.0.0.1:57734:payload.items.0.html",
+                    "sourceKind": "postMessage",
+                    "score": 3001000000,
+                    "sourceValuePreview": "<b>CERTX_IAST_OBJECT</b>"
+                  }
+                ],
+                "sources": [
+                  {
+                    "source": "postMessage:http://127.0.0.1:57734:payload.items.0.html",
+                    "raw": "<b>CERTX_IAST_OBJECT</b>",
+                    "kind": "postMessage",
+                    "matchType": "substring",
+                    "score": 3001000000,
+                    "lastUpdated": 1792680558281,
+                    "taintKind": "user_input",
+                    "key": "postMessage:http://127.0.0.1:57734:payload.items.0.html",
+                    "value": "<b>CERTX_IAST_OBJECT</b>",
+                    "label": "postMessage from http://127.0.0.1:57734:payload.items.0.html",
+                    "detail": "postMessage:http://127.0.0.1:57734:payload.items.0.html",
+                    "location": "http://127.0.0.1:57734/app",
+                    "sourceKind": "postMessage",
+                    "sourceId": "s_5",
+                    "origin": null,
+                    "isCrossOriginMessage": null,
+                    "responseUrl": null,
+                    "responseStatus": null,
+                    "__normalizedSource": true,
+                    "display": "postMessage from http://127.0.0.1:57734:payload.items.0.html (<b>CERTX_IAST_OBJECT</b>)",
+                    "sourceValuePreview": "<b>CERTX_IAST_OBJECT</b>"
+                  }
+                ],
+                "sink": "innerHTML",
+                "sinkContext": {
+                  "requestUrl": null,
+                  "method": null,
+                  "headerName": null,
+                  "destUrl": null,
+                  "destHost": null,
+                  "destOrigin": null,
+                  "isCrossOrigin": null,
+                  "tagName": "DIV",
+                  "domPath": "div#sink",
+                  "attribute": null,
+                  "elementId": null,
+                  "cookieName": null,
+                  "cookieAttributes": null,
+                  "storageKey": null,
+                  "storageArea": null
+                },
+                "matched": "<b>CERTX_IAST_OBJECT</b>",
+                "trace": "Error: Sink: xss-via-innerHTML\nat http://127.0.0.1:57734/app:15:51",
+                "traceSummary": "at http://127.0.0.1:57734/app:15:51",
+                "context": {
+                  "location": "http://127.0.0.1:57734/app",
+                  "domPath": "div#sink",
+                  "elementId": "sink",
+                  "tagName": "div",
+                  "valuePreview": "<b>CERTX_IAST_OBJECT</b>"
+                },
+                "sinkSummary": {
+                  "sinks": [
+                    "dom.innerHTML"
+                  ],
+                  "primarySink": "dom.innerHTML"
+                },
+                "taintSummary": {
+                  "sources": [
+                    "postMessage from http://127.0.0.1:57734:payload.items.0.html (<b>CERTX_IAST_OBJECT</b>)",
+                    "postMessage:http://127.0.0.1:57734:payload.items.0.html"
+                  ],
+                  "primarySource": "postMessage from http://127.0.0.1:57734:payload.items.0.html (<b>CERTX_IAST_OBJECT</b>)"
+                },
+                "schemaVersion": "iast-evidence@1",
+                "primaryClass": "observation",
+                "sourceRole": "origin",
+                "operation": {
+                  "sinkId": "dom.innerHTML",
+                  "sinkArgs": null
+                },
+                "detection": {
+                  "schemaVersion": "iast-detection@1",
+                  "reason": "same_origin_postmessage_receiver",
+                  "dataKind": "unknown",
+                  "confidence": 58,
+                  "details": {
+                    "messageOrigin": "unknown",
+                    "crossOriginMessage": false
+                  }
+                },
+                "trust": {
+                  "schemaVersion": "iast-trust@1",
+                  "level": "same_origin",
+                  "decision": "allow"
+                },
+                "routing": {
+                  "runtimeUrl": "http://127.0.0.1:57734/app",
+                  "pathname": "/app",
+                  "clientRoute": "/app",
+                  "route": "/app",
+                  "urlPattern": "http://127.0.0.1:57734/app"
+                },
+                "aggregate": {
+                  "mode": "route-source-sink-callsite",
+                  "key": "IAST|route-source-sink-callsite|6bbe6d4f-49dc-4692-a891-6f0f56cfdf4c|127.0.0.1:57734|iast_dom_xss|dom_innerhtml_xss|http://127.0.0.1:57734/app|postmessage:http://127.0.0.1:57734:payload.items.0.html|dom.innerhtml|div#sink"
+                },
+                "occurrenceCount": 1,
+                "sampleLimit": 10,
+                "truncated": false,
+                "samples": [
+                  {
+                    "url": "http://127.0.0.1:57734/app",
+                    "route": "http://127.0.0.1:57734/app",
+                    "sourceKey": "postmessage:http://127.0.0.1:57734:payload.items.0.html",
+                    "sourceKind": "postMessage",
+                    "source": "postMessage from http://127.0.0.1:57734:payload.items.0.html (<b>CERTX_IAST_OBJECT</b>)",
+                    "sinkId": "dom.innerHTML",
+                    "callsite": "div#sink",
+                    "matched": "<b>CERTX_IAST_OBJECT</b>",
+                    "seenAt": "2026-10-22T14:49:18.287Z"
+                  }
+                ],
+                "affectedUrls": [
+                  "http://127.0.0.1:57734/app"
+                ]
+              }
+            },
+            "scanId": "6bbe6d4f-49dc-4692-a891-6f0f56cfdf4c",
+            "createdAt": "2026-10-22T14:49:18.285Z",
+            "updatedAt": "2026-10-22T14:49:18.285Z",
+            "vulnId": "dom_xss",
+            "requestKey": null,
+            "presentationAggregate": "route-source-sink-callsite",
+            "engine": "IAST",
+            "tags": [
+              "iast",
+              "dom",
+              "xss"
+            ]
+          }
+        ]
+      },
+      "safe": {
+        "observations": [],
+        "findings": []
+      },
+      "accessorReads": 1,
+      "query": {
+        "observations": [
+          {
+            "ruleId": "dom_innerhtml_xss",
+            "moduleId": "iast_dom_xss",
+            "sourceKinds": [
+              "query"
+            ],
+            "sink": "dom.innerHTML",
+            "sourceLocations": [
+              "http://127.0.0.1:57734/app?collector=%3Cb%3ECERTX_IAST_QUERY%3C%2Fb%3E"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "6bbe6d4f-49dc-4692-a891-6f0f56cfdf4c::IAST::86a6053d08f2882e190d256cca1823efde512c95",
+            "fingerprint": "86a6053d08f2882e190d256cca1823efde512c95",
+            "category": "xss",
+            "severity": "high",
+            "confidence": 77,
+            "cwe": [
+              "CWE-79"
+            ],
+            "owasp": [
+              "A05:2025 - Injection",
+              "A03:2021 - Injection"
+            ],
+            "location": {
+              "url": "http://127.0.0.1:57734/app?collector=%3Cb%3ECERTX_IAST_QUERY%3C%2Fb%3E",
+              "scriptUrl": null,
+              "line": null,
+              "column": null,
+              "domPath": "div#sink",
+              "kind": "runtime",
+              "method": null
+            },
+            "ruleId": "dom_innerhtml_xss",
+            "ruleName": "DOM XSS via Element.innerHTML",
+            "moduleId": "iast_dom_xss",
+            "moduleName": "DOM XSS sinks",
+            "description": "Tainted data assigned to innerHTML (possible DOM XSS).",
+            "recommendation": "<ul><li>Avoid inserting untrusted strings into HTML or inline handlers.</li><li>Prefer textContent or safe templating; sanitize with DOMPurify when HTML is required.</li><li>Use CSP without unsafe-inline where possible.</li></ul>",
+            "links": {
+              "OWASP": "https://owasp.org/www-community/attacks/xss/",
+              "CWE": "https://cwe.mitre.org/data/definitions/79.html"
+            },
+            "evidence": {
+              "iast": {
+                "sinkId": "dom.innerHTML",
+                "sourceId": "query:collector",
+                "sourceKey": "query:collector",
+                "sourceKind": "query",
+                "sourceValuePreview": "<b>CERTX_IAST_QUERY</b>",
+                "taintSource": "location.search parameter \"collector\" (value: \"<b>CERTX_IAST_QUERY</b>\")",
+                "source": "location.search parameter \"collector\" (value: \"<b>CERTX_IAST_QUERY</b>\")",
+                "primarySource": {
+                  "source": "query:collector",
+                  "raw": "<b>CERTX_IAST_QUERY</b>",
+                  "kind": "query",
+                  "matchType": "substring",
+                  "score": 10001000000,
+                  "lastUpdated": 1792680559955,
+                  "taintKind": "user_input",
+                  "key": "query:collector",
+                  "value": "<b>CERTX_IAST_QUERY</b>",
+                  "label": "Query parameter \"collector\"",
+                  "detail": "collector",
+                  "location": "http://127.0.0.1:57734/app?collector=%3Cb%3ECERTX_IAST_QUERY%3C%2Fb%3E",
+                  "sourceKind": "query",
+                  "sourceId": "s_6",
+                  "origin": null,
+                  "isCrossOriginMessage": null,
+                  "responseUrl": null,
+                  "responseStatus": null,
+                  "__normalizedSource": true
+                },
+                "secondarySources": [
+                  {
+                    "display": "location.search parameter \"collector\" (value: \"<b>CERTX_IAST_QUERY</b>\")",
+                    "key": "query:collector",
+                    "sourceKind": "query",
+                    "score": 10001000000,
+                    "sourceValuePreview": "<b>CERTX_IAST_QUERY</b>"
+                  }
+                ],
+                "sources": [
+                  {
+                    "source": "query:collector",
+                    "raw": "<b>CERTX_IAST_QUERY</b>",
+                    "kind": "query",
+                    "matchType": "substring",
+                    "score": 10001000000,
+                    "lastUpdated": 1792680559955,
+                    "taintKind": "user_input",
+                    "key": "query:collector",
+                    "value": "<b>CERTX_IAST_QUERY</b>",
+                    "label": "Query parameter \"collector\"",
+                    "detail": "collector",
+                    "location": "http://127.0.0.1:57734/app?collector=%3Cb%3ECERTX_IAST_QUERY%3C%2Fb%3E",
+                    "sourceKind": "query",
+                    "sourceId": "s_6",
+                    "origin": null,
+                    "isCrossOriginMessage": null,
+                    "responseUrl": null,
+                    "responseStatus": null,
+                    "__normalizedSource": true,
+                    "display": "location.search parameter \"collector\" (value: \"<b>CERTX_IAST_QUERY</b>\")",
+                    "sourceValuePreview": "<b>CERTX_IAST_QUERY</b>"
+                  }
+                ],
+                "sink": "innerHTML",
+                "sinkContext": {
+                  "requestUrl": null,
+                  "method": null,
+                  "headerName": null,
+                  "destUrl": null,
+                  "destHost": null,
+                  "destOrigin": null,
+                  "isCrossOrigin": null,
+                  "tagName": "DIV",
+                  "domPath": "div#sink",
+                  "attribute": null,
+                  "elementId": null,
+                  "cookieName": null,
+                  "cookieAttributes": null,
+                  "storageKey": null,
+                  "storageArea": null
+                },
+                "matched": "<b>CERTX_IAST_QUERY</b>",
+                "trace": "Error: Sink: xss-via-innerHTML\nat window.renderQuery (http://127.0.0.1:57734/app:29:44)\nat UtilityScript.evaluate (<anonymous>:303:16)\nat UtilityScript.<anonymous> (<anonymous>:1:44)",
+                "traceSummary": "at window.renderQuery (http://127.0.0.1:57734/app:29:44)",
+                "context": {
+                  "location": "http://127.0.0.1:57734/app?collector=%3Cb%3ECERTX_IAST_QUERY%3C%2Fb%3E",
+                  "domPath": "div#sink",
+                  "elementId": "sink",
+                  "tagName": "div",
+                  "valuePreview": "<b>CERTX_IAST_QUERY</b>"
+                },
+                "sinkSummary": {
+                  "sinks": [
+                    "dom.innerHTML"
+                  ],
+                  "primarySink": "dom.innerHTML"
+                },
+                "taintSummary": {
+                  "sources": [
+                    "location.search parameter \"collector\" (value: \"<b>CERTX_IAST_QUERY</b>\")",
+                    "query:collector"
+                  ],
+                  "primarySource": "location.search parameter \"collector\" (value: \"<b>CERTX_IAST_QUERY</b>\")"
+                },
+                "schemaVersion": "iast-evidence@1",
+                "primaryClass": "taint_flow",
+                "sourceRole": "origin",
+                "operation": {
+                  "sinkId": "dom.innerHTML",
+                  "sinkArgs": null
+                },
+                "routing": {
+                  "runtimeUrl": "http://127.0.0.1:57734/app?collector=%3Cb%3ECERTX_IAST_QUERY%3C%2Fb%3E",
+                  "pathname": "/app",
+                  "clientRoute": "/app",
+                  "route": "/app",
+                  "urlPattern": "http://127.0.0.1:57734/app"
+                },
+                "aggregate": {
+                  "mode": "route-source-sink-callsite",
+                  "key": "IAST|route-source-sink-callsite|6bbe6d4f-49dc-4692-a891-6f0f56cfdf4c|127.0.0.1:57734|iast_dom_xss|dom_innerhtml_xss|http://127.0.0.1:57734/app|query:collector|dom.innerhtml|div#sink"
+                },
+                "occurrenceCount": 1,
+                "sampleLimit": 10,
+                "truncated": false,
+                "samples": [
+                  {
+                    "url": "http://127.0.0.1:57734/app?collector=%3Cb%3ECERTX_IAST_QUERY%3C%2Fb%3E",
+                    "route": "http://127.0.0.1:57734/app",
+                    "sourceKey": "query:collector",
+                    "sourceKind": "query",
+                    "source": "location.search parameter \"collector\" (value: \"<b>CERTX_IAST_QUERY</b>\")",
+                    "sinkId": "dom.innerHTML",
+                    "callsite": "div#sink",
+                    "matched": "<b>CERTX_IAST_QUERY</b>",
+                    "seenAt": "2026-10-22T14:49:19.960Z"
+                  }
+                ],
+                "affectedUrls": [
+                  "http://127.0.0.1:57734/app?collector=%3Cb%3ECERTX_IAST_QUERY%3C%2Fb%3E"
+                ]
+              }
+            },
+            "scanId": "6bbe6d4f-49dc-4692-a891-6f0f56cfdf4c",
+            "createdAt": "2026-10-22T14:49:19.960Z",
+            "updatedAt": "2026-10-22T14:49:19.960Z",
+            "vulnId": "dom_xss",
+            "requestKey": null,
+            "presentationAggregate": "route-source-sink-callsite",
+            "engine": "IAST",
+            "tags": [
+              "iast",
+              "dom",
+              "xss"
+            ]
+          }
+        ]
+      },
+      "state": {
+        "observations": [],
+        "findings": []
+      },
+      "stateSafe": {
+        "observations": [],
+        "findings": []
+      },
+      "foreign": {
+        "observations": [],
+        "findings": []
+      }
+    },
+    "contract": {
+      "documentIdentity": "b280f768-056c-456f-8483-4d1f5e60963b",
+      "calls": {
+        "object": 1,
+        "safe": 1,
+        "foreign": 1,
+        "accessor": 1
+      },
+      "identities": [
+        {
+          "tag": "object",
+          "same": true,
+          "repeat": true,
+          "origin": "http://127.0.0.1:57734"
+        },
+        {
+          "tag": "safe",
+          "same": true,
+          "repeat": true,
+          "origin": "http://127.0.0.1:57734"
+        },
+        {
+          "tag": "foreign",
+          "same": true,
+          "repeat": true,
+          "origin": "http://127.0.0.1:57735"
+        }
+      ],
+      "accessorReads": 1,
+      "receiverErrors": [
+        [
+          "TypeError",
+          "TypeError"
+        ],
+        [
+          "TypeError",
+          "TypeError"
+        ],
+        [
+          "TypeError",
+          "TypeError"
+        ]
+      ],
+      "staleQuery": [],
+      "stateKeys": [
+        "history:state:payload.items.0.html"
+      ]
+    },
+    "initialIdentity": "b280f768-056c-456f-8483-4d1f5e60963b",
+    "stopUnchanged": true,
+    "finalFindingCount": 6
+  },
+  "error": "AssertionError [ERR_ASSERTION]: Agent must not invoke message object accessor\n\n1 !== 0\n\n    at run (C:\\Users\\zeb\\Downloads\\ki\\tools\\security\\tests\\iast-acquisition.browser.cjs:143:16)\n    at async main (C:\\Users\\zeb\\Downloads\\ki\\tools\\security\\tests\\iast-acquisition.browser.cjs:167:5)"
+}

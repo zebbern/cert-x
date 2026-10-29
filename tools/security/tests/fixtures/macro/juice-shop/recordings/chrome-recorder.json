@@ -1,0 +1,405 @@
+{
+    "title": "juice-shop",
+    "steps": [
+        {
+            "type": "setViewport",
+            "width": 2042,
+            "height": 761,
+            "deviceScaleFactor": 1,
+            "isMobile": false,
+            "hasTouch": false,
+            "isLandscape": false
+        },
+        {
+            "type": "navigate",
+            "url": "http://localhost:3001/#/",
+            "assertedEvents": [
+                {
+                    "type": "navigation",
+                    "url": "http://localhost:3001/#/",
+                    "title": "OWASP Juice Shop"
+                }
+            ]
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "button.close-dialog > span.mdc-button__label > span"
+                ],
+                [
+                    "xpath///*[@id=\"mat-mdc-dialog-0\"]/div/div/app-welcome-banner/div[2]/button[2]/span[2]/span"
+                ],
+                [
+                    "pierce/button.close-dialog > span.mdc-button__label > span"
+                ],
+                [
+                    "text/Dismiss"
+                ]
+            ],
+            "offsetY": 2,
+            "offsetX": 21.40625
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "#navbarAccount > span.mdc-button__label > span"
+                ],
+                [
+                    "xpath///*[@id=\"navbarAccount\"]/span[2]/span"
+                ],
+                [
+                    "pierce/#navbarAccount > span.mdc-button__label > span"
+                ]
+            ],
+            "offsetY": 4,
+            "offsetX": 23.34375
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "div.cdk-overlay-container span > span"
+                ],
+                [
+                    "xpath///*[@id=\"navbarLoginButton\"]/span/span"
+                ],
+                [
+                    "pierce/div.cdk-overlay-container span > span"
+                ]
+            ],
+            "offsetY": 5,
+            "offsetX": 18.34375
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Text field for the login email"
+                ],
+                [
+                    "#email"
+                ],
+                [
+                    "xpath///*[@id=\"email\"]"
+                ],
+                [
+                    "pierce/#email"
+                ]
+            ],
+            "offsetY": 18,
+            "offsetX": 247.25
+        },
+        {
+            "type": "change",
+            "value": "ptk@test.com",
+            "selectors": [
+                [
+                    "aria/Text field for the login email"
+                ],
+                [
+                    "#email"
+                ],
+                [
+                    "xpath///*[@id=\"email\"]"
+                ],
+                [
+                    "pierce/#email"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Text field for the login password"
+                ],
+                [
+                    "#password"
+                ],
+                [
+                    "xpath///*[@id=\"password\"]"
+                ],
+                [
+                    "pierce/#password"
+                ]
+            ],
+            "offsetY": 10,
+            "offsetX": 186.25
+        },
+        {
+            "type": "change",
+            "value": "P@ssword",
+            "selectors": [
+                [
+                    "aria/Text field for the login password"
+                ],
+                [
+                    "#password"
+                ],
+                [
+                    "xpath///*[@id=\"password\"]"
+                ],
+                [
+                    "pierce/#password"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "#loginButton > span.mat-mdc-button-touch-target"
+                ],
+                [
+                    "xpath///*[@id=\"loginButton\"]/span[4]"
+                ],
+                [
+                    "pierce/#loginButton > span.mat-mdc-button-touch-target"
+                ]
+            ],
+            "offsetY": 17,
+            "offsetX": 195.953125
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "#navbarAccount > span.mdc-button__label > span"
+                ],
+                [
+                    "xpath///*[@id=\"navbarAccount\"]/span[2]/span"
+                ],
+                [
+                    "pierce/#navbarAccount > span.mdc-button__label > span"
+                ]
+            ],
+            "offsetY": 2,
+            "offsetX": 32.078125
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "button.cdk-focused > span > span"
+                ],
+                [
+                    "xpath///*[@id=\"mat-menu-panel-0\"]/div/button[1]/span/span"
+                ],
+                [
+                    "pierce/button.cdk-focused > span > span"
+                ]
+            ],
+            "offsetY": 5,
+            "offsetX": 53.078125,
+            "assertedEvents": [
+                {
+                    "type": "navigation",
+                    "url": "http://localhost:3001/profile",
+                    "title": ""
+                }
+            ]
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/OWASP Juice Shop",
+                    "aria/[role=\"generic\"]"
+                ],
+                [
+                    "a:nth-of-type(4) > span"
+                ],
+                [
+                    "xpath//html/body/div/header/div/a[4]/span"
+                ],
+                [
+                    "pierce/a:nth-of-type(4) > span"
+                ],
+                [
+                    "text/OWASP Juice Shop"
+                ]
+            ],
+            "offsetY": 4,
+            "offsetX": 70.125,
+            "assertedEvents": [
+                {
+                    "type": "navigation",
+                    "url": "http://localhost:3001/#/",
+                    "title": ""
+                }
+            ]
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "mat-grid-tile:nth-of-type(1) span.mdc-button__label > span"
+                ],
+                [
+                    "xpath//html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-search-result/div/div/div[2]/mat-grid-list/div/mat-grid-tile[1]/div/mat-card/div/div[2]/button/span[2]/span"
+                ],
+                [
+                    "pierce/mat-grid-tile:nth-of-type(1) span.mdc-button__label > span"
+                ]
+            ],
+            "offsetY": 0.109375,
+            "offsetX": 36.0625
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "mat-grid-tile:nth-of-type(1) span.mdc-button__label > span"
+                ],
+                [
+                    "xpath//html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-search-result/div/div/div[2]/mat-grid-list/div/mat-grid-tile[1]/div/mat-card/div/div[2]/button/span[2]/span"
+                ],
+                [
+                    "pierce/mat-grid-tile:nth-of-type(1) span.mdc-button__label > span"
+                ]
+            ],
+            "offsetY": 1.109375,
+            "offsetX": 51.0625
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "mat-grid-tile:nth-of-type(2) span.mdc-button__label > span"
+                ],
+                [
+                    "xpath//html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-search-result/div/div/div[2]/mat-grid-list/div/mat-grid-tile[2]/div/mat-card/div/div[2]/button/span[2]/span"
+                ],
+                [
+                    "pierce/mat-grid-tile:nth-of-type(2) span.mdc-button__label > span"
+                ]
+            ],
+            "offsetY": 5.109375,
+            "offsetX": 44.171875
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "button:nth-of-type(4) span.hide-lt-md"
+                ],
+                [
+                    "xpath//html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-navbar/mat-toolbar/mat-toolbar-row/button[4]/span[2]/span[1]"
+                ],
+                [
+                    "pierce/button:nth-of-type(4) span.hide-lt-md"
+                ],
+                [
+                    "text/Your Basket"
+                ]
+            ],
+            "offsetY": 4,
+            "offsetX": 36.734375
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "mat-row:nth-of-type(1) > mat-cell.cdk-column-remove span.mat-mdc-button-touch-target"
+                ],
+                [
+                    "xpath//html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-basket/mat-card/div/app-purchase-basket/mat-table/mat-row[1]/mat-cell[5]/button/span[3]"
+                ],
+                [
+                    "pierce/mat-row:nth-of-type(1) > mat-cell.cdk-column-remove span.mat-mdc-button-touch-target"
+                ]
+            ],
+            "offsetY": 19.421875,
+            "offsetX": 25.640625
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "mat-icon.mat-search_icon-search"
+                ],
+                [
+                    "xpath///*[@id=\"searchQuery\"]/span/mat-icon[2]"
+                ],
+                [
+                    "pierce/mat-icon.mat-search_icon-search"
+                ],
+                [
+                    "text/search"
+                ]
+            ],
+            "offsetY": 7,
+            "offsetX": 9.078125
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Click to search",
+                    "aria/[role=\"textbox\"]"
+                ],
+                [
+                    "#mat-input-1"
+                ],
+                [
+                    "xpath///*[@id=\"mat-input-1\"]"
+                ],
+                [
+                    "pierce/#mat-input-1"
+                ]
+            ],
+            "offsetY": 13.5,
+            "offsetX": 85.078125
+        },
+        {
+            "type": "change",
+            "value": "test",
+            "selectors": [
+                [
+                    "aria/Click to search",
+                    "aria/[role=\"textbox\"]"
+                ],
+                [
+                    "#mat-input-1"
+                ],
+                [
+                    "xpath///*[@id=\"mat-input-1\"]"
+                ],
+                [
+                    "pierce/#mat-input-1"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "keyDown",
+            "target": "main",
+            "key": "Enter"
+        },
+        {
+            "type": "keyUp",
+            "key": "Enter",
+            "target": "main"
+        }
+    ]
+}

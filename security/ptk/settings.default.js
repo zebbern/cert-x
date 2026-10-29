@@ -1,0 +1,90 @@
+const defaultSettings = {
+    main: {
+        enable_logging: false,
+        enable_websocket: false
+    },
+    zap: {
+        enable_logging: true
+    },
+    module: {
+        messages: [
+            {
+                name: {
+                    external: true
+                }
+            }
+        ],
+        channelName: "ptk_module",
+        options: {}
+    },
+    proxy: {
+        max_tabs: 5,
+        max_requests_per_tab: 1000
+    },
+    rbuilder: {
+        override_headers: true,
+        follow_redirect: true,
+        update_content_length: true,
+        use_content_type: true
+    },
+    rattacker: {
+        max_requests: 1000,
+        blacklist: [
+            "stylesheet",
+            "script",
+            "image",
+            "font"
+        ],
+        enable_external_integration: false,
+        maxRequestsPerSecond: 5,
+        concurrency: 3,
+        planningConcurrency: 2,
+        dastScanStrategy: "SMART",
+        runCve: true
+    },
+    decoder: {
+        settings: {}
+    },
+    privacy: {
+        enable_personal_data: false,
+        enable_cookie: true,
+        enable_anonymous_data: false
+    },
+    recorder: {
+        recorderFile: "/security/ptk/content/recorder.js",
+        trackerFile: "/security/ptk/content/tracker.js",
+        popupFile: "/security/ptk/content/popup.js",
+        replayerFile: "/security/ptk/content/replayer.js",
+        set_window_size: true,
+        window_height: 768,
+        window_width: 1024,
+        icons: "/security/ptk/browser/assets/icons",
+        double_click: false
+    },
+    macro: {
+        format: "xml",
+        export_format: "xml",
+        min_duration: 3000,
+        enable_extra_delay: false,
+        element_path: "css",
+        event_type: "driverclick",
+        enable_regex: false,
+        validate_regex: "(sign|log)[ -]?(out|off)"
+    },
+    traffic: {
+        format: "har"
+    },
+    profile: {},
+    history: {
+        route: "index",
+        hash: ""
+    },
+    release_note: {
+        show: true
+    },
+    automation: {
+        enable: false
+    }
+}
+
+export default defaultSettings

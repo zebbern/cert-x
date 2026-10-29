@@ -2,22 +2,22 @@ const KEY = "ki_mcp_servers";
 const $ = (id) => document.getElementById(id);
 const copy = {
   en: {
-    heading: "MCP servers",
-    note: "Remote MCP over HTTP. Tools from these servers show up in the browser agent. A local npx server cannot run inside the extension.",
+    heading: "Remote servers",
+    note: "Connect remote tools over HTTP.",
     add: "Add a server",
-    empty: "No MCP servers yet.",
+    empty: "No remote servers yet.",
     formAdd: "Add an MCP server",
     formEdit: "Edit MCP server",
     name: "Name",
     url: "Server URL",
     token: "Token",
-    tokenHint: "Optional. Paste the key only, not the word Bearer. A Postman EU URL only accepts a key from postman.eu. A postman.com key uses https://mcp.postman.com/minimal.",
+    tokenHint: "Paste the key only, without Bearer.",
     test: "Test connection",
     testing: "Testing…",
-    known: "Known servers",
+    known: "Quick connect",
     signIn: "Sign in",
     signingIn: "Waiting for you to approve…",
-    signedIn: "Signed in. The agent picks up these tools on the next message.",
+    signedIn: "Connected · available next message",
     cancelled: "Sign-in was cancelled.",
     needsAuth: "This server uses sign-in. Click Sign in.",
     signed: "Signed in",
@@ -32,14 +32,14 @@ const copy = {
     yes: "Remove",
     no: "Keep",
     urlError: "Enter a URL that starts with http:// or https://.",
-    saved: "Saved. The agent picks up these tools on its next message.",
+    saved: "Connected · available next message",
     tools: (n) => (n === 1 ? "1 tool" : `${n} tools`),
-    connected: (names) => `Connected. Tools: ${names.join(", ")}`,
+    connected: (names) => `Connected · ${names.length} ${names.length === 1 ? "tool" : "tools"}`,
     none: "Connected, but the server published no tools.",
   },
   zh: {
-    heading: "MCP 服务器",
-    note: "通过 HTTP 连接远程 MCP。这些服务器的工具会出现在浏览器智能体里。扩展里不能运行本机的 npx 服务器。",
+    heading: "远程服务器",
+    note: "通过 HTTP 连接远程工具。",
     add: "添加服务器",
     empty: "还没有 MCP 服务器。",
     formAdd: "添加 MCP 服务器",
@@ -105,7 +105,7 @@ function applyCopy() {
   $("mcp-known-heading").textContent = s.known;
   $("mcp-signin").textContent = s.signIn;
   $("mcp-cancel").textContent = s.cancel;
-  $("mcp-save").textContent = s.save;
+  $("mcp-save").textContent = editingId ? s.save : (lang === "zh" ? "连接" : "Connect");
   $("mcp-form-title").textContent = editingId ? s.formEdit : s.formAdd;
 }
 
@@ -144,6 +144,7 @@ function renderKnown() {
         openForm(null);
         $("mcp-name").value = item.label;
         $("mcp-url").value = item.url;
+        $("mcp-options").open = true;
         $("mcp-token").focus();
       }
     });
@@ -217,9 +218,11 @@ function openForm(id) {
   $("mcp-name").value = server?.label || "";
   $("mcp-url").value = server?.url || "";
   $("mcp-token").value = "";
+  $("mcp-options").open = false;
   status("");
   applyCopy();
   $("mcp-url").focus();
+  $("mcp-form").scrollIntoView({ block: "nearest" });
 }
 
 async function testServer() {
@@ -230,7 +233,7 @@ async function testServer() {
     return;
   }
   const current = editingId ? servers.find((item) => item.id === editingId) : null;
-  const token = $("mcp-token").value || current?.token || "";
+  const token = $("mcp-token").value || (current?.url === url ? current.token : "") || "";
   $("mcp-test").disabled = true;
   $("mcp-test").textContent = s.testing;
   status("");
@@ -256,19 +259,29 @@ async function save(event) {
     return;
   }
   const current = editingId ? servers.find((item) => item.id === editingId) : null;
-  const token = $("mcp-token").value || current?.token || "";
+  const token = $("mcp-token").value || (current?.url === url ? current.token : "") || "";
   const record = {
     id: editingId || crypto.randomUUID().slice(0, 8),
     label: $("mcp-name").value.trim() || new URL(url).host,
     url,
     token,
-    ...(current?.oauth ? { oauth: current.oauth } : {}),
+    ...(current?.oauth && current.url === url ? { oauth: current.oauth } : {}),
   };
-  const next = editingId ? servers.map((item) => (item.id === editingId ? record : item)) : [...servers, record];
-  await persist(next);
-  editingId = null;
-  $("mcp-form").hidden = true;
-  status(s.saved, "ok");
+  $("mcp-save").disabled = true;
+  $("mcp-test").disabled = true;
+  status(s.testing);
+  try {
+    const result = await chrome.runtime.sendMessage({ type: "KI_MCP", op: "test", server: { url, token } });
+    if (result?.needsAuth) { await signIn(url, record.label); return; }
+    if (!result?.ok) throw Error(result?.error || "Connection failed");
+    const next = editingId ? servers.map((item) => (item.id === editingId ? record : item)) : [...servers, record];
+    await persist(next);
+    editingId = null;
+    $("mcp-form").hidden = true;
+    status(s.saved, "ok");
+  } catch (error) { status(error.message, "error"); }
+  finally { $("mcp-save").disabled = false; $("mcp-test").disabled = false; }
+
 }
 
 async function load() {
@@ -323,4 +336,7 @@ async function signIn(url, label) {
 $("mcp-test").addEventListener("click", () => testServer());
 $("mcp-signin").addEventListener("click", () => signIn($("mcp-url").value.trim(), $("mcp-name").value.trim()));
 $("mcp-form").addEventListener("submit", save);
-load();
+await load();
+chrome.storage.onChanged.addListener((changes, area) => {
+  if (area === "local" && changes[KEY]) { servers = changes[KEY].newValue || []; render(); }
+});

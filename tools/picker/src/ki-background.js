@@ -2,13 +2,32 @@ var kiCtl=new Map,kiSkips=new Map,kiFocus=new Map,kiMarkTools=new Set(["click","
 function kiState(s){let t=kiCtl.get(s);return t||(t={paused:!1,waiters:[],steer:[]},kiCtl.set(s,t)),t}
 // save_file: write model-supplied content into the user's Downloads folder via the
 // downloads API (the honest shape for file output in MV3 — no arbitrary-path write).
+// Justified: the 8 MB cap is effectively unreachable — content arrives inside the
+// model's tool-call arguments — and guards the data-URL download path.
 var kiSaveFileTool=class{name="save_file";async execute(e){let name=typeof e.filename=="string"?e.filename.trim().replace(/\\/g,"/"):"";if(!name)throw Error("save_file: filename is required");if(/^[\\/]/.test(name)||/(^|\/)\.\.?(\/|$)/.test(name)||/^[A-Za-z]:/.test(name)||/[\0-\x1f]/.test(name))throw Error("save_file: filename must be a relative name inside Downloads (no absolute paths, drive letters, or ..)");if(typeof e.content!="string")throw Error("save_file: content is required (a string)");let b64=e.encoding==="base64",url;if(b64){let c=e.content.replace(/\s+/g,"");if(!c||!/^[A-Za-z0-9+/]+={0,2}$/.test(c)||c.length%4)throw Error("save_file: content is not valid base64");if(Math.floor(c.length*3/4)>8e6)throw Error("save_file: content exceeds 8 MB");url="data:application/octet-stream;base64,"+c}else{let bytes=new TextEncoder().encode(e.content);if(bytes.length>8e6)throw Error("save_file: content exceeds 8 MB");let bin="";for(let i=0;i<bytes.length;i+=32768)bin+=String.fromCharCode(...bytes.subarray(i,i+32768));url="data:text/plain;charset=utf-8;base64,"+btoa(bin)}if(!chrome.downloads||!chrome.downloads.download)throw Error("save_file: the downloads permission is missing from the extension");let id;try{id=await chrome.downloads.download({url,filename:name,saveAs:!1,conflictAction:"uniquify"})}catch(x){throw Error("save_file: could not start the download — "+(x instanceof Error?x.message:String(x)))}let state=await new Promise(res=>{let done=!1,finish=s=>{done||(done=!0,chrome.downloads.onChanged.removeListener(onCh),res(s))},onCh=d=>{d.id===id&&d.state&&(d.state.current==="complete"?finish("complete"):d.state.current==="interrupted"&&finish("interrupted"))};chrome.downloads.onChanged.addListener(onCh);chrome.downloads.search({id}).then(r=>{let s=r[0]&&r[0].state;s==="complete"?finish("complete"):s==="interrupted"&&finish("interrupted")}).catch(()=>{});setTimeout(()=>finish("pending"),15e3)}),it=(await chrome.downloads.search({id}).catch(()=>[]))[0];if(state==="interrupted")throw Error("save_file: the download was interrupted ("+(it&&it.error||"unknown")+")");return{success:!0,downloadId:id,filename:it&&it.filename||name,bytes:it&&it.fileSize>0?it.fileSize:void 0,state}}};
 function kiZh(){try{return A()==="zh-CN"}catch{return!1}}
 async function kiGate(s,signal){let t=kiCtl.get(s);if(!t||!t.paused)return;t.held=(t.held||0)+1;try{for(;t.paused&&!signal.aborted;)await new Promise(r=>{let done=()=>{signal.removeEventListener("abort",done),r()};t.waiters.push(done),signal.addEventListener("abort",done,{once:!0})})}finally{t.held--}}
 function kiSetPaused(s,p){let t=kiState(s);t.paused=p;if(!p){let w=t.waiters;t.waiters=[],w.forEach(f=>f())}}
 function kiDrainSteer(s,acc,onCtx){let t=kiCtl.get(s);if(!t||t.steer.length===0)return;let list=t.steer;t.steer=[];for(let text of list){let i=acc.history.length;acc.appendUserMessage([{type:"text",text:"[The user sent this while you were working. Take it into account from your next step on.]\n"+text}],{kind:"user"});let m=acc.history[i];m!==void 0&&onCtx?.(m)}}
 function kiSkipped(name){return{output:`The user skipped "${name}" before it finished. Do not repeat it the same way; continue the task differently or ask the user.`,isError:!0}}
-async function kiMark(name,args){if(!kiMarkTools.has(String(name).replace(/^browser_/,""))||!args||args.target===void 0&&args.selector===void 0)return;let job=ga({target:args.target,selector:args.selector,...args._tabId===void 0?{}:{_tabId:args._tabId}},"highlight_region",async(tab,obj)=>{await E(tab,"Runtime.callFunctionOn",{objectId:obj,functionDeclaration:"function(){this.scrollIntoView({block:'center',inline:'nearest'})}"}).catch(()=>{});let id=await da(tab,obj,4e3);await new Promise(r=>setTimeout(r,650));await fa(tab,id).catch(()=>{})});await Promise.race([job.catch(()=>{}),new Promise(r=>setTimeout(r,1500))])}
+// A ref is a backend node id, and the page can relabel or repurpose that node after the read.
+// Mutating tools re-read its accessibility role/name (minus the field's own value, which some
+// names embed) and refuse a changed element once, naming old and new. A retry within 60 s (a
+// turn or two) on the same role acts; if the name moved again it ticks and is ignored until the
+// page is read again. Hidden nodes keep the old behaviour. set_checked's verify reads are not
+// guarded (apply-picker labels them), only its first read and the mouse_click it performs.
+var kiRefGuardTools=new Set(["click","mouse_click","fill","select_option","set_checked","drag"]);
+async function kiRefGuard(tab,ref,tool,entry){if(!kiRefGuardTools.has(tool)||entry.dom||!ae.has(entry.role))return;let node;try{node=(await E(tab,"Accessibility.getPartialAXTree",{backendNodeId:entry.backendDOMNodeId,fetchRelatives:!1})).nodes?.find(x=>x.backendDOMNodeId===entry.backendDOMNodeId)}catch{return}if(!node||node.ignored)return;let norm=s=>String(s??"").replace(/\s+/g," ").trim(),role=node.role?.value??"",name=norm(node.name?.value),value=norm(node.value?.value),read=norm(entry.name),at=value?name.lastIndexOf(value):-1;if(role===entry.role){if(entry.roleOnly||name===read||at>=0&&norm(name.slice(0,at)+" "+name.slice(at+value.length))===read){delete entry.pass;return}if(entry.pass>Date.now()-6e4){delete entry.pass;entry.roleOnly=!0;return}}let was=`${entry.role} "${read.slice(0,80)}"`;entry.role=role,entry.name=name,entry.pass=Date.now();throw Error(`${tool}: ref "${ref}" changed since it was read: was ${was}, now ${role||"no role"} "${name.slice(0,80)}". Retry the same ref to act on it as it is now, or read the page again.`)}
+// The interact highlight runs on its own timer while the action proceeds; it is a CDP overlay,
+// so it never blocks hit-testing. Awaiting it cost every interact call 650 ms. The scroll is
+// instant because the action reads geometry immediately. Hiding retries while a JS dialog
+// blocks CDP, until the box is gone or replaced (tab close, detach and navigation clear it).
+// A capture first hides its own tab's pending box so evidence images stay clean, bounded at
+// 300 ms because one CDP call is never worth stalling the capture. The 1500 ms race only stops
+// a stuck target resolution from holding the action (setup measures ~50 ms).
+var kiMarkIds=new Map;
+function kiUnmark(tab,id,ms){setTimeout(()=>fa(tab,id).then(()=>{kiMarkIds.get(tab)===id&&kiMarkIds.delete(tab)},()=>{kiMarkIds.get(tab)===id&&kiUnmark(tab,id,300)}),ms)}
+async function kiMark(name,args){let tool=String(name).replace(/^browser_/,"");if(tool==="screenshot"||tool==="save_as_pdf"||tool==="cdp"&&/^Page\.(captureScreenshot|printToPDF)$/.test(args?.method)){if(kiMarkIds.size)try{let tab=(await D(args?._tabId)).id,id=kiMarkIds.get(tab);id&&await Promise.race([fa(tab,id).catch(()=>{}),new Promise(r=>setTimeout(r,300))])}catch{}return}if(!kiMarkTools.has(tool)||!args||args.target===void 0&&args.selector===void 0)return;try{let policy=await kiPolicyState(kiPolicyBrowserMeta(tool));if(!policy.parentEnabled||policy.rule==="disabled")return}catch{return}let job=ga({target:args.target,selector:args.selector,...args._tabId===void 0?{}:{_tabId:args._tabId}},"highlight_region",async(tab,obj)=>{await E(tab,"Runtime.callFunctionOn",{objectId:obj,functionDeclaration:"function(){this.scrollIntoView({block:'center',inline:'nearest',behavior:'instant'})}"}).catch(()=>{});let id=await da(tab,obj,6e4);kiMarkIds.set(tab,id);kiUnmark(tab,id,650)});await Promise.race([job.catch(()=>{}),new Promise(r=>setTimeout(r,1500))])}
 async function kiAway(s){let c=UI.get(s);if(!c||c.ports.size===0||!kiFocus.get(s)?.visible)return!0;try{return!(await chrome.windows.getLastFocused())?.focused}catch{return!1}}
 var kiNotes=new Map,kiIcons=new Map,kiBadge={done:["#22c55e","check"],failed:["#ef4444","cross"],stopped:["#8b8f98","stop"],ask:["#f59e0b","bang"],handoff:["#3b82f6","hand"]};
 function kiCut(t,n){t=String(t||"").replace(/\s+/g," ").trim();return t.length>n?t.slice(0,n-1).trimEnd()+"…":t}
@@ -55,28 +74,50 @@ async function kiMcpEnsure(server){if(kiMcpSessions.has(server.url+"|ready"))ret
 async function kiMcpList(server){await kiMcpEnsure(server);let tools=[],cursor;for(let i=0;i<8;i++){let msg=await kiMcpRpc(server,{jsonrpc:"2.0",id:kiMcpSeq++,method:"tools/list",params:cursor?{cursor}:{}});if(!msg||msg.error)throw Error(msg&&msg.error&&msg.error.message||"tools/list failed");let result=msg.result||{};for(let t of result.tools||[])t&&t.name&&tools.push(t);cursor=result.nextCursor;if(!cursor)break}return tools}
 function kiMcpText(result){if(!result)return"";if(typeof result=="string")return result.slice(0,1e5);let parts=Array.isArray(result.content)?result.content:[];if(!parts.length)return JSON.stringify(result).slice(0,2e4);return parts.map(p=>{if(!p||typeof p!="object")return String(p);if(p.type==="text")return p.text||"";if(p.type==="image")return"[image]";if(p.type==="resource"&&p.resource)return p.resource.text||p.resource.uri||"[resource]";return JSON.stringify(p)}).join("\n").slice(0,1e5)}
 async function kiMcpCall(server,name,args){await kiMcpEnsure(server);let msg=await kiMcpRpc(server,{jsonrpc:"2.0",id:kiMcpSeq++,method:"tools/call",params:{name,arguments:args&&typeof args=="object"&&!Array.isArray(args)?args:{}}});if(!msg||msg.error)throw Error(msg&&msg.error&&msg.error.message||"tools/call failed");let text=kiMcpText(msg.result);if(msg.result&&msg.result.isError)throw Error(text||"tool returned an error");return text||"(empty result)"}
-function kiMcpToolDefs(){return kiMcpCache.tools}
-async function kiMcpRefresh(){
-if(Date.now()-kiMcpCache.at<2e4)return kiMcpCache;
-let servers=await kiMcpLoad(),tools=[],errors=[],used=new Set;
-for(let server of servers){
-let slug=kiMcpSlug(server.id||server.label||server.url);
-try{
-let list=await kiMcpList(server);
-if(list.length>40)list=list.slice(0,40);
-for(let t of list){
-let base=("mcp_"+slug+"_"+kiMcpSlug(t.name)).slice(0,64),n=base,i=2;
-while(used.has(n)&&i<30)n=(base.slice(0,56)+"_"+i++).slice(0,64);
-if(used.has(n))continue;
-used.add(n);
-let original=t.name,srv={id:server.id,label:server.label,url:server.url,token:server.token||""};
-tools.push({name:n,description:("["+(server.label||slug)+"] "+(t.description||original)).slice(0,1024),parameters:kiMcpSchema(t.inputSchema),resolveExecution(args){let a=args&&typeof args=="object"?args:{};return{approvalRule:"allow",async execute(){try{return{output:await kiMcpCall(srv,original,a)}}catch(e){return{output:"MCP "+(srv.label||slug)+" / "+original+" failed: "+(e instanceof Error?e.message:String(e)),isError:!0}}}}}})
+// Discovery is cached by connection; a task never starts an unselected server.
+var kiMcpServerCache = new Map(), kiMcpGeneration = 0;
+function kiMcpToolDefs(session){return kiMcpCache.tools.filter(tool=>!session||typeof kiContextFor!=="function"||kiContextAllows(tool.kiPolicyMeta,kiContextFor(session)))}
+async function kiMcpRefresh(session){
+await kiPolicyLoad();
+await kiNativeRefresh(session);
+const generation=kiMcpGeneration, servers=await kiMcpLoad(), active=new Set();
+const groups=await Promise.all(servers.map(server=>kiPolicyServerGroup(server,"remote")));
+for(const [serverIndex,server] of servers.entries()){
+ if(generation!==kiMcpGeneration)return kiMcpCache;
+ const group=groups[serverIndex];active.add(group);
+ if(typeof kiContextServerSelected==="function"&&!await kiContextServerSelected(server,"remote",session))continue;
+ if(generation!==kiMcpGeneration)return kiMcpCache;
+ let entry=kiMcpServerCache.get(group);
+ if(entry&&Date.now()-entry.at<2e4)continue;
+ if(entry?.pending){await entry.pending;continue;}
+ entry={at:0,tools:[],errors:[]};kiMcpServerCache.set(group,entry);
+ const refresh=(async()=>{
+  try{
+   const list=(await kiMcpList(server)).slice(0,40);
+   if(generation!==kiMcpGeneration)return;
+   await kiPolicyRecordMcp(server,list,"remote");
+   if(generation!==kiMcpGeneration)return;
+   const slug=kiMcpSlug(server.id||server.label||server.url), hash=group.split(":").pop();
+   let namespace=hash.slice(0,16);
+   const collisions=[...new Set(groups.filter(id=>id.split(":").pop().startsWith(namespace)))].sort();
+   if(collisions.length>1)namespace+="_"+collisions.indexOf(group);
+   const used=new Set();
+   for(const tool of list){
+    const base=("mcp_"+namespace+"_"+kiMcpSlug(tool.name)).slice(0,64);let name=base,index=2;
+    while(used.has(name)&&index<30)name=base.slice(0,56)+"_"+index++;
+    if(used.has(name))continue;used.add(name);
+    const original=tool.name,srv=JSON.parse(JSON.stringify(server));
+    entry.tools.push({name,kiPolicyMeta:await kiPolicyMcpMeta(server,original,"remote"),description:("["+(server.label||slug)+"] "+(tool.description||original)).slice(0,1024),parameters:kiMcpSchema(tool.inputSchema),resolveExecution(args){const snapshot=JSON.parse(JSON.stringify(args&&typeof args==="object"&&!Array.isArray(args)?args:{}));return{approvalRule:"allow",async execute(context){try{await kiPolicyRecheck(context[KI_POLICY_CONTEXT]);const configured=await kiMcpLoad();let current;for(const candidate of configured)if(await kiPolicyServerGroup(candidate,"remote")===group){current=candidate;break}if(!current)throw Error("MCP connection was removed or changed; refresh the tool list.");await kiPolicyRecheck(context[KI_POLICY_CONTEXT]);return{output:await kiMcpCall(current,original,snapshot)}}catch(error){return{output:"MCP "+(srv.label||slug)+" / "+original+" failed: "+(error instanceof Error?error.message:String(error)),isError:true}}}}}});
+   }
+  }catch(error){entry.errors.push({id:server.id,label:server.label||server.url,error:error instanceof Error?error.message:String(error)});}
+  finally{entry.at=Date.now();delete entry.pending;}
+ })();entry.pending=refresh;await refresh;
 }
-}catch(e){errors.push({id:server.id,label:server.label||server.url,error:e instanceof Error?e.message:String(e)})}
+if(generation!==kiMcpGeneration)return kiMcpCache;
+for(const key of kiMcpServerCache.keys())if(!active.has(key))kiMcpServerCache.delete(key);
+kiMcpCache={at:Date.now(),tools:[...kiMcpServerCache.values()].flatMap(entry=>entry.tools),errors:[...kiMcpServerCache.values()].flatMap(entry=>entry.errors)};
+return kiMcpCache;
 }
-kiMcpCache={at:Date.now(),tools,errors};
-return kiMcpCache
-}
-function kiMcpForget(url){kiMcpSessions.delete(url);kiMcpSessions.delete(url+"|ready");kiMcpCache.at=0}
-chrome.storage.onChanged.addListener((ch,area)=>{if(area==="local"&&ch[KI_MCP_KEY]){kiMcpSessions.clear(),kiMcpCache.at=0,kiMcpRefresh().catch(()=>{})}});
-chrome.runtime.onMessage.addListener((m,sender,reply)=>{if(!m||m.type!=="KI_MCP")return;(async()=>{try{if(m.op==="status"){let cache=await kiMcpRefresh(),servers=await kiMcpLoad();reply({ok:!0,servers:servers.map(s=>{let err=cache.errors.find(e=>e.id===s.id);return{id:s.id,label:s.label||"",url:s.url,hasToken:!!s.token,toolCount:err?0:cache.tools.filter(t=>t.name.startsWith("mcp_"+kiMcpSlug(s.id)+"_")).length,error:err?err.error:""}})});return}if(m.op==="test"){let server=m.server||{};if(typeof server.url!="string"||!/^https?:\/\//i.test(server.url)){reply({ok:!1,error:"URL must start with http:// or https://"});return}kiMcpForget(server.url);let saved=(await kiMcpLoad()).find(s=>s.url===server.url),tools=await kiMcpList({url:server.url,token:typeof server.token=="string"?server.token:"",oauth:saved?.oauth});reply({ok:!0,tools:tools.map(t=>t.name).slice(0,40),truncated:tools.length>40});return}if(m.op==="auth-start"){let server=m.server||{};if(typeof server.url!="string"||!/^https?:\/\//i.test(server.url)){reply({ok:!1,error:"URL must start with http:// or https://"});return}let started=await kiMcpAuthStart(server);reply({ok:!0,...started});return}if(m.op==="auth-finish"){let done=await kiMcpAuthFinish(m.state,m.responseUrl,m.server||{});reply({ok:!0,...done});return}reply({ok:!1,error:"unknown op"})}catch(e){reply({ok:!1,needsAuth:!!e.needsAuth,needsToken:!!e.needsToken,error:e instanceof Error?e.message:String(e)})}})();return!0});
+function kiMcpForget(url){kiMcpSessions.delete(url);kiMcpSessions.delete(url+"|ready");kiMcpCache.at=0;kiMcpGeneration++;kiMcpServerCache.clear()}
+chrome.storage.onChanged.addListener((ch,area)=>{if(area==="local"&&ch[KI_MCP_KEY]){kiMcpSessions.clear();kiMcpCache={at:0,tools:[],errors:[]};kiMcpGeneration++;kiMcpServerCache.clear()}});
+chrome.runtime.onMessage.addListener((m,sender,reply)=>{if(!m||m.type!=="KI_MCP")return;(async()=>{try{if(m.op==="status"){let cache=await kiMcpRefresh(),servers=await kiMcpLoad();reply({ok:!0,servers:await Promise.all(servers.map(async s=>{let err=cache.errors.find(e=>e.id===s.id),group=await kiPolicyServerGroup(s,"remote");return{id:s.id,label:s.label||"",url:s.url,hasToken:!!s.token,toolCount:err?0:cache.tools.filter(t=>t.kiPolicyMeta?.group===group).length,error:err?err.error:""}}))});return}if(m.op==="test"){let server=m.server||{};if(typeof server.url!="string"||!/^https?:\/\//i.test(server.url)){reply({ok:!1,error:"URL must start with http:// or https://"});return}kiMcpForget(server.url);let saved=(await kiMcpLoad()).find(s=>s.url===server.url),tools=await kiMcpList({url:server.url,token:typeof server.token=="string"?server.token:"",oauth:saved?.oauth});reply({ok:!0,tools:tools.map(t=>t.name).slice(0,40),truncated:tools.length>40});return}if(m.op==="auth-start"){let server=m.server||{};if(typeof server.url!="string"||!/^https?:\/\//i.test(server.url)){reply({ok:!1,error:"URL must start with http:// or https://"});return}let started=await kiMcpAuthStart(server);reply({ok:!0,...started});return}if(m.op==="auth-finish"){let done=await kiMcpAuthFinish(m.state,m.responseUrl,m.server||{});reply({ok:!0,...done});return}reply({ok:!1,error:"unknown op"})}catch(e){reply({ok:!1,needsAuth:!!e.needsAuth,needsToken:!!e.needsToken,error:e instanceof Error?e.message:String(e)})}})();return!0});

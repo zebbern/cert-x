@@ -1,0 +1,38 @@
+.context-settings { display: flex; flex-direction: column; gap: 16px; }
+.context-settings .context-status:empty { display: none; }
+.context-settings .context-saved-row { flex-wrap: wrap; }
+.context-settings .context-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.context-settings .context-saved-row .context-actions { margin-left: auto; }
+.context-settings .context-editor { gap: 18px; }
+.context-settings .context-field, .context-settings .context-field > input,
+.context-settings .context-field > select, .context-settings .context-field > textarea { width: 100%; min-width: 0; }
+.context-settings .context-details { min-width: 0; }
+.context-settings .context-details > summary { cursor: pointer; color: var(--text); padding: 8px 0; }
+.context-settings .context-details > :not(summary) { margin-top: 10px; }
+.context-settings .context-details .context-details { padding: 0 0 0 12px; border-left: 1px solid var(--line); }
+.context-settings .context-setting-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.context-settings .context-setting-row:last-child { border-bottom: 0; }
+.context-settings .context-setting-row > div:first-child, .context-settings .context-setting-row > span { min-width: 0; overflow-wrap: anywhere; }
+.context-settings .context-setting-row small { display: block; font-size: 11px; line-height: 16px; color: var(--muted); overflow-wrap: anywhere; }
+.context-settings .context-setting-row > select { flex: none; width: 145px; max-width: 48%; }
+.context-settings .context-setting-row > button { flex: none; }
+.context-settings .context-inline { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.context-settings .context-inline > input, .context-settings .context-inline > select { flex: 1 1 170px; min-width: 0; }
+.context-settings .context-pins:empty { display: none; }
+.context-settings .context-pins .context-setting-row { align-items: flex-start; }
+.context-settings .context-custom { margin-top: 8px; }
+.context-settings .context-footer { justify-content: flex-end; border-top: 1px solid var(--line); padding-top: 16px; }
+.context-settings .context-footer > :first-child:not(:last-child) { margin-right: auto; }
+.context-settings .context-confirm { max-width: min(420px, calc(100% - 32px)); background: var(--menu); color: var(--text); border: 1px solid var(--line); border-radius: 12px; padding: 20px; }
+.context-settings .context-confirm::backdrop { background: #0008; }
+.context-settings .context-confirm .context-actions { justify-content: flex-end; }
+.context-settings .context-output-preview { padding: 12px; background: var(--fill); border-radius: 8px; }
+.context-settings .context-output-preview img { display: block; max-width: 100%; margin-top: 12px; }
+.context-settings .context-output-preview pre { max-height: 320px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 12px; }
+@media (max-width: 460px) {
+  .context-settings .context-editor { padding: 12px; }
+  .context-settings .context-saved-row { gap: 8px; }
+  .context-settings .context-setting-row { gap: 8px; }
+  .context-settings .context-setting-row > select { width: 124px; font-size: 12px; }
+  .context-settings .context-actions button { font-size: 12px; min-width: 0; }
+}

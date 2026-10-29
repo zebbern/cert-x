@@ -1,0 +1,58 @@
+{
+  "schema": "ptk-macro-fixture-set/v1",
+  "journey": "journey.json",
+  "releaseScanConfig": "release-scan.config.json",
+  "sourceOfTruth": "pentestkit",
+  "requiredRecordings": [
+    {
+      "id": "ptk-flow",
+      "format": "ptk-flow",
+      "producer": "OWASP PTK Recorder",
+      "file": "recordings/ptk-flow.json",
+      "status": "accepted",
+      "sha256": "77edab761fd9ae4dcd9f5ca40813aa34a3d5346d88874f69611bf0cc79004195"
+    },
+    {
+      "id": "ptk-xml",
+      "format": "xml",
+      "producer": "OWASP PTK Recorder",
+      "file": "recordings/ptk-xml.rec",
+      "status": "accepted",
+      "sha256": "ce0c8f7e8f27b3a89cf14dc83c4de04348883531b1b83916d21bf4efbb9d3e90"
+    },
+    {
+      "id": "zap-zest",
+      "format": "zest",
+      "producer": "ZAP by Checkmarx Recorder",
+      "file": "recordings/zap-zest.zst",
+      "status": "accepted",
+      "sha256": "5f6fd75bc8a604c4e7e73d6fcf728c949d9292015b984a92e6a82b061466dbd7"
+    },
+    {
+      "id": "chrome-recorder",
+      "format": "chrome-recorder",
+      "producer": "Chrome DevTools Recorder",
+      "file": "recordings/chrome-recorder.json",
+      "status": "accepted",
+      "sha256": "682830e659786557d9abbd4484b5d36e78b2d18218508bac2d6c752160fa8e8f"
+    },
+    {
+      "id": "katalon",
+      "format": "xml",
+      "producer": "Katalon Recorder command model",
+      "file": "recordings/katalon.xml",
+      "status": "accepted",
+      "sha256": "ee51dad00333c2c9543a4a7dbd38797e7d8c3df7733e4dcef56adadad875b988"
+    },
+    {
+      "id": "selenium-ide-firefox",
+      "format": "side",
+      "producer": "Selenium IDE for Firefox",
+      "file": "recordings/selenium.side",
+      "status": "accepted",
+      "sha256": "264c2231c863bfa9944f42ffd2001a79528dca8f6d211e22362a0bd786edfcd6"
+    }
+  ],
+  "provenanceArtifacts": [],
+  "deferredRecordings": []
+}

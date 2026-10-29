@@ -1,0 +1,181 @@
+{
+  "fixture": "Real AngularJS 1.1.5 preloaded at opaque URL, HttpOnly account cookie",
+  "cases": [
+    {
+      "account": "a",
+      "findings": 18,
+      "bodyCoverage": {
+        "captured": 2,
+        "analyzed": 2,
+        "gaps": 0
+      },
+      "sourceCoverage": {
+        "captured": 1,
+        "analyzed": 1,
+        "gaps": 0
+      },
+      "acquisitions": [
+        "captured_http_body"
+      ],
+      "extraReads": [],
+      "liveReads": [
+        {
+          "url": "/opaque/fetch",
+          "account": "a"
+        },
+        {
+          "url": "/opaque/xhr",
+          "account": "a"
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "account": "b",
+      "findings": 0,
+      "bodyCoverage": {
+        "captured": 2,
+        "analyzed": 2,
+        "gaps": 0
+      },
+      "sourceCoverage": {
+        "captured": 1,
+        "analyzed": 1,
+        "gaps": 0
+      },
+      "acquisitions": [],
+      "extraReads": [],
+      "liveReads": [
+        {
+          "url": "/opaque/fetch",
+          "account": "b"
+        },
+        {
+          "url": "/opaque/xhr",
+          "account": "b"
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "account": "anonymous",
+      "findings": 0,
+      "bodyCoverage": {
+        "captured": 0,
+        "analyzed": 0,
+        "gaps": 2
+      },
+      "sourceCoverage": {
+        "captured": 0,
+        "analyzed": 0,
+        "gaps": 1
+      },
+      "acquisitions": [],
+      "extraReads": [],
+      "liveReads": [
+        {
+          "url": "/opaque/fetch",
+          "account": "anonymous"
+        },
+        {
+          "url": "/opaque/xhr",
+          "account": "anonymous"
+        }
+      ],
+      "warnings": [
+        {
+          "url": "http://127.0.0.1:55396/opaque/asset.js",
+          "reason": "preexisting_script_source_not_observed",
+          "tabId": 401350592,
+          "requestId": null,
+          "documentId": null,
+          "acquisition": "debugger_script_source"
+        },
+        {
+          "url": "http://127.0.0.1:55396/opaque/fetch",
+          "reason": "response_status_unavailable",
+          "tabId": 401350592,
+          "requestId": "15700.17",
+          "documentId": "744F22D15824DD43AAFAC26F7C998340"
+        },
+        {
+          "url": "http://127.0.0.1:55396/opaque/xhr",
+          "reason": "response_status_unavailable",
+          "tabId": 401350592,
+          "requestId": "15700.18",
+          "documentId": "744F22D15824DD43AAFAC26F7C998340"
+        }
+      ]
+    }
+  ],
+  "wire": [
+    {
+      "url": "/login/a",
+      "account": "anonymous"
+    },
+    {
+      "url": "/app",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/asset.js",
+      "account": "a"
+    },
+    {
+      "url": "/favicon.ico",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/fetch",
+      "account": "a"
+    },
+    {
+      "url": "/opaque/xhr",
+      "account": "a"
+    },
+    {
+      "url": "/login/b",
+      "account": "anonymous"
+    },
+    {
+      "url": "/app",
+      "account": "b"
+    },
+    {
+      "url": "/opaque/asset.js",
+      "account": "b"
+    },
+    {
+      "url": "/favicon.ico",
+      "account": "b"
+    },
+    {
+      "url": "/opaque/fetch",
+      "account": "b"
+    },
+    {
+      "url": "/opaque/xhr",
+      "account": "b"
+    },
+    {
+      "url": "/app",
+      "account": "anonymous"
+    },
+    {
+      "url": "/opaque/asset.js",
+      "account": "anonymous"
+    },
+    {
+      "url": "/favicon.ico",
+      "account": "anonymous"
+    },
+    {
+      "url": "/opaque/fetch",
+      "account": "anonymous"
+    },
+    {
+      "url": "/opaque/xhr",
+      "account": "anonymous"
+    }
+  ]
+}

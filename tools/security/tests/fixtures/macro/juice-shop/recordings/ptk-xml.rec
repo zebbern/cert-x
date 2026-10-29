@@ -1,0 +1,419 @@
+<?xml version="1.0"?>
+<MacroEventList>
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>Navigate</EventType>
+    <EventTypeName>Navigate</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[http://localhost:3001/#/]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[]]></ElementPath>
+    <Duration>1</Duration>
+    <TimeoutMs>0</TimeoutMs>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>1</Step>
+  </MacroEvent>
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>Delay</EventType>
+    <EventTypeName>Delay</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[]]></ElementPath>
+    <Duration>1434</Duration>
+    <TimeoutMs>0</TimeoutMs>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>2</Step>
+  </MacroEvent>
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>DriverClick</EventType>
+    <EventTypeName>DriverClick</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[css=[aria-label="Close Welcome Banner"]]]></ElementPath>
+    <Duration>2656</Duration>
+    <TimeoutMs>0</TimeoutMs>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>18</Step>
+    <TargetOptions><![CDATA[["css=[aria-label=\"Close Welcome Banner\"]","css=button[aria-label=\"Close Welcome Banner\"]","css=body > div:nth-of-type(4) > div:nth-of-type(3) > div > mat-dialog-container > div > div > app-welcome-banner > div:nth-of-type(2) > button:nth-of-type(2)","xpath=//button[@aria-label=\"Close Welcome Banner\"]","xpath=/body/div[3]/div[2]/div/mat-dialog-container/div/div/app-welcome-banner/div[1]/button[1]","xpath=//mat-dialog-container/div/div/app-welcome-banner/div[1]/button[1]"]]]></TargetOptions>
+  </MacroEvent>
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>DriverClick</EventType>
+    <EventTypeName>DriverClick</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[css=[aria-label="Show/hide account menu"]]]></ElementPath>
+    <Duration>415</Duration>
+    <TimeoutMs>0</TimeoutMs>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>3</Step>
+    <TargetOptions><![CDATA[["id=navbarAccount","css=[aria-label=\"Show/hide account menu\"]","css=button[aria-label=\"Show/hide account menu\"]","css=body > app-root > mat-sidenav-container > mat-sidenav-content > app-navbar > mat-toolbar > mat-toolbar-row > button:nth-of-type(3)","xpath=//button[@aria-label=\"Show/hide account menu\"]","xpath=/body/app-root/mat-sidenav-container/mat-sidenav-content/app-navbar/mat-toolbar/mat-toolbar-row/button[2]"]]]></TargetOptions>
+  </MacroEvent>
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>Hover</EventType>
+    <EventTypeName>Hover</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[css=button[aria-label="Go to login page"]]]></ElementPath>
+    <Duration>423</Duration>
+    <TimeoutMs>0</TimeoutMs>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>4</Step>
+    <TargetOptions><![CDATA[["id=navbarLoginButton","css=button[aria-label=\"Go to login page\"]","css=body > div:nth-of-type(4) > div:nth-of-type(2) > div > div > div > button","xpath=//button[@aria-label=\"Go to login page\"]","css=[aria-label=\"Go to login page\"]","xpath=/body/div[3]/div[1]/div/div/div/button"]]]></TargetOptions>
+  </MacroEvent>
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>DriverClick</EventType>
+    <EventTypeName>DriverClick</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[css=button[aria-label="Go to login page"]]]></ElementPath>
+    <Duration>1169</Duration>
+    <TimeoutMs>0</TimeoutMs>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>5</Step>
+    <TargetOptions><![CDATA[["id=navbarLoginButton","css=button[aria-label=\"Go to login page\"]","css=body > div:nth-of-type(4) > div:nth-of-type(2) > div > div > div > button","xpath=//button[@aria-label=\"Go to login page\"]","css=[aria-label=\"Go to login page\"]","xpath=/body/div[3]/div[1]/div/div/div/button"]]]></TargetOptions>
+  </MacroEvent>
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>DriverClick</EventType>
+    <EventTypeName>DriverClick</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[css=[aria-label="Text field for the login email"]]]></ElementPath>
+    <Duration>1060</Duration>
+    <TimeoutMs>0</TimeoutMs>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>6</Step>
+    <TargetOptions><![CDATA[["id=email","css=[aria-label=\"Text field for the login email\"]","name=email","css=input[aria-label=\"Text field for the login email\"]","xpath=//input[@aria-label=\"Text field for the login email\"]","css=body > app-root > mat-sidenav-container > mat-sidenav-content > app-login > div > mat-card > div > div > mat-form-field > div > div > div:nth-of-type(2) > input","xpath=/body/app-root/mat-sidenav-container/mat-sidenav-content/app-login/div/mat-card/div/div/mat-form-field/div/div/div[1]/input"]]]></TargetOptions>
+  </MacroEvent>
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>DriverSetControlValue</EventType>
+    <EventTypeName>DriverSetControlValue</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[ptk@test.com]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[css=[aria-label="Text field for the login email"]]]></ElementPath>
+    <Duration>1502</Duration>
+    <TimeoutMs>0</TimeoutMs>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>7</Step>
+    <TargetOptions><![CDATA[["id=email","css=[aria-label=\"Text field for the login email\"]","name=email","css=input[aria-label=\"Text field for the login email\"]","xpath=//input[@aria-label=\"Text field for the login email\"]","css=body > app-root > mat-sidenav-container > mat-sidenav-content > app-login > div > mat-card > div > div > mat-form-field > div > div > div:nth-of-type(2) > input","xpath=/body/app-root/mat-sidenav-container/mat-sidenav-content/app-login/div/mat-card/div/div/mat-form-field/div/div/div[1]/input"]]]></TargetOptions>
+  </MacroEvent>
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>DriverClick</EventType>
+    <EventTypeName>DriverClick</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[css=div[id="login-form"] > mat-form-field:nth-of-type(2) > div > div > div > div:nth-of-type(2) > label > mat-label]]></ElementPath>
+    <Duration>2</Duration>
+    <TimeoutMs>0</TimeoutMs>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>8</Step>
+    <TargetOptions><![CDATA[["css=div[id=\"login-form\"] > mat-form-field:nth-of-type(2) > div > div > div > div:nth-of-type(2) > label > mat-label","css=body > app-root > mat-sidenav-container > mat-sidenav-content > app-login > div > mat-card > div > div > mat-form-field:nth-of-type(2) > div > div > div > div:nth-of-type(2) > label > mat-label","xpath=//div[@id=\"login-form\"]/mat-form-field[1]/div/div/div/div[1]/label/mat-label","xpath=/body/app-root/mat-sidenav-container/mat-sidenav-content/app-login/div/mat-card/div/div/mat-form-field[1]/div/div/div/div[1]/label/mat-label"]]]></TargetOptions>
+  </MacroEvent>
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>DriverClick</EventType>
+    <EventTypeName>DriverClick</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[css=[aria-label="Text field for the login password"]]]></ElementPath>
+    <Duration>984</Duration>
+    <TimeoutMs>0</TimeoutMs>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>9</Step>
+    <TargetOptions><![CDATA[["id=password","css=[aria-label=\"Text field for the login password\"]","name=password","css=input[aria-label=\"Text field for the login password\"]","css=body > app-root > mat-sidenav-container > mat-sidenav-content > app-login > div > mat-card > div > div > mat-form-field:nth-of-type(2) > div > div > div:nth-of-type(2) > input","xpath=//input[@aria-label=\"Text field for the login password\"]","xpath=/body/app-root/mat-sidenav-container/mat-sidenav-content/app-login/div/mat-card/div/div/mat-form-field[1]/div/div/div[1]/input"]]]></TargetOptions>
+  </MacroEvent>
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>DriverSetControlValue</EventType>
+    <EventTypeName>DriverSetControlValue</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[P@ssword]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[css=[aria-label="Text field for the login password"]]]></ElementPath>
+    <Duration>1241</Duration>
+    <TimeoutMs>0</TimeoutMs>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>10</Step>
+    <TargetOptions><![CDATA[["id=password","css=[aria-label=\"Text field for the login password\"]","name=password","css=input[aria-label=\"Text field for the login password\"]","css=body > app-root > mat-sidenav-container > mat-sidenav-content > app-login > div > mat-card > div > div > mat-form-field:nth-of-type(2) > div > div > div:nth-of-type(2) > input","xpath=//input[@aria-label=\"Text field for the login password\"]","xpath=/body/app-root/mat-sidenav-container/mat-sidenav-content/app-login/div/mat-card/div/div/mat-form-field[1]/div/div/div[1]/input"]]]></TargetOptions>
+  </MacroEvent>
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>DriverClick</EventType>
+    <EventTypeName>DriverClick</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[css=[aria-label="Login"]]]></ElementPath>
+    <Duration>2407</Duration>
+    <TimeoutMs>0</TimeoutMs>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>11</Step>
+    <TargetOptions><![CDATA[["id=loginButton","css=[aria-label=\"Login\"]","css=button[aria-label=\"Login\"]","css=body > app-root > mat-sidenav-container > mat-sidenav-content > app-login > div > mat-card > div > div > button","xpath=//button[@aria-label=\"Login\"]","xpath=/body/app-root/mat-sidenav-container/mat-sidenav-content/app-login/div/mat-card/div/div/button"]]]></TargetOptions>
+  </MacroEvent>
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>DriverClick</EventType>
+    <EventTypeName>DriverClick</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[css=[aria-label="Show/hide account menu"]]]></ElementPath>
+    <Duration>334</Duration>
+    <TimeoutMs>0</TimeoutMs>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>12</Step>
+    <TargetOptions><![CDATA[["id=navbarAccount","css=[aria-label=\"Show/hide account menu\"]","css=button[aria-label=\"Show/hide account menu\"]","css=body > app-root > mat-sidenav-container > mat-sidenav-content > app-navbar > mat-toolbar > mat-toolbar-row > button:nth-of-type(3)","xpath=//button[@aria-label=\"Show/hide account menu\"]","xpath=/body/app-root/mat-sidenav-container/mat-sidenav-content/app-navbar/mat-toolbar/mat-toolbar-row/button[2]"]]]></TargetOptions>
+  </MacroEvent>
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>Hover</EventType>
+    <EventTypeName>Hover</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[css=button[aria-label="Go to user profile"]]]></ElementPath>
+    <Duration>522</Duration>
+    <TimeoutMs>0</TimeoutMs>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>13</Step>
+    <TargetOptions><![CDATA[["css=button[aria-label=\"Go to user profile\"]","xpath=//button[@aria-label=\"Go to user profile\"]","css=[aria-label=\"Go to user profile\"]","css=body > div:nth-of-type(4) > div:nth-of-type(2) > div > div > div > button","xpath=/body/div[3]/div[1]/div/div/div/button"]]]></TargetOptions>
+  </MacroEvent>
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>DriverClick</EventType>
+    <EventTypeName>DriverClick</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[css=button[aria-label="Go to user profile"]]]></ElementPath>
+    <Duration>689</Duration>
+    <TimeoutMs>0</TimeoutMs>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>14</Step>
+    <TargetOptions><![CDATA[["css=button[aria-label=\"Go to user profile\"]","xpath=//button[@aria-label=\"Go to user profile\"]","css=[aria-label=\"Go to user profile\"]","css=body > div:nth-of-type(4) > div:nth-of-type(2) > div > div > div > button","xpath=/body/div[3]/div[1]/div/div/div/button"]]]></TargetOptions>
+  </MacroEvent>
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>Delay</EventType>
+    <EventTypeName>Delay</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[]]></ElementPath>
+    <Duration>2649</Duration>
+    <TimeoutMs>0</TimeoutMs>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>15</Step>
+  </MacroEvent>
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>DriverClick</EventType>
+    <EventTypeName>DriverClick</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[css=body > div > header > div > a:nth-of-type(4)]]></ElementPath>
+    <Duration>636</Duration>
+    <TimeoutMs>0</TimeoutMs>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>16</Step>
+    <TargetOptions><![CDATA[["css=body > div > header > div > a:nth-of-type(4)","linkText=OWASP Juice Shop","xpath=/body/div/header/div/a[3]"]]]></TargetOptions>
+  </MacroEvent>
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>Delay</EventType>
+    <EventTypeName>Delay</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[]]></ElementPath>
+    <Duration>1635</Duration>
+    <TimeoutMs>0</TimeoutMs>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>17</Step>
+  </MacroEvent>
+
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>DriverClick</EventType>
+    <EventTypeName>DriverClick</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[css=[aria-label="Add to Basket"]]]></ElementPath>
+    <Duration>2578</Duration>
+    <TimeoutMs>0</TimeoutMs>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>19</Step>
+    <TargetOptions><![CDATA[["css=[aria-label=\"Add to Basket\"]","css=button[aria-label=\"Add to Basket\"]","css=body > app-root > mat-sidenav-container > mat-sidenav-content > app-search-result > div > div > div:nth-of-type(2) > mat-grid-list > div > mat-grid-tile > div > mat-card > div > div:nth-of-type(2) > button","xpath=//button[@aria-label=\"Add to Basket\"]","xpath=/body/app-root/mat-sidenav-container/mat-sidenav-content/app-search-result/div/div/div[1]/mat-grid-list/div/mat-grid-tile/div/mat-card/div/div[1]/button"]]]></TargetOptions>
+  </MacroEvent>
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>DriverClick</EventType>
+    <EventTypeName>DriverClick</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[css=[aria-label="Add to Basket"]]]></ElementPath>
+    <Duration>3724</Duration>
+    <TimeoutMs>0</TimeoutMs>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>20</Step>
+    <TargetOptions><![CDATA[["css=[aria-label=\"Add to Basket\"]","css=button[aria-label=\"Add to Basket\"]","css=body > app-root > mat-sidenav-container > mat-sidenav-content > app-search-result > div > div > div:nth-of-type(2) > mat-grid-list > div > mat-grid-tile > div > mat-card > div > div:nth-of-type(2) > button","xpath=//button[@aria-label=\"Add to Basket\"]","xpath=/body/app-root/mat-sidenav-container/mat-sidenav-content/app-search-result/div/div/div[1]/mat-grid-list/div/mat-grid-tile/div/mat-card/div/div[1]/button"]]]></TargetOptions>
+  </MacroEvent>
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>DriverClick</EventType>
+    <EventTypeName>DriverClick</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[css=body > app-root > mat-sidenav-container > mat-sidenav-content > app-search-result > div > div > div:nth-of-type(2) > mat-grid-list > div > mat-grid-tile:nth-of-type(2) > div > mat-card > div > div:nth-of-type(2) > button]]></ElementPath>
+    <Duration>2163</Duration>
+    <TimeoutMs>0</TimeoutMs>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>21</Step>
+    <TargetOptions><![CDATA[["css=body > app-root > mat-sidenav-container > mat-sidenav-content > app-search-result > div > div > div:nth-of-type(2) > mat-grid-list > div > mat-grid-tile:nth-of-type(2) > div > mat-card > div > div:nth-of-type(2) > button","css=[aria-label=\"Add to Basket\"]","css=button[aria-label=\"Add to Basket\"]","xpath=//button[@aria-label=\"Add to Basket\"]","xpath=/body/app-root/mat-sidenav-container/mat-sidenav-content/app-search-result/div/div/div[1]/mat-grid-list/div/mat-grid-tile[1]/div/mat-card/div/div[1]/button"]]]></TargetOptions>
+  </MacroEvent>
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>DriverClick</EventType>
+    <EventTypeName>DriverClick</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[css=[aria-label="Show the shopping cart"]]]></ElementPath>
+    <Duration>2375</Duration>
+    <TimeoutMs>0</TimeoutMs>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>22</Step>
+    <TargetOptions><![CDATA[["css=[aria-label=\"Show the shopping cart\"]","css=button[aria-label=\"Show the shopping cart\"]","css=body > app-root > mat-sidenav-container > mat-sidenav-content > app-navbar > mat-toolbar > mat-toolbar-row > button:nth-of-type(4)","xpath=//button[@aria-label=\"Show the shopping cart\"]","xpath=/body/app-root/mat-sidenav-container/mat-sidenav-content/app-navbar/mat-toolbar/mat-toolbar-row/button[3]"]]]></TargetOptions>
+  </MacroEvent>
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>DriverClick</EventType>
+    <EventTypeName>DriverClick</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[css=body > app-root > mat-sidenav-container > mat-sidenav-content > app-basket > mat-card > div > app-purchase-basket > mat-table > mat-row > mat-cell:nth-of-type(5) > button]]></ElementPath>
+    <Duration>1981</Duration>
+    <TimeoutMs>0</TimeoutMs>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>23</Step>
+    <TargetOptions><![CDATA[["css=body > app-root > mat-sidenav-container > mat-sidenav-content > app-basket > mat-card > div > app-purchase-basket > mat-table > mat-row > mat-cell:nth-of-type(5) > button","xpath=/body/app-root/mat-sidenav-container/mat-sidenav-content/app-basket/mat-card/div/app-purchase-basket/mat-table/mat-row/mat-cell[4]/button"]]]></TargetOptions>
+  </MacroEvent>
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>DriverClick</EventType>
+    <EventTypeName>DriverClick</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[css=app-mat-search-bar[aria-label="Click to search"] > span > mat-icon:nth-of-type(2)]]></ElementPath>
+    <Duration>761</Duration>
+    <TimeoutMs>0</TimeoutMs>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>24</Step>
+    <TargetOptions><![CDATA[["css=app-mat-search-bar[aria-label=\"Click to search\"] > span > mat-icon:nth-of-type(2)","css=body > app-root > mat-sidenav-container > mat-sidenav-content > app-navbar > mat-toolbar > mat-toolbar-row > app-mat-search-bar > span > mat-icon:nth-of-type(2)","xpath=//app-mat-search-bar[@aria-label=\"Click to search\"]/span/mat-icon[1]","xpath=/body/app-root/mat-sidenav-container/mat-sidenav-content/app-navbar/mat-toolbar/mat-toolbar-row/app-mat-search-bar/span/mat-icon[1]"]]]></TargetOptions>
+  </MacroEvent>
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>DriverClick</EventType>
+    <EventTypeName>DriverClick</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[css=app-mat-search-bar[aria-label="Click to search"] > mat-form-field > div > div:nth-of-type(2) > div > input]]></ElementPath>
+    <Duration>888</Duration>
+    <TimeoutMs>0</TimeoutMs>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>25</Step>
+    <TargetOptions><![CDATA[["css=app-mat-search-bar[aria-label=\"Click to search\"] > mat-form-field > div > div:nth-of-type(2) > div > input","css=body > app-root > mat-sidenav-container > mat-sidenav-content > app-navbar > mat-toolbar > mat-toolbar-row > app-mat-search-bar > mat-form-field > div > div:nth-of-type(2) > div > input","xpath=//app-mat-search-bar[@aria-label=\"Click to search\"]/mat-form-field/div/div[1]/div/input","xpath=/body/app-root/mat-sidenav-container/mat-sidenav-content/app-navbar/mat-toolbar/mat-toolbar-row/app-mat-search-bar/mat-form-field/div/div[1]/div/input"]]]></TargetOptions>
+  </MacroEvent>
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>DriverSetControlValue</EventType>
+    <EventTypeName>DriverSetControlValue</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[test]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[css=app-mat-search-bar[aria-label="Click to search"] > mat-form-field > div > div:nth-of-type(2) > div > input]]></ElementPath>
+    <Duration>773</Duration>
+    <TimeoutMs>0</TimeoutMs>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>26</Step>
+    <TargetOptions><![CDATA[["css=app-mat-search-bar[aria-label=\"Click to search\"] > mat-form-field > div > div:nth-of-type(2) > div > input","css=body > app-root > mat-sidenav-container > mat-sidenav-content > app-navbar > mat-toolbar > mat-toolbar-row > app-mat-search-bar > mat-form-field > div > div:nth-of-type(2) > div > input","xpath=//app-mat-search-bar[@aria-label=\"Click to search\"]/mat-form-field/div/div[1]/div/input","xpath=/body/app-root/mat-sidenav-container/mat-sidenav-content/app-navbar/mat-toolbar/mat-toolbar-row/app-mat-search-bar/mat-form-field/div/div[1]/div/input"]]]></TargetOptions>
+  </MacroEvent>
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>SendKeys</EventType>
+    <EventTypeName>SendKeys</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[${KEY_ENTER}]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[css=app-mat-search-bar[aria-label="Click to search"] > mat-form-field > div > div:nth-of-type(2) > div > input]]></ElementPath>
+    <Duration>0</Duration>
+    <TimeoutMs>0</TimeoutMs>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>27</Step>
+    <TargetOptions><![CDATA[["css=app-mat-search-bar[aria-label=\"Click to search\"] > mat-form-field > div > div:nth-of-type(2) > div > input","css=body > app-root > mat-sidenav-container > mat-sidenav-content > app-navbar > mat-toolbar > mat-toolbar-row > app-mat-search-bar > mat-form-field > div > div:nth-of-type(2) > div > input","xpath=//app-mat-search-bar[@aria-label=\"Click to search\"]/mat-form-field/div/div[1]/div/input","xpath=/body/app-root/mat-sidenav-container/mat-sidenav-content/app-navbar/mat-toolbar/mat-toolbar-row/app-mat-search-bar/mat-form-field/div/div[1]/div/input"]]]></TargetOptions>
+  </MacroEvent>
+  <MacroEvent>
+    <WindowIndex>0</WindowIndex>
+    <EventType>Delay</EventType>
+    <EventTypeName>Delay</EventTypeName>
+    <UseEncryptedData>0</UseEncryptedData>
+    <Data><![CDATA[]]></Data>
+    <EncryptedData></EncryptedData>
+    <ElementPath><![CDATA[]]></ElementPath>
+    <Duration>3000</Duration>
+    <TimeoutMs>0</TimeoutMs>
+    <Enable>1</Enable>
+    <Optional>0</Optional>
+    <Step>28</Step>
+  </MacroEvent>
+</MacroEventList>

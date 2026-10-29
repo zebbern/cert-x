@@ -1,0 +1,18 @@
+.authz-root { display: flex; flex-direction: column; gap: 20px; }
+.authz-root .authz-card { padding: 16px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.authz-root .authz-field { display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 12px; margin: 8px 0; min-width: 0; }
+.authz-root .authz-field > span { min-width: 0; overflow-wrap: anywhere; }
+.authz-root .authz-field > input, .authz-root .authz-field > select { width: 55%; min-width: 0; }
+.authz-root .authz-field > button { flex: none; }
+.authz-root select { max-width: 100%; }
+.authz-root .authz-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.authz-root .authz-meta { color: var(--muted); font-size: 12px; line-height: 1.55; margin: 0; overflow-wrap: anywhere; }
+.authz-root .authz-item { padding: 12px 0; border-bottom: 1px solid var(--line); min-width: 0; overflow-wrap: anywhere; }
+.authz-root .authz-item:last-child { border-bottom: 0; }
+.authz-root .authz-item .authz-actions { margin-top: 8px; }
+.authz-root summary { padding: 6px 0; cursor: pointer; }
+.authz-root pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 300px; overflow: auto; font-size: 12px; }
+.authz-root .authz-results { max-height: 540px; overflow: auto; }
+.authz-root .authz-notice:empty { display: none; }
+.authz-root .authz-error { color: var(--danger); }
+@media (max-width: 460px) { .authz-root .authz-card { padding: 12px; } .authz-root .authz-field { gap: 8px; } .authz-root .authz-field > span { font-size: 12px; } }

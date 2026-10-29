@@ -14,7 +14,7 @@ const ROW_ICON = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true
 const copy = {
   en: {
     title: "Your models",
-    intro: "Use your own API key, or a model running on this computer. Signed-in membership models stay in the same menu. The browser agent works best with a model that can call tools.",
+    intro: "Connect a provider, then choose its model in chat.",
     saved: "Saved providers",
     add: "Add a provider",
     edit: "Edit",
@@ -70,7 +70,7 @@ const copy = {
   },
   zh: {
     title: "你的模型",
-    intro: "使用你自己的 API key，或这台电脑上的模型。已登录的会员模型仍会出现在同一个菜单里。浏览器操作需要支持工具调用的模型。",
+    intro: "连接提供方，然后在聊天中选择模型。",
     saved: "已保存的提供方",
     add: "添加提供方",
     edit: "编辑",
@@ -654,4 +654,4 @@ $("models").addEventListener("keydown", (event) => {
   }
 });
 
-void load();
+await load();

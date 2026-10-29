@@ -1,0 +1,3851 @@
+{
+  "cases": [
+    {
+      "engines": [
+        "SAST"
+      ],
+      "status": {
+        "runId": "85cbb786-52b8-4b6b-9c67-bedd05b86e33",
+        "owner": "sast-combined",
+        "workspaceId": null,
+        "tabId": 659776776,
+        "engines": [
+          "SAST"
+        ],
+        "state": "running",
+        "config": {
+          "preset": "thorough",
+          "scanStrategy": "COMPREHENSIVE",
+          "dastScanStrategy": "COMPREHENSIVE",
+          "scanControlProfile": "wide",
+          "allowCaptureWithoutInteraction": true,
+          "maxRequestsPerSecond": 5,
+          "concurrency": 3,
+          "planningConcurrency": 2,
+          "runCve": false,
+          "follow_redirect": true,
+          "maxRequests": null,
+          "durationSeconds": null,
+          "engineOptions": {
+            "DAST": {
+              "moduleIds": [
+                "headers"
+              ]
+            }
+          },
+          "acquisition": {
+            "maxResourceBytes": 8388608,
+            "maxTotalBytes": 33554432,
+            "maxScripts": 128,
+            "drainTimeoutMs": 5000
+          },
+          "limits": {}
+        },
+        "scope": {
+          "origins": [
+            "http://127.0.0.1:59315"
+          ],
+          "excludePaths": []
+        },
+        "accountId": null,
+        "accountRevision": null,
+        "createdAt": 1792693515673,
+        "updatedAt": 1792693515784,
+        "requestsSent": 0,
+        "coverage": {
+          "backendGaps": [],
+          "engineFailures": [],
+          "actionableGaps": [],
+          "recovery": {
+            "runId": "85cbb786-52b8-4b6b-9c67-bedd05b86e33",
+            "state": "in_progress",
+            "instruction": "Assess only the checks and evidence actually recorded; absence of reported gaps is not proof of full application coverage."
+          }
+        },
+        "summary": {
+          "findingsCount": 3,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          },
+          "findings": 3
+        },
+        "runtimeId": "ptk-session_a9412ac7-7d28-4285-8525-dea273d6be7d",
+        "engineStatus": {
+          "SAST": {
+            "status": "running",
+            "isRunning": true,
+            "progress": {
+              "done": 1,
+              "total": 1,
+              "remaining": 0
+            },
+            "findingsCount": 3,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            },
+            "lastActivityAt": null,
+            "warnings": [],
+            "phase": "waiting",
+            "totalFiles": 1,
+            "completedFiles": 1,
+            "totalModules": 11,
+            "completedModules": 11,
+            "currentFile": null,
+            "currentModule": null,
+            "lastStatus": "Waiting for next page activity",
+            "findings": 2,
+            "hints": 1,
+            "isSessionRunning": true,
+            "isAnalysisRunning": false,
+            "collectionState": "waiting_for_page_activity",
+            "sessionState": "running",
+            "analysisState": "complete",
+            "firstCollectionStarted": true,
+            "firstCollectionSettled": true,
+            "firstCollectionError": null,
+            "initialCollectionDeferred": null,
+            "activeCollectionCount": 0,
+            "pendingCollectionCount": 0,
+            "currentGeneration": 8,
+            "lastCompletedGeneration": 8,
+            "currentCollectionId": "sast_collection_8",
+            "currentCollectionFile": "http://127.0.0.1:59315/exec",
+            "currentCollectionScriptsCount": 1,
+            "currentCollectionHtmlChars": 0,
+            "currentCollectionFindingsCount": 6,
+            "currentCollectionStartedAt": "2026-10-22T18:25:15.760Z",
+            "currentCollectionPayloadAt": "2026-10-22T18:25:15.760Z",
+            "lastCompletedCollectionId": "sast_collection_8",
+            "lastCompletedFile": "http://127.0.0.1:59315/exec",
+            "lastCompletedModule": "DOM Data Manipulation",
+            "lastCompletedScriptsCount": 1,
+            "lastCompletedHtmlChars": 0,
+            "lastCompletedFindingsCount": 6,
+            "lastCompletedArtifactsCount": 0,
+            "lastCompletedAt": "2026-10-22T18:25:15.768Z",
+            "hasObservedCollection": true,
+            "idle": true
+          }
+        },
+        "lastStatus": {
+          "sessionId": "ptk-session_a9412ac7-7d28-4285-8525-dea273d6be7d",
+          "scanId": "ptk-session_a9412ac7-7d28-4285-8525-dea273d6be7d",
+          "ok": true,
+          "status": "running",
+          "completionStatus": "running",
+          "releaseStatus": null,
+          "error": null,
+          "startedAt": "2026-10-22T18:25:15.676Z",
+          "finishedAt": null,
+          "stopRequestedAt": null,
+          "closeRequestId": null,
+          "closeRequestAck": false,
+          "closeRequestMode": null,
+          "idleVerified": false,
+          "elapsedMs": 108,
+          "lastUpdatedAt": null,
+          "engines": {
+            "SAST": {
+              "status": "running",
+              "isRunning": true,
+              "progress": {
+                "done": 1,
+                "total": 1,
+                "remaining": 0
+              },
+              "findingsCount": 3,
+              "bySeverity": {
+                "critical": 0,
+                "high": 0,
+                "medium": 0,
+                "low": 0,
+                "info": 0
+              },
+              "lastActivityAt": null,
+              "warnings": [],
+              "phase": "waiting",
+              "totalFiles": 1,
+              "completedFiles": 1,
+              "totalModules": 11,
+              "completedModules": 11,
+              "currentFile": null,
+              "currentModule": null,
+              "lastStatus": "Waiting for next page activity",
+              "findings": 2,
+              "hints": 1,
+              "isSessionRunning": true,
+              "isAnalysisRunning": false,
+              "collectionState": "waiting_for_page_activity",
+              "sessionState": "running",
+              "analysisState": "complete",
+              "firstCollectionStarted": true,
+              "firstCollectionSettled": true,
+              "firstCollectionError": null,
+              "initialCollectionDeferred": null,
+              "activeCollectionCount": 0,
+              "pendingCollectionCount": 0,
+              "currentGeneration": 8,
+              "lastCompletedGeneration": 8,
+              "currentCollectionId": "sast_collection_8",
+              "currentCollectionFile": "http://127.0.0.1:59315/exec",
+              "currentCollectionScriptsCount": 1,
+              "currentCollectionHtmlChars": 0,
+              "currentCollectionFindingsCount": 6,
+              "currentCollectionStartedAt": "2026-10-22T18:25:15.760Z",
+              "currentCollectionPayloadAt": "2026-10-22T18:25:15.760Z",
+              "lastCompletedCollectionId": "sast_collection_8",
+              "lastCompletedFile": "http://127.0.0.1:59315/exec",
+              "lastCompletedModule": "DOM Data Manipulation",
+              "lastCompletedScriptsCount": 1,
+              "lastCompletedHtmlChars": 0,
+              "lastCompletedFindingsCount": 6,
+              "lastCompletedArtifactsCount": 0,
+              "lastCompletedAt": "2026-10-22T18:25:15.768Z",
+              "hasObservedCollection": true,
+              "idle": true
+            }
+          },
+          "summary": {
+            "findingsCount": 3,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            }
+          },
+          "warnings": [],
+          "sessionLookup": {
+            "requestedSessionId": "ptk-session_a9412ac7-7d28-4285-8525-dea273d6be7d",
+            "tabId": 659776776,
+            "strictCurrentTab": true,
+            "allowActive": true,
+            "allowCompleted": true,
+            "allowGlobalCompleted": true,
+            "lookupSource": "explicit-session",
+            "activeSessionIdForTab": "ptk-session_a9412ac7-7d28-4285-8525-dea273d6be7d",
+            "completedSessionIdForTab": null,
+            "globalCompletedSessionId": null,
+            "sessionExists": true,
+            "sessionStatus": "running",
+            "sessionFinishedAt": null,
+            "stopRequestedAt": null,
+            "retention": {
+              "ttlMs": 86400000,
+              "maxCompletedSessions": 20,
+              "evicted": false
+            }
+          },
+          "supplemental": {
+            "backends": {},
+            "gaps": []
+          },
+          "coverage": {
+            "backendGaps": []
+          }
+        }
+      },
+      "stopped": {
+        "runId": "85cbb786-52b8-4b6b-9c67-bedd05b86e33",
+        "owner": "sast-combined",
+        "workspaceId": null,
+        "tabId": 659776776,
+        "engines": [
+          "SAST"
+        ],
+        "state": "completed",
+        "config": {
+          "preset": "thorough",
+          "scanStrategy": "COMPREHENSIVE",
+          "dastScanStrategy": "COMPREHENSIVE",
+          "scanControlProfile": "wide",
+          "allowCaptureWithoutInteraction": true,
+          "maxRequestsPerSecond": 5,
+          "concurrency": 3,
+          "planningConcurrency": 2,
+          "runCve": false,
+          "follow_redirect": true,
+          "maxRequests": null,
+          "durationSeconds": null,
+          "engineOptions": {
+            "DAST": {
+              "moduleIds": [
+                "headers"
+              ]
+            }
+          },
+          "acquisition": {
+            "maxResourceBytes": 8388608,
+            "maxTotalBytes": 33554432,
+            "maxScripts": 128,
+            "drainTimeoutMs": 5000
+          },
+          "limits": {}
+        },
+        "scope": {
+          "origins": [
+            "http://127.0.0.1:59315"
+          ],
+          "excludePaths": []
+        },
+        "accountId": null,
+        "accountRevision": null,
+        "createdAt": 1792693515673,
+        "updatedAt": 1792693515802,
+        "requestsSent": 0,
+        "coverage": {
+          "backendGaps": [],
+          "engineFailures": [],
+          "actionableGaps": [],
+          "recovery": {
+            "runId": "85cbb786-52b8-4b6b-9c67-bedd05b86e33",
+            "state": "reported_checks_finished",
+            "instruction": "Assess only the checks and evidence actually recorded; absence of reported gaps is not proof of full application coverage."
+          }
+        },
+        "summary": {
+          "status": "completed",
+          "releaseStatus": "clean",
+          "stats": {
+            "findingsCount": 3,
+            "bySeverity": {
+              "critical": 0,
+              "high": 2,
+              "medium": 0,
+              "low": 1,
+              "info": 0
+            }
+          },
+          "findings": 3
+        },
+        "runtimeId": "ptk-session_a9412ac7-7d28-4285-8525-dea273d6be7d",
+        "engineStatus": {
+          "SAST": {
+            "status": "stopped",
+            "isRunning": false,
+            "progress": {
+              "done": 1,
+              "total": 1,
+              "remaining": 0
+            },
+            "findingsCount": 3,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            },
+            "lastActivityAt": null,
+            "warnings": [],
+            "phase": "waiting",
+            "totalFiles": 1,
+            "completedFiles": 1,
+            "totalModules": 11,
+            "completedModules": 11,
+            "currentFile": null,
+            "currentModule": null,
+            "lastStatus": "SAST analysis complete",
+            "findings": 2,
+            "hints": 1,
+            "isSessionRunning": false,
+            "isAnalysisRunning": false,
+            "collectionState": "completed",
+            "sessionState": "idle",
+            "analysisState": "complete",
+            "firstCollectionStarted": false,
+            "firstCollectionSettled": false,
+            "firstCollectionError": null,
+            "initialCollectionDeferred": null,
+            "activeCollectionCount": 0,
+            "pendingCollectionCount": 0,
+            "currentGeneration": 0,
+            "lastCompletedGeneration": 8,
+            "currentCollectionId": null,
+            "currentCollectionFile": null,
+            "currentCollectionScriptsCount": 0,
+            "currentCollectionHtmlChars": 0,
+            "currentCollectionFindingsCount": 0,
+            "currentCollectionStartedAt": null,
+            "currentCollectionPayloadAt": null,
+            "lastCompletedCollectionId": null,
+            "lastCompletedFile": "http://127.0.0.1:59315/asset.js",
+            "lastCompletedModule": "DOM Data Manipulation",
+            "lastCompletedScriptsCount": 0,
+            "lastCompletedHtmlChars": 0,
+            "lastCompletedFindingsCount": 0,
+            "lastCompletedArtifactsCount": 0,
+            "lastCompletedAt": null,
+            "hasObservedCollection": true,
+            "idle": true
+          }
+        },
+        "lastStatus": {
+          "sessionId": "ptk-session_a9412ac7-7d28-4285-8525-dea273d6be7d",
+          "scanId": "ptk-session_a9412ac7-7d28-4285-8525-dea273d6be7d",
+          "ok": true,
+          "status": "completed",
+          "completionStatus": "completed",
+          "releaseStatus": "clean",
+          "error": null,
+          "startedAt": "2026-10-22T18:25:15.676Z",
+          "finishedAt": "2026-10-22T18:25:15.800Z",
+          "stopRequestedAt": null,
+          "closeRequestId": null,
+          "closeRequestAck": false,
+          "closeRequestMode": null,
+          "idleVerified": false,
+          "elapsedMs": 125,
+          "lastUpdatedAt": null,
+          "engines": {
+            "SAST": {
+              "status": "stopped",
+              "isRunning": false,
+              "progress": {
+                "done": 1,
+                "total": 1,
+                "remaining": 0
+              },
+              "findingsCount": 3,
+              "bySeverity": {
+                "critical": 0,
+                "high": 0,
+                "medium": 0,
+                "low": 0,
+                "info": 0
+              },
+              "lastActivityAt": null,
+              "warnings": [],
+              "phase": "waiting",
+              "totalFiles": 1,
+              "completedFiles": 1,
+              "totalModules": 11,
+              "completedModules": 11,
+              "currentFile": null,
+              "currentModule": null,
+              "lastStatus": "SAST analysis complete",
+              "findings": 2,
+              "hints": 1,
+              "isSessionRunning": false,
+              "isAnalysisRunning": false,
+              "collectionState": "completed",
+              "sessionState": "idle",
+              "analysisState": "complete",
+              "firstCollectionStarted": false,
+              "firstCollectionSettled": false,
+              "firstCollectionError": null,
+              "initialCollectionDeferred": null,
+              "activeCollectionCount": 0,
+              "pendingCollectionCount": 0,
+              "currentGeneration": 0,
+              "lastCompletedGeneration": 8,
+              "currentCollectionId": null,
+              "currentCollectionFile": null,
+              "currentCollectionScriptsCount": 0,
+              "currentCollectionHtmlChars": 0,
+              "currentCollectionFindingsCount": 0,
+              "currentCollectionStartedAt": null,
+              "currentCollectionPayloadAt": null,
+              "lastCompletedCollectionId": null,
+              "lastCompletedFile": "http://127.0.0.1:59315/asset.js",
+              "lastCompletedModule": "DOM Data Manipulation",
+              "lastCompletedScriptsCount": 0,
+              "lastCompletedHtmlChars": 0,
+              "lastCompletedFindingsCount": 0,
+              "lastCompletedArtifactsCount": 0,
+              "lastCompletedAt": null,
+              "hasObservedCollection": true,
+              "idle": true
+            }
+          },
+          "summary": {
+            "findingsCount": 3,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            }
+          },
+          "finalSummary": {
+            "status": "completed",
+            "releaseStatus": "clean",
+            "stats": {
+              "findingsCount": 3,
+              "bySeverity": {
+                "critical": 0,
+                "high": 2,
+                "medium": 0,
+                "low": 1,
+                "info": 0
+              }
+            }
+          },
+          "warnings": [],
+          "sessionLookup": {
+            "requestedSessionId": "ptk-session_a9412ac7-7d28-4285-8525-dea273d6be7d",
+            "tabId": 659776776,
+            "strictCurrentTab": true,
+            "allowActive": true,
+            "allowCompleted": true,
+            "allowGlobalCompleted": true,
+            "lookupSource": "explicit-session",
+            "activeSessionIdForTab": null,
+            "completedSessionIdForTab": "ptk-session_a9412ac7-7d28-4285-8525-dea273d6be7d",
+            "globalCompletedSessionId": "ptk-session_a9412ac7-7d28-4285-8525-dea273d6be7d",
+            "sessionExists": true,
+            "sessionStatus": "completed",
+            "sessionFinishedAt": "2026-10-22T18:25:15.800Z",
+            "stopRequestedAt": null,
+            "retention": {
+              "ttlMs": 86400000,
+              "maxCompletedSessions": 20,
+              "evicted": false
+            }
+          },
+          "supplemental": {
+            "backends": {},
+            "gaps": []
+          },
+          "coverage": {
+            "backendGaps": []
+          }
+        },
+        "stopReason": "Stopped by user."
+      },
+      "native": {
+        "scan": {
+          "version": "1.0",
+          "engine": "SAST",
+          "scanId": "5062340d-7e34-4327-a5e6-8d2cb58488fe",
+          "host": "127.0.0.1:59315",
+          "startedAt": "2026-10-22T18:25:15.687Z",
+          "finishedAt": "2026-10-22T18:25:15.798Z",
+          "settings": {
+            "policyCode": "COMPREHENSIVE",
+            "scanStrategyCode": 0
+          },
+          "toolVersion": "1.0.0",
+          "stats": {
+            "findingsCount": 3,
+            "filesCount": 1,
+            "critical": 0,
+            "high": 2,
+            "medium": 0,
+            "low": 1,
+            "info": 0,
+            "rulesCount": 3
+          },
+          "findings": [
+            {
+              "id": "5062340d-7e34-4327-a5e6-8d2cb58488fe::SAST::dom-xss::no-inner-outer-html::43261340b23eb37c",
+              "engine": "SAST",
+              "scanId": "5062340d-7e34-4327-a5e6-8d2cb58488fe",
+              "moduleId": "dom-xss",
+              "moduleName": "DOM-based XSS",
+              "ruleId": "no-inner-outer-html",
+              "ruleName": "Disallow innerHTML/outerHTML assignments",
+              "vulnId": "dom_xss",
+              "category": "xss",
+              "severity": "low",
+              "owasp": [
+                "A05:2025 - Injection",
+                "A03:2021 - Injection"
+              ],
+              "cwe": [
+                "CWE-79"
+              ],
+              "tags": [
+                "sast",
+                "dom",
+                "xss"
+              ],
+              "description": "Assignments to innerHTML/outerHTML are dangerous when they contain untrusted data and may lead to XSS.",
+              "recommendation": "<p>Prevent DOM-based XSS by never inserting untrusted strings directly into HTML or executing them as code. Prefer DOM/text APIs, safe templating, or a vetted sanitizer and apply context-aware encoding where needed.</p><ul><li><strong>Primary:</strong> Use <code>textContent</code> / <code>innerText</code> or create DOM nodes instead of string-based HTML insertion. If you must insert HTML, sanitize it with a vetted library such as <a href=\"https://github.com/cure53/DOMPurify\" target=\"_blank\">DOMPurify</a>.</li><li><strong>Secondary:</strong> Apply context-sensitive encoding for attributes and JavaScript contexts, avoid <code>eval</code>/<code>new Function</code>/<code>setTimeout</code> with strings, and prefer safe templating engines.</li><li><strong>Controls:</strong> Use Content Security Policy (CSP), follow least-privilege principles, and validate/allow-list input shapes where practical.</li><li><strong>Testing:</strong> Add unit/browser tests for inline handlers and client-side flows that read from <code>location</code>, form inputs, storage, and <code>postMessage</code>.</li></ul>",
+              "links": {
+                "OWASP": "https://owasp.org/www-community/attacks/xss/",
+                "CWE": "https://cwe.mitre.org/data/definitions/79.html"
+              },
+              "location": {
+                "file": "http://127.0.0.1:59315/asset.js",
+                "line": 1,
+                "column": 22,
+                "runtimeUrl": "http://127.0.0.1:59315/exec",
+                "runtimeUrls": [
+                  "http://127.0.0.1:59315/exec"
+                ],
+                "pageUrl": "http://127.0.0.1:59315/exec",
+                "pageUrls": [
+                  "http://127.0.0.1:59315/exec"
+                ],
+                "url": "http://127.0.0.1:59315/exec",
+                "param": null,
+                "kind": "code"
+              },
+              "createdAt": "2026-10-22T18:25:15.767Z",
+              "fingerprint": "no-inner-outer-html@@low@@http://127.0.0.1:59315/asset.js@@http://127.0.0.1:59315/asset.js@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":79}}@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":63}}@@",
+              "findingKind": "hint",
+              "confidence": 38,
+              "evidence": {
+                "sast": {
+                  "codeSnippet": "Source context:\nfunction showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }\n\nSink context:\nfunction showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }",
+                  "source": {
+                    "label": "innerHTML",
+                    "path": null,
+                    "sourceFile": "http://127.0.0.1:59315/asset.js",
+                    "sourceFileFull": "http://127.0.0.1:59315/asset.js",
+                    "sourceLoc": {
+                      "start": {
+                        "line": 1,
+                        "column": 22
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 79
+                      }
+                    },
+                    "sourceName": "innerHTML",
+                    "sourceSnippet": "function showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }"
+                  },
+                  "sink": {
+                    "kind": "assign",
+                    "label": "innerHTML",
+                    "path": [],
+                    "sinkFile": "http://127.0.0.1:59315/asset.js",
+                    "sinkFileFull": "http://127.0.0.1:59315/asset.js",
+                    "sinkLoc": {
+                      "start": {
+                        "line": 1,
+                        "column": 22
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 63
+                      }
+                    },
+                    "sinkName": "innerHTML",
+                    "sinkSnippet": "function showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }"
+                  },
+                  "nodeType": "AssignmentExpression",
+                  "trace": [],
+                  "mode": "pattern",
+                  "findingKind": "hint",
+                  "confidenceSignals": [
+                    "base:pattern:58",
+                    "finding_kind:hint:-20"
+                  ]
+                }
+              },
+              "updatedAt": "2026-10-22T18:25:15.767Z",
+              "pageUrl": "http://127.0.0.1:59315/exec"
+            },
+            {
+              "id": "5062340d-7e34-4327-a5e6-8d2cb58488fe::SAST::dom-xss::dom-xss-taint::7efec2d4c35ebd14",
+              "engine": "SAST",
+              "scanId": "5062340d-7e34-4327-a5e6-8d2cb58488fe",
+              "moduleId": "dom-xss",
+              "moduleName": "DOM-based XSS",
+              "ruleId": "dom-xss-taint",
+              "ruleName": "DOM-based XSS (taint flow)",
+              "vulnId": "dom_xss",
+              "category": "xss",
+              "severity": "high",
+              "owasp": [
+                "A05:2025 - Injection",
+                "A03:2021 - Injection"
+              ],
+              "cwe": [
+                "CWE-79"
+              ],
+              "tags": [
+                "sast",
+                "dom",
+                "xss"
+              ],
+              "description": "Detects flows where untrusted DOM-derived data (location, element values, storage, message data) reaches HTML/JS execution sinks (e.g., innerHTML, document.write, insertAdjacentHTML, location assignment, eval/Function) without passing through a recognized sanitizer.",
+              "recommendation": "<p>Prevent DOM-based XSS by never inserting untrusted strings directly into HTML or executing them as code. Prefer DOM/text APIs, safe templating, or a vetted sanitizer and apply context-aware encoding where needed.</p><ul><li><strong>Primary:</strong> Use <code>textContent</code> / <code>innerText</code> or create DOM nodes instead of string-based HTML insertion. If you must insert HTML, sanitize it with a vetted library such as <a href=\"https://github.com/cure53/DOMPurify\" target=\"_blank\">DOMPurify</a>.</li><li><strong>Secondary:</strong> Apply context-sensitive encoding for attributes and JavaScript contexts, avoid <code>eval</code>/<code>new Function</code>/<code>setTimeout</code> with strings, and prefer safe templating engines.</li><li><strong>Controls:</strong> Use Content Security Policy (CSP), follow least-privilege principles, and validate/allow-list input shapes where practical.</li><li><strong>Testing:</strong> Add unit/browser tests for inline handlers and client-side flows that read from <code>location</code>, form inputs, storage, and <code>postMessage</code>.</li></ul>",
+              "links": {
+                "OWASP": "https://owasp.org/www-community/attacks/xss/",
+                "CWE": "https://cwe.mitre.org/data/definitions/79.html"
+              },
+              "location": {
+                "file": "http://127.0.0.1:59315/asset.js",
+                "line": 1,
+                "column": 22,
+                "runtimeUrl": "http://127.0.0.1:59315/exec",
+                "runtimeUrls": [
+                  "http://127.0.0.1:59315/exec"
+                ],
+                "pageUrl": "http://127.0.0.1:59315/exec",
+                "pageUrls": [
+                  "http://127.0.0.1:59315/exec"
+                ],
+                "url": "http://127.0.0.1:59315/exec",
+                "param": null,
+                "kind": "code"
+              },
+              "createdAt": "2026-10-22T18:25:15.767Z",
+              "fingerprint": "dom-xss-taint@@high@@http://127.0.0.1:59315/asset.js@@http://127.0.0.1:59315/asset.js@@{\"start\":{\"line\":1,\"column\":66},\"end\":{\"line\":1,\"column\":79}}@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":63}}@@",
+              "findingKind": "finding",
+              "confidence": 100,
+              "evidence": {
+                "sast": {
+                  "codeSnippet": "Source context:\nfunction showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }\n\nSink context:\nfunction showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }",
+                  "source": {
+                    "label": "location.hash",
+                    "path": "location.hash",
+                    "sourceFile": "http://127.0.0.1:59315/asset.js",
+                    "sourceFileFull": "http://127.0.0.1:59315/asset.js",
+                    "sourceLoc": {
+                      "start": {
+                        "line": 1,
+                        "column": 66
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 79
+                      }
+                    },
+                    "sourceName": "location.hash",
+                    "sourceSnippet": "function showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }"
+                  },
+                  "sink": {
+                    "kind": "assign",
+                    "label": "innerHTML",
+                    "path": [
+                      "innerHTML"
+                    ],
+                    "framework": null,
+                    "api": null,
+                    "argIndex": null,
+                    "sinkFile": "http://127.0.0.1:59315/asset.js",
+                    "sinkFileFull": "http://127.0.0.1:59315/asset.js",
+                    "sinkLoc": {
+                      "start": {
+                        "line": 1,
+                        "column": 22
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 63
+                      }
+                    },
+                    "sinkName": "innerHTML",
+                    "sinkSnippet": "function showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }"
+                  },
+                  "nodeType": "AssignmentExpression",
+                  "trace": [
+                    {
+                      "kind": "source",
+                      "label": "location.hash",
+                      "file": "http://127.0.0.1:59315/asset.js",
+                      "loc": {
+                        "start": {
+                          "line": 1,
+                          "column": 66
+                        },
+                        "end": {
+                          "line": 1,
+                          "column": 79
+                        }
+                      }
+                    },
+                    {
+                      "kind": "sink",
+                      "label": "innerHTML",
+                      "file": "http://127.0.0.1:59315/asset.js",
+                      "loc": {
+                        "start": {
+                          "line": 1,
+                          "column": 22
+                        },
+                        "end": {
+                          "line": 1,
+                          "column": 79
+                        }
+                      }
+                    }
+                  ],
+                  "mode": "taint",
+                  "findingKind": "finding",
+                  "sinkContext": "html",
+                  "sourceTier": "url",
+                  "confidenceSignals": [
+                    "base:taint:78",
+                    "sink_context:html:+8",
+                    "source_tier:url:+6",
+                    "trace_len:2:+10"
+                  ]
+                }
+              },
+              "updatedAt": "2026-10-22T18:25:15.767Z",
+              "pageUrl": "http://127.0.0.1:59315/exec"
+            },
+            {
+              "id": "5062340d-7e34-4327-a5e6-8d2cb58488fe::SAST::client-template-injection::client-template-injection-taint::aa7eb437176ab40d",
+              "engine": "SAST",
+              "scanId": "5062340d-7e34-4327-a5e6-8d2cb58488fe",
+              "moduleId": "client-template-injection",
+              "moduleName": "Client-side Template Injection",
+              "ruleId": "client-template-injection-taint",
+              "ruleName": "Template injection (taint flow)",
+              "vulnId": "code_injection",
+              "category": "injection",
+              "severity": "high",
+              "owasp": [
+                "A05:2025 - Injection",
+                "A03:2021 - Injection"
+              ],
+              "cwe": [
+                "CWE-94"
+              ],
+              "tags": [
+                "sast",
+                "template",
+                "injection"
+              ],
+              "description": "Tainted data flows into client-side template sources or rendered HTML sinks.",
+              "recommendation": "<ul><li>Avoid compiling templates from untrusted strings; use precompiled templates.</li><li>Sanitize render output before inserting into the DOM.</li></ul>",
+              "links": {
+                "OWASP": "https://owasp.org/www-community/attacks/Template_Injection",
+                "CWE": "https://cwe.mitre.org/data/definitions/94.html"
+              },
+              "location": {
+                "file": "http://127.0.0.1:59315/asset.js",
+                "line": 1,
+                "column": 22,
+                "runtimeUrl": "http://127.0.0.1:59315/exec",
+                "runtimeUrls": [
+                  "http://127.0.0.1:59315/exec"
+                ],
+                "pageUrl": "http://127.0.0.1:59315/exec",
+                "pageUrls": [
+                  "http://127.0.0.1:59315/exec"
+                ],
+                "url": "http://127.0.0.1:59315/exec",
+                "param": null,
+                "kind": "code"
+              },
+              "createdAt": "2026-10-22T18:25:15.767Z",
+              "fingerprint": "client-template-injection-taint@@high@@http://127.0.0.1:59315/asset.js@@http://127.0.0.1:59315/asset.js@@{\"start\":{\"line\":1,\"column\":66},\"end\":{\"line\":1,\"column\":79}}@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":63}}@@",
+              "findingKind": "finding",
+              "confidence": 88,
+              "evidence": {
+                "sast": {
+                  "codeSnippet": "Source context:\nfunction showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }\n\nSink context:\nfunction showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }",
+                  "source": {
+                    "label": "location.hash",
+                    "path": "location.hash",
+                    "sourceFile": "http://127.0.0.1:59315/asset.js",
+                    "sourceFileFull": "http://127.0.0.1:59315/asset.js",
+                    "sourceLoc": {
+                      "start": {
+                        "line": 1,
+                        "column": 66
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 79
+                      }
+                    },
+                    "sourceName": "location.hash",
+                    "sourceSnippet": "function showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }"
+                  },
+                  "sink": {
+                    "kind": "assign",
+                    "label": "innerHTML",
+                    "path": [
+                      "innerHTML"
+                    ],
+                    "framework": null,
+                    "api": null,
+                    "argIndex": null,
+                    "sinkFile": "http://127.0.0.1:59315/asset.js",
+                    "sinkFileFull": "http://127.0.0.1:59315/asset.js",
+                    "sinkLoc": {
+                      "start": {
+                        "line": 1,
+                        "column": 22
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 63
+                      }
+                    },
+                    "sinkName": "innerHTML",
+                    "sinkSnippet": "function showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }"
+                  },
+                  "nodeType": "AssignmentExpression",
+                  "trace": [
+                    {
+                      "kind": "source",
+                      "label": "location.hash",
+                      "file": "http://127.0.0.1:59315/asset.js",
+                      "loc": {
+                        "start": {
+                          "line": 1,
+                          "column": 66
+                        },
+                        "end": {
+                          "line": 1,
+                          "column": 79
+                        }
+                      }
+                    },
+                    {
+                      "kind": "sink",
+                      "label": "innerHTML",
+                      "file": "http://127.0.0.1:59315/asset.js",
+                      "loc": {
+                        "start": {
+                          "line": 1,
+                          "column": 22
+                        },
+                        "end": {
+                          "line": 1,
+                          "column": 79
+                        }
+                      }
+                    }
+                  ],
+                  "mode": "taint",
+                  "findingKind": "finding",
+                  "sinkContext": "generic",
+                  "sourceTier": "url",
+                  "confidenceSignals": [
+                    "base:taint:78",
+                    "sink_context:generic:-6",
+                    "source_tier:url:+6",
+                    "trace_len:2:+10"
+                  ]
+                }
+              },
+              "updatedAt": "2026-10-22T18:25:15.767Z",
+              "pageUrl": "http://127.0.0.1:59315/exec"
+            }
+          ],
+          "groups": [
+            {
+              "id": "SAST@@dom_xss@@dom-xss@@no-inner-outer-html@@http://127.0.0.1:59315/asset.js@@1",
+              "engine": "SAST",
+              "scanId": "5062340d-7e34-4327-a5e6-8d2cb58488fe",
+              "vulnId": "dom_xss",
+              "category": "xss",
+              "severity": "low",
+              "correlationKey": null,
+              "location": {
+                "url": "http://127.0.0.1:59315/exec",
+                "runtimeUrl": "http://127.0.0.1:59315/exec",
+                "file": "http://127.0.0.1:59315/asset.js",
+                "param": null,
+                "sink": "innerHTML"
+              },
+              "occurrenceIds": [
+                "5062340d-7e34-4327-a5e6-8d2cb58488fe::SAST::dom-xss::no-inner-outer-html::43261340b23eb37c"
+              ],
+              "count": 1
+            },
+            {
+              "id": "SAST@@dom_xss@@dom-xss@@dom-xss-taint@@http://127.0.0.1:59315/asset.js@@1",
+              "engine": "SAST",
+              "scanId": "5062340d-7e34-4327-a5e6-8d2cb58488fe",
+              "vulnId": "dom_xss",
+              "category": "xss",
+              "severity": "high",
+              "correlationKey": null,
+              "location": {
+                "url": "http://127.0.0.1:59315/exec",
+                "runtimeUrl": "http://127.0.0.1:59315/exec",
+                "file": "http://127.0.0.1:59315/asset.js",
+                "param": null,
+                "sink": "innerHTML"
+              },
+              "occurrenceIds": [
+                "5062340d-7e34-4327-a5e6-8d2cb58488fe::SAST::dom-xss::dom-xss-taint::7efec2d4c35ebd14"
+              ],
+              "count": 1
+            },
+            {
+              "id": "SAST@@code_injection@@client-template-injection@@client-template-injection-taint@@http://127.0.0.1:59315/asset.js@@1",
+              "engine": "SAST",
+              "scanId": "5062340d-7e34-4327-a5e6-8d2cb58488fe",
+              "vulnId": "code_injection",
+              "category": "injection",
+              "severity": "high",
+              "correlationKey": null,
+              "location": {
+                "url": "http://127.0.0.1:59315/exec",
+                "runtimeUrl": "http://127.0.0.1:59315/exec",
+                "file": "http://127.0.0.1:59315/asset.js",
+                "param": null,
+                "sink": "innerHTML"
+              },
+              "occurrenceIds": [
+                "5062340d-7e34-4327-a5e6-8d2cb58488fe::SAST::client-template-injection::client-template-injection-taint::aa7eb437176ab40d"
+              ],
+              "count": 1
+            }
+          ],
+          "codeArtifacts": {
+            "sast": {
+              "version": 2,
+              "routes": [],
+              "endpoints": [],
+              "graphql": [],
+              "surfaces": [],
+              "hiddenParams": [],
+              "gadgets": [
+                {
+                  "id": "sast-gadget::127.0.0.1:59315|*|/exec::dom-html-sink::innerHTML",
+                  "bucketId": "sast-gadget::127.0.0.1:59315|*|/exec::dom-html-sink::innerHTML",
+                  "artifactType": "gadget",
+                  "moduleId": "sast-gadget-path-hints",
+                  "ruleId": "gadget-artifact",
+                  "gadgetType": "dom-html-sink",
+                  "label": "innerHTML",
+                  "routeKey": "127.0.0.1:59315|*|/exec",
+                  "occurrenceCount": 2,
+                  "sourceFiles": [
+                    "http://127.0.0.1:59315/asset.js"
+                  ],
+                  "sourceFile": "http://127.0.0.1:59315/asset.js",
+                  "sourceLoc": {
+                    "line": 1,
+                    "column": 22
+                  },
+                  "pageUrl": "http://127.0.0.1:59315/exec",
+                  "pageCanon": "http://127.0.0.1:59315/exec",
+                  "pageUrls": [
+                    "http://127.0.0.1:59315/exec"
+                  ],
+                  "runtimeUrls": [
+                    "http://127.0.0.1:59315/exec"
+                  ],
+                  "observedUrls": [
+                    "http://127.0.0.1:59315/exec"
+                  ],
+                  "runtimeUrl": "http://127.0.0.1:59315/exec",
+                  "authHints": [],
+                  "protocolHints": [],
+                  "discoveryTags": [],
+                  "environmentHints": [],
+                  "storageHints": [],
+                  "uploadSignals": [],
+                  "paramNames": [],
+                  "bodyKeys": [],
+                  "headerNames": [],
+                  "operationTypes": [],
+                  "operationNames": [],
+                  "rootFields": [],
+                  "variableNames": [],
+                  "hintNames": [],
+                  "hintTypes": [],
+                  "actions": [],
+                  "transports": []
+                }
+              ]
+            }
+          },
+          "files": [
+            "http://127.0.0.1:59315/asset.js"
+          ],
+          "scanStrategy": {
+            "policyCode": "COMPREHENSIVE",
+            "scanStrategyCode": 0
+          }
+        },
+        "progress": {
+          "sessionState": "idle",
+          "collectionState": "idle",
+          "analysisState": "idle",
+          "isSessionRunning": false,
+          "isAnalysisRunning": false,
+          "firstCollectionStarted": false,
+          "firstCollectionSettled": false,
+          "firstCollectionError": null,
+          "activeCollectionCount": 0,
+          "pendingCollectionCount": 0,
+          "lastCollectionState": "idle",
+          "currentGeneration": 0,
+          "lastCompletedGeneration": 0,
+          "currentCollectionId": null,
+          "currentCollectionFile": null,
+          "currentCollectionScriptsCount": null,
+          "currentCollectionHtmlChars": null,
+          "currentCollectionFindingsCount": null,
+          "currentCollectionStartedAt": null,
+          "currentCollectionPayloadAt": null,
+          "lastCompletedFile": null,
+          "lastCompletedModule": null,
+          "lastCompletedCollectionId": null,
+          "lastCompletedScriptsCount": null,
+          "lastCompletedHtmlChars": null,
+          "lastCompletedFindingsCount": null,
+          "lastCompletedArtifactsCount": null,
+          "lastCompletedAt": null,
+          "initialCollectionDeferred": null
+        }
+      }
+    },
+    {
+      "engines": [
+        "SAST",
+        "SCA"
+      ],
+      "status": {
+        "runId": "449372e4-2c64-4a6d-84df-fe07edebefb9",
+        "owner": "sast-combined",
+        "workspaceId": null,
+        "tabId": 659776776,
+        "engines": [
+          "SAST",
+          "SCA"
+        ],
+        "state": "running",
+        "config": {
+          "preset": "thorough",
+          "scanStrategy": "COMPREHENSIVE",
+          "dastScanStrategy": "COMPREHENSIVE",
+          "scanControlProfile": "wide",
+          "allowCaptureWithoutInteraction": true,
+          "maxRequestsPerSecond": 5,
+          "concurrency": 3,
+          "planningConcurrency": 2,
+          "runCve": false,
+          "follow_redirect": true,
+          "maxRequests": null,
+          "durationSeconds": null,
+          "engineOptions": {
+            "DAST": {
+              "moduleIds": [
+                "headers"
+              ]
+            }
+          },
+          "acquisition": {
+            "maxResourceBytes": 8388608,
+            "maxTotalBytes": 33554432,
+            "maxScripts": 128,
+            "drainTimeoutMs": 5000
+          },
+          "limits": {}
+        },
+        "scope": {
+          "origins": [
+            "http://127.0.0.1:59315"
+          ],
+          "excludePaths": []
+        },
+        "accountId": null,
+        "accountRevision": null,
+        "createdAt": 1792693515833,
+        "updatedAt": 1792693515942,
+        "requestsSent": 0,
+        "coverage": {
+          "backendGaps": [],
+          "scaBodies": {
+            "captured": 1,
+            "analyzed": 1,
+            "gaps": 0,
+            "basis": "Admitted JavaScript resources observed during this scan; URI detections do not prove body analysis."
+          },
+          "scaSources": {
+            "captured": 1,
+            "analyzed": 1,
+            "gaps": 0,
+            "basis": "Executable Debugger script text, not a claim of HTTP-byte identity."
+          },
+          "scaAcquisition": {
+            "phase": "observed_content_analyzed",
+            "limits": {
+              "requested": {
+                "maxResourceBytes": 8388608,
+                "maxTotalBytes": 33554432,
+                "maxScripts": 128,
+                "drainTimeoutMs": 5000
+              },
+              "effective": {
+                "maxScripts": 128,
+                "maxResourceBytes": 8388608,
+                "maxTotalBytes": 33554432
+              }
+            },
+            "drain": null
+          },
+          "scaBodyWarnings": [],
+          "engineFailures": [],
+          "actionableGaps": [],
+          "recovery": {
+            "runId": "449372e4-2c64-4a6d-84df-fe07edebefb9",
+            "state": "in_progress",
+            "instruction": "Assess only the checks and evidence actually recorded; absence of reported gaps is not proof of full application coverage."
+          }
+        },
+        "summary": {
+          "findingsCount": 3,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          },
+          "findings": 3
+        },
+        "runtimeId": "ptk-session_8e0c1e66-fa16-4432-bd45-4f4973622317",
+        "engineStatus": {
+          "SAST": {
+            "status": "running",
+            "isRunning": true,
+            "progress": {
+              "done": 1,
+              "total": 1,
+              "remaining": 0
+            },
+            "findingsCount": 3,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            },
+            "lastActivityAt": null,
+            "warnings": [],
+            "phase": "waiting",
+            "totalFiles": 1,
+            "completedFiles": 1,
+            "totalModules": 11,
+            "completedModules": 11,
+            "currentFile": null,
+            "currentModule": null,
+            "lastStatus": "Waiting for next page activity",
+            "findings": 2,
+            "hints": 1,
+            "isSessionRunning": true,
+            "isAnalysisRunning": false,
+            "collectionState": "waiting_for_page_activity",
+            "sessionState": "running",
+            "analysisState": "complete",
+            "firstCollectionStarted": true,
+            "firstCollectionSettled": true,
+            "firstCollectionError": null,
+            "initialCollectionDeferred": null,
+            "activeCollectionCount": 0,
+            "pendingCollectionCount": 0,
+            "currentGeneration": 7,
+            "lastCompletedGeneration": 7,
+            "currentCollectionId": "sast_collection_7",
+            "currentCollectionFile": "http://127.0.0.1:59315/exec",
+            "currentCollectionScriptsCount": 1,
+            "currentCollectionHtmlChars": 0,
+            "currentCollectionFindingsCount": 3,
+            "currentCollectionStartedAt": "2026-10-22T18:25:15.940Z",
+            "currentCollectionPayloadAt": "2026-10-22T18:25:15.941Z",
+            "lastCompletedCollectionId": "sast_collection_7",
+            "lastCompletedFile": "http://127.0.0.1:59315/exec",
+            "lastCompletedModule": "DOM Data Manipulation",
+            "lastCompletedScriptsCount": 1,
+            "lastCompletedHtmlChars": 0,
+            "lastCompletedFindingsCount": 3,
+            "lastCompletedArtifactsCount": 0,
+            "lastCompletedAt": "2026-10-22T18:25:15.941Z",
+            "hasObservedCollection": true,
+            "idle": true
+          },
+          "SCA": {
+            "status": "running",
+            "isRunning": true,
+            "progress": {
+              "done": 0,
+              "total": null
+            },
+            "findingsCount": 0,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            },
+            "lastActivityAt": null,
+            "warnings": [],
+            "idle": false
+          }
+        },
+        "lastStatus": {
+          "sessionId": "ptk-session_8e0c1e66-fa16-4432-bd45-4f4973622317",
+          "scanId": "ptk-session_8e0c1e66-fa16-4432-bd45-4f4973622317",
+          "ok": true,
+          "status": "running",
+          "completionStatus": "running",
+          "releaseStatus": null,
+          "error": null,
+          "startedAt": "2026-10-22T18:25:15.835Z",
+          "finishedAt": null,
+          "stopRequestedAt": null,
+          "closeRequestId": null,
+          "closeRequestAck": false,
+          "closeRequestMode": null,
+          "idleVerified": false,
+          "elapsedMs": 107,
+          "lastUpdatedAt": null,
+          "engines": {
+            "SAST": {
+              "status": "running",
+              "isRunning": true,
+              "progress": {
+                "done": 1,
+                "total": 1,
+                "remaining": 0
+              },
+              "findingsCount": 3,
+              "bySeverity": {
+                "critical": 0,
+                "high": 0,
+                "medium": 0,
+                "low": 0,
+                "info": 0
+              },
+              "lastActivityAt": null,
+              "warnings": [],
+              "phase": "waiting",
+              "totalFiles": 1,
+              "completedFiles": 1,
+              "totalModules": 11,
+              "completedModules": 11,
+              "currentFile": null,
+              "currentModule": null,
+              "lastStatus": "Waiting for next page activity",
+              "findings": 2,
+              "hints": 1,
+              "isSessionRunning": true,
+              "isAnalysisRunning": false,
+              "collectionState": "waiting_for_page_activity",
+              "sessionState": "running",
+              "analysisState": "complete",
+              "firstCollectionStarted": true,
+              "firstCollectionSettled": true,
+              "firstCollectionError": null,
+              "initialCollectionDeferred": null,
+              "activeCollectionCount": 0,
+              "pendingCollectionCount": 0,
+              "currentGeneration": 7,
+              "lastCompletedGeneration": 7,
+              "currentCollectionId": "sast_collection_7",
+              "currentCollectionFile": "http://127.0.0.1:59315/exec",
+              "currentCollectionScriptsCount": 1,
+              "currentCollectionHtmlChars": 0,
+              "currentCollectionFindingsCount": 3,
+              "currentCollectionStartedAt": "2026-10-22T18:25:15.940Z",
+              "currentCollectionPayloadAt": "2026-10-22T18:25:15.941Z",
+              "lastCompletedCollectionId": "sast_collection_7",
+              "lastCompletedFile": "http://127.0.0.1:59315/exec",
+              "lastCompletedModule": "DOM Data Manipulation",
+              "lastCompletedScriptsCount": 1,
+              "lastCompletedHtmlChars": 0,
+              "lastCompletedFindingsCount": 3,
+              "lastCompletedArtifactsCount": 0,
+              "lastCompletedAt": "2026-10-22T18:25:15.941Z",
+              "hasObservedCollection": true,
+              "idle": true
+            },
+            "SCA": {
+              "status": "running",
+              "isRunning": true,
+              "progress": {
+                "done": 0,
+                "total": null
+              },
+              "findingsCount": 0,
+              "bySeverity": {
+                "critical": 0,
+                "high": 0,
+                "medium": 0,
+                "low": 0,
+                "info": 0
+              },
+              "lastActivityAt": null,
+              "warnings": [],
+              "idle": false
+            }
+          },
+          "summary": {
+            "findingsCount": 3,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            }
+          },
+          "warnings": [],
+          "sessionLookup": {
+            "requestedSessionId": "ptk-session_8e0c1e66-fa16-4432-bd45-4f4973622317",
+            "tabId": 659776776,
+            "strictCurrentTab": true,
+            "allowActive": true,
+            "allowCompleted": true,
+            "allowGlobalCompleted": true,
+            "lookupSource": "explicit-session",
+            "activeSessionIdForTab": "ptk-session_8e0c1e66-fa16-4432-bd45-4f4973622317",
+            "completedSessionIdForTab": "ptk-session_a9412ac7-7d28-4285-8525-dea273d6be7d",
+            "globalCompletedSessionId": "ptk-session_a9412ac7-7d28-4285-8525-dea273d6be7d",
+            "sessionExists": true,
+            "sessionStatus": "running",
+            "sessionFinishedAt": null,
+            "stopRequestedAt": null,
+            "retention": {
+              "ttlMs": 86400000,
+              "maxCompletedSessions": 20,
+              "evicted": false
+            }
+          },
+          "supplemental": {
+            "backends": {},
+            "gaps": []
+          },
+          "coverage": {
+            "backendGaps": [],
+            "scaBodies": {
+              "captured": 1,
+              "analyzed": 1,
+              "gaps": 0,
+              "basis": "Admitted JavaScript resources observed during this scan; URI detections do not prove body analysis."
+            },
+            "scaSources": {
+              "captured": 1,
+              "analyzed": 1,
+              "gaps": 0,
+              "basis": "Executable Debugger script text, not a claim of HTTP-byte identity."
+            },
+            "scaAcquisition": {
+              "phase": "observed_content_analyzed",
+              "limits": {
+                "requested": {
+                  "maxResourceBytes": 8388608,
+                  "maxTotalBytes": 33554432,
+                  "maxScripts": 128,
+                  "drainTimeoutMs": 5000
+                },
+                "effective": {
+                  "maxScripts": 128,
+                  "maxResourceBytes": 8388608,
+                  "maxTotalBytes": 33554432
+                }
+              },
+              "drain": null
+            },
+            "scaBodyWarnings": []
+          }
+        }
+      },
+      "stopped": {
+        "runId": "449372e4-2c64-4a6d-84df-fe07edebefb9",
+        "owner": "sast-combined",
+        "workspaceId": null,
+        "tabId": 659776776,
+        "engines": [
+          "SAST",
+          "SCA"
+        ],
+        "state": "completed",
+        "config": {
+          "preset": "thorough",
+          "scanStrategy": "COMPREHENSIVE",
+          "dastScanStrategy": "COMPREHENSIVE",
+          "scanControlProfile": "wide",
+          "allowCaptureWithoutInteraction": true,
+          "maxRequestsPerSecond": 5,
+          "concurrency": 3,
+          "planningConcurrency": 2,
+          "runCve": false,
+          "follow_redirect": true,
+          "maxRequests": null,
+          "durationSeconds": null,
+          "engineOptions": {
+            "DAST": {
+              "moduleIds": [
+                "headers"
+              ]
+            }
+          },
+          "acquisition": {
+            "maxResourceBytes": 8388608,
+            "maxTotalBytes": 33554432,
+            "maxScripts": 128,
+            "drainTimeoutMs": 5000
+          },
+          "limits": {}
+        },
+        "scope": {
+          "origins": [
+            "http://127.0.0.1:59315"
+          ],
+          "excludePaths": []
+        },
+        "accountId": null,
+        "accountRevision": null,
+        "createdAt": 1792693515833,
+        "updatedAt": 1792693515971,
+        "requestsSent": 0,
+        "coverage": {
+          "backendGaps": [],
+          "scaBodies": {
+            "captured": 1,
+            "analyzed": 1,
+            "gaps": 0,
+            "basis": "Admitted JavaScript resources observed during this scan; URI detections do not prove body analysis."
+          },
+          "scaSources": {
+            "captured": 1,
+            "analyzed": 1,
+            "gaps": 0,
+            "basis": "Executable Debugger script text, not a claim of HTTP-byte identity."
+          },
+          "scaAcquisition": {
+            "phase": "observed_content_analyzed",
+            "limits": {
+              "requested": {
+                "maxResourceBytes": 8388608,
+                "maxTotalBytes": 33554432,
+                "maxScripts": 128,
+                "drainTimeoutMs": 5000
+              },
+              "effective": {
+                "maxScripts": 128,
+                "maxResourceBytes": 8388608,
+                "maxTotalBytes": 33554432
+              }
+            },
+            "drain": {
+              "complete": true,
+              "gaps": 0,
+              "cleanupPending": false,
+              "tabs": {
+                "659776776": {
+                  "complete": true,
+                  "gaps": 0
+                }
+              }
+            }
+          },
+          "scaBodyWarnings": [],
+          "engineFailures": [],
+          "actionableGaps": [],
+          "recovery": {
+            "runId": "449372e4-2c64-4a6d-84df-fe07edebefb9",
+            "state": "reported_checks_finished",
+            "instruction": "Assess only the checks and evidence actually recorded; absence of reported gaps is not proof of full application coverage."
+          }
+        },
+        "summary": {
+          "status": "completed",
+          "releaseStatus": "clean",
+          "stats": {
+            "findingsCount": 3,
+            "bySeverity": {
+              "critical": 0,
+              "high": 2,
+              "medium": 0,
+              "low": 1,
+              "info": 0
+            }
+          },
+          "findings": 3
+        },
+        "runtimeId": "ptk-session_8e0c1e66-fa16-4432-bd45-4f4973622317",
+        "engineStatus": {
+          "SAST": {
+            "status": "stopped",
+            "isRunning": false,
+            "progress": {
+              "done": 1,
+              "total": 1,
+              "remaining": 0
+            },
+            "findingsCount": 3,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            },
+            "lastActivityAt": null,
+            "warnings": [],
+            "phase": "waiting",
+            "totalFiles": 1,
+            "completedFiles": 1,
+            "totalModules": 11,
+            "completedModules": 11,
+            "currentFile": null,
+            "currentModule": null,
+            "lastStatus": "SAST analysis complete",
+            "findings": 2,
+            "hints": 1,
+            "isSessionRunning": false,
+            "isAnalysisRunning": false,
+            "collectionState": "completed",
+            "sessionState": "idle",
+            "analysisState": "complete",
+            "firstCollectionStarted": false,
+            "firstCollectionSettled": false,
+            "firstCollectionError": null,
+            "initialCollectionDeferred": null,
+            "activeCollectionCount": 0,
+            "pendingCollectionCount": 0,
+            "currentGeneration": 0,
+            "lastCompletedGeneration": 8,
+            "currentCollectionId": null,
+            "currentCollectionFile": null,
+            "currentCollectionScriptsCount": 0,
+            "currentCollectionHtmlChars": 0,
+            "currentCollectionFindingsCount": 0,
+            "currentCollectionStartedAt": null,
+            "currentCollectionPayloadAt": null,
+            "lastCompletedCollectionId": null,
+            "lastCompletedFile": "http://127.0.0.1:59315/asset.js",
+            "lastCompletedModule": "DOM Data Manipulation",
+            "lastCompletedScriptsCount": 0,
+            "lastCompletedHtmlChars": 0,
+            "lastCompletedFindingsCount": 0,
+            "lastCompletedArtifactsCount": 0,
+            "lastCompletedAt": null,
+            "hasObservedCollection": true,
+            "idle": true
+          },
+          "SCA": {
+            "status": "stopped",
+            "isRunning": false,
+            "progress": {
+              "done": 0,
+              "total": null
+            },
+            "findingsCount": 0,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            },
+            "lastActivityAt": null,
+            "warnings": [],
+            "idle": true
+          }
+        },
+        "lastStatus": {
+          "sessionId": "ptk-session_8e0c1e66-fa16-4432-bd45-4f4973622317",
+          "scanId": "ptk-session_8e0c1e66-fa16-4432-bd45-4f4973622317",
+          "ok": true,
+          "status": "completed",
+          "completionStatus": "completed",
+          "releaseStatus": "clean",
+          "error": null,
+          "startedAt": "2026-10-22T18:25:15.835Z",
+          "finishedAt": "2026-10-22T18:25:15.967Z",
+          "stopRequestedAt": null,
+          "closeRequestId": null,
+          "closeRequestAck": false,
+          "closeRequestMode": null,
+          "idleVerified": false,
+          "elapsedMs": 135,
+          "lastUpdatedAt": null,
+          "engines": {
+            "SAST": {
+              "status": "stopped",
+              "isRunning": false,
+              "progress": {
+                "done": 1,
+                "total": 1,
+                "remaining": 0
+              },
+              "findingsCount": 3,
+              "bySeverity": {
+                "critical": 0,
+                "high": 0,
+                "medium": 0,
+                "low": 0,
+                "info": 0
+              },
+              "lastActivityAt": null,
+              "warnings": [],
+              "phase": "waiting",
+              "totalFiles": 1,
+              "completedFiles": 1,
+              "totalModules": 11,
+              "completedModules": 11,
+              "currentFile": null,
+              "currentModule": null,
+              "lastStatus": "SAST analysis complete",
+              "findings": 2,
+              "hints": 1,
+              "isSessionRunning": false,
+              "isAnalysisRunning": false,
+              "collectionState": "completed",
+              "sessionState": "idle",
+              "analysisState": "complete",
+              "firstCollectionStarted": false,
+              "firstCollectionSettled": false,
+              "firstCollectionError": null,
+              "initialCollectionDeferred": null,
+              "activeCollectionCount": 0,
+              "pendingCollectionCount": 0,
+              "currentGeneration": 0,
+              "lastCompletedGeneration": 8,
+              "currentCollectionId": null,
+              "currentCollectionFile": null,
+              "currentCollectionScriptsCount": 0,
+              "currentCollectionHtmlChars": 0,
+              "currentCollectionFindingsCount": 0,
+              "currentCollectionStartedAt": null,
+              "currentCollectionPayloadAt": null,
+              "lastCompletedCollectionId": null,
+              "lastCompletedFile": "http://127.0.0.1:59315/asset.js",
+              "lastCompletedModule": "DOM Data Manipulation",
+              "lastCompletedScriptsCount": 0,
+              "lastCompletedHtmlChars": 0,
+              "lastCompletedFindingsCount": 0,
+              "lastCompletedArtifactsCount": 0,
+              "lastCompletedAt": null,
+              "hasObservedCollection": true,
+              "idle": true
+            },
+            "SCA": {
+              "status": "stopped",
+              "isRunning": false,
+              "progress": {
+                "done": 0,
+                "total": null
+              },
+              "findingsCount": 0,
+              "bySeverity": {
+                "critical": 0,
+                "high": 0,
+                "medium": 0,
+                "low": 0,
+                "info": 0
+              },
+              "lastActivityAt": null,
+              "warnings": [],
+              "idle": true
+            }
+          },
+          "summary": {
+            "findingsCount": 3,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            }
+          },
+          "finalSummary": {
+            "status": "completed",
+            "releaseStatus": "clean",
+            "stats": {
+              "findingsCount": 3,
+              "bySeverity": {
+                "critical": 0,
+                "high": 2,
+                "medium": 0,
+                "low": 1,
+                "info": 0
+              }
+            }
+          },
+          "warnings": [],
+          "sessionLookup": {
+            "requestedSessionId": "ptk-session_8e0c1e66-fa16-4432-bd45-4f4973622317",
+            "tabId": 659776776,
+            "strictCurrentTab": true,
+            "allowActive": true,
+            "allowCompleted": true,
+            "allowGlobalCompleted": true,
+            "lookupSource": "explicit-session",
+            "activeSessionIdForTab": null,
+            "completedSessionIdForTab": "ptk-session_8e0c1e66-fa16-4432-bd45-4f4973622317",
+            "globalCompletedSessionId": "ptk-session_8e0c1e66-fa16-4432-bd45-4f4973622317",
+            "sessionExists": true,
+            "sessionStatus": "completed",
+            "sessionFinishedAt": "2026-10-22T18:25:15.967Z",
+            "stopRequestedAt": null,
+            "retention": {
+              "ttlMs": 86400000,
+              "maxCompletedSessions": 20,
+              "evicted": false
+            }
+          },
+          "supplemental": {
+            "backends": {},
+            "gaps": []
+          },
+          "coverage": {
+            "backendGaps": [],
+            "scaBodies": {
+              "captured": 1,
+              "analyzed": 1,
+              "gaps": 0,
+              "basis": "Admitted JavaScript resources observed during this scan; URI detections do not prove body analysis."
+            },
+            "scaSources": {
+              "captured": 1,
+              "analyzed": 1,
+              "gaps": 0,
+              "basis": "Executable Debugger script text, not a claim of HTTP-byte identity."
+            },
+            "scaAcquisition": {
+              "phase": "observed_content_analyzed",
+              "limits": {
+                "requested": {
+                  "maxResourceBytes": 8388608,
+                  "maxTotalBytes": 33554432,
+                  "maxScripts": 128,
+                  "drainTimeoutMs": 5000
+                },
+                "effective": {
+                  "maxScripts": 128,
+                  "maxResourceBytes": 8388608,
+                  "maxTotalBytes": 33554432
+                }
+              },
+              "drain": {
+                "complete": true,
+                "gaps": 0,
+                "cleanupPending": false,
+                "tabs": {
+                  "659776776": {
+                    "complete": true,
+                    "gaps": 0
+                  }
+                }
+              }
+            },
+            "scaBodyWarnings": []
+          }
+        },
+        "stopReason": "Stopped by user."
+      },
+      "native": {
+        "scan": {
+          "version": "1.0",
+          "engine": "SAST",
+          "scanId": "d595714a-bc5d-4933-81af-bfd38d01fe6e",
+          "host": "127.0.0.1:59315",
+          "startedAt": "2026-10-22T18:25:15.841Z",
+          "finishedAt": "2026-10-22T18:25:15.965Z",
+          "settings": {
+            "policyCode": "COMPREHENSIVE",
+            "scanStrategyCode": 0
+          },
+          "toolVersion": "1.0.0",
+          "stats": {
+            "findingsCount": 3,
+            "filesCount": 1,
+            "critical": 0,
+            "high": 2,
+            "medium": 0,
+            "low": 1,
+            "info": 0,
+            "rulesCount": 3
+          },
+          "findings": [
+            {
+              "id": "d595714a-bc5d-4933-81af-bfd38d01fe6e::SAST::dom-xss::no-inner-outer-html::43261340b23eb37c",
+              "engine": "SAST",
+              "scanId": "d595714a-bc5d-4933-81af-bfd38d01fe6e",
+              "moduleId": "dom-xss",
+              "moduleName": "DOM-based XSS",
+              "ruleId": "no-inner-outer-html",
+              "ruleName": "Disallow innerHTML/outerHTML assignments",
+              "vulnId": "dom_xss",
+              "category": "xss",
+              "severity": "low",
+              "owasp": [
+                "A05:2025 - Injection",
+                "A03:2021 - Injection"
+              ],
+              "cwe": [
+                "CWE-79"
+              ],
+              "tags": [
+                "sast",
+                "dom",
+                "xss"
+              ],
+              "description": "Assignments to innerHTML/outerHTML are dangerous when they contain untrusted data and may lead to XSS.",
+              "recommendation": "<p>Prevent DOM-based XSS by never inserting untrusted strings directly into HTML or executing them as code. Prefer DOM/text APIs, safe templating, or a vetted sanitizer and apply context-aware encoding where needed.</p><ul><li><strong>Primary:</strong> Use <code>textContent</code> / <code>innerText</code> or create DOM nodes instead of string-based HTML insertion. If you must insert HTML, sanitize it with a vetted library such as <a href=\"https://github.com/cure53/DOMPurify\" target=\"_blank\">DOMPurify</a>.</li><li><strong>Secondary:</strong> Apply context-sensitive encoding for attributes and JavaScript contexts, avoid <code>eval</code>/<code>new Function</code>/<code>setTimeout</code> with strings, and prefer safe templating engines.</li><li><strong>Controls:</strong> Use Content Security Policy (CSP), follow least-privilege principles, and validate/allow-list input shapes where practical.</li><li><strong>Testing:</strong> Add unit/browser tests for inline handlers and client-side flows that read from <code>location</code>, form inputs, storage, and <code>postMessage</code>.</li></ul>",
+              "links": {
+                "OWASP": "https://owasp.org/www-community/attacks/xss/",
+                "CWE": "https://cwe.mitre.org/data/definitions/79.html"
+              },
+              "location": {
+                "file": "http://127.0.0.1:59315/asset.js",
+                "line": 1,
+                "column": 22,
+                "runtimeUrl": "http://127.0.0.1:59315/exec",
+                "runtimeUrls": [
+                  "http://127.0.0.1:59315/exec"
+                ],
+                "pageUrl": "http://127.0.0.1:59315/exec",
+                "pageUrls": [
+                  "http://127.0.0.1:59315/exec"
+                ],
+                "url": "http://127.0.0.1:59315/exec",
+                "param": null,
+                "kind": "code"
+              },
+              "createdAt": "2026-10-22T18:25:15.951Z",
+              "fingerprint": "no-inner-outer-html@@low@@http://127.0.0.1:59315/asset.js@@http://127.0.0.1:59315/asset.js@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":79}}@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":63}}@@",
+              "findingKind": "hint",
+              "confidence": 38,
+              "evidence": {
+                "sast": {
+                  "codeSnippet": "Source context:\nfunction showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }\n\nSink context:\nfunction showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }",
+                  "source": {
+                    "label": "innerHTML",
+                    "path": null,
+                    "sourceFile": "http://127.0.0.1:59315/asset.js",
+                    "sourceFileFull": "http://127.0.0.1:59315/asset.js",
+                    "sourceLoc": {
+                      "start": {
+                        "line": 1,
+                        "column": 22
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 79
+                      }
+                    },
+                    "sourceName": "innerHTML",
+                    "sourceSnippet": "function showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }"
+                  },
+                  "sink": {
+                    "kind": "assign",
+                    "label": "innerHTML",
+                    "path": [],
+                    "sinkFile": "http://127.0.0.1:59315/asset.js",
+                    "sinkFileFull": "http://127.0.0.1:59315/asset.js",
+                    "sinkLoc": {
+                      "start": {
+                        "line": 1,
+                        "column": 22
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 63
+                      }
+                    },
+                    "sinkName": "innerHTML",
+                    "sinkSnippet": "function showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }"
+                  },
+                  "nodeType": "AssignmentExpression",
+                  "trace": [],
+                  "mode": "pattern",
+                  "findingKind": "hint",
+                  "confidenceSignals": [
+                    "base:pattern:58",
+                    "finding_kind:hint:-20"
+                  ]
+                }
+              },
+              "updatedAt": "2026-10-22T18:25:15.951Z",
+              "pageUrl": "http://127.0.0.1:59315/exec"
+            },
+            {
+              "id": "d595714a-bc5d-4933-81af-bfd38d01fe6e::SAST::dom-xss::dom-xss-taint::7efec2d4c35ebd14",
+              "engine": "SAST",
+              "scanId": "d595714a-bc5d-4933-81af-bfd38d01fe6e",
+              "moduleId": "dom-xss",
+              "moduleName": "DOM-based XSS",
+              "ruleId": "dom-xss-taint",
+              "ruleName": "DOM-based XSS (taint flow)",
+              "vulnId": "dom_xss",
+              "category": "xss",
+              "severity": "high",
+              "owasp": [
+                "A05:2025 - Injection",
+                "A03:2021 - Injection"
+              ],
+              "cwe": [
+                "CWE-79"
+              ],
+              "tags": [
+                "sast",
+                "dom",
+                "xss"
+              ],
+              "description": "Detects flows where untrusted DOM-derived data (location, element values, storage, message data) reaches HTML/JS execution sinks (e.g., innerHTML, document.write, insertAdjacentHTML, location assignment, eval/Function) without passing through a recognized sanitizer.",
+              "recommendation": "<p>Prevent DOM-based XSS by never inserting untrusted strings directly into HTML or executing them as code. Prefer DOM/text APIs, safe templating, or a vetted sanitizer and apply context-aware encoding where needed.</p><ul><li><strong>Primary:</strong> Use <code>textContent</code> / <code>innerText</code> or create DOM nodes instead of string-based HTML insertion. If you must insert HTML, sanitize it with a vetted library such as <a href=\"https://github.com/cure53/DOMPurify\" target=\"_blank\">DOMPurify</a>.</li><li><strong>Secondary:</strong> Apply context-sensitive encoding for attributes and JavaScript contexts, avoid <code>eval</code>/<code>new Function</code>/<code>setTimeout</code> with strings, and prefer safe templating engines.</li><li><strong>Controls:</strong> Use Content Security Policy (CSP), follow least-privilege principles, and validate/allow-list input shapes where practical.</li><li><strong>Testing:</strong> Add unit/browser tests for inline handlers and client-side flows that read from <code>location</code>, form inputs, storage, and <code>postMessage</code>.</li></ul>",
+              "links": {
+                "OWASP": "https://owasp.org/www-community/attacks/xss/",
+                "CWE": "https://cwe.mitre.org/data/definitions/79.html"
+              },
+              "location": {
+                "file": "http://127.0.0.1:59315/asset.js",
+                "line": 1,
+                "column": 22,
+                "runtimeUrl": "http://127.0.0.1:59315/exec",
+                "runtimeUrls": [
+                  "http://127.0.0.1:59315/exec"
+                ],
+                "pageUrl": "http://127.0.0.1:59315/exec",
+                "pageUrls": [
+                  "http://127.0.0.1:59315/exec"
+                ],
+                "url": "http://127.0.0.1:59315/exec",
+                "param": null,
+                "kind": "code"
+              },
+              "createdAt": "2026-10-22T18:25:15.951Z",
+              "fingerprint": "dom-xss-taint@@high@@http://127.0.0.1:59315/asset.js@@http://127.0.0.1:59315/asset.js@@{\"start\":{\"line\":1,\"column\":66},\"end\":{\"line\":1,\"column\":79}}@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":63}}@@",
+              "findingKind": "finding",
+              "confidence": 100,
+              "evidence": {
+                "sast": {
+                  "codeSnippet": "Source context:\nfunction showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }\n\nSink context:\nfunction showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }",
+                  "source": {
+                    "label": "location.hash",
+                    "path": "location.hash",
+                    "sourceFile": "http://127.0.0.1:59315/asset.js",
+                    "sourceFileFull": "http://127.0.0.1:59315/asset.js",
+                    "sourceLoc": {
+                      "start": {
+                        "line": 1,
+                        "column": 66
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 79
+                      }
+                    },
+                    "sourceName": "location.hash",
+                    "sourceSnippet": "function showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }"
+                  },
+                  "sink": {
+                    "kind": "assign",
+                    "label": "innerHTML",
+                    "path": [
+                      "innerHTML"
+                    ],
+                    "framework": null,
+                    "api": null,
+                    "argIndex": null,
+                    "sinkFile": "http://127.0.0.1:59315/asset.js",
+                    "sinkFileFull": "http://127.0.0.1:59315/asset.js",
+                    "sinkLoc": {
+                      "start": {
+                        "line": 1,
+                        "column": 22
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 63
+                      }
+                    },
+                    "sinkName": "innerHTML",
+                    "sinkSnippet": "function showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }"
+                  },
+                  "nodeType": "AssignmentExpression",
+                  "trace": [
+                    {
+                      "kind": "source",
+                      "label": "location.hash",
+                      "file": "http://127.0.0.1:59315/asset.js",
+                      "loc": {
+                        "start": {
+                          "line": 1,
+                          "column": 66
+                        },
+                        "end": {
+                          "line": 1,
+                          "column": 79
+                        }
+                      }
+                    },
+                    {
+                      "kind": "sink",
+                      "label": "innerHTML",
+                      "file": "http://127.0.0.1:59315/asset.js",
+                      "loc": {
+                        "start": {
+                          "line": 1,
+                          "column": 22
+                        },
+                        "end": {
+                          "line": 1,
+                          "column": 79
+                        }
+                      }
+                    }
+                  ],
+                  "mode": "taint",
+                  "findingKind": "finding",
+                  "sinkContext": "html",
+                  "sourceTier": "url",
+                  "confidenceSignals": [
+                    "base:taint:78",
+                    "sink_context:html:+8",
+                    "source_tier:url:+6",
+                    "trace_len:2:+10"
+                  ]
+                }
+              },
+              "updatedAt": "2026-10-22T18:25:15.951Z",
+              "pageUrl": "http://127.0.0.1:59315/exec"
+            },
+            {
+              "id": "d595714a-bc5d-4933-81af-bfd38d01fe6e::SAST::client-template-injection::client-template-injection-taint::aa7eb437176ab40d",
+              "engine": "SAST",
+              "scanId": "d595714a-bc5d-4933-81af-bfd38d01fe6e",
+              "moduleId": "client-template-injection",
+              "moduleName": "Client-side Template Injection",
+              "ruleId": "client-template-injection-taint",
+              "ruleName": "Template injection (taint flow)",
+              "vulnId": "code_injection",
+              "category": "injection",
+              "severity": "high",
+              "owasp": [
+                "A05:2025 - Injection",
+                "A03:2021 - Injection"
+              ],
+              "cwe": [
+                "CWE-94"
+              ],
+              "tags": [
+                "sast",
+                "template",
+                "injection"
+              ],
+              "description": "Tainted data flows into client-side template sources or rendered HTML sinks.",
+              "recommendation": "<ul><li>Avoid compiling templates from untrusted strings; use precompiled templates.</li><li>Sanitize render output before inserting into the DOM.</li></ul>",
+              "links": {
+                "OWASP": "https://owasp.org/www-community/attacks/Template_Injection",
+                "CWE": "https://cwe.mitre.org/data/definitions/94.html"
+              },
+              "location": {
+                "file": "http://127.0.0.1:59315/asset.js",
+                "line": 1,
+                "column": 22,
+                "runtimeUrl": "http://127.0.0.1:59315/exec",
+                "runtimeUrls": [
+                  "http://127.0.0.1:59315/exec"
+                ],
+                "pageUrl": "http://127.0.0.1:59315/exec",
+                "pageUrls": [
+                  "http://127.0.0.1:59315/exec"
+                ],
+                "url": "http://127.0.0.1:59315/exec",
+                "param": null,
+                "kind": "code"
+              },
+              "createdAt": "2026-10-22T18:25:15.951Z",
+              "fingerprint": "client-template-injection-taint@@high@@http://127.0.0.1:59315/asset.js@@http://127.0.0.1:59315/asset.js@@{\"start\":{\"line\":1,\"column\":66},\"end\":{\"line\":1,\"column\":79}}@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":63}}@@",
+              "findingKind": "finding",
+              "confidence": 88,
+              "evidence": {
+                "sast": {
+                  "codeSnippet": "Source context:\nfunction showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }\n\nSink context:\nfunction showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }",
+                  "source": {
+                    "label": "location.hash",
+                    "path": "location.hash",
+                    "sourceFile": "http://127.0.0.1:59315/asset.js",
+                    "sourceFileFull": "http://127.0.0.1:59315/asset.js",
+                    "sourceLoc": {
+                      "start": {
+                        "line": 1,
+                        "column": 66
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 79
+                      }
+                    },
+                    "sourceName": "location.hash",
+                    "sourceSnippet": "function showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }"
+                  },
+                  "sink": {
+                    "kind": "assign",
+                    "label": "innerHTML",
+                    "path": [
+                      "innerHTML"
+                    ],
+                    "framework": null,
+                    "api": null,
+                    "argIndex": null,
+                    "sinkFile": "http://127.0.0.1:59315/asset.js",
+                    "sinkFileFull": "http://127.0.0.1:59315/asset.js",
+                    "sinkLoc": {
+                      "start": {
+                        "line": 1,
+                        "column": 22
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 63
+                      }
+                    },
+                    "sinkName": "innerHTML",
+                    "sinkSnippet": "function showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }"
+                  },
+                  "nodeType": "AssignmentExpression",
+                  "trace": [
+                    {
+                      "kind": "source",
+                      "label": "location.hash",
+                      "file": "http://127.0.0.1:59315/asset.js",
+                      "loc": {
+                        "start": {
+                          "line": 1,
+                          "column": 66
+                        },
+                        "end": {
+                          "line": 1,
+                          "column": 79
+                        }
+                      }
+                    },
+                    {
+                      "kind": "sink",
+                      "label": "innerHTML",
+                      "file": "http://127.0.0.1:59315/asset.js",
+                      "loc": {
+                        "start": {
+                          "line": 1,
+                          "column": 22
+                        },
+                        "end": {
+                          "line": 1,
+                          "column": 79
+                        }
+                      }
+                    }
+                  ],
+                  "mode": "taint",
+                  "findingKind": "finding",
+                  "sinkContext": "generic",
+                  "sourceTier": "url",
+                  "confidenceSignals": [
+                    "base:taint:78",
+                    "sink_context:generic:-6",
+                    "source_tier:url:+6",
+                    "trace_len:2:+10"
+                  ]
+                }
+              },
+              "updatedAt": "2026-10-22T18:25:15.951Z",
+              "pageUrl": "http://127.0.0.1:59315/exec"
+            }
+          ],
+          "groups": [
+            {
+              "id": "SAST@@dom_xss@@dom-xss@@no-inner-outer-html@@http://127.0.0.1:59315/asset.js@@1",
+              "engine": "SAST",
+              "scanId": "d595714a-bc5d-4933-81af-bfd38d01fe6e",
+              "vulnId": "dom_xss",
+              "category": "xss",
+              "severity": "low",
+              "correlationKey": null,
+              "location": {
+                "url": "http://127.0.0.1:59315/exec",
+                "runtimeUrl": "http://127.0.0.1:59315/exec",
+                "file": "http://127.0.0.1:59315/asset.js",
+                "param": null,
+                "sink": "innerHTML"
+              },
+              "occurrenceIds": [
+                "d595714a-bc5d-4933-81af-bfd38d01fe6e::SAST::dom-xss::no-inner-outer-html::43261340b23eb37c"
+              ],
+              "count": 1
+            },
+            {
+              "id": "SAST@@dom_xss@@dom-xss@@dom-xss-taint@@http://127.0.0.1:59315/asset.js@@1",
+              "engine": "SAST",
+              "scanId": "d595714a-bc5d-4933-81af-bfd38d01fe6e",
+              "vulnId": "dom_xss",
+              "category": "xss",
+              "severity": "high",
+              "correlationKey": null,
+              "location": {
+                "url": "http://127.0.0.1:59315/exec",
+                "runtimeUrl": "http://127.0.0.1:59315/exec",
+                "file": "http://127.0.0.1:59315/asset.js",
+                "param": null,
+                "sink": "innerHTML"
+              },
+              "occurrenceIds": [
+                "d595714a-bc5d-4933-81af-bfd38d01fe6e::SAST::dom-xss::dom-xss-taint::7efec2d4c35ebd14"
+              ],
+              "count": 1
+            },
+            {
+              "id": "SAST@@code_injection@@client-template-injection@@client-template-injection-taint@@http://127.0.0.1:59315/asset.js@@1",
+              "engine": "SAST",
+              "scanId": "d595714a-bc5d-4933-81af-bfd38d01fe6e",
+              "vulnId": "code_injection",
+              "category": "injection",
+              "severity": "high",
+              "correlationKey": null,
+              "location": {
+                "url": "http://127.0.0.1:59315/exec",
+                "runtimeUrl": "http://127.0.0.1:59315/exec",
+                "file": "http://127.0.0.1:59315/asset.js",
+                "param": null,
+                "sink": "innerHTML"
+              },
+              "occurrenceIds": [
+                "d595714a-bc5d-4933-81af-bfd38d01fe6e::SAST::client-template-injection::client-template-injection-taint::aa7eb437176ab40d"
+              ],
+              "count": 1
+            }
+          ],
+          "codeArtifacts": {
+            "sast": {
+              "version": 2,
+              "routes": [],
+              "endpoints": [],
+              "graphql": [],
+              "surfaces": [],
+              "hiddenParams": [],
+              "gadgets": [
+                {
+                  "id": "sast-gadget::127.0.0.1:59315|*|/exec::dom-html-sink::innerHTML",
+                  "bucketId": "sast-gadget::127.0.0.1:59315|*|/exec::dom-html-sink::innerHTML",
+                  "artifactType": "gadget",
+                  "moduleId": "sast-gadget-path-hints",
+                  "ruleId": "gadget-artifact",
+                  "gadgetType": "dom-html-sink",
+                  "label": "innerHTML",
+                  "routeKey": "127.0.0.1:59315|*|/exec",
+                  "occurrenceCount": 2,
+                  "sourceFiles": [
+                    "http://127.0.0.1:59315/asset.js"
+                  ],
+                  "sourceFile": "http://127.0.0.1:59315/asset.js",
+                  "sourceLoc": {
+                    "line": 1,
+                    "column": 22
+                  },
+                  "pageUrl": "http://127.0.0.1:59315/exec",
+                  "pageCanon": "http://127.0.0.1:59315/exec",
+                  "pageUrls": [
+                    "http://127.0.0.1:59315/exec"
+                  ],
+                  "runtimeUrls": [
+                    "http://127.0.0.1:59315/exec"
+                  ],
+                  "observedUrls": [
+                    "http://127.0.0.1:59315/exec"
+                  ],
+                  "runtimeUrl": "http://127.0.0.1:59315/exec",
+                  "authHints": [],
+                  "protocolHints": [],
+                  "discoveryTags": [],
+                  "environmentHints": [],
+                  "storageHints": [],
+                  "uploadSignals": [],
+                  "paramNames": [],
+                  "bodyKeys": [],
+                  "headerNames": [],
+                  "operationTypes": [],
+                  "operationNames": [],
+                  "rootFields": [],
+                  "variableNames": [],
+                  "hintNames": [],
+                  "hintTypes": [],
+                  "actions": [],
+                  "transports": []
+                }
+              ]
+            }
+          },
+          "files": [
+            "http://127.0.0.1:59315/asset.js"
+          ],
+          "scanStrategy": {
+            "policyCode": "COMPREHENSIVE",
+            "scanStrategyCode": 0
+          }
+        },
+        "progress": {
+          "sessionState": "idle",
+          "collectionState": "idle",
+          "analysisState": "idle",
+          "isSessionRunning": false,
+          "isAnalysisRunning": false,
+          "firstCollectionStarted": false,
+          "firstCollectionSettled": false,
+          "firstCollectionError": null,
+          "activeCollectionCount": 0,
+          "pendingCollectionCount": 0,
+          "lastCollectionState": "idle",
+          "currentGeneration": 0,
+          "lastCompletedGeneration": 0,
+          "currentCollectionId": null,
+          "currentCollectionFile": null,
+          "currentCollectionScriptsCount": null,
+          "currentCollectionHtmlChars": null,
+          "currentCollectionFindingsCount": null,
+          "currentCollectionStartedAt": null,
+          "currentCollectionPayloadAt": null,
+          "lastCompletedFile": null,
+          "lastCompletedModule": null,
+          "lastCompletedCollectionId": null,
+          "lastCompletedScriptsCount": null,
+          "lastCompletedHtmlChars": null,
+          "lastCompletedFindingsCount": null,
+          "lastCompletedArtifactsCount": null,
+          "lastCompletedAt": null,
+          "initialCollectionDeferred": null
+        }
+      }
+    },
+    {
+      "engines": [
+        "DAST",
+        "SAST",
+        "SCA"
+      ],
+      "status": {
+        "runId": "9c6745d6-82bd-49e2-9ae1-b3b2ae297d69",
+        "owner": "sast-combined",
+        "workspaceId": null,
+        "tabId": 659776776,
+        "engines": [
+          "DAST",
+          "SAST",
+          "SCA"
+        ],
+        "state": "running",
+        "config": {
+          "preset": "thorough",
+          "scanStrategy": "COMPREHENSIVE",
+          "dastScanStrategy": "COMPREHENSIVE",
+          "scanControlProfile": "wide",
+          "allowCaptureWithoutInteraction": true,
+          "maxRequestsPerSecond": 5,
+          "concurrency": 3,
+          "planningConcurrency": 2,
+          "runCve": false,
+          "follow_redirect": true,
+          "maxRequests": null,
+          "durationSeconds": null,
+          "engineOptions": {
+            "DAST": {
+              "moduleIds": [
+                "headers"
+              ]
+            }
+          },
+          "acquisition": {
+            "maxResourceBytes": 8388608,
+            "maxTotalBytes": 33554432,
+            "maxScripts": 128,
+            "drainTimeoutMs": 5000
+          },
+          "limits": {}
+        },
+        "scope": {
+          "origins": [
+            "http://127.0.0.1:59315"
+          ],
+          "excludePaths": []
+        },
+        "accountId": null,
+        "accountRevision": null,
+        "createdAt": 1792693516004,
+        "updatedAt": 1792693516312,
+        "requestsSent": 0,
+        "coverage": {
+          "backendGaps": [],
+          "scaBodies": {
+            "captured": 1,
+            "analyzed": 1,
+            "gaps": 0,
+            "basis": "Admitted JavaScript resources observed during this scan; URI detections do not prove body analysis."
+          },
+          "scaSources": {
+            "captured": 1,
+            "analyzed": 1,
+            "gaps": 0,
+            "basis": "Executable Debugger script text, not a claim of HTTP-byte identity."
+          },
+          "scaAcquisition": {
+            "phase": "observed_content_analyzed",
+            "limits": {
+              "requested": {
+                "maxResourceBytes": 8388608,
+                "maxTotalBytes": 33554432,
+                "maxScripts": 128,
+                "drainTimeoutMs": 5000
+              },
+              "effective": {
+                "maxScripts": 128,
+                "maxResourceBytes": 8388608,
+                "maxTotalBytes": 33554432
+              }
+            },
+            "drain": null
+          },
+          "scaBodyWarnings": [],
+          "engineFailures": [],
+          "dast": {
+            "phase": "dispatch_attribution_unknown",
+            "applicationRequestsObserved": 1,
+            "applicationRequestsQueued": 1,
+            "proxySeededRequests": 1,
+            "selectedTargetSeededRequests": 0,
+            "seedCandidates": 3,
+            "unsafeSeedSkipped": 0,
+            "tasksPlanned": 0,
+            "tasksExecuted": 0,
+            "taskCounterMeaning": "Tasks entered execution before any transport attempt",
+            "probeDispatches": null,
+            "baselineDispatches": null,
+            "dastRequestsDispatched": null,
+            "runRequestsDispatched": 0,
+            "skippedDueToStrategy": 0,
+            "taskErrors": 0,
+            "lastTaskError": null,
+            "taskSkips": 0,
+            "lastTaskSkip": null,
+            "captureErrors": 0,
+            "waitingForInteraction": false
+          },
+          "actionableGaps": [
+            {
+              "code": "dispatch_attribution_unknown",
+              "engine": "DAST",
+              "summary": "Request counts cannot be attributed to DAST.",
+              "sampledOccurrences": 1,
+              "retryUnchanged": false,
+              "recovery": {
+                "action": "inspect_evidence",
+                "instruction": "Use retained request/response evidence; do not count other engines’ traffic as DAST probes."
+              },
+              "examples": []
+            }
+          ],
+          "recovery": {
+            "runId": "9c6745d6-82bd-49e2-9ae1-b3b2ae297d69",
+            "state": "in_progress",
+            "instruction": "Address applicable recovery steps or include unresolved gaps in the final report. Do not repeat unchanged failed calls."
+          }
+        },
+        "summary": {
+          "findingsCount": 3,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          },
+          "findings": 3
+        },
+        "runtimeId": "ptk-session_6b6cf6ae-f064-4204-92e7-08d7590b551c",
+        "engineStatus": {
+          "DAST": {
+            "status": "running",
+            "isRunning": true,
+            "progress": {
+              "done": 0,
+              "total": 0,
+              "remaining": 1
+            },
+            "findingsCount": 0,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            },
+            "lastActivityAt": "2026-10-22T18:25:16.180Z",
+            "warnings": [],
+            "phase": "scanning",
+            "idle": false,
+            "remaining": 1,
+            "activeTasks": 0,
+            "taskQueue": 0,
+            "requestQueue": 1,
+            "pendingPlans": 0,
+            "planning": 0,
+            "pendingCaptures": 0,
+            "captureStats": {
+              "pendingObservedRequests": 0,
+              "pendingObservedRequestsMax": 1,
+              "observedRequestsStarted": 1,
+              "observedRequestsQueued": 1,
+              "observedRequestsDropped": 0,
+              "observedRequestsErrored": 0,
+              "observedRequestsDeduplicated": 2,
+              "lastObservedRequestStartedAt": "2026-10-22T18:25:16.255Z",
+              "lastObservedRequestFinishedAt": "2026-10-22T18:25:16.257Z",
+              "lastObservedRequestQueuedAt": "2026-10-22T18:25:16.257Z",
+              "lastObservedRequestDroppedAt": null,
+              "lastObservedRequestErrorAt": null
+            },
+            "engineError": null,
+            "taskErrorsCount": 0,
+            "lastTaskError": null,
+            "taskSkipsCount": 0,
+            "lastTaskSkip": null,
+            "skippedDueToStrategy": 0,
+            "scanStrategy": "COMPREHENSIVE",
+            "pendingAutomationSeeds": 0,
+            "seededRequests": 1,
+            "proxySeededRequests": 1,
+            "selectedTargetSeededRequests": 0,
+            "seedCandidates": 3,
+            "unsafeSeedSkipped": 0,
+            "seedError": null,
+            "waitingForInteraction": false,
+            "historySeededRequests": 0,
+            "historySeedInputCount": 0,
+            "historySeedTotalAvailable": 0,
+            "historySeedDroppedByCap": 0,
+            "historySeedDuplicatesSkipped": 0,
+            "targetWindowRequired": true,
+            "zapAttackWindow": null
+          },
+          "SAST": {
+            "status": "running",
+            "isRunning": true,
+            "progress": {
+              "done": 1,
+              "total": 1,
+              "remaining": 0
+            },
+            "findingsCount": 3,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            },
+            "lastActivityAt": null,
+            "warnings": [],
+            "phase": "waiting",
+            "totalFiles": 1,
+            "completedFiles": 1,
+            "totalModules": 11,
+            "completedModules": 11,
+            "currentFile": null,
+            "currentModule": null,
+            "lastStatus": "Waiting for next page activity",
+            "findings": 2,
+            "hints": 1,
+            "isSessionRunning": true,
+            "isAnalysisRunning": true,
+            "collectionState": "analysis_running",
+            "sessionState": "running",
+            "analysisState": "analyzing",
+            "firstCollectionStarted": true,
+            "firstCollectionSettled": true,
+            "firstCollectionError": null,
+            "initialCollectionDeferred": null,
+            "activeCollectionCount": 1,
+            "pendingCollectionCount": 1,
+            "currentGeneration": 8,
+            "lastCompletedGeneration": 7,
+            "currentCollectionId": "sast_collection_8",
+            "currentCollectionFile": "http://127.0.0.1:59315/exec",
+            "currentCollectionScriptsCount": 1,
+            "currentCollectionHtmlChars": 0,
+            "currentCollectionFindingsCount": 0,
+            "currentCollectionStartedAt": "2026-10-22T18:25:16.309Z",
+            "currentCollectionPayloadAt": "2026-10-22T18:25:16.310Z",
+            "lastCompletedCollectionId": "sast_collection_7",
+            "lastCompletedFile": "http://127.0.0.1:59315/exec",
+            "lastCompletedModule": "DOM Data Manipulation",
+            "lastCompletedScriptsCount": 1,
+            "lastCompletedHtmlChars": 0,
+            "lastCompletedFindingsCount": 3,
+            "lastCompletedArtifactsCount": 0,
+            "lastCompletedAt": "2026-10-22T18:25:16.309Z",
+            "hasObservedCollection": true,
+            "idle": false
+          },
+          "SCA": {
+            "status": "running",
+            "isRunning": true,
+            "progress": {
+              "done": 0,
+              "total": null
+            },
+            "findingsCount": 0,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            },
+            "lastActivityAt": null,
+            "warnings": [],
+            "idle": false
+          }
+        },
+        "lastStatus": {
+          "sessionId": "ptk-session_6b6cf6ae-f064-4204-92e7-08d7590b551c",
+          "scanId": "ptk-session_6b6cf6ae-f064-4204-92e7-08d7590b551c",
+          "ok": true,
+          "status": "running",
+          "completionStatus": "running",
+          "releaseStatus": null,
+          "error": null,
+          "startedAt": "2026-10-22T18:25:16.027Z",
+          "finishedAt": null,
+          "stopRequestedAt": null,
+          "closeRequestId": null,
+          "closeRequestAck": false,
+          "closeRequestMode": null,
+          "idleVerified": false,
+          "elapsedMs": 285,
+          "lastUpdatedAt": "2026-10-22T18:25:16.180Z",
+          "engines": {
+            "DAST": {
+              "status": "running",
+              "isRunning": true,
+              "progress": {
+                "done": 0,
+                "total": 0,
+                "remaining": 1
+              },
+              "findingsCount": 0,
+              "bySeverity": {
+                "critical": 0,
+                "high": 0,
+                "medium": 0,
+                "low": 0,
+                "info": 0
+              },
+              "lastActivityAt": "2026-10-22T18:25:16.180Z",
+              "warnings": [],
+              "phase": "scanning",
+              "idle": false,
+              "remaining": 1,
+              "activeTasks": 0,
+              "taskQueue": 0,
+              "requestQueue": 1,
+              "pendingPlans": 0,
+              "planning": 0,
+              "pendingCaptures": 0,
+              "captureStats": {
+                "pendingObservedRequests": 0,
+                "pendingObservedRequestsMax": 1,
+                "observedRequestsStarted": 1,
+                "observedRequestsQueued": 1,
+                "observedRequestsDropped": 0,
+                "observedRequestsErrored": 0,
+                "observedRequestsDeduplicated": 2,
+                "lastObservedRequestStartedAt": "2026-10-22T18:25:16.255Z",
+                "lastObservedRequestFinishedAt": "2026-10-22T18:25:16.257Z",
+                "lastObservedRequestQueuedAt": "2026-10-22T18:25:16.257Z",
+                "lastObservedRequestDroppedAt": null,
+                "lastObservedRequestErrorAt": null
+              },
+              "engineError": null,
+              "taskErrorsCount": 0,
+              "lastTaskError": null,
+              "taskSkipsCount": 0,
+              "lastTaskSkip": null,
+              "skippedDueToStrategy": 0,
+              "scanStrategy": "COMPREHENSIVE",
+              "pendingAutomationSeeds": 0,
+              "seededRequests": 1,
+              "proxySeededRequests": 1,
+              "selectedTargetSeededRequests": 0,
+              "seedCandidates": 3,
+              "unsafeSeedSkipped": 0,
+              "seedError": null,
+              "waitingForInteraction": false,
+              "historySeededRequests": 0,
+              "historySeedInputCount": 0,
+              "historySeedTotalAvailable": 0,
+              "historySeedDroppedByCap": 0,
+              "historySeedDuplicatesSkipped": 0,
+              "targetWindowRequired": true,
+              "zapAttackWindow": null
+            },
+            "SAST": {
+              "status": "running",
+              "isRunning": true,
+              "progress": {
+                "done": 1,
+                "total": 1,
+                "remaining": 0
+              },
+              "findingsCount": 3,
+              "bySeverity": {
+                "critical": 0,
+                "high": 0,
+                "medium": 0,
+                "low": 0,
+                "info": 0
+              },
+              "lastActivityAt": null,
+              "warnings": [],
+              "phase": "waiting",
+              "totalFiles": 1,
+              "completedFiles": 1,
+              "totalModules": 11,
+              "completedModules": 11,
+              "currentFile": null,
+              "currentModule": null,
+              "lastStatus": "Waiting for next page activity",
+              "findings": 2,
+              "hints": 1,
+              "isSessionRunning": true,
+              "isAnalysisRunning": true,
+              "collectionState": "analysis_running",
+              "sessionState": "running",
+              "analysisState": "analyzing",
+              "firstCollectionStarted": true,
+              "firstCollectionSettled": true,
+              "firstCollectionError": null,
+              "initialCollectionDeferred": null,
+              "activeCollectionCount": 1,
+              "pendingCollectionCount": 1,
+              "currentGeneration": 8,
+              "lastCompletedGeneration": 7,
+              "currentCollectionId": "sast_collection_8",
+              "currentCollectionFile": "http://127.0.0.1:59315/exec",
+              "currentCollectionScriptsCount": 1,
+              "currentCollectionHtmlChars": 0,
+              "currentCollectionFindingsCount": 0,
+              "currentCollectionStartedAt": "2026-10-22T18:25:16.309Z",
+              "currentCollectionPayloadAt": "2026-10-22T18:25:16.310Z",
+              "lastCompletedCollectionId": "sast_collection_7",
+              "lastCompletedFile": "http://127.0.0.1:59315/exec",
+              "lastCompletedModule": "DOM Data Manipulation",
+              "lastCompletedScriptsCount": 1,
+              "lastCompletedHtmlChars": 0,
+              "lastCompletedFindingsCount": 3,
+              "lastCompletedArtifactsCount": 0,
+              "lastCompletedAt": "2026-10-22T18:25:16.309Z",
+              "hasObservedCollection": true,
+              "idle": false
+            },
+            "SCA": {
+              "status": "running",
+              "isRunning": true,
+              "progress": {
+                "done": 0,
+                "total": null
+              },
+              "findingsCount": 0,
+              "bySeverity": {
+                "critical": 0,
+                "high": 0,
+                "medium": 0,
+                "low": 0,
+                "info": 0
+              },
+              "lastActivityAt": null,
+              "warnings": [],
+              "idle": false
+            }
+          },
+          "summary": {
+            "findingsCount": 3,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            }
+          },
+          "warnings": [],
+          "sessionLookup": {
+            "requestedSessionId": "ptk-session_6b6cf6ae-f064-4204-92e7-08d7590b551c",
+            "tabId": 659776776,
+            "strictCurrentTab": true,
+            "allowActive": true,
+            "allowCompleted": true,
+            "allowGlobalCompleted": true,
+            "lookupSource": "explicit-session",
+            "activeSessionIdForTab": "ptk-session_6b6cf6ae-f064-4204-92e7-08d7590b551c",
+            "completedSessionIdForTab": "ptk-session_8e0c1e66-fa16-4432-bd45-4f4973622317",
+            "globalCompletedSessionId": "ptk-session_8e0c1e66-fa16-4432-bd45-4f4973622317",
+            "sessionExists": true,
+            "sessionStatus": "running",
+            "sessionFinishedAt": null,
+            "stopRequestedAt": null,
+            "retention": {
+              "ttlMs": 86400000,
+              "maxCompletedSessions": 20,
+              "evicted": false
+            }
+          },
+          "supplemental": {
+            "backends": {},
+            "gaps": []
+          },
+          "coverage": {
+            "backendGaps": [],
+            "scaBodies": {
+              "captured": 1,
+              "analyzed": 1,
+              "gaps": 0,
+              "basis": "Admitted JavaScript resources observed during this scan; URI detections do not prove body analysis."
+            },
+            "scaSources": {
+              "captured": 1,
+              "analyzed": 1,
+              "gaps": 0,
+              "basis": "Executable Debugger script text, not a claim of HTTP-byte identity."
+            },
+            "scaAcquisition": {
+              "phase": "observed_content_analyzed",
+              "limits": {
+                "requested": {
+                  "maxResourceBytes": 8388608,
+                  "maxTotalBytes": 33554432,
+                  "maxScripts": 128,
+                  "drainTimeoutMs": 5000
+                },
+                "effective": {
+                  "maxScripts": 128,
+                  "maxResourceBytes": 8388608,
+                  "maxTotalBytes": 33554432
+                }
+              },
+              "drain": null
+            },
+            "scaBodyWarnings": []
+          }
+        }
+      },
+      "stopped": {
+        "runId": "9c6745d6-82bd-49e2-9ae1-b3b2ae297d69",
+        "owner": "sast-combined",
+        "workspaceId": null,
+        "tabId": 659776776,
+        "engines": [
+          "DAST",
+          "SAST",
+          "SCA"
+        ],
+        "state": "cancelled",
+        "config": {
+          "preset": "thorough",
+          "scanStrategy": "COMPREHENSIVE",
+          "dastScanStrategy": "COMPREHENSIVE",
+          "scanControlProfile": "wide",
+          "allowCaptureWithoutInteraction": true,
+          "maxRequestsPerSecond": 5,
+          "concurrency": 3,
+          "planningConcurrency": 2,
+          "runCve": false,
+          "follow_redirect": true,
+          "maxRequests": null,
+          "durationSeconds": null,
+          "engineOptions": {
+            "DAST": {
+              "moduleIds": [
+                "headers"
+              ]
+            }
+          },
+          "acquisition": {
+            "maxResourceBytes": 8388608,
+            "maxTotalBytes": 33554432,
+            "maxScripts": 128,
+            "drainTimeoutMs": 5000
+          },
+          "limits": {}
+        },
+        "scope": {
+          "origins": [
+            "http://127.0.0.1:59315"
+          ],
+          "excludePaths": []
+        },
+        "accountId": null,
+        "accountRevision": null,
+        "createdAt": 1792693516004,
+        "updatedAt": 1792693516448,
+        "requestsSent": 0,
+        "coverage": {
+          "backendGaps": [],
+          "scaBodies": {
+            "captured": 1,
+            "analyzed": 1,
+            "gaps": 0,
+            "basis": "Admitted JavaScript resources observed during this scan; URI detections do not prove body analysis."
+          },
+          "scaSources": {
+            "captured": 1,
+            "analyzed": 1,
+            "gaps": 0,
+            "basis": "Executable Debugger script text, not a claim of HTTP-byte identity."
+          },
+          "scaAcquisition": {
+            "phase": "observed_content_analyzed",
+            "limits": {
+              "requested": {
+                "maxResourceBytes": 8388608,
+                "maxTotalBytes": 33554432,
+                "maxScripts": 128,
+                "drainTimeoutMs": 5000
+              },
+              "effective": {
+                "maxScripts": 128,
+                "maxResourceBytes": 8388608,
+                "maxTotalBytes": 33554432
+              }
+            },
+            "drain": null
+          },
+          "scaBodyWarnings": [],
+          "engineFailures": [],
+          "dast": {
+            "phase": "dispatch_attribution_unknown",
+            "applicationRequestsObserved": 1,
+            "applicationRequestsQueued": 1,
+            "proxySeededRequests": 1,
+            "selectedTargetSeededRequests": 0,
+            "seedCandidates": 3,
+            "unsafeSeedSkipped": 0,
+            "tasksPlanned": 0,
+            "tasksExecuted": 0,
+            "taskCounterMeaning": "Tasks entered execution before any transport attempt",
+            "probeDispatches": null,
+            "baselineDispatches": null,
+            "dastRequestsDispatched": null,
+            "runRequestsDispatched": 0,
+            "skippedDueToStrategy": 0,
+            "taskErrors": 0,
+            "lastTaskError": null,
+            "taskSkips": 0,
+            "lastTaskSkip": null,
+            "captureErrors": 0,
+            "waitingForInteraction": false
+          },
+          "actionableGaps": [
+            {
+              "code": "dispatch_attribution_unknown",
+              "engine": "DAST",
+              "summary": "Request counts cannot be attributed to DAST.",
+              "sampledOccurrences": 1,
+              "retryUnchanged": false,
+              "recovery": {
+                "action": "inspect_evidence",
+                "instruction": "Use retained request/response evidence; do not count other engines’ traffic as DAST probes."
+              },
+              "examples": []
+            }
+          ],
+          "recovery": {
+            "runId": "9c6745d6-82bd-49e2-9ae1-b3b2ae297d69",
+            "state": "incomplete",
+            "instruction": "Address applicable recovery steps or include unresolved gaps in the final report. Do not repeat unchanged failed calls."
+          }
+        },
+        "summary": {
+          "status": "engine_incomplete",
+          "releaseStatus": "incomplete",
+          "stats": {
+            "findingsCount": 3,
+            "bySeverity": {
+              "critical": 0,
+              "high": 2,
+              "medium": 0,
+              "low": 1,
+              "info": 0
+            }
+          },
+          "incompleteEngines": [
+            "DAST"
+          ],
+          "findings": 3
+        },
+        "runtimeId": "ptk-session_6b6cf6ae-f064-4204-92e7-08d7590b551c",
+        "engineStatus": {
+          "DAST": {
+            "status": "running",
+            "isRunning": true,
+            "progress": {
+              "done": 0,
+              "total": 0,
+              "remaining": 1
+            },
+            "findingsCount": 0,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            },
+            "lastActivityAt": "2026-10-22T18:25:16.180Z",
+            "warnings": [],
+            "phase": "scanning",
+            "idle": false,
+            "remaining": 1,
+            "activeTasks": 0,
+            "taskQueue": 0,
+            "requestQueue": 1,
+            "pendingPlans": 0,
+            "planning": 0,
+            "pendingCaptures": 0,
+            "captureStats": {
+              "pendingObservedRequests": 0,
+              "pendingObservedRequestsMax": 1,
+              "observedRequestsStarted": 1,
+              "observedRequestsQueued": 1,
+              "observedRequestsDropped": 0,
+              "observedRequestsErrored": 0,
+              "observedRequestsDeduplicated": 2,
+              "lastObservedRequestStartedAt": "2026-10-22T18:25:16.255Z",
+              "lastObservedRequestFinishedAt": "2026-10-22T18:25:16.257Z",
+              "lastObservedRequestQueuedAt": "2026-10-22T18:25:16.257Z",
+              "lastObservedRequestDroppedAt": null,
+              "lastObservedRequestErrorAt": null
+            },
+            "engineError": null,
+            "taskErrorsCount": 0,
+            "lastTaskError": null,
+            "taskSkipsCount": 0,
+            "lastTaskSkip": null,
+            "skippedDueToStrategy": 0,
+            "scanStrategy": "COMPREHENSIVE",
+            "pendingAutomationSeeds": 0,
+            "seededRequests": 1,
+            "proxySeededRequests": 1,
+            "selectedTargetSeededRequests": 0,
+            "seedCandidates": 3,
+            "unsafeSeedSkipped": 0,
+            "seedError": null,
+            "waitingForInteraction": false,
+            "historySeededRequests": 0,
+            "historySeedInputCount": 0,
+            "historySeedTotalAvailable": 0,
+            "historySeedDroppedByCap": 0,
+            "historySeedDuplicatesSkipped": 0,
+            "targetWindowRequired": true,
+            "zapAttackWindow": null
+          },
+          "SAST": {
+            "status": "running",
+            "isRunning": true,
+            "progress": {
+              "done": 1,
+              "total": 1,
+              "remaining": 0
+            },
+            "findingsCount": 3,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            },
+            "lastActivityAt": null,
+            "warnings": [],
+            "phase": "waiting",
+            "totalFiles": 1,
+            "completedFiles": 1,
+            "totalModules": 11,
+            "completedModules": 11,
+            "currentFile": null,
+            "currentModule": null,
+            "lastStatus": "Waiting for next page activity",
+            "findings": 2,
+            "hints": 1,
+            "isSessionRunning": true,
+            "isAnalysisRunning": true,
+            "collectionState": "analysis_running",
+            "sessionState": "running",
+            "analysisState": "analyzing",
+            "firstCollectionStarted": true,
+            "firstCollectionSettled": true,
+            "firstCollectionError": null,
+            "initialCollectionDeferred": null,
+            "activeCollectionCount": 1,
+            "pendingCollectionCount": 1,
+            "currentGeneration": 8,
+            "lastCompletedGeneration": 7,
+            "currentCollectionId": "sast_collection_8",
+            "currentCollectionFile": "http://127.0.0.1:59315/exec",
+            "currentCollectionScriptsCount": 1,
+            "currentCollectionHtmlChars": 0,
+            "currentCollectionFindingsCount": 0,
+            "currentCollectionStartedAt": "2026-10-22T18:25:16.309Z",
+            "currentCollectionPayloadAt": "2026-10-22T18:25:16.310Z",
+            "lastCompletedCollectionId": "sast_collection_7",
+            "lastCompletedFile": "http://127.0.0.1:59315/exec",
+            "lastCompletedModule": "DOM Data Manipulation",
+            "lastCompletedScriptsCount": 1,
+            "lastCompletedHtmlChars": 0,
+            "lastCompletedFindingsCount": 3,
+            "lastCompletedArtifactsCount": 0,
+            "lastCompletedAt": "2026-10-22T18:25:16.309Z",
+            "hasObservedCollection": true,
+            "idle": false
+          },
+          "SCA": {
+            "status": "running",
+            "isRunning": true,
+            "progress": {
+              "done": 0,
+              "total": null
+            },
+            "findingsCount": 0,
+            "bySeverity": {
+              "critical": 0,
+              "high": 0,
+              "medium": 0,
+              "low": 0,
+              "info": 0
+            },
+            "lastActivityAt": null,
+            "warnings": [],
+            "idle": false
+          }
+        },
+        "lastStatus": {
+          "ok": true,
+          "summary": {
+            "status": "engine_incomplete",
+            "releaseStatus": "incomplete",
+            "stats": {
+              "findingsCount": 3,
+              "bySeverity": {
+                "critical": 0,
+                "high": 2,
+                "medium": 0,
+                "low": 1,
+                "info": 0
+              }
+            },
+            "incompleteEngines": [
+              "DAST"
+            ]
+          },
+          "supplemental": {
+            "backends": {},
+            "gaps": []
+          },
+          "sessionId": "ptk-session_6b6cf6ae-f064-4204-92e7-08d7590b551c",
+          "status": "cancelled"
+        },
+        "stopReason": "Stopped by user."
+      },
+      "native": {
+        "scan": {
+          "version": "1.0",
+          "engine": "SAST",
+          "scanId": "67b1a35e-7994-42c3-ba46-4fd4e20bb938",
+          "host": "127.0.0.1:59315",
+          "startedAt": "2026-10-22T18:25:16.196Z",
+          "finishedAt": "2026-10-22T18:25:16.439Z",
+          "settings": {
+            "policyCode": "COMPREHENSIVE",
+            "scanStrategyCode": 0
+          },
+          "toolVersion": "1.0.0",
+          "stats": {
+            "findingsCount": 3,
+            "filesCount": 1,
+            "critical": 0,
+            "high": 2,
+            "medium": 0,
+            "low": 1,
+            "info": 0,
+            "rulesCount": 3
+          },
+          "findings": [
+            {
+              "id": "67b1a35e-7994-42c3-ba46-4fd4e20bb938::SAST::dom-xss::no-inner-outer-html::43261340b23eb37c",
+              "engine": "SAST",
+              "scanId": "67b1a35e-7994-42c3-ba46-4fd4e20bb938",
+              "moduleId": "dom-xss",
+              "moduleName": "DOM-based XSS",
+              "ruleId": "no-inner-outer-html",
+              "ruleName": "Disallow innerHTML/outerHTML assignments",
+              "vulnId": "dom_xss",
+              "category": "xss",
+              "severity": "low",
+              "owasp": [
+                "A05:2025 - Injection",
+                "A03:2021 - Injection"
+              ],
+              "cwe": [
+                "CWE-79"
+              ],
+              "tags": [
+                "sast",
+                "dom",
+                "xss"
+              ],
+              "description": "Assignments to innerHTML/outerHTML are dangerous when they contain untrusted data and may lead to XSS.",
+              "recommendation": "<p>Prevent DOM-based XSS by never inserting untrusted strings directly into HTML or executing them as code. Prefer DOM/text APIs, safe templating, or a vetted sanitizer and apply context-aware encoding where needed.</p><ul><li><strong>Primary:</strong> Use <code>textContent</code> / <code>innerText</code> or create DOM nodes instead of string-based HTML insertion. If you must insert HTML, sanitize it with a vetted library such as <a href=\"https://github.com/cure53/DOMPurify\" target=\"_blank\">DOMPurify</a>.</li><li><strong>Secondary:</strong> Apply context-sensitive encoding for attributes and JavaScript contexts, avoid <code>eval</code>/<code>new Function</code>/<code>setTimeout</code> with strings, and prefer safe templating engines.</li><li><strong>Controls:</strong> Use Content Security Policy (CSP), follow least-privilege principles, and validate/allow-list input shapes where practical.</li><li><strong>Testing:</strong> Add unit/browser tests for inline handlers and client-side flows that read from <code>location</code>, form inputs, storage, and <code>postMessage</code>.</li></ul>",
+              "links": {
+                "OWASP": "https://owasp.org/www-community/attacks/xss/",
+                "CWE": "https://cwe.mitre.org/data/definitions/79.html"
+              },
+              "location": {
+                "file": "http://127.0.0.1:59315/asset.js",
+                "line": 1,
+                "column": 22,
+                "runtimeUrl": "http://127.0.0.1:59315/exec",
+                "runtimeUrls": [
+                  "http://127.0.0.1:59315/exec"
+                ],
+                "pageUrl": "http://127.0.0.1:59315/exec",
+                "pageUrls": [
+                  "http://127.0.0.1:59315/exec"
+                ],
+                "url": "http://127.0.0.1:59315/exec",
+                "param": null,
+                "kind": "code"
+              },
+              "createdAt": "2026-10-22T18:25:16.317Z",
+              "fingerprint": "no-inner-outer-html@@low@@http://127.0.0.1:59315/asset.js@@http://127.0.0.1:59315/asset.js@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":79}}@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":63}}@@",
+              "findingKind": "hint",
+              "confidence": 38,
+              "evidence": {
+                "sast": {
+                  "codeSnippet": "Source context:\nfunction showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }\n\nSink context:\nfunction showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }",
+                  "source": {
+                    "label": "innerHTML",
+                    "path": null,
+                    "sourceFile": "http://127.0.0.1:59315/asset.js",
+                    "sourceFileFull": "http://127.0.0.1:59315/asset.js",
+                    "sourceLoc": {
+                      "start": {
+                        "line": 1,
+                        "column": 22
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 79
+                      }
+                    },
+                    "sourceName": "innerHTML",
+                    "sourceSnippet": "function showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }"
+                  },
+                  "sink": {
+                    "kind": "assign",
+                    "label": "innerHTML",
+                    "path": [],
+                    "sinkFile": "http://127.0.0.1:59315/asset.js",
+                    "sinkFileFull": "http://127.0.0.1:59315/asset.js",
+                    "sinkLoc": {
+                      "start": {
+                        "line": 1,
+                        "column": 22
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 63
+                      }
+                    },
+                    "sinkName": "innerHTML",
+                    "sinkSnippet": "function showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }"
+                  },
+                  "nodeType": "AssignmentExpression",
+                  "trace": [],
+                  "mode": "pattern",
+                  "findingKind": "hint",
+                  "confidenceSignals": [
+                    "base:pattern:58",
+                    "finding_kind:hint:-20"
+                  ]
+                }
+              },
+              "updatedAt": "2026-10-22T18:25:16.317Z",
+              "pageUrl": "http://127.0.0.1:59315/exec"
+            },
+            {
+              "id": "67b1a35e-7994-42c3-ba46-4fd4e20bb938::SAST::dom-xss::dom-xss-taint::7efec2d4c35ebd14",
+              "engine": "SAST",
+              "scanId": "67b1a35e-7994-42c3-ba46-4fd4e20bb938",
+              "moduleId": "dom-xss",
+              "moduleName": "DOM-based XSS",
+              "ruleId": "dom-xss-taint",
+              "ruleName": "DOM-based XSS (taint flow)",
+              "vulnId": "dom_xss",
+              "category": "xss",
+              "severity": "high",
+              "owasp": [
+                "A05:2025 - Injection",
+                "A03:2021 - Injection"
+              ],
+              "cwe": [
+                "CWE-79"
+              ],
+              "tags": [
+                "sast",
+                "dom",
+                "xss"
+              ],
+              "description": "Detects flows where untrusted DOM-derived data (location, element values, storage, message data) reaches HTML/JS execution sinks (e.g., innerHTML, document.write, insertAdjacentHTML, location assignment, eval/Function) without passing through a recognized sanitizer.",
+              "recommendation": "<p>Prevent DOM-based XSS by never inserting untrusted strings directly into HTML or executing them as code. Prefer DOM/text APIs, safe templating, or a vetted sanitizer and apply context-aware encoding where needed.</p><ul><li><strong>Primary:</strong> Use <code>textContent</code> / <code>innerText</code> or create DOM nodes instead of string-based HTML insertion. If you must insert HTML, sanitize it with a vetted library such as <a href=\"https://github.com/cure53/DOMPurify\" target=\"_blank\">DOMPurify</a>.</li><li><strong>Secondary:</strong> Apply context-sensitive encoding for attributes and JavaScript contexts, avoid <code>eval</code>/<code>new Function</code>/<code>setTimeout</code> with strings, and prefer safe templating engines.</li><li><strong>Controls:</strong> Use Content Security Policy (CSP), follow least-privilege principles, and validate/allow-list input shapes where practical.</li><li><strong>Testing:</strong> Add unit/browser tests for inline handlers and client-side flows that read from <code>location</code>, form inputs, storage, and <code>postMessage</code>.</li></ul>",
+              "links": {
+                "OWASP": "https://owasp.org/www-community/attacks/xss/",
+                "CWE": "https://cwe.mitre.org/data/definitions/79.html"
+              },
+              "location": {
+                "file": "http://127.0.0.1:59315/asset.js",
+                "line": 1,
+                "column": 22,
+                "runtimeUrl": "http://127.0.0.1:59315/exec",
+                "runtimeUrls": [
+                  "http://127.0.0.1:59315/exec"
+                ],
+                "pageUrl": "http://127.0.0.1:59315/exec",
+                "pageUrls": [
+                  "http://127.0.0.1:59315/exec"
+                ],
+                "url": "http://127.0.0.1:59315/exec",
+                "param": null,
+                "kind": "code"
+              },
+              "createdAt": "2026-10-22T18:25:16.317Z",
+              "fingerprint": "dom-xss-taint@@high@@http://127.0.0.1:59315/asset.js@@http://127.0.0.1:59315/asset.js@@{\"start\":{\"line\":1,\"column\":66},\"end\":{\"line\":1,\"column\":79}}@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":63}}@@",
+              "findingKind": "finding",
+              "confidence": 100,
+              "evidence": {
+                "sast": {
+                  "codeSnippet": "Source context:\nfunction showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }\n\nSink context:\nfunction showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }",
+                  "source": {
+                    "label": "location.hash",
+                    "path": "location.hash",
+                    "sourceFile": "http://127.0.0.1:59315/asset.js",
+                    "sourceFileFull": "http://127.0.0.1:59315/asset.js",
+                    "sourceLoc": {
+                      "start": {
+                        "line": 1,
+                        "column": 66
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 79
+                      }
+                    },
+                    "sourceName": "location.hash",
+                    "sourceSnippet": "function showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }"
+                  },
+                  "sink": {
+                    "kind": "assign",
+                    "label": "innerHTML",
+                    "path": [
+                      "innerHTML"
+                    ],
+                    "framework": null,
+                    "api": null,
+                    "argIndex": null,
+                    "sinkFile": "http://127.0.0.1:59315/asset.js",
+                    "sinkFileFull": "http://127.0.0.1:59315/asset.js",
+                    "sinkLoc": {
+                      "start": {
+                        "line": 1,
+                        "column": 22
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 63
+                      }
+                    },
+                    "sinkName": "innerHTML",
+                    "sinkSnippet": "function showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }"
+                  },
+                  "nodeType": "AssignmentExpression",
+                  "trace": [
+                    {
+                      "kind": "source",
+                      "label": "location.hash",
+                      "file": "http://127.0.0.1:59315/asset.js",
+                      "loc": {
+                        "start": {
+                          "line": 1,
+                          "column": 66
+                        },
+                        "end": {
+                          "line": 1,
+                          "column": 79
+                        }
+                      }
+                    },
+                    {
+                      "kind": "sink",
+                      "label": "innerHTML",
+                      "file": "http://127.0.0.1:59315/asset.js",
+                      "loc": {
+                        "start": {
+                          "line": 1,
+                          "column": 22
+                        },
+                        "end": {
+                          "line": 1,
+                          "column": 79
+                        }
+                      }
+                    }
+                  ],
+                  "mode": "taint",
+                  "findingKind": "finding",
+                  "sinkContext": "html",
+                  "sourceTier": "url",
+                  "confidenceSignals": [
+                    "base:taint:78",
+                    "sink_context:html:+8",
+                    "source_tier:url:+6",
+                    "trace_len:2:+10"
+                  ]
+                }
+              },
+              "updatedAt": "2026-10-22T18:25:16.317Z",
+              "pageUrl": "http://127.0.0.1:59315/exec"
+            },
+            {
+              "id": "67b1a35e-7994-42c3-ba46-4fd4e20bb938::SAST::client-template-injection::client-template-injection-taint::aa7eb437176ab40d",
+              "engine": "SAST",
+              "scanId": "67b1a35e-7994-42c3-ba46-4fd4e20bb938",
+              "moduleId": "client-template-injection",
+              "moduleName": "Client-side Template Injection",
+              "ruleId": "client-template-injection-taint",
+              "ruleName": "Template injection (taint flow)",
+              "vulnId": "code_injection",
+              "category": "injection",
+              "severity": "high",
+              "owasp": [
+                "A05:2025 - Injection",
+                "A03:2021 - Injection"
+              ],
+              "cwe": [
+                "CWE-94"
+              ],
+              "tags": [
+                "sast",
+                "template",
+                "injection"
+              ],
+              "description": "Tainted data flows into client-side template sources or rendered HTML sinks.",
+              "recommendation": "<ul><li>Avoid compiling templates from untrusted strings; use precompiled templates.</li><li>Sanitize render output before inserting into the DOM.</li></ul>",
+              "links": {
+                "OWASP": "https://owasp.org/www-community/attacks/Template_Injection",
+                "CWE": "https://cwe.mitre.org/data/definitions/94.html"
+              },
+              "location": {
+                "file": "http://127.0.0.1:59315/asset.js",
+                "line": 1,
+                "column": 22,
+                "runtimeUrl": "http://127.0.0.1:59315/exec",
+                "runtimeUrls": [
+                  "http://127.0.0.1:59315/exec"
+                ],
+                "pageUrl": "http://127.0.0.1:59315/exec",
+                "pageUrls": [
+                  "http://127.0.0.1:59315/exec"
+                ],
+                "url": "http://127.0.0.1:59315/exec",
+                "param": null,
+                "kind": "code"
+              },
+              "createdAt": "2026-10-22T18:25:16.317Z",
+              "fingerprint": "client-template-injection-taint@@high@@http://127.0.0.1:59315/asset.js@@http://127.0.0.1:59315/asset.js@@{\"start\":{\"line\":1,\"column\":66},\"end\":{\"line\":1,\"column\":79}}@@{\"start\":{\"line\":1,\"column\":22},\"end\":{\"line\":1,\"column\":63}}@@",
+              "findingKind": "finding",
+              "confidence": 88,
+              "evidence": {
+                "sast": {
+                  "codeSnippet": "Source context:\nfunction showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }\n\nSink context:\nfunction showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }",
+                  "source": {
+                    "label": "location.hash",
+                    "path": "location.hash",
+                    "sourceFile": "http://127.0.0.1:59315/asset.js",
+                    "sourceFileFull": "http://127.0.0.1:59315/asset.js",
+                    "sourceLoc": {
+                      "start": {
+                        "line": 1,
+                        "column": 66
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 79
+                      }
+                    },
+                    "sourceName": "location.hash",
+                    "sourceSnippet": "function showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }"
+                  },
+                  "sink": {
+                    "kind": "assign",
+                    "label": "innerHTML",
+                    "path": [
+                      "innerHTML"
+                    ],
+                    "framework": null,
+                    "api": null,
+                    "argIndex": null,
+                    "sinkFile": "http://127.0.0.1:59315/asset.js",
+                    "sinkFileFull": "http://127.0.0.1:59315/asset.js",
+                    "sinkLoc": {
+                      "start": {
+                        "line": 1,
+                        "column": 22
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 63
+                      }
+                    },
+                    "sinkName": "innerHTML",
+                    "sinkSnippet": "function showInput(){ document.getElementById(\"sink\").innerHTML = location.hash; }"
+                  },
+                  "nodeType": "AssignmentExpression",
+                  "trace": [
+                    {
+                      "kind": "source",
+                      "label": "location.hash",
+                      "file": "http://127.0.0.1:59315/asset.js",
+                      "loc": {
+                        "start": {
+                          "line": 1,
+                          "column": 66
+                        },
+                        "end": {
+                          "line": 1,
+                          "column": 79
+                        }
+                      }
+                    },
+                    {
+                      "kind": "sink",
+                      "label": "innerHTML",
+                      "file": "http://127.0.0.1:59315/asset.js",
+                      "loc": {
+                        "start": {
+                          "line": 1,
+                          "column": 22
+                        },
+                        "end": {
+                          "line": 1,
+                          "column": 79
+                        }
+                      }
+                    }
+                  ],
+                  "mode": "taint",
+                  "findingKind": "finding",
+                  "sinkContext": "generic",
+                  "sourceTier": "url",
+                  "confidenceSignals": [
+                    "base:taint:78",
+                    "sink_context:generic:-6",
+                    "source_tier:url:+6",
+                    "trace_len:2:+10"
+                  ]
+                }
+              },
+              "updatedAt": "2026-10-22T18:25:16.317Z",
+              "pageUrl": "http://127.0.0.1:59315/exec"
+            }
+          ],
+          "groups": [
+            {
+              "id": "SAST@@dom_xss@@dom-xss@@no-inner-outer-html@@http://127.0.0.1:59315/asset.js@@1",
+              "engine": "SAST",
+              "scanId": "67b1a35e-7994-42c3-ba46-4fd4e20bb938",
+              "vulnId": "dom_xss",
+              "category": "xss",
+              "severity": "low",
+              "correlationKey": null,
+              "location": {
+                "url": "http://127.0.0.1:59315/exec",
+                "runtimeUrl": "http://127.0.0.1:59315/exec",
+                "file": "http://127.0.0.1:59315/asset.js",
+                "param": null,
+                "sink": "innerHTML"
+              },
+              "occurrenceIds": [
+                "67b1a35e-7994-42c3-ba46-4fd4e20bb938::SAST::dom-xss::no-inner-outer-html::43261340b23eb37c"
+              ],
+              "count": 1
+            },
+            {
+              "id": "SAST@@dom_xss@@dom-xss@@dom-xss-taint@@http://127.0.0.1:59315/asset.js@@1",
+              "engine": "SAST",
+              "scanId": "67b1a35e-7994-42c3-ba46-4fd4e20bb938",
+              "vulnId": "dom_xss",
+              "category": "xss",
+              "severity": "high",
+              "correlationKey": null,
+              "location": {
+                "url": "http://127.0.0.1:59315/exec",
+                "runtimeUrl": "http://127.0.0.1:59315/exec",
+                "file": "http://127.0.0.1:59315/asset.js",
+                "param": null,
+                "sink": "innerHTML"
+              },
+              "occurrenceIds": [
+                "67b1a35e-7994-42c3-ba46-4fd4e20bb938::SAST::dom-xss::dom-xss-taint::7efec2d4c35ebd14"
+              ],
+              "count": 1
+            },
+            {
+              "id": "SAST@@code_injection@@client-template-injection@@client-template-injection-taint@@http://127.0.0.1:59315/asset.js@@1",
+              "engine": "SAST",
+              "scanId": "67b1a35e-7994-42c3-ba46-4fd4e20bb938",
+              "vulnId": "code_injection",
+              "category": "injection",
+              "severity": "high",
+              "correlationKey": null,
+              "location": {
+                "url": "http://127.0.0.1:59315/exec",
+                "runtimeUrl": "http://127.0.0.1:59315/exec",
+                "file": "http://127.0.0.1:59315/asset.js",
+                "param": null,
+                "sink": "innerHTML"
+              },
+              "occurrenceIds": [
+                "67b1a35e-7994-42c3-ba46-4fd4e20bb938::SAST::client-template-injection::client-template-injection-taint::aa7eb437176ab40d"
+              ],
+              "count": 1
+            }
+          ],
+          "codeArtifacts": {
+            "sast": {
+              "version": 2,
+              "routes": [],
+              "endpoints": [],
+              "graphql": [],
+              "surfaces": [],
+              "hiddenParams": [],
+              "gadgets": [
+                {
+                  "id": "sast-gadget::127.0.0.1:59315|*|/exec::dom-html-sink::innerHTML",
+                  "bucketId": "sast-gadget::127.0.0.1:59315|*|/exec::dom-html-sink::innerHTML",
+                  "artifactType": "gadget",
+                  "moduleId": "sast-gadget-path-hints",
+                  "ruleId": "gadget-artifact",
+                  "gadgetType": "dom-html-sink",
+                  "label": "innerHTML",
+                  "routeKey": "127.0.0.1:59315|*|/exec",
+                  "occurrenceCount": 2,
+                  "sourceFiles": [
+                    "http://127.0.0.1:59315/asset.js"
+                  ],
+                  "sourceFile": "http://127.0.0.1:59315/asset.js",
+                  "sourceLoc": {
+                    "line": 1,
+                    "column": 22
+                  },
+                  "pageUrl": "http://127.0.0.1:59315/exec",
+                  "pageCanon": "http://127.0.0.1:59315/exec",
+                  "pageUrls": [
+                    "http://127.0.0.1:59315/exec"
+                  ],
+                  "runtimeUrls": [
+                    "http://127.0.0.1:59315/exec"
+                  ],
+                  "observedUrls": [
+                    "http://127.0.0.1:59315/exec"
+                  ],
+                  "runtimeUrl": "http://127.0.0.1:59315/exec",
+                  "authHints": [],
+                  "protocolHints": [],
+                  "discoveryTags": [],
+                  "environmentHints": [],
+                  "storageHints": [],
+                  "uploadSignals": [],
+                  "paramNames": [],
+                  "bodyKeys": [],
+                  "headerNames": [],
+                  "operationTypes": [],
+                  "operationNames": [],
+                  "rootFields": [],
+                  "variableNames": [],
+                  "hintNames": [],
+                  "hintTypes": [],
+                  "actions": [],
+                  "transports": []
+                }
+              ]
+            }
+          },
+          "files": [
+            "http://127.0.0.1:59315/asset.js"
+          ],
+          "scanStrategy": {
+            "policyCode": "COMPREHENSIVE",
+            "scanStrategyCode": 0
+          }
+        },
+        "progress": {
+          "sessionState": "idle",
+          "collectionState": "idle",
+          "analysisState": "idle",
+          "isSessionRunning": false,
+          "isAnalysisRunning": false,
+          "firstCollectionStarted": false,
+          "firstCollectionSettled": false,
+          "firstCollectionError": null,
+          "activeCollectionCount": 0,
+          "pendingCollectionCount": 0,
+          "lastCollectionState": "idle",
+          "currentGeneration": 0,
+          "lastCompletedGeneration": 0,
+          "currentCollectionId": null,
+          "currentCollectionFile": null,
+          "currentCollectionScriptsCount": null,
+          "currentCollectionHtmlChars": null,
+          "currentCollectionFindingsCount": null,
+          "currentCollectionStartedAt": null,
+          "currentCollectionPayloadAt": null,
+          "lastCompletedFile": null,
+          "lastCompletedModule": null,
+          "lastCompletedCollectionId": null,
+          "lastCompletedScriptsCount": null,
+          "lastCompletedHtmlChars": null,
+          "lastCompletedFindingsCount": null,
+          "lastCompletedArtifactsCount": null,
+          "lastCompletedAt": null,
+          "initialCollectionDeferred": null
+        }
+      }
+    }
+  ],
+  "wire": [
+    "/login",
+    "/exec",
+    "/asset.js",
+    "/favicon.ico",
+    "/exec",
+    "/asset.js",
+    "/favicon.ico",
+    "/login",
+    "/exec",
+    "/asset.js",
+    "/favicon.ico",
+    "/exec",
+    "/asset.js",
+    "/favicon.ico",
+    "/login",
+    "/exec",
+    "/asset.js",
+    "/favicon.ico",
+    "/exec",
+    "/asset.js",
+    "/favicon.ico"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "id": "sanitized-project",
+  "version": "3.17.0",
+  "name": "Sanitized Selenium login",
+  "url": "http://localhost:3001",
+  "tests": [
+    {
+      "id": "login-test",
+      "name": "Login",
+      "commands": [
+        {
+          "id": "open",
+          "comment": "",
+          "command": "open",
+          "target": "/#/login",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "email",
+          "comment": "",
+          "command": "type",
+          "target": "id=emailControl",
+          "targets": [
+            ["id=emailControl", "id"],
+            ["css=#emailControl", "css:finder"]
+          ],
+          "value": "ptk@example.invalid"
+        },
+        {
+          "id": "password",
+          "comment": "",
+          "command": "type",
+          "target": "id=passwordControl",
+          "targets": [["id=passwordControl", "id"]],
+          "value": "${PTK_SECRET:PASSWORD}"
+        },
+        {
+          "id": "submit",
+          "comment": "",
+          "command": "click",
+          "target": "css=button[type=submit]",
+          "targets": [["css=button[type=submit]", "css:finder"]],
+          "value": ""
+        }
+      ]
+    }
+  ],
+  "suites": [],
+  "urls": ["http://localhost:3001"],
+  "plugins": []
+}

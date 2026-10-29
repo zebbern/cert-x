@@ -33,6 +33,21 @@
 .ki-mm-empty{padding:12px 10px;color:var(--wb-dim);font-size:12px;line-height:16px;word-break:break-word}
 .ki-mm-foot{margin-top:4px;padding-top:4px;border-top:1px solid var(--wb-line-faint)}
 .ki-mm-foot .wb-pop-item{width:100%;min-height:34px;border-radius:11px;font-size:13px}
+.ki-fb-row[aria-checked]{background:transparent}
+.ki-fb-row:hover,.ki-fb-row:focus-visible{background:var(--ki-hi);outline:none}
+.ki-fb-row[aria-busy=true]{cursor:progress}
+.ki-fb-glyph{display:inline-flex;flex:none;align-items:center;justify-content:center;width:18px;height:18px;color:var(--wb-mid)}
+.ki-fb-row[aria-checked=true] .ki-fb-glyph{color:var(--wb-text)}
+.ki-fb-form{display:flex;flex-direction:column;gap:6px;padding:2px 10px 8px}
+.ki-fb-line{display:flex;gap:6px}
+.ki-fb-key{flex:1;min-width:0;height:28px;padding:0 9px;border:1px solid var(--ki-pop-line);border-radius:9px;background:transparent;color:var(--wb-text);font:inherit;font-size:12px;outline:0;box-shadow:none}
+.ki-fb-key:focus{border-color:var(--wb-mid)}
+.ki-fb-key::placeholder{color:var(--wb-dim)}
+.ki-fb-go{flex:none;min-width:0;height:28px;padding:0 10px;border:0;border-radius:9px;background:var(--wb-text);color:var(--ki-pop-bg);font:inherit;font-size:12px;font-weight:500;cursor:pointer}
+.ki-fb-go[aria-disabled=true]{opacity:.4;cursor:default}
+.ki-fb-hint{color:var(--wb-dim);font-size:11px;line-height:15px}
+.ki-fb-hint a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+.ki-fb-err{padding:0 10px 8px;color:var(--wb-error);font-size:11px;line-height:15px;word-break:break-word}
 .ki-glyph{display:inline-flex;flex:none;align-items:center;justify-content:center;border-radius:5px;background:color-mix(in srgb,var(--ki-tint) 18%,transparent);color:var(--ki-tint);font-family:var(--wb-font);font-weight:700;line-height:1}
 .ki-glyph-logo{background:transparent;overflow:hidden}
 .ki-logo-img{width:100%;height:100%;object-fit:contain;display:block}
@@ -176,3 +191,31 @@
 .ki-topnav-record[aria-disabled]{cursor:not-allowed}
 .ki-topnav-record[aria-disabled]>svg{opacity:.4}
 .ki-topnav-record .wb-sk-tip{max-width:240px;white-space:normal}
+/* Task outputs use the existing composer colors and compact controls. */
+.ki-output-tray { width: 100%; border-bottom: 1px solid var(--wb-border); padding: 8px 0; font-size: 12px; }
+.ki-output-tray summary { cursor: pointer; color: var(--wb-text-2); }
+.ki-output-list { max-height: 220px; overflow: auto; margin-top: 8px; }
+.ki-output-row { display: flex; align-items: center; gap: 6px; padding: 5px 0; }
+.ki-output-row > span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ki-output-tray button { padding: 4px 6px; border-radius: 6px; background: var(--wb-fill-2); color: var(--wb-text); border: 0; cursor: pointer; font-size: 11px; white-space: nowrap; }
+.ki-output-tray button:disabled { opacity: .5; cursor: wait; }
+.ki-output-preview pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 220px; overflow: auto; }
+.ki-output-preview img { max-width: 100%; max-height: 260px; object-fit: contain; }
+/* Task selectors share the existing neutral composer/settings palette. */
+.ki-profile-control { display: inline-flex; min-width: 0; flex: 0 1 auto; position: relative; }
+.ki-profile-control select, .ki-workspace-control select, .ki-history-filter { color: var(--wb-text); background: var(--wb-fill-1); border: 1px solid var(--wb-line); border-radius: 8px; padding: 5px 8px; font: inherit; font-size: 12px; min-width: 0; max-width: 100%; cursor: pointer; }
+.ki-profile-control select { max-width: 140px; }
+.ki-profile-control option, .ki-workspace-control option, .ki-history-filter option { color: var(--wb-text); background: var(--wb-bg); }
+.ki-profile-control select:disabled, .ki-workspace-control select:disabled { opacity: .55; cursor: default; }
+.ki-workspace-control { padding: 8px 0 4px; font-size: 12px; width: 100%; }
+.ki-workspace-line { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; min-width: 0; }
+.ki-workspace-control select { max-width: min(240px, 100%); }
+.ki-workspace-folder { color: var(--wb-dim); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 160px; }
+.ki-context-default { font: inherit; color: var(--wb-dim); cursor: pointer; border: 0; background: transparent; padding: 4px; margin-left: auto; }
+.ki-context-default:hover { color: var(--wb-text); }
+.ki-context-error { color: var(--wb-error); font-size: 12px; overflow-wrap: anywhere; }
+.ki-profile-control > .ki-context-error { position: absolute; bottom: 100%; left: 0; background: var(--wb-bg); padding: 8px; width: 220px; border: 1px solid var(--wb-line); border-radius: 8px; }
+.ki-history-filter { margin-bottom: 12px; }
+.ki-output-scope { display: flex; gap: 8px; margin-top: 8px; }
+.ki-output-source { display: block; color: var(--wb-dim); font-size: 10px; }
+@media (max-width: 480px) { .ki-profile-control select { max-width: 100px; padding: 4px; } .wb-composer-model { min-width: 0; } .ki-workspace-folder { max-width: 100px; } }

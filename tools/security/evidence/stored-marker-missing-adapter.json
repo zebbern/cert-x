@@ -1,0 +1,544 @@
+{
+  "scope": "Actual inert submission/retrieval parity. Browser confirmation is inconclusive because the standalone test lacks its specialized browser-operation adapter; positive execution remains unverified.",
+  "wire": [
+    {
+      "side": "reference",
+      "path": "/submit",
+      "method": "POST",
+      "body": "comment=%3Cb%3ECERTX_STORED_INERT_MARKER%3C%2Fb%3E"
+    },
+    {
+      "side": "reference",
+      "path": "/submit",
+      "method": "GET",
+      "body": ""
+    },
+    {
+      "side": "reference",
+      "path": "/view",
+      "method": "GET",
+      "body": ""
+    },
+    {
+      "side": "reference",
+      "path": "/view",
+      "method": "GET",
+      "body": ""
+    },
+    {
+      "side": "reference",
+      "path": "/submit",
+      "method": "GET",
+      "body": ""
+    },
+    {
+      "side": "owned",
+      "path": "/submit",
+      "method": "POST",
+      "body": "comment=%3Cb%3ECERTX_STORED_INERT_MARKER%3C%2Fb%3E"
+    },
+    {
+      "side": "owned",
+      "path": "/submit",
+      "method": "GET",
+      "body": ""
+    },
+    {
+      "side": "owned",
+      "path": "/view",
+      "method": "GET",
+      "body": ""
+    },
+    {
+      "side": "owned",
+      "path": "/view",
+      "method": "GET",
+      "body": ""
+    },
+    {
+      "side": "owned",
+      "path": "/submit",
+      "method": "GET",
+      "body": ""
+    }
+  ],
+  "referenceSha256": "901619844a281628f9dc9eb17ff978cc3498cf05b9548cea15808c706c42c581",
+  "reference": {
+    "raw": {
+      "result": null,
+      "executed": {
+        "sort": 0,
+        "opts": {
+          "follow_redirect": false,
+          "ptk_source": "dast",
+          "override_headers": true,
+          "preserve_browser_headers": false,
+          "keepalive": false,
+          "retry_on_transport_failure": true,
+          "transport_retry_count": 1,
+          "transport_retry_delay_ms": 75,
+          "log_fingerprint": true,
+          "requestTimeoutMs": 15000,
+          "ptk_req_id": "yvg9wzw4c6bc"
+        },
+        "request": {
+          "method": "POST",
+          "protocolVersion": "HTTP/1.1",
+          "url": "http://127.0.0.1:60636/submit",
+          "host": "127.0.0.1:60636",
+          "path": "/submit",
+          "headersSize": 139,
+          "bodySize": 50,
+          "queryParams": [],
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/x-www-form-urlencoded"
+            },
+            {
+              "name": "Cache-Control",
+              "value": "no-cache"
+            },
+            {
+              "name": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "name": "X-PTK-ReqId",
+              "value": "yvg9wzw4c6bc"
+            },
+            {
+              "name": "X-PTK-Source",
+              "value": "dast"
+            }
+          ],
+          "body": {
+            "contentType": "application/x-www-form-urlencoded",
+            "params": [
+              {
+                "name": "comment",
+                "value": "<b>CERTX_STORED_INERT_MARKER</b>"
+              }
+            ],
+            "text": "comment=%3Cb%3ECERTX_STORED_INERT_MARKER%3C%2Fb%3E"
+          },
+          "scheme": "http",
+          "target": "/submit",
+          "raw": "POST http://127.0.0.1:60636/submit HTTP/1.1\r\nHost: 127.0.0.1:60636\r\nContent-Type: application/x-www-form-urlencoded\r\nContent-Length: 50\r\nCache-Control: no-cache\r\nPragma: no-cache\r\n\r\ncomment=%3Cb%3ECERTX_STORED_INERT_MARKER%3C%2Fb%3E",
+          "ui_url": "http://127.0.0.1:60636/submit",
+          "timestamp": 1792664529096
+        },
+        "response": {
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "text/html"
+            },
+            {
+              "name": "Location",
+              "value": "/view"
+            },
+            {
+              "name": "Date",
+              "value": "Thu, 22 Oct 2026 10:22:09 GMT"
+            },
+            {
+              "name": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "name": "Keep-Alive",
+              "value": "timeout=5"
+            },
+            {
+              "name": "Content-Length",
+              "value": "6"
+            }
+          ],
+          "statusLine": "HTTP/1.1 302 Found",
+          "statusCode": 302,
+          "body": "",
+          "length": 0,
+          "timeMs": 19,
+          "transportAttempts": 1,
+          "transportRetried": false,
+          "transportRetryCount": 0
+        }
+      },
+      "events": [
+        {
+          "ts": "2026-10-22T10:22:09.233Z",
+          "engine": "DAST",
+          "moduleId": "stored_xss_blind",
+          "moduleName": null,
+          "attackId": "inert-storage-observation",
+          "attackName": null,
+          "taskType": null,
+          "method": "POST",
+          "url": "http://127.0.0.1:60636/submit",
+          "uiUrl": "http://127.0.0.1:60636/submit",
+          "param": "comment",
+          "type": "dast_browser_nav_filtered",
+          "phase": "harness_bootstrap",
+          "reason": "inject_failed",
+          "bootstrapReason": "preflight_ping",
+          "error": "dast_browser_operation_unavailable"
+        },
+        {
+          "ts": "2026-10-22T10:22:09.309Z",
+          "engine": "DAST",
+          "moduleId": "stored_xss_blind",
+          "moduleName": null,
+          "attackId": "inert-storage-observation",
+          "attackName": null,
+          "taskType": null,
+          "method": "POST",
+          "url": "http://127.0.0.1:60636/submit",
+          "uiUrl": "http://127.0.0.1:60636/submit",
+          "param": "comment",
+          "type": "dast_browser_nav_filtered",
+          "phase": "harness_bootstrap",
+          "reason": "inject_failed",
+          "bootstrapReason": "preflight_ping",
+          "error": "dast_browser_operation_unavailable"
+        },
+        {
+          "ts": "2026-10-22T10:22:09.317Z",
+          "engine": "DAST",
+          "moduleId": "stored_xss_blind",
+          "moduleName": null,
+          "attackId": "inert-storage-observation",
+          "attackName": null,
+          "taskType": null,
+          "method": "POST",
+          "url": "http://127.0.0.1:60636/submit",
+          "uiUrl": "http://127.0.0.1:60636/submit",
+          "param": "comment",
+          "type": "dast_stored_xss_retrieved_unconfirmed",
+          "phase": "tracking",
+          "retrievalCount": 1,
+          "retrievalSources": [
+            "followup"
+          ],
+          "renderCandidates": [
+            "http://127.0.0.1:60636/view",
+            "http://127.0.0.1:60636/submit"
+          ]
+        }
+      ],
+      "stats": {
+        "strategy": "SMART",
+        "totalJobsPlanned": 0,
+        "totalJobsExecuted": 0,
+        "skippedDueToStrategy": 0
+      }
+    },
+    "wire": [
+      {
+        "path": "/submit",
+        "method": "POST",
+        "body": "comment=%3Cb%3ECERTX_STORED_INERT_MARKER%3C%2Fb%3E"
+      },
+      {
+        "path": "/submit",
+        "method": "GET",
+        "body": ""
+      },
+      {
+        "path": "/view",
+        "method": "GET",
+        "body": ""
+      },
+      {
+        "path": "/view",
+        "method": "GET",
+        "body": ""
+      },
+      {
+        "path": "/submit",
+        "method": "GET",
+        "body": ""
+      }
+    ]
+  },
+  "owned": {
+    "raw": {
+      "result": null,
+      "executed": {
+        "sort": 0,
+        "opts": {
+          "follow_redirect": false,
+          "ptk_source": "dast",
+          "override_headers": true,
+          "preserve_browser_headers": false,
+          "keepalive": false,
+          "retry_on_transport_failure": true,
+          "transport_retry_count": 1,
+          "transport_retry_delay_ms": 75,
+          "log_fingerprint": true,
+          "requestTimeoutMs": 15000,
+          "ptk_req_id": "4o7ykbgxq8mj"
+        },
+        "request": {
+          "method": "POST",
+          "protocolVersion": "HTTP/1.1",
+          "url": "http://127.0.0.1:60636/submit",
+          "host": "127.0.0.1:60636",
+          "path": "/submit",
+          "headersSize": 139,
+          "bodySize": 50,
+          "queryParams": [],
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/x-www-form-urlencoded"
+            },
+            {
+              "name": "Cache-Control",
+              "value": "no-cache"
+            },
+            {
+              "name": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "name": "X-PTK-ReqId",
+              "value": "4o7ykbgxq8mj"
+            },
+            {
+              "name": "X-PTK-Source",
+              "value": "dast"
+            }
+          ],
+          "body": {
+            "contentType": "application/x-www-form-urlencoded",
+            "params": [
+              {
+                "name": "comment",
+                "value": "<b>CERTX_STORED_INERT_MARKER</b>"
+              }
+            ],
+            "text": "comment=%3Cb%3ECERTX_STORED_INERT_MARKER%3C%2Fb%3E"
+          },
+          "scheme": "http",
+          "target": "/submit",
+          "raw": "POST http://127.0.0.1:60636/submit HTTP/1.1\r\nHost: 127.0.0.1:60636\r\nContent-Type: application/x-www-form-urlencoded\r\nContent-Length: 50\r\nCache-Control: no-cache\r\nPragma: no-cache\r\n\r\ncomment=%3Cb%3ECERTX_STORED_INERT_MARKER%3C%2Fb%3E",
+          "ui_url": "http://127.0.0.1:60636/submit",
+          "timestamp": 1792664531641
+        },
+        "response": {
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "text/html"
+            },
+            {
+              "name": "Location",
+              "value": "/view"
+            },
+            {
+              "name": "Date",
+              "value": "Thu, 22 Oct 2026 10:22:11 GMT"
+            },
+            {
+              "name": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "name": "Keep-Alive",
+              "value": "timeout=5"
+            },
+            {
+              "name": "Content-Length",
+              "value": "6"
+            }
+          ],
+          "statusLine": "HTTP/1.1 302 Found",
+          "statusCode": 302,
+          "body": "",
+          "length": 0,
+          "timeMs": 12,
+          "transportAttempts": 1,
+          "transportRetried": false,
+          "transportRetryCount": 0
+        }
+      },
+      "events": [
+        {
+          "ts": "2026-10-22T10:22:11.860Z",
+          "engine": "DAST",
+          "moduleId": "stored_xss_blind",
+          "moduleName": null,
+          "attackId": "inert-storage-observation",
+          "attackName": null,
+          "taskType": null,
+          "method": "POST",
+          "url": "http://127.0.0.1:60636/submit",
+          "uiUrl": "http://127.0.0.1:60636/submit",
+          "param": "comment",
+          "type": "dast_browser_nav_filtered",
+          "phase": "harness_bootstrap",
+          "reason": "inject_failed",
+          "bootstrapReason": "preflight_ping",
+          "error": "dast_browser_operation_unavailable"
+        },
+        {
+          "ts": "2026-10-22T10:22:12.016Z",
+          "engine": "DAST",
+          "moduleId": "stored_xss_blind",
+          "moduleName": null,
+          "attackId": "inert-storage-observation",
+          "attackName": null,
+          "taskType": null,
+          "method": "POST",
+          "url": "http://127.0.0.1:60636/submit",
+          "uiUrl": "http://127.0.0.1:60636/submit",
+          "param": "comment",
+          "type": "dast_browser_nav_filtered",
+          "phase": "harness_bootstrap",
+          "reason": "inject_failed",
+          "bootstrapReason": "preflight_ping",
+          "error": "dast_browser_operation_unavailable"
+        },
+        {
+          "ts": "2026-10-22T10:22:12.023Z",
+          "engine": "DAST",
+          "moduleId": "stored_xss_blind",
+          "moduleName": null,
+          "attackId": "inert-storage-observation",
+          "attackName": null,
+          "taskType": null,
+          "method": "POST",
+          "url": "http://127.0.0.1:60636/submit",
+          "uiUrl": "http://127.0.0.1:60636/submit",
+          "param": "comment",
+          "type": "dast_stored_xss_retrieved_unconfirmed",
+          "phase": "tracking",
+          "retrievalCount": 1,
+          "retrievalSources": [
+            "followup"
+          ],
+          "renderCandidates": [
+            "http://127.0.0.1:60636/view",
+            "http://127.0.0.1:60636/submit"
+          ]
+        }
+      ],
+      "stats": {
+        "strategy": "SMART",
+        "totalJobsPlanned": 0,
+        "totalJobsExecuted": 0,
+        "skippedDueToStrategy": 0
+      }
+    },
+    "wire": [
+      {
+        "path": "/submit",
+        "method": "POST",
+        "body": "comment=%3Cb%3ECERTX_STORED_INERT_MARKER%3C%2Fb%3E"
+      },
+      {
+        "path": "/submit",
+        "method": "GET",
+        "body": ""
+      },
+      {
+        "path": "/view",
+        "method": "GET",
+        "body": ""
+      },
+      {
+        "path": "/view",
+        "method": "GET",
+        "body": ""
+      },
+      {
+        "path": "/submit",
+        "method": "GET",
+        "body": ""
+      }
+    ]
+  },
+  "summary": {
+    "realSubmissionOncePerRuntime": true,
+    "realRetrieval": true,
+    "inertMarkerUnconfirmed": true,
+    "browserConfirmation": "unverified: browser-operation adapter unavailable",
+    "harnessFailures": [
+      {
+        "ts": "2026-10-22T10:22:09.233Z",
+        "engine": "DAST",
+        "moduleId": "stored_xss_blind",
+        "moduleName": null,
+        "attackId": "inert-storage-observation",
+        "attackName": null,
+        "taskType": null,
+        "method": "POST",
+        "url": "http://127.0.0.1:60636/submit",
+        "uiUrl": "http://127.0.0.1:60636/submit",
+        "param": "comment",
+        "type": "dast_browser_nav_filtered",
+        "phase": "harness_bootstrap",
+        "reason": "inject_failed",
+        "bootstrapReason": "preflight_ping",
+        "error": "dast_browser_operation_unavailable"
+      },
+      {
+        "ts": "2026-10-22T10:22:09.309Z",
+        "engine": "DAST",
+        "moduleId": "stored_xss_blind",
+        "moduleName": null,
+        "attackId": "inert-storage-observation",
+        "attackName": null,
+        "taskType": null,
+        "method": "POST",
+        "url": "http://127.0.0.1:60636/submit",
+        "uiUrl": "http://127.0.0.1:60636/submit",
+        "param": "comment",
+        "type": "dast_browser_nav_filtered",
+        "phase": "harness_bootstrap",
+        "reason": "inject_failed",
+        "bootstrapReason": "preflight_ping",
+        "error": "dast_browser_operation_unavailable"
+      },
+      {
+        "ts": "2026-10-22T10:22:11.860Z",
+        "engine": "DAST",
+        "moduleId": "stored_xss_blind",
+        "moduleName": null,
+        "attackId": "inert-storage-observation",
+        "attackName": null,
+        "taskType": null,
+        "method": "POST",
+        "url": "http://127.0.0.1:60636/submit",
+        "uiUrl": "http://127.0.0.1:60636/submit",
+        "param": "comment",
+        "type": "dast_browser_nav_filtered",
+        "phase": "harness_bootstrap",
+        "reason": "inject_failed",
+        "bootstrapReason": "preflight_ping",
+        "error": "dast_browser_operation_unavailable"
+      },
+      {
+        "ts": "2026-10-22T10:22:12.016Z",
+        "engine": "DAST",
+        "moduleId": "stored_xss_blind",
+        "moduleName": null,
+        "attackId": "inert-storage-observation",
+        "attackName": null,
+        "taskType": null,
+        "method": "POST",
+        "url": "http://127.0.0.1:60636/submit",
+        "uiUrl": "http://127.0.0.1:60636/submit",
+        "param": "comment",
+        "type": "dast_browser_nav_filtered",
+        "phase": "harness_bootstrap",
+        "reason": "inject_failed",
+        "bootstrapReason": "preflight_ping",
+        "error": "dast_browser_operation_unavailable"
+      }
+    ],
+    "positiveStoredExecution": "unverified"
+  },
+  "methodCorrection": "Initial null-result assertion did not inspect runtime harness errors. Evidence review corrected the interpretation; the test now fails on these errors."
+}

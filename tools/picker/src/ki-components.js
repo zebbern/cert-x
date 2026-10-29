@@ -71,6 +71,32 @@ return(0,A.jsxs)("button",{type:"button",role:"menuitemradio","aria-checked":s,t
 items.length===0&&(0,A.jsx)("div",{className:"ki-mm-empty",children:L.none(q.trim())})]}),
 footer&&(0,A.jsx)("div",{className:"ki-mm-foot",children:footer})]})]})}
 
+// Fast browse switch in the model menu. The worker owns the setting and checks a
+// pasted key before keeping it; with no key and no OpenRouter provider the switch
+// opens the key box instead. Busy controls ignore clicks rather than going
+// disabled, which would drop keyboard focus to the page.
+var kiFastCopy={en:{name:"Fast browse",tip:"The agent finishes page tasks like signing in or reaching a form in one step, using a fast model.",off:"Off",add:"Add a key to turn on",key:"TypeSafe or OpenRouter key",on:"Turn on",checking:"Checking…",get:"Get a key:",fastest:"fastest"},
+"zh-CN":{name:"快速浏览",tip:"智能体使用快速模型一步完成登录、打开表单等页面任务。",off:"已关闭",add:"添加密钥以开启",key:"TypeSafe 或 OpenRouter 密钥",on:"开启",checking:"正在检查…",get:"获取密钥：",fastest:"最快"}};
+function kiFastAsk(op,extra){return chrome.runtime.sendMessage({type:"KI_BROWSE",op,...extra}).then(r=>{if(r?.ok!==!0)throw Error(r?.error||"The extension did not respond.");return r.result})}
+function KiFastBrowse({lang}){
+let L=kiFastCopy[lang]||kiFastCopy.en,[st,setSt]=(0,_.useState)(null),[open,setOpen]=(0,_.useState)(!1),[key,setKey]=(0,_.useState)(""),[busy,setBusy]=(0,_.useState)(!1),[err,setErr]=(0,_.useState)(""),inp=(0,_.useRef)(null),sw=(0,_.useRef)(null);
+(0,_.useEffect)(()=>{let live=!0;kiFastAsk("status").then(s=>{if(!live)return;setSt(s);s.error&&(setErr(s.error),s.available||setOpen(!0))},e=>{live&&setErr(e.message)});return()=>{live=!1}},[]);
+(0,_.useEffect)(()=>{open&&inp.current?.focus()},[open]);
+let on=!!st?.ready,
+save=async change=>{setBusy(!0),setErr("");try{let s=await kiFastAsk("save",change);setSt(s);s.ready&&open&&(sw.current?.focus(),setOpen(!1),setKey(""))}catch(e){setErr(e.message)}finally{setBusy(!1)}},
+flip=()=>{if(!st||busy)return;st.ready||st.available?save({on:!st.ready}):setOpen(o=>!o)};
+return(0,A.jsxs)("div",{className:"ki-fb",children:[
+(0,A.jsxs)("button",{ref:sw,type:"button",role:"switch","aria-checked":on,"aria-expanded":st&&!st.available?open:void 0,"aria-busy":busy||void 0,title:L.tip,className:"ki-mm-row ki-fb-row",onClick:flip,children:[
+(0,A.jsx)("span",{className:"ki-fb-glyph",children:kiSvg("M8 1.5 3 8h4l-1 4.5L11 6H7l1-4.5Z",13)}),
+(0,A.jsxs)("span",{className:"ki-mm-copy",children:[(0,A.jsx)("span",{className:"ki-mm-name",children:L.name}),(0,A.jsx)("span",{className:"ki-mm-sub",children:!st?"…":on?st.label:st.available?L.off:L.add})]}),
+(0,A.jsx)("span",{className:"wb-toggle wb-toggle--sm"+(on?" is-on":""),"aria-hidden":!0,children:(0,A.jsx)("span",{className:"wb-toggle-thumb"})})]}),
+open&&(0,A.jsxs)("form",{className:"ki-fb-form",onSubmit:e=>{e.preventDefault(),key.trim()&&!busy&&save({key:key.trim()})},children:[
+(0,A.jsxs)("div",{className:"ki-fb-line",children:[
+(0,A.jsx)("input",{ref:inp,type:"password",className:"ki-fb-key",value:key,placeholder:L.key,"aria-label":L.key,spellCheck:!1,autoComplete:"off",onChange:e=>setKey(e.target.value)}),
+(0,A.jsx)("button",{type:"submit",className:"ki-fb-go","aria-disabled":busy||!key.trim(),children:busy?L.checking:L.on})]}),
+(0,A.jsxs)("div",{className:"ki-fb-hint",children:[L.get," ",(0,A.jsx)("a",{href:"https://console.typesafe.ai/keys",target:"_blank",rel:"noopener",children:"TypeSafe"})," (",L.fastest,") · ",(0,A.jsx)("a",{href:"https://openrouter.ai/settings/keys",target:"_blank",rel:"noopener",children:"OpenRouter"})]})]}),
+err&&(0,A.jsx)("div",{className:"ki-fb-err",role:"alert",children:err})]})}
+
 function kiStepText(n,lang){return lang==="zh-CN"?n+" 步":n+(n===1?" step":" steps")}
 function KiEffortPill({options,current,label,onPick,lang}){
 let L=kiCopy[lang]||kiCopy.en,[open,setOpen]=(0,_.useState)(!1),ref=(0,_.useRef)(null),menu=(0,_.useRef)(null),shift=kiUseEdgeShift(menu),sel=options.find(o=>o.effort===current)||options[0];

@@ -1,0 +1,5660 @@
+{
+  "provider": "scripted_fixture",
+  "liveModelInference": false,
+  "integerAndStringAndAliasPass": true,
+  "distinctRunOwnership": true,
+  "nativeHandleRejected": true,
+  "jwtDecodePass": true,
+  "calls": [
+    {
+      "phase": "prime",
+      "name": null,
+      "args": null,
+      "toolSchema": null
+    },
+    {
+      "phase": "main",
+      "name": "security_capabilities",
+      "args": {},
+      "toolSchema": {
+        "type": "object",
+        "properties": {
+          "detail": {
+            "type": "string",
+            "enum": [
+              "summary",
+              "full"
+            ],
+            "description": "Default summary omits provenance and verification bulk."
+          },
+          "tool": {
+            "type": "string",
+            "description": "Optional available security_* tool name to return only its exact argument schema."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "phase": "main",
+      "name": "security_start_scan",
+      "args": {
+        "tabId": 145442255,
+        "engines": [
+          "SCA"
+        ]
+      },
+      "toolSchema": {
+        "type": "object",
+        "properties": {
+          "tabId": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "expectedOrigin": {
+            "type": "string"
+          },
+          "engines": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "DAST",
+                "IAST",
+                "SAST",
+                "SCA"
+              ]
+            }
+          },
+          "accountId": {
+            "type": "string"
+          },
+          "options": {
+            "type": "object",
+            "description": "Native engine settings: preset, scanStrategy, scanControlProfile, runCve, maxRequestsPerSecond, concurrency, planningConcurrency, optional maxRequests/durationSeconds, scanControls, modules, engineOptions, acquisition. Explicit user limits remain binding.",
+            "properties": {
+              "moduleIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+              },
+              "modules": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+              },
+              "excludeModules": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "Module ID strings to exclude."
+              },
+              "preset": {
+                "type": "string",
+                "enum": [
+                  "thorough",
+                  "ptk-defaults"
+                ]
+              },
+              "scanStrategy": {
+                "type": "string",
+                "enum": [
+                  "FAST",
+                  "SMART",
+                  "COMPREHENSIVE"
+                ]
+              },
+              "dastScanStrategy": {
+                "type": "string",
+                "enum": [
+                  "FAST",
+                  "SMART",
+                  "COMPREHENSIVE"
+                ]
+              },
+              "scanControlProfile": {
+                "type": "string",
+                "enum": [
+                  "strict",
+                  "safe",
+                  "wide"
+                ]
+              },
+              "safetyProfile": {
+                "type": "string",
+                "enum": [
+                  "strict",
+                  "safe",
+                  "wide"
+                ]
+              },
+              "runCve": {
+                "type": "boolean"
+              },
+              "follow_redirect": {
+                "type": "boolean"
+              },
+              "followRedirect": {
+                "type": "boolean"
+              },
+              "override_headers": {
+                "type": "boolean"
+              },
+              "update_content_length": {
+                "type": "boolean"
+              },
+              "use_content_type": {
+                "type": "boolean"
+              },
+              "allowCaptureWithoutInteraction": {
+                "type": "boolean"
+              },
+              "enableHtmlLinkDiscovery": {
+                "type": "boolean"
+              },
+              "enableSyntheticRedirectRequests": {
+                "type": "boolean"
+              },
+              "maxRequestsPerSecond": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "concurrency": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "planningConcurrency": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "maxRequests": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1,
+                "description": "Optional overall request budget. null leaves no overall preference limit; explicit user ceilings still apply."
+              },
+              "durationSeconds": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "exclusiveMinimum": 0,
+                "description": "Optional observation/run duration in seconds. null continues until stopped or work ends."
+              },
+              "requestTimeoutMs": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "originalRequestTimeoutMs": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "engineOptions": {
+                "type": "object",
+                "description": "Native per-engine options. Module selectors are arrays, including inside each engine.",
+                "properties": {
+                  "DAST": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  },
+                  "IAST": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  },
+                  "SAST": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  },
+                  "SCA": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  }
+                },
+                "additionalProperties": true
+              },
+              "scanControls": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "globalExcludes": {
+                "type": [
+                  "object",
+                  "array"
+                ]
+              },
+              "confirm": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "rulepack": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "cveRulepack": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "acquisition": {
+                "type": "object",
+                "description": "Browser acquisition limits. A limit reached is a coverage gap, not a negative finding. Changes apply to the next scan.",
+                "properties": {
+                  "maxResourceBytes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 8388608,
+                    "description": "Maximum retained bytes per resource; platform ceiling 8 MiB."
+                  },
+                  "maxTotalBytes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 33554432,
+                    "description": "Maximum aggregate retained bytes; platform ceiling 32 MiB per tab."
+                  },
+                  "maxScripts": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 4096,
+                    "description": "Maximum loaded executable scripts to acquire."
+                  },
+                  "drainTimeoutMs": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 60000,
+                    "description": "SCA pending-acquisition drain window after stop, in milliseconds. Unfinished work remains a gap. SAST retains its native stop timeout; see acquisitionSupport."
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "scope": {
+            "type": "object"
+          },
+          "requests": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "tabId"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "phase": "main",
+      "name": "security_scan_status",
+      "args": {
+        "runId": "a5fb1891-65ae-419c-9879-9c651841d14c"
+      },
+      "toolSchema": {
+        "type": "object",
+        "properties": {
+          "runId": {
+            "type": "string"
+          },
+          "detail": {
+            "type": "string",
+            "enum": [
+              "summary",
+              "full"
+            ],
+            "description": "Default summary includes progress and gaps; full includes native engine diagnostics."
+          },
+          "waitForIdle": {
+            "type": "boolean",
+            "description": "Wait for DAST queued work to become idle or the run to end. Does not stop the run."
+          },
+          "timeoutMs": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 30000,
+            "default": 30000,
+            "description": "Maximum status wait, in milliseconds; only used with waitForIdle."
+          }
+        },
+        "required": [
+          "runId"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "phase": "main",
+      "name": "security_stop_scan",
+      "args": {
+        "runId": "a5fb1891-65ae-419c-9879-9c651841d14c"
+      },
+      "toolSchema": {
+        "type": "object",
+        "properties": {
+          "runId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "runId"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "phase": "main",
+      "name": "security_start_scan",
+      "args": {
+        "tabId": "145442255",
+        "engines": [
+          "SCA"
+        ]
+      },
+      "toolSchema": {
+        "type": "object",
+        "properties": {
+          "tabId": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "expectedOrigin": {
+            "type": "string"
+          },
+          "engines": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "DAST",
+                "IAST",
+                "SAST",
+                "SCA"
+              ]
+            }
+          },
+          "accountId": {
+            "type": "string"
+          },
+          "options": {
+            "type": "object",
+            "description": "Native engine settings: preset, scanStrategy, scanControlProfile, runCve, maxRequestsPerSecond, concurrency, planningConcurrency, optional maxRequests/durationSeconds, scanControls, modules, engineOptions, acquisition. Explicit user limits remain binding.",
+            "properties": {
+              "moduleIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+              },
+              "modules": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+              },
+              "excludeModules": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "Module ID strings to exclude."
+              },
+              "preset": {
+                "type": "string",
+                "enum": [
+                  "thorough",
+                  "ptk-defaults"
+                ]
+              },
+              "scanStrategy": {
+                "type": "string",
+                "enum": [
+                  "FAST",
+                  "SMART",
+                  "COMPREHENSIVE"
+                ]
+              },
+              "dastScanStrategy": {
+                "type": "string",
+                "enum": [
+                  "FAST",
+                  "SMART",
+                  "COMPREHENSIVE"
+                ]
+              },
+              "scanControlProfile": {
+                "type": "string",
+                "enum": [
+                  "strict",
+                  "safe",
+                  "wide"
+                ]
+              },
+              "safetyProfile": {
+                "type": "string",
+                "enum": [
+                  "strict",
+                  "safe",
+                  "wide"
+                ]
+              },
+              "runCve": {
+                "type": "boolean"
+              },
+              "follow_redirect": {
+                "type": "boolean"
+              },
+              "followRedirect": {
+                "type": "boolean"
+              },
+              "override_headers": {
+                "type": "boolean"
+              },
+              "update_content_length": {
+                "type": "boolean"
+              },
+              "use_content_type": {
+                "type": "boolean"
+              },
+              "allowCaptureWithoutInteraction": {
+                "type": "boolean"
+              },
+              "enableHtmlLinkDiscovery": {
+                "type": "boolean"
+              },
+              "enableSyntheticRedirectRequests": {
+                "type": "boolean"
+              },
+              "maxRequestsPerSecond": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "concurrency": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "planningConcurrency": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "maxRequests": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1,
+                "description": "Optional overall request budget. null leaves no overall preference limit; explicit user ceilings still apply."
+              },
+              "durationSeconds": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "exclusiveMinimum": 0,
+                "description": "Optional observation/run duration in seconds. null continues until stopped or work ends."
+              },
+              "requestTimeoutMs": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "originalRequestTimeoutMs": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "engineOptions": {
+                "type": "object",
+                "description": "Native per-engine options. Module selectors are arrays, including inside each engine.",
+                "properties": {
+                  "DAST": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  },
+                  "IAST": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  },
+                  "SAST": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  },
+                  "SCA": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  }
+                },
+                "additionalProperties": true
+              },
+              "scanControls": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "globalExcludes": {
+                "type": [
+                  "object",
+                  "array"
+                ]
+              },
+              "confirm": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "rulepack": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "cveRulepack": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "acquisition": {
+                "type": "object",
+                "description": "Browser acquisition limits. A limit reached is a coverage gap, not a negative finding. Changes apply to the next scan.",
+                "properties": {
+                  "maxResourceBytes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 8388608,
+                    "description": "Maximum retained bytes per resource; platform ceiling 8 MiB."
+                  },
+                  "maxTotalBytes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 33554432,
+                    "description": "Maximum aggregate retained bytes; platform ceiling 32 MiB per tab."
+                  },
+                  "maxScripts": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 4096,
+                    "description": "Maximum loaded executable scripts to acquire."
+                  },
+                  "drainTimeoutMs": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 60000,
+                    "description": "SCA pending-acquisition drain window after stop, in milliseconds. Unfinished work remains a gap. SAST retains its native stop timeout; see acquisitionSupport."
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "scope": {
+            "type": "object"
+          },
+          "requests": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "tabId"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "phase": "main",
+      "name": "security_stop_scan",
+      "args": {
+        "runId": "e5ef9e9b-b016-4643-a418-21d00fa07b66"
+      },
+      "toolSchema": {
+        "type": "object",
+        "properties": {
+          "runId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "runId"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "phase": "main",
+      "name": "security_start_scan",
+      "args": {
+        "tab": "145442255",
+        "engines": [
+          "SCA"
+        ]
+      },
+      "toolSchema": {
+        "type": "object",
+        "properties": {
+          "tabId": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "expectedOrigin": {
+            "type": "string"
+          },
+          "engines": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "DAST",
+                "IAST",
+                "SAST",
+                "SCA"
+              ]
+            }
+          },
+          "accountId": {
+            "type": "string"
+          },
+          "options": {
+            "type": "object",
+            "description": "Native engine settings: preset, scanStrategy, scanControlProfile, runCve, maxRequestsPerSecond, concurrency, planningConcurrency, optional maxRequests/durationSeconds, scanControls, modules, engineOptions, acquisition. Explicit user limits remain binding.",
+            "properties": {
+              "moduleIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+              },
+              "modules": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+              },
+              "excludeModules": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "Module ID strings to exclude."
+              },
+              "preset": {
+                "type": "string",
+                "enum": [
+                  "thorough",
+                  "ptk-defaults"
+                ]
+              },
+              "scanStrategy": {
+                "type": "string",
+                "enum": [
+                  "FAST",
+                  "SMART",
+                  "COMPREHENSIVE"
+                ]
+              },
+              "dastScanStrategy": {
+                "type": "string",
+                "enum": [
+                  "FAST",
+                  "SMART",
+                  "COMPREHENSIVE"
+                ]
+              },
+              "scanControlProfile": {
+                "type": "string",
+                "enum": [
+                  "strict",
+                  "safe",
+                  "wide"
+                ]
+              },
+              "safetyProfile": {
+                "type": "string",
+                "enum": [
+                  "strict",
+                  "safe",
+                  "wide"
+                ]
+              },
+              "runCve": {
+                "type": "boolean"
+              },
+              "follow_redirect": {
+                "type": "boolean"
+              },
+              "followRedirect": {
+                "type": "boolean"
+              },
+              "override_headers": {
+                "type": "boolean"
+              },
+              "update_content_length": {
+                "type": "boolean"
+              },
+              "use_content_type": {
+                "type": "boolean"
+              },
+              "allowCaptureWithoutInteraction": {
+                "type": "boolean"
+              },
+              "enableHtmlLinkDiscovery": {
+                "type": "boolean"
+              },
+              "enableSyntheticRedirectRequests": {
+                "type": "boolean"
+              },
+              "maxRequestsPerSecond": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "concurrency": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "planningConcurrency": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "maxRequests": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1,
+                "description": "Optional overall request budget. null leaves no overall preference limit; explicit user ceilings still apply."
+              },
+              "durationSeconds": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "exclusiveMinimum": 0,
+                "description": "Optional observation/run duration in seconds. null continues until stopped or work ends."
+              },
+              "requestTimeoutMs": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "originalRequestTimeoutMs": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "engineOptions": {
+                "type": "object",
+                "description": "Native per-engine options. Module selectors are arrays, including inside each engine.",
+                "properties": {
+                  "DAST": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  },
+                  "IAST": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  },
+                  "SAST": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  },
+                  "SCA": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  }
+                },
+                "additionalProperties": true
+              },
+              "scanControls": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "globalExcludes": {
+                "type": [
+                  "object",
+                  "array"
+                ]
+              },
+              "confirm": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "rulepack": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "cveRulepack": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "acquisition": {
+                "type": "object",
+                "description": "Browser acquisition limits. A limit reached is a coverage gap, not a negative finding. Changes apply to the next scan.",
+                "properties": {
+                  "maxResourceBytes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 8388608,
+                    "description": "Maximum retained bytes per resource; platform ceiling 8 MiB."
+                  },
+                  "maxTotalBytes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 33554432,
+                    "description": "Maximum aggregate retained bytes; platform ceiling 32 MiB per tab."
+                  },
+                  "maxScripts": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 4096,
+                    "description": "Maximum loaded executable scripts to acquire."
+                  },
+                  "drainTimeoutMs": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 60000,
+                    "description": "SCA pending-acquisition drain window after stop, in milliseconds. Unfinished work remains a gap. SAST retains its native stop timeout; see acquisitionSupport."
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "scope": {
+            "type": "object"
+          },
+          "requests": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "tabId"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "phase": "main",
+      "name": "security_stop_scan",
+      "args": {
+        "runId": "acc7f664-cda8-4bc2-895b-0ab5aba68262"
+      },
+      "toolSchema": {
+        "type": "object",
+        "properties": {
+          "runId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "runId"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "phase": "main",
+      "name": "security_candidates",
+      "args": {
+        "arguments": {
+          "action": "list"
+        }
+      },
+      "toolSchema": {
+        "type": "object",
+        "properties": {
+          "tabId": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "arguments": {
+            "type": "object",
+            "properties": {
+              "action": {
+                "type": "string",
+                "enum": [
+                  "list",
+                  "get",
+                  "recompute",
+                  "suppress",
+                  "readiness",
+                  "reproduce",
+                  "status",
+                  "stop",
+                  "objectswap",
+                  "compare",
+                  "workflow",
+                  "workflowReplay",
+                  "draft"
+                ],
+                "description": "list, get, recompute, suppress, readiness, reproduce, status, stop, objectswap, compare, workflow, workflowReplay, draft"
+              },
+              "runId": {
+                "type": "string",
+                "description": "Source security scan run ID (required)"
+              },
+              "executionRunId": {
+                "type": "string",
+                "description": "Original reproduction operation run ID for status/stop"
+              },
+              "jobId": {
+                "type": "string",
+                "description": "Reproduction job reference"
+              },
+              "candidateId": {
+                "type": "string",
+                "description": "Candidate returned by list"
+              },
+              "offset": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Zero-based pagination"
+              },
+              "limit": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "1–500"
+              },
+              "includeSuppressed": {
+                "type": "boolean",
+                "description": "Include locally suppressed candidates"
+              },
+              "suppressed": {
+                "type": "boolean",
+                "description": "false removes suppression"
+              },
+              "check": {
+                "type": "boolean",
+                "description": "Explicit true allows readiness network probes"
+              },
+              "browserSessionId": {
+                "type": "string",
+                "description": "Explicit managed browser session for reproduction"
+              },
+              "objectSwap": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "PTK object swap specification"
+              },
+              "baselineResponse": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Retained baseline HTTP response"
+              },
+              "comparisonResponse": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Retained comparison HTTP response"
+              },
+              "baselineSessionProfileId": {
+                "type": "string",
+                "description": "Private account reference"
+              },
+              "comparisonSessionProfileId": {
+                "type": "string",
+                "description": "Private account reference"
+              },
+              "profile": {
+                "type": "string",
+                "description": "smoke or deep reproduction"
+              },
+              "constraints": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Native reproduction constraints"
+              },
+              "title": {
+                "type": "string",
+                "description": "Report title"
+              },
+              "notes": {
+                "type": "string",
+                "description": "Investigation notes"
+              },
+              "snapshotId": {
+                "type": "string",
+                "description": "Pin the returned immutable candidate snapshot; stale references fail."
+              },
+              "execute": {
+                "type": "boolean",
+                "description": "For compare: true replays through both verified account references; false compares supplied response evidence."
+              },
+              "selector": {
+                "type": "object",
+                "description": "Exact input occurrence {location:query|form|json,name,index} for reproduction or comparison request mutation.",
+                "properties": {
+                  "location": {
+                    "enum": [
+                      "query",
+                      "form",
+                      "json"
+                    ],
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "index": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                },
+                "required": [
+                  "location",
+                  "name",
+                  "index"
+                ]
+              },
+              "replacement": {
+                "type": "string",
+                "description": "Replacement for the selected comparison input only."
+              }
+            },
+            "required": [
+              "action",
+              "runId"
+            ],
+            "additionalProperties": true
+          },
+          "options": {
+            "type": "object",
+            "description": "Native engine settings: preset, scanStrategy, scanControlProfile, runCve, maxRequestsPerSecond, concurrency, planningConcurrency, optional maxRequests/durationSeconds, scanControls, modules, engineOptions, acquisition. Explicit user limits remain binding.",
+            "properties": {
+              "moduleIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+              },
+              "modules": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+              },
+              "excludeModules": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "Module ID strings to exclude."
+              },
+              "preset": {
+                "type": "string",
+                "enum": [
+                  "thorough",
+                  "ptk-defaults"
+                ]
+              },
+              "scanStrategy": {
+                "type": "string",
+                "enum": [
+                  "FAST",
+                  "SMART",
+                  "COMPREHENSIVE"
+                ]
+              },
+              "dastScanStrategy": {
+                "type": "string",
+                "enum": [
+                  "FAST",
+                  "SMART",
+                  "COMPREHENSIVE"
+                ]
+              },
+              "scanControlProfile": {
+                "type": "string",
+                "enum": [
+                  "strict",
+                  "safe",
+                  "wide"
+                ]
+              },
+              "safetyProfile": {
+                "type": "string",
+                "enum": [
+                  "strict",
+                  "safe",
+                  "wide"
+                ]
+              },
+              "runCve": {
+                "type": "boolean"
+              },
+              "follow_redirect": {
+                "type": "boolean"
+              },
+              "followRedirect": {
+                "type": "boolean"
+              },
+              "override_headers": {
+                "type": "boolean"
+              },
+              "update_content_length": {
+                "type": "boolean"
+              },
+              "use_content_type": {
+                "type": "boolean"
+              },
+              "allowCaptureWithoutInteraction": {
+                "type": "boolean"
+              },
+              "enableHtmlLinkDiscovery": {
+                "type": "boolean"
+              },
+              "enableSyntheticRedirectRequests": {
+                "type": "boolean"
+              },
+              "maxRequestsPerSecond": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "concurrency": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "planningConcurrency": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "maxRequests": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1,
+                "description": "Optional overall request budget. null leaves no overall preference limit; explicit user ceilings still apply."
+              },
+              "durationSeconds": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "exclusiveMinimum": 0,
+                "description": "Optional observation/run duration in seconds. null continues until stopped or work ends."
+              },
+              "requestTimeoutMs": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "originalRequestTimeoutMs": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "engineOptions": {
+                "type": "object",
+                "description": "Native per-engine options. Module selectors are arrays, including inside each engine.",
+                "properties": {
+                  "DAST": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  },
+                  "IAST": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  },
+                  "SAST": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  },
+                  "SCA": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  }
+                },
+                "additionalProperties": true
+              },
+              "scanControls": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "globalExcludes": {
+                "type": [
+                  "object",
+                  "array"
+                ]
+              },
+              "confirm": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "rulepack": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "cveRulepack": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "acquisition": {
+                "type": "object",
+                "description": "Browser acquisition limits. A limit reached is a coverage gap, not a negative finding. Changes apply to the next scan.",
+                "properties": {
+                  "maxResourceBytes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 8388608,
+                    "description": "Maximum retained bytes per resource; platform ceiling 8 MiB."
+                  },
+                  "maxTotalBytes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 33554432,
+                    "description": "Maximum aggregate retained bytes; platform ceiling 32 MiB per tab."
+                  },
+                  "maxScripts": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 4096,
+                    "description": "Maximum loaded executable scripts to acquire."
+                  },
+                  "drainTimeoutMs": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 60000,
+                    "description": "SCA pending-acquisition drain window after stop, in milliseconds. Unfinished work remains a gap. SAST retains its native stop timeout; see acquisitionSupport."
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "required": [
+          "arguments"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "phase": "main",
+      "name": "security_list_runs",
+      "args": {},
+      "toolSchema": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 500
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "phase": "main",
+      "name": "security_candidates",
+      "args": {
+        "arguments": {
+          "action": "list",
+          "runId": "acc7f664-cda8-4bc2-895b-0ab5aba68262"
+        }
+      },
+      "toolSchema": {
+        "type": "object",
+        "properties": {
+          "tabId": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "arguments": {
+            "type": "object",
+            "properties": {
+              "action": {
+                "type": "string",
+                "enum": [
+                  "list",
+                  "get",
+                  "recompute",
+                  "suppress",
+                  "readiness",
+                  "reproduce",
+                  "status",
+                  "stop",
+                  "objectswap",
+                  "compare",
+                  "workflow",
+                  "workflowReplay",
+                  "draft"
+                ],
+                "description": "list, get, recompute, suppress, readiness, reproduce, status, stop, objectswap, compare, workflow, workflowReplay, draft"
+              },
+              "runId": {
+                "type": "string",
+                "description": "Source security scan run ID (required)"
+              },
+              "executionRunId": {
+                "type": "string",
+                "description": "Original reproduction operation run ID for status/stop"
+              },
+              "jobId": {
+                "type": "string",
+                "description": "Reproduction job reference"
+              },
+              "candidateId": {
+                "type": "string",
+                "description": "Candidate returned by list"
+              },
+              "offset": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Zero-based pagination"
+              },
+              "limit": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "1–500"
+              },
+              "includeSuppressed": {
+                "type": "boolean",
+                "description": "Include locally suppressed candidates"
+              },
+              "suppressed": {
+                "type": "boolean",
+                "description": "false removes suppression"
+              },
+              "check": {
+                "type": "boolean",
+                "description": "Explicit true allows readiness network probes"
+              },
+              "browserSessionId": {
+                "type": "string",
+                "description": "Explicit managed browser session for reproduction"
+              },
+              "objectSwap": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "PTK object swap specification"
+              },
+              "baselineResponse": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Retained baseline HTTP response"
+              },
+              "comparisonResponse": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Retained comparison HTTP response"
+              },
+              "baselineSessionProfileId": {
+                "type": "string",
+                "description": "Private account reference"
+              },
+              "comparisonSessionProfileId": {
+                "type": "string",
+                "description": "Private account reference"
+              },
+              "profile": {
+                "type": "string",
+                "description": "smoke or deep reproduction"
+              },
+              "constraints": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Native reproduction constraints"
+              },
+              "title": {
+                "type": "string",
+                "description": "Report title"
+              },
+              "notes": {
+                "type": "string",
+                "description": "Investigation notes"
+              },
+              "snapshotId": {
+                "type": "string",
+                "description": "Pin the returned immutable candidate snapshot; stale references fail."
+              },
+              "execute": {
+                "type": "boolean",
+                "description": "For compare: true replays through both verified account references; false compares supplied response evidence."
+              },
+              "selector": {
+                "type": "object",
+                "description": "Exact input occurrence {location:query|form|json,name,index} for reproduction or comparison request mutation.",
+                "properties": {
+                  "location": {
+                    "enum": [
+                      "query",
+                      "form",
+                      "json"
+                    ],
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "index": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                },
+                "required": [
+                  "location",
+                  "name",
+                  "index"
+                ]
+              },
+              "replacement": {
+                "type": "string",
+                "description": "Replacement for the selected comparison input only."
+              }
+            },
+            "required": [
+              "action",
+              "runId"
+            ],
+            "additionalProperties": true
+          },
+          "options": {
+            "type": "object",
+            "description": "Native engine settings: preset, scanStrategy, scanControlProfile, runCve, maxRequestsPerSecond, concurrency, planningConcurrency, optional maxRequests/durationSeconds, scanControls, modules, engineOptions, acquisition. Explicit user limits remain binding.",
+            "properties": {
+              "moduleIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+              },
+              "modules": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+              },
+              "excludeModules": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "Module ID strings to exclude."
+              },
+              "preset": {
+                "type": "string",
+                "enum": [
+                  "thorough",
+                  "ptk-defaults"
+                ]
+              },
+              "scanStrategy": {
+                "type": "string",
+                "enum": [
+                  "FAST",
+                  "SMART",
+                  "COMPREHENSIVE"
+                ]
+              },
+              "dastScanStrategy": {
+                "type": "string",
+                "enum": [
+                  "FAST",
+                  "SMART",
+                  "COMPREHENSIVE"
+                ]
+              },
+              "scanControlProfile": {
+                "type": "string",
+                "enum": [
+                  "strict",
+                  "safe",
+                  "wide"
+                ]
+              },
+              "safetyProfile": {
+                "type": "string",
+                "enum": [
+                  "strict",
+                  "safe",
+                  "wide"
+                ]
+              },
+              "runCve": {
+                "type": "boolean"
+              },
+              "follow_redirect": {
+                "type": "boolean"
+              },
+              "followRedirect": {
+                "type": "boolean"
+              },
+              "override_headers": {
+                "type": "boolean"
+              },
+              "update_content_length": {
+                "type": "boolean"
+              },
+              "use_content_type": {
+                "type": "boolean"
+              },
+              "allowCaptureWithoutInteraction": {
+                "type": "boolean"
+              },
+              "enableHtmlLinkDiscovery": {
+                "type": "boolean"
+              },
+              "enableSyntheticRedirectRequests": {
+                "type": "boolean"
+              },
+              "maxRequestsPerSecond": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "concurrency": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "planningConcurrency": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "maxRequests": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1,
+                "description": "Optional overall request budget. null leaves no overall preference limit; explicit user ceilings still apply."
+              },
+              "durationSeconds": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "exclusiveMinimum": 0,
+                "description": "Optional observation/run duration in seconds. null continues until stopped or work ends."
+              },
+              "requestTimeoutMs": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "originalRequestTimeoutMs": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "engineOptions": {
+                "type": "object",
+                "description": "Native per-engine options. Module selectors are arrays, including inside each engine.",
+                "properties": {
+                  "DAST": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  },
+                  "IAST": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  },
+                  "SAST": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  },
+                  "SCA": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  }
+                },
+                "additionalProperties": true
+              },
+              "scanControls": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "globalExcludes": {
+                "type": [
+                  "object",
+                  "array"
+                ]
+              },
+              "confirm": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "rulepack": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "cveRulepack": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "acquisition": {
+                "type": "object",
+                "description": "Browser acquisition limits. A limit reached is a coverage gap, not a negative finding. Changes apply to the next scan.",
+                "properties": {
+                  "maxResourceBytes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 8388608,
+                    "description": "Maximum retained bytes per resource; platform ceiling 8 MiB."
+                  },
+                  "maxTotalBytes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 33554432,
+                    "description": "Maximum aggregate retained bytes; platform ceiling 32 MiB per tab."
+                  },
+                  "maxScripts": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 4096,
+                    "description": "Maximum loaded executable scripts to acquire."
+                  },
+                  "drainTimeoutMs": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 60000,
+                    "description": "SCA pending-acquisition drain window after stop, in milliseconds. Unfinished work remains a gap. SAST retains its native stop timeout; see acquisitionSupport."
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "required": [
+          "arguments"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "phase": "main",
+      "name": "security_utility",
+      "args": null,
+      "toolSchema": {
+        "type": "object",
+        "properties": {
+          "tabId": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "arguments": {
+            "type": "object",
+            "properties": {
+              "tool": {
+                "type": "string",
+                "enum": [
+                  "decoder",
+                  "jwt",
+                  "cookies",
+                  "openapi",
+                  "api_explorer",
+                  "recon",
+                  "portscan"
+                ],
+                "description": "Required utility selector. ZAP uses security_zap, not this tool."
+              },
+              "action": {
+                "description": "Action for the selected utility; see the variant conditions. Decoder uses encode/decode; JWT defaults to decode.",
+                "type": "string"
+              },
+              "method": {
+                "description": "A supported native codec name",
+                "type": "string"
+              },
+              "text": {
+                "description": "Input string",
+                "type": "string"
+              },
+              "token": {
+                "description": "JWT input",
+                "type": "string"
+              },
+              "header": {
+                "description": "Signing header object or JSON",
+                "oneOf": [
+                  {
+                    "type": "object"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "payload": {
+                "description": "Signing claims object or JSON",
+                "oneOf": [
+                  {
+                    "type": "object"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "secret": {
+                "description": "HMAC signing/verification secret",
+                "type": "string"
+              },
+              "keys": {
+                "description": "{private: PKCS8 PEM or JWK JSON} for asymmetric signing",
+                "type": "object",
+                "additionalProperties": true
+              },
+              "words": {
+                "description": "Optional dictionary for local HMAC testing",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "url": {
+                "description": "Scoped URL used to select browser cookie domain/path",
+                "type": "string"
+              },
+              "cookieId": {
+                "description": "Exact opaque identity returned by list",
+                "type": "string"
+              },
+              "cookie": {
+                "description": "New cookie descriptor, or exact name/domain/path/storeId/partitionKey selector",
+                "type": "object",
+                "additionalProperties": true
+              },
+              "changes": {
+                "description": "For set: selected value/flags/expiry changes; absent value preserves it privately",
+                "type": "object",
+                "additionalProperties": true
+              },
+              "policyId": {
+                "description": "Policy identifier for unset",
+                "type": "string"
+              },
+              "storeId": {
+                "description": "Optional explicit browser cookie store; partitioned selectors retain partitionKey",
+                "type": "string"
+              },
+              "data": {
+                "description": "OpenAPI/Swagger JSON or YAML document",
+                "type": "string"
+              },
+              "fileName": {
+                "description": "Optional parsing hint",
+                "type": "string"
+              },
+              "contentType": {
+                "description": "Optional parsing hint",
+                "type": "string"
+              },
+              "runId": {
+                "description": "Original security scan runId from this chat; route and source-artifact analysis",
+                "type": "string"
+              },
+              "tabId": {
+                "description": "Explicit captured target tab; headers, DOM, JS, detected technologies and evidence",
+                "type": "integer",
+                "minimum": 0
+              },
+              "host": {
+                "description": "Hostname without scheme",
+                "type": "string"
+              },
+              "ports": {
+                "description": "Integer port array",
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 65535
+                }
+              },
+              "samples": {
+                "description": "Positive sample count (default 30)",
+                "type": "integer",
+                "minimum": 1
+              },
+              "baselinePort": {
+                "description": "Comparison port (default 37857)",
+                "type": "integer",
+                "minimum": 1
+              },
+              "timeoutMs": {
+                "description": "Per-image timeout (default 5000); timing is a heuristic",
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "required": [
+              "tool"
+            ],
+            "additionalProperties": true
+          },
+          "options": {
+            "type": "object",
+            "description": "Native engine settings: preset, scanStrategy, scanControlProfile, runCve, maxRequestsPerSecond, concurrency, planningConcurrency, optional maxRequests/durationSeconds, scanControls, modules, engineOptions, acquisition. Explicit user limits remain binding.",
+            "properties": {
+              "moduleIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+              },
+              "modules": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+              },
+              "excludeModules": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "Module ID strings to exclude."
+              },
+              "preset": {
+                "type": "string",
+                "enum": [
+                  "thorough",
+                  "ptk-defaults"
+                ]
+              },
+              "scanStrategy": {
+                "type": "string",
+                "enum": [
+                  "FAST",
+                  "SMART",
+                  "COMPREHENSIVE"
+                ]
+              },
+              "dastScanStrategy": {
+                "type": "string",
+                "enum": [
+                  "FAST",
+                  "SMART",
+                  "COMPREHENSIVE"
+                ]
+              },
+              "scanControlProfile": {
+                "type": "string",
+                "enum": [
+                  "strict",
+                  "safe",
+                  "wide"
+                ]
+              },
+              "safetyProfile": {
+                "type": "string",
+                "enum": [
+                  "strict",
+                  "safe",
+                  "wide"
+                ]
+              },
+              "runCve": {
+                "type": "boolean"
+              },
+              "follow_redirect": {
+                "type": "boolean"
+              },
+              "followRedirect": {
+                "type": "boolean"
+              },
+              "override_headers": {
+                "type": "boolean"
+              },
+              "update_content_length": {
+                "type": "boolean"
+              },
+              "use_content_type": {
+                "type": "boolean"
+              },
+              "allowCaptureWithoutInteraction": {
+                "type": "boolean"
+              },
+              "enableHtmlLinkDiscovery": {
+                "type": "boolean"
+              },
+              "enableSyntheticRedirectRequests": {
+                "type": "boolean"
+              },
+              "maxRequestsPerSecond": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "concurrency": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "planningConcurrency": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "maxRequests": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1,
+                "description": "Optional overall request budget. null leaves no overall preference limit; explicit user ceilings still apply."
+              },
+              "durationSeconds": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "exclusiveMinimum": 0,
+                "description": "Optional observation/run duration in seconds. null continues until stopped or work ends."
+              },
+              "requestTimeoutMs": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "originalRequestTimeoutMs": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "engineOptions": {
+                "type": "object",
+                "description": "Native per-engine options. Module selectors are arrays, including inside each engine.",
+                "properties": {
+                  "DAST": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  },
+                  "IAST": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  },
+                  "SAST": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  },
+                  "SCA": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  }
+                },
+                "additionalProperties": true
+              },
+              "scanControls": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "globalExcludes": {
+                "type": [
+                  "object",
+                  "array"
+                ]
+              },
+              "confirm": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "rulepack": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "cveRulepack": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "acquisition": {
+                "type": "object",
+                "description": "Browser acquisition limits. A limit reached is a coverage gap, not a negative finding. Changes apply to the next scan.",
+                "properties": {
+                  "maxResourceBytes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 8388608,
+                    "description": "Maximum retained bytes per resource; platform ceiling 8 MiB."
+                  },
+                  "maxTotalBytes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 33554432,
+                    "description": "Maximum aggregate retained bytes; platform ceiling 32 MiB per tab."
+                  },
+                  "maxScripts": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 4096,
+                    "description": "Maximum loaded executable scripts to acquire."
+                  },
+                  "drainTimeoutMs": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 60000,
+                    "description": "SCA pending-acquisition drain window after stop, in milliseconds. Unfinished work remains a gap. SAST retains its native stop timeout; see acquisitionSupport."
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "required": [
+          "arguments"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "phase": "main",
+      "name": "security_utility",
+      "args": {
+        "arguments": {
+          "tool": "zap",
+          "action": "scan"
+        }
+      },
+      "toolSchema": {
+        "type": "object",
+        "properties": {
+          "tabId": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "arguments": {
+            "type": "object",
+            "properties": {
+              "tool": {
+                "type": "string",
+                "enum": [
+                  "decoder",
+                  "jwt",
+                  "cookies",
+                  "openapi",
+                  "api_explorer",
+                  "recon",
+                  "portscan"
+                ],
+                "description": "Required utility selector. ZAP uses security_zap, not this tool."
+              },
+              "action": {
+                "description": "Action for the selected utility; see the variant conditions. Decoder uses encode/decode; JWT defaults to decode.",
+                "type": "string"
+              },
+              "method": {
+                "description": "A supported native codec name",
+                "type": "string"
+              },
+              "text": {
+                "description": "Input string",
+                "type": "string"
+              },
+              "token": {
+                "description": "JWT input",
+                "type": "string"
+              },
+              "header": {
+                "description": "Signing header object or JSON",
+                "oneOf": [
+                  {
+                    "type": "object"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "payload": {
+                "description": "Signing claims object or JSON",
+                "oneOf": [
+                  {
+                    "type": "object"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "secret": {
+                "description": "HMAC signing/verification secret",
+                "type": "string"
+              },
+              "keys": {
+                "description": "{private: PKCS8 PEM or JWK JSON} for asymmetric signing",
+                "type": "object",
+                "additionalProperties": true
+              },
+              "words": {
+                "description": "Optional dictionary for local HMAC testing",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "url": {
+                "description": "Scoped URL used to select browser cookie domain/path",
+                "type": "string"
+              },
+              "cookieId": {
+                "description": "Exact opaque identity returned by list",
+                "type": "string"
+              },
+              "cookie": {
+                "description": "New cookie descriptor, or exact name/domain/path/storeId/partitionKey selector",
+                "type": "object",
+                "additionalProperties": true
+              },
+              "changes": {
+                "description": "For set: selected value/flags/expiry changes; absent value preserves it privately",
+                "type": "object",
+                "additionalProperties": true
+              },
+              "policyId": {
+                "description": "Policy identifier for unset",
+                "type": "string"
+              },
+              "storeId": {
+                "description": "Optional explicit browser cookie store; partitioned selectors retain partitionKey",
+                "type": "string"
+              },
+              "data": {
+                "description": "OpenAPI/Swagger JSON or YAML document",
+                "type": "string"
+              },
+              "fileName": {
+                "description": "Optional parsing hint",
+                "type": "string"
+              },
+              "contentType": {
+                "description": "Optional parsing hint",
+                "type": "string"
+              },
+              "runId": {
+                "description": "Original security scan runId from this chat; route and source-artifact analysis",
+                "type": "string"
+              },
+              "tabId": {
+                "description": "Explicit captured target tab; headers, DOM, JS, detected technologies and evidence",
+                "type": "integer",
+                "minimum": 0
+              },
+              "host": {
+                "description": "Hostname without scheme",
+                "type": "string"
+              },
+              "ports": {
+                "description": "Integer port array",
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 65535
+                }
+              },
+              "samples": {
+                "description": "Positive sample count (default 30)",
+                "type": "integer",
+                "minimum": 1
+              },
+              "baselinePort": {
+                "description": "Comparison port (default 37857)",
+                "type": "integer",
+                "minimum": 1
+              },
+              "timeoutMs": {
+                "description": "Per-image timeout (default 5000); timing is a heuristic",
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "required": [
+              "tool"
+            ],
+            "additionalProperties": true
+          },
+          "options": {
+            "type": "object",
+            "description": "Native engine settings: preset, scanStrategy, scanControlProfile, runCve, maxRequestsPerSecond, concurrency, planningConcurrency, optional maxRequests/durationSeconds, scanControls, modules, engineOptions, acquisition. Explicit user limits remain binding.",
+            "properties": {
+              "moduleIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+              },
+              "modules": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+              },
+              "excludeModules": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "Module ID strings to exclude."
+              },
+              "preset": {
+                "type": "string",
+                "enum": [
+                  "thorough",
+                  "ptk-defaults"
+                ]
+              },
+              "scanStrategy": {
+                "type": "string",
+                "enum": [
+                  "FAST",
+                  "SMART",
+                  "COMPREHENSIVE"
+                ]
+              },
+              "dastScanStrategy": {
+                "type": "string",
+                "enum": [
+                  "FAST",
+                  "SMART",
+                  "COMPREHENSIVE"
+                ]
+              },
+              "scanControlProfile": {
+                "type": "string",
+                "enum": [
+                  "strict",
+                  "safe",
+                  "wide"
+                ]
+              },
+              "safetyProfile": {
+                "type": "string",
+                "enum": [
+                  "strict",
+                  "safe",
+                  "wide"
+                ]
+              },
+              "runCve": {
+                "type": "boolean"
+              },
+              "follow_redirect": {
+                "type": "boolean"
+              },
+              "followRedirect": {
+                "type": "boolean"
+              },
+              "override_headers": {
+                "type": "boolean"
+              },
+              "update_content_length": {
+                "type": "boolean"
+              },
+              "use_content_type": {
+                "type": "boolean"
+              },
+              "allowCaptureWithoutInteraction": {
+                "type": "boolean"
+              },
+              "enableHtmlLinkDiscovery": {
+                "type": "boolean"
+              },
+              "enableSyntheticRedirectRequests": {
+                "type": "boolean"
+              },
+              "maxRequestsPerSecond": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "concurrency": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "planningConcurrency": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "maxRequests": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1,
+                "description": "Optional overall request budget. null leaves no overall preference limit; explicit user ceilings still apply."
+              },
+              "durationSeconds": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "exclusiveMinimum": 0,
+                "description": "Optional observation/run duration in seconds. null continues until stopped or work ends."
+              },
+              "requestTimeoutMs": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "originalRequestTimeoutMs": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "engineOptions": {
+                "type": "object",
+                "description": "Native per-engine options. Module selectors are arrays, including inside each engine.",
+                "properties": {
+                  "DAST": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  },
+                  "IAST": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  },
+                  "SAST": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  },
+                  "SCA": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  }
+                },
+                "additionalProperties": true
+              },
+              "scanControls": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "globalExcludes": {
+                "type": [
+                  "object",
+                  "array"
+                ]
+              },
+              "confirm": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "rulepack": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "cveRulepack": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "acquisition": {
+                "type": "object",
+                "description": "Browser acquisition limits. A limit reached is a coverage gap, not a negative finding. Changes apply to the next scan.",
+                "properties": {
+                  "maxResourceBytes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 8388608,
+                    "description": "Maximum retained bytes per resource; platform ceiling 8 MiB."
+                  },
+                  "maxTotalBytes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 33554432,
+                    "description": "Maximum aggregate retained bytes; platform ceiling 32 MiB per tab."
+                  },
+                  "maxScripts": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 4096,
+                    "description": "Maximum loaded executable scripts to acquire."
+                  },
+                  "drainTimeoutMs": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 60000,
+                    "description": "SCA pending-acquisition drain window after stop, in milliseconds. Unfinished work remains a gap. SAST retains its native stop timeout; see acquisitionSupport."
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "required": [
+          "arguments"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "phase": "main",
+      "name": "security_utility",
+      "args": {
+        "arguments": {
+          "tool": "jwt",
+          "action": "decode",
+          "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmaXh0dXJlIn0.c2ln"
+        }
+      },
+      "toolSchema": {
+        "type": "object",
+        "properties": {
+          "tabId": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "arguments": {
+            "type": "object",
+            "properties": {
+              "tool": {
+                "type": "string",
+                "enum": [
+                  "decoder",
+                  "jwt",
+                  "cookies",
+                  "openapi",
+                  "api_explorer",
+                  "recon",
+                  "portscan"
+                ],
+                "description": "Required utility selector. ZAP uses security_zap, not this tool."
+              },
+              "action": {
+                "description": "Action for the selected utility; see the variant conditions. Decoder uses encode/decode; JWT defaults to decode.",
+                "type": "string"
+              },
+              "method": {
+                "description": "A supported native codec name",
+                "type": "string"
+              },
+              "text": {
+                "description": "Input string",
+                "type": "string"
+              },
+              "token": {
+                "description": "JWT input",
+                "type": "string"
+              },
+              "header": {
+                "description": "Signing header object or JSON",
+                "oneOf": [
+                  {
+                    "type": "object"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "payload": {
+                "description": "Signing claims object or JSON",
+                "oneOf": [
+                  {
+                    "type": "object"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "secret": {
+                "description": "HMAC signing/verification secret",
+                "type": "string"
+              },
+              "keys": {
+                "description": "{private: PKCS8 PEM or JWK JSON} for asymmetric signing",
+                "type": "object",
+                "additionalProperties": true
+              },
+              "words": {
+                "description": "Optional dictionary for local HMAC testing",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "url": {
+                "description": "Scoped URL used to select browser cookie domain/path",
+                "type": "string"
+              },
+              "cookieId": {
+                "description": "Exact opaque identity returned by list",
+                "type": "string"
+              },
+              "cookie": {
+                "description": "New cookie descriptor, or exact name/domain/path/storeId/partitionKey selector",
+                "type": "object",
+                "additionalProperties": true
+              },
+              "changes": {
+                "description": "For set: selected value/flags/expiry changes; absent value preserves it privately",
+                "type": "object",
+                "additionalProperties": true
+              },
+              "policyId": {
+                "description": "Policy identifier for unset",
+                "type": "string"
+              },
+              "storeId": {
+                "description": "Optional explicit browser cookie store; partitioned selectors retain partitionKey",
+                "type": "string"
+              },
+              "data": {
+                "description": "OpenAPI/Swagger JSON or YAML document",
+                "type": "string"
+              },
+              "fileName": {
+                "description": "Optional parsing hint",
+                "type": "string"
+              },
+              "contentType": {
+                "description": "Optional parsing hint",
+                "type": "string"
+              },
+              "runId": {
+                "description": "Original security scan runId from this chat; route and source-artifact analysis",
+                "type": "string"
+              },
+              "tabId": {
+                "description": "Explicit captured target tab; headers, DOM, JS, detected technologies and evidence",
+                "type": "integer",
+                "minimum": 0
+              },
+              "host": {
+                "description": "Hostname without scheme",
+                "type": "string"
+              },
+              "ports": {
+                "description": "Integer port array",
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 65535
+                }
+              },
+              "samples": {
+                "description": "Positive sample count (default 30)",
+                "type": "integer",
+                "minimum": 1
+              },
+              "baselinePort": {
+                "description": "Comparison port (default 37857)",
+                "type": "integer",
+                "minimum": 1
+              },
+              "timeoutMs": {
+                "description": "Per-image timeout (default 5000); timing is a heuristic",
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "required": [
+              "tool"
+            ],
+            "additionalProperties": true
+          },
+          "options": {
+            "type": "object",
+            "description": "Native engine settings: preset, scanStrategy, scanControlProfile, runCve, maxRequestsPerSecond, concurrency, planningConcurrency, optional maxRequests/durationSeconds, scanControls, modules, engineOptions, acquisition. Explicit user limits remain binding.",
+            "properties": {
+              "moduleIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+              },
+              "modules": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+              },
+              "excludeModules": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "Module ID strings to exclude."
+              },
+              "preset": {
+                "type": "string",
+                "enum": [
+                  "thorough",
+                  "ptk-defaults"
+                ]
+              },
+              "scanStrategy": {
+                "type": "string",
+                "enum": [
+                  "FAST",
+                  "SMART",
+                  "COMPREHENSIVE"
+                ]
+              },
+              "dastScanStrategy": {
+                "type": "string",
+                "enum": [
+                  "FAST",
+                  "SMART",
+                  "COMPREHENSIVE"
+                ]
+              },
+              "scanControlProfile": {
+                "type": "string",
+                "enum": [
+                  "strict",
+                  "safe",
+                  "wide"
+                ]
+              },
+              "safetyProfile": {
+                "type": "string",
+                "enum": [
+                  "strict",
+                  "safe",
+                  "wide"
+                ]
+              },
+              "runCve": {
+                "type": "boolean"
+              },
+              "follow_redirect": {
+                "type": "boolean"
+              },
+              "followRedirect": {
+                "type": "boolean"
+              },
+              "override_headers": {
+                "type": "boolean"
+              },
+              "update_content_length": {
+                "type": "boolean"
+              },
+              "use_content_type": {
+                "type": "boolean"
+              },
+              "allowCaptureWithoutInteraction": {
+                "type": "boolean"
+              },
+              "enableHtmlLinkDiscovery": {
+                "type": "boolean"
+              },
+              "enableSyntheticRedirectRequests": {
+                "type": "boolean"
+              },
+              "maxRequestsPerSecond": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "concurrency": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "planningConcurrency": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "maxRequests": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1,
+                "description": "Optional overall request budget. null leaves no overall preference limit; explicit user ceilings still apply."
+              },
+              "durationSeconds": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "exclusiveMinimum": 0,
+                "description": "Optional observation/run duration in seconds. null continues until stopped or work ends."
+              },
+              "requestTimeoutMs": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "originalRequestTimeoutMs": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "engineOptions": {
+                "type": "object",
+                "description": "Native per-engine options. Module selectors are arrays, including inside each engine.",
+                "properties": {
+                  "DAST": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  },
+                  "IAST": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  },
+                  "SAST": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  },
+                  "SCA": {
+                    "type": "object",
+                    "properties": {
+                      "moduleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module IDs returned by security_capabilities, for example [\"xss\"]. Supply the array directly; no wrapper object."
+                      },
+                      "modules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Compatibility alias for moduleIds; supply an array of module ID strings."
+                      },
+                      "excludeModules": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": "Module ID strings to exclude."
+                      }
+                    },
+                    "additionalProperties": true
+                  }
+                },
+                "additionalProperties": true
+              },
+              "scanControls": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "globalExcludes": {
+                "type": [
+                  "object",
+                  "array"
+                ]
+              },
+              "confirm": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "rulepack": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "cveRulepack": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "acquisition": {
+                "type": "object",
+                "description": "Browser acquisition limits. A limit reached is a coverage gap, not a negative finding. Changes apply to the next scan.",
+                "properties": {
+                  "maxResourceBytes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 8388608,
+                    "description": "Maximum retained bytes per resource; platform ceiling 8 MiB."
+                  },
+                  "maxTotalBytes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 33554432,
+                    "description": "Maximum aggregate retained bytes; platform ceiling 32 MiB per tab."
+                  },
+                  "maxScripts": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 4096,
+                    "description": "Maximum loaded executable scripts to acquire."
+                  },
+                  "drainTimeoutMs": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 60000,
+                    "description": "SCA pending-acquisition drain window after stop, in milliseconds. Unfinished work remains a gap. SAST retains its native stop timeout; see acquisitionSupport."
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "required": [
+          "arguments"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "phase": "main",
+      "name": null,
+      "args": null,
+      "toolSchema": null
+    }
+  ],
+  "results": {
+    "capabilities": {
+      "version": "10.0.0",
+      "baseline": "PTK 10.0.0",
+      "configuration": {
+        "preset": "thorough",
+        "scanStrategy": "COMPREHENSIVE",
+        "dastScanStrategy": "COMPREHENSIVE",
+        "scanControlProfile": "wide",
+        "allowCaptureWithoutInteraction": true,
+        "maxRequestsPerSecond": 5,
+        "concurrency": 3,
+        "planningConcurrency": 2,
+        "runCve": true,
+        "follow_redirect": true,
+        "maxRequests": null,
+        "durationSeconds": null,
+        "acquisition": {
+          "maxResourceBytes": 8388608,
+          "maxTotalBytes": 33554432,
+          "maxScripts": 128,
+          "drainTimeoutMs": 5000
+        },
+        "limits": {}
+      },
+      "presets": [
+        "thorough",
+        "ptk-defaults"
+      ],
+      "transport": {
+        "backend": "browser",
+        "http": true,
+        "rawHttp": false,
+        "http2HelperRedirects": false,
+        "webSocketFrames": false,
+        "serverSideOast": false,
+        "managed": {
+          "requires": "enabled local access and host security_raw_v2",
+          "rawHttp": true,
+          "http2": {
+            "structured": true,
+            "frames": true,
+            "structuredBodyWindow": 65535,
+            "dynamicFlowControl": false
+          },
+          "webSocketFrames": true,
+          "validatedUpgrade": true,
+          "desync": {
+            "explicitOptIn": true,
+            "pairedControls": true,
+            "modes": [
+              "backend_observation",
+              "response_queue"
+            ]
+          },
+          "evidencePagination": true,
+          "unsupported": [
+            "opaque HTTP/1 routing",
+            "bare-LF boundaries",
+            "HTTP/2 CONNECT",
+            "PUSH_PROMISE",
+            "unknown HTTP/2 extension frames"
+          ]
+        }
+      },
+      "accountReferences": {
+        "DAST": true,
+        "replay": true,
+        "browserInstrumentation": false
+      },
+      "engineConcurrency": "One active instance per engine; independent utilities and replay use their own contexts.",
+      "acquisitionSupport": {
+        "SCA": "Resource/total content limits, preloaded script count and bounded drainTimeoutMs.",
+        "SAST": "Resource/total content limits before analysis and preloaded script count. Stop retains the native SAST timeout; acquisition.drainTimeoutMs is the SCA drain preference."
+      },
+      "targetScope": {
+        "configured": true,
+        "scope": {
+          "origins": [
+            "http://127.0.0.1:65181"
+          ],
+          "excludePaths": []
+        },
+        "whenUnset": "Use the explicitly selected target for each new operation.",
+        "matchingModes": {
+          "origin": "Exact HTTP(S) origins",
+          "host": "Same host across HTTP(S) and ports; optional subdomains"
+        },
+        "settings": "Workspaces → Testing scope"
+      },
+      "modules": [
+        {
+          "id": "sql_injection",
+          "engine": "DAST",
+          "name": "SQL Injection",
+          "executable": true,
+          "checkCount": 4
+        },
+        {
+          "id": "os_command_injection",
+          "engine": "DAST",
+          "name": "OS command injection",
+          "executable": true,
+          "checkCount": 3
+        },
+        {
+          "id": "xss",
+          "engine": "DAST",
+          "name": "Reflected Cross-Site Scripting (XSS)",
+          "executable": true,
+          "checkCount": 18
+        },
+        {
+          "id": "angularjs_client_template_injection",
+          "engine": "DAST",
+          "name": "AngularJS client-side template / expression injection",
+          "executable": true,
+          "checkCount": 25
+        },
+        {
+          "id": "jwt_injection",
+          "engine": "DAST",
+          "name": "JWT None Algorithm attacks",
+          "executable": true,
+          "checkCount": 9
+        },
+        {
+          "id": "version_control_exposure",
+          "engine": "DAST",
+          "name": "Exposure of Version-Control Repository",
+          "executable": true,
+          "checkCount": 3
+        },
+        {
+          "id": "headers",
+          "engine": "DAST",
+          "name": "OWASP Secure Headers",
+          "executable": true,
+          "checkCount": 23
+        },
+        {
+          "id": "sensitive_data_exposure",
+          "engine": "DAST",
+          "name": "Sensitive data exposure",
+          "executable": true,
+          "checkCount": 2
+        },
+        {
+          "id": "spa_dom_xss",
+          "engine": "DAST",
+          "name": "SPA hash-based DOM XSS",
+          "executable": true,
+          "checkCount": 1
+        },
+        {
+          "id": "websocket_security",
+          "engine": "DAST",
+          "name": "WebSocket security indicators",
+          "executable": true,
+          "checkCount": 1
+        },
+        {
+          "id": "recon_sourcemaps_debug",
+          "engine": "DAST",
+          "name": "Passive Recon: Source Maps & Debug Artifacts",
+          "executable": true,
+          "checkCount": 4
+        },
+        {
+          "id": "recon_error_stacktraces",
+          "engine": "DAST",
+          "name": "Passive Recon: Error & Stack Trace Disclosure",
+          "executable": true,
+          "checkCount": 6
+        },
+        {
+          "id": "recon_client_config_secrets",
+          "engine": "DAST",
+          "name": "Passive Recon: Client Config & Secret-Like Values",
+          "executable": true,
+          "checkCount": 9
+        },
+        {
+          "id": "recon_api_docs_specs",
+          "engine": "DAST",
+          "name": "Passive Recon: API Docs & Specs Exposure",
+          "executable": true,
+          "checkCount": 5
+        },
+        {
+          "id": "recon_well_known_metadata",
+          "engine": "DAST",
+          "name": "Passive Recon: .well-known & Metadata Files",
+          "executable": true,
+          "checkCount": 4
+        },
+        {
+          "id": "recon_tokens_in_url",
+          "engine": "DAST",
+          "name": "Passive Recon: Tokens & Secrets in URLs",
+          "executable": true,
+          "checkCount": 3
+        },
+        {
+          "id": "recon_parameter_leads",
+          "engine": "DAST",
+          "name": "Passive Recon: High-Risk Parameter Names",
+          "executable": true,
+          "checkCount": 4
+        },
+        {
+          "id": "recon_internal_hosts_env_hints",
+          "engine": "DAST",
+          "name": "Passive Recon: Internal Hosts & Environment Hints",
+          "executable": true,
+          "checkCount": 4
+        },
+        {
+          "id": "recon_cors_posture",
+          "engine": "DAST",
+          "name": "Passive Recon: CORS Posture Indicators",
+          "executable": true,
+          "checkCount": 3
+        },
+        {
+          "id": "recon_cache_privacy",
+          "engine": "DAST",
+          "name": "Passive Recon: Cache & Privacy Posture",
+          "executable": true,
+          "checkCount": 1
+        },
+        {
+          "id": "recon_interesting_endpoints",
+          "engine": "DAST",
+          "name": "Passive Recon: Interesting Endpoint Patterns",
+          "executable": true,
+          "checkCount": 9
+        },
+        {
+          "id": "jsonp_callback_injection",
+          "engine": "DAST",
+          "name": "JSONP Callback Injection (generic)",
+          "executable": true,
+          "checkCount": 1
+        },
+        {
+          "id": "open_redirect",
+          "engine": "DAST",
+          "name": "Open Redirect (generic)",
+          "executable": true,
+          "checkCount": 3
+        },
+        {
+          "id": "cve_2025_55182_react_rsc",
+          "engine": "DAST",
+          "name": "React2Shell: React Server Components RCE (CVE-2025-55182)",
+          "executable": true,
+          "checkCount": 2
+        },
+        {
+          "id": "cve_2015_1635",
+          "engine": "DAST",
+          "name": "Microsoft Windows 'HTTP.sys' - Remote Code Execution (CVE-2015-1635)",
+          "executable": true,
+          "checkCount": 1
+        },
+        {
+          "id": "cve_2018_20062",
+          "engine": "DAST",
+          "name": "ThinkPHP 5.0.23 - Remote Code Execution (CVE-2018-20062)",
+          "executable": true,
+          "checkCount": 1
+        },
+        {
+          "id": "cve_2019_10692",
+          "engine": "DAST",
+          "name": "WordPress Google Maps <7.11.18 - SQL Injection (CVE-2019-10692)",
+          "executable": true,
+          "checkCount": 1
+        },
+        {
+          "id": "cve_2020_14092",
+          "engine": "DAST",
+          "name": "WordPress PayPal Pro <1.1.65 - SQL Injection (CVE-2020-14092)",
+          "executable": true,
+          "checkCount": 1
+        },
+        {
+          "id": "cve_2020_17530",
+          "engine": "DAST",
+          "name": "Apache Struts 2.0.0-2.5.25 - Remote Code Execution (CVE-2020-17530)",
+          "executable": true,
+          "checkCount": 1
+        },
+        {
+          "id": "cve_2021_28918",
+          "engine": "DAST",
+          "name": "Netmask NPM Package - Server-Side Request Forgery (CVE-2021-28918)",
+          "executable": true,
+          "checkCount": 3
+        },
+        {
+          "id": "cve_2022_47945",
+          "engine": "DAST",
+          "name": "Thinkphp Lang - Local File Inclusion (CVE-2022-47945)",
+          "executable": true,
+          "checkCount": 2
+        },
+        {
+          "id": "cve_2023_34598",
+          "engine": "DAST",
+          "name": "Gibbon v25.0.0 - Local File Inclusion (CVE-2023-34598)",
+          "executable": true,
+          "checkCount": 1
+        },
+        {
+          "id": "cve_2023_5991",
+          "engine": "DAST",
+          "name": "Hotel Booking Lite < 4.8.5 - Arbitrary File Download & Deletion (CVE-2023-5991)",
+          "executable": true,
+          "checkCount": 1
+        },
+        {
+          "id": "cve_2022_1970_cve_2024_27954",
+          "engine": "DAST",
+          "name": "WordPress Automatic Plugin <3.92.1 - Arbitrary File Download and SSRF (CVE-2022-1970)",
+          "executable": true,
+          "checkCount": 1
+        },
+        {
+          "id": "dom-xss",
+          "engine": "SAST",
+          "name": "DOM-based XSS",
+          "executable": true,
+          "checkCount": 9
+        },
+        {
+          "id": "cookie-manipulation",
+          "engine": "SAST",
+          "name": "DOM-based Cookie Manipulation",
+          "executable": true,
+          "checkCount": 2
+        },
+        {
+          "id": "open-redirection",
+          "engine": "SAST",
+          "name": "Open Redirection",
+          "executable": true,
+          "checkCount": 3
+        },
+        {
+          "id": "javascript-injection",
+          "engine": "SAST",
+          "name": "DOM-based JavaScript Injection",
+          "executable": true,
+          "checkCount": 5
+        },
+        {
+          "id": "angularjs-expression-injection",
+          "engine": "SAST",
+          "name": "AngularJS client-side template / expression injection",
+          "executable": true,
+          "checkCount": 6
+        },
+        {
+          "id": "client-template-injection",
+          "engine": "SAST",
+          "name": "Client-side Template Injection",
+          "executable": true,
+          "checkCount": 6
+        },
+        {
+          "id": "network-destination-poisoning",
+          "engine": "SAST",
+          "name": "Network Destination Poisoning",
+          "executable": true,
+          "checkCount": 5
+        },
+        {
+          "id": "client-script-loader-poisoning",
+          "engine": "SAST",
+          "name": "Client Script Loader Poisoning",
+          "executable": true,
+          "checkCount": 8
+        },
+        {
+          "id": "web-message",
+          "engine": "SAST",
+          "name": "Web Message Handling",
+          "executable": true,
+          "checkCount": 9
+        },
+        {
+          "id": "link-manipulation",
+          "engine": "SAST",
+          "name": "DOM-based Link Manipulation",
+          "executable": true,
+          "checkCount": 2
+        },
+        {
+          "id": "dom-data-manipulation",
+          "engine": "SAST",
+          "name": "DOM Data Manipulation",
+          "executable": true,
+          "checkCount": 3
+        },
+        {
+          "id": "iast_dom_xss",
+          "engine": "IAST",
+          "name": "DOM XSS sinks",
+          "executable": true,
+          "checkCount": 6
+        },
+        {
+          "id": "iast_dangerous_url_scheme_execution",
+          "engine": "IAST",
+          "name": "Dangerous URL scheme execution sinks",
+          "executable": true,
+          "checkCount": 15
+        },
+        {
+          "id": "iast_js_execution",
+          "engine": "IAST",
+          "name": "Dynamic JS execution",
+          "executable": true,
+          "checkCount": 3
+        },
+        {
+          "id": "iast_open_redirect",
+          "engine": "IAST",
+          "name": "Client-side navigation sinks",
+          "executable": true,
+          "checkCount": 2
+        },
+        {
+          "id": "iast_angularjs_expression_injection",
+          "engine": "IAST",
+          "name": "AngularJS expression / client-template injection",
+          "executable": true,
+          "checkCount": 5
+        },
+        {
+          "id": "iast_postmessage_misuse",
+          "engine": "IAST",
+          "name": "window.postMessage misuse",
+          "executable": true,
+          "checkCount": 2
+        },
+        {
+          "id": "iast_timer_js_execution",
+          "engine": "IAST",
+          "name": "Timer-based JS execution sinks",
+          "executable": true,
+          "checkCount": 2
+        },
+        {
+          "id": "iast_iframe_navigation",
+          "engine": "IAST",
+          "name": "IFrame navigation and content sinks",
+          "executable": true,
+          "checkCount": 2
+        },
+        {
+          "id": "iast_client_http_exfiltration",
+          "engine": "IAST",
+          "name": "Client-side HTTP exfiltration sinks",
+          "executable": true,
+          "checkCount": 7
+        },
+        {
+          "id": "iast_dom_link_manipulation",
+          "engine": "IAST",
+          "name": "DOM link and attribute navigation sinks",
+          "executable": true,
+          "checkCount": 4
+        },
+        {
+          "id": "iast_dom_url_navigation",
+          "engine": "IAST",
+          "name": "DOM URL-based navigation sinks",
+          "executable": true,
+          "checkCount": 5
+        },
+        {
+          "id": "iast_dom_parser_xss",
+          "engine": "IAST",
+          "name": "DOM parser and unsafe HTML sinks",
+          "executable": true,
+          "checkCount": 4
+        },
+        {
+          "id": "iast_dom_xss_secondary_sources",
+          "engine": "IAST",
+          "name": "DOM XSS from secondary client-side sources",
+          "executable": true,
+          "checkCount": 7
+        },
+        {
+          "id": "iast_route_controlled_navigation",
+          "engine": "IAST",
+          "name": "Route-controlled client navigation",
+          "executable": true,
+          "checkCount": 3
+        },
+        {
+          "id": "iast_form_submission_hijack",
+          "engine": "IAST",
+          "name": "Form submission target hijack",
+          "executable": true,
+          "checkCount": 2
+        },
+        {
+          "id": "iast_dangerous_form_scheme_execution",
+          "engine": "IAST",
+          "name": "Dangerous form target URL schemes",
+          "executable": true,
+          "checkCount": 4
+        },
+        {
+          "id": "iast_response_field_dom_reachability",
+          "engine": "IAST",
+          "name": "Response-derived DOM execution reachability",
+          "executable": true,
+          "checkCount": 9
+        },
+        {
+          "id": "iast_prototype_pollution_impact",
+          "engine": "IAST",
+          "name": "Prototype pollution impact confirmation",
+          "executable": true,
+          "checkCount": 2
+        },
+        {
+          "id": "iast_storage_taint_to_exec",
+          "engine": "IAST",
+          "name": "Storage/referrer taint to execution sinks",
+          "executable": true,
+          "checkCount": 5
+        },
+        {
+          "id": "iast_source_scoped_open_redirect",
+          "engine": "IAST",
+          "name": "Open redirect from client-side taint sources",
+          "executable": true,
+          "checkCount": 7
+        }
+      ],
+      "unavailable": [
+        {
+          "id": "access_control_coverage",
+          "engine": "DAST",
+          "executable": false,
+          "reason": "metadata_only_in_standard_rulepacks"
+        },
+        {
+          "id": "access_control_idor_bola",
+          "engine": "DAST",
+          "executable": false,
+          "reason": "metadata_only_in_standard_rulepacks"
+        },
+        {
+          "id": "access_control_multi_identity",
+          "engine": "DAST",
+          "executable": false,
+          "reason": "metadata_only_in_standard_rulepacks"
+        },
+        {
+          "id": "api_mass_assignment",
+          "engine": "DAST",
+          "executable": false,
+          "reason": "metadata_only_in_standard_rulepacks"
+        },
+        {
+          "id": "api_parameter_pollution",
+          "engine": "DAST",
+          "executable": false,
+          "reason": "metadata_only_in_standard_rulepacks"
+        },
+        {
+          "id": "api_testing_coverage",
+          "engine": "DAST",
+          "executable": false,
+          "reason": "metadata_only_in_standard_rulepacks"
+        },
+        {
+          "id": "authentication_browser_workflows",
+          "engine": "DAST",
+          "executable": false,
+          "reason": "metadata_only_in_standard_rulepacks"
+        },
+        {
+          "id": "authentication_coverage",
+          "engine": "DAST",
+          "executable": false,
+          "reason": "metadata_only_in_standard_rulepacks"
+        },
+        {
+          "id": "authentication_flaws",
+          "engine": "DAST",
+          "executable": false,
+          "reason": "metadata_only_in_standard_rulepacks"
+        },
+        {
+          "id": "bsql_cookie_boolean_oracle",
+          "engine": "DAST",
+          "executable": false,
+          "reason": "metadata_only_in_standard_rulepacks"
+        },
+        {
+          "id": "bsql_cookie_boolean_time_confirm",
+          "engine": "DAST",
+          "executable": false,
+          "reason": "metadata_only_in_standard_rulepacks"
+        },
+        {
+          "id": "bsql_injection",
+          "engine": "DAST",
+          "executable": false,
+          "reason": "metadata_only_in_standard_rulepacks"
+        },
+        {
+          "id": "bsql_param_boolean_oracle",
+          "engine": "DAST",
+          "executable": false,
+          "reason": "metadata_only_in_standard_rulepacks"
+        },
+        {
+          "id": "business_logic_abuse",
+          "engine": "DAST",
+          "executable": false,
+          "reason": "metadata_only_in_standard_rulepacks"
+        },
+        {
+          "id": "business_logic_coverage",
+          "engine": "DAST",
+          "executable": false,
+          "reason": "metadata_only_in_standard_rulepacks"
+        },
+        {
+          "id": "cache_poisoning",
+          "engine": "DAST",
+          "executable": false,
+          "reason": "metadata_only_in_standard_rulepacks"
+        },
+        {
+          "id": "clickjacking_coverage",
+          "engine": "DAST",
+          "executable": false,
+          "reason": "metadata_only_in_standard_rulepacks"
+        },
+        {
+          "id": "client_prototype_pollution_spa",
+          "engine": "DAST",
+          "executable": false,
+          "reason": "metadata_only_in_standard_rulepacks"
+        },
+        {
+          "id": "cors_advanced",
+          "engine": "DAST",
+          "executable": false,
+          "reason": "metadata_only_in_standard_rulepacks"
+        },
+        {
+          "id": "cors_coverage",
+          "engine": "DAST",
+          "executable": false,
+          "reason": "metadata_only_in_standard_rulepacks"
+        }
+      ],
+      "unavailableTotal": 144,
+      "unavailableTruncated": true,
+      "capabilities": [
+        {
+          "id": "candidate-investigation",
+          "entryPoint": "candidate/evidencePackage"
+        },
+        {
+          "id": "openapi-execution",
+          "entryPoint": "api"
+        },
+        {
+          "id": "private-cookie-transfer",
+          "entryPoint": "utility.cookies.import/export"
+        },
+        {
+          "id": "supplemental-backend-selection",
+          "entryPoint": "startScan/backend configuration"
+        },
+        {
+          "id": "DAST",
+          "entryPoint": "startScan"
+        },
+        {
+          "id": "IAST",
+          "entryPoint": "startScan"
+        },
+        {
+          "id": "SAST",
+          "entryPoint": "startScan"
+        },
+        {
+          "id": "SCA",
+          "entryPoint": "startScan"
+        },
+        {
+          "id": "capture",
+          "entryPoint": "capture/listRequests"
+        },
+        {
+          "id": "replay",
+          "entryPoint": "replay"
+        },
+        {
+          "id": "macros",
+          "entryPoint": "macro"
+        },
+        {
+          "id": "jwt",
+          "entryPoint": "utility(jwt)"
+        },
+        {
+          "id": "reconnaissance",
+          "entryPoint": "utility(recon)"
+        },
+        {
+          "id": "port_probe",
+          "entryPoint": "utility(portscan)"
+        },
+        {
+          "id": "encode",
+          "entryPoint": "utility(encode)"
+        },
+        {
+          "id": "decode",
+          "entryPoint": "utility(decode)"
+        },
+        {
+          "id": "report_export",
+          "entryPoint": "exportFullReport",
+          "formats": [
+            "json",
+            "markdown",
+            "pdf"
+          ]
+        },
+        {
+          "id": "macro_import",
+          "entryPoint": "import"
+        },
+        {
+          "id": "macro_export",
+          "entryPoint": "macro(export)"
+        },
+        {
+          "id": "scan_import",
+          "entryPoint": "import(format:ptk-report|ptk-report-gzip)"
+        },
+        {
+          "id": "api_explorer",
+          "entryPoint": "utility(api_explorer)"
+        },
+        {
+          "id": "openapi",
+          "entryPoint": "utility(openapi)"
+        },
+        {
+          "id": "cookies",
+          "entryPoint": "utility(cookies)",
+          "actions": [
+            "list",
+            "set",
+            "remove",
+            "block",
+            "readonly",
+            "unset",
+            "listpolicies"
+          ],
+          "limitations": "Browser cookie scope is domain/path/store/partition, not origin-port isolation. Retained values stay in private extension storage and are not returned to the agent."
+        },
+        {
+          "id": "candidate_investigation",
+          "entryPoint": "candidate"
+        },
+        {
+          "id": "evidence_packages",
+          "entryPoint": "evidencePackage"
+        },
+        {
+          "id": "api_execution",
+          "entryPoint": "api"
+        },
+        {
+          "id": "isolated_browsers",
+          "entryPoint": "browser"
+        },
+        {
+          "id": "callback_testing",
+          "entryPoint": "oast"
+        },
+        {
+          "id": "zap_backend",
+          "entryPoint": "zap"
+        },
+        {
+          "id": "manual_raw_transport",
+          "entryPoint": "raw"
+        },
+        {
+          "id": "managed_setup",
+          "entryPoint": "security_setup"
+        }
+      ],
+      "integrationBuild": {
+        "contract": "agent-security-v2",
+        "fingerprint": "c333a2b2c6bdc3f75670b224418b3d74e6a5f80e469e949eb95b18b764aa7380"
+      },
+      "runReferences": {
+        "scan": "Use runId returned by security_start_scan for status, findings, stop, candidates and report export.",
+        "recovery": "security_list_runs lists only this chat’s runs.",
+        "native": "sessionId/runtimeId are internal engine handles; do not pass them as runId.",
+        "reproduction": "Keep the source scan runId and the reproduction executionRunId separately."
+      },
+      "detail": "summary",
+      "operations": [
+        "security_capabilities",
+        "security_list_runs",
+        "security_start_scan",
+        "security_scan_status",
+        "security_stop_scan",
+        "security_get_findings",
+        "security_get_evidence",
+        "security_export_report",
+        "security_capture",
+        "security_list_requests",
+        "security_replay_request",
+        "security_macro",
+        "security_utility",
+        "security_clear_cookie_policy",
+        "security_import",
+        "security_export",
+        "security_candidates",
+        "security_evidence_package",
+        "security_api",
+        "security_browser",
+        "security_raw",
+        "security_oast",
+        "security_zap"
+      ],
+      "operationArguments": {
+        "security_capabilities": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string",
+                "enum": [
+                  "summary",
+                  "full"
+                ],
+                "description": "Default summary omits provenance and verification bulk."
+              },
+              "tool": {
+                "type": "string",
+                "description": "Optional available security_* tool name to return only its exact argument schema."
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "security_list_runs": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "offset": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "limit": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 500
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "security_scan_status": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "runId": {
+                "type": "string"
+              },
+              "detail": {
+                "type": "string",
+                "enum": [
+                  "summary",
+                  "full"
+                ],
+                "description": "Default summary includes progress and gaps; full includes native engine diagnostics."
+              },
+              "waitForIdle": {
+                "type": "boolean",
+                "description": "Wait for DAST queued work to become idle or the run to end. Does not stop the run."
+              },
+              "timeoutMs": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 30000,
+                "default": 30000,
+                "description": "Maximum status wait, in milliseconds; only used with waitForIdle."
+              }
+            },
+            "required": [
+              "runId"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "security_stop_scan": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "runId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "runId"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "security_get_findings": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "runId": {
+                "type": "string"
+              },
+              "offset": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "limit": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 500
+              },
+              "detail": {
+                "type": "string",
+                "enum": [
+                  "summary",
+                  "full"
+                ],
+                "description": "Summary lists findings without large evidence bodies; use security_get_evidence for one finding."
+              }
+            },
+            "required": [
+              "runId"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "security_get_evidence": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "runId": {
+                "type": "string"
+              },
+              "offset": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "limit": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 500
+              },
+              "evidenceId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "runId"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "security_export_report": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "runId": {
+                "type": "string"
+              },
+              "format": {
+                "type": "string",
+                "enum": [
+                  "json",
+                  "pdf",
+                  "markdown"
+                ]
+              },
+              "options": {
+                "type": "object",
+                "properties": {
+                  "preset": {
+                    "type": "string",
+                    "enum": [
+                      "technical",
+                      "executive"
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "runId"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "discovery": "Use security_capabilities({tool:\"security_start_scan\"}) or another exact tool name for its schema; detail:\"full\" includes unavailable reasons, provenance and verification metadata.",
+      "localRuntime": {
+        "enabled": false,
+        "readiness": "not_checked",
+        "reason": "Enable Local computer access before using managed browser, raw transport, callback or ZAP operations.",
+        "browserBackend": "extension",
+        "zapSelected": false,
+        "callbackConnection": null
+      }
+    },
+    "integer": {
+      "runId": "a5fb1891-65ae-419c-9879-9c651841d14c",
+      "kind": "scan",
+      "state": "running",
+      "tabId": 145442255,
+      "engines": [
+        "SCA"
+      ],
+      "workspaceId": "target-chat",
+      "createdAt": 1792711810018,
+      "updatedAt": 1792711810166,
+      "requestsSent": 0,
+      "config": {
+        "preset": "thorough",
+        "scanStrategy": "COMPREHENSIVE",
+        "dastScanStrategy": "COMPREHENSIVE",
+        "scanControlProfile": "wide",
+        "allowCaptureWithoutInteraction": true,
+        "maxRequestsPerSecond": 5,
+        "concurrency": 3,
+        "planningConcurrency": 2,
+        "runCve": true,
+        "follow_redirect": true,
+        "maxRequests": null,
+        "durationSeconds": null,
+        "acquisition": {
+          "maxResourceBytes": 8388608,
+          "maxTotalBytes": 33554432,
+          "maxScripts": 128,
+          "drainTimeoutMs": 5000
+        },
+        "limits": {}
+      },
+      "scope": {
+        "origins": [
+          "http://127.0.0.1:65181"
+        ],
+        "excludePaths": []
+      },
+      "summary": {
+        "findingsCount": 0,
+        "bySeverity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "info": 0
+        },
+        "findings": 0,
+        "byModule": {},
+        "countsBasis": "retained_findings"
+      },
+      "coverage": {
+        "backendGaps": [],
+        "scaBodies": {
+          "captured": 0,
+          "analyzed": 0,
+          "gaps": 0,
+          "basis": "Admitted JavaScript resources observed during this scan; URI detections do not prove body analysis."
+        },
+        "scaSources": {
+          "captured": 1,
+          "analyzed": 1,
+          "gaps": 0,
+          "basis": "Executable Debugger script text, not a claim of HTTP-byte identity."
+        },
+        "scaAcquisition": {
+          "phase": "observed_content_analyzed",
+          "limits": {
+            "requested": {
+              "maxResourceBytes": 8388608,
+              "maxTotalBytes": 33554432,
+              "maxScripts": 128,
+              "drainTimeoutMs": 5000
+            },
+            "effective": {
+              "maxScripts": 128,
+              "maxResourceBytes": 8388608,
+              "maxTotalBytes": 33554432
+            }
+          },
+          "drain": null
+        },
+        "scaBodyWarnings": [],
+        "engineFailures": [],
+        "actionableGaps": [],
+        "recovery": {
+          "runId": "a5fb1891-65ae-419c-9879-9c651841d14c",
+          "state": "in_progress",
+          "instruction": "Assess only the checks and evidence actually recorded; absence of reported gaps is not proof of full application coverage."
+        }
+      },
+      "engineStatus": {
+        "SCA": {
+          "status": "running",
+          "progress": {
+            "done": 0,
+            "total": null
+          },
+          "findingsCount": 0,
+          "idle": false,
+          "error": null,
+          "warnings": []
+        }
+      },
+      "detail": "summary",
+      "detailHint": "Use detail:\"full\" with security_scan_status for native engine diagnostics."
+    },
+    "integer-status": {
+      "runId": "a5fb1891-65ae-419c-9879-9c651841d14c",
+      "kind": "scan",
+      "state": "running",
+      "tabId": 145442255,
+      "engines": [
+        "SCA"
+      ],
+      "workspaceId": "target-chat",
+      "createdAt": 1792711810018,
+      "updatedAt": 1792711810209,
+      "requestsSent": 0,
+      "config": {
+        "preset": "thorough",
+        "scanStrategy": "COMPREHENSIVE",
+        "dastScanStrategy": "COMPREHENSIVE",
+        "scanControlProfile": "wide",
+        "allowCaptureWithoutInteraction": true,
+        "maxRequestsPerSecond": 5,
+        "concurrency": 3,
+        "planningConcurrency": 2,
+        "runCve": true,
+        "follow_redirect": true,
+        "maxRequests": null,
+        "durationSeconds": null,
+        "acquisition": {
+          "maxResourceBytes": 8388608,
+          "maxTotalBytes": 33554432,
+          "maxScripts": 128,
+          "drainTimeoutMs": 5000
+        },
+        "limits": {}
+      },
+      "scope": {
+        "origins": [
+          "http://127.0.0.1:65181"
+        ],
+        "excludePaths": []
+      },
+      "summary": {
+        "findingsCount": 0,
+        "bySeverity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "info": 0
+        },
+        "findings": 0,
+        "byModule": {},
+        "countsBasis": "retained_findings"
+      },
+      "coverage": {
+        "backendGaps": [],
+        "scaBodies": {
+          "captured": 0,
+          "analyzed": 0,
+          "gaps": 0,
+          "basis": "Admitted JavaScript resources observed during this scan; URI detections do not prove body analysis."
+        },
+        "scaSources": {
+          "captured": 1,
+          "analyzed": 1,
+          "gaps": 0,
+          "basis": "Executable Debugger script text, not a claim of HTTP-byte identity."
+        },
+        "scaAcquisition": {
+          "phase": "observed_content_analyzed",
+          "limits": {
+            "requested": {
+              "maxResourceBytes": 8388608,
+              "maxTotalBytes": 33554432,
+              "maxScripts": 128,
+              "drainTimeoutMs": 5000
+            },
+            "effective": {
+              "maxScripts": 128,
+              "maxResourceBytes": 8388608,
+              "maxTotalBytes": 33554432
+            }
+          },
+          "drain": null
+        },
+        "scaBodyWarnings": [],
+        "engineFailures": [],
+        "actionableGaps": [],
+        "recovery": {
+          "runId": "a5fb1891-65ae-419c-9879-9c651841d14c",
+          "state": "in_progress",
+          "instruction": "Assess only the checks and evidence actually recorded; absence of reported gaps is not proof of full application coverage."
+        }
+      },
+      "engineStatus": {
+        "SCA": {
+          "status": "running",
+          "progress": {
+            "done": 0,
+            "total": null
+          },
+          "findingsCount": 0,
+          "idle": false,
+          "error": null,
+          "warnings": []
+        }
+      },
+      "detail": "summary",
+      "detailHint": "Use detail:\"full\" with security_scan_status for native engine diagnostics."
+    },
+    "integer-stop": {
+      "runId": "a5fb1891-65ae-419c-9879-9c651841d14c",
+      "kind": "scan",
+      "state": "completed",
+      "tabId": 145442255,
+      "engines": [
+        "SCA"
+      ],
+      "workspaceId": "target-chat",
+      "createdAt": 1792711810018,
+      "updatedAt": 1792711810313,
+      "requestsSent": 0,
+      "config": {
+        "preset": "thorough",
+        "scanStrategy": "COMPREHENSIVE",
+        "dastScanStrategy": "COMPREHENSIVE",
+        "scanControlProfile": "wide",
+        "allowCaptureWithoutInteraction": true,
+        "maxRequestsPerSecond": 5,
+        "concurrency": 3,
+        "planningConcurrency": 2,
+        "runCve": true,
+        "follow_redirect": true,
+        "maxRequests": null,
+        "durationSeconds": null,
+        "acquisition": {
+          "maxResourceBytes": 8388608,
+          "maxTotalBytes": 33554432,
+          "maxScripts": 128,
+          "drainTimeoutMs": 5000
+        },
+        "limits": {}
+      },
+      "scope": {
+        "origins": [
+          "http://127.0.0.1:65181"
+        ],
+        "excludePaths": []
+      },
+      "summary": {
+        "status": "completed",
+        "releaseStatus": "clean",
+        "stats": {
+          "findingsCount": 0,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          }
+        },
+        "findings": 0,
+        "byModule": {},
+        "countsBasis": "retained_findings"
+      },
+      "coverage": {
+        "backendGaps": [],
+        "scaBodies": {
+          "captured": 0,
+          "analyzed": 0,
+          "gaps": 0,
+          "basis": "Admitted JavaScript resources observed during this scan; URI detections do not prove body analysis."
+        },
+        "scaSources": {
+          "captured": 1,
+          "analyzed": 1,
+          "gaps": 0,
+          "basis": "Executable Debugger script text, not a claim of HTTP-byte identity."
+        },
+        "scaAcquisition": {
+          "phase": "observed_content_analyzed",
+          "limits": {
+            "requested": {
+              "maxResourceBytes": 8388608,
+              "maxTotalBytes": 33554432,
+              "maxScripts": 128,
+              "drainTimeoutMs": 5000
+            },
+            "effective": {
+              "maxScripts": 128,
+              "maxResourceBytes": 8388608,
+              "maxTotalBytes": 33554432
+            }
+          },
+          "drain": {
+            "complete": true,
+            "gaps": 0,
+            "cleanupPending": false,
+            "tabs": {
+              "145442255": {
+                "complete": true,
+                "gaps": 0
+              }
+            }
+          }
+        },
+        "scaBodyWarnings": [],
+        "engineFailures": [],
+        "actionableGaps": [],
+        "recovery": {
+          "runId": "a5fb1891-65ae-419c-9879-9c651841d14c",
+          "state": "reported_checks_finished",
+          "instruction": "Assess only the checks and evidence actually recorded; absence of reported gaps is not proof of full application coverage."
+        }
+      },
+      "engineStatus": {
+        "SCA": {
+          "status": "stopped",
+          "progress": {
+            "done": 0,
+            "total": null
+          },
+          "findingsCount": 0,
+          "idle": true,
+          "error": null,
+          "warnings": []
+        }
+      },
+      "detail": "summary",
+      "detailHint": "Use detail:\"full\" with security_scan_status for native engine diagnostics."
+    },
+    "string": {
+      "runId": "e5ef9e9b-b016-4643-a418-21d00fa07b66",
+      "kind": "scan",
+      "state": "running",
+      "tabId": 145442255,
+      "engines": [
+        "SCA"
+      ],
+      "workspaceId": "target-chat",
+      "createdAt": 1792711810357,
+      "updatedAt": 1792711810403,
+      "requestsSent": 0,
+      "config": {
+        "preset": "thorough",
+        "scanStrategy": "COMPREHENSIVE",
+        "dastScanStrategy": "COMPREHENSIVE",
+        "scanControlProfile": "wide",
+        "allowCaptureWithoutInteraction": true,
+        "maxRequestsPerSecond": 5,
+        "concurrency": 3,
+        "planningConcurrency": 2,
+        "runCve": true,
+        "follow_redirect": true,
+        "maxRequests": null,
+        "durationSeconds": null,
+        "acquisition": {
+          "maxResourceBytes": 8388608,
+          "maxTotalBytes": 33554432,
+          "maxScripts": 128,
+          "drainTimeoutMs": 5000
+        },
+        "limits": {}
+      },
+      "scope": {
+        "origins": [
+          "http://127.0.0.1:65181"
+        ],
+        "excludePaths": []
+      },
+      "summary": {
+        "findingsCount": 0,
+        "bySeverity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "info": 0
+        },
+        "findings": 0,
+        "byModule": {},
+        "countsBasis": "retained_findings"
+      },
+      "coverage": {
+        "backendGaps": [],
+        "scaBodies": {
+          "captured": 0,
+          "analyzed": 0,
+          "gaps": 0,
+          "basis": "Admitted JavaScript resources observed during this scan; URI detections do not prove body analysis."
+        },
+        "scaSources": {
+          "captured": 1,
+          "analyzed": 1,
+          "gaps": 0,
+          "basis": "Executable Debugger script text, not a claim of HTTP-byte identity."
+        },
+        "scaAcquisition": {
+          "phase": "observed_content_analyzed",
+          "limits": {
+            "requested": {
+              "maxResourceBytes": 8388608,
+              "maxTotalBytes": 33554432,
+              "maxScripts": 128,
+              "drainTimeoutMs": 5000
+            },
+            "effective": {
+              "maxScripts": 128,
+              "maxResourceBytes": 8388608,
+              "maxTotalBytes": 33554432
+            }
+          },
+          "drain": null
+        },
+        "scaBodyWarnings": [],
+        "engineFailures": [],
+        "actionableGaps": [],
+        "recovery": {
+          "runId": "e5ef9e9b-b016-4643-a418-21d00fa07b66",
+          "state": "in_progress",
+          "instruction": "Assess only the checks and evidence actually recorded; absence of reported gaps is not proof of full application coverage."
+        }
+      },
+      "engineStatus": {
+        "SCA": {
+          "status": "running",
+          "progress": {
+            "done": 0,
+            "total": null
+          },
+          "findingsCount": 0,
+          "idle": false,
+          "error": null,
+          "warnings": []
+        }
+      },
+      "detail": "summary",
+      "detailHint": "Use detail:\"full\" with security_scan_status for native engine diagnostics."
+    },
+    "string-stop": {
+      "runId": "e5ef9e9b-b016-4643-a418-21d00fa07b66",
+      "kind": "scan",
+      "state": "completed",
+      "tabId": 145442255,
+      "engines": [
+        "SCA"
+      ],
+      "workspaceId": "target-chat",
+      "createdAt": 1792711810357,
+      "updatedAt": 1792711810486,
+      "requestsSent": 0,
+      "config": {
+        "preset": "thorough",
+        "scanStrategy": "COMPREHENSIVE",
+        "dastScanStrategy": "COMPREHENSIVE",
+        "scanControlProfile": "wide",
+        "allowCaptureWithoutInteraction": true,
+        "maxRequestsPerSecond": 5,
+        "concurrency": 3,
+        "planningConcurrency": 2,
+        "runCve": true,
+        "follow_redirect": true,
+        "maxRequests": null,
+        "durationSeconds": null,
+        "acquisition": {
+          "maxResourceBytes": 8388608,
+          "maxTotalBytes": 33554432,
+          "maxScripts": 128,
+          "drainTimeoutMs": 5000
+        },
+        "limits": {}
+      },
+      "scope": {
+        "origins": [
+          "http://127.0.0.1:65181"
+        ],
+        "excludePaths": []
+      },
+      "summary": {
+        "status": "completed",
+        "releaseStatus": "clean",
+        "stats": {
+          "findingsCount": 0,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          }
+        },
+        "findings": 0,
+        "byModule": {},
+        "countsBasis": "retained_findings"
+      },
+      "coverage": {
+        "backendGaps": [],
+        "scaBodies": {
+          "captured": 0,
+          "analyzed": 0,
+          "gaps": 0,
+          "basis": "Admitted JavaScript resources observed during this scan; URI detections do not prove body analysis."
+        },
+        "scaSources": {
+          "captured": 1,
+          "analyzed": 1,
+          "gaps": 0,
+          "basis": "Executable Debugger script text, not a claim of HTTP-byte identity."
+        },
+        "scaAcquisition": {
+          "phase": "observed_content_analyzed",
+          "limits": {
+            "requested": {
+              "maxResourceBytes": 8388608,
+              "maxTotalBytes": 33554432,
+              "maxScripts": 128,
+              "drainTimeoutMs": 5000
+            },
+            "effective": {
+              "maxScripts": 128,
+              "maxResourceBytes": 8388608,
+              "maxTotalBytes": 33554432
+            }
+          },
+          "drain": {
+            "complete": true,
+            "gaps": 0,
+            "cleanupPending": false,
+            "tabs": {
+              "145442255": {
+                "complete": true,
+                "gaps": 0
+              }
+            }
+          }
+        },
+        "scaBodyWarnings": [],
+        "engineFailures": [],
+        "actionableGaps": [],
+        "recovery": {
+          "runId": "e5ef9e9b-b016-4643-a418-21d00fa07b66",
+          "state": "reported_checks_finished",
+          "instruction": "Assess only the checks and evidence actually recorded; absence of reported gaps is not proof of full application coverage."
+        }
+      },
+      "engineStatus": {
+        "SCA": {
+          "status": "stopped",
+          "progress": {
+            "done": 0,
+            "total": null
+          },
+          "findingsCount": 0,
+          "idle": true,
+          "error": null,
+          "warnings": []
+        }
+      },
+      "detail": "summary",
+      "detailHint": "Use detail:\"full\" with security_scan_status for native engine diagnostics."
+    },
+    "alias": {
+      "runId": "acc7f664-cda8-4bc2-895b-0ab5aba68262",
+      "kind": "scan",
+      "state": "running",
+      "tabId": 145442255,
+      "engines": [
+        "SCA"
+      ],
+      "workspaceId": "target-chat",
+      "createdAt": 1792711810558,
+      "updatedAt": 1792711810616,
+      "requestsSent": 0,
+      "config": {
+        "preset": "thorough",
+        "scanStrategy": "COMPREHENSIVE",
+        "dastScanStrategy": "COMPREHENSIVE",
+        "scanControlProfile": "wide",
+        "allowCaptureWithoutInteraction": true,
+        "maxRequestsPerSecond": 5,
+        "concurrency": 3,
+        "planningConcurrency": 2,
+        "runCve": true,
+        "follow_redirect": true,
+        "maxRequests": null,
+        "durationSeconds": null,
+        "acquisition": {
+          "maxResourceBytes": 8388608,
+          "maxTotalBytes": 33554432,
+          "maxScripts": 128,
+          "drainTimeoutMs": 5000
+        },
+        "limits": {}
+      },
+      "scope": {
+        "origins": [
+          "http://127.0.0.1:65181"
+        ],
+        "excludePaths": []
+      },
+      "summary": {
+        "findingsCount": 0,
+        "bySeverity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "info": 0
+        },
+        "findings": 0,
+        "byModule": {},
+        "countsBasis": "retained_findings"
+      },
+      "coverage": {
+        "backendGaps": [],
+        "scaBodies": {
+          "captured": 0,
+          "analyzed": 0,
+          "gaps": 0,
+          "basis": "Admitted JavaScript resources observed during this scan; URI detections do not prove body analysis."
+        },
+        "scaSources": {
+          "captured": 1,
+          "analyzed": 1,
+          "gaps": 0,
+          "basis": "Executable Debugger script text, not a claim of HTTP-byte identity."
+        },
+        "scaAcquisition": {
+          "phase": "observed_content_analyzed",
+          "limits": {
+            "requested": {
+              "maxResourceBytes": 8388608,
+              "maxTotalBytes": 33554432,
+              "maxScripts": 128,
+              "drainTimeoutMs": 5000
+            },
+            "effective": {
+              "maxScripts": 128,
+              "maxResourceBytes": 8388608,
+              "maxTotalBytes": 33554432
+            }
+          },
+          "drain": null
+        },
+        "scaBodyWarnings": [],
+        "engineFailures": [],
+        "actionableGaps": [],
+        "recovery": {
+          "runId": "acc7f664-cda8-4bc2-895b-0ab5aba68262",
+          "state": "in_progress",
+          "instruction": "Assess only the checks and evidence actually recorded; absence of reported gaps is not proof of full application coverage."
+        }
+      },
+      "engineStatus": {
+        "SCA": {
+          "status": "running",
+          "progress": {
+            "done": 0,
+            "total": null
+          },
+          "findingsCount": 0,
+          "idle": false,
+          "error": null,
+          "warnings": []
+        }
+      },
+      "detail": "summary",
+      "detailHint": "Use detail:\"full\" with security_scan_status for native engine diagnostics."
+    },
+    "alias-stop": {
+      "runId": "acc7f664-cda8-4bc2-895b-0ab5aba68262",
+      "kind": "scan",
+      "state": "completed",
+      "tabId": 145442255,
+      "engines": [
+        "SCA"
+      ],
+      "workspaceId": "target-chat",
+      "createdAt": 1792711810558,
+      "updatedAt": 1792711810704,
+      "requestsSent": 0,
+      "config": {
+        "preset": "thorough",
+        "scanStrategy": "COMPREHENSIVE",
+        "dastScanStrategy": "COMPREHENSIVE",
+        "scanControlProfile": "wide",
+        "allowCaptureWithoutInteraction": true,
+        "maxRequestsPerSecond": 5,
+        "concurrency": 3,
+        "planningConcurrency": 2,
+        "runCve": true,
+        "follow_redirect": true,
+        "maxRequests": null,
+        "durationSeconds": null,
+        "acquisition": {
+          "maxResourceBytes": 8388608,
+          "maxTotalBytes": 33554432,
+          "maxScripts": 128,
+          "drainTimeoutMs": 5000
+        },
+        "limits": {}
+      },
+      "scope": {
+        "origins": [
+          "http://127.0.0.1:65181"
+        ],
+        "excludePaths": []
+      },
+      "summary": {
+        "status": "completed",
+        "releaseStatus": "clean",
+        "stats": {
+          "findingsCount": 0,
+          "bySeverity": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "info": 0
+          }
+        },
+        "findings": 0,
+        "byModule": {},
+        "countsBasis": "retained_findings"
+      },
+      "coverage": {
+        "backendGaps": [],
+        "scaBodies": {
+          "captured": 0,
+          "analyzed": 0,
+          "gaps": 0,
+          "basis": "Admitted JavaScript resources observed during this scan; URI detections do not prove body analysis."
+        },
+        "scaSources": {
+          "captured": 1,
+          "analyzed": 1,
+          "gaps": 0,
+          "basis": "Executable Debugger script text, not a claim of HTTP-byte identity."
+        },
+        "scaAcquisition": {
+          "phase": "observed_content_analyzed",
+          "limits": {
+            "requested": {
+              "maxResourceBytes": 8388608,
+              "maxTotalBytes": 33554432,
+              "maxScripts": 128,
+              "drainTimeoutMs": 5000
+            },
+            "effective": {
+              "maxScripts": 128,
+              "maxResourceBytes": 8388608,
+              "maxTotalBytes": 33554432
+            }
+          },
+          "drain": {
+            "complete": true,
+            "gaps": 0,
+            "cleanupPending": false,
+            "tabs": {
+              "145442255": {
+                "complete": true,
+                "gaps": 0
+              }
+            }
+          }
+        },
+        "scaBodyWarnings": [],
+        "engineFailures": [],
+        "actionableGaps": [],
+        "recovery": {
+          "runId": "acc7f664-cda8-4bc2-895b-0ab5aba68262",
+          "state": "reported_checks_finished",
+          "instruction": "Assess only the checks and evidence actually recorded; absence of reported gaps is not proof of full application coverage."
+        }
+      },
+      "engineStatus": {
+        "SCA": {
+          "status": "stopped",
+          "progress": {
+            "done": 0,
+            "total": null
+          },
+          "findingsCount": 0,
+          "idle": true,
+          "error": null,
+          "warnings": []
+        }
+      },
+      "detail": "summary",
+      "detailHint": "Use detail:\"full\" with security_scan_status for native engine diagnostics."
+    },
+    "wrong-handle": {
+      "error": "This security run does not belong to this chat. Use the public runId returned by security_start_scan, not its native sessionId/runtimeId. Use security_list_runs to recover this chat’s run references.",
+      "code": "run_reference_unavailable",
+      "retryable": false,
+      "recovery": "List this chat’s runs with security_list_runs and use the source scan runId. Do not substitute a run from another chat."
+    },
+    "runs": {
+      "runs": [
+        {
+          "runId": "acc7f664-cda8-4bc2-895b-0ab5aba68262",
+          "kind": "scan",
+          "engines": [
+            "SCA"
+          ],
+          "operation": null,
+          "state": "completed",
+          "tabId": 145442255,
+          "sourceRunId": null,
+          "createdAt": 1792711810558,
+          "summary": {
+            "status": "completed",
+            "releaseStatus": "clean",
+            "stats": {
+              "findingsCount": 0,
+              "bySeverity": {
+                "critical": 0,
+                "high": 0,
+                "medium": 0,
+                "low": 0,
+                "info": 0
+              }
+            },
+            "findings": 0,
+            "byModule": {},
+            "countsBasis": "retained_findings"
+          }
+        },
+        {
+          "runId": "e5ef9e9b-b016-4643-a418-21d00fa07b66",
+          "kind": "scan",
+          "engines": [
+            "SCA"
+          ],
+          "operation": null,
+          "state": "completed",
+          "tabId": 145442255,
+          "sourceRunId": null,
+          "createdAt": 1792711810357,
+          "summary": {
+            "status": "completed",
+            "releaseStatus": "clean",
+            "stats": {
+              "findingsCount": 0,
+              "bySeverity": {
+                "critical": 0,
+                "high": 0,
+                "medium": 0,
+                "low": 0,
+                "info": 0
+              }
+            },
+            "findings": 0,
+            "byModule": {},
+            "countsBasis": "retained_findings"
+          }
+        },
+        {
+          "runId": "a5fb1891-65ae-419c-9879-9c651841d14c",
+          "kind": "scan",
+          "engines": [
+            "SCA"
+          ],
+          "operation": null,
+          "state": "completed",
+          "tabId": 145442255,
+          "sourceRunId": null,
+          "createdAt": 1792711810018,
+          "summary": {
+            "status": "completed",
+            "releaseStatus": "clean",
+            "stats": {
+              "findingsCount": 0,
+              "bySeverity": {
+                "critical": 0,
+                "high": 0,
+                "medium": 0,
+                "low": 0,
+                "info": 0
+              }
+            },
+            "findings": 0,
+            "byModule": {},
+            "countsBasis": "retained_findings"
+          }
+        }
+      ],
+      "total": 3,
+      "nextOffset": null,
+      "referenceGuide": "For candidates and evidence packages, use the original scan runId. Reproduction executionRunId is a separate operation reference."
+    },
+    "owned-handle": {
+      "candidates": [],
+      "total": 0,
+      "nextOffset": null,
+      "coverage": {
+        "enginesPresent": [
+          "SCA"
+        ],
+        "enginesMissing": [
+          "DAST",
+          "IAST",
+          "SAST"
+        ],
+        "gaps": [
+          {
+            "code": "SCA_NO_LOCKFILE_OR_PACKAGE_GRAPH",
+            "severity": "med",
+            "engine": "SCA",
+            "recommendedActionKey": "ACTION_PROVIDE_DEP_GRAPH",
+            "detail": "SCA run has no package inventory and no findings."
+          }
+        ],
+        "limitations": [],
+        "confidence": "low",
+        "confidenceScore": 25
+      },
+      "snapshotScanId": "42cc4acd-6bb6-4b29-b26b-76fdb5e598a6",
+      "sourceRunId": "acc7f664-cda8-4bc2-895b-0ab5aba68262",
+      "snapshotId": "ec76e2a1-a499-449b-8357-fe6c23458a07",
+      "runId": "d5a0524e-0843-4bde-9b70-70a63f6f444b"
+    },
+    "malformed-json": {
+      "text": "<system>ERROR: Tool execution failed.</system>\nInvalid args for tool \"security_utility\": malformed JSON in arguments: Unexpected end of JSON input"
+    },
+    "unknown-utility": {
+      "error": "Choose arguments.tool: decoder, jwt, cookies, openapi, api_explorer, recon, portscan. ZAP uses security_zap.",
+      "code": "invalid_operation_arguments",
+      "retryable": false,
+      "recovery": "Use the declared arguments object and supported action. Correct the input before retrying; no operation was sent."
+    },
+    "jwt": {
+      "header": {
+        "alg": "HS256"
+      },
+      "claims": {
+        "sub": "fixture"
+      },
+      "runId": "bacb6abb-27d4-4a94-8265-ea78bd3d4017"
+    }
+  },
+  "wire": [
+    "/app",
+    "/app.js",
+    "/favicon.ico"
+  ]
+}

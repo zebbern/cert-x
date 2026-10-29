@@ -59,11 +59,14 @@ body.embed .page {
 }
 
 body.embed header { display: none; }
+body.embed .settings-nav { display: none; }
 body.embed #add { display: none; }
 body.embed .toolbar { margin: 0; }
 body.embed form { margin-top: 0; }
 body.editing #saved-bar,
 body.editing #saved,
+body.editing #fast-browse-bar,
+body.editing #fast-browse,
 body.editing #mcp { display: none; }
 
 #mcp { display: flex; flex-direction: column; gap: 8px; }
@@ -511,3 +514,65 @@ textarea {
   text-align: left;
   justify-content: flex-start;
 }
+
+.settings-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.settings-nav a { padding: 6px 10px; border-radius: 8px; color: var(--muted); text-decoration: none; }
+.settings-nav a[aria-current] { background: var(--fill); color: var(--text); }
+#models-panel, #native-section, #browser-section, #permissions-section, #health-section { display: flex; flex-direction: column; gap: 16px; }
+.native-code { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 12px; padding: 12px; border-radius: 8px; background: var(--fill); }
+#native-section .card { padding: 16px; }
+#browser-section .card { padding: 16px; }
+#browser-status { margin: 4px 0; }
+#browser-controller, #browser-error { overflow-wrap: anywhere; }
+#browser-error { margin-top: 8px; }
+#browser-disconnect { margin-top: 12px; }
+#browser-authorize { max-width: min(420px, calc(100% - 32px)); color: var(--text); background: var(--menu); border: 1px solid var(--line); border-radius: 12px; padding: 20px; }
+#browser-authorize::backdrop { background: #0008; }
+.permission-group { padding: 16px; margin-bottom: 12px; }
+.permission-group .toolbar h2 { color: var(--text); overflow-wrap: anywhere; }
+.permission-group select { width: auto; max-width: 160px; flex: none; }
+.permission-group summary { cursor: pointer; color: var(--muted); padding-top: 8px; }
+.permission-row { display: flex; gap: 12px; align-items: center; justify-content: space-between; padding: 12px 0; border-top: 1px solid var(--line); }
+.permission-row:first-of-type { margin-top: 10px; }
+.permission-row > div { min-width: 0; overflow-wrap: anywhere; }
+.permission-row small { display: block; color: var(--muted); font-size: 11px; }
+.permission-preview { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 240px; overflow: auto; font-size: 12px; }
+#permissions-reset-confirm { max-width: min(420px, calc(100% - 32px)); color: var(--text); background: var(--menu); border: 1px solid var(--line); border-radius: 12px; padding: 20px; }
+#permissions-reset-confirm::backdrop { background: #0008; }
+.import-row { display: flex; flex-direction: row; align-items: center; gap: 10px; margin: 8px 0; }
+.import-row input { width: auto; flex: none; accent-color: var(--text); }
+.import-row > span { min-width: 0; overflow-wrap: anywhere; }
+#mcp-import-json { width: 100%; }
+#health-list .section-link { flex: none; max-width: 150px; text-align: right; }
+#health-list .section-link.connection-ok { color: var(--ok); }
+#jobs-section > :not(summary) { margin-top: 12px; }
+#native-section .native-enable { display: flex; flex-direction: row; justify-content: space-between; align-items: center; gap: 8px; padding-top: 16px; margin: 16px 0 8px; border-top: 1px solid var(--line); }
+/* Match the side panel's small wb-toggle, including its neutral colors. */
+.wb-toggle { --toggle-fill: #00000026; width: 32px; min-width: 0; height: 18px; min-height: 0; background: var(--toggle-fill); cursor: pointer; border: 0; border-radius: 999px; flex: none; padding: 0; transition: background-color .15s; display: inline-flex; position: relative; }
+:root[data-theme="dark"] .wb-toggle { --toggle-fill: #ffffff2e; }
+.wb-toggle.is-on, .wb-toggle.is-on:hover:not(:disabled) { background: var(--text); }
+.wb-toggle:hover:not(:disabled) { background: var(--toggle-fill); }
+.wb-toggle-thumb { top: 2px; left: 2px; width: 14px; height: 14px; background: #fff; border-radius: 50%; transition: translate .18s ease-out; position: absolute; translate: 0; }
+.wb-toggle.is-on .wb-toggle-thumb { translate: 14px 0; }
+.wb-toggle:disabled { cursor: not-allowed; opacity: .4; }
+.wb-toggle.is-on:disabled { background: var(--card); opacity: 1; }
+:root[data-theme="dark"] .wb-toggle:disabled .wb-toggle-thumb { background: #fff6; }
+.wb-toggle:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .wb-toggle, .wb-toggle-thumb { transition: none; } }
+#native-access-status { min-height: 16px; }
+.connection-ok { color: var(--ok); }
+#native-status { margin: 4px 0 0; }
+.setup-details summary, .quick-connect summary, form details summary { cursor: pointer; color: var(--muted); padding: 4px 0; }
+.setup-details[open] > :not(summary), form details[open] > label { margin-top: 12px; }
+.setup-details p { overflow-wrap: anywhere; }
+.section-link { color: var(--muted); font-size: 13px; text-decoration: none; }
+#native-copy-status { margin-left: 10px; font-size: 12px; color: var(--muted); }
+.server-form { padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+#local-mcp { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+.empty-list { color: var(--muted); margin: 0; padding: 16px; }
+.quick-connect { margin: 4px 0 12px; }
+.quick-connect[open] { background: var(--card); border-radius: 12px; padding: 12px; }
+form details label { display: flex; flex-direction: column; gap: 6px; }
+
+.fast-browse-status { margin: 0; color: var(--text); font-size: 13px; line-height: 18px; }
+#fast-browse-hint a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }

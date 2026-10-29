@@ -1,0 +1,89 @@
+{
+  "formats": {
+    "navigate": {
+      "success": true,
+      "url": "http://127.0.0.1:54931/fixture",
+      "requested": "http://127.0.0.1:54931/fixture",
+      "redirected": false,
+      "tabId": 1182871994
+    },
+    "png": {
+      "format": "png",
+      "width": 120,
+      "height": 90
+    },
+    "jpeg": {
+      "format": "jpeg",
+      "width": 130,
+      "height": 100
+    },
+    "webp": {
+      "format": "webp",
+      "width": 140,
+      "height": 110
+    },
+    "ordinary": {
+      "format": "png",
+      "width": 720,
+      "height": 900
+    },
+    "pdf": {
+      "format": "pdf",
+      "outputId": "2becbd30-3b2b-4941-b248-d23a271ec438",
+      "name": "Page.pdf",
+      "bytes": 160155,
+      "location": "Outputs"
+    }
+  },
+  "providerImages": 4,
+  "renderedImages": [
+    {
+      "loaded": true,
+      "width": 120,
+      "height": 90
+    },
+    {
+      "loaded": true,
+      "width": 130,
+      "height": 100
+    },
+    {
+      "loaded": true,
+      "width": 140,
+      "height": 110
+    },
+    {
+      "loaded": true,
+      "width": 720,
+      "height": 900
+    }
+  ],
+  "outputs": [
+    {
+      "name": "Screenshot.jpeg",
+      "kind": "image",
+      "mime": "image/jpeg"
+    },
+    {
+      "name": "Screenshot.jpeg",
+      "kind": "image",
+      "mime": "image/jpeg"
+    },
+    {
+      "name": "Screenshot.jpeg",
+      "kind": "image",
+      "mime": "image/jpeg"
+    },
+    {
+      "name": "Screenshot.jpeg",
+      "kind": "image",
+      "mime": "image/jpeg"
+    },
+    {
+      "name": "Page.pdf",
+      "kind": "file",
+      "mime": "application/pdf"
+    }
+  ],
+  "errors": []
+}

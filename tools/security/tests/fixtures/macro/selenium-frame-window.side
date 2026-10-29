@@ -1,0 +1,23 @@
+{
+  "id": "sanitized-frame-project",
+  "version": "3.17.0",
+  "name": "Sanitized frame and window workflow",
+  "url": "http://localhost:3001",
+  "tests": [
+    {
+      "id": "frame-window-test",
+      "name": "Frame and window",
+      "commands": [
+        { "id": "open", "comment": "", "command": "open", "target": "/frame-host", "targets": [], "value": "" },
+        { "id": "frame", "comment": "", "command": "selectFrame", "target": "css=iframe#account-frame", "targets": [], "value": "" },
+        { "id": "click", "comment": "", "command": "click", "target": "id=open-account", "targets": [["id=open-account", "id"]], "value": "" },
+        { "id": "top", "comment": "", "command": "selectFrame", "target": "relative=top", "targets": [], "value": "" },
+        { "id": "window", "comment": "", "command": "selectWindow", "target": "handle=account-window", "targets": [], "value": "" },
+        { "id": "assert", "comment": "", "command": "assertElementPresent", "target": "css=#account-ready", "targets": [["css=#account-ready", "css:finder"]], "value": "" }
+      ]
+    }
+  ],
+  "suites": [],
+  "urls": ["http://localhost:3001"],
+  "plugins": []
+}

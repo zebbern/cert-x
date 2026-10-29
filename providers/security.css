@@ -1,0 +1,31 @@
+.security-root, .ki-security-panel { --security-text: var(--wb-text, #252525); --security-muted: var(--wb-text-secondary, #707070); --security-line: var(--wb-border, #dfdfdf); --security-fill: var(--wb-hover, #f4f4f4); color: var(--security-text); }
+:root[data-theme="dark"] .security-root, :root[data-theme="dark"] .ki-security-panel { --security-text: var(--wb-text, #e8e8e8); --security-muted: var(--wb-text-secondary, #a1a1a1); --security-line: var(--wb-border, #414141); --security-fill: var(--wb-hover, #303030); }
+.security-root .security-card { padding: 18px; margin: 14px 0; }
+.security-field { display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 16px; padding: 10px 0; min-width: 0; }
+.security-field > span { flex: 0 1 45%; }
+.security-field input, .security-field select { width: 52%; min-width: 0; margin: 0; }
+.security-field .wb-toggle { flex: 0 0 32px; }
+.security-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 10px 0; }
+.security-actions select { width: auto; max-width: 100%; padding: 6px 10px; font-size: 13px; }
+.security-meta, .security-notice { color: var(--security-muted); font-size: 13px; line-height: 1.5; overflow-wrap: anywhere; }
+.security-notice:empty { display: none; }
+.security-error { color: #c24636; overflow-wrap: anywhere; }
+:root[data-theme="dark"] .security-error { color: #f9a399; }
+.security-advanced { padding: 12px 0; border-top: 1px solid var(--security-line); }
+.security-advanced > summary { cursor: pointer; font-weight: 500; }
+.security-root pre, .ki-security-panel pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 280px; overflow: auto; font-size: 12px; line-height: 1.5; }
+.security-run, .security-finding { padding: 14px 0; border-bottom: 1px solid var(--security-line); }
+.security-run:last-child, .security-finding:last-child { border-bottom: 0; }
+.security-run h3, .security-finding h3 { font-size: 14px; margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+.security-run details, .security-finding details { margin: 8px 0; }
+.security-results { scroll-margin-top: 12px; }
+.security-attribution { margin: 16px 0; }
+.security-attribution a { color: inherit; }
+.security-root [hidden], .ki-security-panel [hidden] { display: none !important; }
+.ki-security-panel { padding: 8px 0; border-bottom: 1px solid var(--security-line); }
+.ki-security-panel > summary { cursor: pointer; font-weight: 500; }
+.ki-security-panel button { background: var(--security-fill); color: var(--security-text); border: 0; border-radius: 6px; font: inherit; padding: 6px 9px; cursor: pointer; }
+.ki-security-panel button:disabled { opacity: .5; cursor: default; }
+.ki-security-panel .security-run { padding: 8px 0; }
+.ki-security-panel select { background: var(--wb-bg, var(--security-fill)); color: var(--security-text); border: 1px solid var(--security-line); border-radius: 6px; font: inherit; padding: 6px; }
+@media (max-width: 460px) { .security-root .security-card { padding: 12px; } .security-field { gap: 10px; } .security-actions button { min-width: 0; } }

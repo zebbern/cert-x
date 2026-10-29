@@ -1,0 +1,9 @@
+{
+  "schema": 1,
+  "platform": "win32-x64",
+  "python": {"version":"3.12.15+20261021","url":"https://github.com/astral-sh/python-build-standalone/releases/download/20261021/cpython-3.12.15%2B20261021-x86_64-pc-windows-msvc-install_only_stripped.tar.gz","sha256":"aac5d331fc3307343f95928fdbea4583f0d53973d08c7e1d081884fbd229a0e1","size":21990627,"entry":"python/python.exe","format":"tar.gz"},
+  "chromium": {"version":"156.0.8078.4","url":"https://cdn.playwright.dev/builds/cft/156.0.8078.4/win64/chrome-win64.zip","sha256":"220021ecfdad08c116fc71a153e65e3861ba841c531afc4f7acc7bd5d44b41db","size":207073013,"entry":"chrome-win64/chrome.exe"},
+  "chromedriver": {"version":"156.0.8078.47","url":"https://storage.googleapis.com/chrome-for-testing-public/156.0.8078.47/win64/chromedriver-win64.zip","sha256":"024ee8cafa622e31cd0c3092c7a6b3548248bde7f68317d7415408dcd03ae510","size":11501978,"entry":"chromedriver-win64/chromedriver.exe"},
+  "zap": {"version":"2.17.0","url":"https://github.com/zaproxy/zaproxy/releases/download/v2.17.0/ZAP_2.17.0_Crossplatform.zip","sha256":"94c8f767b1c2e94f0db66b3ae56514d5e3f5a728ee1b6c798e0c8fe2d61fbff0","size":286652857,"entry":"ZAP_2.17.0/zap-2.17.0.jar"},
+  "jre": {"version":"21.0.12.1+1","url":"https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jre_x64_windows_hotspot_21.0.12.1_1.zip","sha256":"d35f31e712f0fcf6ac5a093edc90204fbff22f720ba3950bd09d331d5e621636","size":48999141,"entry":"jdk-21.0.12.1+1-jre/bin/java.exe"}
+}

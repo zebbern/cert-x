@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 // Runs every real-Chromium validation check with real exit codes so red stays
 // red — the default node --test glob does not include these .cjs/.js checks
-// and they silently skip otherwise. Known failures are documented in
-// HANDOFF.md; this runner reports reality and exits non-zero on any failure.
+// and they silently skip otherwise. Open problems are tracked in
+// docs/backlog.md; this runner reports reality and exits non-zero on any failure.
 // Usage: node tools/run-browser-tests.cjs [filter ...]
 const { spawnSync } = require("node:child_process");
 const path = require("node:path");

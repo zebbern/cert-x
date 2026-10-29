@@ -42,7 +42,7 @@ async function main() {
   await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve)); const origin='http://127.0.0.1:'+server.address().port;
   const downloads=path.join(temp,'downloads'),profile=path.join(temp,'profile');fs.mkdirSync(path.join(profile,'Default'),{recursive:true});fs.mkdirSync(downloads);
   fs.writeFileSync(path.join(profile,'Default/Preferences'),JSON.stringify({download:{default_directory:downloads,prompt_for_download:false}}));
-  browser=await chromium.launchPersistentContext(profile,{headless:true,downloadsPath:downloads,viewport:{width:720,height:1100},executablePath:process.env.CHROMIUM_PATH||path.join(process.env.LOCALAPPDATA,'ms-playwright/chromium-1234/chrome-win64/chrome.exe'),args:['--disable-extensions-except='+root,'--load-extension='+root]});
+  browser=await chromium.launchPersistentContext(profile,{headless:true,downloadsPath:downloads,viewport:{width:720,height:1100},executablePath:require('../../chromium-path.cjs'),args:['--disable-extensions-except='+root,'--load-extension='+root]});
   const cert=browser.serviceWorkers()[0]||await browser.waitForEvent('serviceworker',{timeout:15000}),ptk=cert;
   assert.ok(cert.url().endsWith('/background/entry.js'));
   await cert.evaluate(async()=>{await globalThis.certXSecurity.ready;await globalThis.certXSecurityCompatibilityReady;});

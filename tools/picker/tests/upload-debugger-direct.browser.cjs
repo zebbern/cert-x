@@ -7,7 +7,7 @@ async function main(){
  fs.writeFileSync(file,'CERTX_DEBUGGER_UPLOAD');
  server=http.createServer((req,res)=>{res.setHeader('Content-Type','text/html');res.end('<input type="file" name="uploaded"><a id="download" href="data:text/plain,CERTX_DOWNLOADED" download="probe.txt">Download</a>')});
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const origin='http://127.0.0.1:'+server.address().port;
- browser=await chromium.launchPersistentContext(path.join(temp,'profile'),{headless:true,acceptDownloads:true,executablePath:process.env.CHROMIUM_PATH||path.join(process.env.LOCALAPPDATA,'ms-playwright/chromium-1234/chrome-win64/chrome.exe'),args:['--disable-extensions-except='+root,'--load-extension='+root]});
+ browser=await chromium.launchPersistentContext(path.join(temp,'profile'),{headless:true,acceptDownloads:true,executablePath:require('../../chromium-path.cjs'),args:['--disable-extensions-except='+root,'--load-extension='+root]});
  const worker=browser.serviceWorkers()[0]||await browser.waitForEvent('serviceworker');await worker.evaluate(()=>certXSecurity.ready);
  const page=await browser.newPage();await page.goto(origin+'/upload');
  const [download]=await Promise.all([page.waitForEvent('download'),page.locator('#download').click()]);const downloaded=await download.path();assert.ok(fs.existsSync(downloaded));

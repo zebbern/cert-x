@@ -34,7 +34,7 @@ const avatars = {
     fs.writeFileSync(path.join(out, f + ".svg"), svg);
     map[k] = { f: f + ".svg", mono: /fill="currentColor"/.test(svg.slice(0, 200)) };
   }
-  const browser = await chromium.launch({ executablePath: path.join(process.env.LOCALAPPDATA, "ms-playwright/chromium-1234/chrome-win64/chrome.exe") });
+  const browser = await chromium.launch({ executablePath: require("../../chromium-path.cjs") });
   const page = await browser.newPage();
   for (const [k, f] of Object.entries(avatars)) {
     const file = fs.readdirSync(path.join(src, "avatars")).find((x) => x.startsWith(f + "."));

@@ -13,7 +13,7 @@ async function main(){
  fs.mkdirSync(runtimeRoot,{recursive:true});fs.copyFileSync(path.join(process.env.LOCALAPPDATA,'cert-x','security-runtime','installed.json'),path.join(runtimeRoot,'installed.json'));
  server=http.createServer((req,res)=>{report.wire.push({method:req.method,url:req.url});res.writeHead(200,{'Content-Length':body.length,Connection:'close'});res.end(body)});
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const origin='http://127.0.0.1:'+server.address().port;
- browser=await chromium.launchPersistentContext(path.join(work,'profile'),{headless:true,executablePath:process.env.CHROMIUM_PATH||path.join(process.env.LOCALAPPDATA,'ms-playwright/chromium-1234/chrome-win64/chrome.exe'),args:['--disable-extensions-except='+root,'--load-extension='+root]});
+ browser=await chromium.launchPersistentContext(path.join(work,'profile'),{headless:true,executablePath:require('../../chromium-path.cjs'),args:['--disable-extensions-except='+root,'--load-extension='+root]});
  const worker=browser.serviceWorkers()[0]||await browser.waitForEvent('serviceworker');await worker.evaluate(()=>certXSecurity.ready);const id=new URL(worker.url()).host;
  const host=path.join(work,'host');execFileSync('powershell.exe',['-NoProfile','-ExecutionPolicy','Bypass','-File',path.join(root,'tools/host/install.ps1'),'-ExtensionId',id,'-Browser','Chromium','-OutputDirectory',host],{windowsHide:true,stdio:'pipe'});registered=true;
  const installed=path.join(host,'Chromium',id);fs.writeFileSync(path.join(installed,'launch.cmd'),'@echo off\r\nset "CERT_X_SECURITY_ROOT='+runtimeRoot+'"\r\n"'+process.execPath+'" "'+path.join(installed,'ki-host.js')+'" %*\r\n');

@@ -7,7 +7,7 @@ const root=path.resolve(__dirname,'../../..'),temp=fs.mkdtempSync(path.join(os.t
 let server,browser,reference,stored='',side='';const wire=[],evidence={scope:'Inert stored marker: real submission, retrieval and browser confirmation negative. Positive execution remains unverified.',wire};
 async function run(extension,integrated,origin){
  side=integrated?'owned':'reference';stored='';console.log('STORED-MARKER',side);
- browser=await chromium.launchPersistentContext(path.join(temp,side),{headless:true,executablePath:process.env.CHROMIUM_PATH||path.join(process.env.LOCALAPPDATA,'ms-playwright/chromium-1234/chrome-win64/chrome.exe'),args:['--disable-extensions-except='+extension,'--load-extension='+extension]});const worker=browser.serviceWorkers()[0]||await browser.waitForEvent('serviceworker');
+ browser=await chromium.launchPersistentContext(path.join(temp,side),{headless:true,executablePath:require('../../chromium-path.cjs'),args:['--disable-extensions-except='+extension,'--load-extension='+extension]});const worker=browser.serviceWorkers()[0]||await browser.waitForEvent('serviceworker');
  const page=await browser.newPage();await page.goto('chrome-extension://'+new URL(worker.url()).host+'/manifest.json');
  const result=await page.evaluate(async({integrated,origin})=>{
   const prefix=integrated?'security/ptk/':'ptk/',load=file=>import(chrome.runtime.getURL(prefix+file));await load('packages/browser-polyfill/browser-polyfill.min.js');

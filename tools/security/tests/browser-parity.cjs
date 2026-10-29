@@ -8,7 +8,7 @@ const engines=(process.env.PARITY_ENGINES||'SAST,SCA').split(',');
 let server,browser,reference;
 const wire=[];
 async function run(extension,integrated,origin,safe) {
-  browser=await chromium.launchPersistentContext(path.join(temp,(integrated?'owned':'reference')+(safe?'-safe':'')),{headless:true,executablePath:process.env.CHROMIUM_PATH||path.join(process.env.LOCALAPPDATA,'ms-playwright/chromium-1234/chrome-win64/chrome.exe'),args:['--disable-extensions-except='+extension,'--load-extension='+extension]});
+  browser=await chromium.launchPersistentContext(path.join(temp,(integrated?'owned':'reference')+(safe?'-safe':'')),{headless:true,executablePath:require('../../chromium-path.cjs'),args:['--disable-extensions-except='+extension,'--load-extension='+extension]});
   const worker=browser.serviceWorkers()[0]||await browser.waitForEvent('serviceworker',{timeout:15000});
   const logs=[];browser.on('console',message=>{if(['error','warning'].includes(message.type()))logs.push(message.text());});
   await worker.evaluate(async integrated=>{if(integrated)await globalThis.certXSecurity.ready;else {for(let i=0;i<200&&!globalThis.ptk_app?.ready;i++)await new Promise(r=>setTimeout(r,25));await globalThis.ptk_app.ready;globalThis.ptk_app.devLocalConfig.automationEnabled=true;}},integrated);

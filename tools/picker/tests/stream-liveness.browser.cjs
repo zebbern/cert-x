@@ -96,7 +96,7 @@ async function main() {
   let browser;
   try {
     await new Promise(resolve => provider.listen(0, '127.0.0.1', resolve));
-    browser = await chromium.launchPersistentContext(temp, { headless: true, viewport: { width: 720, height: 1000 }, executablePath: process.env.CHROMIUM_PATH || path.join(process.env.LOCALAPPDATA, 'ms-playwright/chromium-1234/chrome-win64/chrome.exe'), args: ['--disable-extensions-except=' + root, '--load-extension=' + root] });
+    browser = await chromium.launchPersistentContext(temp, { headless: true, viewport: { width: 720, height: 1000 }, executablePath: require('../../chromium-path.cjs'), args: ['--disable-extensions-except=' + root, '--load-extension=' + root] });
     const worker = browser.serviceWorkers()[0] || await browser.waitForEvent('serviceworker', { timeout: 15000 });
     assert.equal(await worker.evaluate(() => typeof globalThis.kiTest?.setStreamIdle), 'function', 'kiTest exposes the stall budget (build with KI_TEST_HOOKS=1 node tools/picker/apply-picker.js)');
     await worker.evaluate(ms => kiTest.setStreamIdle(ms), IDLE_MS);

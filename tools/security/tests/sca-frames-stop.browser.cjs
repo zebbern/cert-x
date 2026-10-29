@@ -39,7 +39,7 @@ async function main() {
   await new Promise(resolve => server.listen(0, '0.0.0.0', resolve));
   origin = `https://127.0.0.1:${server.address().port}`; crossOrigin = `https://localhost:${server.address().port}`;
   browser = await chromium.launchPersistentContext(path.join(temp, 'profile'), { headless: true, ignoreHTTPSErrors: true,
-    executablePath: process.env.CHROMIUM_PATH || path.join(process.env.LOCALAPPDATA, 'ms-playwright/chromium-1234/chrome-win64/chrome.exe'),
+    executablePath: require('../../chromium-path.cjs'),
     args: ['--site-per-process', '--disable-extensions-except=' + root, '--load-extension=' + root] });
   const worker = browser.serviceWorkers()[0] || await browser.waitForEvent('serviceworker');
   await worker.evaluate(async () => certXSecurity.ready);

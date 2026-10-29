@@ -15,7 +15,7 @@ async function main() {
   const root = path.resolve(__dirname, '../../..'), downloads = path.join(temp,'downloads'), profile=path.join(temp,'profile');
   fs.mkdirSync(path.join(profile,'Default'),{recursive:true});fs.mkdirSync(downloads);
   fs.writeFileSync(path.join(profile,'Default/Preferences'),JSON.stringify({download:{default_directory:downloads,prompt_for_download:false}}));
-  browser = await chromium.launchPersistentContext(profile, {headless:true,downloadsPath:downloads, executablePath:process.env.CHROMIUM_PATH || path.join(process.env.LOCALAPPDATA,'ms-playwright/chromium-1234/chrome-win64/chrome.exe'), args:['--disable-extensions-except='+root+','+extension,'--load-extension='+root+','+extension]});
+  browser = await chromium.launchPersistentContext(profile, {headless:true,downloadsPath:downloads, executablePath:require('../../chromium-path.cjs'), args:['--disable-extensions-except='+root+','+extension,'--load-extension='+root+','+extension]});
   for(let i=0;i<200&&browser.serviceWorkers().length<2;i++)await new Promise(resolve=>setTimeout(resolve,50));
   const ptkWorker=browser.serviceWorkers().find(w=>new URL(w.url()).pathname==='/app.js'),certWorker=browser.serviceWorkers().find(w=>new URL(w.url()).pathname==='/background/background.js');
   assert.ok(ptkWorker&&certWorker,'Both real extensions must load');

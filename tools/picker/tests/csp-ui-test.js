@@ -19,7 +19,7 @@ async function main() {
   fs.writeFileSync(path.join(extension, "manifest.json"), JSON.stringify({ manifest_version: 3, name: "cert-x CSP test fixture", version: "1.0", background: { service_worker: "background.js" }, permissions: ["tabs", "storage", "webNavigation", "debugger", "declarativeNetRequestWithHostAccess"], host_permissions: ["<all_urls>"] }));
   fs.writeFileSync(path.join(extension, "providers/providers.html"), '<!doctype html><html data-theme="dark"><head><link rel="stylesheet" href="providers.css"></head><body><main class="page"><section class="card" id="csp-controls"></section></main><script type="module" src="test.js"></script></body></html>');
   fs.writeFileSync(path.join(extension, "providers/test.js"), 'import {initCsp} from "./csp.js"; initCsp(document.getElementById("csp-controls"));');
-  const launch = () => chromium.launchPersistentContext(path.join(directory, "profile"), { executablePath: process.env.CHROMIUM_PATH || path.join(process.env.LOCALAPPDATA, "ms-playwright/chromium-1234/chrome-win64/chrome.exe"), headless: true, viewport: { width: 420, height: 820 }, args: [`--disable-extensions-except=${extension}`, `--load-extension=${extension}`] });
+  const launch = () => chromium.launchPersistentContext(path.join(directory, "profile"), { executablePath: require("../../chromium-path.cjs"), headless: true, viewport: { width: 420, height: 820 }, args: [`--disable-extensions-except=${extension}`, `--load-extension=${extension}`] });
   context = await launch();
   let [worker] = context.serviceWorkers(); if (!worker) worker = await context.waitForEvent("serviceworker");
   const id = new URL(worker.url()).host, target = await context.newPage(), untouched = await context.newPage(), settings = await context.newPage();

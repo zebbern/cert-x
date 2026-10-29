@@ -44,7 +44,7 @@ async function run(extension, integrated, origin, mode) {
   const profile = path.join(profileRoot, `${currentSide}-${mode}`);
   browser = await chromium.launchPersistentContext(profile, {
     headless: true,
-    executablePath: process.env.CHROMIUM_PATH || path.join(process.env.LOCALAPPDATA, 'ms-playwright/chromium-1234/chrome-win64/chrome.exe'),
+    executablePath: require('../../chromium-path.cjs'),
     args: ['--disable-extensions-except=' + extension, '--load-extension=' + extension]
   });
   const worker = browser.serviceWorkers()[0] || await browser.waitForEvent('serviceworker');

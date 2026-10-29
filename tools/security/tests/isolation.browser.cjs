@@ -3,7 +3,7 @@ const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'C:/Users/zeb/AppData/Ro
 const root=path.resolve(__dirname,'../../..'),temp=fs.mkdtempSync(path.join(os.tmpdir(),'cert-x-security-isolation-'));let browser,server;
 async function main(){
  server=http.createServer((req,res)=>{res.setHeader('Content-Type','text/html');res.end('<!doctype html><title>Isolation fixture</title><input id="value"><button id="render">Render</button><div id="sink"></div><script>document.querySelector("#render").onclick=()=>document.querySelector("#sink").innerHTML=new URLSearchParams(location.search).get("q");</script>');});await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin='http://127.0.0.1:'+server.address().port;
- browser=await chromium.launchPersistentContext(path.join(temp,'profile'),{headless:true,executablePath:process.env.CHROMIUM_PATH||path.join(process.env.LOCALAPPDATA,'ms-playwright/chromium-1234/chrome-win64/chrome.exe'),args:['--disable-extensions-except='+root,'--load-extension='+root]});
+ browser=await chromium.launchPersistentContext(path.join(temp,'profile'),{headless:true,executablePath:require('../../chromium-path.cjs'),args:['--disable-extensions-except='+root,'--load-extension='+root]});
  const worker=browser.serviceWorkers()[0]||await browser.waitForEvent('serviceworker');await worker.evaluate(()=>globalThis.certXSecurity.ready);
  const first=await browser.newPage(),second=await browser.newPage();await first.goto(origin+'/first?q=first');await second.goto(origin+'/second?q=second');
  const tabs=await worker.evaluate(()=>chrome.tabs.query({})),a=tabs.find(t=>t.url?.includes('/first?')).id,b=tabs.find(t=>t.url?.includes('/second?')).id;

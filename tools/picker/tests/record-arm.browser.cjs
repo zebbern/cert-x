@@ -18,7 +18,7 @@ async function main() {
   try {
     await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
     const origin = 'http://127.0.0.1:' + server.address().port;
-    browser = await chromium.launchPersistentContext(temp, { headless: true, executablePath: process.env.CHROMIUM_PATH || path.join(process.env.LOCALAPPDATA, 'ms-playwright/chromium-1234/chrome-win64/chrome.exe'), args: ['--disable-extensions-except=' + root, '--load-extension=' + root] });
+    browser = await chromium.launchPersistentContext(temp, { headless: true, executablePath: require('../../chromium-path.cjs'), args: ['--disable-extensions-except=' + root, '--load-extension=' + root] });
     const worker = browser.serviceWorkers()[0] || await browser.waitForEvent('serviceworker', { timeout: 15000 });
     // Recording needs a usable model; a local catalog is enough.
     for (let i = 0; i < 8; i++) {

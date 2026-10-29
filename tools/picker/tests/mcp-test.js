@@ -85,7 +85,7 @@ async function main() {
   await new Promise((r) => llm.listen(8788, "127.0.0.1", r));
   const profile = fs.mkdtempSync(path.join(os.tmpdir(), "ki-ui-"));
   const ctx = await chromium.launchPersistentContext(profile, {
-    executablePath: path.join(process.env.LOCALAPPDATA, "ms-playwright/chromium-1234/chrome-win64/chrome.exe"),
+    executablePath: require("../../chromium-path.cjs"),
     headless: false,
     viewport: { width: 720, height: 900 },
     colorScheme: "dark",

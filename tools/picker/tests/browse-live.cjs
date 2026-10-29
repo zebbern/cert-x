@@ -66,7 +66,7 @@ async function main() {
   const server = http.createServer((req, res) => handler(req, res).catch(e => { res.statusCode = 500; res.end(String(e)); }));
   await new Promise(r => server.listen(0, '127.0.0.1', r));
   const origin = 'http://127.0.0.1:' + server.address().port;
-  const browser = await chromium.launchPersistentContext(temp, { headless: true, viewport: { width: 1200, height: 800 }, executablePath: process.env.CHROMIUM_PATH || path.join(process.env.LOCALAPPDATA, 'ms-playwright/chromium-1234/chrome-win64/chrome.exe'), args: ['--disable-extensions-except=' + root, '--load-extension=' + root] });
+  const browser = await chromium.launchPersistentContext(temp, { headless: true, viewport: { width: 1200, height: 800 }, executablePath: require('../../chromium-path.cjs'), args: ['--disable-extensions-except=' + root, '--load-extension=' + root] });
   const rows = [];
   try {
     const worker = browser.serviceWorkers()[0] || await browser.waitForEvent('serviceworker');

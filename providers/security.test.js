@@ -9,8 +9,9 @@ test("security settings preserve explicit limits, show lifecycle and evidence, a
     if (file) { res.setHeader("Content-Type", file.endsWith(".js") ? "text/javascript" : "text/css"); return res.end(fs.readFileSync(path.join(__dirname, file))); }
     res.setHeader("Content-Type", "text/html"); res.end('<!doctype html><html data-theme="dark"><head><title>Security testing</title><link rel="stylesheet" href="/providers.css"></head><body><main class="page"><section id="security-section"></section><section id="authz-section" hidden></section></main><script type="module">import {initSecurity} from "/security.js"; await initSecurity(); window.ready=true;</script></body></html>');
   });
+  // Launch before listening: a failed launch must not leave the server holding the test process open.
+  const browser = await chromium.launch({ executablePath: require("../tools/chromium-path.cjs"), headless: true });
   await new Promise(resolve => server.listen(0, "127.0.0.1", resolve));
-  const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || path.join(process.env.LOCALAPPDATA, "ms-playwright/chromium-1234/chrome-win64/chrome.exe"), headless: true });
   try {
     const page = await browser.newPage({ viewport: { width: 420, height: 950 } }), errors = [];
     page.on("pageerror", error => errors.push(error.message));

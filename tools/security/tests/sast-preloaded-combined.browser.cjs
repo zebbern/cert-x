@@ -13,7 +13,7 @@ async function main(){
   res.setHeader('Content-Type','text/html');res.end('<!doctype html><title>Authenticated preloaded form</title><form method="post"><input name="ip" value="127.0.0.1"><button>Submit</button></form><div id="sink"></div><script src="/asset.js'+(req.url.includes('safe')?'?safe':'')+'"></script>'+(req.url.includes('missing')?'<script src="/missing.js"></script>':''));
  });
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const origin=`http://127.0.0.1:${server.address().port}`;
- browser=await chromium.launchPersistentContext(path.join(temp,'profile'),{headless:true,executablePath:process.env.CHROMIUM_PATH||path.join(process.env.LOCALAPPDATA,'ms-playwright/chromium-1234/chrome-win64/chrome.exe'),args:['--disable-extensions-except='+root,'--load-extension='+root]});
+ browser=await chromium.launchPersistentContext(path.join(temp,'profile'),{headless:true,executablePath:require('../../chromium-path.cjs'),args:['--disable-extensions-except='+root,'--load-extension='+root]});
  const worker=browser.serviceWorkers()[0]||await browser.waitForEvent('serviceworker');await worker.evaluate(async()=>certXSecurity.ready);
  const page=await browser.newPage();
  for(const scenario of [{name:'preloaded-positive',engines:['SAST']},{name:'preloaded-safe',engines:['SAST','SCA'],query:'?safe'},{name:'missing-external',engines:['SAST','SCA'],query:'?missing',reload:true},{name:'limited-after-navigation',engines:['SAST'],reload:true,acquisition:{maxResourceBytes:32,maxTotalBytes:64}},{name:'combined-positive',engines:['DAST','SAST','SCA']}]){

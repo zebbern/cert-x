@@ -7,7 +7,7 @@ const source=fs.readFileSync(path.join(__dirname,'fixtures/angular/angular-1.1.5
 let browser,server,reference,side='';const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 async function run(extension,integrated,origin){
  side=integrated?'owned':'reference';const cases=[];console.log('SCA auth',side,'launch');
- browser=await chromium.launchPersistentContext(path.join(temp,side),{headless:true,executablePath:process.env.CHROMIUM_PATH||path.join(process.env.LOCALAPPDATA,'ms-playwright/chromium-1234/chrome-win64/chrome.exe'),args:['--disable-extensions-except='+extension,'--load-extension='+extension]});
+ browser=await chromium.launchPersistentContext(path.join(temp,side),{headless:true,executablePath:require('../../chromium-path.cjs'),args:['--disable-extensions-except='+extension,'--load-extension='+extension]});
  const worker=browser.serviceWorkers()[0]||await browser.waitForEvent('serviceworker');await worker.evaluate(async integrated=>{if(integrated)await certXSecurity.ready;else{await ptk_app.ready;ptk_app.devLocalConfig.automationEnabled=true;}},integrated);
  const page=await browser.newPage();
  for(const account of ['a','b','anonymous']){

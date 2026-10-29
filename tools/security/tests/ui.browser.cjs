@@ -8,7 +8,7 @@ async function main() {
   server = http.createServer((req, res) => { res.setHeader('Content-Type', 'text/html'); res.end('<!doctype html><title>Security UI fixture</title><h1>Application</h1>'); });
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
   const origin = 'http://127.0.0.1:' + server.address().port;
-  browser = await chromium.launchPersistentContext(path.join(temp, 'profile'), { headless: true, viewport: { width: 420, height: 950 }, executablePath: process.env.CHROMIUM_PATH || path.join(process.env.LOCALAPPDATA, 'ms-playwright/chromium-1234/chrome-win64/chrome.exe'), args: ['--disable-extensions-except=' + root, '--load-extension=' + root] });
+  browser = await chromium.launchPersistentContext(path.join(temp, 'profile'), { headless: true, viewport: { width: 420, height: 950 }, executablePath: require('../../chromium-path.cjs'), args: ['--disable-extensions-except=' + root, '--load-extension=' + root] });
   const worker = browser.serviceWorkers()[0] || await browser.waitForEvent('serviceworker', { timeout: 15000 });
   await worker.evaluate(async () => { if (!globalThis.certXSecurity) throw Error('Security runtime missing'); await globalThis.certXSecurity.ready; });
   const id = new URL(worker.url()).host, session = 'security-ui-browser';

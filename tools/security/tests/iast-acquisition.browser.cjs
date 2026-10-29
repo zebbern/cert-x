@@ -67,7 +67,7 @@ async function run(extension, integrated, origin, foreignOrigin) {
     console.log('IAST-ACQUISITION', side);
     browser = await chromium.launchPersistentContext(path.join(temp, side), {
         headless: true,
-        executablePath: process.env.CHROMIUM_PATH || path.join(process.env.LOCALAPPDATA, 'ms-playwright/chromium-1234/chrome-win64/chrome.exe'),
+        executablePath: require('../../chromium-path.cjs'),
         args: ['--disable-extensions-except=' + extension, '--load-extension=' + extension]
     });
     const worker = browser.serviceWorkers()[0] || await browser.waitForEvent('serviceworker');

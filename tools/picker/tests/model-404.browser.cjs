@@ -37,7 +37,7 @@ async function main() {
   let browser, panel, notice = '', compactNotice = '';
   try {
     await new Promise(resolve => provider.listen(0, '127.0.0.1', resolve));
-    browser = await chromium.launchPersistentContext(temp, { headless: true, viewport: { width: 720, height: 1000 }, executablePath: process.env.CHROMIUM_PATH || path.join(process.env.LOCALAPPDATA, 'ms-playwright/chromium-1234/chrome-win64/chrome.exe'), args: ['--disable-extensions-except=' + root, '--load-extension=' + root] });
+    browser = await chromium.launchPersistentContext(temp, { headless: true, viewport: { width: 720, height: 1000 }, executablePath: require('../../chromium-path.cjs'), args: ['--disable-extensions-except=' + root, '--load-extension=' + root] });
     const worker = browser.serviceWorkers()[0] || await browser.waitForEvent('serviceworker', { timeout: 15000 });
     const base = 'chrome-extension://' + new URL(worker.url()).host, host = 'http://127.0.0.1:' + provider.address().port + '/api/v1';
     for (let i = 0; i < 8; i++) {

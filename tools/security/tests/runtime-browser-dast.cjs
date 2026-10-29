@@ -5,7 +5,7 @@ const root=path.resolve(__dirname,'../../..'),temp=fs.mkdtempSync(path.join(os.t
 let browser,server,reference;const wire=[];
 const angularFile=path.join(__dirname,'fixtures/angular/angular-1.1.5.min.js');
 async function run(extension,integrated,origin,kind,safe){
- const logs=[];browser=await chromium.launchPersistentContext(path.join(temp,(integrated?'owned':'ref')+'-'+kind+'-'+safe),{headless:true,executablePath:process.env.CHROMIUM_PATH||path.join(process.env.LOCALAPPDATA,'ms-playwright/chromium-1234/chrome-win64/chrome.exe'),args:['--disable-extensions-except='+extension,'--load-extension='+extension]});
+ const logs=[];browser=await chromium.launchPersistentContext(path.join(temp,(integrated?'owned':'ref')+'-'+kind+'-'+safe),{headless:true,executablePath:require('../../chromium-path.cjs'),args:['--disable-extensions-except='+extension,'--load-extension='+extension]});
  const worker=browser.serviceWorkers()[0]||await browser.waitForEvent('serviceworker');worker.on('console',m=>{if(m.type()==='error')logs.push(m.text());});
  await worker.evaluate(async integrated=>{if(integrated){await certXSecurity.ready;}else{for(let i=0;i<200&&!globalThis.ptk_app?.ready;i++)await new Promise(r=>setTimeout(r,50));await ptk_app.ready;ptk_app.devLocalConfig.automationEnabled=true;}},integrated);
  const page=await browser.newPage(),url=origin+'/'+kind+(safe?'-safe':'-unsafe')+'?q=hello'+(kind==='spa'?'#/search?q=hello':'');await page.goto(url);await page.waitForTimeout(150);

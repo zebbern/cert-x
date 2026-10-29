@@ -88,7 +88,7 @@ async function main() {
   await new Promise(resolve => llm.listen(0, "127.0.0.1", resolve));
   const port = llm.address().port;
   ctx = await chromium.launchPersistentContext(path.join(temp, "profile"), {
-    executablePath: process.env.CHROMIUM_PATH || path.join(process.env.LOCALAPPDATA, "ms-playwright/chromium-1234/chrome-win64/chrome.exe"),
+    executablePath: require("../../chromium-path.cjs"),
     headless: true, viewport: { width: 720, height: 900 }, downloadsPath: path.join(temp, "downloads"),
     args: [`--disable-extensions-except=${root}`, `--load-extension=${root}`],
   });

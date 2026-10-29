@@ -4,7 +4,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'C:/Users/zeb/AppD
 const root = path.resolve(__dirname, '../../..'), temp = fs.mkdtempSync(path.join(os.tmpdir(), 'cert-x-report-coverage-'));
 let browser;
 async function main() {
-    browser = await chromium.launchPersistentContext(path.join(temp, 'profile'), { headless: true, executablePath: process.env.CHROMIUM_PATH || path.join(process.env.LOCALAPPDATA, 'ms-playwright/chromium-1234/chrome-win64/chrome.exe'), args: ['--disable-extensions-except=' + root, '--load-extension=' + root] });
+    browser = await chromium.launchPersistentContext(path.join(temp, 'profile'), { headless: true, executablePath: require('../../chromium-path.cjs'), args: ['--disable-extensions-except=' + root, '--load-extension=' + root] });
     const worker = browser.serviceWorkers()[0] || await browser.waitForEvent('serviceworker');
     await worker.evaluate(async () => { await certXSecurity.ready; await ptk_app.offscreenRuntimeManager.ensureDocument(); });
     const run = { runId: 'coverage-fixture-owned-run', state: 'incomplete', config: { acquisition: { maxResourceBytes: 1024, maxTotalBytes: 8192, maxScripts: 20, drainTimeoutMs: 7500 } }, coverage: { dast: { phase: 'no_active_probes', probeDispatches: 0, baselineDispatches: 1 }, actionableGaps: [{ engine: 'SCA', summary: 'Capture did not finish before its stop deadline.', recovery: { instruction: 'Keep partial evidence and repeat only the affected workflow.' }, examples: [{ reason: 'capture_drain_timeout', url: 'https://fixture.test/pending.js' }] }] } };

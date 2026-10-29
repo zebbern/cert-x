@@ -21,7 +21,7 @@ try{
  fs.mkdirSync(downloads,{recursive:true});fs.mkdirSync(path.join(profile,'Default'),{recursive:true});
  const prefsPath=path.join(profile,'Default/Preferences');
  if(!fs.existsSync(prefsPath))fs.writeFileSync(prefsPath,JSON.stringify({download:{default_directory:downloads,prompt_for_download:false}}));
- browser=await chromium.launchPersistentContext(profile,{headless:process.env.M4_HEADED==='1'?false:true,downloadsPath:downloads,viewport:{width:1100,height:1000},executablePath:process.env.CHROMIUM_PATH||path.join(process.env.LOCALAPPDATA,'ms-playwright/chromium-1234/chrome-win64/chrome.exe'),args:['--disable-extensions-except='+root,'--load-extension='+root]});
+ browser=await chromium.launchPersistentContext(profile,{headless:process.env.M4_HEADED==='1'?false:true,downloadsPath:downloads,viewport:{width:1100,height:1000},executablePath:require('../../chromium-path.cjs'),args:['--disable-extensions-except='+root,'--load-extension='+root]});
  browser.on('console',message=>{const text=message.text();if(!/favicon|preload|net::ERR_FAILED.*favicon/i.test(text))console.log('CONSOLE['+message.type()+']',text.slice(0,300));});
  browser.on('pageerror',error=>console.log('PAGEERROR',String(error).slice(0,300)));
 let posts=0,lastPostAt=Date.now();

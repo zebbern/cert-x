@@ -1,7 +1,6 @@
 import test, { before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
-import path from 'node:path';
 import http from 'node:http';
 import { createRequire } from 'node:module';
 import { sastEngine } from '../../../security/ptk/background/sast/sastEngine.js';
@@ -62,7 +61,7 @@ let browser, server, origin, instrumented;
 before(async () => {
  const require=createRequire(import.meta.url),{chromium}=require(process.env.PLAYWRIGHT_MODULE || 'C:/Users/zeb/AppData/Roaming/npm/node_modules/@playwright/cli/node_modules/playwright-core');
  server=http.createServer((_request,response)=>{response.setHeader('Content-Type','text/html');response.end('<!doctype html><html><body><div id="sink"></div></body></html>');});await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));origin='http://127.0.0.1:'+server.address().port;
- browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH || path.join(process.env.LOCALAPPDATA,'ms-playwright/chromium-1234/chrome-win64/chrome.exe')});
+ browser=await chromium.launch({headless:true,executablePath:require('../../chromium-path.cjs')});
  const source=await fs.readFile(new URL('security/ptk/content/iast.js',root),'utf8'),end=source.lastIndexOf('})();');assert.ok(end>0);
  // Expose functions only in this isolated fixture. No production instrumentation
  // or detector logic is changed by the test harness.

@@ -39,7 +39,7 @@ async function main(){
    send({id,object:'chat.completion.chunk',choices:[{index:0,delta}]});send({id,object:'chat.completion.chunk',choices:[{index:0,delta:{},finish_reason:item?'tool_calls':'stop'}]});res.end('data: [DONE]\n\n');
   }catch(error){errors.push(error.message);res.statusCode=500;res.end(error.message);}
  });await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));origin='http://127.0.0.1:'+server.address().port;
- browser=await chromium.launchPersistentContext(path.join(temp,'profile'),{headless:true,viewport:{width:720,height:950},executablePath:process.env.CHROMIUM_PATH||path.join(process.env.LOCALAPPDATA,'ms-playwright/chromium-1234/chrome-win64/chrome.exe'),args:['--disable-extensions-except='+root,'--load-extension='+root]});
+ browser=await chromium.launchPersistentContext(path.join(temp,'profile'),{headless:true,viewport:{width:720,height:950},executablePath:require('../../chromium-path.cjs'),args:['--disable-extensions-except='+root,'--load-extension='+root]});
  const worker=browser.serviceWorkers()[0]||await browser.waitForEvent('serviceworker');await worker.evaluate(()=>certXSecurity.ready);const extensionId=new URL(worker.url()).host;
  await worker.evaluate(async origin=>chrome.storage.local.set({sidepanel_language:'en',sidepanel_theme:'dark',sidepanel_approval_mode:'full_access',sidepanel_connections:[{id:'mock',label:'Target fixture',presetId:'openrouter',apiKey:'fixture',host:origin+'/api/v1'}]}),origin);
  const target=await browser.newPage();await target.goto(origin+'/app');tabId=await worker.evaluate(async origin=>(await chrome.tabs.query({})).find(tab=>tab.url===origin+'/app').id,origin);

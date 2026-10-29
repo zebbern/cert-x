@@ -57,7 +57,7 @@ async function main() {
   const origin = 'http://127.0.0.1:' + server.address().port, downloads = path.join(temp, 'downloads'), profile = path.join(temp, 'profile');
   fs.mkdirSync(path.join(profile, 'Default'), { recursive: true }); fs.mkdirSync(downloads);
   fs.writeFileSync(path.join(profile, 'Default/Preferences'), JSON.stringify({ download: { default_directory: downloads, prompt_for_download: false } }));
-  browser = await chromium.launchPersistentContext(profile, { headless: true, downloadsPath: downloads, viewport: { width: 720, height: 1000 }, executablePath: process.env.CHROMIUM_PATH || path.join(process.env.LOCALAPPDATA, 'ms-playwright/chromium-1234/chrome-win64/chrome.exe'), args: ['--disable-extensions-except=' + root, '--load-extension=' + root] });
+  browser = await chromium.launchPersistentContext(profile, { headless: true, downloadsPath: downloads, viewport: { width: 720, height: 1000 }, executablePath: require('../../chromium-path.cjs'), args: ['--disable-extensions-except=' + root, '--load-extension=' + root] });
   const cert=browser.serviceWorkers()[0]||await browser.waitForEvent('serviceworker');
   await cert.evaluate(()=>globalThis.certXSecurityCompatibilityReady);
   const manifest=await cert.evaluate(()=>globalThis.certXSecurity.runtime.describe());assert.equal(manifest.version,'10.0.0');

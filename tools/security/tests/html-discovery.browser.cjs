@@ -12,7 +12,7 @@ async function main(){
   res.end('<!doctype html><title>Home</title><a href="/target?q=hello">Target route</a>');
  });
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const origin='http://127.0.0.1:'+server.address().port;
- browser=await chromium.launchPersistentContext(path.join(temp,'profile'),{headless:true,executablePath:process.env.CHROMIUM_PATH||path.join(process.env.LOCALAPPDATA,'ms-playwright/chromium-1234/chrome-win64/chrome.exe'),args:['--disable-extensions-except='+root,'--load-extension='+root]});
+ browser=await chromium.launchPersistentContext(path.join(temp,'profile'),{headless:true,executablePath:require('../../chromium-path.cjs'),args:['--disable-extensions-except='+root,'--load-extension='+root]});
  const worker=browser.serviceWorkers()[0]||await browser.waitForEvent('serviceworker');await worker.evaluate(()=>certXSecurity.ready);
  const pack=JSON.parse(fs.readFileSync(path.join(root,'security/ptk/background/dast/modules/modules.json'),'utf8'));
  pack.modules=pack.modules.filter(module=>['headers','xss'].includes(module.id)).map(module=>module.id==='xss'?{...module,attacks:module.attacks.slice(0,1)}:module);assert.equal(pack.modules.length,2);

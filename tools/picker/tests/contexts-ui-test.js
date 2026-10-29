@@ -32,7 +32,7 @@ async function main() {
   });
   await new Promise(resolve => server.listen(0, "127.0.0.1", resolve));
   const origin = "http://127.0.0.1:" + server.address().port;
-  context = await chromium.launchPersistentContext(path.join(temp, "profile"), { executablePath: process.env.CHROMIUM_PATH || path.join(process.env.LOCALAPPDATA, "ms-playwright/chromium-1234/chrome-win64/chrome.exe"), headless: true, viewport: { width: 720, height: 980 }, args: [`--disable-extensions-except=${root}`, `--load-extension=${root}`] });
+  context = await chromium.launchPersistentContext(path.join(temp, "profile"), { executablePath: require("../../chromium-path.cjs"), headless: true, viewport: { width: 720, height: 980 }, args: [`--disable-extensions-except=${root}`, `--load-extension=${root}`] });
   let [worker] = context.serviceWorkers(); if (!worker) worker = await context.waitForEvent("serviceworker");
   const id = new URL(worker.url()).host, base = "chrome-extension://" + id;
   for (let attempt = 0; attempt < 8; attempt++) {

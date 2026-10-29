@@ -5,7 +5,7 @@ const file=path.join(os.tmpdir(),'cert-x-direct-upload-'+process.pid+'.txt');
 let browser;
 async function main(){
  fs.writeFileSync(file,'CERTX_DIRECT_UPLOAD');
- browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||path.join(process.env.LOCALAPPDATA,'ms-playwright/chromium-1234/chrome-win64/chrome.exe')});
+ browser=await chromium.launch({headless:true,executablePath:require('../../chromium-path.cjs')});
  const page=await browser.newPage();await page.setContent('<input type="file" name="uploaded"><a id="download" href="data:text/plain,CERTX_DOWNLOAD_FILE" download="probe.txt">Download</a>');
  const cdp=await page.context().newCDPSession(page);
  const document=await cdp.send('DOM.getDocument'),node=await cdp.send('DOM.querySelector',{nodeId:document.root.nodeId,selector:'input[name="uploaded"]'});

@@ -7,7 +7,7 @@ test("DAST UI selects exact fields, freezes plans, respects replay consent and r
     res.setHeader("Content-Type", "text/html"); res.end('<!doctype html><html data-theme="dark"><head><link rel="stylesheet" href="/providers.css"></head><body><main class="page"><section id="dast-section"></section></main><script type="module">import {initDast} from "/dast.js"; await initDast(); window.ready=true;</script></body></html>');
   });
   await new Promise(resolve => server.listen(0, "127.0.0.1", resolve));
-  const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || path.join(process.env.LOCALAPPDATA, "ms-playwright/chromium-1234/chrome-win64/chrome.exe"), headless: true });
+  const browser = await chromium.launch({ executablePath: require("../../../chromium-path.cjs"), headless: true });
   try {
     const page = await browser.newPage({ viewport: { width: 420, height: 1000 } }), errors = [];
     page.on("pageerror", error => errors.push(error.message));

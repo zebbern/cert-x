@@ -32,7 +32,7 @@ async function main() {
   await new Promise(resolve => server.listen(0, "127.0.0.1", resolve));
   const address = `ws://127.0.0.1:${server.address().port}/ws`;
   context = await chromium.launchPersistentContext(path.join(directory, "profile"), {
-    executablePath: process.env.CHROMIUM_PATH || path.join(process.env.LOCALAPPDATA, "ms-playwright/chromium-1234/chrome-win64/chrome.exe"),
+    executablePath: require("../../chromium-path.cjs"),
     headless: true, viewport: { width: 720, height: 900 }, args: [`--disable-extensions-except=${root}`, `--load-extension=${root}`],
   });
   let [worker] = context.serviceWorkers(); if (!worker) worker = await context.waitForEvent("serviceworker");

@@ -10,7 +10,7 @@ fs.mkdirSync(shots, { recursive: true });
 async function main() {
   const profile = fs.mkdtempSync(path.join(os.tmpdir(), "ki-ui-"));
   const ctx = await chromium.launchPersistentContext(profile, {
-    executablePath: path.join(process.env.LOCALAPPDATA, "ms-playwright/chromium-1234/chrome-win64/chrome.exe"),
+    executablePath: require("../../chromium-path.cjs"),
     headless: false,
     viewport: { width: 900, height: 500 },
     args: [`--disable-extensions-except=${ext}`, `--load-extension=${ext}`],

@@ -21,7 +21,7 @@ async function main() {
     res.setHeader('Content-Type', 'text/html'); res.end('<!doctype html><title>Native utility fixture</title>' + (url.pathname === '/app' ? '<meta name="generator" content="WordPress 6.5">' : '') + '<button id="click-me">Click fixture</button><div id="result">ready</div><script src="/fixture.js"></script>');
   });
   await new Promise(resolve => primary.listen(0, '127.0.0.1', resolve)); const origin = 'http://127.0.0.1:' + primary.address().port;
-  browser = await chromium.launchPersistentContext(path.join(temp, 'profile'), { headless: true, executablePath: process.env.CHROMIUM_PATH || path.join(process.env.LOCALAPPDATA, 'ms-playwright/chromium-1234/chrome-win64/chrome.exe'), args: ['--disable-extensions-except=' + root, '--load-extension=' + root] });
+  browser = await chromium.launchPersistentContext(path.join(temp, 'profile'), { headless: true, executablePath: require('../../chromium-path.cjs'), args: ['--disable-extensions-except=' + root, '--load-extension=' + root] });
   const worker = browser.serviceWorkers()[0] || await browser.waitForEvent('serviceworker', { timeout: 15000 });
   await worker.evaluate(async () => { await globalThis.certXSecurity.ready; await globalThis.certXSecurityCompatibilityReady; });
   const extensionId = new URL(worker.url()).host, session = 'security-utilities', workspaceId = 'utilities-workspace';
@@ -99,7 +99,7 @@ async function main() {
     const technologies = recon.technologies.map(technology => technology.name); assert.ok(technologies.includes('jQuery'), brief(recon.technologies)); assert.ok(technologies.includes('WordPress'), brief(recon.technologies));
     assert.equal(JSON.stringify(recon).includes('capture=other'), false, 'Other chat traffic does not leak into reconnaissance');
     referenceCopy = require('../prepare-reference.cjs').resolveReference(process.env.PTK_REFERENCE_ROOT);
-    referenceBrowser = await chromium.launchPersistentContext(path.join(temp, 'reference-profile'), { headless: true, executablePath: process.env.CHROMIUM_PATH || path.join(process.env.LOCALAPPDATA, 'ms-playwright/chromium-1234/chrome-win64/chrome.exe'), args: ['--disable-extensions-except=' + referenceCopy.extensionPath, '--load-extension=' + referenceCopy.extensionPath] });
+    referenceBrowser = await chromium.launchPersistentContext(path.join(temp, 'reference-profile'), { headless: true, executablePath: require('../../chromium-path.cjs'), args: ['--disable-extensions-except=' + referenceCopy.extensionPath, '--load-extension=' + referenceCopy.extensionPath] });
     const referenceWorker = referenceBrowser.serviceWorkers()[0] || await referenceBrowser.waitForEvent('serviceworker', { timeout: 15000 });
     await referenceWorker.evaluate(async () => { for (let i = 0; i < 200 && !globalThis.ptk_app?.ready; i++) await new Promise(resolve => setTimeout(resolve, 25)); await globalThis.ptk_app.ready; });
     const referencePage = await referenceBrowser.newPage(); await referencePage.goto(origin + '/app');

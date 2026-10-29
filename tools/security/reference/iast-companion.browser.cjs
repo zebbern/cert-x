@@ -35,7 +35,7 @@ async function main() {
   await new Promise(resolve => outsideServer.listen(0, "127.0.0.1", resolve)); const outsideOrigin = "http://127.0.0.1:" + outsideServer.address().port;
   const downloads = path.join(temp, "downloads"), profile = path.join(temp, "profile"); fs.mkdirSync(path.join(profile, "Default"), { recursive: true }); fs.mkdirSync(downloads);
   fs.writeFileSync(path.join(profile, "Default/Preferences"), JSON.stringify({ download: { default_directory: downloads, prompt_for_download: false } }));
-  browser = await chromium.launchPersistentContext(profile, { headless: true, downloadsPath: downloads, viewport: { width: 720, height: 1000 }, executablePath: process.env.CHROMIUM_PATH || path.join(process.env.LOCALAPPDATA, "ms-playwright/chromium-1234/chrome-win64/chrome.exe"), args: ["--disable-extensions-except=" + root + "," + extension, "--load-extension=" + root + "," + extension] });
+  browser = await chromium.launchPersistentContext(profile, { headless: true, downloadsPath: downloads, viewport: { width: 720, height: 1000 }, executablePath: require("../../chromium-path.cjs"), args: ["--disable-extensions-except=" + root + "," + extension, "--load-extension=" + root + "," + extension] });
   for (let i = 0; i < 200 && browser.serviceWorkers().length < 2; i++) await sleep(50);
   const ptk = browser.serviceWorkers().find(worker => new URL(worker.url()).pathname === "/app.js"), cert = browser.serviceWorkers().find(worker => new URL(worker.url()).pathname === "/background/background.js"); assert.ok(ptk && cert);
   await ptk.evaluate(async () => { for (let i = 0; i < 200 && !self.ptk_app?.ready; i++) await new Promise(resolve => setTimeout(resolve, 50)); await self.ptk_app.ready; });

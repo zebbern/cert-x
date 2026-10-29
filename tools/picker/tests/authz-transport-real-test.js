@@ -18,7 +18,7 @@ const listen = server => new Promise(resolve => server.listen(0, '127.0.0.1', re
   fs.writeFileSync(path.join(extension, 'manifest.json'), JSON.stringify({ manifest_version: 3, name: 'Isolated access transport fixture', version: '1.0', permissions: ['declarativeNetRequestWithHostAccess'], host_permissions: ['http://127.0.0.1/*'], background: { service_worker: 'background.js', type: 'module' } }));
   fs.writeFileSync(path.join(extension, 'background.js'), "import { createIsolatedTransport } from './authz-transport.mjs'; globalThis.testSend = createIsolatedTransport();");
   fs.writeFileSync(path.join(extension, 'fixture.html'), '<!doctype html><title>Independent extension tab</title>');
-  browser = await chromium.launchPersistentContext(path.join(temp, 'profile'), { headless: true, executablePath: process.env.CHROMIUM_PATH || path.join(process.env.LOCALAPPDATA, 'ms-playwright/chromium-1234/chrome-win64/chrome.exe'), args: ['--disable-extensions-except=' + extension, '--load-extension=' + extension] });
+  browser = await chromium.launchPersistentContext(path.join(temp, 'profile'), { headless: true, executablePath: require('../../chromium-path.cjs'), args: ['--disable-extensions-except=' + extension, '--load-extension=' + extension] });
   const worker = browser.serviceWorkers()[0] || await browser.waitForEvent('serviceworker');
   await browser.addCookies([{ name: 'fixture_session', value: 'ambient-original', url: origin, httpOnly: true, sameSite: 'Lax' }]);
   const baseHeaders = [{ name: 'Cookie', value: 'stale=browser-capture' }, { name: 'Authorization', value: 'Bearer stale-capture' }, { name: 'X-Account-Key', value: 'stale-custom' }];

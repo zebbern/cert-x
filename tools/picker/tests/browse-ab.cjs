@@ -20,7 +20,7 @@ const instruction = s => 'In the attached tab: ' + s.goal + (Object.keys(s.value
 
 async function runMode(mode, origin) {
   const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'cert-x-browse-ab-'));
-  const browser = await chromium.launchPersistentContext(temp, { headless: true, viewport: { width: 1200, height: 900 }, executablePath: process.env.CHROMIUM_PATH || path.join(process.env.LOCALAPPDATA, 'ms-playwright/chromium-1234/chrome-win64/chrome.exe'), args: ['--disable-extensions-except=' + root, '--load-extension=' + root] });
+  const browser = await chromium.launchPersistentContext(temp, { headless: true, viewport: { width: 1200, height: 900 }, executablePath: require('../../chromium-path.cjs'), args: ['--disable-extensions-except=' + root, '--load-extension=' + root] });
   const rows = [];
   // Chat-model traffic (OpenRouter) and Fast browse traffic (TypeSafe), from the worker.
   const net = { chat: 0, inflight: 0, lastEnd: 0, fast: 0, model: '', offered: null };

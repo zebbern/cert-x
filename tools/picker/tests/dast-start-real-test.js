@@ -33,7 +33,7 @@ async function main() {
   fs.writeFileSync(path.join(profile, 'Default/Preferences'), JSON.stringify({ download: { default_directory: downloads, prompt_for_download: false } }));
   browser = await chromium.launchPersistentContext(profile, {
     headless: true, downloadsPath: downloads,
-    executablePath: process.env.CHROMIUM_PATH || path.join(process.env.LOCALAPPDATA, 'ms-playwright/chromium-1234/chrome-win64/chrome.exe'),
+    executablePath: require('../../chromium-path.cjs'),
     args: ['--disable-extensions-except=' + root, '--load-extension=' + root]
   });
   const cert = browser.serviceWorkers()[0] || await browser.waitForEvent('serviceworker');

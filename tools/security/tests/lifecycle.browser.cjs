@@ -5,7 +5,7 @@ let context,server,activeProbes=0;
 async function main(){
  server=http.createServer((req,res)=>{if(req.headers['x-ptk-source']==='dast')activeProbes++;res.setHeader('Content-Type','text/html');res.end('<!doctype html><title>Lifecycle fixture</title><div id="sink"></div><script>document.querySelector("#sink").innerHTML=new URLSearchParams(location.search).get("q")||"fixture";</script>');});
  await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin='http://127.0.0.1:'+server.address().port;
- context=await chromium.launchPersistentContext(path.join(temp,'profile'),{headless:true,executablePath:process.env.CHROMIUM_PATH||path.join(process.env.LOCALAPPDATA,'ms-playwright/chromium-1234/chrome-win64/chrome.exe'),args:['--disable-extensions-except='+root,'--load-extension='+root]});
+ context=await chromium.launchPersistentContext(path.join(temp,'profile'),{headless:true,executablePath:require('../../chromium-path.cjs'),args:['--disable-extensions-except='+root,'--load-extension='+root]});
  const worker=context.serviceWorkers()[0]||await context.waitForEvent('serviceworker');await worker.evaluate(()=>globalThis.certXSecurity.ready);
  const id=new URL(worker.url()).host,session='lifecycle-chat',settings=await context.newPage();
  await settings.goto('chrome-extension://'+id+'/providers/providers.html?section=security&session='+session);

@@ -10,7 +10,7 @@ const target = process.argv[2] || 'https://app.grayswan.ai/challenges';
 (async () => {
   fs.mkdirSync(path.join(profile, 'Default'), { recursive: true });
   const browser = await chromium.launchPersistentContext(profile, { headless: false, viewport: { width: 1200, height: 900 },
-    executablePath: process.env.CHROMIUM_PATH || path.join(process.env.LOCALAPPDATA, 'ms-playwright/chromium-1234/chrome-win64/chrome.exe') });
+    executablePath: require('../../chromium-path.cjs') });
   const page = await browser.newPage();
   await page.goto(target, { waitUntil: 'domcontentloaded', timeout: 45000 }).catch(error => console.log('goto:', error.message));
   console.log('WINDOW OPEN — log in (Google if offered; if the site emails a sign-in link, copy that link and open it IN THIS WINDOW\'s address bar). CLOSE THIS WINDOW when done.');

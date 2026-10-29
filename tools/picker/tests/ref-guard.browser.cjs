@@ -25,7 +25,7 @@ let browser,server;
 async function main(){
  server=http.createServer((req,res)=>{res.setHeader('Content-Type','text/html');res.end(fixture)});
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const origin='http://127.0.0.1:'+server.address().port;
- browser=await chromium.launchPersistentContext(temp,{headless:true,viewport:{width:800,height:600},executablePath:process.env.CHROMIUM_PATH||path.join(process.env.LOCALAPPDATA,'ms-playwright/chromium-1234/chrome-win64/chrome.exe'),args:['--enable-smooth-scrolling','--disable-extensions-except='+root,'--load-extension='+root]});
+ browser=await chromium.launchPersistentContext(temp,{headless:true,viewport:{width:800,height:600},executablePath:require('../../chromium-path.cjs'),args:['--enable-smooth-scrolling','--disable-extensions-except='+root,'--load-extension='+root]});
  const worker=browser.serviceWorkers()[0]||await browser.waitForEvent('serviceworker');
  const page=await browser.newPage();await page.goto(origin+'/fixture');
  const tabId=await worker.evaluate(url=>chrome.tabs.query({url:url+'/*'}).then(tabs=>tabs[0].id),origin);

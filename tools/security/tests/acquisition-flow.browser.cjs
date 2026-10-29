@@ -14,7 +14,7 @@ async function main() {
   });
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
   const origin = `http://127.0.0.1:${server.address().port}`;
-  browser = await chromium.launchPersistentContext(path.join(temp, 'profile'), { headless: true, executablePath: process.env.CHROMIUM_PATH || path.join(process.env.LOCALAPPDATA, 'ms-playwright/chromium-1234/chrome-win64/chrome.exe'), args: ['--disable-extensions-except=' + root, '--load-extension=' + root] });
+  browser = await chromium.launchPersistentContext(path.join(temp, 'profile'), { headless: true, executablePath: require('../../chromium-path.cjs'), args: ['--disable-extensions-except=' + root, '--load-extension=' + root] });
   const worker = browser.serviceWorkers()[0] || await browser.waitForEvent('serviceworker');
   await worker.evaluate(async () => { await certXSecurity.ready; await chrome.storage.local.set({ ki_security_settings: { version: 1, defaults: { acquisition: { drainTimeoutMs: 9000 } }, limits: { acquisition: { maxResourceBytes: 1024 } } } }); });
   const page = await browser.newPage(); await page.goto(origin + '/app'); await page.waitForLoadState('load');

@@ -2,8 +2,9 @@ const test = require("node:test"), assert = require("node:assert/strict"), fs = 
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE || "C:/Users/zeb/AppData/Roaming/npm/node_modules/@playwright/cli/node_modules/playwright-core");
 test("Compare accounts renders explicit identities, frozen cases, uncertain stops and safe outcomes", async () => {
   const server = http.createServer((req, res) => { const file = { "/authz.js": "authz.js", "/authz.css": "authz.css", "/providers.css": "providers.css" }[req.url.split("?")[0]]; if (file) { res.setHeader("Content-Type", file.endsWith(".js") ? "text/javascript" : "text/css"); return res.end(fs.readFileSync(path.join(__dirname, file))); } res.setHeader("Content-Type", "text/html"); res.end('<!doctype html><html data-theme="dark"><head><link rel="stylesheet" href="/providers.css"></head><body><main class="page"><section id="authz-section"></section></main><script type="module">import {initAuthz} from "/authz.js"; await initAuthz(); window.ready=true;</script></body></html>'); });
+  // Launch before listening: a failed launch must not leave the server holding the test process open.
+  const browser = await chromium.launch({ executablePath: require("../tools/chromium-path.cjs"), headless: true });
   await new Promise(resolve => server.listen(0, "127.0.0.1", resolve));
-  const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || path.join(process.env.LOCALAPPDATA, "ms-playwright/chromium-1234/chrome-win64/chrome.exe"), headless: true });
   try {
     const page = await browser.newPage({ viewport: { width: 420, height: 1000 } }), errors = []; page.on("pageerror", error => errors.push(error.message));
     await page.addInitScript(() => {

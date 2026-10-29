@@ -13,7 +13,7 @@ async function main() {
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve)); const origin = 'http://127.0.0.1:' + server.address().port;
   const profile = path.join(temp, 'profile'), downloads = path.join(temp, 'downloads'); fs.mkdirSync(path.join(profile, 'Default'), { recursive: true }); fs.mkdirSync(downloads);
   fs.writeFileSync(path.join(profile, 'Default/Preferences'), JSON.stringify({ download: { default_directory: downloads, prompt_for_download: false } }));
-  browser = await chromium.launchPersistentContext(profile, { headless: true, downloadsPath: downloads, executablePath: process.env.CHROMIUM_PATH || path.join(process.env.LOCALAPPDATA, 'ms-playwright/chromium-1234/chrome-win64/chrome.exe'), args: ['--disable-extensions-except=' + root, '--load-extension=' + root] });
+  browser = await chromium.launchPersistentContext(profile, { headless: true, downloadsPath: downloads, executablePath: require('../../chromium-path.cjs'), args: ['--disable-extensions-except=' + root, '--load-extension=' + root] });
   const worker = browser.serviceWorkers()[0] || await browser.waitForEvent('serviceworker', { timeout: 15000 }); await worker.evaluate(async () => { await certXSecurity.ready; await certXSecurityCompatibilityReady; });
   const extensionId = new URL(worker.url()).host, session = 'native-reporting';
   const settings = await browser.newPage(); await settings.goto('chrome-extension://' + extensionId + '/providers/providers.html?section=security&session=' + session); await settings.waitForFunction(() => !document.querySelector('main').inert);

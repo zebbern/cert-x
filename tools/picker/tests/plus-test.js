@@ -11,7 +11,7 @@ const tag = process.env.TAG || "dark";
 async function main() {
   const profile = fs.mkdtempSync(path.join(os.tmpdir(), "ki-ui-"));
   const ctx = await chromium.launchPersistentContext(profile, {
-    executablePath: path.join(process.env.LOCALAPPDATA, "ms-playwright/chromium-1234/chrome-win64/chrome.exe"),
+    executablePath: require("../../chromium-path.cjs"),
     headless: false,
     viewport: { width: Number(process.env.W || 420), height: 820 },
     colorScheme: process.env.SCHEME || "dark",

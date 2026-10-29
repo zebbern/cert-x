@@ -21,7 +21,7 @@ function save(){fs.writeFileSync(evidenceFile,JSON.stringify(evidence,null,2));}
 function snapshotFindings(snapshot,name){return projectIast(snapshot.IAST?.findings||[],marker(name));}
 async function run(extension,integrated,origin){
  side=integrated?'owned':'reference';console.log('COLLECTION',side,'launch');
- browser=await chromium.launchPersistentContext(path.join(temp,side),{headless:true,executablePath:process.env.CHROMIUM_PATH||path.join(process.env.LOCALAPPDATA,'ms-playwright/chromium-1234/chrome-win64/chrome.exe'),args:['--disable-extensions-except='+extension,'--load-extension='+extension]});
+ browser=await chromium.launchPersistentContext(path.join(temp,side),{headless:true,executablePath:require('../../chromium-path.cjs'),args:['--disable-extensions-except='+extension,'--load-extension='+extension]});
  const worker=browser.serviceWorkers()[0]||await browser.waitForEvent('serviceworker',{timeout:15000});
  const logs=[];worker.on('console',message=>{if(['warning','error'].includes(message.type()))logs.push(message.text());});
  await worker.evaluate(async integrated=>{if(integrated)await certXSecurity.ready;else{for(let i=0;i<200&&!globalThis.ptk_app;i++)await new Promise(r=>setTimeout(r,25));if(!globalThis.ptk_app)throw Error('Original runtime unavailable');await ptk_app.ready;ptk_app.devLocalConfig.automationEnabled=true;}},integrated);

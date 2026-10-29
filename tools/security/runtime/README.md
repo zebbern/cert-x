@@ -23,9 +23,10 @@ node tools/security/tests/managed-zap-guard.cjs <managed-runtime-root>
 node tools/security/tests/managed-zap.cjs <managed-runtime-root>
 node tools/security/tests/managed-agent.browser.cjs
 node tools/security/tests/managed-java-fallback.cjs <managed-runtime-root>
+node tools/security/tests/managed-python-fallback.cjs <managed-runtime-root>
 ```
 
-Set `ZAP_ACTIVE=1` or `ZAP_AJAX=1` for the respective ZAP fixture. The bounded live webhook test additionally requires an explicit environment-file argument; it creates its own endpoint, sends marker-only events, retains evidence, and deletes only that endpoint.
+Set `ZAP_ACTIVE=1` or `ZAP_AJAX=1` for the respective ZAP fixture. The bounded live webhook test, `managed-oast-live.cjs <managed-runtime-root> <env-file>`, calls the real webhook service; it creates its own endpoint, sends marker-only events, retains evidence, and deletes only that endpoint.
 
 `managed-agent.browser.cjs` uses a scripted model-protocol endpoint and real browser/native tools. It verifies chat-loop dispatch and results, not live model inference.
 
@@ -37,4 +38,4 @@ Run summaries separate `probeUnits` (raw send attempts), `httpRequestsSent` (oth
 
 Raw HTTP/1 and HTTP/2 desync use paired controls and repeated backend observations; HTTP/1 also supports controlled response queues. WebSocket frames require a validated upgrade. Structured HTTP/2 uses pinned HPACK and 16,384-byte DATA frames, with the initial 65,535-byte flow-control limit. Private evidence supports paging after completion or errors. See `../raw-contract.md` for exact arguments and unsupported forms. Byte sends and timeouts alone never confirm a vulnerability.
 
-Stored execution now passes two positive and three negative original/owned browser cases using a fixture-derived rule. Messaging, existing/OOPIF documents and multi-origin HTTP correlation have separate passing browser fixtures. Candidate/API contracts and selected browser flows pass; that is not exhaustive parity across every original PTK path. See `security/advanced-verification.md` for the observed evidence and exact remaining work.
+Stored execution passes two positive and three negative original/owned browser cases using a fixture-derived rule. Messaging, existing/OOPIF documents and multi-origin HTTP correlation have separate passing browser fixtures. Candidate/API contracts and selected browser flows pass; that is not exhaustive parity across every original PTK path. See `security/advanced-verification.md` for the observed evidence and exact remaining work.

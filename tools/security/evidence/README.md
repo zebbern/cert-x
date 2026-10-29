@@ -180,7 +180,8 @@ Command: `node tools/security/tests/iast-http-scope.browser.cjs` — passed, 12 
 `sca-authenticated-browser.json` records real AngularJS content detection at opaque authenticated resource URLs, matched against original PTK for A/B/anonymous. `sca-authenticated-verify.cjs` independently compares findings and retained locations. `sca-preloaded-browser.json` covers pre-existing executable sources without refetch and extensionless JavaScript Fetch/XHR bodies. These replace the earlier unverified body-acquisition status; HTTP bodies and Debugger text are distinct evidence types.
 
 `dast-public-smoke.json` records the bounded user-authorized training-site check: one reflected-XSS rule, two baseline requests and one probe, three HTTP responses, zero findings. It establishes execution only. Local DAST fixtures provide resettable positive/negative and no-traffic controls. `cdp-screenshot.json` now also verifies a PDF Outputs artifact rather than raw base64 text.
-# Child-frame acquisition and stop follow-up
+
+## Child-frame acquisition and stop follow-up
 
 `sca-frames-stop-browser.json` records real HTTPS root/nested/OOPIF acquisition with an already-active browser Runtime owner, sequential A/B/anonymous identities, immediate stop after Fetch/XHR loadend, and a configured one-script/75 ms timeout. A and B each acquire four preloaded sources and two response bodies; only A has Angular findings. Failed cookie, shared-Runtime, repeated-attachment and disable-filter trials remain in adjacent named files.
 

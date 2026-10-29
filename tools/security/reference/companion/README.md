@@ -1,5 +1,7 @@
 # PTK v10 companion
 
+Historical: this describes the superseded two-extension companion with its original paths (`tools/ptk/build.ps1` is now `build.ps1` in this directory); see `../README.md`. The maintained targeted DAST (`tools/picker/src/ki-dast.js`, `security/compat/dast-core.mjs`) defaults to 100 requests, 300 seconds and five requests per second, keeps concurrency one, and has no request, time or rate cap like those described below.
+
 From the cert-x repository, run:
 
 ```powershell

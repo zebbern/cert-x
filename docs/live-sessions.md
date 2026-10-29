@@ -13,9 +13,13 @@ OPENROUTER_API_KEY=... M4_MINUTES=40 M4_MODEL=xiaomi/mimo-v2.6-pro \
 ```
 
 - Loads the extension in an isolated Chromium profile, configures an
-  OpenRouter connection pinned to `M4_MODEL`, logs into the target, selects
-  the Bug bounty profile, sends one instruction, then only watches — no
-  model behavior is scripted.
+  OpenRouter connection (its `modelIds` are the two MiMo v2.6 models), pins
+  the workspace model to `M4_MODEL`, logs into the target, selects the Bug
+  bounty profile, sends one instruction, then only watches (clicking Retry
+  when a turn fails) — no model behavior is scripted.
+- `DVWA_ORIGIN` moves the first target (default `http://127.0.0.1:4280`),
+  `M4_LOGIN=none` skips the DVWA login for targets without one, and
+  `M4_INSTRUCTION` replaces the default DVWA instruction.
 - `M4_MINUTES` is a **test-only** timebox. The product has no time window;
   at 60% of the box the runner steers a wrap-up through the same mid-run
   message channel any human user has. **Scale the box with scope** — a
@@ -23,8 +27,8 @@ OPENROUTER_API_KEY=... M4_MINUTES=40 M4_MODEL=xiaomi/mimo-v2.6-pro \
   dual-target session exceeded 35 min and lost its final report to the
   clock (work was complete; the report was mid-generation at expiry).
 - `M4_ORIGIN2` adds a second target tab in the same workspace — the
-  cross-target map scenario (validated 2026-10-24: parallel recon
-  subagents, one shared graph, orchestrator holds the hypothesis ledger).
+  cross-target map scenario (validated 2026-10-24: recon subagents, one
+  shared graph, orchestrator holds the hypothesis ledger).
 - Captures per run: model request bodies (full conversation history), the
   panel transcript, and tool telemetry (`C:/tmp/m4-*`).
 
@@ -42,7 +46,8 @@ OPENROUTER_API_KEY=... M4_MINUTES=40 M4_MODEL=xiaomi/mimo-v2.6-pro \
 ## Reading results
 
 - `telemetry.calls` — tool adoption; `telemetry.errors` and `afterError` —
-  recovery-loop cost (via `get_capabilities` or the captured storage dump).
+  recovery-loop cost (via `get_capabilities`; the runner's raw storage dump
+  holds the same data as `calls`, `counts` and `next`).
 - The fullest captured request body contains the whole conversation; the DOM
   transcript contains the final report.
 
@@ -54,10 +59,10 @@ Five minutes of setup, then the same shape as every evidence run:
 2. **Settings → Models**: your OpenRouter connection needs the models in its
    `modelIds` list (e.g. `xiaomi/mimo-v2.6-pro`); pick it as the model.
 3. **Settings → Workspaces**: create one for the program. Put the program's
-   **scope and exclusions in the workspace notes** (origins in scope,
-   out-of-scope paths, rate expectations) and the testing scope origins —
-   scans and replays are refused outside those origins, and the agent treats
-   written limits as binding.
+   **scope and exclusions in the workspace's Shared notes** (origins in scope,
+   out-of-scope paths, rate expectations) and its origins under **Testing
+   scope** — scans and replays are refused outside those origins, and the
+   agent treats written limits as binding.
 4. Open the target logged in as the intended account, select the Bug bounty
    profile and the workspace, and give one instruction: what to test, "work
    findings to proof, report each one with the invariant."

@@ -1,5 +1,7 @@
 # Compare accounts — implementation contract
 
+Historical revision 4 companion contract. The maintained comparison (`tools/picker/src/ki-authz.js`, `security/compat/authz-core.mjs`) keeps these `authz_*` operations and tool names in-process, without pairing; its budget defaults to 100 requests, 300 seconds and five requests per second (`kiDastBudget` in `tools/picker/src/ki-dast.js`), with concurrency one and no hard request, time or rate cap.
+
 Separate read-access workflow; existing injection plans stay unchanged. Reuse `kiDastCompanion` authenticated RPC with `authz_*` operations. Private account material and plans live in `chrome.storage.session`; public account metadata and terminal batch summaries may persist locally. Credentials never enter model tool results, page scripts, approval previews or reports.
 
 ## Companion wire (revision 4)

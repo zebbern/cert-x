@@ -2,7 +2,7 @@
 
 These results apply to the local Windows checkout tested with Node 24.20.0 and Chromium 151.0.7922.34. Browser checks use isolated temporary profiles and resettable local fixtures. They do not establish CI results or universal finding parity on arbitrary applications.
 
-Final maintained contract/regression run: **516 passed, 0 failed, 0 skipped** using the root README's `node --test` command. Separate browser suites and the combined four-engine workflow passed. The standalone source-copy build passed twice with identical output; `git diff --check` passed.
+Maintained contract/regression run for this record: **516 passed, 0 failed, 0 skipped** using the root README's `node --test` command; the suite has grown since. Separate browser suites and the combined four-engine workflow passed. The standalone source-copy build passed twice with identical output; `git diff --check` passed.
 
 ## Reference and coverage
 
@@ -23,7 +23,7 @@ Observed differential browser results under matched settings:
 
 Comparisons retain meaningful finding/evidence differences. The SPA negative case is deliberately recorded as a reflection observation because the baseline produces a candidate without execution proof. It is not relabelled as confirmed XSS.
 
-The independent DAST contract comparison additionally covers all 34 modules and 158 prepared attack definitions, with 246 positive/negative request-mutation cases and 246 validation/evidence comparisons across the 31 HTTP-fixture modules. Request targets, payloads and metadata match with deterministic nonce/UUID generation. One expected difference remains: the maintained cache/privacy validator detects the characterized nested-constant case missed by the original. Its negative controls still match. JWT, AngularJS and SPA execution have separate specialized tests.
+The independent DAST contract comparison additionally covers all 34 modules and 158 prepared attack definitions, with 246 positive/negative request-mutation cases and 246 validation/evidence comparisons across the 31 HTTP-fixture modules. Request targets, payloads and metadata match with deterministic nonce/UUID generation. Two expected differences remain: the maintained cache/privacy validator detects the characterized nested-constant case missed by the original, and the OS command rule drops the original payload's dangling terminal pipe (its two added output-marker checks are tested separately). Negative controls still match. JWT, AngularJS and SPA execution have separate specialized tests.
 
 ## Functional and regression checks
 
@@ -32,7 +32,7 @@ The independent DAST contract comparison additionally covers all 34 modules and 
 - Requests and identities: replay methods/bodies/headers, per-hop scope, budgets, error evidence, saved/anonymous account headers and cookies, unchanged ambient identity, and the existing account comparison matrix.
 - Supporting tools: capture, macros, import/export, JWT operations, codecs, reconnaissance, timing probes, OpenAPI JSON/YAML parsing, and native reports. JSON/Markdown and both PDF styles were downloaded; PDF text and rendered pages were inspected.
 - Cookie policies: actual privileged settings bridge, production approval grant, private persistence, browser restart, exact domain/path/store/partition identity, cross-owner denial, revocation, removal after workspace movement, and unavailable private-store refusal.
-- Worker recovery: completed SAST evidence survives exactly; active SAST/DAST runs become interrupted. Surviving DAST request evidence retains its original automation-session and scan IDs. Old probes stop, a fresh scan starts, and no state-changing request is replayed automatically. Failed cleanup still reports an error.
+- Worker recovery: completed SAST evidence survives exactly; active SAST/DAST runs become interrupted. Surviving DAST request evidence retains its original automation-session and scan IDs. Adopting the surviving executor re-pages its event journal when live events overtake the replay; three re-pages in a row that apply nothing still fail with `dast_runtime_event_cursor_gap`. Old probes stop, a fresh scan starts, and no state-changing request is replayed automatically. Failed cleanup still reports an error.
 - Existing integrations: native commands/files/jobs, local and remote MCP, Browser control, profiles/workspaces/model precedence, permission rules, manual CSP control, and legacy DAST/account extensions.
 - UI: keyboard-accessible controls, persisted settings, dark 420px and light 720px layouts, no horizontal overflow, concise collapsed advanced controls, and neutral switches.
 - Packaging: source-only temporary checkout without dependencies, inspiration folders, or companion configuration; two normal builds produced byte-identical bundles. The packaged static module graph is validated on every build.

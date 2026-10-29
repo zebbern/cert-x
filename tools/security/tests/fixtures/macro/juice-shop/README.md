@@ -1,7 +1,10 @@
 # Juice Shop macro release fixtures
 
-This directory is the source of truth for the authenticated OWASP Juice Shop
-journey used by PTK macro import, replay, and macro-guided scan release tests.
+This directory holds the authenticated OWASP Juice Shop journey used by PTK
+macro import, replay, and macro-guided scan release tests. Its source of truth
+is the `pentestkit` repository (`fixture-set.json`); in cert-x,
+`tools/security/tests/runtime-macroFlow.test.mjs` imports
+`recordings/chrome-recorder.json`.
 
 The journey is defined in `journey.json`. Every recording must represent that
 same browser journey. `fixture-set.json` records the producer, format, expected

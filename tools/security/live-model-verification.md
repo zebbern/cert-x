@@ -38,7 +38,7 @@ The live harness loads `OPENROUTER_API_KEY` from this checkout's `.env.local` in
 
 The harness first uses two scripted tool calls in the same chat to prepare a **real** DAST/SAST scan from traffic captured by the extension on a resettable localhost fixture. The live model receives the resulting scan ID and must select its own investigation tool calls. The fixture has no external targets or real accounts. The native host registration is installed only after checking Chromium has no existing registration, and the harness deletes only its own registration, daemon, browser profile, and work directory.
 
-Run from the repository root:
+The harness makes real, paid model calls; the verifier only reads retained evidence. Run from the repository root:
 
 ```powershell
 node tools/security/tests/live-model.browser.cjs

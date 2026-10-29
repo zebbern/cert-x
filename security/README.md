@@ -36,7 +36,7 @@ Ordinary replay supports scoped redirects and the browser's normal HTTP/2 negoti
 
 `capabilities.json` separates executable modules from metadata-only entries. Its verification fields must be updated only from recorded tests. Copying a rulepack, a matching module count, or a successful start does not establish detection parity.
 
-Run unit/contract tests with `node --test tools/security/tests/*.test.mjs tools/ptk/*.test.cjs tools/ptk/*.test.mjs`, and real Chromium checks with:
+Run unit/contract tests with `node --test tools/security/tests/*.test.mjs tools/ptk/*.test.cjs tools/ptk/*.test.mjs`, and real Chromium checks plus the source-only build check (`clean-build.cjs`) with:
 
 ```text
 node tools/security/tests/browser-smoke.cjs
@@ -53,7 +53,7 @@ node tools/security/tests/runtime-browser-dast.cjs
 node tools/security/tests/clean-build.cjs
 ```
 
-Browser tests use fresh temporary profiles and local application fixtures. `PLAYWRIGHT_MODULE` and `CHROMIUM_PATH` override the installed test runtime paths. The parity harness copies the unmodified supplied v10 extension through `prepare-reference.cjs`, or accepts `PTK_REFERENCE_ROOT` pointing to such a copy. Set `PARITY_ENGINES` to select DAST, IAST, SAST, SCA, or comma-separated combinations. Original PTK and cert-x execute in separate profiles against identical fixtures. Reports are written to the OS temporary directory; source fixtures remain in the repository.
+Browser tests use fresh temporary profiles and local application fixtures. `PLAYWRIGHT_MODULE` and `CHROMIUM_PATH` override the installed test runtime paths (Chromium defaults to the newest build Playwright has installed); the unit run's detector tests launch Chromium too. The parity harness copies the unmodified supplied v10 extension through `prepare-reference.cjs`, or accepts `PTK_REFERENCE_ROOT` pointing to such a copy. Set `PARITY_ENGINES` to select DAST, IAST, SAST, SCA, or comma-separated combinations. Original PTK and cert-x execute in separate profiles against identical fixtures. Reports are written to the OS temporary directory; source fixtures remain in the repository. Some harnesses leave the machine and are in neither list: `dvwa-live.browser.cjs`, `live-model.browser.cjs` and `dvwa-report-complete.cjs` make paid model calls, and the `*-public*` harnesses send bounded traffic to a public training lab only when their opt-in variable is `1`.
 
 All reference paths are checked against the recorded source-tree digest in `tools/security/reference/baseline.json`, including environment overrides. A patched companion cannot serve as the oracle. The focused DAST differential fixture selects the original three reflected-XSS checks; it is not evidence of parity for every DAST module. Per-module detector tests and imported engine regression suites supply additional evidence. Baseline defects and intentional fixes require separate expectations, rather than normalizing away meaningful differences.
 
@@ -63,7 +63,7 @@ See [verification.md](verification.md) for the tested environment, observed resu
 
 ### Testing scope
 
-In **Settings → Workspaces → Testing scope**, keep exact origins or enable **Include HTTP/S and ports on the same host**. **Include subdomains** is separate. Excluded paths still apply. Without configured targets, each new operation uses its explicitly selected target; discovering a link does not silently add another host. Capabilities report the effective scope, and denied-target errors identify the URL and settings location.
+In **Settings → Workspaces → Testing scope**, keep exact origins or enable **Include HTTP/S and ports on the same host**. **Include subdomains** appears once that is on. Excluded paths still apply. Without configured targets, each new operation uses its explicitly selected target; discovering a link does not silently add another host. Capabilities report the effective scope, and denied-target errors identify the URL and settings location.
 
 ### Reading execution coverage
 

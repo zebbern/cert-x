@@ -1,6 +1,6 @@
-const test=require('node:test'),assert=require('node:assert/strict'),net=require('node:net'),http2=require('node:http2'),crypto=require('node:crypto'),path=require('node:path');
+const test=require('node:test'),assert=require('node:assert/strict'),net=require('node:net'),http2=require('node:http2'),crypto=require('node:crypto'),path=require('node:path'),fs=require('node:fs'),os=require('node:os');
 const {createTransports}=require('../security/transports.cjs');
-const root=path.join(process.env.LOCALAPPDATA||process.cwd(),'cert-x','verification','raw-tests');
+const root=fs.mkdtempSync(path.join(os.tmpdir(),'cert-x-raw-tests-'));test.after(()=>fs.rmSync(root,{recursive:true,force:true,maxRetries:4,retryDelay:100}));
 const modules=path.resolve(__dirname,'../../security/runtime/node_modules');
 const b64=x=>Buffer.from(x).toString('base64');
 const request=(host,p='/')=>b64(`GET ${p} HTTP/1.1\r\nHost: ${host}\r\n\r\n`);

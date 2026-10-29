@@ -187,3 +187,21 @@ Command: `node tools/security/tests/iast-http-scope.browser.cjs` — passed, 12 
 
 `acquisition-flow-browser.json` exercises the actual service/runtime/automation path: inherited resource ceilings survive partial run options and engine-options overrides, persist in history, and appear with incomplete coverage in the Markdown report. Separate `report-coverage.browser.cjs` checks both PDF styles and retained native findings. These are bounded fixture results, not exhaustive application coverage.
 
+
+## Regenerating these records
+
+These harnesses reproduce the records above and run in neither suite, because each one rewrites tracked JSON here, in most cases even when it fails. Commit a regenerated record only after a passing run.
+
+- `node tools/security/tests/acquisition-flow.browser.cjs` → `acquisition-flow-browser.json`
+- `node tools/security/tests/collection-combinations.browser.cjs` → `collection-combinations.json` (needs the PTK reference). The current `collection-parity.browser.cjs` asserts owned acquisition for the object-message and SPA cases, while the committed record still shows 0 for both, so regenerate it before citing those two cases.
+- `node tools/security/tests/command-injection.browser.cjs` → `command-injection-browser.json` (needs `/bin/sh`, or the `kali-linux` WSL distro on Windows)
+- `node tools/security/tests/iast-acquisition.browser.cjs` → `iast-acquisition-browser.json` (needs the PTK reference)
+- `node tools/security/tests/sast-preloaded-combined.browser.cjs` → `sast-preloaded-combined.json`
+- `node tools/security/tests/sca-authenticated.browser.cjs` → `sca-authenticated-browser.json`, checked by `sca-authenticated-verify.cjs` (`SCA_OWNED_ONLY=1` skips the reference)
+- `node tools/security/tests/sca-frames-stop.browser.cjs` → `sca-frames-stop-browser.json` (needs the managed runtime; its HTTPS fixture listens on all interfaces during the run)
+- `node tools/security/tests/sca-preloaded.browser.cjs` → `sca-preloaded-browser.json`
+- `node tools/security/tests/tool-target-chat.browser.cjs` → `tool-target-chat.json`
+- `CERT_X_PUBLIC_SMOKE=1 node tools/security/tests/dast-public-smoke.browser.cjs` → `dast-public-smoke.json` (sends bounded traffic to the public training lab)
+- `node tools/picker/tests/cdp-screenshot.browser.cjs` → `cdp-screenshot.json` only with `CERT_X_REFRESH_EVIDENCE=1`; otherwise it writes to the OS temp directory and runs in `tools/run-browser-tests.cjs`.
+
+Two more harnesses that `security/capabilities.json` cites stay out of both suites: `raw-bridge.browser.cjs` (Windows, managed runtime; it adds a temporary HKCU native-host registration, refuses if one exists, and must not run alongside `native-test.js`) and `runtime-browser-reports.cjs` (offscreen Markdown and both PDF report renders). `CERT_X_PUBLIC_COMMAND_SMOKE=1` enables `command-injection-public.cjs` and `command-injection-syntax-public.cjs`, which write to `%LOCALAPPDATA%\cert-x\verification`.

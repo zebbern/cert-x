@@ -164,10 +164,12 @@ Build and run maintained contracts. The build refuses to write a bundle whose to
 
 ```text
 node tools/picker/apply-picker.js
-node --test tools/host/tests/*.test.js tools/picker/tests/*.test.js providers/*.test.js tools/ptk/*.test.cjs tools/ptk/*.test.mjs tools/security/tests/*.test.mjs
+node --test tools/host/tests/*.test.js tools/host/tests/*.test.cjs tools/picker/tests/*.test.js providers/*.test.js tools/ptk/*.test.cjs tools/ptk/*.test.mjs tools/security/tests/*.test.mjs
 ```
 
-Real Chromium checks use temporary profiles and local fixtures. Run every check in the list below with real exit codes (nothing silently skips; the DVWA rehearsal is reported as skipped unless DVWA answers at `DVWA_ORIGIN`, default `http://127.0.0.1:4280/`) via:
+The host's raw HTTP/2 and TLS tests load the runtime's pinned packages; install them once with `npm ci --ignore-scripts --prefix tools/security/runtime`. The managed-browser host tests (`security-browser*.test.cjs`) skip unless `CERT_X_TEST_RUNTIME` points at a prepared runtime; `tools/run-browser-tests.cjs` runs them when one is installed.
+
+Real Chromium checks use temporary profiles and local fixtures. Run every check in the list below with real exit codes (nothing silently skips; the DVWA rehearsal is reported as skipped unless DVWA answers at `DVWA_ORIGIN`, default `http://127.0.0.1:4280/`, and the two managed-browser checks unless a local runtime is installed) via:
 
 ```text
 node tools/run-browser-tests.cjs
@@ -191,12 +193,21 @@ node tools/picker/tests/iast-real-test.js
 node tools/picker/tests/dast-real-test.js
 node tools/picker/tests/dast-coverage-real-test.js
 node tools/picker/tests/authz-real-test.js
+node tools/picker/tests/authz-transport-real-test.js
+node tools/picker/tests/dast-start-real-test.js
+node tools/picker/tests/cdp-screenshot.browser.cjs
+node tools/picker/tests/upload-lifecycle.browser.cjs
 node tools/security/tests/browser-parity.cjs
 node tools/security/tests/runtime-browser-dast.cjs
+node tools/security/tests/cve-wire-parity.browser.cjs
+node tools/security/tests/html-discovery.browser.cjs
+node tools/security/tests/investigation.browser.cjs
+node tools/host/tests/security-browser.test.cjs
+node tools/host/tests/security-browser-workers.test.cjs
 ```
 
 `tools/picker/tests/ref-guard.browser.cjs` (non-blocking interact highlight, changed-element ref refusal), `tools/picker/tests/browse.browser.cjs` (the browse loop with a scripted decision model), `tools/picker/tests/fast-browse-ui.browser.cjs` (the Fast browse switch and key check in the model menu and Settings) and `tools/picker/tests/stream-liveness.browser.cjs` (a subagent that streams reasoning or only keep-alive comments past the stall budget finishes; a silent or cut stream reaches the orchestrator as its own error after the retries; a refusal or a missing model is not retried and comes back marked not retryable) use test hooks, so they need a test build first: `KI_TEST_HOOKS=1 node tools/picker/apply-picker.js`. Rebuild without the variable afterwards. Two scripts make real, paid model calls and belong to neither suite. `node tools/picker/tests/browse-ab.cjs --model=<openrouter model>` compares whole chats with Fast browse on and off on the same fixtures (a real chat model and real Fast browse, keys `OPENROUTER_API_KEY` and `TYPESAFE_API_KEY` from `.env.local`, never printed; production build): tasks done, time, chat-model calls and how often the model chose `browse`. On the test build, `node tools/picker/tests/browse-live.cjs typesafe:jev-latest openrouter:<model>` runs real decision models (keys from `.env.local`, never printed) on seven local fixtures and reports pass rate and latency per backend; a scenario passes on what the fixture server received, not on the model's own "done".
 
 The native-host test checks same-conversation tool enablement, Full access, approval overrides, files, commands, local/remote MCP, jobs and outputs. It uses temporary Chromium host registration and refuses to replace an existing registration. Chrome/Edge registrations are unaffected. Browser control tests use a local WebSocket fixture, never the user's running controller.
 
-Use `PLAYWRIGHT_MODULE` and `CHROMIUM_PATH` to select installed browser-test dependencies (Chromium defaults to the newest build Playwright has installed, `tools/chromium-path.cjs`); three unit files (`providers/authz.test.js`, `providers/security.test.js`, `tools/security/tests/detectors-analysis.test.mjs`) launch Chromium too. The expanded targeted fixtures also require Node's SQLite support and Python with Jinja2. Security detector tests include isolated browser execution; see [security verification](security/README.md) for the independent PTK reference and per-engine parity commands. Historical companion-specific fixtures are preserved under `tools/security/reference`; they are not the current installation workflow.
+Use `PLAYWRIGHT_MODULE` and `CHROMIUM_PATH` to select installed browser-test dependencies (Chromium defaults to the newest build Playwright has installed, `tools/chromium-path.cjs`); three unit files (`providers/authz.test.js`, `providers/security.test.js`, `tools/security/tests/detectors-analysis.test.mjs`) launch Chromium too. The expanded targeted fixtures also require Node's SQLite support and Python with Jinja2. Security detector tests include isolated browser execution; see [security verification](security/README.md) for the independent PTK reference and per-engine parity commands.

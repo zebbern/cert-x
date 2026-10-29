@@ -31,8 +31,9 @@ test('native connection loss rejects an in-flight operation and reconnect does n
  const work=client.request('dispatch',{action:'transport.http1',args:{url,requestBase64:Buffer.from('GET /once HTTP/1.0\r\n\r\n').toString('base64'),timeoutMs:30000},context:{owner:'chat',runId:'lost',scope:{origins:[url]},lease:'lease'}});const rejected=assert.rejects(work,/partial.*evidence/);
  await until(()=>wire.length===1);client.close();await rejected;await until(()=>sockets.size===0);const state=await client.request('status',{});assert.equal(state.lifecycle.idle,true);assert.equal((await f.descriptor()).pid,before.pid);assert.equal(wire.length,1);
 });
-test('an open managed browser survives a host update until explicitly closed',async t=>{
- const f=await fixture(t),installed=process.env.CERT_X_MANAGED_COMPONENTS||path.join(process.env.CERT_X_TEST_RUNTIME||path.join(process.env.LOCALAPPDATA||os.homedir(),'cert-x','security-runtime'),'installed.json');await fs.copyFile(installed,path.join(f.runtime,'installed.json'));
+const installed=process.env.CERT_X_MANAGED_COMPONENTS||path.join(process.env.CERT_X_TEST_RUNTIME||path.join(process.env.LOCALAPPDATA||os.homedir(),'cert-x','security-runtime'),'installed.json');
+test('an open managed browser survives a host update until explicitly closed',{skip:!require('node:fs').existsSync(installed)&&'needs an installed managed runtime: '+installed},async t=>{
+ const f=await fixture(t);await fs.copyFile(installed,path.join(f.runtime,'installed.json'));
  const server=require('node:http').createServer((_req,res)=>res.end('<!doctype html><title>Persistent lifecycle</title><h1>Retained browser</h1>'));await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));t.after(async()=>{server.closeAllConnections();await new Promise(resolve=>server.close(resolve));});
  const url='http://127.0.0.1:'+server.address().port,context={owner:'owner',workspaceId:'workspace',runId:'browser-run',scope:{origins:[url]},lease:'persistent-lease'},old=f.create(f.old);
  const created=await old.request('dispatch',{action:'browser.create',args:{url,headless:true},context}),second=await old.request('dispatch',{action:'browser.create',args:{url,headless:true},context});assert.ok(created.sessionId);const before=await f.descriptor();old.close();await new Promise(resolve=>setTimeout(resolve,100));

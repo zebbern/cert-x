@@ -14,7 +14,7 @@ Host updates stage and validate all maintained files before publishing them, wit
 
 ## Validation
 
-The broad repository test command covers extension/service contracts. Managed host tests use the additional `tools/host/tests/security-*.test.cjs` files; browser tests require a prepared runtime selected with `CERT_X_TEST_RUNTIME` or their documented fixture setup. Do not count missing dependencies or skipped tests as passes.
+The broad repository test command covers extension/service contracts and the managed host tests in `tools/host/tests/security-*.test.cjs`. Those need this directory's packages (`npm ci --ignore-scripts --prefix tools/security/runtime`); the managed-browser ones skip unless `CERT_X_TEST_RUNTIME` selects a prepared runtime, and the browser runner supplies it when the default runtime is installed. Do not count missing dependencies or skipped tests as passes.
 
 Useful standalone checks:
 

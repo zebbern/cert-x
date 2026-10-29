@@ -186,7 +186,7 @@ check itself was wrong or obsolete, fix it and say so.
   `node tools/picker/apply-picker.js` and reload the extension. Never hand-edit
   `background/background.js` or `chunks/*` — they are generated.
 - Unit tests:
-  `node --test tools/host/tests/*.test.js tools/picker/tests/*.test.js providers/*.test.js tools/ptk/*.test.cjs tools/ptk/*.test.mjs tools/security/tests/*.test.mjs`
+  `node --test tools/host/tests/*.test.js tools/host/tests/*.test.cjs tools/picker/tests/*.test.js providers/*.test.js tools/ptk/*.test.cjs tools/ptk/*.test.mjs tools/security/tests/*.test.mjs`
 - Real-browser checks are listed in the README's Validation section. Run the
   ones relevant to what you touched.
 - Windows is the primary platform for the native host.

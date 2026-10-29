@@ -46,8 +46,10 @@ async function main() {
         if (req.url.startsWith("/mcp")) {
           res.setHeader("Content-Type", "application/json");
           const reply = result => res.end(JSON.stringify({ jsonrpc: "2.0", id: request.id, result }));
-          if (request.method === "initialize") return reply({ protocolVersion: "2025-03-26", capabilities: { tools: {} }, serverInfo: { name: "remote fixture", version: "1" } });
+          if (request.method === "initialize") { res.setHeader("mcp-session-id", "native-session"); return reply({ protocolVersion: "2025-03-26", capabilities: { tools: {} }, serverInfo: { name: "remote fixture", version: "1" } }); }
           if (request.method === "notifications/initialized") { res.statusCode = 202; return res.end(); }
+          // Streamable HTTP: later requests must echo the session ID that initialize returned.
+          if (req.headers["mcp-session-id"] !== "native-session") return res.end(JSON.stringify({ jsonrpc: "2.0", id: request.id, error: { code: -32000, message: "missing session" } }));
           if (request.method === "tools/list") return reply({ tools: [{ name: "echo", description: "Remote echo", inputSchema: { type: "object", properties: { text: { type: "string" } } } }] });
           if (request.method === "tools/call") return reply({ content: [{ type: "text", text: "echo:" + request.params.arguments.text }] });
           throw Error("Unexpected remote MCP method");

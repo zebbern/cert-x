@@ -10,6 +10,4 @@ Run:
 node --test tools/ptk/*.test.cjs tools/ptk/*.test.mjs
 ```
 
-The original companion preparation scripts, patches, coordinator, contracts, and their previous tests are preserved under `tools/security/reference/companion/` for migration evidence and reproduction. They are not part of the active build. Restore their original directory layout in a separate test checkout before running those historical scripts; do not run them against the maintained runtime.
-
 See `security/README.md` for native scanning, configurable testing, and current validation commands.

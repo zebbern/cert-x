@@ -19,7 +19,15 @@ Ordered by expected value, not by age.
    fills itself; about 9 s either way).
 4. **Failed subagents keep no partial work**: the failure envelope carries
    none of it; only what the subagent wrote with `graph_write` survives.
-5. **Knowledge graph, smaller open items** (found by the 2026-10-28 review,
+5. **Untested features** (found 2026-10-29 while sorting unused test scripts):
+   MCP OAuth sign-in (`KI_MCP` auth-start/auth-finish) and agent
+   pause/resume/steer (`KI_CTL`) have no test. `tools/picker/tests/mcp-oauth.js`
+   (a complete local OAuth fixture) and `tools/picker/tests/mock-ctl.js` only
+   print what they see; make them assert, then add them to the runner. Smaller
+   gaps: desktop notification text, vendor `read_file` base64, the Record
+   button's enabled state, the composer + menu, the welcome screen, and
+   whether `options.html` and `install-welcome.html` load without errors.
+6. **Knowledge graph, smaller open items** (found by the 2026-10-28 review,
    not fixed): when observations are not what makes a graph big, the 2 MiB
    cap still drops all of them and saves above 2 MiB (the result reports the
    count); a failed `kiContextResolve` sends a write to `chat:<owner>`
@@ -28,7 +36,7 @@ Ordered by expected value, not by age.
    suggestions match triggers as raw substrings ("id" matches "/guide");
    nodes saved before 2026-10-28 with slash or space ids can be read but not
    updated; there is no way to remove one node short of `reset`.
-6. **Mimosa scanning**: exclude generated bundles (`background/background.js`,
+7. **Mimosa scanning**: exclude generated bundles (`background/background.js`,
    `chunks/*`) from line-level diff scans — their line numbers shift every
    rebuild and produce phantom findings. Scan `tools/picker/src/`,
    `security/`, `providers/` instead. Blocked (checked 2026-10-29): Mimosa
@@ -37,16 +45,21 @@ Ordered by expected value, not by age.
    exclude (it skips only files over 2 MB or that look binary; every bundle
    is smaller), and its engine is sealed, so whether one exists is
    unconfirmed.
-7. **Load-only test failures** (low value): three tests fail only under
+8. **Load-only test failures** (low value): three tests fail only under
    stalls far beyond realistic load — `tools/picker/tests/context.test.js`
    (20 s), `tools/ptk/authz-transport.test.mjs` (10 s) and the IAST taint-TTL
    test in `tools/security/tests/runtime-iast-propagation.test.mjs` (10 s).
-8. **Test harnesses assume one machine**: `PLAYWRIGHT_MODULE` defaults to a
+9. **Test harnesses assume one machine**: `PLAYWRIGHT_MODULE` defaults to a
    developer-specific global npm path, so other machines must set it.
-9. **BugHunterz and Shodan integrations**: follow-up work, not started
-   (moved here from the README).
-10. **omnigraph**: deferred until graph-query volume justifies a real graph
+10. **BugHunterz and Shodan integrations**: follow-up work, not started
+    (moved here from the README).
+11. **omnigraph**: deferred until graph-query volume justifies a real graph
     engine; the embedded graph has not been a bottleneck in any session.
+12. **Evidence harnesses overwrite on failure**: the harnesses listed in
+    `tools/security/evidence/README.md` rewrite cited, tracked JSON, most of
+    them even when they fail; default them to the OS temp directory with an
+    opt-in refresh (as `cdp-screenshot.browser.cjs` now does) so they can join
+    the runner. `collection-combinations.json` is stale against its generator.
 
 Closed 2026-10-29: the unit suite hung on a machine without Chromium build
 1234, which 88 test files hard-coded (a Playwright update had replaced it), and
@@ -61,6 +74,21 @@ passes them.
 Same day: `local_read_file` says 512 KiB per call like the host,
 `save_as_pdf` says it saves to Downloads, and the browser runner points at
 this backlog instead of a deleted `HANDOFF.md`.
+Same day, unused test scripts: 13 picker scripts that only printed what they
+saw, or that maintained checks supersede, and the companion archive under
+`tools/security/reference` (it targeted code that no longer exists) were
+deleted; git keeps them at a81b057. Seven harnesses that passed alone joined
+the browser runner (authz isolated transport, DAST start contract, CDP
+screenshots, upload and `save_file`, CVE wire parity, DAST link discovery,
+candidate investigation), as did the two managed-browser host tests, which
+run only when a local runtime is installed. The other host
+`security-*.test.cjs` files joined the unit command: setup no longer runs
+`npm ci` against the registry, raw evidence goes to a temp directory instead
+of `%LOCALAPPDATA%`, and the upgrade test skips without a runtime (792
+tests: 790 pass, the two managed-browser ones skip). `native-test.js` now
+requires the MCP session ID, which only `mcp-test.js` checked. 25 of the 26
+runner checks pass on Chromium 156; the DVWA rehearsal needs its container
+and was not run.
 
 Closed 2026-10-28 (a311f71, 46cde53): the unit suite's rare failure (1 of
 760) and its hang. `tools/host/jobs.js` reported a job completed before

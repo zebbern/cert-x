@@ -1,4 +1,4 @@
-// Native contract; prior deployment-specific tests are retained under tools/security/reference.
+// Native contract.
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),path=require('node:path'),{webcrypto}=require('node:crypto');
 const event=()=>({listeners:[],addListener(fn){this.listeners.push(fn);},removeListener(){}});
 async function setup(){

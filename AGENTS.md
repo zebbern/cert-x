@@ -117,7 +117,7 @@ mechanical task done deterministically is a failure mode removed for free.
   has poisoned the window even when it is technically complete.
 - **Intent over primitives.** If a composite tool captures the intent, build
   it instead of making the model chain primitives: `set_checked` over click,
-  `fill_form(fields, submit)` over per-field type calls, macro record/replay
+  `browse(goal, values)` over per-field fill and click calls, macro record/replay
   over re-driving a login flow each time, `waitForIdle` over poll loops.
   Prefer one tool with an `action` parameter over several micro-tools.
 - **Determinism over model.** Anything mechanical — encoding, reference
